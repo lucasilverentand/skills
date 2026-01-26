@@ -13,17 +13,38 @@ WARNINGS=0
 echo "🔍 Validating skills plugin..."
 echo
 
-# 1. Validate plugin.json
-echo "Checking plugin.json..."
-if claude plugin validate . >/dev/null 2>&1; then
-	echo -e "  ${GREEN}✔${NC} plugin.json is valid"
+# 1. Validate Claude metadata files (plugin.json, marketplace.json)
+echo "Checking Claude metadata files..."
+if [[ -x scripts/validate-claude-metadata.sh ]]; then
+	if ./scripts/validate-claude-metadata.sh >/dev/null 2>&1; then
+		echo -e "  ${GREEN}✔${NC} Claude metadata is valid"
+	else
+		echo -e "  ${RED}✘${NC} Claude metadata validation failed"
+		./scripts/validate-claude-metadata.sh 2>&1 | sed 's/^/    /'
+		ERRORS=$((ERRORS + 1))
+	fi
 else
-	echo -e "  ${RED}✘${NC} plugin.json validation failed"
-	claude plugin validate . 2>&1 | sed 's/^/    /'
-	ERRORS=$((ERRORS + 1))
+	echo -e "  ${YELLOW}⚠${NC} validate-claude-metadata.sh not found or not executable"
+	WARNINGS=$((WARNINGS + 1))
 fi
 
-# 2. Check each skill directory has SKILL.md
+# 2. Validate plugin.json with Claude CLI (if available)
+echo
+echo "Checking plugin.json with Claude CLI..."
+if command -v claude &>/dev/null; then
+	if claude plugin validate . >/dev/null 2>&1; then
+		echo -e "  ${GREEN}✔${NC} plugin.json is valid"
+	else
+		echo -e "  ${RED}✘${NC} plugin.json validation failed"
+		claude plugin validate . 2>&1 | sed 's/^/    /'
+		ERRORS=$((ERRORS + 1))
+	fi
+else
+	echo -e "  ${YELLOW}⚠${NC} Claude CLI not installed, skipping Claude CLI validation"
+	WARNINGS=$((WARNINGS + 1))
+fi
+
+# 3. Check each skill directory has SKILL.md
 echo
 echo "Checking skill directories..."
 for dir in skills/*/; do
@@ -36,7 +57,7 @@ for dir in skills/*/; do
 		continue
 	fi
 
-	# 3. Check SKILL.md has description in frontmatter
+	# Check SKILL.md has description in frontmatter
 	if grep -q "^description:" "$skill_file"; then
 		desc=$(grep "^description:" "$skill_file" | head -1 | sed 's/description: *//')
 		if [[ -z $desc ]]; then

@@ -1,0 +1,11 @@
+{
+  "name": "luca-skills",
+  "description": "A collection of reusable skills for code review, testing, documentation, and more",
+  "version": "0.1.0",
+  "author": {
+    "name": "Luca Silverentand"
+  },
+  "homepage": "https://github.com/lucasilverentand/skills",
+  "repository": "https://github.com/lucasilverentand/skills",
+  "license": "MIT"
+}
