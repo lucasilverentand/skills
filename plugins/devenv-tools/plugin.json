@@ -1,0 +1,27 @@
+{
+  "name": "devenv-tools",
+  "description": "Complete devenv workflow tools for searching packages, initializing projects, and configuring environments with full-stack and CI/CD support",
+  "version": "0.1.0",
+  "author": {
+    "name": "Luca Silverentand",
+    "url": "https://github.com/lucasilverentand"
+  },
+  "homepage": "https://github.com/lucasilverentand/skills",
+  "repository": "https://github.com/lucasilverentand/skills",
+  "license": "MIT",
+  "keywords": ["devenv", "nix", "development-environment", "full-stack", "ci-cd"],
+  "skills": [
+    "../../skills/devenv-search",
+    "../../skills/devenv-init",
+    "../../skills/devenv-config"
+  ],
+  "mcp": {
+    "servers": {
+      "mcp.devenv.sh": {
+        "type": "http",
+        "url": "https://mcp.devenv.sh",
+        "description": "Search devenv packages and configuration options"
+      }
+    }
+  }
+}
