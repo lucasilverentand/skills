@@ -1,0 +1,47 @@
+{
+  "name": "Luca's Skills",
+  "description": "A collection of development skills including devenv setup, configuration, and code review",
+  "version": "0.1.0",
+  "author": {
+    "name": "Luca Silverentand",
+    "url": "https://github.com/lucasilverentand"
+  },
+  "homepage": "https://github.com/lucasilverentand/skills",
+  "repository": "https://github.com/lucasilverentand/skills",
+  "license": "MIT",
+  "skills": [
+    {
+      "name": "devenv-search",
+      "path": "skills/devenv-search",
+      "description": "Search for devenv packages, languages, and configuration options",
+      "category": "devtools"
+    },
+    {
+      "name": "devenv-init",
+      "path": "skills/devenv-init",
+      "description": "Initialize devenv in a new project with templates for various stacks",
+      "category": "devtools"
+    },
+    {
+      "name": "devenv-config",
+      "path": "skills/devenv-config",
+      "description": "Configure devenv projects with full-stack and CI/CD support",
+      "category": "devtools"
+    },
+    {
+      "name": "code-review",
+      "path": "skills/code-review",
+      "description": "Review code for bugs, security issues, performance, and best practices",
+      "category": "quality"
+    }
+  ],
+  "mcp": {
+    "servers": {
+      "mcp.devenv.sh": {
+        "type": "http",
+        "url": "https://mcp.devenv.sh",
+        "description": "Search devenv packages and configuration options"
+      }
+    }
+  }
+}
