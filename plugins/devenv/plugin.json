@@ -1,6 +1,6 @@
 {
-  "name": "devenv-tools",
-  "description": "Complete devenv workflow tools for searching packages, initializing projects, and configuring environments with full-stack and CI/CD support",
+  "name": "devenv",
+  "description": "Complete devenv toolkit: search packages, initialize projects, and configure reproducible development environments with full-stack and CI/CD support",
   "version": "0.1.0",
   "author": {
     "name": "Luca Silverentand",
@@ -9,7 +9,16 @@
   "homepage": "https://github.com/lucasilverentand/skills",
   "repository": "https://github.com/lucasilverentand/skills",
   "license": "MIT",
-  "keywords": ["devenv", "nix", "development-environment", "full-stack", "ci-cd"],
+  "keywords": [
+    "devenv",
+    "nix",
+    "development-environment",
+    "reproducible-builds",
+    "full-stack",
+    "ci-cd",
+    "docker",
+    "processes"
+  ],
   "skills": [
     "../../skills/devenv-search",
     "../../skills/devenv-init",

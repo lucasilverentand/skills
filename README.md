@@ -18,8 +18,8 @@ Then install either:
 
 ## Bundled Plugins
 
-### 🛠️ devenv-tools
-**Complete devenv workflow tools**
+### 🛠️ devenv
+**Complete devenv toolkit**
 
 Includes: `devenv-search`, `devenv-init`, `devenv-config`
 
@@ -36,7 +36,7 @@ Features:
 - CI/CD optimization (same scripts locally and in CI)
 - Comprehensive validation and error correction
 
-[Learn more →](./plugins/devenv-tools/README.md)
+[Learn more →](./plugins/devenv/README.md)
 
 ### 🔍 code-quality
 **Code quality analysis tools**
@@ -74,8 +74,8 @@ Install specific skills without bundles:
 ### Using Bundled Plugins
 
 ```bash
-# Install devenv-tools bundle
-"Install devenv-tools plugin"
+# Install devenv bundle
+"Install devenv plugin"
 
 # Then use any included skill
 "Find Python packages for devenv"      # Uses devenv-search
@@ -95,7 +95,7 @@ Install specific skills without bundles:
 
 ## Example Workflows
 
-### Full-Stack Development (devenv-tools)
+### Full-Stack Development (devenv)
 
 1. **Initialize**: Start with full-stack template
    ```
@@ -132,7 +132,7 @@ Install specific skills without bundles:
 ```
 .
 ├── plugins/              # Bundled plugin collections
-│   ├── devenv-tools/    # Complete devenv workflow
+│   ├── devenv/          # Complete devenv toolkit
 │   └── code-quality/    # Code analysis tools
 ├── skills/              # Individual skills
 │   ├── devenv-search/
@@ -184,7 +184,7 @@ claude plugin validate .                 # Validate with Claude CLI
 
 ## MCP Integration
 
-The devenv-tools bundle includes the `mcp.devenv.sh` MCP server for dynamic package lookups:
+The devenv plugin includes the `mcp.devenv.sh` MCP server for dynamic package lookups:
 - Real-time package search
 - Configuration option discovery
 - Always up-to-date package information

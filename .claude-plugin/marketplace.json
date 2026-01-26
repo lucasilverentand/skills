@@ -11,9 +11,9 @@
   "license": "MIT",
   "plugins": [
     {
-      "name": "devenv-tools",
-      "source": "./plugins/devenv-tools",
-      "description": "Complete devenv workflow: search packages, initialize projects, and configure environments with full-stack and CI/CD support",
+      "name": "devenv",
+      "source": "./plugins/devenv",
+      "description": "Complete devenv toolkit: search, initialize, and configure reproducible development environments with full-stack and CI/CD support",
       "category": "devtools"
     },
     {
