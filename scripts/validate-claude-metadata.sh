@@ -176,7 +176,12 @@ if [ -f ".claude-plugin/marketplace.json" ]; then
 					else
 						# Resolve @plugins/ prefix to plugins/ and ./ prefix
 						resolved_source="${plugin_source#@}"
-						resolved_source="${resolved_source#./}"
+						if [ "$resolved_source" = "./" ] || [ "$resolved_source" = "." ]; then
+							# Current directory is always valid
+							resolved_source="."
+						else
+							resolved_source="${resolved_source#./}"
+						fi
 						if [ ! -d "$resolved_source" ]; then
 							echo -e "  ${RED}✗${NC} Plugin source directory does not exist: $plugin_source"
 							errors=$((errors + 1))

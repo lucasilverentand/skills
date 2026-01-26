@@ -12,24 +12,30 @@
   "plugins": [
     {
       "name": "devenv",
-      "source": "./plugins/devenv",
+      "source": "./",
       "description": "Complete devenv toolkit: search, initialize, and configure reproducible development environments with full-stack and CI/CD support",
-      "category": "devtools"
+      "category": "devtools",
+      "skills": [
+        "./skills/devenv-search",
+        "./skills/devenv-init",
+        "./skills/devenv-config"
+      ],
+      "mcpServers": {
+        "mcp.devenv.sh": {
+          "type": "http",
+          "url": "https://mcp.devenv.sh",
+          "description": "Search devenv packages and configuration options"
+        }
+      },
+      "strict": false
     },
     {
       "name": "code-quality",
-      "source": "./plugins/code-quality",
+      "source": "./",
       "description": "Code quality analysis: review code for bugs, security issues, performance problems, and best practices",
-      "category": "quality"
+      "category": "quality",
+      "skills": ["./skills/code-review"],
+      "strict": false
     }
-  ],
-  "mcp": {
-    "servers": {
-      "mcp.devenv.sh": {
-        "type": "http",
-        "url": "https://mcp.devenv.sh",
-        "description": "Search devenv packages and configuration options"
-      }
-    }
-  }
+  ]
 }
