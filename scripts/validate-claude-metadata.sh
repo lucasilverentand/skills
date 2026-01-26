@@ -38,7 +38,7 @@ if [ -f ".claude-plugin/plugin.json" ]; then
 
 			# Check name is kebab-case (no spaces)
 			if [ -n "$name" ]; then
-				if [[ "$name" =~ [[:space:]] ]]; then
+				if [[ $name =~ [[:space:]] ]]; then
 					echo -e "  ${RED}✗${NC} name contains spaces, must be kebab-case (e.g., 'my-plugin')"
 					errors=$((errors + 1))
 				else
@@ -59,7 +59,7 @@ if [ -f ".claude-plugin/plugin.json" ]; then
 
 			# Check version exists and is valid semver
 			if [ -n "$version" ]; then
-				if [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+				if [[ $version =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
 					echo -e "  ${GREEN}✔${NC} version is valid semver: $version"
 				else
 					echo -e "  ${YELLOW}⚠${NC} version should follow semver (X.Y.Z): $version"
@@ -107,7 +107,7 @@ if [ -f ".claude-plugin/marketplace.json" ]; then
 
 			# Check name is kebab-case (no spaces)
 			if [ -n "$name" ]; then
-				if [[ "$name" =~ [[:space:]] ]]; then
+				if [[ $name =~ [[:space:]] ]]; then
 					echo -e "  ${RED}✗${NC} name contains spaces, must be kebab-case (e.g., 'my-marketplace')"
 					errors=$((errors + 1))
 				else
@@ -128,7 +128,7 @@ if [ -f ".claude-plugin/marketplace.json" ]; then
 
 			# Check version exists
 			if [ -n "$version" ]; then
-				if [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+				if [[ $version =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
 					echo -e "  ${GREEN}✔${NC} version is valid semver: $version"
 				else
 					echo -e "  ${YELLOW}⚠${NC} version should follow semver (X.Y.Z): $version"
@@ -173,9 +173,14 @@ if [ -f ".claude-plugin/marketplace.json" ]; then
 					if [ -z "$plugin_source" ]; then
 						echo -e "  ${RED}✗${NC} Plugin at index $i is missing 'source'"
 						errors=$((errors + 1))
-					elif [ ! -d "$plugin_source" ]; then
-						echo -e "  ${RED}✗${NC} Plugin source directory does not exist: $plugin_source"
-						errors=$((errors + 1))
+					else
+						# Resolve @plugins/ prefix to plugins/ and ./ prefix
+						resolved_source="${plugin_source#@}"
+						resolved_source="${resolved_source#./}"
+						if [ ! -d "$resolved_source" ]; then
+							echo -e "  ${RED}✗${NC} Plugin source directory does not exist: $plugin_source"
+							errors=$((errors + 1))
+						fi
 					fi
 				done
 			fi
