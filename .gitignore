@@ -1,0 +1,18 @@
+.DS_Store
+*.log
+node_modules/
+
+# devenv
+.devenv/
+.devenv.flake.nix
+
+# Devenv
+.devenv*
+devenv.local.nix
+devenv.local.yaml
+
+# direnv
+.direnv
+
+# pre-commit
+.pre-commit-config.yaml
