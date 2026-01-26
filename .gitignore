@@ -14,5 +14,8 @@ devenv.local.yaml
 # direnv
 .direnv
 
+# Claude Code
+.claude/
+
 # pre-commit
 .pre-commit-config.yaml
