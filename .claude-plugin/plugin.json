@@ -1,6 +1,6 @@
 {
-  "name": "luca-skills",
-  "description": "A collection of reusable skills for code review, testing, documentation, and more",
+  "name": "devenv-skills",
+  "description": "Development workflow skills: devenv tools for reproducible environments, full-stack development, CI/CD optimization, and code quality analysis",
   "version": "0.1.0",
   "author": {
     "name": "Luca Silverentand"

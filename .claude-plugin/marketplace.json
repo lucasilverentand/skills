@@ -1,6 +1,6 @@
 {
-  "name": "luca-skills",
-  "description": "A collection of development skills including devenv setup, configuration, and code review. Install bundled plugins for complete workflows or individual skills as needed.",
+  "name": "devenv-skills",
+  "description": "Development workflow skills: devenv tools for reproducible environments, full-stack development, CI/CD optimization, and code quality analysis. Install bundled plugins for complete workflows or individual skills as needed.",
   "version": "0.1.0",
   "owner": {
     "name": "Luca Silverentand",
