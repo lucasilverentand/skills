@@ -36,6 +36,27 @@
       "category": "quality",
       "skills": ["./skills/code-review"],
       "strict": false
+    },
+    {
+      "name": "hono",
+      "source": "./",
+      "description": "Skills for building web applications with the Hono framework: project setup, middleware, authentication, validation, testing, deployment, databases, JSX rendering, and WebSockets",
+      "category": "web-development",
+      "skills": [
+        "./skills/hono-init",
+        "./skills/hono-best-practices",
+        "./skills/hono-middleware",
+        "./skills/hono-auth",
+        "./skills/hono-validation",
+        "./skills/hono-api-design",
+        "./skills/hono-testing",
+        "./skills/hono-debugging",
+        "./skills/hono-deployment",
+        "./skills/hono-database",
+        "./skills/hono-jsx",
+        "./skills/hono-websockets"
+      ],
+      "strict": false
     }
   ]
 }
