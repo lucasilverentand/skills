@@ -1,6 +1,6 @@
 {
   "name": "skills-of-luca",
-  "description": "Development workflow skills: devenv tools for reproducible environments, full-stack development, CI/CD optimization, and code quality analysis. Install bundled plugins for complete workflows or individual skills as needed.",
+  "description": "Development workflow skills: devenv tools for reproducible environments, full-stack development, CI/CD optimization, code quality analysis, and Neovim configuration. Install bundled plugins for complete workflows or individual skills as needed.",
   "version": "0.1.0",
   "owner": {
     "name": "Luca Silverentand",
@@ -55,6 +55,26 @@
         "./skills/hono-database",
         "./skills/hono-jsx",
         "./skills/hono-websockets"
+      ],
+      "strict": false
+    },
+    {
+      "name": "neovim",
+      "source": "./",
+      "description": "Neovim configuration toolkit: generate, modify, troubleshoot configs with lazy.nvim, LazyVim support, LSP setup, and headless testing",
+      "category": "editor",
+      "skills": ["./skills/nvim-config"],
+      "strict": false
+    },
+    {
+      "name": "issues",
+      "source": "./",
+      "description": "Issue management toolkit: create well-structured issues, analyze issues against codebase, and organize issues with proper formatting, labels, and project fields. Supports GitHub, GitLab, and other platforms.",
+      "category": "devtools",
+      "skills": [
+        "./skills/create-issue",
+        "./skills/analyze-issue",
+        "./skills/cleanup-issue"
       ],
       "strict": false
     }
