@@ -20,13 +20,6 @@
         "./skills/devenv/init",
         "./skills/devenv/config"
       ],
-      "mcpServers": {
-        "mcp.devenv.sh": {
-          "type": "http",
-          "url": "https://mcp.devenv.sh",
-          "description": "Search devenv packages and configuration options"
-        }
-      },
       "strict": false
     },
     {
