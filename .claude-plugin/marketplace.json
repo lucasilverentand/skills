@@ -1,6 +1,6 @@
 {
   "name": "skills-of-luca",
-  "description": "Development workflow skills: devenv tools for reproducible environments, full-stack development, CI/CD optimization, code quality analysis, and Neovim configuration. Install bundled plugins for complete workflows or individual skills as needed.",
+  "description": "Development workflow skills: devenv tools for reproducible environments, full-stack development, CI/CD optimization, code quality analysis, Neovim configuration, and skill authoring tools. Install bundled plugins for complete workflows or individual skills as needed.",
   "version": "0.1.0",
   "owner": {
     "name": "Luca Silverentand",
@@ -75,6 +75,19 @@
         "./skills/issues/create",
         "./skills/issues/analyze",
         "./skills/issues/cleanup"
+      ],
+      "strict": false
+    },
+    {
+      "name": "skill-authoring",
+      "source": "./",
+      "description": "Skill authoring toolkit: create, validate, and improve Claude Code skills with templates, best practices, and quality checks",
+      "category": "devtools",
+      "skills": [
+        "./skills/skill-authoring/init",
+        "./skills/skill-authoring/validate",
+        "./skills/skill-authoring/improve",
+        "./skills/skill-authoring/examples"
       ],
       "strict": false
     }
