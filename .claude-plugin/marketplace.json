@@ -16,9 +16,9 @@
       "description": "Complete devenv toolkit: search, initialize, and configure reproducible development environments with full-stack and CI/CD support",
       "category": "devtools",
       "skills": [
-        "./skills/devenv-search",
-        "./skills/devenv-init",
-        "./skills/devenv-config"
+        "./skills/devenv/search",
+        "./skills/devenv/init",
+        "./skills/devenv/config"
       ],
       "mcpServers": {
         "mcp.devenv.sh": {
@@ -34,7 +34,7 @@
       "source": "./",
       "description": "Code quality analysis: review code for bugs, security issues, performance problems, and best practices",
       "category": "quality",
-      "skills": ["./skills/code-review"],
+      "skills": ["./skills/code-quality/review"],
       "strict": false
     },
     {
@@ -43,18 +43,18 @@
       "description": "Skills for building web applications with the Hono framework: project setup, middleware, authentication, validation, testing, deployment, databases, JSX rendering, and WebSockets",
       "category": "web-development",
       "skills": [
-        "./skills/hono-init",
-        "./skills/hono-best-practices",
-        "./skills/hono-middleware",
-        "./skills/hono-auth",
-        "./skills/hono-validation",
-        "./skills/hono-api-design",
-        "./skills/hono-testing",
-        "./skills/hono-debugging",
-        "./skills/hono-deployment",
-        "./skills/hono-database",
-        "./skills/hono-jsx",
-        "./skills/hono-websockets"
+        "./skills/hono/init",
+        "./skills/hono/best-practices",
+        "./skills/hono/middleware",
+        "./skills/hono/auth",
+        "./skills/hono/validation",
+        "./skills/hono/api-design",
+        "./skills/hono/testing",
+        "./skills/hono/debugging",
+        "./skills/hono/deployment",
+        "./skills/hono/database",
+        "./skills/hono/jsx",
+        "./skills/hono/websockets"
       ],
       "strict": false
     },
@@ -63,7 +63,7 @@
       "source": "./",
       "description": "Neovim configuration toolkit: generate, modify, troubleshoot configs with lazy.nvim, LazyVim support, LSP setup, and headless testing",
       "category": "editor",
-      "skills": ["./skills/nvim-config"],
+      "skills": ["./skills/neovim/config"],
       "strict": false
     },
     {
@@ -72,9 +72,9 @@
       "description": "Issue management toolkit: create well-structured issues, analyze issues against codebase, and organize issues with proper formatting, labels, and project fields. Supports GitHub, GitLab, and other platforms.",
       "category": "devtools",
       "skills": [
-        "./skills/create-issue",
-        "./skills/analyze-issue",
-        "./skills/cleanup-issue"
+        "./skills/issues/create",
+        "./skills/issues/analyze",
+        "./skills/issues/cleanup"
       ],
       "strict": false
     }

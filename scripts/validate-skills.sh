@@ -45,17 +45,12 @@ else
 fi
 
 # 3. Check each skill directory has SKILL.md
+# Supports both flat (skills/skill-name/) and nested (skills/category/skill-name/) structures
 echo
 echo "Checking skill directories..."
-for dir in skills/*/; do
-	skill_name=$(basename "$dir")
-	skill_file="$dir/SKILL.md"
-
-	if [[ ! -f $skill_file ]]; then
-		echo -e "  ${RED}✘${NC} $skill_name: Missing SKILL.md"
-		ERRORS=$((ERRORS + 1))
-		continue
-	fi
+for skill_file in $(find skills -name "SKILL.md" | sort); do
+	skill_dir=$(dirname "$skill_file")
+	skill_name=${skill_dir#skills/}
 
 	# Check SKILL.md has description in frontmatter
 	if grep -q "^description:" "$skill_file"; then
@@ -78,7 +73,7 @@ echo "Checking for misplaced skills..."
 orphans=$(find . -name "SKILL.md" -not -path "./skills/*" -not -path "./.git/*" 2>/dev/null)
 if [[ -n $orphans ]]; then
 	echo -e "  ${YELLOW}⚠${NC} Found SKILL.md outside skills/ directory:"
-	echo "$orphans" | sed 's/^/    /'
+	while IFS= read -r line; do echo "    $line"; done <<<"$orphans"
 	WARNINGS=$((WARNINGS + 1))
 else
 	echo -e "  ${GREEN}✔${NC} No misplaced skills"
