@@ -6,3 +6,4 @@ MD034: false # Bare URLs (allow for documentation links)
 MD036: false # Emphasis as heading (allow for numbered items)
 MD040: false # Fenced code language (allow unlabeled blocks)
 MD041: false # First line heading
+MD060: false # Table column style (allow flexible table formatting)
