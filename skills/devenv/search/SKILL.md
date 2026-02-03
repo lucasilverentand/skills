@@ -1,142 +1,99 @@
 ---
 name: devenv-search
-description: Searches devenv packages, languages, and configuration options. Use when finding or discovering available devenv packages, searching for specific tools, or exploring configuration options.
+description: Searches devenv packages, languages, and configuration options using the devenv CLI. Use when finding available devenv packages, searching for specific tools, exploring configuration options, or looking up how to add something to devenv.nix.
 argument-hint: [query]
-allowed-tools:
-  - Bash
-  - Read
+allowed-tools: [Bash, Read]
 ---
 
 # Devenv Package and Option Search
 
-Helps users discover available devenv packages and configuration options using the devenv CLI.
+Searches and discovers available devenv packages and configuration options.
 
 ## Your Task
 
 When the user provides a search query in $ARGUMENTS or asks to find packages/options:
 
-1. **Search using the devenv CLI:**
+1. **Run the search:**
 
    ```bash
    devenv search <query>
    ```
 
-   This searches both packages and configuration options.
+2. **Present results** organized by type (packages vs options)
 
-2. **Present results clearly:**
-   - Show relevant packages with their names and descriptions
-   - Highlight the most commonly used or recommended options
-   - For configuration options, explain what they configure
-   - Provide examples of how to use them in devenv.nix or devenv.yaml
+3. **Show usage examples** for the most relevant results
 
-3. **Common searches to help with:**
-   - **Languages**: "python", "nodejs", "rust", "go", "java", "ruby", "php"
-   - **Databases**: "postgres", "mysql", "redis", "mongodb", "sqlite"
-   - **Tools**: "docker", "kubectl", "terraform", "git", "gh"
-   - **Build tools**: "cmake", "make", "gradle", "maven", "vite", "webpack"
-   - **Configuration options**: "languages.python", "scripts", "processes", "git-hooks", "services"
+## Search Categories
 
-## Examples
+| Category | Example Queries | What You'll Find |
+|----------|----------------|------------------|
+| Languages | python, nodejs, rust, go | `languages.*` options |
+| Databases | postgres, mysql, redis | `services.*` options |
+| Tools | docker, kubectl, gh | Package names |
+| Build tools | cmake, vite, webpack | Package names |
+| Options | scripts, processes, hooks | Configuration options |
 
-### Package Search Example
+## Output Format
 
-```text
-User: /devenv-search python
-You: [Run: devenv search python]
-     [Present results showing python-related packages and options]
+Present results like this:
 
-     The main Python packages and options available include:
+```markdown
+## Search Results for "{query}"
 
-     **Packages:**
-     - python3 - Python 3 interpreter
-     - python311 - Python 3.11 specifically
+### Configuration Options
 
-     **Configuration Options:**
-     - languages.python.enable - Enable Python support
-     - languages.python.version - Specify Python version
-     - languages.python.poetry.enable - Enable Poetry
+| Option | Description |
+|--------|-------------|
+| `languages.python.enable` | Enable Python support |
+| `languages.python.version` | Specify version (e.g., "3.11") |
+
+### Packages
+
+| Package | Description |
+|---------|-------------|
+| `python311` | Python 3.11 interpreter |
+
+### Usage Example
+
+(nix code block showing: languages.python = { enable = true; version = "3.11"; };)
 ```
 
-### Option Search Example
+## Common Query Corrections
 
-```text
-User: /devenv-search postgres
-You: [Run: devenv search postgres]
-     [Present configuration options for PostgreSQL]
+Automatically correct these common searches:
 
-     PostgreSQL can be configured with:
-     - services.postgres.enable - Enable PostgreSQL service
-     - services.postgres.port - Configure port (default 5432)
-     - services.postgres.initialDatabases - Create initial databases
-```
+| User Types | Search For | Reason |
+|------------|------------|--------|
+| node, npm | nodejs | Package name is "nodejs" |
+| pg, postgresql | postgres | Shorter name in nixpkgs |
+| k8s | kubectl | Search the CLI tool name |
+| python3 | python | Generic term has more results |
+| mongo | mongodb | Full name required |
 
-## Full-Stack and CI/CD Searches
+## Result Prioritization
 
-### Full-Stack Project Searches
+When presenting results:
 
-When users are setting up full-stack applications, they often need:
+1. **Most relevant first**: Exact matches over partial matches
+2. **Options over packages**: For languages, show `languages.*` options first
+3. **Services for databases**: Show `services.*` options for postgres, redis, mysql
+4. **Include usage**: Always show a quick usage example
 
-**Frontend Development:**
+## Related Searches
 
-- Search for: "vite", "webpack", "nodejs", "bun"
-- Explain: Frontend typically needs Node.js/Bun + build tools
+Suggest related searches when helpful:
 
-**Backend Development:**
-
-- Search for language-specific tools based on their stack:
-  - Python: "python", "uvicorn", "gunicorn"
-  - Node.js: "nodejs", "pm2"
-  - Go: "go", "air" (for hot reload)
-  - Rust: "rust", "cargo-watch"
-
-**Databases:**
-
-- Search for: "postgres", "mysql", "redis", "mongodb"
-- Explain: Services options auto-configure databases for local development
-
-### CI/CD Searches
-
-When users need CI/CD support:
-
-**GitHub Actions:**
-
-- Search for: "act" (run actions locally), "gh"
-- Explain: Scripts can be reused in CI and locally
-
-**Container/Docker:**
-
-- Search for: "docker", "podman", "docker-compose", "buildah", "skopeo"
-- Explain: Same containers locally and in CI
-
-**Testing Tools:**
-
-- Search for language-specific test runners:
-  - Python: "pytest", "coverage"
-  - JavaScript: "playwright", "cypress"
-  - Go: built-in, but search "gotestsum"
-
-## Error Handling
-
-### No Results
-
-If a search returns no results:
-
-- Suggest alternative search terms (e.g., "node" → "nodejs", "pg" → "postgres")
-- Try a broader search (e.g., if "python3.11" fails, try "python")
-- Check for common typos or abbreviations
-
-### Common Naming Issues
-
-Proactively correct these common search mistakes:
-
-- "node" or "npm" → should search "nodejs"
-- "pg" or "postgresql" → try "postgres"
-- "k8s" → should search "kubectl" or "kubernetes"
-- "python3" → better to search "python"
+| If Searching | Also Suggest |
+|--------------|--------------|
+| python | poetry, pip, venv |
+| nodejs | npm, pnpm, bun |
+| postgres | redis, mysql (other DBs) |
+| docker | docker-compose, podman |
+| git | gh (GitHub CLI), git-lfs |
 
 ## Tips
 
-- If the search returns many results, prioritize the most relevant ones
-- Suggest related searches if the user might find them helpful
-- Explain the difference between adding packages directly vs using language options
-- For popular languages, mention both the language option (e.g., `languages.python`) and related packages
+- Prefer `languages.*` options over adding interpreter packages directly
+- Use `services.*` for databases (auto-configured for local dev)
+- If no results, try shorter or alternative terms
+- Explain packages vs options distinction when relevant
