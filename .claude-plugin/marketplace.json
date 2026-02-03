@@ -83,6 +83,80 @@
         "./skills/skill-authoring/examples"
       ],
       "strict": false
+    },
+    {
+      "name": "pull-requests",
+      "source": "./",
+      "description": "Pull request toolkit: create well-structured PRs, review code changes, update PR metadata, and resolve merge conflicts with context-aware guidance",
+      "category": "devtools",
+      "skills": [
+        "./skills/pull-requests/create",
+        "./skills/pull-requests/review",
+        "./skills/pull-requests/update",
+        "./skills/pull-requests/conflict"
+      ],
+      "strict": false
+    },
+    {
+      "name": "github-actions",
+      "source": "./",
+      "description": "GitHub Actions toolkit: initialize CI/CD workflows, debug failing runs, and optimize workflow performance for speed and cost reduction",
+      "category": "devtools",
+      "skills": [
+        "./skills/github-actions/init",
+        "./skills/github-actions/debug",
+        "./skills/github-actions/optimize"
+      ],
+      "strict": false
+    },
+    {
+      "name": "releases",
+      "source": "./",
+      "description": "Release management toolkit: generate release notes from commits and PRs, maintain changelogs, and manage semantic versioning",
+      "category": "devtools",
+      "skills": [
+        "./skills/releases/notes",
+        "./skills/releases/changelog",
+        "./skills/releases/version"
+      ],
+      "strict": false
+    },
+    {
+      "name": "repo-setup",
+      "source": "./",
+      "description": "Repository setup toolkit: initialize repos with best practices, create issue/PR templates, manage CODEOWNERS, and generate contributing guides",
+      "category": "devtools",
+      "skills": [
+        "./skills/repo-setup/init",
+        "./skills/repo-setup/templates",
+        "./skills/repo-setup/codeowners",
+        "./skills/repo-setup/contributing"
+      ],
+      "strict": false
+    },
+    {
+      "name": "security",
+      "source": "./",
+      "description": "Security toolkit: configure Dependabot for dependency updates, manage security advisories, and audit repositories for exposed secrets",
+      "category": "security",
+      "skills": [
+        "./skills/security/dependabot",
+        "./skills/security/advisory",
+        "./skills/security/secrets"
+      ],
+      "strict": false
+    },
+    {
+      "name": "project-management",
+      "source": "./",
+      "description": "Project management toolkit: manage GitHub Projects boards, synchronize repository labels, and track milestone progress",
+      "category": "devtools",
+      "skills": [
+        "./skills/project-management/projects",
+        "./skills/project-management/labels",
+        "./skills/project-management/milestones"
+      ],
+      "strict": false
     }
   ]
 }
