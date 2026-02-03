@@ -1,6 +1,7 @@
 ---
 name: hono-websockets
-description: WebSocket implementation with Hono. Use when building real-time features or WebSocket endpoints with Hono.
+description: Implements WebSockets in Hono for real-time communication including connection management, broadcasting, authentication, and runtime-specific implementations for Cloudflare, Bun, Deno, and Node.js. Use when building chat applications, real-time notifications, live updates, or bidirectional communication in Hono apps.
+allowed-tools: [Read, Write, Edit, Glob, Grep]
 ---
 
 # Hono WebSockets

@@ -1,7 +1,8 @@
 ---
 name: hono-deployment
-description: Deploy Hono applications to various runtimes and platforms. Use when deploying Hono to Cloudflare, Vercel, AWS, or other platforms.
+description: Deploys Hono applications to Cloudflare Workers/Pages, Vercel Edge, AWS Lambda, Google Cloud Run, Azure Functions, Node.js, Bun, and Deno. Use when deploying Hono apps, configuring runtimes, setting up CI/CD, managing environment variables, or choosing deployment platforms.
 argument-hint: [platform]
+allowed-tools: [Read, Write, Edit, Bash, Glob, Grep]
 ---
 
 # Hono Deployment

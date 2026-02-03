@@ -1,6 +1,7 @@
 ---
 name: hono-validation
-description: Request validation in Hono with Zod, Valibot, or custom validators. Use when validating request data or generating types from schemas.
+description: Implements request validation in Hono using Zod, Valibot, Standard Schema, or custom validators for body, query, params, and headers. Use when validating request data, generating TypeScript types from schemas, handling validation errors, or ensuring type-safe API inputs.
+allowed-tools: [Read, Write, Edit, Glob, Grep]
 ---
 
 # Hono Validation

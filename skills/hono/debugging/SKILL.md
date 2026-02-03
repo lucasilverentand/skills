@@ -1,6 +1,7 @@
 ---
 name: hono-debugging
-description: Debug Hono applications. Use when troubleshooting Hono apps, understanding errors, or setting up logging.
+description: Debugs Hono applications with logging, request inspection, error handling, stack traces, and performance profiling. Use when troubleshooting Hono apps, understanding errors, setting up structured logging, debugging middleware chains, or profiling request performance.
+allowed-tools: [Read, Glob, Grep, Bash]
 ---
 
 # Hono Debugging

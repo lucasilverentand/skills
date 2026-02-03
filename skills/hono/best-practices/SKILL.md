@@ -1,6 +1,7 @@
 ---
 name: hono-best-practices
-description: Hono application architecture and patterns. Use when designing Hono apps, organizing code, or needing guidance on Hono conventions.
+description: Guides Hono application architecture, code organization, error handling, type safety, security, and performance patterns. Use when designing Hono apps, organizing routes and middleware, implementing error handling, optimizing performance, or following Hono conventions and best practices.
+allowed-tools: [Read, Glob, Grep]
 ---
 
 # Hono Best Practices

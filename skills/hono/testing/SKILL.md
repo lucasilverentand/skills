@@ -1,6 +1,7 @@
 ---
 name: hono-testing
-description: Testing Hono applications. Use when writing tests for Hono routes, middleware, or handlers.
+description: Tests Hono applications with Vitest including route testing, middleware testing, mocking, authentication testing, and Cloudflare Workers testing with miniflare. Use when writing unit tests, integration tests, testing protected routes, mocking databases, or setting up test infrastructure for Hono apps.
+allowed-tools: [Read, Write, Edit, Bash, Glob, Grep]
 ---
 
 # Hono Testing

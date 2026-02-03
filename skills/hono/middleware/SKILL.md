@@ -1,6 +1,7 @@
 ---
 name: hono-middleware
-description: Create and use Hono middleware. Use when building custom middleware, composing middleware chains, or integrating built-in middleware.
+description: Creates and configures Hono middleware including logger, CORS, security headers, authentication, compression, caching, rate limiting, and custom middleware. Use when building custom middleware, composing middleware chains, implementing request/response interceptors, or integrating built-in Hono middleware.
+allowed-tools: [Read, Write, Edit, Glob, Grep]
 ---
 
 # Hono Middleware

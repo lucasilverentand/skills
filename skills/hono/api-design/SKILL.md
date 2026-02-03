@@ -1,6 +1,7 @@
 ---
 name: hono-api-design
-description: API design patterns with Hono including REST, RPC, and OpenAPI. Use when designing APIs or setting up Hono RPC.
+description: Designs APIs with Hono including REST patterns, type-safe RPC with hono/client, OpenAPI/Swagger generation, route organization, and versioning. Use when designing API structure, implementing REST endpoints, setting up Hono RPC for end-to-end type safety, or generating OpenAPI documentation.
+allowed-tools: [Read, Write, Edit, Glob, Grep]
 ---
 
 # Hono API Design

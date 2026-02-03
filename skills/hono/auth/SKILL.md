@@ -1,7 +1,8 @@
 ---
 name: hono-auth
-description: Authentication with Hono including better-auth, JWT, OAuth, and session management. Use when implementing auth in Hono applications.
+description: Implements authentication in Hono applications including better-auth integration, JWT tokens, OAuth 2.0 flows, session management, basic/bearer auth, API keys, and role-based access control. Use when adding authentication, implementing login/logout, protecting routes, or setting up RBAC in Hono apps.
 argument-hint: [auth-type]
+allowed-tools: [Read, Write, Edit, Glob, Grep]
 ---
 
 # Hono Authentication

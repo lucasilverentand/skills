@@ -1,7 +1,8 @@
 ---
 name: hono-database
-description: Database integrations with Hono including Drizzle, Prisma, D1, and Turso. Use when connecting databases to Hono applications.
+description: Integrates databases with Hono including Drizzle ORM, Prisma, Cloudflare D1, Turso/libSQL, PostgreSQL, and raw SQL queries. Use when connecting databases, configuring ORMs, writing queries, managing database connections in serverless environments, or setting up database middleware.
 argument-hint: [database]
+allowed-tools: [Read, Write, Edit, Glob, Grep]
 ---
 
 # Hono Database Integration

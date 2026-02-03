@@ -1,6 +1,7 @@
 ---
 name: hono-jsx
-description: Server-side rendering with Hono JSX. Use when building HTML pages, SSR, or streaming responses with Hono.
+description: Implements server-side rendering with Hono's built-in JSX including components, layouts, streaming SSR, forms, and client interactivity. Use when building HTML pages, creating reusable components, implementing SSR with streaming, handling form submissions, or rendering dynamic HTML in Hono apps.
+allowed-tools: [Read, Write, Edit, Glob, Grep]
 ---
 
 # Hono JSX

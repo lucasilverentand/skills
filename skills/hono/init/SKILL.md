@@ -1,7 +1,8 @@
 ---
 name: hono-init
-description: Initialize new Hono projects. Use when creating a new Hono application, scaffolding project structure, or setting up for a specific runtime.
+description: Initializes new Hono web applications for various runtimes including Cloudflare Workers, Node.js, Bun, Deno, Vercel, and AWS Lambda. Use when creating a new Hono project, scaffolding application structure, setting up for a specific runtime, or adding Hono to an existing project.
 argument-hint: [runtime]
+allowed-tools: [Bash, Read, Write, Glob]
 ---
 
 # Hono Project Initialization
