@@ -4,143 +4,72 @@ Tools for creating, validating, and improving Claude Code skills.
 
 ## Skills
 
-| Skill | Description | Use When |
-|-------|-------------|----------|
-| `skill-init` | Initialize new skills with proper structure | Creating a new skill |
-| `skill-validate` | Validate skill files for correctness | Checking skill quality before publishing |
-| `skill-improve` | Enhance existing skills with better docs and examples | Improving skill quality |
-| `skill-examples` | Generate templates for different skill types | Needing reference implementations |
+| Skill | Description |
+|-------|-------------|
+| `authoring-skills` | Create, validate, and improve skills (consolidated) |
+| `generating-skill-from-chat` | Extract skills from conversation patterns (auto-suggested) |
 
-## Quick Start
+## Usage
 
-### Create a New Skill
+Just describe what you want:
 
 ```
-/skill-init my-new-skill devtools
+Create a skill for searching Jira
+Check if this skill is correct
+Make this skill better
 ```
 
-Or describe what you want:
+Or be explicit:
 
 ```
-"Create a new skill for managing Docker containers"
+/authoring-skills create searching-jira mcp-caller
+/authoring-skills validate processing-pdfs
+/authoring-skills improve my-skill
 ```
 
-### Validate Your Skill
+## Scripts
 
+Scripts are bundled in `authoring-skills/scripts/`:
+
+```bash
+# Validate a skill
+authoring-skills/scripts/validate-skill.sh skill-name
+
+# Validate all skills
+authoring-skills/scripts/validate-skill.sh --all
+
+# Scaffold new skill
+authoring-skills/scripts/scaffold-skill.sh searching-jira integrations mcp-caller
 ```
-/skill-validate my-new-skill
-```
-
-Or validate all skills:
-
-```
-"Validate all skills in the marketplace"
-```
-
-### Improve an Existing Skill
-
-```
-/skill-improve devenv-search
-```
-
-Or describe the improvement:
-
-```
-"Add more examples to the devenv-search skill"
-```
-
-### Get Templates
-
-```
-/skill-examples mcp-tool-caller
-```
-
-Available types:
-
-- `mcp-tool-caller` - For skills that call MCP tools
-- `code-generator` - For skills that create code
-- `config-manager` - For skills that modify configs
-- `workflow` - For multi-step processes
-- `analyzer` - For code review/analysis
 
 ## Skill File Format
 
-Every skill needs a `SKILL.md` file with:
-
 ```yaml
 ---
-name: skill-name           # kebab-case identifier
-description: Brief desc. Use when {trigger conditions}.
-argument-hint: [args]      # optional
-allowed-tools: [tools]     # optional
-context: fork              # optional: fork (separate context) or main (shared)
-agent: general-purpose     # optional: agent type for skill execution
+name: searching-jira           # gerund form, kebab-case
+description: Searches Jira issues. Use when finding tickets.
+argument-hint: [query]
+allowed-tools: [Read, Glob]
+context: fork                  # optional
+agent: general-purpose         # optional
 ---
 
-# Skill Title
+# Searching Jira
 
 ## Your Task
-{What the skill does}
+{what the skill does}
 
 ## Examples
-{Usage examples}
+{usage examples}
 
 ## Error Handling
-{Common issues and fixes}
+{common issues}
 ```
 
-## Best Practices
+## Key Rules
 
-### Descriptions
+**Names:** Gerund form (`processing-pdfs`), max 64 chars, lowercase + hyphens
 
-The description field drives auto-invocation. Good descriptions:
+**Descriptions:** Third person, include "Use when", add keywords
 
-- Start with an action verb
-- Explain what the skill does
-- End with "Use when {specific conditions}"
-- Include key terms users might mention
-
-### Examples
-
-Include at minimum:
-
-- Basic usage example
-- Advanced/complex example
-- Error case example
-
-### Error Handling
-
-Document:
-
-- Common failure modes
-- How to detect them
-- How to fix them
-- Fallback options
-
-### Validation Checklist
-
-Always include a checklist of verifications before considering the task complete.
-
-## Plugin Integration
-
-After creating skills, add them to a plugin in `marketplace.json`:
-
-```json
-{
-  "name": "my-plugin",
-  "description": "Plugin description",
-  "skills": ["./skills/category/skill-name"]
-}
-```
-
-## Quality Checklist
-
-Before publishing a skill:
-
-- [ ] Name is kebab-case and unique
-- [ ] Description includes "Use when" trigger
-- [ ] Has clear "Your Task" section
-- [ ] Includes realistic examples
-- [ ] Has error handling section
-- [ ] Has validation checklist
-- [ ] Passes `/skill-validate`
+**Size:** Target under 300 lines
