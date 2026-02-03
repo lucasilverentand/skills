@@ -1,42 +1,33 @@
 ---
-name: {skill-name}
-description: Searches {service} for {resources}. Use when finding, querying, or discovering {service} data.
-argument-hint: [query]
+name: {name}
+description: {description}. Use when {triggers}.
+argument-hint: {hint}
 allowed-tools:
-  - mcp__{server}__tool_name
+  - mcp__{server}__{tool}
 ---
 
-# {Skill Title}
+# {Title}
 
-Searches {service} and presents formatted results.
+{One-line description}.
 
 ## Your Task
 
-1. Parse the query from $ARGUMENTS
-2. Call the MCP tool with appropriate parameters
-3. Format results clearly with descriptions
-4. Suggest related searches if helpful
+1. Parse $ARGUMENTS for: {expected args}
+2. Call MCP tool with parameters
+3. Format and present results
 
-## Examples
-
-### Basic Search
+## Example
 
 ```
-User: /{skill-name} authentication
-→ Call MCP tool, show top results with descriptions
-```
-
-### No Results
-
-```
-→ Suggest alternative search terms
-→ Show popular searches in this category
+User: {example request}
+Action: Call mcp__{server}__{tool} with {params}
+Output: {formatted result}
 ```
 
 ## Error Handling
 
-| Issue | Response |
+| Error | Response |
 |-------|----------|
-| Empty query | Show usage examples |
-| No results | Suggest alternative terms |
-| Tool unavailable | Explain, suggest manual approach |
+| Tool unavailable | Check MCP server status |
+| Invalid params | Show required format |
+| Empty result | Explain and suggest alternatives |

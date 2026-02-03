@@ -1,48 +1,43 @@
 ---
-name: {skill-name}
-description: Generates {artifact} with {framework} conventions. Use when creating, scaffolding, or adding {artifact} to projects.
-argument-hint: [name] [options]
+name: {name}
+description: {description}. Use when {triggers}.
+argument-hint: {hint}
 allowed-tools:
   - Read
   - Write
   - Glob
-  - Bash
 ---
 
-# {Skill Title}
+# {Title}
 
-Creates {artifact} following best practices.
+Generates {what} based on {input}.
 
 ## Your Task
 
-1. Check existing project structure
-2. Gather requirements from $ARGUMENTS (ask if critical info missing)
-3. Generate files using template below
-4. Validate syntax: `{validation-command}`
-5. If errors, fix and re-validate until passing
+1. Parse $ARGUMENTS for: {expected args}
+2. Detect project context (language, framework)
+3. Generate code following project conventions
+4. Write to appropriate location
+5. Validate output
 
-## Template
+## Output Format
 
-```{language}
-// Generated {artifact}
-{template code with placeholders}
-```
+- Match existing code style
+- Include necessary imports
+- Add minimal documentation
 
-## Examples
-
-### Basic Generation
+## Example
 
 ```
-User: /{skill-name} my-component
-→ Creates component with default options
-→ Validates syntax
-→ Reports what was created
+User: {example request}
+Action: Generate {file} at {path}
+Output: Created {path} with {description}
 ```
 
 ## Error Handling
 
-| Issue | Response |
+| Error | Response |
 |-------|----------|
-| Already exists | Ask: replace, rename, or cancel? |
-| Validation fails | Fix errors, re-validate |
-| Missing dependencies | Show installation command |
+| Path exists | Ask: overwrite, rename, or abort |
+| Unknown project type | Ask for language/framework |
+| Missing context | Request additional info |

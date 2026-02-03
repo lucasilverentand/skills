@@ -1,58 +1,71 @@
 ---
-name: {skill-name}
-description: Investigates {problem-type} systematically. Use when debugging, analyzing incidents, or understanding complex {domain} issues.
-argument-hint: [problem-description]
+name: {name}
+description: {description}. Use when {triggers}.
+argument-hint: {hint}
+allowed-tools:
+  - Read
+  - Glob
+  - Grep
+  - Task
 context: fork
 agent: general-purpose
 ---
 
-# {Skill Title}
+# {Title}
 
-Performs systematic investigation using parallel exploration.
+Investigates {what} by {method}.
 
 ## Your Task
 
-1. **Understand the problem** from $ARGUMENTS
-   - What's happening vs what's expected?
-   - When did it start? Reproducible?
+1. Understand the problem/question
+2. Form hypotheses
+3. Spawn parallel investigations
+4. Synthesize findings
+5. Present conclusions with evidence
 
-2. **Generate 3-5 hypotheses** of likely causes
+## Investigation Strategy
 
-3. **Investigate in parallel**
-   Spawn Task agents (subagent_type: Explore) for each hypothesis
+### Phase 1: Gather Context
 
-4. **Synthesize findings**
-   Correlate evidence across agents
+Spawn Explore agents for:
+- {search area 1}
+- {search area 2}
+- {search area 3}
 
-5. **Report**
-   - Root cause with evidence (file:line)
-   - Recommended fix
-   - Confidence: High/Medium/Low
+### Phase 2: Deep Dive
+
+Based on Phase 1, investigate:
+- {specific investigation}
+- {specific investigation}
+
+### Phase 3: Synthesize
+
+Combine findings into actionable answer.
+
+## Spawning Agents
+
+```
+Use Task tool with:
+- subagent_type: Explore
+- prompt: "{specific search question}"
+
+Spawn multiple in single message for parallel execution.
+```
 
 ## Example
 
 ```
-User: /{skill-name} Login fails after deployment
-
-You:
-Hypotheses:
-1. Config change
-2. Missing env var
-3. Dependency issue
-
-[Spawns 3 Explore agents in parallel]
-
-Agent 2 finds: Missing AUTH_SECRET in production.env:42
-
-Root cause: Missing AUTH_SECRET environment variable
-Fix: Add AUTH_SECRET to production.env
-Confidence: High
+User: {example question}
+Investigation:
+- Agent 1: Found {x}
+- Agent 2: Found {y}
+Conclusion: {answer with evidence}
 ```
 
 ## Error Handling
 
-| Issue | Response |
+| Error | Response |
 |-------|----------|
-| Vague problem | Ask clarifying questions |
-| Conflicting evidence | Spawn focused agent to resolve |
-| No root cause | Report findings, suggest next steps |
+| No results | Broaden search, try alternatives |
+| Conflicting info | Present both, explain discrepancy |
+| Incomplete data | State confidence level, suggest next steps |

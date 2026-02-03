@@ -1,55 +1,62 @@
 ---
-name: {skill-name}
-description: Analyzes code for {aspect} issues. Use when reviewing, auditing, or checking {aspect} in code.
-argument-hint: [path]
+name: {name}
+description: {description}. Use when {triggers}.
+argument-hint: {hint}
 allowed-tools:
   - Read
   - Glob
   - Grep
 ---
 
-# {Skill Title}
+# {Title}
 
-Analyzes code for {aspect} and reports findings.
+Analyzes {what} for {purpose}.
 
 ## Your Task
 
-1. Find files to analyze from $ARGUMENTS (or current directory)
-2. Read and check for issues listed below
-3. Report findings with file:line locations and fixes
+1. Identify target files/code
+2. Apply analysis criteria
+3. Collect findings
+4. Prioritize by severity/impact
+5. Present actionable report
 
-## What to Check
+## Analysis Criteria
 
-- {Issue type 1}: {detection pattern}
-- {Issue type 2}: {detection pattern}
-- {Issue type 3}: {detection pattern}
+| Check | Severity | Description |
+|-------|----------|-------------|
+| {check1} | High | {what it catches} |
+| {check2} | Medium | {what it catches} |
+| {check3} | Low | {what it catches} |
 
 ## Output Format
 
-For each issue:
+```
+## Analysis: {target}
 
-**{Severity}: {Title}**
-- File: `path/file.ts:42`
-- Problem: {what's wrong}
-- Fix: {how to fix}
+### Critical ({count})
+- {finding}: {location} - {suggestion}
 
-End with: "Checked X files, found Y issues"
+### Warnings ({count})
+- {finding}: {location} - {suggestion}
 
-## Examples
+### Info ({count})
+- {finding}: {location}
 
-### Analyze Directory
+Summary: {x} issues found, {y} critical
+```
+
+## Example
 
 ```
-User: /{skill-name} src/
-→ Checks all files
-→ Reports issues by severity
-→ Summarizes findings
+User: {example request}
+Analysis: Scanned {n} files
+Found: {findings summary}
 ```
 
 ## Error Handling
 
-| Issue | Response |
+| Error | Response |
 |-------|----------|
-| No files found | Check path, suggest alternatives |
-| File unreadable | Skip with note, continue |
-| No issues | Confirm clean analysis |
+| No files found | Clarify target path/pattern |
+| Too many results | Offer to filter by severity |
+| Unknown file type | Skip with warning |

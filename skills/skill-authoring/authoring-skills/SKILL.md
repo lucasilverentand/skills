@@ -1,6 +1,6 @@
 ---
 name: authoring-skills
-description: Creates, validates, and improves Claude Code skills. Use when making a skill, creating a skill, checking skill quality, improving a skill, or someone says "make this into a skill".
+description: Creates, validates, and improves Claude Code skills. Use when making a skill, creating a skill, checking skill quality, improving a skill, scaffolding SKILL.md, or extracting patterns into reusable skills.
 argument-hint: [action] [skill-name]
 allowed-tools:
   - Bash
@@ -19,183 +19,293 @@ Creates, validates, and improves Claude Code skills.
 
 ## Your Task
 
-Determine the action from $ARGUMENTS or context:
+Determine action from $ARGUMENTS or context:
 
 | Intent | Action |
 |--------|--------|
 | "create a skill", "make a skill for X" | Create new skill |
-| "check this skill", "validate", "is this correct" | Validate existing skill |
-| "improve this skill", "make it better" | Improve existing skill |
-| After solving complex problem | Suggest extracting as skill |
+| "check this skill", "validate", "is this correct" | Validate skill |
+| "improve this skill", "make it better" | Improve skill |
+| Complex problem just solved | Suggest extracting as skill |
+
+## Progress Checklist
+
+- [ ] Determine action (create/validate/improve)
+- [ ] Gather requirements
+- [ ] Execute action
+- [ ] Validate result
+- [ ] Suggest next steps
+
+---
 
 ## Creating Skills
 
-1. **Get the basics** (from args or ask):
-   - Name (gerund form: `searching-jira`, `processing-pdfs`)
-   - What it does (one sentence)
-   - When to invoke it
+### Step 1: Get the Basics
 
-2. **Pick skill type:**
-   - `mcp-caller` - Wraps MCP tools (high freedom)
-   - `code-generator` - Creates files (medium freedom)
-   - `config-manager` - Edits configs (medium freedom)
-   - `workflow` - Multi-step process (low freedom, forked)
-   - `analyzer` - Reviews code (medium freedom)
-   - `investigator` - Spawns agents (forked)
+From $ARGUMENTS or ask:
+- Name (action-first gerund: `searching-jira`, `processing-pdfs`)
+- What it does (one sentence)
+- When Claude should invoke it
 
-3. **Determine execution context:**
-   - Simple skills: `context: main` (default) - runs in conversation
-   - Autonomous/agent-spawning: `context: fork` - isolated execution
-   - See `references/AGENTS.md` for agent types and forking details
+### Step 2: Pick Skill Type
 
-4. **Generate from template** in `references/templates/{type}.md`
+| Template | Freedom | Use Case |
+|----------|---------|----------|
+| `mcp-caller` | High | Wraps MCP tools |
+| `code-generator` | Medium | Creates files |
+| `config-manager` | Medium | Edits configs |
+| `workflow` | Low | Multi-step processes |
+| `analyzer` | Medium | Reviews/audits code |
+| `investigator` | Medium | Spawns agents, debugs |
+| `documentation` | Medium | Generates docs |
+| `refactorer` | Low | Transforms code |
+| `teaching` | High | Explains concepts |
+| `integration` | Medium | Connects services |
+| `validator` | Low | Checks compliance |
+| `scaffolder` | Medium | Project initialization |
 
-4. **Validate** before finishing
+### Step 3: Determine Context
+
+| Context | When |
+|---------|------|
+| `main` (default) | Simple skills, user sees steps |
+| `fork` | Autonomous work, spawning subagents |
+
+### Step 4: Generate SKILL.md
+
+Use template from `references/templates/{type}.md`.
+
+### Step 5: Validate
+
+Check against rules below before finishing.
+
+---
 
 ## Validating Skills
 
-Check these rules:
+### Name Rules (Critical)
 
-**Name (Critical):**
-- Max 64 chars, lowercase, hyphens only
-- No `--`, no start/end hyphen
-- Gerund form: `processing-pdfs` not `pdf-processor`
-- Matches directory name
+| Rule | Valid | Invalid |
+|------|-------|---------|
+| Max 64 chars | `processing-pdfs` | `processing-pdf-files-from-various-sources-...` |
+| Lowercase + hyphens | `my-skill` | `My_Skill` |
+| No `--` | `my-skill` | `my--skill` |
+| No start/end hyphen | `my-skill` | `-my-skill-` |
+| Gerund form | `searching-jira` | `jira-searcher` |
+| Action-first | `searching-jira` | `jira-searching` |
+| Matches directory | `skills/foo/foo/` | `skills/foo/bar/` |
 
-**Description (Critical):**
-- Third person ("Searches..." not "I search...")
-- Includes "Use when" trigger
-- Has searchable keywords
+### Description Rules (Critical)
 
-**Content:**
-- Has `## Your Task` section
-- Has examples and error handling
-- Under 300 lines (500 max)
+| Rule | Valid | Invalid |
+|------|-------|---------|
+| Third person | "Searches..." | "I search..." |
+| Has "Use when" | "...Use when finding..." | "Searches Jira." |
+| Has keywords | "...tickets, issues, Jira..." | "Searches things." |
+| Max 1024 chars | (short) | (too long) |
 
-**Output style:** Conversational prose, explain issues with fixes.
+### Content Rules
+
+| Rule | Check |
+|------|-------|
+| Has title | `# Title` exists |
+| Has task section | `## Your Task` exists |
+| Has examples | `## Example` exists |
+| Has error handling | `## Error` exists |
+| Size | Under 300 lines preferred, 500 max |
+
+### Output Style
+
+Explain findings conversationally:
+
+```
+Looking at searching-jira...
+
+Name: Good gerund form, matches directory.
+Description: Third-person with "Use when" - good.
+Size: 89 lines - concise.
+
+Issue: Missing error handling section.
+Fix: Add ## Error Handling with common failure cases.
+
+Overall: 1 issue to fix.
+```
+
+---
 
 ## Improving Skills
 
-1. Read and assess current state
-2. Prioritize improvements:
-   - Description voice/triggers (highest impact)
-   - Naming (high impact)
-   - Size/structure (medium)
-   - Workflow patterns (lower)
-3. Show before/after for each change
+### Priority Order
+
+1. **Description** (highest impact) - drives auto-invocation
+2. **Naming** - gerund form, action-first
+3. **Size/structure** - under 300 lines
+4. **Patterns** - checklists, validation loops
+
+### Process
+
+1. Read skill, assess against rules
+2. List improvements with priority
+3. Show before/after for each
 4. Apply after user approval
 5. Validate result
+
+---
 
 ## Suggesting Skill Extraction
 
 After solving a complex problem, proactively suggest:
 
 ```
-That was a useful pattern for [problem type]. Want me to turn
-this into a skill? I'd call it "debugging-auth-issues" or similar.
+That was a useful pattern. Want me to turn this into a skill?
+I'd call it "debugging-auth-issues" or similar.
 ```
 
-Suggest when you notice:
+Suggest when:
 - Multi-step solution (5+ steps)
 - Reusable pattern
 - Domain expertise applied
 - Tool orchestration
 
-## Naming Rules
+---
 
-| Rule | Example |
-|------|---------|
-| Gerund form | `analyzing-code` not `code-analyzer` |
-| Max 64 chars | `processing-pdfs` |
-| Lowercase + hyphens | `my-skill` not `My_Skill` |
+## Style Guide
 
-**Conversions:**
-- `pdf-processor` → `processing-pdfs`
-- `code-review` → `reviewing-code`
+### Core Principles
 
-## Description Rules
+**Always explain the why.** Don't just do things - explain reasoning.
 
-**Good:** `Searches Jira issues and projects. Use when finding tickets, querying Jira, or looking up issues.`
+**Fail fast.** Validate inputs early. Check preconditions before work:
+- Required files exist?
+- Arguments valid?
+- Dependencies available?
 
-**Bad:** `I help you search Jira.` (first person)
+**Idempotent.** Running twice is safe:
+- Check before creating
+- Update rather than duplicate
+- Report "already exists" vs failing
 
-## Scripts
+**Smart defaults.** On ambiguity:
+1. Make reasonable assumption
+2. Proceed with sensible default
+3. State what was assumed
+4. Let user correct
 
-```bash
-# Validate a skill
-scripts/validate-skill.sh skill-name
+### Verbosity by Freedom
 
-# Validate all skills
-scripts/validate-skill.sh --all
+| Freedom | Verbosity | Why |
+|---------|-----------|-----|
+| High | Sparse | Over-specification constrains |
+| Low | Detailed | Fragile ops need exact steps |
 
-# Scaffold new skill
-scripts/scaffold-skill.sh searching-jira integrations mcp-caller
-```
+### Tone
 
-## Examples
+Technical and precise. Like a spec document:
+- Unambiguous language
+- Clear terminology
+- No filler
 
-### Create
+### Output
 
-```
-User: Create a skill for searching Jira
+Verbose walkthrough:
+1. What was done
+2. Why that approach
+3. What each step accomplished
+4. Next steps
+5. Improvement suggestions
 
-You: Creating searching-jira as an mcp-caller skill...
-[Generates SKILL.md from template]
-Created at skills/integrations/searching-jira/SKILL.md
-```
+### Error Handling
 
-### Validate
-
-```
-User: Check if this skill is correct
-
-You: Looking at searching-jira...
-
-Name: Good gerund form
-Description: Third-person with "Use when" - looks good
-Size: 89 lines - nice and concise
-
-Passes validation.
-```
-
-### Improve
+Present options when something fails:
 
 ```
-User: Make this skill better
+Config file couldn't be parsed.
 
-You: Looking at processing-pdfs...
+Options:
+1. Show syntax error for manual fix
+2. Attempt auto-repair
+3. Use default config
+4. Abort
 
-The description starts with "I can help" - needs third-person.
-
-Before: "I can help you extract text from PDFs"
-After: "Extracts text and metadata from PDFs. Use when processing documents or converting PDF to text."
-
-Want me to apply this fix?
+Which approach?
 ```
 
-## Agents and Context
+### Checklists
 
-For skills that need to spawn subagents or run autonomously, read `references/AGENTS.md`.
+Required for all multi-step tasks. Copyable format:
 
-**Quick reference:**
+```markdown
+## Progress
+- [ ] Step 1
+- [ ] Step 2
+- [ ] Step 3
+```
 
-| Agent Type | Use For |
-|------------|---------|
-| `general-purpose` | Multi-step tasks needing all tools |
-| `Explore` | Read-only codebase research |
-| `Bash` | Command execution only |
-| `Plan` | Architecture planning |
+### Validation Loops
 
-| Context | Use For |
-|---------|---------|
-| `main` (default) | Simple skills, user sees steps |
-| `fork` | Autonomous work, spawning subagents |
+Build into skills:
+1. Perform action
+2. Check result
+3. If invalid: analyze, fix, repeat
+4. Only proceed when valid
+
+### Composability
+
+Design for chaining:
+- Structured output
+- Clear success/failure
+- Consistent argument patterns
+
+### Path Handling
+
+Smart detection:
+1. Look for project markers (package.json, Cargo.toml)
+2. Check conventions (src/, lib/)
+3. Fall back to cwd
+4. Allow explicit override
+
+---
+
+## Agent Types
+
+| Type | Use For | Tools |
+|------|---------|-------|
+| `general-purpose` | Multi-step tasks | All |
+| `Explore` | Codebase research | Read-only |
+| `Bash` | Command execution | Bash only |
+| `Plan` | Architecture planning | Read-only |
+
+### Spawning Subagents
+
+Use Task tool with `subagent_type`:
+
+```
+Spawn Task agents in parallel:
+- subagent_type: Explore
+- prompt: "Find files handling auth"
+```
+
+For parallel investigation, spawn multiple in single message.
+
+---
 
 ## Error Handling
 
 | Issue | Response |
 |-------|----------|
-| Skill not found | Search for similar names, list available skills |
-| Invalid YAML | Show syntax error location, suggest fix |
-| Name conflict | Suggest alternative name or confirm replace |
+| Skill not found | Search similar names, list available |
+| Invalid YAML | Show error location, suggest fix |
+| Name conflict | Suggest alternative or confirm replace |
 | Template not found | List available templates |
+
+---
+
+## Templates
+
+Templates are in `references/templates/`. Each contains:
+- YAML frontmatter structure
+- Your Task section template
+- Example format
+- Error handling table
+
+Available: `mcp-caller`, `code-generator`, `config-manager`, `workflow`, `analyzer`, `investigator`, `documentation`, `refactorer`, `teaching`, `integration`, `validator`, `scaffolder`.

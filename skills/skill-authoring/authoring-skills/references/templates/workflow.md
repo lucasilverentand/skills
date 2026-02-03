@@ -1,75 +1,64 @@
 ---
-name: {skill-name}
-description: Guides {process} step by step with validation. Use when {trigger conditions}.
-argument-hint: [options]
+name: {name}
+description: {description}. Use when {triggers}.
+argument-hint: {hint}
 allowed-tools:
+  - Bash
   - Read
   - Write
   - Edit
   - Glob
-  - Bash
 context: fork
 agent: general-purpose
 ---
 
-# {Skill Title}
+# {Title}
 
-Guides through {process} with validation at each step.
+Executes {workflow description}.
 
 ## Your Task
 
-Execute these phases in order. Only proceed when each step validates.
+Follow this exact sequence:
 
-### Phase 1: Assessment
+### Step 1: {First Step}
 
-1. Check prerequisites:
+- Action: {what to do}
+- Verify: {success criteria}
+- On failure: {recovery action}
 
-   ```bash
-   {prerequisite-check}
-   ```
+### Step 2: {Second Step}
 
-2. Examine current state
-3. Identify what needs to happen
+- Action: {what to do}
+- Verify: {success criteria}
+- On failure: {recovery action}
 
-### Phase 2: Planning
+### Step 3: {Third Step}
 
-1. Determine approach based on assessment
-2. Present plan to user
-3. **Get confirmation before proceeding**
+- Action: {what to do}
+- Verify: {success criteria}
+- On failure: {recovery action}
 
-### Phase 3: Execution
+## Progress Checklist
 
-1. Step 1: {action}
+- [ ] Step 1: {description}
+- [ ] Step 2: {description}
+- [ ] Step 3: {description}
 
-   ```bash
-   {command}
-   ```
+## Example
 
-   Verify: {expected result}
-
-2. Step 2: {action}
-
-   ```bash
-   {command}
-   ```
-
-   Verify: {expected result}
-
-### Phase 4: Verification
-
-1. Run final check:
-
-   ```bash
-   {verification-command}
-   ```
-
-2. Report what was done
-3. Suggest next steps
+```
+User: {example request}
+Steps executed:
+1. {step 1 result}
+2. {step 2 result}
+3. {step 3 result}
+Result: {final outcome}
+```
 
 ## Error Handling
 
-| Issue | Response |
+| Error | Response |
 |-------|----------|
-| Prerequisite missing | Explain what's needed |
-| Step fails | Show error, attempt fix, retry |
-| User wants rollback | Execute rollback steps |
+| Step fails | Stop, report, offer recovery options |
+| Partial completion | Report progress, suggest resume |
+| Precondition unmet | Explain requirement, suggest fix |

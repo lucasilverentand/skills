@@ -1,47 +1,44 @@
 ---
-name: {skill-name}
-description: Configures {tool} settings safely. Use when changing {tool} options, updating configuration, or setting up {tool}.
-argument-hint: [setting] [value]
+name: {name}
+description: {description}. Use when {triggers}.
+argument-hint: {hint}
 allowed-tools:
   - Read
-  - Write
   - Edit
   - Glob
-  - Bash
 ---
 
-# {Skill Title}
+# {Title}
 
-Manages {tool} configuration with validation.
+Manages {config type} configuration.
 
 ## Your Task
 
-1. Find config file (check standard locations below)
-2. Read current configuration
-3. Apply changes from $ARGUMENTS
-4. Validate: `{validation-command}`
-5. If invalid, fix and re-validate
+1. Locate config file (check common paths)
+2. Parse current configuration
+3. Apply requested changes
+4. Validate result
+5. Report what changed
 
 ## Config Locations
 
-| Location | Priority |
-|----------|----------|
-| `./{config-file}` | Project-level |
-| `~/.config/{tool}/{config-file}` | User-level |
+Check in order:
+1. Project root ({filename})
+2. User config (~/.{filename})
+3. Create if not found (ask first)
 
-## Examples
-
-### Change Setting
+## Example
 
 ```
-User: /{skill-name} theme dark
-→ Finds config, updates theme, validates, confirms
+User: {example request}
+Action: Update {key} in {file}
+Output: Changed {key}: {old} → {new}
 ```
 
 ## Error Handling
 
-| Issue | Response |
+| Error | Response |
 |-------|----------|
-| Config not found | Create with sensible defaults |
-| Invalid syntax | Show error location, suggest fix |
-| Unknown setting | List similar settings |
+| Config not found | Offer to create with defaults |
+| Parse error | Show location, suggest fix |
+| Invalid value | Explain valid options |
