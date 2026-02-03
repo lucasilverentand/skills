@@ -1,8 +1,8 @@
 ---
 name: analyze-issue
-description: Analyze an issue against the codebase to improve issue quality, validate claims, identify gaps, and find related code. Use when reviewing issues for completeness or before starting work.
+description: Performs deep analysis of issues against the codebase to validate file references, verify claims, identify missing information, find related code, and assess issue quality. Use when reviewing issues for completeness, validating bug reports, assessing work scope, or preparing to start development on an issue.
 argument-hint: [issue-number, URL, or description]
-allowed-tools: [Bash, Read, Glob, Grep]
+allowed-tools: [Bash, Read, Glob, Grep, Task]
 ---
 
 # Analyze Issue

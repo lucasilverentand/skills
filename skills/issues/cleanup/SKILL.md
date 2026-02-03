@@ -1,6 +1,6 @@
 ---
 name: cleanup-issue
-description: Format and organize issues to match repository templates, apply appropriate labels, and update project fields. Use when standardizing issues or managing GitHub/GitLab Projects.
+description: Formats and organizes issues to match repository templates, applies appropriate labels based on content analysis, updates project fields, and suggests assignees/milestones. Use when standardizing issues, triaging new issues, managing GitHub/GitLab Projects, or batch-cleaning up issues.
 argument-hint: [issue-number or URL]
 allowed-tools: [Bash, Read, Glob, Grep]
 ---

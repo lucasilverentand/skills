@@ -1,6 +1,6 @@
 ---
 name: create-issue
-description: Create well-structured issues with proper context, reproduction steps, and acceptance criteria. Use when creating bug reports, feature requests, or task issues on GitHub, GitLab, or other platforms.
+description: Creates well-structured issues on GitHub, GitLab, or other platforms with proper context, reproduction steps, environment details, and acceptance criteria. Use when creating bug reports, feature requests, task issues, or filing issues from code analysis findings.
 argument-hint: [issue-type or description]
 allowed-tools: [Bash, Read, Glob, Grep]
 ---
