@@ -98,10 +98,10 @@
       "description": "Pull request toolkit: create well-structured PRs, review code changes, update PR metadata, and resolve merge conflicts with context-aware guidance",
       "category": "devtools",
       "skills": [
-        "./skills/pull-requests/create",
-        "./skills/pull-requests/review",
-        "./skills/pull-requests/update",
-        "./skills/pull-requests/conflict"
+        "./skills/pull-requests/creating-pull-requests",
+        "./skills/pull-requests/reviewing-pull-requests",
+        "./skills/pull-requests/updating-pull-requests",
+        "./skills/pull-requests/resolving-pr-conflicts"
       ],
       "strict": false
     },

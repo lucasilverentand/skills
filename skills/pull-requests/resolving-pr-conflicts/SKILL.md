@@ -1,13 +1,8 @@
 ---
-name: pr-conflict
+name: resolving-pr-conflicts
 description: Guides resolution of merge conflicts with context-aware suggestions by analyzing both branches, understanding the intent of competing changes, and providing step-by-step resolution strategies. Use when handling merge conflicts, rebasing branches, resolving competing changes, fixing failed merges, or updating PRs with conflicts.
 argument-hint: [branch-name or --rebase]
-allowed-tools:
-  - Bash
-  - Read
-  - Write
-  - Glob
-  - Grep
+allowed-tools: Bash Read Write Glob Grep
 ---
 
 # Resolve PR Conflicts

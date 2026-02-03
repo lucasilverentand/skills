@@ -1,13 +1,8 @@
 ---
-name: pr-update
+name: updating-pull-requests
 description: Updates pull request titles, descriptions, labels, and metadata to match repository standards and improve reviewability. Use when cleaning up PRs, adding missing context, improving PR descriptions, fixing formatting, or updating PR metadata after changes.
 argument-hint: [pr-number]
-allowed-tools:
-  - Bash
-  - Read
-  - Write
-  - Glob
-  - Grep
+allowed-tools: Bash Read Write Glob Grep
 ---
 
 # Update Pull Request

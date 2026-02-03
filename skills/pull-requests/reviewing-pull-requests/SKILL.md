@@ -1,12 +1,8 @@
 ---
-name: pr-review
+name: reviewing-pull-requests
 description: Reviews pull request diffs for bugs, security vulnerabilities, performance issues, and best practices. Provides structured feedback with severity levels and actionable suggestions. Use when reviewing PRs, providing code feedback, checking quality before merge, conducting code reviews, or auditing changes.
 argument-hint: [pr-number or pr-url]
-allowed-tools:
-  - Bash
-  - Read
-  - Glob
-  - Grep
+allowed-tools: Bash Read Glob Grep
 ---
 
 # Review Pull Request
@@ -247,12 +243,12 @@ Check for:
 ```
 
 **Suggestion:**
+
 ```{language}
 {The proposed fix}
 ```
 
 **Impact:** {What could go wrong if unfixed}
-```
 
 ### Review Summary Format
 
@@ -404,6 +400,7 @@ const query = `SELECT * FROM users WHERE id = ${userId}`;
 ```
 
 **Fix:** Use parameterized queries:
+
 ```typescript
 const query = 'SELECT * FROM users WHERE id = $1';
 const result = await db.query(query, [userId]);
@@ -418,6 +415,7 @@ The async function doesn't handle rejection.
 Please address the critical issue before merge.
 EOF
 )"
+
 ```
 
 ## Validation Checklist

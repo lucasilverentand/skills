@@ -1,13 +1,8 @@
 ---
-name: pr-create
+name: creating-pull-requests
 description: Creates well-structured pull requests with conventional titles, linked issues, comprehensive descriptions, and appropriate metadata. Use when opening PRs, drafting PR descriptions, preparing code for review, submitting changes for merge, or creating pull requests from feature branches.
 argument-hint: [base-branch or issue-number]
-allowed-tools:
-  - Bash
-  - Read
-  - Write
-  - Glob
-  - Grep
+allowed-tools: Bash Read Write Glob Grep
 ---
 
 # Create Pull Request
