@@ -73,6 +73,8 @@ name: skill-name           # kebab-case identifier
 description: Brief desc. Use when {trigger conditions}.
 argument-hint: [args]      # optional
 allowed-tools: [tools]     # optional
+context: fork              # optional: fork (separate context) or main (shared)
+agent: general-purpose     # optional: agent type for skill execution
 ---
 
 # Skill Title

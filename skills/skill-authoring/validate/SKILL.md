@@ -200,6 +200,45 @@ if echo "$TOOLS" | grep -q '^ *-'; then
 fi
 ```
 
+### 6b. Context Field Validation (LOW)
+
+The `context` field controls skill execution context:
+
+| Value | Description |
+|-------|-------------|
+| `main` | Runs in shared conversation context (default) |
+| `fork` | Runs in isolated forked context |
+
+**Check command:**
+
+```bash
+CONTEXT=$(grep -m1 '^context:' SKILL.md | sed 's/context: *//')
+if [ -n "$CONTEXT" ] && [ "$CONTEXT" != "main" ] && [ "$CONTEXT" != "fork" ]; then
+  echo "FAIL: Invalid context value '$CONTEXT' (must be 'main' or 'fork')"
+fi
+```
+
+### 6c. Agent Field Validation (LOW)
+
+The `agent` field specifies which agent type executes the skill:
+
+| Value | Use Case |
+|-------|----------|
+| `general-purpose` | Complex multi-step tasks requiring all tools |
+| `Explore` | Codebase exploration and research |
+| `Bash` | Command execution focused tasks |
+| `Plan` | Architecture and implementation planning |
+
+**Check command:**
+
+```bash
+AGENT=$(grep -m1 '^agent:' SKILL.md | sed 's/agent: *//')
+VALID_AGENTS="general-purpose Explore Bash Plan"
+if [ -n "$AGENT" ] && ! echo "$VALID_AGENTS" | grep -qw "$AGENT"; then
+  echo "FAIL: Invalid agent value '$AGENT' (must be one of: $VALID_AGENTS)"
+fi
+```
+
 ### 7. Content Structure Validation (HIGH)
 
 Required and recommended sections:
@@ -272,7 +311,7 @@ Run each validation category and collect results:
 
 ### Validation Report Structure
 
-```
+```text
 ================================================================================
                          SKILL VALIDATION REPORT
 ================================================================================
@@ -566,6 +605,8 @@ Before marking validation complete:
 - [ ] Required sections present (# Title, ## Your Task)
 - [ ] File references validated (exist, not deeply nested)
 - [ ] allowed-tools format checked if present
+- [ ] context field valid if present (main or fork)
+- [ ] agent field valid if present (general-purpose, Explore, Bash, Plan)
 - [ ] Validation report generated with all findings
 - [ ] Copy-paste fixes provided for each issue
 - [ ] Severity levels correctly assigned

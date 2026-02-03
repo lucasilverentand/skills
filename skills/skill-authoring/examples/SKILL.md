@@ -61,6 +61,26 @@ All skills must use these exact constraints:
 | Keywords | Include terms users might mention |
 | Trigger | End with "Use when..." clause |
 
+### Optional Execution Fields
+
+| Field | Values | Description |
+|-------|--------|-------------|
+| `context` | `main`, `fork` | `main` runs in shared context (default), `fork` runs in isolated context |
+| `agent` | `general-purpose`, `Explore`, `Bash`, `Plan` | Specifies which agent type executes the skill |
+
+**When to use `context: fork`:**
+
+- Skills that perform extensive autonomous investigation
+- Skills that spawn multiple sub-agents
+- Skills where intermediate steps should not appear in main conversation
+
+**When to use `agent` field:**
+
+- `general-purpose`: Complex tasks needing all tools (debugging, analysis)
+- `Explore`: Codebase exploration and research tasks
+- `Bash`: Command-line focused operations
+- `Plan`: Architecture and implementation planning
+
 ### Good Description Examples
 
 ```yaml
@@ -624,6 +644,8 @@ allowed-tools:
   - Glob
   - Grep
   - Bash
+context: fork             # optional: run in isolated context for complex workflows
+agent: general-purpose    # optional: use general-purpose agent for multi-tool tasks
 ---
 
 # {Workflow Name}
@@ -1269,6 +1291,108 @@ then implement equivalent extraction using available tools.
 
 ---
 
+### 7. Agent-Based Investigator (Forked Context)
+
+For skills that perform autonomous investigation by spawning multiple sub-agents.
+
+```yaml
+---
+name: analyzing-{domain}
+description: Systematically investigates {problem type} using structured hypothesis-driven analysis with parallel exploration. Use when debugging complex issues, investigating incidents, or analyzing {domain} problems.
+argument-hint: [problem-description]
+context: fork
+agent: general-purpose
+---
+
+# {Domain} Analysis
+
+Performs systematic investigation of {problem type} using parallel exploration agents.
+
+## Degrees of Freedom: MEDIUM
+
+Follow the structured investigation phases but adapt agent prompts and
+hypothesis generation to the specific problem context.
+
+## Your Task
+
+Investigate the problem described in $ARGUMENTS:
+
+1. **Gather context** - Understand the problem fully
+2. **Generate hypotheses** - List 3-5 likely causes
+3. **Investigate in parallel** - Spawn Explore agents for each track
+4. **Synthesize findings** - Correlate evidence across agents
+5. **Report findings** - Present evidence-backed conclusion
+
+## Phase 1: Context Gathering
+
+If information is missing, ask the user:
+
+- What is the unexpected behavior?
+- What is the expected behavior?
+- When did this start?
+- Is it reproducible?
+
+## Phase 2: Hypothesis Generation
+
+Based on the problem type, generate hypotheses:
+
+| Problem Type | Common Hypotheses |
+|--------------|-------------------|
+| {Type A} | {hypothesis 1}, {hypothesis 2} |
+| {Type B} | {hypothesis 1}, {hypothesis 2} |
+
+## Phase 3: Parallel Investigation
+
+**Spawn 3-5 Task agents in parallel** (single message, multiple Task calls):
+
+### Agent 1: {Investigation Track}
+
+```text
+subagent_type: Explore
+prompt: |
+  Investigate {aspect} for: [problem]
+
+  Find {what to look for}. Report file paths with line numbers.
+```
+
+### Agent 2: {Investigation Track}
+
+```text
+subagent_type: Explore
+prompt: |
+  Analyze {aspect} for: [problem area]
+
+  Check for {patterns}. Report findings with evidence.
+```
+
+## Phase 4: Evidence Synthesis
+
+After agents return, correlate findings:
+
+| Hypothesis | Agent 1 | Agent 2 | Agent 3 |
+|------------|---------|---------|---------|
+| Hypothesis A | Supports/Neutral/Contradicts | ... | ... |
+
+## Phase 5: Report
+
+Present findings with:
+- Summary of investigation
+- Root cause with evidence (file:line references)
+- Recommended actions
+- Confidence level (High/Medium/Low)
+
+## Error Handling
+
+| Issue | Response |
+|-------|----------|
+| Insufficient context | Ask clarifying questions |
+| Agents return conflicting evidence | Spawn focused agent to resolve |
+| No clear root cause found | Report findings, suggest additional investigation |
+
+```
+
+---
+
 ## Script Bundling Guide
 
 ### Directory Structure
@@ -1397,15 +1521,16 @@ Only read these files when you need the specific information they contain.
 
 ## Choosing the Right Template
 
-| If the skill needs to... | Template | Freedom |
-|--------------------------|----------|---------|
-| Call MCP or external APIs | MCP Tool Caller | High |
-| Create files or projects | Code Generator | Medium |
-| Modify config files | Configuration Manager | Medium |
-| Guide multi-step processes | Workflow Orchestrator | Low |
-| Review or analyze code | Code Analyzer | Medium |
-| Process documents/files | Document Processor | Low |
-| Combine multiple concerns | Start with Workflow | Low |
+| If the skill needs to... | Template | Freedom | Context/Agent |
+|--------------------------|----------|---------|---------------|
+| Call MCP or external APIs | MCP Tool Caller | High | main |
+| Create files or projects | Code Generator | Medium | main |
+| Modify config files | Configuration Manager | Medium | main |
+| Guide multi-step processes | Workflow Orchestrator | Low | fork + general-purpose |
+| Review or analyze code | Code Analyzer | Medium | main or fork |
+| Process documents/files | Document Processor | Low | main |
+| Autonomous investigation | Agent-Based Investigator | Medium | fork + general-purpose |
+| Codebase exploration | Explorer Skill | High | fork + Explore |
 
 ## Template Customization
 
@@ -1436,4 +1561,6 @@ After creating a skill from a template:
 - [ ] Error handling covers likely scenarios
 - [ ] Validation loop pattern included where applicable
 - [ ] Reference files have table of contents if 100+ lines
+- [ ] context field valid if used (main or fork)
+- [ ] agent field valid if used (general-purpose, Explore, Bash, Plan)
 - [ ] Run `/skill-validate` to verify

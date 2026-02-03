@@ -31,6 +31,14 @@
       "strict": false
     },
     {
+      "name": "debugger",
+      "source": "./",
+      "description": "Debugging toolkit: systematic root cause analysis using hypothesis-driven investigation with parallel exploration of code flow, git history, error patterns, and test coverage",
+      "category": "debugger",
+      "skills": ["./skills/debugger/analyzing-root-cause"],
+      "strict": false
+    },
+    {
       "name": "hono",
       "source": "./",
       "description": "Skills for building web applications with the Hono framework: project setup, middleware, authentication, validation, testing, deployment, databases, JSX rendering, and WebSockets",

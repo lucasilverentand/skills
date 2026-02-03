@@ -320,13 +320,15 @@ For API integration examples, read `references/API-EXAMPLES.md`.
 
 ## SKILL.md Template
 
-```yaml
+```markdown
 ---
 name: {skill-name}
 description: {Third-person description of what it does}. Use when {trigger conditions}.
 argument-hint: [{expected-arguments}]
 allowed-tools:
   - {list of tools this skill can use}
+context: {main or fork}    # optional: fork for isolated execution
+agent: {agent-type}        # optional: general-purpose, Explore, Bash, Plan
 ---
 
 # {Skill Title}
@@ -623,6 +625,33 @@ For iterative tasks, implement fix loops:
 |-------|-------------|---------|
 | `argument-hint` | Expected arguments display | `[query]`, `[file] [options]` |
 | `allowed-tools` | Restrict available tools | `[Bash, Read, Write]` |
+| `context` | Execution context for the skill | `fork` (separate context) or `main` (shared context) |
+| `agent` | Agent type for skill execution | `general-purpose`, `Explore`, `Bash`, `Plan` |
+
+### Context Field
+
+The `context` field controls how the skill executes:
+
+| Value | Behavior |
+|-------|----------|
+| `main` | Skill runs in the main conversation context (default) |
+| `fork` | Skill runs in a separate forked context, isolated from main conversation |
+
+Use `fork` for skills that:
+- Perform extensive exploration or investigation
+- Should not pollute the main conversation with intermediate steps
+- Need to spawn multiple sub-agents autonomously
+
+### Agent Field
+
+The `agent` field specifies which agent type executes the skill:
+
+| Value | Use Case |
+|-------|----------|
+| `general-purpose` | Complex multi-step tasks requiring all tools |
+| `Explore` | Codebase exploration and research |
+| `Bash` | Command execution focused tasks |
+| `Plan` | Architecture and implementation planning |
 
 ## Testing Guidance
 
