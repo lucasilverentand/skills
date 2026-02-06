@@ -11,31 +11,14 @@
   "license": "MIT",
   "plugins": [
     {
-      "name": "devenv",
+      "name": "dev-environment",
       "source": "./",
-      "description": "Complete devenv toolkit: search, initialize, and configure reproducible development environments with full-stack and CI/CD support",
+      "description": "Development environment toolkit: configure reproducible development environments with devenv and set up git hooks with Lefthook",
       "category": "devtools",
       "skills": [
-        "./skills/devenv/search",
-        "./skills/devenv/init",
-        "./skills/devenv/config"
+        "./skills/dev-environment/configuring-devenv",
+        "./skills/dev-environment/configuring-lefthook"
       ],
-      "strict": false
-    },
-    {
-      "name": "code-quality",
-      "source": "./",
-      "description": "Code quality analysis: review code for bugs, security issues, performance problems, and best practices",
-      "category": "quality",
-      "skills": ["./skills/code-quality/review"],
-      "strict": false
-    },
-    {
-      "name": "debugger",
-      "source": "./",
-      "description": "Debugging toolkit: systematic root cause analysis using hypothesis-driven investigation with parallel exploration of code flow, git history, error patterns, and test coverage",
-      "category": "debugger",
-      "skills": ["./skills/debugger/analyzing-root-cause"],
       "strict": false
     },
     {
@@ -80,16 +63,11 @@
       "strict": false
     },
     {
-      "name": "skill-authoring",
+      "name": "agent-skills",
       "source": "./",
       "description": "Skill authoring toolkit: create, validate, and improve Claude Code skills with templates, best practices, and quality checks",
       "category": "devtools",
-      "skills": [
-        "./skills/skill-authoring/init",
-        "./skills/skill-authoring/validate",
-        "./skills/skill-authoring/improve",
-        "./skills/skill-authoring/examples"
-      ],
+      "skills": ["./skills/agent-skills/authoring-skills"],
       "strict": false
     },
     {
@@ -106,6 +84,19 @@
       "strict": false
     },
     {
+      "name": "git",
+      "source": "./",
+      "description": "Git workflow toolkit: commit conventions, branching strategies, merge conflict resolution, and PR template creation",
+      "category": "devtools",
+      "skills": [
+        "./skills/git/commit-conventions",
+        "./skills/git/git-branching",
+        "./skills/git/merge-conflicts",
+        "./skills/git/creating-pr-templates"
+      ],
+      "strict": false
+    },
+    {
       "name": "github-actions",
       "source": "./",
       "description": "GitHub Actions toolkit: initialize CI/CD workflows, debug failing runs, and optimize workflow performance for speed and cost reduction",
@@ -118,52 +109,19 @@
       "strict": false
     },
     {
-      "name": "releases",
+      "name": "development",
       "source": "./",
-      "description": "Release management toolkit: generate release notes from commits and PRs, maintain changelogs, and manage semantic versioning",
+      "description": "Development workflow toolkit: analyze repo state and decide what to work on next based on issues, PRs, git status, and TODOs",
       "category": "devtools",
-      "skills": [
-        "./skills/releases/notes",
-        "./skills/releases/changelog",
-        "./skills/releases/version"
-      ],
+      "skills": ["./skills/development/next-steps"],
       "strict": false
     },
     {
-      "name": "repo-setup",
+      "name": "tooling",
       "source": "./",
-      "description": "Repository setup toolkit: initialize repos with best practices, create issue/PR templates, manage CODEOWNERS, and generate contributing guides",
+      "description": "Marketplace management toolkit: validate marketplace.json integrity, verify skill paths, find orphans, and generate health reports with embedded CI scripts",
       "category": "devtools",
-      "skills": [
-        "./skills/repo-setup/init",
-        "./skills/repo-setup/templates",
-        "./skills/repo-setup/codeowners",
-        "./skills/repo-setup/contributing"
-      ],
-      "strict": false
-    },
-    {
-      "name": "security",
-      "source": "./",
-      "description": "Security toolkit: configure Dependabot for dependency updates, manage security advisories, and audit repositories for exposed secrets",
-      "category": "security",
-      "skills": [
-        "./skills/security/dependabot",
-        "./skills/security/advisory",
-        "./skills/security/secrets"
-      ],
-      "strict": false
-    },
-    {
-      "name": "project-management",
-      "source": "./",
-      "description": "Project management toolkit: manage GitHub Projects boards, synchronize repository labels, and track milestone progress",
-      "category": "devtools",
-      "skills": [
-        "./skills/project-management/projects",
-        "./skills/project-management/labels",
-        "./skills/project-management/milestones"
-      ],
+      "skills": ["./skills/tooling/managing-marketplace"],
       "strict": false
     }
   ]
