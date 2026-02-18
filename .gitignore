@@ -2,20 +2,8 @@
 *.log
 node_modules/
 
-# devenv
-.devenv/
-.devenv.flake.nix
-
-# Devenv
-.devenv*
-devenv.local.nix
-devenv.local.yaml
-
-# direnv
-.direnv
+# mise
+.mise.local.toml
 
 # Claude Code
 .claude/
-
-# pre-commit
-.pre-commit-config.yaml

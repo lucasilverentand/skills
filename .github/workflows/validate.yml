@@ -21,4 +21,4 @@ jobs:
         run: claude plugin validate .
 
       - name: Validate skills
-        run: ./scripts/validate-skills.sh
+        run: bun run validate

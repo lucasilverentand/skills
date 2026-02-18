@@ -1,0 +1,10 @@
+{
+  "name": "skills-of-luca",
+  "private": true,
+  "scripts": {
+    "validate": "bun run scripts/validate.ts",
+    "validate:metadata": "bun run scripts/validate-metadata.ts",
+    "validate:marketplace": "bun run scripts/verify-marketplace.ts",
+    "validate:skill": "bun run scripts/verify-skill.ts"
+  }
+}

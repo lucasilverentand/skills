@@ -1,0 +1,18 @@
+[tools]
+bun = "latest"
+
+[tasks.validate]
+description = "Run all validations"
+run = "bun run scripts/validate.ts"
+
+[tasks."validate:metadata"]
+description = "Validate Claude metadata files"
+run = "bun run scripts/validate-metadata.ts"
+
+[tasks."validate:marketplace"]
+description = "Verify marketplace.json integrity"
+run = "bun run scripts/verify-marketplace.ts"
+
+[tasks."validate:skill"]
+description = "Validate a single skill directory"
+run = "bun run scripts/verify-skill.ts"
