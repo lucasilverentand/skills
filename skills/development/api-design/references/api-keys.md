@@ -4,7 +4,7 @@
 
 - Prefix: `sk_live_` for production, `sk_test_` for development/staging
 - Key body: nanoid (32 characters)
-- Full example: `sk_live_V1StGXR8Z5jdHi6B9mXAn9d3hG7kP2`
+- Full example: `sk_test_example00000000000000000000`
 
 ## Storage
 
