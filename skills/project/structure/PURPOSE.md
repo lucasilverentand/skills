@@ -1,6 +1,6 @@
 # Structure
 
-Scaffold projects, set up monorepos, and maintain convention documentation.
+Scaffold projects, set up monorepos, manage workspace dependencies, and maintain conventions.
 
 ## Responsibilities
 
@@ -9,6 +9,10 @@ Scaffold projects, set up monorepos, and maintain convention documentation.
 - Configure bun workspaces and tsconfig project references
 - Set up shared tooling configs for Biome, TypeScript, and CI
 - Enforce directory layout and naming conventions across the repo
+- Manage workspace dependency linking and versioning
+- Orchestrate cross-package builds and scripts
+- Integrate new packages into existing monorepos
+- Troubleshoot workspace dependency issues
 
 ## Tools
 

@@ -95,8 +95,20 @@ validateJsonFile(
   "marketplace.json",
   (data) => {
     checkName(data);
-    checkDescription(data);
-    checkVersion(data);
+
+    // metadata.description and metadata.version (Claude Code schema)
+    const metadata = data.metadata as Record<string, unknown> | undefined;
+    if (metadata?.description) pass(`metadata.description is present`);
+    else if (data.description) pass("description is present (top-level, consider moving to metadata)");
+    else fail("Missing description (expected in metadata.description)");
+
+    if (metadata?.version) {
+      const v = metadata.version as string;
+      if (SEMVER.test(v)) pass(`metadata.version is valid semver: ${v}`);
+      else warn(`metadata.version should follow semver (X.Y.Z): ${v}`);
+    } else {
+      checkVersion(data);
+    }
 
     const owner = data.owner as Record<string, unknown> | undefined;
     if (!owner) {

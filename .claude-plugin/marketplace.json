@@ -1,127 +1,188 @@
 {
   "name": "skills-of-luca",
-  "description": "Development workflow skills: devenv tools for reproducible environments, full-stack development, CI/CD optimization, code quality analysis, Neovim configuration, and skill authoring tools. Install bundled plugins for complete workflows or individual skills as needed.",
-  "version": "0.1.0",
   "owner": {
     "name": "Luca Silverentand",
     "url": "https://github.com/lucasilverentand"
   },
-  "homepage": "https://github.com/lucasilverentand/skills",
-  "repository": "https://github.com/lucasilverentand/skills",
-  "license": "MIT",
+  "metadata": {
+    "description": "Development workflow skills: debugging, testing, deployment, documentation, editor configuration, git workflows, infrastructure, project scaffolding, research, security audits, and skill authoring.",
+    "version": "0.2.0",
+    "homepage": "https://github.com/lucasilverentand/skills",
+    "repository": "https://github.com/lucasilverentand/skills",
+    "license": "MIT"
+  },
   "plugins": [
     {
-      "name": "dev-environment",
+      "name": "communication",
       "source": "./",
-      "description": "Development environment toolkit: configure reproducible development environments with devenv and set up git hooks with Lefthook",
+      "description": "Communication platform integrations: Discord bots, webhooks, and channel management",
       "category": "devtools",
       "skills": [
-        "./skills/dev-environment/configuring-devenv",
-        "./skills/dev-environment/configuring-lefthook"
+        "./skills/communication/discord"
       ],
       "strict": false
     },
     {
-      "name": "hono",
+      "name": "data",
       "source": "./",
-      "description": "Skills for building web applications with the Hono framework: project setup, middleware, authentication, validation, testing, deployment, databases, JSX rendering, and WebSockets",
-      "category": "web-development",
+      "description": "Data analysis and analytics toolkit: dashboards, metrics, and data pipelines",
+      "category": "devtools",
       "skills": [
-        "./skills/hono/init",
-        "./skills/hono/best-practices",
-        "./skills/hono/middleware",
-        "./skills/hono/auth",
-        "./skills/hono/validation",
-        "./skills/hono/api-design",
-        "./skills/hono/testing",
-        "./skills/hono/debugging",
-        "./skills/hono/deployment",
-        "./skills/hono/database",
-        "./skills/hono/jsx",
-        "./skills/hono/websockets"
+        "./skills/data/analytics"
       ],
       "strict": false
     },
     {
-      "name": "neovim",
+      "name": "deployment",
       "source": "./",
-      "description": "Neovim configuration toolkit: generate, modify, troubleshoot configs with lazy.nvim, LazyVim support, LSP setup, and headless testing",
-      "category": "editor",
-      "skills": ["./skills/neovim/config"],
-      "strict": false
-    },
-    {
-      "name": "issues",
-      "source": "./",
-      "description": "Issue management toolkit: create well-structured issues, analyze issues against codebase, and organize issues with proper formatting, labels, and project fields. Supports GitHub, GitLab, and other platforms.",
+      "description": "Deployment toolkit: Cloudflare Workers, Kubernetes, and Railway deployments",
       "category": "devtools",
       "skills": [
-        "./skills/issues/create",
-        "./skills/issues/analyze",
-        "./skills/issues/cleanup"
-      ],
-      "strict": false
-    },
-    {
-      "name": "agent-skills",
-      "source": "./",
-      "description": "Skill authoring toolkit: create, validate, and improve Claude Code skills with templates, best practices, and quality checks",
-      "category": "devtools",
-      "skills": ["./skills/agent-skills/authoring-skills"],
-      "strict": false
-    },
-    {
-      "name": "pull-requests",
-      "source": "./",
-      "description": "Pull request toolkit: create well-structured PRs, review code changes, update PR metadata, and resolve merge conflicts with context-aware guidance",
-      "category": "devtools",
-      "skills": [
-        "./skills/pull-requests/creating-pull-requests",
-        "./skills/pull-requests/reviewing-pull-requests",
-        "./skills/pull-requests/updating-pull-requests",
-        "./skills/pull-requests/resolving-pr-conflicts"
-      ],
-      "strict": false
-    },
-    {
-      "name": "git",
-      "source": "./",
-      "description": "Git workflow toolkit: commit conventions, branching strategies, merge conflict resolution, and PR template creation",
-      "category": "devtools",
-      "skills": [
-        "./skills/git/commit-conventions",
-        "./skills/git/git-branching",
-        "./skills/git/merge-conflicts",
-        "./skills/git/creating-pr-templates"
-      ],
-      "strict": false
-    },
-    {
-      "name": "github-actions",
-      "source": "./",
-      "description": "GitHub Actions toolkit: initialize CI/CD workflows, debug failing runs, and optimize workflow performance for speed and cost reduction",
-      "category": "devtools",
-      "skills": [
-        "./skills/github-actions/init",
-        "./skills/github-actions/debug",
-        "./skills/github-actions/optimize"
+        "./skills/deployment/cloudflare",
+        "./skills/deployment/kubernetes",
+        "./skills/deployment/railway"
       ],
       "strict": false
     },
     {
       "name": "development",
       "source": "./",
-      "description": "Development workflow toolkit: analyze repo state and decide what to work on next based on issues, PRs, git status, and TODOs",
+      "description": "Development workflow toolkit: debugging, testing, refactoring, CI, planning, and more",
       "category": "devtools",
-      "skills": ["./skills/development/next-steps"],
+      "skills": [
+        "./skills/development/accessibility",
+        "./skills/development/api-design",
+        "./skills/development/ci",
+        "./skills/development/dead-code",
+        "./skills/development/debugging",
+        "./skills/development/descision-recording",
+        "./skills/development/environment",
+        "./skills/development/extraction",
+        "./skills/development/implementing",
+        "./skills/development/learning",
+        "./skills/development/migrations",
+        "./skills/development/performance",
+        "./skills/development/planning",
+        "./skills/development/refactoring",
+        "./skills/development/team",
+        "./skills/development/test-fixing",
+        "./skills/development/testing",
+        "./skills/development/type-safety"
+      ],
       "strict": false
     },
     {
-      "name": "tooling",
+      "name": "documentation",
       "source": "./",
-      "description": "Marketplace management toolkit: validate marketplace.json integrity, verify skill paths, find orphans, and generate health reports with embedded CI scripts",
+      "description": "Documentation toolkit: READMEs, API references, internal docs, and contributor guides",
       "category": "devtools",
-      "skills": ["./skills/tooling/managing-marketplace"],
+      "skills": [
+        "./skills/documentation/api-reference",
+        "./skills/documentation/contributing",
+        "./skills/documentation/internal",
+        "./skills/documentation/readme"
+      ],
+      "strict": false
+    },
+    {
+      "name": "editors",
+      "source": "./",
+      "description": "Editor configuration toolkit: Neovim, VS Code, Zed, Xcode, and terminal setup",
+      "category": "editor",
+      "skills": [
+        "./skills/editors/neovim",
+        "./skills/editors/terminal",
+        "./skills/editors/vscode",
+        "./skills/editors/xcode",
+        "./skills/editors/zed"
+      ],
+      "strict": false
+    },
+    {
+      "name": "git",
+      "source": "./",
+      "description": "Git workflow toolkit: committing, branching, conflicts, history, and worktrees",
+      "category": "devtools",
+      "skills": [
+        "./skills/git/branching",
+        "./skills/git/committing",
+        "./skills/git/conflicts",
+        "./skills/git/history",
+        "./skills/git/worktrees"
+      ],
+      "strict": false
+    },
+    {
+      "name": "infrastructure",
+      "source": "./",
+      "description": "Infrastructure toolkit: Docker, GitOps, and secrets management",
+      "category": "devtools",
+      "skills": [
+        "./skills/infrastructure/docker",
+        "./skills/infrastructure/gitops",
+        "./skills/infrastructure/secrets"
+      ],
+      "strict": false
+    },
+    {
+      "name": "project",
+      "source": "./",
+      "description": "Project scaffolding toolkit: monorepo structure, workspace parts, and service templates",
+      "category": "web-development",
+      "skills": [
+        "./skills/project/parts",
+        "./skills/project/parts/astro-site",
+        "./skills/project/parts/auth",
+        "./skills/project/parts/config",
+        "./skills/project/parts/email",
+        "./skills/project/parts/expo-app",
+        "./skills/project/parts/hono-api",
+        "./skills/project/parts/logger",
+        "./skills/project/parts/schema",
+        "./skills/project/parts/shared-packages",
+        "./skills/project/parts/types",
+        "./skills/project/parts/ui",
+        "./skills/project/parts/utils",
+        "./skills/project/structure"
+      ],
+      "strict": false
+    },
+    {
+      "name": "research",
+      "source": "./",
+      "description": "Research toolkit: codebase analysis, API exploration, market research, and UX audits",
+      "category": "devtools",
+      "skills": [
+        "./skills/research/api",
+        "./skills/research/codebase",
+        "./skills/research/competitors",
+        "./skills/research/impact-analysis",
+        "./skills/research/market",
+        "./skills/research/technologies",
+        "./skills/research/user-experience",
+        "./skills/research/user-interface"
+      ],
+      "strict": false
+    },
+    {
+      "name": "security",
+      "source": "./",
+      "description": "Security toolkit: vulnerability audits, dependency scanning, and security best practices",
+      "category": "devtools",
+      "skills": [
+        "./skills/security/audit"
+      ],
+      "strict": false
+    },
+    {
+      "name": "skills",
+      "source": "./",
+      "description": "Skill management toolkit: authoring skills and managing the marketplace catalog",
+      "category": "devtools",
+      "skills": [
+        "./skills/skills/authoring",
+        "./skills/skills/marketplace"
+      ],
       "strict": false
     }
   ]
