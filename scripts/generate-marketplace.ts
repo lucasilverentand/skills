@@ -1,53 +1,23 @@
 #!/usr/bin/env bun
 /**
- * Generate marketplace.json from all SKILL.md files on disk.
+ * Generate marketplace.json from plugin-config.ts.
  *
- * Scans all SKILL.md files under skills/, parses frontmatter, groups by
- * top-level category, and writes a valid .claude-plugin/marketplace.json.
+ * Reads plugin and bundle definitions from the config, validates that every
+ * skill path exists on disk, warns about orphan skills, and writes a valid
+ * .claude-plugin/marketplace.json with both plugins[] and bundles[].
  *
  * Usage: bun run scripts/generate-marketplace.ts [--dry-run]
  */
 
-import { readFileSync, writeFileSync } from "node:fs";
-import { resolve, dirname, relative } from "node:path";
+import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { resolve, dirname } from "node:path";
+import { PLUGINS, BUNDLES } from "./plugin-config";
 
 // --- Config ---
 
 const REPO_ROOT = resolve(import.meta.dirname, "..");
 const SKILLS_DIR = resolve(REPO_ROOT, "skills");
 const OUTPUT_PATH = resolve(REPO_ROOT, ".claude-plugin/marketplace.json");
-
-/** Map top-level skill directories to marketplace plugin categories. */
-const CATEGORY_MAP: Record<string, string> = {
-  communication: "devtools",
-  data: "devtools",
-  deployment: "devtools",
-  development: "devtools",
-  documentation: "devtools",
-  editors: "editor",
-  git: "devtools",
-  infrastructure: "devtools",
-  project: "web-development",
-  research: "devtools",
-  security: "devtools",
-  skills: "devtools",
-};
-
-/** Human-readable plugin descriptions keyed by category directory name. */
-const PLUGIN_DESCRIPTIONS: Record<string, string> = {
-  communication: "Communication platform integrations: Discord bots, webhooks, and channel management",
-  data: "Data analysis and analytics toolkit: dashboards, metrics, and data pipelines",
-  deployment: "Deployment toolkit: Cloudflare Workers, Kubernetes, and Railway deployments",
-  development: "Development workflow toolkit: debugging, testing, refactoring, CI, planning, and more",
-  documentation: "Documentation toolkit: READMEs, API references, internal docs, and contributor guides",
-  editors: "Editor configuration toolkit: Neovim, VS Code, Zed, Xcode, and terminal setup",
-  git: "Git workflow toolkit: committing, branching, conflicts, history, and worktrees",
-  infrastructure: "Infrastructure toolkit: Docker, GitOps, and secrets management",
-  project: "Project scaffolding toolkit: monorepo structure, workspace parts, and service templates",
-  research: "Research toolkit: codebase analysis, API exploration, market research, and UX audits",
-  security: "Security toolkit: vulnerability audits, dependency scanning, and security best practices",
-  skills: "Skill management toolkit: authoring skills and managing the marketplace catalog",
-};
 
 // --- Frontmatter parser ---
 
@@ -86,72 +56,107 @@ function parseFrontmatter(content: string): Frontmatter | null {
   return fm as Frontmatter;
 }
 
-// --- Scan & group ---
-
-interface SkillEntry {
-  path: string; // relative to repo root, e.g. "skills/git/committing"
-  frontmatter: Frontmatter;
-}
-
-function discoverSkills(): Map<string, SkillEntry[]> {
-  const grouped = new Map<string, SkillEntry[]>();
-  const glob = new Bun.Glob("**/SKILL.md");
-
-  for (const match of glob.scanSync({ cwd: SKILLS_DIR })) {
-    const skillDir = dirname(match);
-    const relativePath = `skills/${skillDir}`;
-    const absolutePath = resolve(SKILLS_DIR, match);
-
-    const content = readFileSync(absolutePath, "utf-8");
-    const fm = parseFrontmatter(content);
-    if (!fm) {
-      console.warn(`  skip: ${relativePath} (invalid or missing frontmatter)`);
-      continue;
-    }
-
-    // Top-level category is the first path segment
-    const category = skillDir.split("/")[0];
-
-    if (!grouped.has(category)) {
-      grouped.set(category, []);
-    }
-    grouped.get(category)!.push({ path: relativePath, frontmatter: fm });
-  }
-
-  // Sort skills within each category for stable output
-  for (const [, skills] of grouped) {
-    skills.sort((a, b) => a.path.localeCompare(b.path));
-  }
-
-  return grouped;
-}
-
-// --- Generate ---
+// --- Validation & generation ---
 
 function generate(dryRun: boolean) {
-  const grouped = discoverSkills();
-  const categories = [...grouped.keys()].sort();
+  const pluginNames = Object.keys(PLUGINS).sort();
+  let totalSkills = 0;
+  let hasErrors = false;
 
-  console.log(`Found ${categories.length} categories:\n`);
+  console.log(`Found ${pluginNames.length} plugins:\n`);
 
-  const plugins: Record<string, unknown>[] = [];
+  // Validate all skill paths exist and have valid frontmatter
+  const allConfiguredSkills = new Set<string>();
 
-  for (const category of categories) {
-    const skills = grouped.get(category)!;
-    console.log(`  ${category} (${skills.length} skills)`);
-    for (const s of skills) {
-      console.log(`    - ${s.path} [${s.frontmatter.name}]`);
+  for (const name of pluginNames) {
+    const plugin = PLUGINS[name];
+    console.log(`  ${name} (${plugin.skills.length} skills)`);
+
+    for (const skill of plugin.skills) {
+      const skillMd = resolve(SKILLS_DIR, skill, "SKILL.md");
+
+      if (!existsSync(skillMd)) {
+        console.error(`    ERROR: ${skill}/SKILL.md does not exist`);
+        hasErrors = true;
+        continue;
+      }
+
+      const content = readFileSync(skillMd, "utf-8");
+      const fm = parseFrontmatter(content);
+      if (!fm) {
+        console.warn(`    WARN: ${skill}/SKILL.md has invalid frontmatter`);
+      } else {
+        console.log(`    - ${skill} [${fm.name}]`);
+      }
+
+      if (allConfiguredSkills.has(skill)) {
+        console.error(`    ERROR: ${skill} appears in multiple plugins`);
+        hasErrors = true;
+      }
+      allConfiguredSkills.add(skill);
+      totalSkills++;
+    }
+  }
+
+  // Detect orphan skills (on disk but not in any plugin)
+  const glob = new Bun.Glob("**/SKILL.md");
+  const orphans: string[] = [];
+  for (const match of glob.scanSync({ cwd: SKILLS_DIR })) {
+    const skillDir = dirname(match);
+    if (!allConfiguredSkills.has(skillDir)) {
+      orphans.push(skillDir);
+    }
+  }
+
+  if (orphans.length) {
+    console.warn(`\nOrphan skills (on disk but not in any plugin):`);
+    for (const o of orphans) {
+      console.warn(`  - ${o}`);
+    }
+    hasErrors = true;
+  }
+
+  // Validate bundles
+  console.log(`\nFound ${Object.keys(BUNDLES).length} bundles:\n`);
+  for (const [bundleName, bundle] of Object.entries(BUNDLES)) {
+    const resolvedPlugins = bundle.plugins.includes("*")
+      ? pluginNames
+      : bundle.plugins;
+
+    for (const p of resolvedPlugins) {
+      if (!(p in PLUGINS)) {
+        console.error(`  ERROR: Bundle '${bundleName}' references unknown plugin '${p}'`);
+        hasErrors = true;
+      }
     }
 
-    plugins.push({
-      name: category,
-      source: "./",
-      description: PLUGIN_DESCRIPTIONS[category] ?? `Skills for ${category}`,
-      category: CATEGORY_MAP[category] ?? "devtools",
-      skills: skills.map((s) => `./${s.path}`),
-      strict: false,
-    });
+    const skillCount = resolvedPlugins.reduce(
+      (sum, p) => sum + (PLUGINS[p]?.skills.length ?? 0),
+      0,
+    );
+    console.log(`  ${bundleName}: ${resolvedPlugins.length} plugins, ${skillCount} skills — ${bundle.description}`);
   }
+
+  if (hasErrors) {
+    console.error("\nErrors found — fix them before generating.");
+    process.exit(1);
+  }
+
+  // Build output
+  const plugins = pluginNames.map((name) => ({
+    name,
+    source: "./",
+    description: PLUGINS[name].description,
+    category: PLUGINS[name].category,
+    skills: PLUGINS[name].skills.map((s) => `./skills/${s}`),
+    strict: false,
+  }));
+
+  const bundles = Object.entries(BUNDLES).map(([name, def]) => ({
+    name,
+    description: def.description,
+    plugins: def.plugins,
+  }));
 
   const marketplace = {
     name: "skills-of-luca",
@@ -162,17 +167,18 @@ function generate(dryRun: boolean) {
     metadata: {
       description:
         "Development workflow skills: debugging, testing, deployment, documentation, editor configuration, git workflows, infrastructure, project scaffolding, research, security audits, and skill authoring.",
-      version: "0.2.0",
+      version: "0.3.0",
       homepage: "https://github.com/lucasilverentand/skills",
       repository: "https://github.com/lucasilverentand/skills",
       license: "MIT",
     },
     plugins,
+    bundles,
   };
 
   const json = JSON.stringify(marketplace, null, 2) + "\n";
 
-  console.log(`\nTotal: ${plugins.reduce((sum, p) => sum + (p.skills as string[]).length, 0)} skills in ${plugins.length} plugins`);
+  console.log(`\nTotal: ${totalSkills} skills in ${plugins.length} plugins, ${bundles.length} bundles`);
 
   if (dryRun) {
     console.log("\n--- dry run, would write: ---\n");

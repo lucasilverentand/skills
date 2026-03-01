@@ -6,81 +6,82 @@
   },
   "metadata": {
     "description": "Development workflow skills: debugging, testing, deployment, documentation, editor configuration, git workflows, infrastructure, project scaffolding, research, security audits, and skill authoring.",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "homepage": "https://github.com/lucasilverentand/skills",
     "repository": "https://github.com/lucasilverentand/skills",
     "license": "MIT"
   },
   "plugins": [
     {
-      "name": "communication",
+      "name": "api-data",
       "source": "./",
-      "description": "Communication platform integrations: Discord bots, webhooks, and channel management",
+      "description": "API and data toolkit: API design, database management, and schema migrations",
       "category": "devtools",
       "skills": [
-        "./skills/communication/discord"
+        "./skills/development/api-design",
+        "./skills/development/database",
+        "./skills/development/migrations"
       ],
       "strict": false
     },
     {
-      "name": "data",
+      "name": "backend",
       "source": "./",
-      "description": "Data analysis and analytics toolkit: dashboards, metrics, and data pipelines",
-      "category": "devtools",
+      "description": "Backend toolkit: Hono API services, authentication, database schema, and auth configuration",
+      "category": "web-development",
       "skills": [
-        "./skills/data/analytics"
+        "./skills/project/parts/auth",
+        "./skills/project/parts/database",
+        "./skills/project/parts/hono-api",
+        "./skills/project/parts/schema"
       ],
       "strict": false
     },
     {
-      "name": "deployment",
+      "name": "code-quality",
       "source": "./",
-      "description": "Deployment toolkit: Cloudflare Workers, Kubernetes, and Railway deployments",
-      "category": "devtools",
-      "skills": [
-        "./skills/deployment/cloudflare",
-        "./skills/deployment/kubernetes",
-        "./skills/deployment/railway"
-      ],
-      "strict": false
-    },
-    {
-      "name": "development",
-      "source": "./",
-      "description": "Development workflow toolkit: debugging, testing, refactoring, CI, planning, and more",
+      "description": "Code quality toolkit: testing, type safety, performance, accessibility, and error handling",
       "category": "devtools",
       "skills": [
         "./skills/development/accessibility",
-        "./skills/development/api-design",
-        "./skills/development/ci",
-        "./skills/development/dead-code",
-        "./skills/development/debugging",
-        "./skills/development/descision-recording",
-        "./skills/development/environment",
-        "./skills/development/extraction",
-        "./skills/development/implementing",
-        "./skills/development/learning",
-        "./skills/development/migrations",
+        "./skills/development/error-handling",
         "./skills/development/performance",
-        "./skills/development/planning",
-        "./skills/development/refactoring",
-        "./skills/development/team",
-        "./skills/development/test-fixing",
         "./skills/development/testing",
         "./skills/development/type-safety"
       ],
       "strict": false
     },
     {
-      "name": "documentation",
+      "name": "devops",
       "source": "./",
-      "description": "Documentation toolkit: READMEs, API references, internal docs, and contributor guides",
+      "description": "DevOps toolkit: CI/CD, Cloudflare/Kubernetes/Railway deployment, Docker, GitOps, and secrets",
       "category": "devtools",
       "skills": [
-        "./skills/documentation/api-reference",
+        "./skills/deployment/cloudflare",
+        "./skills/deployment/kubernetes",
+        "./skills/deployment/railway",
+        "./skills/development/ci",
+        "./skills/infrastructure/docker",
+        "./skills/infrastructure/gitops",
+        "./skills/infrastructure/secrets"
+      ],
+      "strict": false
+    },
+    {
+      "name": "docs",
+      "source": "./",
+      "description": "Documentation toolkit: READMEs, internal docs, contributor guides, and structured reports",
+      "category": "devtools",
+      "skills": [
         "./skills/documentation/contributing",
         "./skills/documentation/internal",
-        "./skills/documentation/readme"
+        "./skills/documentation/readme",
+        "./skills/documentation/report",
+        "./skills/documentation/report/analysis",
+        "./skills/documentation/report/comparison",
+        "./skills/documentation/report/research",
+        "./skills/documentation/report/retro",
+        "./skills/documentation/report/status"
       ],
       "strict": false
     },
@@ -113,35 +114,67 @@
       "strict": false
     },
     {
-      "name": "infrastructure",
+      "name": "integrations",
       "source": "./",
-      "description": "Infrastructure toolkit: Docker, GitOps, and secrets management",
+      "description": "Integrations toolkit: email, notifications, payments, analytics, i18n, and Discord",
       "category": "devtools",
       "skills": [
-        "./skills/infrastructure/docker",
-        "./skills/infrastructure/gitops",
-        "./skills/infrastructure/secrets"
+        "./skills/communication/discord",
+        "./skills/project/parts/analytics",
+        "./skills/project/parts/email",
+        "./skills/project/parts/i18n",
+        "./skills/project/parts/notifications",
+        "./skills/project/parts/payments"
       ],
       "strict": false
     },
     {
-      "name": "project",
+      "name": "meta",
       "source": "./",
-      "description": "Project scaffolding toolkit: monorepo structure, workspace parts, and service templates",
+      "description": "Skill management toolkit: authoring skills and managing the marketplace catalog",
+      "category": "devtools",
+      "skills": [
+        "./skills/skills/authoring",
+        "./skills/skills/marketplace"
+      ],
+      "strict": false
+    },
+    {
+      "name": "mobile",
+      "source": "./",
+      "description": "Mobile development toolkit: Expo React Native and iOS/Swift app setup",
+      "category": "web-development",
+      "skills": [
+        "./skills/project/parts/expo-app",
+        "./skills/project/parts/ios-app"
+      ],
+      "strict": false
+    },
+    {
+      "name": "planning",
+      "source": "./",
+      "description": "Planning toolkit: break down features, implement from plans, and record learnings",
+      "category": "devtools",
+      "skills": [
+        "./skills/development/implementing",
+        "./skills/development/knowledge",
+        "./skills/development/planning"
+      ],
+      "strict": false
+    },
+    {
+      "name": "project-scaffold",
+      "source": "./",
+      "description": "Project scaffolding toolkit: monorepo structure, workspace packages, and shared tooling",
       "category": "web-development",
       "skills": [
         "./skills/project/parts",
-        "./skills/project/parts/astro-site",
-        "./skills/project/parts/auth",
+        "./skills/project/parts/cli-tool",
         "./skills/project/parts/config",
-        "./skills/project/parts/email",
-        "./skills/project/parts/expo-app",
-        "./skills/project/parts/hono-api",
         "./skills/project/parts/logger",
-        "./skills/project/parts/schema",
         "./skills/project/parts/shared-packages",
+        "./skills/project/parts/tools",
         "./skills/project/parts/types",
-        "./skills/project/parts/ui",
         "./skills/project/parts/utils",
         "./skills/project/structure"
       ],
@@ -150,13 +183,12 @@
     {
       "name": "research",
       "source": "./",
-      "description": "Research toolkit: codebase analysis, API exploration, market research, and UX audits",
+      "description": "Research toolkit: API exploration, codebase analysis, competitor and market research, UX and UI audits",
       "category": "devtools",
       "skills": [
         "./skills/research/api",
-        "./skills/research/codebase",
+        "./skills/research/codebase-analysis",
         "./skills/research/competitors",
-        "./skills/research/impact-analysis",
         "./skills/research/market",
         "./skills/research/technologies",
         "./skills/research/user-experience",
@@ -175,15 +207,120 @@
       "strict": false
     },
     {
-      "name": "skills",
+      "name": "web",
       "source": "./",
-      "description": "Skill management toolkit: authoring skills and managing the marketplace catalog",
-      "category": "devtools",
+      "description": "Web frontend toolkit: React dashboards, marketing websites, and shared UI components",
+      "category": "web-development",
       "skills": [
-        "./skills/skills/authoring",
-        "./skills/skills/marketplace"
+        "./skills/project/parts/react-dashboard",
+        "./skills/project/parts/ui",
+        "./skills/project/parts/website"
       ],
       "strict": false
+    },
+    {
+      "name": "workflow",
+      "source": "./",
+      "description": "Development workflow toolkit: debugging, refactoring, environment setup, and team orchestration",
+      "category": "devtools",
+      "skills": [
+        "./skills/development/debugging",
+        "./skills/development/environment",
+        "./skills/development/refactoring",
+        "./skills/development/team"
+      ],
+      "strict": false
+    }
+  ],
+  "bundles": [
+    {
+      "name": "full-stack-web",
+      "description": "Building web apps with Hono + React + Drizzle",
+      "plugins": [
+        "git",
+        "planning",
+        "workflow",
+        "code-quality",
+        "api-data",
+        "project-scaffold",
+        "backend",
+        "web",
+        "integrations",
+        "devops",
+        "docs"
+      ]
+    },
+    {
+      "name": "mobile-dev",
+      "description": "Expo/iOS apps with a backend",
+      "plugins": [
+        "git",
+        "planning",
+        "workflow",
+        "code-quality",
+        "api-data",
+        "project-scaffold",
+        "mobile",
+        "integrations",
+        "backend",
+        "docs"
+      ]
+    },
+    {
+      "name": "api-backend",
+      "description": "Pure API/backend work",
+      "plugins": [
+        "git",
+        "planning",
+        "workflow",
+        "code-quality",
+        "api-data",
+        "project-scaffold",
+        "backend",
+        "devops",
+        "docs"
+      ]
+    },
+    {
+      "name": "devops-infra",
+      "description": "CI/CD, deployment, infrastructure",
+      "plugins": [
+        "git",
+        "devops",
+        "security",
+        "docs"
+      ]
+    },
+    {
+      "name": "open-source",
+      "description": "Maintaining OSS projects",
+      "plugins": [
+        "git",
+        "planning",
+        "workflow",
+        "code-quality",
+        "docs",
+        "meta",
+        "security"
+      ]
+    },
+    {
+      "name": "research-strategy",
+      "description": "Research, analysis, planning",
+      "plugins": [
+        "git",
+        "research",
+        "planning",
+        "workflow",
+        "docs"
+      ]
+    },
+    {
+      "name": "all",
+      "description": "Everything",
+      "plugins": [
+        "*"
+      ]
     }
   ]
 }

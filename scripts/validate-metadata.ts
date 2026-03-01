@@ -124,8 +124,10 @@ validateJsonFile(
       fail("Missing required field: plugins (must be an array)");
     } else {
       pass(`plugins array has ${plugins.length} items`);
+      const pluginNames = new Set<string>();
       for (let i = 0; i < plugins.length; i++) {
         if (!plugins[i].name) fail(`Plugin at index ${i} is missing 'name'`);
+        else pluginNames.add(plugins[i].name as string);
         const source = plugins[i].source as string | undefined;
         if (!source) {
           fail(`Plugin at index ${i} is missing 'source'`);
@@ -135,6 +137,29 @@ validateJsonFile(
             fail(`Plugin source directory does not exist: ${source}`);
           }
         }
+      }
+
+      // Validate bundles
+      const bundles = data.bundles as Array<Record<string, unknown>> | undefined;
+      if (Array.isArray(bundles)) {
+        pass(`bundles array has ${bundles.length} items`);
+        for (let i = 0; i < bundles.length; i++) {
+          const b = bundles[i];
+          if (!b.name) fail(`Bundle at index ${i} is missing 'name'`);
+          else if (!KEBAB.test(b.name as string)) fail(`Bundle '${b.name}' name is not kebab-case`);
+          if (!b.description) fail(`Bundle at index ${i} is missing 'description'`);
+          if (!Array.isArray(b.plugins)) {
+            fail(`Bundle at index ${i} is missing 'plugins' array`);
+          } else {
+            for (const ref of b.plugins as string[]) {
+              if (ref !== "*" && !pluginNames.has(ref)) {
+                fail(`Bundle '${b.name}' references unknown plugin '${ref}'`);
+              }
+            }
+          }
+        }
+      } else if ("bundles" in data) {
+        fail("bundles must be an array");
       }
     }
   },

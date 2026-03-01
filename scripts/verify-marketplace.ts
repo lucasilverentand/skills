@@ -277,6 +277,51 @@ function applyFixes(marketplacePath: string, data: Record<string, unknown>, repo
 
 // --- Main ---
 
+function validateBundle(
+  bundle: Record<string, unknown>,
+  idx: number,
+  pluginNames: Set<string>,
+  allBundleNames: Map<string, number>,
+  report: Report,
+) {
+  const name = bundle.name as string | undefined;
+  const bundleLabel = name || `bundle[${idx}]`;
+
+  if (!name) {
+    report.error("missing-bundle-field", `Bundle at index ${idx}: missing required field 'name'`);
+  } else {
+    if (!NAME_PATTERN.test(name)) {
+      report.error("invalid-bundle-name", `Bundle name '${name}' must be kebab-case`);
+    }
+    if (allBundleNames.has(name)) {
+      report.error("duplicate-bundle-name", `Bundle name '${name}' is used by bundles at index ${allBundleNames.get(name)} and ${idx}`);
+    }
+    allBundleNames.set(name, idx);
+  }
+
+  if (!bundle.description) {
+    report.warning("missing-bundle-description", `Bundle '${bundleLabel}': missing description`);
+  }
+
+  const plugins = bundle.plugins;
+  if (!Array.isArray(plugins)) {
+    report.error("invalid-bundle-plugins", `Bundle '${bundleLabel}': 'plugins' must be an array`);
+    return;
+  }
+
+  const seenPlugins = new Set<string>();
+  for (const pluginRef of plugins as string[]) {
+    if (pluginRef === "*") continue;
+    if (!pluginNames.has(pluginRef)) {
+      report.error("unknown-bundle-plugin", `Bundle '${bundleLabel}': references unknown plugin '${pluginRef}'`);
+    }
+    if (seenPlugins.has(pluginRef)) {
+      report.error("duplicate-bundle-plugin", `Bundle '${bundleLabel}': duplicate plugin reference '${pluginRef}'`);
+    }
+    seenPlugins.add(pluginRef);
+  }
+}
+
 function verify(marketplacePath: string, fix: boolean): Report {
   const report = new Report();
   const resolved = resolve(marketplacePath);
@@ -320,6 +365,36 @@ function verify(marketplacePath: string, fix: boolean): Report {
   }
 
   findOrphanSkills(repoRoot, allSkillPaths, report);
+
+  // Validate bundles
+  const pluginNames = new Set(seen.keys());
+  const bundles = data.bundles;
+  if (Array.isArray(bundles)) {
+    const allBundleNames = new Map<string, number>();
+    for (let i = 0; i < bundles.length; i++) {
+      validateBundle(bundles[i], i, pluginNames, allBundleNames, report);
+    }
+
+    // Warn about plugins not referenced by any bundle
+    const referencedPlugins = new Set<string>();
+    for (const bundle of bundles) {
+      const bPlugins = bundle.plugins as string[] | undefined;
+      if (!Array.isArray(bPlugins)) continue;
+      if (bPlugins.includes("*")) {
+        // Wildcard references all plugins
+        for (const p of pluginNames) referencedPlugins.add(p);
+      } else {
+        for (const p of bPlugins) referencedPlugins.add(p);
+      }
+    }
+    for (const p of pluginNames) {
+      if (!referencedPlugins.has(p)) {
+        report.warning("unreferenced-plugin", `Plugin '${p}' is not referenced by any bundle`);
+      }
+    }
+  } else if ("bundles" in data) {
+    report.error("invalid-type", "Field 'bundles' must be an array");
+  }
 
   if (fix && !report.passed()) applyFixes(resolved, data, repoRoot);
 
