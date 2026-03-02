@@ -14,7 +14,7 @@ Each "part" is a workspace package with a dedicated responsibility. Parts live i
   - **Understanding what owns a concern** → what kind of concern?
     - **Data layer** (schema, migrations, DB client) → `schema` part
     - **Authentication or authorization** → `auth` part
-    - **API routes or server logic** → `api` part (see `project/parts/hono-api`)
+    - **API routes or server logic** → `api` part (see `development/api-design`)
     - **Shared types or interfaces** → `types` part
     - **Environment config or feature flags** → `config` part
     - **UI components or styling** → `ui` part

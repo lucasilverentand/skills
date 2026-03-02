@@ -1,6 +1,6 @@
 ---
 name: api-design
-description: Designs API endpoints, generates OpenAPI specs, reviews naming and consistency, detects breaking changes, and generates type-safe client code. Use when designing a new API surface, generating an OpenAPI spec, checking for breaking changes before a release, linting route consistency, or generating a typed client SDK.
+description: Designs API endpoints, generates OpenAPI specs, reviews naming and consistency, detects breaking changes, generates type-safe client code, and provides Hono implementation tooling (route listing, middleware auditing, endpoint scaffolding). Use when designing a new API surface, generating an OpenAPI spec, checking for breaking changes, linting route consistency, generating a typed client SDK, or working with Hono API services.
 allowed-tools: Read Grep Glob Bash Write Edit
 ---
 
@@ -21,8 +21,13 @@ allowed-tools: Read Grep Glob Bash Write Edit
   - **Checking for breaking changes** → see "Breaking change detection" below
   - **Linting existing routes** → run `tools/route-lint.ts` and fix reported issues
   - **Generating a client SDK** → run `tools/client-gen.ts <spec-path>` and review output
+  - **Listing registered routes** → run `tools/route-list.ts` to inspect all routes with methods and paths
+  - **Auditing middleware stack** → run `tools/middleware-audit.ts` to see middleware per route group
+  - **Scaffolding a new endpoint** → run `tools/endpoint-scaffold.ts` to generate a route file with validation boilerplate
 
 ## Conventions
+
+> **Note:** The `{ ok, error }` response shape follows the Result type pattern from `development/error-handling`.
 
 ### Response shape
 
@@ -116,3 +121,6 @@ Test API routes against a real local database. No mocked DB. Test the full reque
 | `tools/breaking-changes.ts` | Diff two OpenAPI specs and report breaking changes |
 | `tools/route-lint.ts` | Check API routes for naming inconsistencies and missing validation |
 | `tools/client-gen.ts` | Generate type-safe client code from an OpenAPI spec |
+| `tools/route-list.ts` | List all registered routes with methods and paths |
+| `tools/middleware-audit.ts` | Show middleware stack for each route group |
+| `tools/endpoint-scaffold.ts` | Generate a new route file with validation boilerplate |

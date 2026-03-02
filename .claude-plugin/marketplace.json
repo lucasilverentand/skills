@@ -15,24 +15,22 @@
     {
       "name": "api-data",
       "source": "./",
-      "description": "API and data toolkit: API design, database management, and schema migrations",
+      "description": "API and data toolkit: API design and database management",
       "category": "devtools",
       "skills": [
         "./skills/development/api-design",
-        "./skills/development/database",
-        "./skills/development/migrations"
+        "./skills/development/database"
       ],
       "strict": false
     },
     {
       "name": "backend",
       "source": "./",
-      "description": "Backend toolkit: Hono API services, authentication, database schema, and auth configuration",
+      "description": "Backend toolkit: authentication, database schema, and auth configuration",
       "category": "web-development",
       "skills": [
         "./skills/project/parts/auth",
         "./skills/project/parts/database",
-        "./skills/project/parts/hono-api",
         "./skills/project/parts/schema"
       ],
       "strict": false
@@ -173,7 +171,6 @@
         "./skills/project/parts/config",
         "./skills/project/parts/logger",
         "./skills/project/parts/shared-packages",
-        "./skills/project/parts/tools",
         "./skills/project/parts/types",
         "./skills/project/parts/utils",
         "./skills/project/structure"

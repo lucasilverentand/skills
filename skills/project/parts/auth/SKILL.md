@@ -99,7 +99,7 @@ export async function authMiddleware(req: Request): Promise<Session | null> {
 }
 ```
 
-- Hono API imports this middleware — see `project/parts/hono-api`
+- Hono API imports this middleware — see `development/api-design` (references/hono.md for middleware patterns, references/auth.md for auth integration)
 - Never inline session logic in route handlers
 
 ## Session persistence across platforms
@@ -115,3 +115,4 @@ export async function authMiddleware(req: Request): Promise<Session | null> {
 | `tools/provider-list.ts` | OAuth providers, callback URLs, status |
 | `tools/permission-audit.ts` | All roles and permissions |
 | `tools/session-inspect.ts` | Decode and display session token claims |
+| `development/api-design/references/auth.md` | Single-API vs multi-API auth patterns, JWT, Service Bindings |

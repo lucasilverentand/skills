@@ -23,6 +23,8 @@ allowed-tools: Read Write Edit Glob Grep Bash
   - **Running cross-package builds or scripts** → follow "Build orchestration" below
   - **Auditing or fixing structure** → run `tools/convention-check.ts` then fix reported violations
   - **Checking workspace dependencies** → run `tools/workspace-graph.ts`
+  - **Listing all dev scripts** → run `tools/script-list.ts`
+  - **Checking script health** → run `tools/script-audit.ts`
 
 ## New project setup
 
@@ -52,7 +54,7 @@ project-root/
     auth/              # Better Auth setup → project/parts/auth
     ui/                # component library → project/parts/ui
     email/             # email templates → project/parts/email
-    api/               # Hono API → project/parts/hono-api
+    api/               # Hono API → development/api-design
     web/               # website → project/parts/website
     app/               # Expo app → project/parts/expo-app
 ```
@@ -148,6 +150,33 @@ Common workspace dependency issues and fixes:
 - **Stale types after changes** → run `tsc --build --force` to rebuild project references
 - **Version mismatch on external dep** → move the dependency to root `package.json` so all packages share one version
 
+## Dev tooling package
+
+Internal dev tooling (`packages/tools/`) is a private workspace package that automates repetitive tasks across the monorepo — code generation, workspace utilities, build helpers. It is not published.
+
+### Script conventions
+
+Every script follows the same pattern:
+- Every script has `--help`
+- Every script that writes files has `--dry-run`
+- Every script that outputs data has `--json`
+- Scripts are self-contained — no build step needed, run directly with `bun run`
+- Zero external dependencies — use Bun APIs (`Bun.file`, `Bun.Glob`, `Bun.spawn`)
+
+### Common codegen patterns
+
+- **Types from schema**: read Drizzle schema or Zod schemas, emit TypeScript interfaces
+- **Route manifest**: scan file-based routes, emit a typed route map
+- **API client**: read OpenAPI spec or route definitions, emit typed fetch wrappers
+- **Barrel files**: scan a directory, generate `index.ts` that re-exports everything
+
+### Workspace utilities
+
+- **Dependency sync**: check that shared dependencies use the same version across packages
+- **Config sync**: copy or merge `tsconfig.json`, `biome.json` from a template to all packages
+- **Unused dependency check**: find `dependencies` entries that aren't imported anywhere
+- **Workspace graph**: show which packages depend on which
+
 ## Naming conventions
 
 - Package dirs: `kebab-case`
@@ -163,3 +192,5 @@ Common workspace dependency issues and fixes:
 | `tools/scaffold-project.ts` | Full project scaffolding with all boilerplate |
 | `tools/convention-check.ts` | Validates naming and layout against conventions |
 | `tools/workspace-graph.ts` | Bun workspace dependency graph as a tree |
+| `tools/script-list.ts` | List all scripts in the tools package with descriptions |
+| `tools/script-audit.ts` | Check that all scripts have --help, --json, and --dry-run flags |

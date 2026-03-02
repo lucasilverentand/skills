@@ -1,6 +1,6 @@
 ---
 name: database
-description: Drizzle ORM patterns and database operations — schema design, queries, relations, seeding, indexing, and performance tuning for D1/SQLite and Postgres.
+description: Drizzle ORM patterns and database operations — schema design, queries, relations, seeding, indexing, performance tuning, and migrations for D1/SQLite and Postgres.
 allowed-tools: Read Grep Glob Bash Write Edit
 ---
 
@@ -18,6 +18,10 @@ allowed-tools: Read Grep Glob Bash Write Edit
   - **Adding indexes** → see "Indexing" below
   - **Linting schema files** → run `tools/schema-lint.ts <path>` and fix reported issues
   - **Running migrations** → see "Migrations" below
+  - **Schema changed, need a migration** → see "Generating a migration" below
+  - **Checking if existing migrations are safe** → run `tools/migration-check.ts` and review the report
+  - **Database state doesn't match schema definitions** → see "Schema drift workflow" below
+  - **Migration files may be out of order** → run `tools/migration-order.ts` and fix per report
 
 ## Conventions
 
@@ -353,6 +357,29 @@ wrangler d1 migrations apply <database-name> --remote  # production
 
 Never edit generated migration files. If a migration is wrong, generate a new one that fixes it.
 
+### Generating a migration
+
+1. Confirm the schema change is complete — do not generate a migration mid-edit
+2. Read the current Drizzle schema files (usually `src/db/schema.ts` or `packages/db/schema/`)
+3. Understand what changed: new table, new column, renamed column, dropped column, index change
+4. Run `tools/migration-gen.ts` — generates the migration from current schema changes
+5. Review the generated migration file:
+   - **New table** → verify `CREATE TABLE` matches schema, including foreign keys and indexes
+   - **New column** → check nullability; if NOT NULL, ensure a default is provided for existing rows
+   - **Renamed column** → Drizzle generates drop + add by default; verify data is not lost, consider a custom migration if needed
+   - **Dropped column** → confirm this is intentional — irreversible in production
+6. Never hand-edit the generated migration file. If the output is wrong, fix the schema and regenerate.
+7. Commit schema changes and the migration together in one commit
+
+### Schema drift workflow
+
+1. Run `tools/schema-drift.ts` — compares Drizzle schema definitions against the current database state
+2. Review the drift report:
+   - **Schema ahead of DB** → a migration has not been applied; run pending migrations
+   - **DB ahead of schema** → manual changes were made to the DB outside of migrations; dangerous, capture them in a migration
+   - **Conflicting state** → schema and DB diverged; resolve schema first, then regenerate
+3. Never manually alter the database to resolve drift — always go through migrations
+
 ## Seeding
 
 Seed scripts live in `db/seed.ts` and use Bun to run:
@@ -370,3 +397,7 @@ Seed with realistic data, not lorem ipsum. Use the `tools/seed-gen.ts` script to
 | `tools/schema-lint.ts` | Check schema files for missing timestamps, IDs, naming violations |
 | `tools/query-explain.ts` | Run EXPLAIN on queries and flag sequential scans, missing indexes |
 | `tools/seed-gen.ts` | Generate realistic seed data from a Drizzle schema file |
+| `tools/migration-gen.ts` | Generate a Drizzle migration from current schema changes |
+| `tools/migration-check.ts` | Verify all migrations are reversible and idempotent |
+| `tools/schema-drift.ts` | Compare schema definitions against the current database state |
+| `tools/migration-order.ts` | Validate migration file ordering and detect dependency conflicts |

@@ -16,6 +16,7 @@ The `config` part is the single source of truth for environment variables, featu
   - **Checking all required env vars are set** → run `tools/env-check.ts`
   - **Reviewing feature flags** → run `tools/flag-list.ts`
   - **Comparing configs across environments** → run `tools/config-diff.ts`
+  - **Generating .env.example from source** → run `tools/env-docs.ts`
 
 ## Environment variables
 
@@ -86,3 +87,4 @@ packages/config/
 | `tools/env-check.ts` | Validates required env vars for a given target |
 | `tools/flag-list.ts` | All feature flags with defaults and descriptions |
 | `tools/config-diff.ts` | Compares environments, highlights mismatches |
+| `tools/env-docs.ts` | Scan source for env var usage and generate `.env.example` |

@@ -12,6 +12,9 @@ Architecture docs, system overviews, and data flow diagrams.
 
 ## Tools
 
-- `tools/adr-scaffold.ts` — create a new Architecture Decision Record from a template with contextual defaults
 - `tools/mermaid-gen.ts` — generate Mermaid diagrams from module imports and database schema definitions
-- `tools/env-docs.ts` — scan source for environment variable usage and generate a documented .env.example
+
+## Cross-references
+
+- ADR scaffolding → `development/knowledge` (tools/adr-create.ts)
+- Environment variable documentation → `project/parts/config` (tools/env-docs.ts)

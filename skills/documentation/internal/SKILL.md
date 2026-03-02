@@ -12,7 +12,7 @@ allowed-tools: Read Grep Glob Bash
   - **Overall system architecture** → follow "Architecture overview" below
   - **A significant design decision** → follow "ADR" below
   - **Data flow or module relationships** → run `tools/mermaid-gen.ts`
-  - **Environment variables** → run `tools/env-docs.ts`
+  - **Environment variables** → see `project/parts/config` (tools/env-docs.ts)
   - **Updating existing docs after changes** → follow "Keeping docs current" below
 
 ## Architecture overview
@@ -27,13 +27,14 @@ allowed-tools: Read Grep Glob Bash
 
 ## ADR
 
-1. Run `tools/adr-scaffold.ts "<title>"` to create a numbered ADR file in `docs/decisions/`
-2. Fill in the four sections:
+> **Cross-reference:** ADR scaffolding is handled by `development/knowledge` (tools/adr-create.ts). Use that skill to create new ADRs.
+
+1. Fill in the four sections:
    - **Context** — what situation forced a decision?
    - **Decision** — what was decided?
    - **Alternatives considered** — what else was on the table and why it was rejected
    - **Consequences** — what does this decision make easier or harder going forward?
-3. Link the ADR from `ARCHITECTURE.md` or the relevant module's docs
+2. Link the ADR from `ARCHITECTURE.md` or the relevant module's docs
 
 ## Mermaid diagrams
 
@@ -44,7 +45,9 @@ allowed-tools: Read Grep Glob Bash
 
 ## Environment variables
 
-1. Run `tools/env-docs.ts` to scan source files for `process.env.*` and `Env.get()` usage
+> **Cross-reference:** The `env-docs` tool now lives in `project/parts/config`. Use that skill for generating `.env.example` from source.
+
+1. Run the env-docs tool from `project/parts/config` to scan source files for `process.env.*` and `Env.get()` usage
 2. The tool generates a `.env.example` with each variable, its type, and whether it's required
 3. Review the output:
    - **Missing descriptions** → add inline comments explaining purpose and format
@@ -55,12 +58,12 @@ allowed-tools: Read Grep Glob Bash
 
 - Architecture docs drift fastest during major refactors — update `ARCHITECTURE.md` as part of those PRs
 - Run `tools/mermaid-gen.ts` after schema changes to regenerate ER diagrams
-- Run `tools/env-docs.ts` after adding or removing env vars to keep `.env.example` in sync
+- Run `env-docs` (from `project/parts/config`) after adding or removing env vars to keep `.env.example` in sync
 
 ## Key references
 
 | File | What it covers |
 |---|---|
-| `tools/adr-scaffold.ts` | Create numbered ADR files from a template |
 | `tools/mermaid-gen.ts` | Generate Mermaid diagrams from modules and DB schema |
-| `tools/env-docs.ts` | Scan source for env var usage and generate `.env.example` |
+| `development/knowledge` | ADR scaffolding (tools/adr-create.ts) |
+| `project/parts/config` | Environment variable documentation (tools/env-docs.ts) |

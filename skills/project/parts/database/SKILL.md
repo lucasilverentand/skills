@@ -6,6 +6,8 @@ allowed-tools: Read Write Edit Glob Grep Bash
 
 # Database
 
+> **Cross-reference:** For migration generation, drift detection, and ordering validation, see `development/database` — that skill owns all migration tooling.
+
 The `database` part provides the data layer for the entire project using Drizzle ORM. Schema definitions live in a shared workspace package — consuming packages import the `db` client and typed schema from it.
 
 ## Decision Tree
@@ -16,7 +18,7 @@ The `database` part provides the data layer for the entire project using Drizzle
   - **Running migrations** → see "Migrations" below
   - **Switching from D1 to Postgres** → see "Provider switch" below
   - **Seeding the database** → see "Seed scripts" below
-  - **Checking migration status** → run `tools/migration-check.ts`
+  - **Checking migration status** → see `development/database` (migration tooling)
   - **Visualizing the schema** → run `tools/schema-overview.ts`
 
 ## Initial setup
@@ -135,7 +137,7 @@ export const postsRelations = relations(posts, ({ one }) => ({
 - **Development**: use `drizzle-kit push` for rapid iteration (applies schema changes directly)
 - **Production**: use `drizzle-kit generate` then `drizzle-kit migrate` for versioned migrations
 - Never edit generated migration SQL files manually
-- Run `tools/migration-check.ts` to verify pending migrations before deploying
+- Use `development/database` migration tools to verify pending migrations before deploying
 
 ### D1 migrations on Cloudflare
 
@@ -181,5 +183,6 @@ seed().catch(console.error);
 
 | File | What it covers |
 |---|---|
-| `tools/migration-check.ts` | Pending migrations, schema drift detection |
 | `tools/schema-overview.ts` | All tables, columns, relations, and indexes |
+| `tools/schema-check.ts` | Validate schema conventions and structure |
+| `development/database` | Migration generation, drift detection, ordering (authoritative) |

@@ -2,6 +2,45 @@
 
 Hono-specific patterns for implementing the API design conventions. This is the default framework — use these patterns unless the project uses something else.
 
+## Bootstrap
+
+When creating a new Hono API service package:
+
+1. Create `packages/api/` (or `apps/api/`) in the workspace root
+2. Add `package.json`:
+   ```json
+   {
+     "name": "@<project>/api",
+     "type": "module",
+     "scripts": {
+       "dev": "bun run --hot src/index.ts",
+       "start": "bun src/index.ts"
+     },
+     "dependencies": {
+       "hono": "latest",
+       "@hono/zod-validator": "latest",
+       "@hono/zod-openapi": "latest"
+     }
+   }
+   ```
+3. Create `src/index.ts` — app entry, mounts routers, starts server
+4. Create `src/app.ts` — exports the Hono app instance (separate from server start for testing)
+5. Add to workspace `bunfig.toml` or root `package.json` workspaces
+
+## Directory structure
+
+```
+packages/api/
+  src/
+    index.ts          # server entry point
+    app.ts            # Hono app factory
+    routes/           # one file per resource
+    middleware/       # custom middleware
+    lib/              # shared helpers (db client, env, etc.)
+  package.json
+  tsconfig.json
+```
+
 ## Project setup
 
 1. `@hono/zod-openapi` for route definitions with automatic OpenAPI spec generation
@@ -12,6 +51,48 @@ Hono-specific patterns for implementing the API design conventions. This is the 
 6. Async operations: synchronous by default; long-running tasks return a job ID, process via Cloudflare Queues
 7. Middleware: see `middleware.md`
 8. Logging: see `logging.md`
+
+## Adding a route
+
+1. Create `src/routes/<resource>.ts`
+2. Use `@hono/zod-validator` for request validation — validate body, query, and params
+3. Return `{ ok: true, data }` on success, `{ ok: false, error }` on failure — never throw
+4. Register on the app in `src/app.ts`
+
+```ts
+import { Hono } from "hono"
+import { zValidator } from "@hono/zod-validator"
+import { z } from "zod"
+
+export const usersRoute = new Hono()
+  .post("/", zValidator("json", CreateUserSchema), async (c) => {
+    const body = c.req.valid("json")
+    const result = await createUser(body)
+    if (!result.ok) return c.json({ ok: false, error: result.error }, 400)
+    return c.json({ ok: true, data: result.data }, 201)
+  })
+```
+
+## Adding middleware
+
+- **CORS** — use `hono/cors`, configure `origin` from env, not hardcoded
+- **Auth** — validate session/JWT in middleware, attach `user` to context via `c.set()`
+- **Rate limiting** — use `@hono/rate-limiter` or a KV-backed implementation
+- **Logger** — use the `@<project>/logger` package, pass request context
+- Apply middleware at router level, not globally, unless it applies everywhere
+
+## Auth integration
+
+- Better Auth: call `auth.handler(c.req.raw)` in the auth route, use `auth.api.getSession()` in middleware
+- Attach session to context: `c.set("user", session.user)`
+- Protect routes with a middleware that checks `c.get("user")` and returns 401 if missing
+- See `references/auth.md` for full single-API vs multi-API patterns
+
+## Request validation pattern
+
+- Always use `zValidator` from `@hono/zod-validator` — never parse `c.req.json()` manually
+- Validate at the route level, not inside handler logic
+- Share Zod schemas from `@<project>/types` or `@<project>/schema` — don't redeclare
 
 ## Route structure
 

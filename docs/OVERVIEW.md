@@ -1,6 +1,6 @@
 # Skills Overview
 
-75 skills organized into 16 atomic plugins and 7 intent-based bundles.
+72 skills organized into 16 atomic plugins and 7 intent-based bundles.
 
 **Plugins** are non-overlapping groups — each skill belongs to exactly one plugin.
 **Bundles** are user-intent collections that reference plugins — a plugin can appear in multiple bundles.
@@ -44,35 +44,32 @@
 | development/testing | Design test strategies and author tests (unit, integration, E2E) |
 | development/type-safety | Tighten types, remove `any`, add Zod schemas |
 
-### api-data (3 skills)
+### api-data (2 skills)
 
 | skill path | purpose |
 | --- | --- |
-| development/api-design | Design endpoints, generate OpenAPI specs, review consistency |
-| development/database | Database management, queries, and optimization |
-| development/migrations | Generate ORM migrations (Drizzle) — never edit migration files directly |
+| development/api-design | Design endpoints, generate OpenAPI specs, review consistency, Hono implementation tooling |
+| development/database | Database management, queries, optimization, and migrations |
 
-### project-scaffold (9 skills)
+### project-scaffold (8 skills)
 
 | skill path | purpose |
 | --- | --- |
-| project/structure | Scaffold projects, monorepo setup, convention docs |
+| project/structure | Scaffold projects, monorepo setup, convention docs, dev tooling package |
 | project/parts | Container for monorepo part-specific skills |
 | project/parts/cli-tool | CLI tool package setup and conventions |
-| project/parts/config | Shared config (env vars, feature flags, constants) |
+| project/parts/config | Shared config (env vars, feature flags, constants, env docs) |
 | project/parts/logger | Shared logging (structured logs, levels, transports) |
 | project/parts/shared-packages | Shared workspace packages guidance |
-| project/parts/tools | Dev tooling package setup |
 | project/parts/types | Shared TypeScript types, interfaces, Zod schemas |
 | project/parts/utils | Shared utility functions (formatters, validators, helpers) |
 
-### backend (4 skills)
+### backend (3 skills)
 
 | skill path | purpose |
 | --- | --- |
 | project/parts/auth | Shared auth (Better Auth config, session types, middleware) |
 | project/parts/database | Database package setup and configuration |
-| project/parts/hono-api | Hono API service setup, routes, middleware |
 | project/parts/schema | Shared database schema (Drizzle tables, types, migrations) |
 
 ### web (3 skills)

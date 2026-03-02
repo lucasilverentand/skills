@@ -61,12 +61,11 @@ export const PLUGINS: Record<string, PluginDef> = {
     ],
   },
   "api-data": {
-    description: "API and data toolkit: API design, database management, and schema migrations",
+    description: "API and data toolkit: API design and database management",
     category: "devtools",
     skills: [
       "development/api-design",
       "development/database",
-      "development/migrations",
     ],
   },
   "project-scaffold": {
@@ -78,19 +77,17 @@ export const PLUGINS: Record<string, PluginDef> = {
       "project/parts/config",
       "project/parts/logger",
       "project/parts/shared-packages",
-      "project/parts/tools",
       "project/parts/types",
       "project/parts/utils",
       "project/structure",
     ],
   },
   backend: {
-    description: "Backend toolkit: Hono API services, authentication, database schema, and auth configuration",
+    description: "Backend toolkit: authentication, database schema, and auth configuration",
     category: "web-development",
     skills: [
       "project/parts/auth",
       "project/parts/database",
-      "project/parts/hono-api",
       "project/parts/schema",
     ],
   },
