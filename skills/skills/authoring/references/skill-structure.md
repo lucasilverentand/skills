@@ -39,35 +39,21 @@ Rules:
 
 ## SKILL.md
 
-The runtime document Claude reads when the skill activates. This is what matters.
-
 Rules:
 - Must have YAML frontmatter with at least `name` and `description`
-- Keep under 5000 tokens (~500 lines) — this is the progressive disclosure sweet spot
+- Keep under 5000 tokens (~500 lines)
 - Lead with the workflow — what does the agent do, in what order?
 - Link to references/ for anything needing more than a few lines
 - Don't duplicate PURPOSE.md content
-- Don't explain things Claude already knows
 
 ## references/
 
 Detailed documentation loaded on demand. Claude reads these when the SKILL.md points to them.
 
-Good candidates for references:
-- Long decision trees (over ~20 lines)
-- Domain-specific documentation
-- API schemas and field descriptions
-- Templates and examples
-- Convention docs shared across skills
-
 Rules:
 - SKILL.md must explicitly reference these files: "See `references/foo.md`"
 - Keep each file focused on one topic
 - One level deep from SKILL.md — don't reference files from within references
-
-## tools/
-
-Bun scripts the agent can run. See `tool-conventions.md` for details.
 
 ## Progressive disclosure
 

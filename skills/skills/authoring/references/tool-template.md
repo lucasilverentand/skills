@@ -1,6 +1,6 @@
 # Tool Template
 
-Use this as a starting point for new tool scripts:
+Tools are zero-dependency bun scripts (only bun built-ins and node stdlib). They support `--help` and `--json`, send errors to stderr, and exit non-zero on failure.
 
 ```ts
 const args = Bun.argv.slice(2);

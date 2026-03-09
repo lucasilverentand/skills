@@ -56,11 +56,7 @@ allowed-tools: Read Grep Glob Bash
 - Use gerund form: `processing-pdfs`, `managing-databases`
 - Avoid: vague names (`helper`, `utils`), reserved prefixes (`anthropic-*`, `claude-*`)
 
-## Content body
-
-The markdown body after frontmatter is the skill's instructions. Keep it under 5000 tokens (~500 lines).
-
-### String substitutions
+## String substitutions
 
 | Variable | Description |
 |---|---|
@@ -68,7 +64,7 @@ The markdown body after frontmatter is the skill's instructions. Keep it under 5
 | `$ARGUMENTS[N]` or `$N` | Specific argument by 0-based index. |
 | `${CLAUDE_SESSION_ID}` | Current session ID. |
 
-### Dynamic context injection
+## Dynamic context injection
 
 The `` !`command` `` syntax runs shell commands and injects output before the skill content reaches Claude:
 
@@ -77,12 +73,3 @@ The `` !`command` `` syntax runs shell commands and injects output before the sk
 - Branch: !`git branch --show-current`
 - Status: !`git status --short`
 ```
-
-## Description guidelines
-
-The `description` field is critical — Claude uses it to decide when to activate the skill.
-
-- Write in third person: "Processes files" not "I can process files"
-- Include BOTH what the skill does AND when to use it
-- Be specific: "Generates Drizzle ORM migrations from schema changes" not "Helps with databases"
-- Include key terms users might mention to help Claude match intent

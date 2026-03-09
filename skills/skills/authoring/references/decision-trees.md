@@ -30,18 +30,13 @@ This creates a visible reasoning trace. Example:
 >
 > → Reset fixtures between test runs using beforeEach.
 
-Never skip steps. Never collapse multiple decisions into one. Every question gets a written answer.
-
 ## Writing good decision trees
 
 - **Start with the trigger** — what activates this skill? What does the agent observe first?
-- **Ask diagnostic questions** — each branch narrows the problem space
 - **Use concrete conditions** — "Does the file have a default export?" not "Is the file structured well?"
-- **Leaf nodes are actions** — every terminal branch says exactly what to do
-- **Cover the 80% cases** — don't enumerate every edge case, handle the common paths
-- **3-4 levels deep** — ideal depth. 5 is the max before it gets unwieldy
-- **Reference tools** — when a branch needs a tool: "→ run `tools/coverage-gaps.ts`"
-- **Reference references** — when a branch needs detail: "→ see `references/foo.md`"
+- **Leaf nodes are actions** — every terminal branch says exactly what to do (run a tool, follow a workflow, see a reference)
+- **Cover the 80% cases** — handle the common paths, don't enumerate every edge case
+- **3-4 levels deep** — 5 is the max before it gets unwieldy
 
 ## Placement
 
