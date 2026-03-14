@@ -9,6 +9,7 @@
 - **Offering too many options** — provide a default approach with an escape hatch, not a menu
 - **Time-sensitive information** — don't include dates or versions that will go stale
 - **Extraneous files** — no README.md, CHANGELOG.md, or other docs that aren't references
+- **Padding with thin-wrapper tools** — don't create tools just to hit a target count. A tool that wraps a single command with minor formatting isn't earning its place. Tools should exist because they compose multiple steps, contain real logic (validation, categorization, threshold detection), or automate a multi-command workflow that's error-prone to do by hand. If the task is a single command with a flag or two, put that command inline in SKILL.md instead.
 
 ## Keeping SKILL.md lean
 
