@@ -47,6 +47,19 @@ Optional:
 | `hooks` | string/object | Hook configurations |
 | `mcpServers` | string/object | MCP server configurations |
 
+New plugin entry template:
+
+```json
+{
+  "name": "<category-directory-name>",
+  "source": "./",
+  "description": "Skills for <what this category covers>",
+  "category": "<marketplace-category>",
+  "skills": ["./skills/<category>/<skill-name>"],
+  "strict": false
+}
+```
+
 ### Source types
 
 **Relative path:**
@@ -83,26 +96,3 @@ Lives at `.claude-plugin/plugin.json` in a plugin repo. Optional when marketplac
 | `agents` | No | array | Paths to agent files |
 | `hooks` | No | object | Hook configurations |
 | `mcpServers` | No | object | MCP server configurations |
-
-## Skill discovery locations
-
-| Scope | Location | Applies to |
-|---|---|---|
-| Personal | `~/.claude/skills/<skill-name>/SKILL.md` | All your projects |
-| Project | `.claude/skills/<skill-name>/SKILL.md` | This project only |
-| Plugin | `<plugin>/skills/<skill-name>/SKILL.md` | Where plugin is enabled |
-| Enterprise | Managed settings | All org users |
-
-Plugin skills use namespaced invocation: `plugin-name:skill-name`.
-
-## External distribution
-
-Skills can be distributed via the `npx skills` CLI:
-
-```bash
-npx skills add owner/repo          # install from GitHub
-npx skills find "query"            # search available skills
-npx skills list                    # list installed skills
-```
-
-Installed skills go to `~/.agents/skills/` with a lock file at `~/.agents/.skill-lock.json`.

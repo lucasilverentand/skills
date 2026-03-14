@@ -1,28 +1,24 @@
 # Testing Skills
 
-The `skill-creator` skill owns the test/eval/improve loop. This guide covers the conventions authoring adds on top.
+## Before running evals
 
-## Before handing off to skill-creator
-
-Validate structure first — skill-creator doesn't check authoring conventions:
+Validate structure first — the eval workflow doesn't check authoring conventions:
 
 1. Run `tools/skill-validate.ts <path>` — required files, frontmatter, naming
 2. Run `tools/token-estimate.ts <path>/SKILL.md` — under 5000 tokens
 3. Run `tools/coverage-gap.ts <path>` — responsibilities covered by content and tools
 
-## After each skill-creator iteration
+## After each iteration
 
-Re-validate after every improvement cycle. Skill-creator optimizes for output quality but may violate authoring structure:
+Re-validate after every improvement cycle. The improvement process optimizes for output quality but may violate authoring structure:
 
 - SKILL.md still under 5000 tokens?
 - Decision tree still intact and covering all responsibilities?
 - No content duplicated between SKILL.md and references?
-- New content placed correctly? (detailed docs → references, automatable steps → tools, workflow → SKILL.md)
+- New content placed correctly? (detailed docs -> references, automatable steps -> tools, workflow -> SKILL.md)
 - PURPOSE.md still accurate after scope changes?
 
 ## Eval query quality standards
-
-When skill-creator asks you to create eval queries (for testing or description optimization), apply these standards:
 
 Good test prompts are concrete, specific, and detailed enough to resemble a real request. Include file paths, personal context, column names, company names. Mix formal and casual phrasings. Some terse, some verbose.
 
@@ -42,4 +38,4 @@ Good assertions are:
 - **Objectively verifiable** — a script can check them, not just human judgment
 - **Descriptively named** — someone reading results should immediately understand what each one checks
 
-Don't force assertions onto subjective outputs (writing style, design quality). Those are better evaluated qualitatively through skill-creator's review viewer.
+Don't force assertions onto subjective outputs (writing style, design quality). Those are better evaluated qualitatively through the review viewer.
