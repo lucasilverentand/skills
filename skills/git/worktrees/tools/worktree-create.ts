@@ -30,7 +30,17 @@ function getArg(flag: string, defaultVal: string): string {
 
 const baseRef = getArg("--base", "origin/main");
 const customPath = getArg("--path", "");
-const filteredArgs = args.filter((a) => !a.startsWith("--") && a !== getArg("--base", "") && a !== getArg("--path", ""));
+
+// Collect indices consumed by flags and their values
+const skipIndices = new Set<number>();
+for (const flag of ["--base", "--path"]) {
+  const idx = args.indexOf(flag);
+  if (idx !== -1) {
+    skipIndices.add(idx);
+    if (args[idx + 1]) skipIndices.add(idx + 1);
+  }
+}
+const filteredArgs = args.filter((a, i) => !a.startsWith("--") && !skipIndices.has(i));
 
 async function run(cmd: string[]): Promise<{ stdout: string; stderr: string; exitCode: number }> {
   const proc = Bun.spawn(cmd, { stdout: "pipe", stderr: "pipe" });

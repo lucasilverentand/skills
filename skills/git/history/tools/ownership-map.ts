@@ -23,7 +23,9 @@ if (args.includes("--help") || args.length === 0) {
 const jsonOutput = args.includes("--json");
 const depthIdx = args.indexOf("--depth");
 const depth = depthIdx !== -1 && args[depthIdx + 1] ? parseInt(args[depthIdx + 1], 10) : 2;
-const filteredArgs = args.filter((a) => !a.startsWith("--") && !(depthIdx !== -1 && args[depthIdx + 1] === a));
+const skipIndices = new Set<number>();
+if (depthIdx !== -1) { skipIndices.add(depthIdx); if (args[depthIdx + 1]) skipIndices.add(depthIdx + 1); }
+const filteredArgs = args.filter((a, i) => !a.startsWith("--") && !skipIndices.has(i));
 
 interface OwnershipEntry {
   path: string;

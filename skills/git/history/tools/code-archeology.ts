@@ -24,7 +24,9 @@ if (args.includes("--help") || args.length === 0) {
 const jsonOutput = args.includes("--json");
 const limitIdx = args.indexOf("--limit");
 const limit = limitIdx !== -1 && args[limitIdx + 1] ? parseInt(args[limitIdx + 1], 10) : 20;
-const filteredArgs = args.filter((a) => !a.startsWith("--") && !(limitIdx !== -1 && args[limitIdx + 1] === a));
+const skipIndices = new Set<number>();
+if (limitIdx !== -1) { skipIndices.add(limitIdx); if (args[limitIdx + 1]) skipIndices.add(limitIdx + 1); }
+const filteredArgs = args.filter((a, i) => !a.startsWith("--") && !skipIndices.has(i));
 
 interface HistoryEntry {
   hash: string;

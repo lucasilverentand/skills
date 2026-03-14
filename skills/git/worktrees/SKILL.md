@@ -14,7 +14,7 @@ allowed-tools: Read Grep Glob Bash
 
 - What do you need to do?
   - **Create a new worktree** → run `tools/worktree-create.ts <branch>` or follow "Creating a worktree" below
-  - **List all worktrees and their status** → run `tools/worktree-status.ts`
+  - **List all worktrees and their status** → `git worktree list`
   - **Clean up stale or merged worktrees** → run `tools/worktree-prune.ts`
   - **Repair a broken worktree reference** → follow "Repairing worktrees" below
 
@@ -59,6 +59,5 @@ If a worktree shows as broken (directory deleted or moved):
 
 | File | What it covers |
 |---|---|
-| `tools/worktree-status.ts` | List all worktrees with their branch, path, and staleness info |
 | `tools/worktree-create.ts` | Create a new worktree linked to a branch with standard directory layout |
 | `tools/worktree-prune.ts` | Detect and remove worktrees whose branches have been merged or deleted |
