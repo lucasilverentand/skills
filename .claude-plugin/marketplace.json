@@ -6,59 +6,102 @@
   },
   "metadata": {
     "description": "Development workflow skills: debugging, testing, deployment, documentation, editor configuration, git workflows, infrastructure, project scaffolding, research, security audits, and skill authoring.",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "homepage": "https://github.com/lucasilverentand/skills",
     "repository": "https://github.com/lucasilverentand/skills",
     "license": "MIT"
   },
   "plugins": [
     {
-      "name": "api-data",
+      "name": "communication",
       "source": "./",
-      "description": "API and data toolkit: API design and database management",
+      "description": "Communication toolkit: discord",
       "category": "devtools",
       "skills": [
-        "./skills/development/api-design",
-        "./skills/development/database"
+        "./skills/communication/discord"
       ],
       "strict": false
     },
     {
-      "name": "backend",
+      "name": "deployment",
       "source": "./",
-      "description": "Backend toolkit: authentication, database schema, and auth configuration",
-      "category": "web-development",
+      "description": "Deployment toolkit: cloudflare, kubernetes, railway",
+      "category": "devtools",
       "skills": [
-        "./skills/project/parts/auth",
-        "./skills/project/parts/database",
-        "./skills/project/parts/schema"
+        "./skills/deployment/cloudflare",
+        "./skills/deployment/kubernetes",
+        "./skills/deployment/railway"
       ],
       "strict": false
     },
     {
-      "name": "code-quality",
+      "name": "development",
       "source": "./",
-      "description": "Code quality toolkit: testing, type safety, performance, accessibility, and error handling",
+      "description": "Development toolkit: accessibility, api-design, database, debugging, environment, error-handling, implementing, knowledge, performance, planning, refactoring, testing, type-safety",
       "category": "devtools",
       "skills": [
         "./skills/development/accessibility",
+        "./skills/development/api-design",
+        "./skills/development/database",
+        "./skills/development/debugging",
+        "./skills/development/environment",
         "./skills/development/error-handling",
+        "./skills/development/implementing",
+        "./skills/development/knowledge",
         "./skills/development/performance",
+        "./skills/development/planning",
+        "./skills/development/refactoring",
         "./skills/development/testing",
         "./skills/development/type-safety"
       ],
       "strict": false
     },
     {
-      "name": "devops",
+      "name": "documentation",
       "source": "./",
-      "description": "DevOps toolkit: CI/CD, Cloudflare/Kubernetes/Railway deployment, Docker, GitOps, and secrets",
+      "description": "Documentation toolkit: report, writing",
       "category": "devtools",
       "skills": [
-        "./skills/deployment/cloudflare",
-        "./skills/deployment/kubernetes",
-        "./skills/deployment/railway",
-        "./skills/development/ci",
+        "./skills/documentation/report",
+        "./skills/documentation/writing"
+      ],
+      "strict": false
+    },
+    {
+      "name": "editor-setup",
+      "source": "./",
+      "description": "Editor setup toolkit: editor-setup",
+      "category": "editor",
+      "skills": [
+        "./skills/editor-setup"
+      ],
+      "strict": false
+    },
+    {
+      "name": "git",
+      "source": "./",
+      "description": "Git toolkit: branching, cherry-picking, clean-repo, committing, conflicts, history, remotes, stashing, tagging, worktrees",
+      "category": "devtools",
+      "skills": [
+        "./skills/git/branching",
+        "./skills/git/cherry-picking",
+        "./skills/git/clean-repo",
+        "./skills/git/committing",
+        "./skills/git/conflicts",
+        "./skills/git/history",
+        "./skills/git/remotes",
+        "./skills/git/stashing",
+        "./skills/git/tagging",
+        "./skills/git/worktrees"
+      ],
+      "strict": false
+    },
+    {
+      "name": "infrastructure",
+      "source": "./",
+      "description": "Infrastructure toolkit: docker, gitops, secrets",
+      "category": "devtools",
+      "skills": [
         "./skills/infrastructure/docker",
         "./skills/infrastructure/gitops",
         "./skills/infrastructure/secrets"
@@ -66,102 +109,12 @@
       "strict": false
     },
     {
-      "name": "docs",
+      "name": "project",
       "source": "./",
-      "description": "Documentation toolkit: READMEs, internal docs, contributor guides, and structured reports",
-      "category": "devtools",
-      "skills": [
-        "./skills/documentation/contributing",
-        "./skills/documentation/internal",
-        "./skills/documentation/readme",
-        "./skills/documentation/report",
-        "./skills/documentation/report/analysis",
-        "./skills/documentation/report/comparison",
-        "./skills/documentation/report/research",
-        "./skills/documentation/report/retro",
-        "./skills/documentation/report/status"
-      ],
-      "strict": false
-    },
-    {
-      "name": "editors",
-      "source": "./",
-      "description": "Editor configuration toolkit: Neovim, VS Code, Zed, Xcode, and terminal setup",
-      "category": "editor",
-      "skills": [
-        "./skills/editors/neovim",
-        "./skills/editors/terminal",
-        "./skills/editors/vscode",
-        "./skills/editors/xcode",
-        "./skills/editors/zed"
-      ],
-      "strict": false
-    },
-    {
-      "name": "git",
-      "source": "./",
-      "description": "Git workflow toolkit: committing, branching, conflicts, history, and worktrees",
-      "category": "devtools",
-      "skills": [
-        "./skills/git/branching",
-        "./skills/git/committing",
-        "./skills/git/conflicts",
-        "./skills/git/history",
-        "./skills/git/worktrees"
-      ],
-      "strict": false
-    },
-    {
-      "name": "integrations",
-      "source": "./",
-      "description": "Integrations toolkit: email, notifications, payments, analytics, i18n, and Discord",
-      "category": "devtools",
-      "skills": [
-        "./skills/communication/discord",
-        "./skills/project/parts/analytics",
-        "./skills/project/parts/email",
-        "./skills/project/parts/i18n",
-        "./skills/project/parts/notifications",
-        "./skills/project/parts/payments"
-      ],
-      "strict": false
-    },
-    {
-      "name": "mobile",
-      "source": "./",
-      "description": "Mobile development toolkit: Expo React Native and iOS/Swift app setup",
-      "category": "web-development",
-      "skills": [
-        "./skills/project/parts/expo-app",
-        "./skills/project/parts/ios-app"
-      ],
-      "strict": false
-    },
-    {
-      "name": "planning",
-      "source": "./",
-      "description": "Planning toolkit: break down features, implement from plans, and record learnings",
-      "category": "devtools",
-      "skills": [
-        "./skills/development/implementing",
-        "./skills/development/knowledge",
-        "./skills/development/planning"
-      ],
-      "strict": false
-    },
-    {
-      "name": "project-scaffold",
-      "source": "./",
-      "description": "Project scaffolding toolkit: monorepo structure, workspace packages, and shared tooling",
+      "description": "Project toolkit: parts, structure",
       "category": "web-development",
       "skills": [
         "./skills/project/parts",
-        "./skills/project/parts/cli-tool",
-        "./skills/project/parts/config",
-        "./skills/project/parts/logger",
-        "./skills/project/parts/shared-packages",
-        "./skills/project/parts/types",
-        "./skills/project/parts/utils",
         "./skills/project/structure"
       ],
       "strict": false
@@ -169,7 +122,7 @@
     {
       "name": "research",
       "source": "./",
-      "description": "Research toolkit: API exploration, codebase analysis, competitor and market research, UX and UI audits",
+      "description": "Research toolkit: api, codebase-analysis, competitors, market, technologies, user-experience",
       "category": "devtools",
       "skills": [
         "./skills/research/api",
@@ -177,15 +130,14 @@
         "./skills/research/competitors",
         "./skills/research/market",
         "./skills/research/technologies",
-        "./skills/research/user-experience",
-        "./skills/research/user-interface"
+        "./skills/research/user-experience"
       ],
       "strict": false
     },
     {
       "name": "security",
       "source": "./",
-      "description": "Security toolkit: vulnerability audits, dependency scanning, and security best practices",
+      "description": "Security toolkit: audit",
       "category": "devtools",
       "skills": [
         "./skills/security/audit"
@@ -193,38 +145,12 @@
       "strict": false
     },
     {
-      "name": "skill-creation",
+      "name": "skills",
       "source": "./",
-      "description": "Skill management toolkit: authoring and managing the marketplace catalog",
+      "description": "Skills toolkit: lifecycle",
       "category": "devtools",
       "skills": [
-        "./skills/skills/authoring",
-        "./skills/skills/marketplace"
-      ],
-      "strict": false
-    },
-    {
-      "name": "web",
-      "source": "./",
-      "description": "Web frontend toolkit: React dashboards, marketing websites, and shared UI components",
-      "category": "web-development",
-      "skills": [
-        "./skills/project/parts/react-dashboard",
-        "./skills/project/parts/ui",
-        "./skills/project/parts/website"
-      ],
-      "strict": false
-    },
-    {
-      "name": "workflow",
-      "source": "./",
-      "description": "Development workflow toolkit: debugging, refactoring, environment setup, and team orchestration",
-      "category": "devtools",
-      "skills": [
-        "./skills/development/debugging",
-        "./skills/development/environment",
-        "./skills/development/refactoring",
-        "./skills/development/team"
+        "./skills/skills/lifecycle"
       ],
       "strict": false
     }
@@ -235,16 +161,11 @@
       "description": "Building web apps with Hono + React + Drizzle",
       "plugins": [
         "git",
-        "planning",
-        "workflow",
-        "code-quality",
-        "api-data",
-        "project-scaffold",
-        "backend",
-        "web",
-        "integrations",
-        "devops",
-        "docs"
+        "development",
+        "project",
+        "deployment",
+        "infrastructure",
+        "documentation"
       ]
     },
     {
@@ -252,15 +173,10 @@
       "description": "Expo/iOS apps with a backend",
       "plugins": [
         "git",
-        "planning",
-        "workflow",
-        "code-quality",
-        "api-data",
-        "project-scaffold",
-        "mobile",
-        "integrations",
-        "backend",
-        "docs"
+        "development",
+        "project",
+        "communication",
+        "documentation"
       ]
     },
     {
@@ -268,14 +184,11 @@
       "description": "Pure API/backend work",
       "plugins": [
         "git",
-        "planning",
-        "workflow",
-        "code-quality",
-        "api-data",
-        "project-scaffold",
-        "backend",
-        "devops",
-        "docs"
+        "development",
+        "project",
+        "deployment",
+        "infrastructure",
+        "documentation"
       ]
     },
     {
@@ -283,9 +196,10 @@
       "description": "CI/CD, deployment, infrastructure",
       "plugins": [
         "git",
-        "devops",
+        "deployment",
+        "infrastructure",
         "security",
-        "docs"
+        "documentation"
       ]
     },
     {
@@ -293,11 +207,9 @@
       "description": "Maintaining OSS projects",
       "plugins": [
         "git",
-        "planning",
-        "workflow",
-        "code-quality",
-        "docs",
-        "skill-creation",
+        "development",
+        "documentation",
+        "skills",
         "security"
       ]
     },
@@ -307,9 +219,8 @@
       "plugins": [
         "git",
         "research",
-        "planning",
-        "workflow",
-        "docs"
+        "development",
+        "documentation"
       ]
     },
     {

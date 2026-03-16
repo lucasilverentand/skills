@@ -1,4 +1,4 @@
-name: Validate Skills
+name: Validate
 
 on:
   pull_request:
@@ -14,11 +14,14 @@ jobs:
 
       - uses: oven-sh/setup-bun@v2
 
-      - name: Install Claude Code
-        run: bun install -g @anthropic-ai/claude-code
+      - name: Check marketplace.json is up to date
+        run: bun run generate -- --check
 
-      - name: Validate plugin structure
-        run: claude plugin validate .
+      - name: Validate marketplace integrity
+        run: bun run validate:marketplace
+
+      - name: Validate skill metadata
+        run: bun run validate:metadata
 
       - name: Validate skills
         run: bun run validate

@@ -34,21 +34,7 @@ async function runScript(label: string, args: string[]): Promise<boolean> {
 
 console.log("🔍 Validating all plugins and marketplace...\n");
 
-// 1. Validate marketplace with claude CLI
-console.log("━━━ Validating Marketplace ━━━");
-const claudeValidate = Bun.spawn(["claude", "plugin", "validate", "."], {
-  stdout: "inherit",
-  stderr: "inherit",
-});
-if ((await claudeValidate.exited) === 0) {
-  console.log(`${GREEN}✔${NC} Marketplace validation passed`);
-} else {
-  console.log(`${RED}✗${NC} Marketplace validation failed`);
-  errors++;
-}
-console.log();
-
-// 2. Custom metadata validation
+// 1. Custom metadata validation
 await runScript("Custom Metadata Validation", ["scripts/validate-metadata.ts"]);
 
 // 3. Skill directory validation
