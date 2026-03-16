@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/lucasilverentand/skills/compare/v0.5.0...v0.5.1) (2026-03-16)
+
+
+### Bug Fixes
+
+* **ci:** replace claude plugin validate with own validation in release workflow ([676743d](https://github.com/lucasilverentand/skills/commit/676743d2d3115e72a43ebeda86306195dfe4461d))
+
 ## [0.5.0](https://github.com/lucasilverentand/skills/compare/v0.4.0...v0.5.0) (2026-03-16)
 
 
