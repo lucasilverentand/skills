@@ -1,14 +1,14 @@
 ---
 name: testing
-description: Designs test strategies, authors tests at all levels (unit, integration, E2E), and diagnoses broken or flaky tests. Use when writing new tests, generating scaffolds, identifying untested code, configuring runners, fixing consistent or intermittent failures, updating stale snapshots, or triaging mass breakage after a refactor.
+description: Designs test strategies, authors tests at all levels (unit, integration, E2E), diagnoses broken or flaky tests, and configures CI pipelines. Use when writing new tests, generating scaffolds, identifying untested code, configuring runners, fixing consistent or intermittent failures, updating stale snapshots, triaging mass breakage after a refactor, setting up CI workflows, optimizing pipeline speed, managing caching, or configuring matrix builds.
 allowed-tools: Read Grep Glob Bash Write Edit
 ---
 
-# Testing
+# Testing & CI
 
 ## Decision Tree
 
-- What is the testing task?
+- What is the task?
   - **Design a test strategy for a new feature or module** → see "Strategy Design" below
   - **Write tests for existing code** → see "Authoring Tests" below
   - **Generate test file boilerplate** → run `tools/test-scaffold.ts <source-file>`, then populate
@@ -19,6 +19,12 @@ allowed-tools: Read Grep Glob Bash Write Edit
   - **Update outdated snapshots** → see "Snapshot Updates" below
   - **Tests pass locally but fail in CI** → see "Environment Divergence" below
   - **Many tests broke after a refactor** → see "Mass Failure Triage" below
+  - **Set up CI for a new project** → run `tools/workflow-gen.ts <project-type>`, then see "CI: New Workflow" below
+  - **CI pipeline is slow** → run `tools/pipeline-timing.ts`, then see "CI: Speed Optimization" below
+  - **CI cache hit rate is low** → run `tools/cache-audit.ts`, then see "CI: Cache Strategy" below
+  - **CI pipeline is flaky (intermittent failures)** → see "CI: Flakiness Reduction" below
+  - **Add matrix builds for cross-platform testing** → see "CI: Matrix Builds" below
+  - **Validate an existing workflow file** → run `tools/ci-lint.ts <workflow-path>`
 
 ## Strategy Design
 
@@ -132,6 +138,120 @@ When a refactor breaks many tests at once:
 3. Fix the root cause first, then re-run to see what's left
 4. Do not update tests to accommodate a bad refactor — if 30 tests break, the refactor may be wrong
 
+---
+
+## CI: New Workflow
+
+1. Run `tools/workflow-gen.ts <project-type>` to scaffold a baseline workflow
+2. Review and customize the generated file for the project's actual needs
+3. Run `tools/ci-lint.ts` to validate before committing
+
+Baseline structure for a TypeScript/Bun project:
+
+```yaml
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun run typecheck
+      - run: bun run lint
+      - run: bun test --coverage
+```
+
+Rules:
+- Pin action versions to full SHA for security (`actions/checkout@<sha>` not `@latest`)
+- Use `--frozen-lockfile` for installs to catch lockfile drift early
+- Separate lint/typecheck from tests — they catch different problems and should report independently
+- Never use `continue-on-error: true` to hide failures
+
+## CI: Speed Optimization
+
+1. Run `tools/pipeline-timing.ts <run-id>` to see step-by-step duration breakdown
+2. Find the slowest steps and classify:
+
+| Slow step | Optimization |
+|---|---|
+| Dependency install | Add dependency caching (see "CI: Cache Strategy") |
+| Build | Cache build artifacts keyed to source hash |
+| Tests | Parallelize with job matrix or `--shard` flag |
+| Docker build | Use `cache-from: type=gha` with BuildKit |
+| Repeated setup across jobs | Extract to a reusable workflow or composite action |
+
+3. Consider job parallelism — if lint, typecheck, and tests are sequential, split into parallel jobs
+4. Use `paths` filters so frontend changes don't run backend tests and vice versa:
+
+```yaml
+on:
+  push:
+    paths:
+      - 'packages/api/**'
+```
+
+## CI: Cache Strategy
+
+After running `tools/cache-audit.ts`:
+
+1. Check cache hit rate per key — a rate below 70% means the key is too specific or the cache expires too often
+2. Fix cache keys:
+   - **Too specific** (includes branch name or PR number) → use only file hashes
+   - **Not specific enough** (no hash) → will serve stale cache after dependency changes
+   - **Correct key pattern**: `<runner-os>-<tool>-<lockfile-hash>`
+
+Standard Bun cache:
+```yaml
+- uses: actions/cache@v4
+  with:
+    path: ~/.bun/install/cache
+    key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+    restore-keys: |
+      ${{ runner.os }}-bun-
+```
+
+3. For build caches, use `restore-keys` with a prefix fallback so a partial cache is better than none
+4. Don't cache `node_modules` directly — cache the package manager's global store instead
+
+## CI: Flakiness Reduction
+
+CI flakiness sources and fixes:
+
+| Pattern | Root cause | Fix |
+|---|---|---|
+| Network timeout on dependency install | Registry instability | Add retry: `--network-timeout 60000`; use a mirror |
+| Port conflicts in parallel jobs | Multiple services on the same port | Use dynamic ports or unique port per job index |
+| Race condition in E2E tests | Tests start before server is ready | Add health check polling before test run |
+| Quota exceeded on external API | Tests call real APIs | Stub external APIs in CI; only test real ones in staging |
+| Different behavior on Linux vs. macOS | Path separators, case sensitivity | Normalize paths; test on Linux in CI |
+
+For persistent flakiness:
+1. Rerun the failed job — if it passes, it's environmental
+2. Check if the failure correlates with a specific runner or time of day → suspect resource contention
+3. Isolate flaky tests and run them 20 times in the flaky job's environment to reproduce
+
+## CI: Matrix Builds
+
+Use matrix builds when the code must work across multiple versions, platforms, or configurations.
+
+```yaml
+strategy:
+  matrix:
+    os: [ubuntu-latest, macos-latest, windows-latest]
+    node: [18, 20, 22]
+  fail-fast: false  # collect all failures, not just the first
+```
+
+Rules:
+- Set `fail-fast: false` so one matrix failure doesn't cancel all others
+- Exclude known-unsupported combinations with `exclude:` rather than letting them fail
+- For large matrices, use `include:` to add special cases rather than a full Cartesian product
+
 ## Key References
 
 | File | What it covers |
@@ -144,3 +264,7 @@ When a refactor breaks many tests at once:
 | `tools/flaky-history.ts` | Track pass/fail history and rank tests by flakiness score |
 | `tools/snapshot-update.ts` | Detect outdated snapshots and regenerate from current output |
 | `tools/test-isolate.ts` | Run a single test in an isolated environment to check for side-effect dependencies |
+| `tools/ci-lint.ts` | Validate GitHub Actions workflow files for common misconfigurations |
+| `tools/pipeline-timing.ts` | Parse CI logs and report step-by-step duration breakdowns |
+| `tools/cache-audit.ts` | Analyze cache hit rates and suggest missing cache keys |
+| `tools/workflow-gen.ts` | Scaffold a GitHub Actions workflow from a project template |

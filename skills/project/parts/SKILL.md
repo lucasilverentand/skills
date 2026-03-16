@@ -1,48 +1,59 @@
 ---
 name: parts
-description: Guides navigation and modification of monorepo workspace packages (parts). Explains how parts relate to each other, what each part is responsible for, and how to validate their structure. Use when working across multiple workspace packages, adding a new part, or understanding which part owns a given concern.
-allowed-tools: Read Glob Grep Bash
+description: Guides navigation, creation, and maintenance of monorepo workspace packages (parts). Covers infrastructure packages (config, types, schema, utils, logger), feature packages (auth, payments, email, analytics, notifications, i18n), and app packages (Expo, iOS, React dashboard, Astro website, CLI tools, UI component library). Use when working across workspace packages, adding a new part, understanding which part owns a concern, or setting up any package type from scratch.
+allowed-tools: Read Write Edit Glob Grep Bash
 ---
 
 # Project Parts
 
-Each "part" is a workspace package with a dedicated responsibility. Parts live in `packages/` and are linked via bun workspaces.
+Each "part" is a workspace package with a dedicated responsibility. Parts live in `packages/` (libraries) or `apps/` (applications) and are linked via bun workspaces.
 
 ## Decision Tree
 
 - What are you doing?
   - **Understanding what owns a concern** → what kind of concern?
-    - **Data layer** (schema, migrations, DB client) → `schema` part
-    - **Authentication or authorization** → `auth` part
-    - **API routes or server logic** → `api` part (see `development/api-design`)
-    - **Shared types or interfaces** → `types` part
-    - **Environment config or feature flags** → `config` part
-    - **UI components or styling** → `ui` part
-    - **Email sending or templates** → `email` part
-    - **Logging or observability** → `logger` part
-    - **Cross-cutting utility used by many parts** → `shared-packages` or `utils`
-    - **None of the above** → create a new part (see "Adding a part" below)
+    - Data layer (schema, migrations, DB client) → `references/schema.md`
+    - Authentication or authorization → `references/auth.md`
+    - Shared types or Zod schemas → `references/types.md`
+    - Environment config or feature flags → `references/config.md`
+    - UI components or design tokens → `references/ui.md`
+    - Email sending or templates → `references/email.md`
+    - Logging or observability → `references/logger.md`
+    - Payments or subscriptions (Stripe) → `references/payments.md`
+    - Push notifications → `references/notifications.md`
+    - Analytics or feature flags (PostHog) → `references/analytics.md`
+    - Internationalization → `references/i18n.md`
+    - Pure utility functions → `references/utils.md`
+    - Cross-cutting shared packages → `references/shared-packages.md`
+  - **Building an app** → what kind?
+    - Expo React Native app → `references/expo-app.md`
+    - iOS Swift app → `references/ios-app.md`
+    - React admin dashboard → `references/react-dashboard.md`
+    - Astro marketing/content site → `references/website.md`
+    - CLI tool (Bun or Rust) → `references/cli-tool.md`
   - **Adding a new part** → follow "Adding a part" below
   - **Validating parts are well-formed** → run `tools/part-validate.ts`
   - **Understanding dependencies between parts** → run `tools/part-deps.ts`
-  - **Listing all parts and their types** → run `tools/part-list.ts`
+  - **Listing all parts** → run `tools/part-list.ts`
+  - **Checking workspace exports resolve** → run `tools/export-check.ts`
+  - **Scaffolding a new package** → run `tools/package-scaffold.ts <name>`
 
 ## Responsibility map
 
 | Part | Owns |
 |---|---|
-| `config` | Env vars, feature flags, typed accessors (Zod-validated) |
-| `types` | Shared TypeScript types used across parts |
-| `schema` | Drizzle ORM schema, migrations, db client |
-| `auth` | Better Auth config, session types, middleware |
-| `ui` | Shared component library (Tailwind) |
-| `email` | Email templates and sending utilities |
-| `api` | Hono API routes, handlers, middleware |
-| `web` | Astro marketing/content site |
-| `app` | Expo React Native app |
-| `logger` | Logging utilities |
-| `shared-packages` | Cross-cutting utilities used by many parts |
-| `utils` | One-off helper functions |
+| `config` | Env vars, feature flags, typed Zod-validated accessors |
+| `types` | Shared TypeScript types, Zod schemas, branded IDs |
+| `schema` | Drizzle ORM table definitions, migrations, DB client |
+| `auth` | Better Auth config, session types, middleware, RBAC |
+| `ui` | Shared component library (Tailwind, design tokens) |
+| `email` | React Email templates and sending utilities |
+| `logger` | Structured logging (pino), transports, redaction |
+| `payments` | Stripe checkout, subscriptions, webhooks |
+| `analytics` | PostHog tracking, feature flags, user identification |
+| `notifications` | Push notifications (Expo, APNs, web push) |
+| `i18n` | Translation files, locale detection, type-safe keys |
+| `utils` | Pure helper functions (formatters, validators, transformers) |
 
 When a concern doesn't fit any existing part, create a new one rather than polluting an existing one.
 
@@ -53,7 +64,7 @@ When a concern doesn't fit any existing part, create a new one rather than pollu
 - `auth` → depends on `schema`, `config`
 - `api` → depends on `auth`, `schema`, `config`
 - `web` and `app` → depend on `config`, `types`; may depend on `ui`
-- `email` → depends on `config`
+- `email`, `logger`, `payments`, `analytics` → depend on `config`
 - `ui` → depends on `types` only
 
 Never create circular dependencies. Run `tools/part-deps.ts` to verify.
@@ -61,12 +72,32 @@ Never create circular dependencies. Run `tools/part-deps.ts` to verify.
 ## Adding a part
 
 1. Create `packages/<name>/` with:
-   - `package.json` — `"name": "@scope/<name>"`, correct dependencies
-   - `tsconfig.json` — extends root, sets `"composite": true`
+   - `package.json` — `"name": "@scope/<name>"`, `"type": "module"`, `"exports": { ".": "./src/index.ts" }`
+   - `tsconfig.json` — extends root, sets `"rootDir": "./src"`
    - `src/index.ts` — named exports for all public API
 2. Add to root `tsconfig.json` references
-3. Add to bun workspace (automatic if in `packages/`)
+3. Add as a dependency in consuming packages: `bun add @scope/<name>`
 4. Run `tools/part-validate.ts packages/<name>` to confirm structure
+
+## Workspace setup
+
+Root `package.json`:
+```json
+{ "workspaces": ["packages/*", "apps/*"] }
+```
+
+Root `tsconfig.json`:
+```json
+{
+  "compilerOptions": {
+    "strict": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "target": "ESNext",
+    "isolatedModules": true
+  }
+}
+```
 
 ## Key references
 
@@ -74,9 +105,7 @@ Never create circular dependencies. Run `tools/part-deps.ts` to verify.
 |---|---|
 | `tools/part-list.ts` | All workspace parts with type and dependencies |
 | `tools/part-validate.ts` | Required files, exports, package.json fields |
-| `tools/part-deps.ts` | Internal dependency graph between parts |
-| `skills/project/parts/astro-site/SKILL.md` | Astro site setup |
-| `skills/project/parts/auth/SKILL.md` | Better Auth setup |
-| `skills/project/parts/config/SKILL.md` | Config and env vars |
-| `skills/project/parts/email/SKILL.md` | Email templates |
-| `skills/project/parts/expo-app/SKILL.md` | Expo React Native app |
+| `tools/part-deps.ts` | Internal dependency graph, circular dependency detection |
+| `tools/export-check.ts` | Verify exports map entries resolve to real files |
+| `tools/package-scaffold.ts` | Generate new package with tsconfig, index.ts, package.json |
+| `references/*.md` | Per-component-type setup guides and conventions |

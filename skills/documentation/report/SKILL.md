@@ -1,6 +1,6 @@
 ---
 name: report
-description: Writes structured reports and documents in Markdown from diverse source material. Routes to the appropriate report sub-type based on what the user needs — status updates, technical analysis, option comparisons, retrospectives, or research summaries.
+description: Writes structured reports in Markdown from diverse source material — status updates, technical analyses, option comparisons, retrospectives, and research summaries. Routes to the right report type based on context, then follows a type-specific template with evidence-backed content.
 allowed-tools: Read Grep Glob Bash WebFetch WebSearch
 ---
 
@@ -9,13 +9,12 @@ allowed-tools: Read Grep Glob Bash WebFetch WebSearch
 ## Decision Tree
 
 - What kind of report?
-  - **Project status, sprint update, or weekly progress** → use `status/` sub-skill
-  - **Technical analysis, investigation, or audit** → use `analysis/` sub-skill
-  - **Comparing technologies, libraries, or approaches** → use `comparison/` sub-skill
-  - **Retrospective, post-mortem, or incident review** → use `retro/` sub-skill
-  - **Research summary, literature review, or survey** → use `research/` sub-skill
-  - **Multiple report types needed** → run each sub-skill separately, then combine
-  - **None of the above** → follow "General workflow" below with the custom template
+  - **Project status, sprint update, or weekly progress** → follow `references/status.md`
+  - **Technical analysis, investigation, or audit** → follow `references/analysis.md`
+  - **Comparing technologies, libraries, or approaches** → follow `references/comparison.md`
+  - **Retrospective, post-mortem, or incident review** → follow `references/retro.md`
+  - **Research summary, literature review, or survey** → follow `references/research.md`
+  - **None of the above** → use the general workflow below with a custom structure
 
 ## General workflow
 
@@ -24,7 +23,7 @@ Every report follows this process regardless of type:
 1. **Clarify scope** — confirm the topic, audience, time period, and desired depth with the user
 2. **Gather sources** — collect material using the approach that fits:
    - Files in the project → read them with Read/Glob/Grep
-   - Git history → `tools/source-collector.ts --git-log --since <period>`
+   - Git history → `bun run tools/source-collector.ts --git-log --since <period>`
    - External information → WebSearch / WebFetch
    - User-provided context → use what's in the conversation
 3. **Outline** — draft section headings before writing prose. Share the outline with the user if the report is large
@@ -33,7 +32,7 @@ Every report follows this process regardless of type:
 
 ## Formatting rules
 
-- **Title**: `# Report: <topic>` with date below
+- **Title**: `# Report: <topic>` with date below (or type-specific title like `# Analysis: <topic>`)
 - **Audience marker**: state who the report is for right after the title
 - **Executive summary**: every report starts with a 2-3 sentence summary
 - **Tables** for structured comparisons, metrics, and timelines
@@ -52,19 +51,14 @@ Before delivering any report:
 - [ ] Executive summary can stand alone — a reader who only reads it gets the key message
 - [ ] No orphan sections (empty or placeholder content)
 
-## Shared tools
+## Tools
 
-| File | What it covers |
+| Tool | Purpose |
 |---|---|
 | `tools/report-scaffold.ts` | Generate a report skeleton: `bun run tools/report-scaffold.ts <type> <topic>` |
 | `tools/source-collector.ts` | Gather git history and file contents: `bun run tools/source-collector.ts --git-log --since <period>` |
-
-## Sub-skill tools
-
-| File | What it covers |
-|---|---|
-| `status/tools/status-gen.ts` | Collect git log, PR activity, and issue updates to draft a status report |
-| `analysis/tools/analysis-scaffold.ts` | Create analysis doc with sections pre-filled from codebase context |
-| `comparison/tools/comparison-matrix.ts` | Generate a comparison table from criteria and options |
-| `retro/tools/retro-scaffold.ts` | Create retro doc with timeline from git/issue history |
-| `research/tools/research-scaffold.ts` | Create research doc with structured sections and source tracking |
+| `tools/status-gen.ts` | Collect git log, PR stats, and contributor activity for status reports |
+| `tools/analysis-scaffold.ts` | Create analysis doc pre-filled with codebase context |
+| `tools/comparison-matrix.ts` | Generate a comparison table from criteria and options |
+| `tools/retro-scaffold.ts` | Create retro doc with timeline from git/issue history |
+| `tools/research-scaffold.ts` | Create research doc with structured sections and source tracking |
