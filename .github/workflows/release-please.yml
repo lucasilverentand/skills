@@ -26,12 +26,8 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         if: ${{ steps.release.outputs.release_created }}
 
-      - name: Regenerate marketplace.json with new version
-        if: ${{ steps.release.outputs.release_created }}
-        run: bun run generate
-
-      - name: Publish plugin
+      - name: Validate release
         if: ${{ steps.release.outputs.release_created }}
         run: |
-          bun install -g @anthropic-ai/claude-code
-          claude plugin validate .
+          bun run generate -- --check
+          bun run validate
