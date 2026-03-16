@@ -1,0 +1,6 @@
+pre-commit:
+  commands:
+    marketplace-check:
+      glob: "skills/**/SKILL.md"
+      run: bun run generate -- --check
+      fail_text: "marketplace.json is out of date. Run: bun run generate"
