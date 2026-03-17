@@ -147,10 +147,11 @@
     {
       "name": "skills",
       "source": "./",
-      "description": "Skills toolkit: lifecycle",
+      "description": "Skills toolkit: lifecycle, retro",
       "category": "devtools",
       "skills": [
-        "./skills/skills/lifecycle"
+        "./skills/skills/lifecycle",
+        "./skills/skills/retro"
       ],
       "strict": false
     }
