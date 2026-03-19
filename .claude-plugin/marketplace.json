@@ -69,20 +69,26 @@
     {
       "name": "documentation",
       "source": "./",
-      "description": "Documentation toolkit: reporting, writing",
+      "description": "Documentation toolkit: developer-docs, external-docs, internal-docs, reporting, reports, writing, writing-style",
       "category": "devtools",
       "skills": [
+        "./skills/documentation/developer-docs",
+        "./skills/documentation/external-docs",
+        "./skills/documentation/internal-docs",
         "./skills/documentation/reporting",
-        "./skills/documentation/writing"
+        "./skills/documentation/reports",
+        "./skills/documentation/writing",
+        "./skills/documentation/writing-style"
       ],
       "strict": false
     },
     {
       "name": "git",
       "source": "./",
-      "description": "Git toolkit: branching, cherry-picking, cleaning-repo, committing, exploring-history, managing-remote, managing-worktree, resolving-conflict, stashing, tagging",
+      "description": "Git toolkit: branching, cherry-picking, cleaning-repo, committing, exploring-history, git, managing-remote, managing-worktree, resolving-conflict, stashing, tagging",
       "category": "devtools",
       "skills": [
+        "./skills/git",
         "./skills/git/branching",
         "./skills/git/cherry-picking",
         "./skills/git/cleaning-repo",
@@ -105,6 +111,19 @@
         "./skills/infrastructure/managing-docker",
         "./skills/infrastructure/managing-gitops",
         "./skills/infrastructure/managing-secret"
+      ],
+      "strict": false
+    },
+    {
+      "name": "macos",
+      "source": "./",
+      "description": "Macos toolkit: data, macos-patterns, state, views",
+      "category": "devtools",
+      "skills": [
+        "./skills/macos/data",
+        "./skills/macos/macos-patterns",
+        "./skills/macos/state",
+        "./skills/macos/views"
       ],
       "strict": false
     },
