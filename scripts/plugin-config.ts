@@ -9,7 +9,6 @@
 
 /** Override the default "devtools" category for specific plugins. */
 export const CATEGORY_OVERRIDES: Record<string, string> = {
-  "editor-setup": "editor",
   project: "web-development",
 };
 
@@ -17,27 +16,27 @@ export const CATEGORY_OVERRIDES: Record<string, string> = {
 export const BUNDLES: Record<string, { description: string; plugins: string[] }> = {
   "full-stack-web": {
     description: "Building web apps with Hono + React + Drizzle",
-    plugins: ["git", "development", "project", "deployment", "infrastructure", "documentation"],
+    plugins: ["git", "project", "documentation"],
   },
   "mobile-dev": {
-    description: "Expo/iOS apps with a backend",
-    plugins: ["git", "development", "project", "communication", "documentation"],
+    description: "Expo/iOS/macOS apps with a backend",
+    plugins: ["git", "project", "macos", "communication", "documentation"],
   },
   "api-backend": {
     description: "Pure API/backend work",
-    plugins: ["git", "development", "project", "deployment", "infrastructure", "documentation"],
+    plugins: ["git", "project", "documentation"],
   },
   "devops-infra": {
-    description: "CI/CD, deployment, infrastructure",
-    plugins: ["git", "deployment", "infrastructure", "security", "documentation"],
+    description: "CI/CD, infrastructure",
+    plugins: ["git", "documentation"],
   },
   "open-source": {
     description: "Maintaining OSS projects",
-    plugins: ["git", "development", "documentation", "skills", "security"],
+    plugins: ["git", "documentation", "skills"],
   },
   "research-strategy": {
     description: "Research, analysis, planning",
-    plugins: ["git", "research", "development", "documentation"],
+    plugins: ["git", "research", "documentation"],
   },
   all: {
     description: "Everything",

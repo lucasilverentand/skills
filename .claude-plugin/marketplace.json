@@ -23,88 +23,39 @@
       "strict": false
     },
     {
-      "name": "deployment",
-      "source": "./",
-      "description": "Deployment toolkit: cloudflare, kubernetes, railway",
-      "category": "devtools",
-      "skills": [
-        "./skills/deployment/cloudflare",
-        "./skills/deployment/kubernetes",
-        "./skills/deployment/railway"
-      ],
-      "strict": false
-    },
-    {
-      "name": "development",
-      "source": "./",
-      "description": "Development toolkit: accessibility, api-design, database, debugging, environment, error-handling, implementing, knowledge, performance, planning, refactoring, testing, type-safety",
-      "category": "devtools",
-      "skills": [
-        "./skills/development/accessibility",
-        "./skills/development/api-design",
-        "./skills/development/database",
-        "./skills/development/debugging",
-        "./skills/development/environment",
-        "./skills/development/error-handling",
-        "./skills/development/implementing",
-        "./skills/development/knowledge",
-        "./skills/development/performance",
-        "./skills/development/planning",
-        "./skills/development/refactoring",
-        "./skills/development/testing",
-        "./skills/development/type-safety"
-      ],
-      "strict": false
-    },
-    {
       "name": "documentation",
       "source": "./",
-      "description": "Documentation toolkit: report, writing",
+      "description": "Documentation toolkit: developer-docs, external-docs, internal-docs, reports, writing-style",
       "category": "devtools",
       "skills": [
-        "./skills/documentation/report",
-        "./skills/documentation/writing"
-      ],
-      "strict": false
-    },
-    {
-      "name": "editor-setup",
-      "source": "./",
-      "description": "Editor setup toolkit: editor-setup",
-      "category": "editor",
-      "skills": [
-        "./skills/editor-setup"
+        "./skills/documentation/developer-docs",
+        "./skills/documentation/external-docs",
+        "./skills/documentation/internal-docs",
+        "./skills/documentation/reports",
+        "./skills/documentation/writing-style"
       ],
       "strict": false
     },
     {
       "name": "git",
       "source": "./",
-      "description": "Git toolkit: branching, cherry-picking, clean-repo, committing, conflicts, history, remotes, stashing, tagging, worktrees",
+      "description": "Git toolkit: git",
       "category": "devtools",
       "skills": [
-        "./skills/git/branching",
-        "./skills/git/cherry-picking",
-        "./skills/git/clean-repo",
-        "./skills/git/committing",
-        "./skills/git/conflicts",
-        "./skills/git/history",
-        "./skills/git/remotes",
-        "./skills/git/stashing",
-        "./skills/git/tagging",
-        "./skills/git/worktrees"
+        "./skills/git"
       ],
       "strict": false
     },
     {
-      "name": "infrastructure",
+      "name": "macos",
       "source": "./",
-      "description": "Infrastructure toolkit: docker, gitops, secrets",
+      "description": "Macos toolkit: data, macos-patterns, state, views",
       "category": "devtools",
       "skills": [
-        "./skills/infrastructure/docker",
-        "./skills/infrastructure/gitops",
-        "./skills/infrastructure/secrets"
+        "./skills/macos/data",
+        "./skills/macos/macos-patterns",
+        "./skills/macos/state",
+        "./skills/macos/views"
       ],
       "strict": false
     },
@@ -135,22 +86,12 @@
       "strict": false
     },
     {
-      "name": "security",
-      "source": "./",
-      "description": "Security toolkit: audit",
-      "category": "devtools",
-      "skills": [
-        "./skills/security/audit"
-      ],
-      "strict": false
-    },
-    {
       "name": "skills",
       "source": "./",
-      "description": "Skills toolkit: lifecycle",
+      "description": "Skills toolkit: skill-authoring",
       "category": "devtools",
       "skills": [
-        "./skills/skills/lifecycle"
+        "./skills/skills/skill-authoring"
       ],
       "strict": false
     }
@@ -161,20 +102,17 @@
       "description": "Building web apps with Hono + React + Drizzle",
       "plugins": [
         "git",
-        "development",
         "project",
-        "deployment",
-        "infrastructure",
         "documentation"
       ]
     },
     {
       "name": "mobile-dev",
-      "description": "Expo/iOS apps with a backend",
+      "description": "Expo/iOS/macOS apps with a backend",
       "plugins": [
         "git",
-        "development",
         "project",
+        "macos",
         "communication",
         "documentation"
       ]
@@ -184,21 +122,15 @@
       "description": "Pure API/backend work",
       "plugins": [
         "git",
-        "development",
         "project",
-        "deployment",
-        "infrastructure",
         "documentation"
       ]
     },
     {
       "name": "devops-infra",
-      "description": "CI/CD, deployment, infrastructure",
+      "description": "CI/CD, infrastructure",
       "plugins": [
         "git",
-        "deployment",
-        "infrastructure",
-        "security",
         "documentation"
       ]
     },
@@ -207,10 +139,8 @@
       "description": "Maintaining OSS projects",
       "plugins": [
         "git",
-        "development",
         "documentation",
-        "skills",
-        "security"
+        "skills"
       ]
     },
     {
@@ -219,7 +149,6 @@
       "plugins": [
         "git",
         "research",
-        "development",
         "documentation"
       ]
     },
