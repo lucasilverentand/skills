@@ -1,6 +1,6 @@
 ---
 name: writing
-description: Writes and maintains project documentation — READMEs, CONTRIBUTING.md, architecture overviews, ADRs, GitHub templates, and Mermaid diagrams. Use when creating docs for a new project, updating existing documentation, or scaffolding contributor workflows.
+description: Writes and maintains project documentation — READMEs, CONTRIBUTING.md, architecture overviews, GitHub templates, and Mermaid diagrams — with built-in support for Library/CLI, Service, Monorepo, Expo, Rust, and Swift project types. Use when creating docs for a new project, updating existing documentation, scaffolding contributor workflows, or generating architecture diagrams from code.
 allowed-tools: Read Grep Glob Bash Write Edit
 ---
 
@@ -146,7 +146,7 @@ For a well-configured project, also set:
 
 ## ADR
 
-> **Cross-reference:** ADR scaffolding is handled by `development/knowledge` (tools/adr-create.ts). Use that skill to create new ADRs.
+> **Cross-reference:** ADR scaffolding is handled by `development/gathering-knowledge` (tools/adr-create.ts). Use that skill to create new ADRs.
 
 1. Fill in the four sections:
    - **Context** — what situation forced a decision?
@@ -209,5 +209,5 @@ Badges provide at-a-glance project status. Use shields.io for consistency. Full 
 | `tools/badge-sync.ts` | Generate and update CI, coverage, npm version badges |
 | `tools/setup-validator.ts` | Verify documented setup steps run cleanly |
 | `tools/mermaid-gen.ts` | Generate Mermaid diagrams from modules and DB schema |
-| `development/knowledge` | ADR scaffolding (tools/adr-create.ts) |
-| `project/parts/config` | Environment variable documentation (tools/env-docs.ts) |
+| `development/gathering-knowledge` | ADR scaffolding (tools/adr-create.ts) |
+| `project/scaffolding` | Project structure and environment config reference |

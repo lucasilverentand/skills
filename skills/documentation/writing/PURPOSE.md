@@ -23,5 +23,5 @@ Write and maintain project documentation — READMEs, contributing guides, archi
 
 ## Cross-references
 
-- ADR scaffolding: `development/knowledge` (tools/adr-create.ts)
-- Environment variable documentation: `project/parts/config` (tools/env-docs.ts)
+- ADR scaffolding: `development/gathering-knowledge` (tools/adr-create.ts)
+- Project structure and environment config: `project/scaffolding`
