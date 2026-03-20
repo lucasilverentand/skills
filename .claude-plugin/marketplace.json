@@ -47,13 +47,14 @@
     {
       "name": "development",
       "source": "./",
-      "description": "Development toolkit: auditing-accessibility, configuring-environment, debugging, designing-api, enforcing-type-safety, gathering-knowledge, handling-error, implementing, modeling-database, optimizing-performance, planning, refactoring, testing",
+      "description": "Development toolkit: auditing-accessibility, configuring-environment, debugging, designing-api, developing-workers, enforcing-type-safety, gathering-knowledge, handling-error, implementing, modeling-database, optimizing-performance, planning, refactoring, testing",
       "category": "devtools",
       "skills": [
         "./skills/development/auditing-accessibility",
         "./skills/development/configuring-environment",
         "./skills/development/debugging",
         "./skills/development/designing-api",
+        "./skills/development/developing-workers",
         "./skills/development/enforcing-type-safety",
         "./skills/development/gathering-knowledge",
         "./skills/development/handling-error",
