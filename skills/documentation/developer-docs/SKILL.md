@@ -1,6 +1,6 @@
 ---
 name: developer-docs
-description: Writes and maintains project documentation — READMEs, CONTRIBUTING.md, architecture overviews, ADRs, GitHub templates, and Mermaid diagrams. Use when creating docs for a new project, updating existing documentation, or scaffolding contributor workflows.
+description: Writes and maintains project documentation — READMEs, CONTRIBUTING.md, architecture overviews, ADRs, GitHub templates, and Mermaid diagrams — with built-in support for Library/CLI, Service, Monorepo, Expo, Rust, and Swift project types. Use when creating docs for a new project, updating existing documentation, scaffolding contributor workflows, or generating architecture diagrams from code.
 allowed-tools: Read Grep Glob Bash Write Edit
 ---
 
@@ -178,6 +178,13 @@ Badges provide at-a-glance project status. Use shields.io for consistency. Full 
 - Do not add badges for internal services or workspace packages
 - Only include badges for services you actually use
 
+## Changelog
+
+- Prefer a separate `CHANGELOG.md` or GitHub Releases over inlining in the README
+- Link from the README: `See [CHANGELOG.md](CHANGELOG.md) for a full list of changes.`
+- Follow [Keep a Changelog](https://keepachangelog.com/) format
+- Group changes: Added, Changed, Fixed, Removed, Security
+
 ## Keeping docs current
 
 - Architecture docs drift fastest during major refactors — update `ARCHITECTURE.md` as part of those PRs
@@ -209,4 +216,4 @@ Badges provide at-a-glance project status. Use shields.io for consistency. Full 
 | `tools/mermaid-gen.ts` | Generate Mermaid diagrams from modules and DB schema |
 | `documentation/style` | Shared voice, tone, formatting, and quality standards |
 | `development/knowledge` | ADR scaffolding (tools/adr-create.ts) |
-| `project/parts/config` | Environment variable documentation (tools/env-docs.ts) |
+| `project/scaffolding` | Project structure and environment config reference |

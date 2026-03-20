@@ -60,7 +60,7 @@
     {
       "name": "documentation",
       "source": "./",
-      "description": "Documentation toolkit: coauthoring, developer-docs, external-docs, internal-docs, reporting, style, writing",
+      "description": "Documentation toolkit: coauthoring, developer-docs, external-docs, internal-docs, reporting, style",
       "category": "devtools",
       "skills": [
         "./skills/documentation/coauthoring",
@@ -68,8 +68,7 @@
         "./skills/documentation/external-docs",
         "./skills/documentation/internal-docs",
         "./skills/documentation/reporting",
-        "./skills/documentation/style",
-        "./skills/documentation/writing"
+        "./skills/documentation/style"
       ],
       "strict": false
     },
