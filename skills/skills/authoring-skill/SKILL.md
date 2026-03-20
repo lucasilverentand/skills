@@ -56,8 +56,7 @@ Proactively ask about edge cases, example files, success criteria, and dependenc
 ### 2. Write the skill
 
 1. Create the directory: `skills/<category>/<skill-name>/`
-2. Write `PURPOSE.md` — scope and responsibilities (see `references/skill-structure.md`)
-3. Write `SKILL.md` with YAML frontmatter — at minimum `name` and `description` (see `references/skill-format.md`)
+2. Write `SKILL.md` with YAML frontmatter — at minimum `name` and `description` (see `references/skill-format.md`)
 4. Write the decision tree — see `references/decision-trees.md`
 5. Write conventions — the rules the agent must follow every time
 6. Add tools in `tools/` if the skill has automatable tasks (see "Adding a tool")
@@ -134,7 +133,7 @@ The `description` field determines whether Claude invokes a skill. See `referenc
 
 ## Improving a decision tree
 
-Read PURPOSE.md to get the skill's responsibilities, then ensure each one has a decision tree branch leading to it. See `references/decision-trees.md` for format and writing guidelines.
+Read SKILL.md to get the skill's responsibilities, then ensure each one has a decision tree branch leading to it. See `references/decision-trees.md` for format and writing guidelines.
 
 ## Adding a tool
 
@@ -147,8 +146,7 @@ If the task is a single command with flags, put it inline in SKILL.md instead. D
 
 Steps:
 1. Create `tools/<tool-name>.ts` using `references/tool-template.md` as a starting point
-2. Update PURPOSE.md to list the new tool
-3. Reference the tool from SKILL.md decision tree where appropriate
+2. Reference the tool from SKILL.md decision tree where appropriate
 
 ## Adding a reference
 
@@ -164,7 +162,7 @@ Steps:
 
 ## Publishing a skill
 
-1. Ensure the skill directory has a valid `SKILL.md` with correct frontmatter (`name`, `description`) and a `PURPOSE.md`
+1. Ensure the skill directory has a valid `SKILL.md` with correct frontmatter (`name`, `description`)
 2. Run the validator: `bun run tools/skill-validate.ts <path>`
 3. Add the skill path to `.claude-plugin/marketplace.json`:
    - Find the plugin entry matching the skill's category directory
@@ -201,7 +199,7 @@ See `references/marketplace-schema.md` for the full schema. Key conventions:
 | File | What it covers |
 |---|---|
 | `references/skill-taxonomy.md` | Skill tiers (atomic, workflow, agent), choosing a tier, extracting skills downward |
-| `references/skill-structure.md` | Directory layout, PURPOSE.md vs SKILL.md, progressive disclosure |
+| `references/skill-structure.md` | Directory layout, SKILL.md structure, progressive disclosure |
 | `references/skill-format.md` | Frontmatter fields, naming rules, Claude Code extensions, string substitutions |
 | `references/decision-trees.md` | Decision tree format, writing guidelines, agent usage |
 | `references/writing-philosophy.md` | Explain the why, keep prompts lean, generalize, description writing |

@@ -7,7 +7,7 @@ Usage:
   bun run tools/skill-validate.ts <skill-path> [options]
 
 Options:
-  --fix     Auto-fix mechanical issues (name mismatch, README.md, missing PURPOSE.md scaffolding)
+  --fix     Auto-fix mechanical issues (name mismatch, README.md)
   --json    Output as JSON instead of plain text
   --help    Show this help message
 
@@ -149,13 +149,6 @@ async function main() {
   }
   pass(results, "skill-md", "SKILL.md exists");
 
-  const purposeMdPath = resolve(skillPath, "PURPOSE.md");
-  if (existsSync(purposeMdPath)) {
-    pass(results, "purpose-md", "PURPOSE.md exists");
-  } else {
-    fail(results, "purpose-md", "PURPOSE.md not found — required for every skill", "error", true);
-  }
-
   // ── Anti-pattern: README.md ──
 
   const readmePath = resolve(skillPath, "README.md");
@@ -163,7 +156,7 @@ async function main() {
     fail(
       results,
       "no-readme",
-      "README.md exists — delete it (use PURPOSE.md for scope, SKILL.md for instructions)",
+      "README.md exists — delete it (use SKILL.md for instructions)",
       "warning",
       true,
     );
@@ -324,18 +317,11 @@ async function main() {
       const referencedSet = new Set(referencedFiles);
       for (const diskFile of diskFiles) {
         if (!referencedSet.has(diskFile)) {
-          // Also check PURPOSE.md for references
-          const purposeContent = existsSync(purposeMdPath)
-            ? readFileSync(purposeMdPath, "utf-8")
-            : "";
-          if (
-            !content.includes(`references/${diskFile}`) &&
-            !purposeContent.includes(`references/${diskFile}`)
-          ) {
+          if (!content.includes(`references/${diskFile}`)) {
             fail(
               results,
               "orphan-ref",
-              `references/${diskFile} exists but is never referenced in SKILL.md or PURPOSE.md`,
+              `references/${diskFile} exists but is never referenced in SKILL.md`,
               "warning",
             );
           }
@@ -364,47 +350,8 @@ async function main() {
         );
       }
 
-      // Check PURPOSE.md mentions tools
-      if (existsSync(purposeMdPath)) {
-        const purposeContent = readFileSync(purposeMdPath, "utf-8");
-        for (const toolFile of toolFiles) {
-          if (!purposeContent.includes(toolFile)) {
-            fail(
-              results,
-              "undocumented-tool",
-              `tools/${toolFile} not listed in PURPOSE.md`,
-              "warning",
-            );
-          }
-        }
-      }
     } catch {
       // readdirSync failed — skip tools check
-    }
-  }
-
-  // ── PURPOSE.md quality ──
-
-  if (existsSync(purposeMdPath)) {
-    const purposeContent = readFileSync(purposeMdPath, "utf-8");
-
-    if (!purposeContent.includes("## Responsibilities")) {
-      fail(
-        results,
-        "purpose-responsibilities",
-        "PURPOSE.md missing '## Responsibilities' section",
-        "warning",
-        true,
-      );
-    }
-
-    if (purposeContent.includes("## Decision") || purposeContent.includes("## How")) {
-      fail(
-        results,
-        "purpose-scope",
-        "PURPOSE.md contains instructions or decision trees — move those to SKILL.md",
-        "warning",
-      );
     }
   }
 
@@ -433,29 +380,6 @@ async function main() {
           fixes.push("Deleted README.md");
           r.passed = true;
           r.message = "README.md deleted";
-          break;
-        }
-        case "purpose-md": {
-          // Scaffold a PURPOSE.md from SKILL.md frontmatter
-          const skillName = fm?.name ?? basename(skillPath);
-          const desc = fm?.description ?? "";
-          const scaffold = `# ${skillName.split("-").map((w: string) => w[0].toUpperCase() + w.slice(1)).join(" ")}\n\n${desc}\n\n## Responsibilities\n\n- TODO: list responsibilities\n`;
-          writeFileSync(purposeMdPath, scaffold);
-          fixes.push("Scaffolded PURPOSE.md");
-          r.passed = true;
-          r.message = "PURPOSE.md scaffolded";
-          break;
-        }
-        case "purpose-responsibilities": {
-          // Append responsibilities section to PURPOSE.md
-          const existing = readFileSync(purposeMdPath, "utf-8");
-          writeFileSync(
-            purposeMdPath,
-            existing.trimEnd() + "\n\n## Responsibilities\n\n- TODO: list responsibilities\n",
-          );
-          fixes.push("Added ## Responsibilities section to PURPOSE.md");
-          r.passed = true;
-          r.message = "## Responsibilities section added";
           break;
         }
       }

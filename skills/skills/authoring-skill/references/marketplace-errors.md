@@ -33,7 +33,6 @@
 |---|---|
 | `unsorted` | Plugins or skills not in alphabetical order — run with `--fix` to auto-sort |
 | `orphan-skill` | Skill exists on disk but isn't registered in any plugin |
-| `missing-purpose-md` | Skill directory has SKILL.md but no PURPOSE.md |
 | `empty-skill-body` | SKILL.md has frontmatter but no content body |
 | `unknown-tool` | SKILL.md `allowed-tools` references an unrecognized tool name |
 | `description-too-long` | SKILL.md frontmatter description exceeds 1024 characters |

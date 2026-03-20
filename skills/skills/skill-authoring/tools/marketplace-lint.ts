@@ -429,18 +429,13 @@ async function main() {
           allSkillPaths.add(skillPath);
           if (pluginName) skillPathToPlugin.set(skillPath, pluginName);
 
-          // Disk existence, SKILL.md, PURPOSE.md, and frontmatter validation
+          // Disk existence, SKILL.md, and frontmatter validation
           const resolved = resolve(dir, skillPath);
           if (!existsSync(resolved)) {
             err(errors, `${prefix}.skills[${j}]`, "source-not-found", `Skill path does not exist: ${skillPath}`);
           } else if (!existsSync(resolve(resolved, "SKILL.md"))) {
             err(errors, `${prefix}.skills[${j}]`, "missing-skill-md", `No SKILL.md found at: ${skillPath}`);
           } else {
-            // PURPOSE.md check
-            if (!existsSync(resolve(resolved, "PURPOSE.md"))) {
-              err(errors, `${prefix}.skills[${j}]`, "missing-purpose-md", `No PURPOSE.md found at: ${skillPath}`, "warning");
-            }
-
             // Cross-reference: validate SKILL.md frontmatter
             const skillMdContent = readFileSync(
               resolve(resolved, "SKILL.md"),

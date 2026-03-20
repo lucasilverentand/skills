@@ -36,4 +36,3 @@ Improvements may violate authoring structure. Check:
 - Decision tree still intact and covering all responsibilities?
 - No content duplicated between SKILL.md and references?
 - New content placed correctly? (detailed docs -> references, automatable steps -> tools, workflow -> SKILL.md)
-- PURPOSE.md still accurate after scope changes?
