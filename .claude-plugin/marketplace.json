@@ -166,11 +166,12 @@
     {
       "name": "skills",
       "source": "./",
-      "description": "Skills toolkit: authoring-skill, retrospecting",
+      "description": "Skills toolkit: authoring-skill, retrospecting, skill-authoring",
       "category": "devtools",
       "skills": [
         "./skills/skills/authoring-skill",
-        "./skills/skills/retrospecting"
+        "./skills/skills/retrospecting",
+        "./skills/skills/skill-authoring"
       ],
       "strict": false
     }
@@ -190,11 +191,12 @@
     },
     {
       "name": "mobile-dev",
-      "description": "Expo/iOS apps with a backend",
+      "description": "Expo/iOS/macOS apps with a backend",
       "plugins": [
         "git",
         "development",
         "project",
+        "macos",
         "communication",
         "documentation"
       ]
@@ -213,7 +215,7 @@
     },
     {
       "name": "devops-infra",
-      "description": "CI/CD, deployment, infrastructure",
+      "description": "CI/CD, infrastructure",
       "plugins": [
         "git",
         "deployment",

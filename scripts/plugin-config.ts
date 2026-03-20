@@ -9,7 +9,6 @@
 
 /** Override the default "devtools" category for specific plugins. */
 export const CATEGORY_OVERRIDES: Record<string, string> = {
-  "editor-setup": "editor",
   project: "web-development",
 };
 
@@ -20,15 +19,15 @@ export const BUNDLES: Record<string, { description: string; plugins: string[] }>
     plugins: ["git", "development", "project", "deployment", "infrastructure", "documentation"],
   },
   "mobile-dev": {
-    description: "Expo/iOS apps with a backend",
-    plugins: ["git", "development", "project", "communication", "documentation"],
+    description: "Expo/iOS/macOS apps with a backend",
+    plugins: ["git", "development", "project", "macos", "communication", "documentation"],
   },
   "api-backend": {
     description: "Pure API/backend work",
     plugins: ["git", "development", "project", "deployment", "infrastructure", "documentation"],
   },
   "devops-infra": {
-    description: "CI/CD, deployment, infrastructure",
+    description: "CI/CD, infrastructure",
     plugins: ["git", "deployment", "infrastructure", "security", "documentation"],
   },
   "open-source": {
