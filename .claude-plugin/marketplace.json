@@ -86,7 +86,7 @@
     {
       "name": "git",
       "source": "./",
-      "description": "Git toolkit: branching, cherry-picking, cleaning-repo, committing, creating-pr, exploring-history, git, managing-remote, managing-worktree, resolving-conflict, stashing, tagging, writing-pr-message",
+      "description": "Git toolkit: branching, cherry-picking, cleaning-repo, committing, exploring-history, git, managing-remote, managing-worktree, resolving-conflict, stashing, tagging",
       "category": "devtools",
       "skills": [
         "./skills/git",
@@ -94,14 +94,24 @@
         "./skills/git/cherry-picking",
         "./skills/git/cleaning-repo",
         "./skills/git/committing",
-        "./skills/git/creating-pr",
         "./skills/git/exploring-history",
         "./skills/git/managing-remote",
         "./skills/git/managing-worktree",
         "./skills/git/resolving-conflict",
         "./skills/git/stashing",
-        "./skills/git/tagging",
-        "./skills/git/writing-pr-message"
+        "./skills/git/tagging"
+      ],
+      "strict": false
+    },
+    {
+      "name": "github",
+      "source": "./",
+      "description": "Github toolkit: creating-pr, github, writing-pr-message",
+      "category": "devtools",
+      "skills": [
+        "./skills/github",
+        "./skills/github/creating-pr",
+        "./skills/github/writing-pr-message"
       ],
       "strict": false
     },
