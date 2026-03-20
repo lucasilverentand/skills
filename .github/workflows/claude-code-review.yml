@@ -1,0 +1,68 @@
+name: Skill Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review, reopened]
+    paths:
+      - "skills/**"
+
+jobs:
+  skill-review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+      issues: read
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Skill Review
+        id: skill-review
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            Review the skills changed in this PR. Run `git diff origin/main...HEAD -- skills/` to see what changed.
+
+            For each changed skill, evaluate against these criteria:
+
+            ## Structure
+            - Has YAML frontmatter with `name` and `description` in SKILL.md
+            - Has PURPOSE.md with responsibilities and tools list
+            - SKILL.md is under 5000 tokens (~500 lines)
+            - Decision tree is present and covers all responsibilities
+            - No content duplicated between SKILL.md and references/
+            - References are one level deep (no references from within references/)
+
+            ## Description quality
+            - Written in third person ("Generates...", "Configures...")
+            - Includes BOTH what and when: what it does + when to trigger
+            - Includes edge cases and trigger phrases
+            - Under 1024 characters
+            - Leans slightly pushy (undertriggering is worse than overtriggering)
+
+            ## Content quality
+            - No common knowledge explanations (don't explain what git, PDF, etc. are)
+            - Explains the "why" behind rules instead of using ALWAYS/NEVER in caps
+            - Tools contain real logic, not thin wrappers around single commands
+            - No extraneous files (README.md, CHANGELOG.md)
+            - Detailed docs live in references/, not inline in SKILL.md
+            - No time-sensitive information (dates, versions that go stale)
+
+            ## Anti-patterns to flag
+            - Vague names (helper, utils, tools)
+            - Deep reference chains
+            - Offering menus of options instead of a default approach with escape hatch
+            - Padding with thin-wrapper tools
+
+            Post your review as a structured comment. For each skill, give a verdict:
+            - ✅ Looks good
+            - ⚠️ Minor issues (list them)
+            - ❌ Needs changes (list them with specific suggestions)
+
+            Also check that marketplace.json is regenerated if skills were added/removed/renamed.
