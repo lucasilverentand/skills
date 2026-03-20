@@ -196,6 +196,22 @@ flowchart LR
 
 > ⚡ = atomic, 🔗 = workflow. The tier is evident from the skill's behavior and `allowed-tools`. Agent-tier skills typically include `Agent` in their allowed tools so they can delegate subtasks.
 
+## Naming Convention
+
+Skill names are **short and direct** — the parent category already provides context, so the name should not repeat it.
+
+| Pattern | When to use | Examples |
+|---|---|---|
+| `<gerund>` | Pure activity skills | `committing`, `debugging`, `testing`, `writing` |
+| `<noun>` | Domain or concern | `conflicts`, `errors`, `performance`, `database` |
+| `<platform>` | Platform/tool-specific skills | `cloudflare`, `docker`, `discord` |
+
+**Rules:**
+- **Drop redundancy with the parent category** — `security/audit`, not `security/auditing-security`; `deployment/cloudflare`, not `deployment/deploying-cloudflare`
+- **Be specific** — `scaffolding`, not `parts`; `knowledge`, not `info`
+- **Use gerunds only for activities** — `debugging` and `testing` are actions; `conflicts` and `performance` are concerns. Don't force a verb when a noun is clearer
+- **Directory name = `name` field** — the folder name must match the `name:` in SKILL.md frontmatter
+
 ## Guidelines for Choosing a Tier
 
 When creating a new skill, pick the lowest tier that covers the use case:
