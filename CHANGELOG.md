@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.0](https://github.com/lucasilverentand/skills/compare/v0.6.0...v0.7.0) (2026-03-20)
+
+
+### Features
+
+* add scanning-security skill for SAST/DAST tooling ([#11](https://github.com/lucasilverentand/skills/issues/11)) ([2f39b06](https://github.com/lucasilverentand/skills/commit/2f39b0604e66f3cc4222eacc9c14922501579855))
+* **github:** add creating-pr and writing-pr-message skills ([#14](https://github.com/lucasilverentand/skills/issues/14)) ([06cd058](https://github.com/lucasilverentand/skills/commit/06cd058b35458a0b96f79e33b86bed6003650935))
+
 ## [0.6.0](https://github.com/lucasilverentand/skills/compare/v0.5.1...v0.6.0) (2026-03-20)
 
 
