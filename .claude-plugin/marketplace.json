@@ -15,91 +15,91 @@
     {
       "name": "communication",
       "source": "./",
-      "description": "Communication toolkit: messaging-discord",
+      "description": "Communication toolkit: discord",
       "category": "devtools",
       "skills": [
-        "./skills/communication/messaging-discord"
-      ],
-      "strict": false
-    },
-    {
-      "name": "configuring-editor",
-      "source": "./",
-      "description": "Configuring editor toolkit: configuring-editor",
-      "category": "devtools",
-      "skills": [
-        "./skills/configuring-editor"
+        "./skills/communication/discord"
       ],
       "strict": false
     },
     {
       "name": "deployment",
       "source": "./",
-      "description": "Deployment toolkit: deploying-cloudflare, deploying-kubernetes, deploying-railway",
+      "description": "Deployment toolkit: cloudflare, kubernetes, railway",
       "category": "devtools",
       "skills": [
-        "./skills/deployment/deploying-cloudflare",
-        "./skills/deployment/deploying-kubernetes",
-        "./skills/deployment/deploying-railway"
+        "./skills/deployment/cloudflare",
+        "./skills/deployment/kubernetes",
+        "./skills/deployment/railway"
       ],
       "strict": false
     },
     {
       "name": "development",
       "source": "./",
-      "description": "Development toolkit: auditing-accessibility, configuring-environment, debugging, designing-api, developing-workers, enforcing-type-safety, gathering-knowledge, handling-error, implementing, modeling-database, optimizing-performance, planning, refactoring, testing",
+      "description": "Development toolkit: accessibility, api, database, debugging, environment, errors, implementing, knowledge, performance, planning, refactoring, testing, type-safety, workers",
       "category": "devtools",
       "skills": [
-        "./skills/development/auditing-accessibility",
-        "./skills/development/configuring-environment",
+        "./skills/development/accessibility",
+        "./skills/development/api",
+        "./skills/development/database",
         "./skills/development/debugging",
-        "./skills/development/designing-api",
-        "./skills/development/developing-workers",
-        "./skills/development/enforcing-type-safety",
-        "./skills/development/gathering-knowledge",
-        "./skills/development/handling-error",
+        "./skills/development/environment",
+        "./skills/development/errors",
         "./skills/development/implementing",
-        "./skills/development/modeling-database",
-        "./skills/development/optimizing-performance",
+        "./skills/development/knowledge",
+        "./skills/development/performance",
         "./skills/development/planning",
         "./skills/development/refactoring",
-        "./skills/development/testing"
+        "./skills/development/testing",
+        "./skills/development/type-safety",
+        "./skills/development/workers"
       ],
       "strict": false
     },
     {
       "name": "documentation",
       "source": "./",
-      "description": "Documentation toolkit: developer-docs, doc-coauthoring, external-docs, internal-docs, reporting, writing, writing-style",
+      "description": "Documentation toolkit: coauthoring, developer-docs, external-docs, internal-docs, reporting, style, writing",
       "category": "devtools",
       "skills": [
+        "./skills/documentation/coauthoring",
         "./skills/documentation/developer-docs",
-        "./skills/documentation/doc-coauthoring",
         "./skills/documentation/external-docs",
         "./skills/documentation/internal-docs",
         "./skills/documentation/reporting",
-        "./skills/documentation/writing",
-        "./skills/documentation/writing-style"
+        "./skills/documentation/style",
+        "./skills/documentation/writing"
+      ],
+      "strict": false
+    },
+    {
+      "name": "editor",
+      "source": "./",
+      "description": "Editor toolkit: editor",
+      "category": "devtools",
+      "skills": [
+        "./skills/editor"
       ],
       "strict": false
     },
     {
       "name": "git",
       "source": "./",
-      "description": "Git toolkit: branching, cherry-picking, cleaning-repo, committing, exploring-history, git, managing-remote, managing-worktree, resolving-conflict, stashing, tagging",
+      "description": "Git toolkit: branching, cherry-pick, clean, committing, conflicts, git, history, remote, stashing, tagging, worktree",
       "category": "devtools",
       "skills": [
         "./skills/git",
         "./skills/git/branching",
-        "./skills/git/cherry-picking",
-        "./skills/git/cleaning-repo",
+        "./skills/git/cherry-pick",
+        "./skills/git/clean",
         "./skills/git/committing",
-        "./skills/git/exploring-history",
-        "./skills/git/managing-remote",
-        "./skills/git/managing-worktree",
-        "./skills/git/resolving-conflict",
+        "./skills/git/conflicts",
+        "./skills/git/history",
+        "./skills/git/remote",
         "./skills/git/stashing",
-        "./skills/git/tagging"
+        "./skills/git/tagging",
+        "./skills/git/worktree"
       ],
       "strict": false
     },
@@ -118,23 +118,23 @@
     {
       "name": "infrastructure",
       "source": "./",
-      "description": "Infrastructure toolkit: managing-docker, managing-gitops, managing-secret",
+      "description": "Infrastructure toolkit: docker, gitops, secrets",
       "category": "devtools",
       "skills": [
-        "./skills/infrastructure/managing-docker",
-        "./skills/infrastructure/managing-gitops",
-        "./skills/infrastructure/managing-secret"
+        "./skills/infrastructure/docker",
+        "./skills/infrastructure/gitops",
+        "./skills/infrastructure/secrets"
       ],
       "strict": false
     },
     {
       "name": "macos",
       "source": "./",
-      "description": "Macos toolkit: data, macos-patterns, state, views",
+      "description": "Macos toolkit: data, patterns, state, views",
       "category": "devtools",
       "skills": [
         "./skills/macos/data",
-        "./skills/macos/macos-patterns",
+        "./skills/macos/patterns",
         "./skills/macos/state",
         "./skills/macos/views"
       ],
@@ -143,49 +143,48 @@
     {
       "name": "project",
       "source": "./",
-      "description": "Project toolkit: scaffolding, structuring-project",
+      "description": "Project toolkit: scaffolding, structure",
       "category": "web-development",
       "skills": [
         "./skills/project/scaffolding",
-        "./skills/project/structuring-project"
+        "./skills/project/structure"
       ],
       "strict": false
     },
     {
       "name": "research",
       "source": "./",
-      "description": "Research toolkit: analyzing-codebase, analyzing-competitor, evaluating-technology, researching-api, researching-market, researching-ux",
+      "description": "Research toolkit: api, codebase, competitor, market, technology, ux",
       "category": "devtools",
       "skills": [
-        "./skills/research/analyzing-codebase",
-        "./skills/research/analyzing-competitor",
-        "./skills/research/evaluating-technology",
-        "./skills/research/researching-api",
-        "./skills/research/researching-market",
-        "./skills/research/researching-ux"
+        "./skills/research/api",
+        "./skills/research/codebase",
+        "./skills/research/competitor",
+        "./skills/research/market",
+        "./skills/research/technology",
+        "./skills/research/ux"
       ],
       "strict": false
     },
     {
       "name": "security",
       "source": "./",
-      "description": "Security toolkit: auditing-security, scanning-security",
+      "description": "Security toolkit: audit, scan",
       "category": "devtools",
       "skills": [
-        "./skills/security/auditing-security",
-        "./skills/security/scanning-security"
+        "./skills/security/audit",
+        "./skills/security/scan"
       ],
       "strict": false
     },
     {
       "name": "skills",
       "source": "./",
-      "description": "Skills toolkit: authoring-skill, retrospecting, skill-authoring",
+      "description": "Skills toolkit: authoring, retrospecting",
       "category": "devtools",
       "skills": [
-        "./skills/skills/authoring-skill",
-        "./skills/skills/retrospecting",
-        "./skills/skills/skill-authoring"
+        "./skills/skills/authoring",
+        "./skills/skills/retrospecting"
       ],
       "strict": false
     }

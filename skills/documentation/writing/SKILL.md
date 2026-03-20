@@ -146,7 +146,7 @@ For a well-configured project, also set:
 
 ## ADR
 
-> **Cross-reference:** ADR scaffolding is handled by `development/gathering-knowledge` (tools/adr-create.ts). Use that skill to create new ADRs.
+> **Cross-reference:** ADR scaffolding is handled by `development/knowledge` (tools/adr-create.ts). Use that skill to create new ADRs.
 
 1. Fill in the four sections:
    - **Context** — what situation forced a decision?
@@ -209,5 +209,5 @@ Badges provide at-a-glance project status. Use shields.io for consistency. Full 
 | `tools/badge-sync.ts` | Generate and update CI, coverage, npm version badges |
 | `tools/setup-validator.ts` | Verify documented setup steps run cleanly |
 | `tools/mermaid-gen.ts` | Generate Mermaid diagrams from modules and DB schema |
-| `development/gathering-knowledge` | ADR scaffolding (tools/adr-create.ts) |
+| `development/knowledge` | ADR scaffolding (tools/adr-create.ts) |
 | `project/scaffolding` | Project structure and environment config reference |

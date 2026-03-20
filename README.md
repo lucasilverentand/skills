@@ -13,12 +13,12 @@
 | Skill | Description |
 | --- | --- |
 | `git/branching` | Branch strategy, create/manage branches, rebase workflows, branch comparison |
-| `git/cherry-picking` | Apply specific commits across branches for backports and selective merges |
+| `git/cherry-pick` | Apply specific commits across branches for backports and selective merges |
 | `git/committing` | Conventional commits, amend & fixup, pre-commit hooks |
-| `git/exploring-history` | Search history (log, blame, bisect), diff analysis |
-| `git/managing-remote` | Manage remote repositories, sync forks, maintain remote-tracking branches |
-| `git/managing-worktree` | Create/manage worktrees, cleanup stale ones |
-| `git/resolving-conflict` | Resolve merge conflicts, conflict prevention |
+| `git/history` | Search history (log, blame, bisect), diff analysis |
+| `git/remote` | Manage remote repositories, sync forks, maintain remote-tracking branches |
+| `git/worktree` | Create/manage worktrees, cleanup stale ones |
+| `git/conflicts` | Resolve merge conflicts, conflict prevention |
 | `git/stashing` | Save and restore work-in-progress changes without committing |
 | `git/tagging` | Create and manage tags for releases, milestones, and version markers |
 
@@ -30,7 +30,7 @@
 | Skill | Description |
 | --- | --- |
 | `development/implementing` | Implement code based on a plan |
-| `development/gathering-knowledge` | Record development learnings and manage ADRs |
+| `development/knowledge` | Record development learnings and manage ADRs |
 | `development/planning` | Break down features into implementation plans and tasks |
 
 </details>
@@ -41,7 +41,7 @@
 | Skill | Description |
 | --- | --- |
 | `development/debugging` | Systematic root cause analysis, log analysis |
-| `development/configuring-environment` | Bootstrap local dev setup, dev containers, tool version management |
+| `development/environment` | Bootstrap local dev setup, dev containers, tool version management |
 | `development/refactoring` | Restructure, extract, and clean up code without changing external behavior |
 
 </details>
@@ -51,11 +51,11 @@
 
 | Skill | Description |
 | --- | --- |
-| `development/auditing-accessibility` | Audit components for WCAG compliance, fix a11y issues |
-| `development/handling-error` | Error handling patterns, result types, error code standards |
-| `development/optimizing-performance` | Identify bottlenecks, bundle optimization, benchmarking |
+| `development/accessibility` | Audit components for WCAG compliance, fix a11y issues |
+| `development/errors` | Error handling patterns, result types, error code standards |
+| `development/performance` | Identify bottlenecks, bundle optimization, benchmarking |
 | `development/testing` | Design test strategies and author tests (unit, integration, E2E) |
-| `development/enforcing-type-safety` | Tighten types, remove `any`, add Zod schemas |
+| `development/type-safety` | Tighten types, remove `any`, add Zod schemas |
 
 </details>
 
@@ -64,8 +64,8 @@
 
 | Skill | Description |
 | --- | --- |
-| `development/designing-api` | Design endpoints, generate OpenAPI specs, review consistency |
-| `development/modeling-database` | Drizzle ORM patterns, schema design, queries, migrations |
+| `development/api` | Design endpoints, generate OpenAPI specs, review consistency |
+| `development/database` | Drizzle ORM patterns, schema design, queries, migrations |
 
 </details>
 
@@ -75,7 +75,7 @@
 | Skill | Description |
 | --- | --- |
 | `project/scaffolding` | Navigate, create, and maintain monorepo workspace packages |
-| `project/structuring-project` | Scaffold projects, monorepo setup, convention docs |
+| `project/structure` | Scaffold projects, monorepo setup, convention docs |
 
 </details>
 
@@ -84,9 +84,9 @@
 
 | Skill | Description |
 | --- | --- |
-| `deployment/deploying-cloudflare` | Deploy Workers/Pages, manage D1/KV/R2, configure DNS |
-| `deployment/deploying-kubernetes` | Write/update manifests, Flux/GitOps deploys, scaling |
-| `deployment/deploying-railway` | Deploy services, provision databases, multi-environment |
+| `deployment/cloudflare` | Deploy Workers/Pages, manage D1/KV/R2, configure DNS |
+| `deployment/kubernetes` | Write/update manifests, Flux/GitOps deploys, scaling |
+| `deployment/railway` | Deploy services, provision databases, multi-environment |
 
 </details>
 
@@ -95,9 +95,9 @@
 
 | Skill | Description |
 | --- | --- |
-| `infrastructure/managing-docker` | Write Dockerfiles, image optimization, debug containers |
-| `infrastructure/managing-gitops` | Flux CD management, repo structure, reconciliation |
-| `infrastructure/managing-secret` | Secret scanning, rotation, vault/store setup |
+| `infrastructure/docker` | Write Dockerfiles, image optimization, debug containers |
+| `infrastructure/gitops` | Flux CD management, repo structure, reconciliation |
+| `infrastructure/secrets` | Secret scanning, rotation, vault/store setup |
 
 </details>
 
@@ -115,12 +115,12 @@
 
 | Skill | Description |
 | --- | --- |
-| `research/analyzing-codebase` | Architecture mapping, pattern discovery, dependency analysis |
-| `research/analyzing-competitor` | Feature comparison, UX teardown, market positioning |
-| `research/evaluating-technology` | Evaluate technologies, migration feasibility |
-| `research/researching-api` | Explore external APIs, compare options, plan integrations |
-| `research/researching-market` | Market sizing, user research synthesis, trend analysis |
-| `research/researching-ux` | UI/UX research — design systems, component patterns, usability |
+| `research/codebase` | Architecture mapping, pattern discovery, dependency analysis |
+| `research/competitor` | Feature comparison, UX teardown, market positioning |
+| `research/technology` | Evaluate technologies, migration feasibility |
+| `research/api` | Explore external APIs, compare options, plan integrations |
+| `research/market` | Market sizing, user research synthesis, trend analysis |
+| `research/ux` | UI/UX research — design systems, component patterns, usability |
 
 </details>
 
@@ -129,7 +129,7 @@
 
 | Skill | Description |
 | --- | --- |
-| `configuring-editor` | Config management across VS Code, Zed, Neovim, and Xcode |
+| `editor` | Config management across VS Code, Zed, Neovim, and Xcode |
 
 </details>
 
@@ -138,7 +138,7 @@
 
 | Skill | Description |
 | --- | --- |
-| `communication/messaging-discord` | Discord bots, webhooks, channel management |
+| `communication/discord` | Discord bots, webhooks, channel management |
 
 </details>
 
@@ -148,7 +148,7 @@
 | Skill | Description |
 | --- | --- |
 | `macos/data` | SwiftData persistence — models, queries, migrations, ModelContainer |
-| `macos/macos-patterns` | macOS SwiftUI patterns — windows, MenuBarExtra, Settings, toolbars, sandboxing |
+| `macos/patterns` | macOS SwiftUI patterns — windows, MenuBarExtra, Settings, toolbars, sandboxing |
 | `macos/state` | SwiftUI state management — @Observable, @State, @Environment, @Binding |
 | `macos/views` | SwiftUI view composition, layout, modifiers, animations, liquid glass |
 
@@ -159,7 +159,7 @@
 
 | Skill | Description |
 | --- | --- |
-| `security/auditing-security` | Code security review, dependency audit, auth/authz review |
+| `security/audit` | Code security review, dependency audit, auth/authz review |
 
 </details>
 
@@ -168,7 +168,7 @@
 
 | Skill | Description |
 | --- | --- |
-| `skills/authoring-skill` | Create, test, publish, and maintain agent skills |
+| `skills/authoring` | Create, test, publish, and maintain agent skills |
 | `skills/retrospecting` | Mine conversations and code changes for struggles, turn findings into skills |
 
 </details>

@@ -6,11 +6,11 @@ description: Writes external-facing documents — blog posts, release notes, ann
 # External Docs
 
 ## Voice & Style
-> See `documentation/writing-style` for full guide (`references/voice-and-tone.md`)
+> See `documentation/style` for full guide (`references/voice-and-tone.md`)
 
 Engaging and clear. Lead with what matters to the reader, not what was hard to build. Show, don't tell — examples over adjectives. Respect the reader's time. No internal jargon.
 
-> For substantial documents, follow the co-authoring workflow: `documentation/writing-style` → `references/co-authoring-workflow.md`
+> For substantial documents, follow the co-authoring workflow: `documentation/style` → `references/co-authoring-workflow.md`
 
 ## Decision Tree
 
@@ -26,7 +26,7 @@ Engaging and clear. Lead with what matters to the reader, not what was hard to b
 1. **Identify the audience** — users, developers, customers, or general public?
 2. **Route to the right type** — each reference has a template and audience considerations
 3. **Draft with the reader's perspective** — what do they care about? What action should they take?
-4. **Review against quality standards** — see `documentation/writing-style` → `references/quality-standards.md`
+4. **Review against quality standards** — see `documentation/style` → `references/quality-standards.md`
 5. **Check tone** — external docs should be engaging without being salesy. No superlatives, no "excited to announce"
 
 ## Key references
@@ -37,4 +37,4 @@ Engaging and clear. Lead with what matters to the reader, not what was hard to b
 | `references/release-notes.md` | Release notes template, versioning, categorization |
 | `references/announcements.md` | Announcement template, channel-specific formatting |
 | `references/changelogs.md` | Changelog format, Keep a Changelog standard |
-| `documentation/writing-style` | Shared voice, tone, formatting, and quality standards |
+| `documentation/style` | Shared voice, tone, formatting, and quality standards |

@@ -34,8 +34,8 @@ Small, focused, self-contained. Each one handles a single well-defined task. An 
 | `git/committing` | Writes a conventional commit message |
 | `git/branching` | Creates and manages branches |
 | `git/tagging` | Creates semver tags |
-| `documentation/writing-style` | Applies voice, tone, and formatting standards |
-| `security/auditing-security` | Runs a security review |
+| `documentation/style` | Applies voice, tone, and formatting standards |
+| `security/audit` | Runs a security review |
 | `development/testing` | Authors tests for a given piece of code |
 
 **When to use atomic:** The task is narrow, well-defined, and doesn't require coordinating multiple steps. "Write a commit message", "create a branch", "add tests for this function".
@@ -57,10 +57,10 @@ Combine atomic skills into a prescribed sequence. A workflow skill knows the ste
 
 | Skill | What it composes |
 |---|---|
-| `git` (parent) | Routes to `branching` → `committing` → `tagging` → `managing-remote` and other atomic git skills in sequence |
-| `documentation/developer-docs` | Uses `writing-style` for tone, `gathering-knowledge` for ADRs, then writes the actual doc |
-| `documentation/reporting` | Picks report type → applies `writing-style` → follows report-specific template |
-| `git/cleaning-repo` | Analyzes dirty state → splits hunks → creates atomic commits → cleans branches → pushes |
+| `git` (parent) | Routes to `branching` → `committing` → `tagging` → `remote` and other atomic git skills in sequence |
+| `documentation/developer-docs` | Uses `style` for tone, `knowledge` for ADRs, then writes the actual doc |
+| `documentation/reporting` | Picks report type → applies `style` → follows report-specific template |
+| `git/clean` | Analyzes dirty state → splits hunks → creates atomic commits → cleans branches → pushes |
 | `development/planning` | Breaks down a feature → creates ordered tasks → maps dependencies |
 
 **Composition patterns:**
@@ -87,8 +87,8 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-  A[documentation/developer-docs] -->|"tone & formatting"| B[documentation/writing-style]
-  A -->|"ADR scaffolding"| C[development/gathering-knowledge]
+  A[documentation/developer-docs] -->|"tone & formatting"| B[documentation/style]
+  A -->|"ADR scaffolding"| C[development/knowledge]
   style A fill:#4a9eff,color:#fff
   style B fill:#2d8a4e,color:#fff
   style C fill:#2d8a4e,color:#fff
@@ -172,12 +172,12 @@ flowchart LR
   subgraph git["skills/git/"]
     A["committing ⚡"]
     B["branching ⚡"]
-    C["cleaning-repo 🔗"]
+    C["clean 🔗"]
     D["SKILL.md 🔗"]
   end
 
   subgraph docs["skills/documentation/"]
-    E["writing-style ⚡"]
+    E["style ⚡"]
     F["developer-docs 🔗"]
   end
 
@@ -229,14 +229,14 @@ A workflow skill may contain a step that does real work inline — formatting, v
 flowchart LR
   subgraph before["Before — step is inline"]
     direction TB
-    W1["🔗 cleaning-repo"] --> S1["analyze dirty state"]
+    W1["🔗 clean"] --> S1["analyze dirty state"]
     S1 --> S2["format commit messages ← inline logic"]
     S2 --> S3["push"]
   end
 
   subgraph after["After — step is extracted"]
     direction TB
-    W2["🔗 cleaning-repo"] --> S4["analyze dirty state"]
+    W2["🔗 clean"] --> S4["analyze dirty state"]
     S4 --> S5["committing ⚡"]
     S5 --> S6["push"]
   end
@@ -256,7 +256,7 @@ flowchart LR
 - The step has its own conventions or rules that deserve a dedicated decision tree (e.g., conventional commit format)
 - The step could reasonably have its own tools or references
 
-**Real example:** `git/committing` started as the commit-writing step inside `git/cleaning-repo`. Once extracted, it became independently useful — any workflow that creates commits can reference it rather than reinventing commit message formatting.
+**Real example:** `git/committing` started as the commit-writing step inside `git/clean`. Once extracted, it became independently useful — any workflow that creates commits can reference it rather than reinventing commit message formatting.
 
 ### Extracting workflows from agent skills
 

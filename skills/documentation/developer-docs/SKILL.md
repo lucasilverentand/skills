@@ -7,11 +7,11 @@ allowed-tools: Read Grep Glob Bash Write Edit
 # Developer Docs
 
 ## Voice & Style
-> See `documentation/writing-style` for full guide (`references/voice-and-tone.md`)
+> See `documentation/style` for full guide (`references/voice-and-tone.md`)
 
 Friendly and practical. Every example must be copy-pasteable. Tables for options and config. Start with the simplest use case, then show advanced patterns. No filler — every section earns its place.
 
-> For substantial documents, follow the co-authoring workflow: `documentation/writing-style` → `references/co-authoring-workflow.md`
+> For substantial documents, follow the co-authoring workflow: `documentation/style` → `references/co-authoring-workflow.md`
 
 ## Decision Tree
 
@@ -207,6 +207,6 @@ Badges provide at-a-glance project status. Use shields.io for consistency. Full 
 | `tools/badge-sync.ts` | Generate and update CI, coverage, npm version badges |
 | `tools/setup-validator.ts` | Verify documented setup steps run cleanly |
 | `tools/mermaid-gen.ts` | Generate Mermaid diagrams from modules and DB schema |
-| `documentation/writing-style` | Shared voice, tone, formatting, and quality standards |
+| `documentation/style` | Shared voice, tone, formatting, and quality standards |
 | `development/knowledge` | ADR scaffolding (tools/adr-create.ts) |
 | `project/parts/config` | Environment variable documentation (tools/env-docs.ts) |

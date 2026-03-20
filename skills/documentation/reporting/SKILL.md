@@ -7,11 +7,11 @@ allowed-tools: Read Grep Glob Bash WebFetch WebSearch
 # Report Writing
 
 ## Voice & Style
-> See `documentation/writing-style` for full guide (`references/voice-and-tone.md`)
+> See `documentation/style` for full guide (`references/voice-and-tone.md`)
 
 Factual and evidence-driven. Every claim is backed by data, code, or sources. Tables for structured comparisons. Executive summary that stands alone. No filler paragraphs.
 
-> For substantial documents, follow the co-authoring workflow: `documentation/writing-style` → `references/co-authoring-workflow.md`
+> For substantial documents, follow the co-authoring workflow: `documentation/style` → `references/co-authoring-workflow.md`
 
 ## Decision Tree
 
@@ -35,7 +35,7 @@ Every report follows this process regardless of type:
    - User-provided context → use what's in the conversation
 3. **Outline** — draft section headings before writing prose. Share the outline with the user if the report is large
 4. **Write** — fill in each section with concrete evidence, not filler. Use tables for structured data, bullet lists for key points
-5. **Review** — check against `documentation/writing-style` → `references/quality-standards.md`
+5. **Review** — check against `documentation/style` → `references/quality-standards.md`
 
 ## Formatting rules
 
@@ -68,4 +68,4 @@ Every report follows this process regardless of type:
 | `references/comparison.md` | Comparison report template, criteria, scoring |
 | `references/retro.md` | Retrospective template, blameless tone, action items |
 | `references/research.md` | Research report template, source tracking, synthesis |
-| `documentation/writing-style` | Shared voice, tone, formatting, and quality standards |
+| `documentation/style` | Shared voice, tone, formatting, and quality standards |
