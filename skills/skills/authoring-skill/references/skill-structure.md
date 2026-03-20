@@ -4,38 +4,12 @@
 
 ```
 skills/<category>/<skill-name>/
-├── PURPOSE.md              # what: responsibilities + tools list
 ├── SKILL.md                # how: lean instructions, frontmatter, short decision trees
 ├── tools/                  # bun scripts the agent can run
 │   └── *.ts
 └── references/             # detailed docs, long decision trees, domain knowledge
     └── *.md
 ```
-
-## PURPOSE.md
-
-Defines scope — what the skill is responsible for and what tools it has. Not loaded at runtime by Claude Code. Used for project organization and by the authoring skill itself.
-
-Format:
-
-```markdown
-# Skill Name
-
-One-liner description.
-
-## Responsibilities
-
-- What this skill does (action-oriented bullets)
-
-## Tools
-
-- `tools/name.ts` — what it does
-```
-
-Rules:
-- No instructions — that's SKILL.md's job
-- No decision trees — those go in SKILL.md or references/
-- Keep responsibilities concrete and verifiable
 
 ## SKILL.md
 
@@ -44,7 +18,6 @@ Rules:
 - Keep under 5000 tokens (~500 lines)
 - Lead with the workflow — what does the agent do, in what order?
 - Link to references/ for anything needing more than a few lines
-- Don't duplicate PURPOSE.md content
 
 ## references/
 

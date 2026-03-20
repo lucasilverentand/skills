@@ -104,6 +104,18 @@
       "strict": false
     },
     {
+      "name": "github",
+      "source": "./",
+      "description": "Github toolkit: creating-pr, github, writing-pr-message",
+      "category": "devtools",
+      "skills": [
+        "./skills/github",
+        "./skills/github/creating-pr",
+        "./skills/github/writing-pr-message"
+      ],
+      "strict": false
+    },
+    {
       "name": "infrastructure",
       "source": "./",
       "description": "Infrastructure toolkit: managing-docker, managing-gitops, managing-secret",
