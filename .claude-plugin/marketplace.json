@@ -157,10 +157,11 @@
     {
       "name": "security",
       "source": "./",
-      "description": "Security toolkit: auditing-security",
+      "description": "Security toolkit: auditing-security, scanning-security",
       "category": "devtools",
       "skills": [
-        "./skills/security/auditing-security"
+        "./skills/security/auditing-security",
+        "./skills/security/scanning-security"
       ],
       "strict": false
     },
