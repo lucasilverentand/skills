@@ -216,3 +216,115 @@ flowchart TD
 **Promote up** when you find users chaining the same atomics manually (→ workflow) or when the sequence itself is variable and requires judgment calls (→ agent).
 
 Avoid making everything an agent skill. Most tasks are well-served by atomics and workflows. Agent skills add complexity and are harder to predict and debug. Use them when the adaptability is genuinely needed.
+
+## When to Extract a Skill Downward
+
+Higher-tier skills often contain steps that are valuable on their own. When you notice a reusable piece inside a workflow or agent skill, extract it into its own lower-tier skill. This makes the piece independently invocable while the parent skill still references it.
+
+### Extracting atomics from workflows
+
+A workflow skill may contain a step that does real work inline — formatting, validation, generation — instead of delegating to a dedicated skill. If that step is useful outside the workflow, it should be its own atomic.
+
+```mermaid
+flowchart LR
+  subgraph before["Before — step is inline"]
+    direction TB
+    W1["🔗 cleaning-repo"] --> S1["analyze dirty state"]
+    S1 --> S2["format commit messages ← inline logic"]
+    S2 --> S3["push"]
+  end
+
+  subgraph after["After — step is extracted"]
+    direction TB
+    W2["🔗 cleaning-repo"] --> S4["analyze dirty state"]
+    S4 --> S5["committing ⚡"]
+    S5 --> S6["push"]
+  end
+
+  before ~~~ after
+
+  style S2 fill:#dc2626,color:#fff
+  style S5 fill:#2d8a4e,color:#fff
+  style W1 fill:#4a9eff,color:#fff
+  style W2 fill:#4a9eff,color:#fff
+```
+
+**Signals that a step should be its own atomic:**
+
+- You find yourself duplicating the same logic in multiple workflows
+- Users ask to do just that step without running the full workflow ("I just want to write a commit message, not clean the whole repo")
+- The step has its own conventions or rules that deserve a dedicated decision tree (e.g., conventional commit format)
+- The step could reasonably have its own tools or references
+
+**Real example:** `git/committing` started as the commit-writing step inside `git/cleaning-repo`. Once extracted, it became independently useful — any workflow that creates commits can reference it rather than reinventing commit message formatting.
+
+### Extracting workflows from agent skills
+
+Agent skills make runtime decisions about what to do. But within that adaptive flow, there are often fixed sequences that repeat the same way every time. Those fixed sequences are workflows waiting to be extracted.
+
+```mermaid
+flowchart TD
+  subgraph before["Before — fixed sequence inside agent"]
+    direction TB
+    A1["🤖 release agent"] --> D1{"Breaking\nchanges?"}
+    D1 -->|yes| M1["bump major"]
+    D1 -->|no| M2["bump minor/patch"]
+    M1 --> CL1["generate changelog ← always the same steps"]
+    M2 --> CL1
+    CL1 --> PR1["create PR"]
+  end
+
+  subgraph after["After — sequence extracted as workflow"]
+    direction TB
+    A2["🤖 release agent"] --> D2{"Breaking\nchanges?"}
+    D2 -->|yes| M3["bump major"]
+    D2 -->|no| M4["bump minor/patch"]
+    M3 --> CL2["🔗 changelog workflow"]
+    M4 --> CL2
+    CL2 --> PR2["create PR"]
+  end
+
+  before ~~~ after
+
+  style CL1 fill:#dc2626,color:#fff
+  style CL2 fill:#4a9eff,color:#fff
+  style A1 fill:#9333ea,color:#fff
+  style A2 fill:#9333ea,color:#fff
+```
+
+**Signals that a sequence should be its own workflow:**
+
+- The agent always runs the same steps in the same order for a particular sub-goal, regardless of what decisions led there
+- Users sometimes want to run just that sequence directly ("generate a changelog" without doing a full release)
+- The sequence is complex enough that it benefits from its own decision tree and documentation
+- Multiple agent skills share the same fixed sequence
+
+**The extraction test:** Ask "could someone invoke this piece on its own and get useful output?" If yes, extract it. The parent skill becomes simpler (it delegates instead of inlining), and the extracted skill becomes available to other skills and to users directly.
+
+```mermaid
+flowchart BT
+  A1["⚡ atomic"] -->|"reusable step appears\nin multiple places"| W1["🔗 workflow"]
+  W1 -->|"fixed sequence appears\nin multiple agents"| AG1["🤖 agent"]
+
+  A2["⚡ atomic"] <--|"inline step is\nindependently useful"| W2["🔗 workflow"]
+  W2 <--|"fixed sequence is\nindependently useful"| AG2["🤖 agent"]
+
+  subgraph up["Promote up ↑"]
+    A1
+    W1
+    AG1
+  end
+
+  subgraph down["Extract down ↓"]
+    AG2
+    W2
+    A2
+  end
+
+  style A1 fill:#2d8a4e,color:#fff
+  style W1 fill:#4a9eff,color:#fff
+  style AG1 fill:#9333ea,color:#fff
+  style A2 fill:#2d8a4e,color:#fff
+  style W2 fill:#4a9eff,color:#fff
+  style AG2 fill:#9333ea,color:#fff
+```
