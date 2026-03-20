@@ -70,14 +70,14 @@
     {
       "name": "documentation",
       "source": "./",
-      "description": "Documentation toolkit: developer-docs, external-docs, internal-docs, reporting, reports, writing, writing-style",
+      "description": "Documentation toolkit: developer-docs, doc-coauthoring, external-docs, internal-docs, reporting, writing, writing-style",
       "category": "devtools",
       "skills": [
         "./skills/documentation/developer-docs",
+        "./skills/documentation/doc-coauthoring",
         "./skills/documentation/external-docs",
         "./skills/documentation/internal-docs",
         "./skills/documentation/reporting",
-        "./skills/documentation/reports",
         "./skills/documentation/writing",
         "./skills/documentation/writing-style"
       ],
