@@ -4,22 +4,16 @@ Skills are organized into three tiers based on scope and autonomy: **atomic**, *
 
 ## The Three Tiers
 
-```
-┌─────────────────────────────────────────────────────┐
-│  Agent Skills                                       │
-│  Goal-driven — decide which workflows/atomics to    │
-│  use based on context                               │
-│                                                     │
-│  ┌───────────────────────────────────────────────┐  │
-│  │  Workflow Skills                              │  │
-│  │  Chain atomic skills in a defined sequence    │  │
-│  │                                               │  │
-│  │  ┌─────────────────────────────────────────┐  │  │
-│  │  │  Atomic Skills                          │  │  │
-│  │  │  Do one thing well                      │  │  │
-│  │  └─────────────────────────────────────────┘  │  │
-│  └───────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────┘
+```mermaid
+block-beta
+  columns 1
+  block:agent["🤖 Agent Skills — Goal-driven, decide their own path"]:1
+    block:workflow["🔗 Workflow Skills — Chain atomics in a defined sequence"]:1
+      block:atomic["⚡ Atomic Skills — Do one thing well"]:1
+        space
+      end
+    end
+  end
 ```
 
 ### Atomic Skills
@@ -74,17 +68,31 @@ Combine atomic skills into a prescribed sequence. A workflow skill knows the ste
 Workflows reference atomic skills in two ways:
 
 1. **Decision tree routing** — the parent skill's decision tree sends the user to the right atomic skill:
-   ```
-   - What do you need to do?
-     - **Committing** → go to "Committing"
-     - **Branching** → go to "Branching"
-   ```
+
+```mermaid
+flowchart LR
+  A[git] -->|"What do you need?"| B{Decision tree}
+  B --> C[git/committing]
+  B --> D[git/branching]
+  B --> E[git/tagging]
+  B --> F[git/stashing]
+  style A fill:#4a9eff,color:#fff
+  style C fill:#2d8a4e,color:#fff
+  style D fill:#2d8a4e,color:#fff
+  style E fill:#2d8a4e,color:#fff
+  style F fill:#2d8a4e,color:#fff
+```
 
 2. **Cross-skill references** — a skill points to another skill for a specific concern:
-   ```
-   ADR scaffolding is handled by `development/knowledge`
-   For tone and formatting → see `documentation/writing-style`
-   ```
+
+```mermaid
+flowchart LR
+  A[documentation/developer-docs] -->|"tone & formatting"| B[documentation/writing-style]
+  A -->|"ADR scaffolding"| C[development/gathering-knowledge]
+  style A fill:#4a9eff,color:#fff
+  style B fill:#2d8a4e,color:#fff
+  style C fill:#2d8a4e,color:#fff
+```
 
 **When to use workflow:** The task has a known sequence of steps that are always (or almost always) the same. "Ship a PR", "clean up this repo", "write architecture docs".
 
@@ -102,16 +110,43 @@ Goal-driven rather than step-driven. An agent skill receives an outcome to achie
 - Can loop, retry, or change strategy when something fails
 - Uses `Agent` in `allowed-tools` to delegate subtasks
 
-**Examples (conceptual):**
+**Example — "Release a package" as an agent skill:**
+
+```mermaid
+flowchart TD
+  Goal["🎯 Release a package"] --> Inspect["Inspect context"]
+  Inspect --> Q1{Monorepo?}
+  Q1 -->|yes| Scope["Determine affected packages"]
+  Q1 -->|no| Changes["Analyze git history"]
+  Scope --> Changes
+  Changes --> Q2{Breaking changes?}
+  Q2 -->|yes| Major["Bump major version"]
+  Q2 -->|no| Q3{New features?}
+  Q3 -->|yes| Minor["Bump minor version"]
+  Q3 -->|no| Patch["Bump patch version"]
+  Major --> Changelog["Generate changelog"]
+  Minor --> Changelog
+  Patch --> Changelog
+  Changelog --> PR["Create release PR"]
+  PR --> CI{CI passes?}
+  CI -->|yes| Done["✅ Ready to merge"]
+  CI -->|no| Fix["Diagnose & fix"]
+  Fix --> CI
+
+  style Goal fill:#9333ea,color:#fff
+  style Done fill:#2d8a4e,color:#fff
+  style Fix fill:#dc2626,color:#fff
+```
+
+**Key difference from workflows:** A workflow for "release a package" would have fixed steps. An agent skill for the same goal first checks: is this a monorepo or single package? Are there breaking changes? Is there a changelog already? Does CI pass? — and adjusts its approach based on the answers.
+
+**More examples (conceptual):**
 
 | Skill | How it decides |
 |---|---|
-| Release a package | Reads git history to determine what changed → picks semver bump → generates changelog → writes release notes → creates PR → monitors CI → handles failures |
 | Full repo health check | Runs security audit → checks test coverage → lints → finds dead code → prioritizes findings → creates fix PRs for critical issues |
 | Migrate a dependency | Researches new API → finds all usage sites → plans migration order → applies changes file by file → runs tests after each change → rolls back on failure |
 | Onboard to a codebase | Analyzes architecture → maps data flow → identifies conventions → generates orientation doc → suggests first tasks |
-
-**Key difference from workflows:** A workflow for "release a package" would have fixed steps. An agent skill for the same goal would first check: is this a monorepo or single package? Are there breaking changes? Is there a changelog already? Does CI pass? — and adjust its approach based on the answers.
 
 **When to use agent:** The task has a clear goal but the path depends on what you find. The skill needs to make judgment calls, not just follow steps.
 
@@ -132,25 +167,52 @@ Goal-driven rather than step-driven. An agent skill receives an outcome to achie
 
 The tier is about behavior, not location. A skill's folder path reflects its **domain** (git, development, documentation), not its tier. Two skills in the same folder can be different tiers:
 
-```
-skills/
-  git/
-    committing/SKILL.md      ← atomic (writes one commit)
-    cleaning-repo/SKILL.md   ← workflow (orchestrates a full cleanup)
-    SKILL.md                  ← workflow (routes to child skills)
-  documentation/
-    writing-style/SKILL.md   ← atomic (applies style rules)
-    developer-docs/SKILL.md  ← workflow (composes style + knowledge + writing)
+```mermaid
+flowchart LR
+  subgraph git["skills/git/"]
+    A["committing ⚡"]
+    B["branching ⚡"]
+    C["cleaning-repo 🔗"]
+    D["SKILL.md 🔗"]
+  end
+
+  subgraph docs["skills/documentation/"]
+    E["writing-style ⚡"]
+    F["developer-docs 🔗"]
+  end
+
+  D -.->|routes to| A
+  D -.->|routes to| B
+  D -.->|routes to| C
+  F -.->|references| E
+
+  style A fill:#2d8a4e,color:#fff
+  style B fill:#2d8a4e,color:#fff
+  style E fill:#2d8a4e,color:#fff
+  style C fill:#4a9eff,color:#fff
+  style D fill:#4a9eff,color:#fff
+  style F fill:#4a9eff,color:#fff
 ```
 
-The tier should be evident from the skill's behavior and `allowed-tools`. Agent-tier skills typically include `Agent` in their allowed tools so they can delegate subtasks.
+> ⚡ = atomic, 🔗 = workflow. The tier is evident from the skill's behavior and `allowed-tools`. Agent-tier skills typically include `Agent` in their allowed tools so they can delegate subtasks.
 
 ## Guidelines for Choosing a Tier
 
 When creating a new skill, pick the lowest tier that covers the use case:
 
-1. **Start atomic.** Can the skill do its job without calling other skills? Keep it atomic.
-2. **Promote to workflow** when you find yourself writing a skill that always follows the same multi-step sequence, or when users keep chaining the same atomics manually.
-3. **Promote to agent** when the sequence itself is variable — when the skill needs to inspect the world before deciding what to do next.
+```mermaid
+flowchart TD
+  Start["New skill idea"] --> Q1{"Can it do its job\nwithout other skills?"}
+  Q1 -->|yes| Atomic["⚡ Make it atomic"]
+  Q1 -->|no| Q2{"Is the sequence\nalways the same?"}
+  Q2 -->|yes| Workflow["🔗 Make it a workflow"]
+  Q2 -->|no| Agent["🤖 Make it an agent"]
+
+  style Atomic fill:#2d8a4e,color:#fff
+  style Workflow fill:#4a9eff,color:#fff
+  style Agent fill:#9333ea,color:#fff
+```
+
+**Promote up** when you find users chaining the same atomics manually (→ workflow) or when the sequence itself is variable and requires judgment calls (→ agent).
 
 Avoid making everything an agent skill. Most tasks are well-served by atomics and workflows. Agent skills add complexity and are harder to predict and debug. Use them when the adaptability is genuinely needed.
