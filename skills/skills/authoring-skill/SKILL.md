@@ -37,6 +37,7 @@ allowed-tools: Read Grep Glob Bash Write Edit Agent
     - **Yes, covers multiple unrelated concerns** -> split into separate skill directories, one per concern
     - **Yes, just too long** -> extract to references, don't split
     - **No** -> the skill is fine, focus on content quality instead
+  - **Extracting a reusable piece from a skill** -> see `references/skill-taxonomy.md` "Extracting skills downward". Check: could someone invoke this piece on its own and get useful output? If yes, extract it as its own lower-tier skill (atomic from workflow, workflow from agent)
 
 ## Creating a skill
 
@@ -47,7 +48,8 @@ Start by understanding what the skill should do. If the conversation already con
 1. What should this skill enable Claude to do?
 2. When should this skill trigger? (what user phrases/contexts)
 3. What's the expected output format?
-4. Should we set up test cases? Skills with objectively verifiable outputs (file transforms, data extraction, code generation) benefit from them. Skills with subjective outputs (writing style, design) often don't.
+4. What tier is this skill? See `references/skill-taxonomy.md` — atomic (does one thing), workflow (chains atomics in a known sequence), or agent (goal-driven, decides its own path). The tier shapes the decision tree, allowed-tools, and composition strategy.
+5. Should we set up test cases? Skills with objectively verifiable outputs (file transforms, data extraction, code generation) benefit from them. Skills with subjective outputs (writing style, design) often don't.
 
 Proactively ask about edge cases, example files, success criteria, and dependencies. Check available MCPs for research and the codebase for similar existing skills to avoid overlap. Come prepared with context.
 
@@ -198,6 +200,7 @@ See `references/marketplace-schema.md` for the full schema. Key conventions:
 
 | File | What it covers |
 |---|---|
+| `references/skill-taxonomy.md` | Skill tiers (atomic, workflow, agent), choosing a tier, extracting skills downward |
 | `references/skill-structure.md` | Directory layout, PURPOSE.md vs SKILL.md, progressive disclosure |
 | `references/skill-format.md` | Frontmatter fields, naming rules, Claude Code extensions, string substitutions |
 | `references/decision-trees.md` | Decision tree format, writing guidelines, agent usage |
