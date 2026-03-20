@@ -6,6 +6,13 @@ allowed-tools: Read Grep Glob Bash WebFetch WebSearch
 
 # Report Writing
 
+## Voice & Style
+> See `documentation/writing-style` for full guide (`references/voice-and-tone.md`)
+
+Factual and evidence-driven. Every claim is backed by data, code, or sources. Tables for structured comparisons. Executive summary that stands alone. No filler paragraphs.
+
+> For substantial documents, follow the co-authoring workflow: `documentation/writing-style` → `references/co-authoring-workflow.md`
+
 ## Decision Tree
 
 - What kind of report?
@@ -28,7 +35,7 @@ Every report follows this process regardless of type:
    - User-provided context → use what's in the conversation
 3. **Outline** — draft section headings before writing prose. Share the outline with the user if the report is large
 4. **Write** — fill in each section with concrete evidence, not filler. Use tables for structured data, bullet lists for key points
-5. **Review** — check for completeness, remove fluff, ensure every claim is grounded in sources
+5. **Review** — check against `documentation/writing-style` → `references/quality-standards.md`
 
 ## Formatting rules
 
@@ -39,17 +46,6 @@ Every report follows this process regardless of type:
 - **Bullet lists** for key points and action items
 - **Code blocks** with language tags when referencing code
 - **Links** to source files and external references inline
-- No filler paragraphs — every sentence should add information
-
-## Quality checklist
-
-Before delivering any report:
-
-- [ ] Every claim is backed by evidence (code, data, link, or explicit reasoning)
-- [ ] Action items are specific and assigned where possible
-- [ ] Tables are used for any data with 3+ comparable items
-- [ ] Executive summary can stand alone — a reader who only reads it gets the key message
-- [ ] No orphan sections (empty or placeholder content)
 
 ## Tools
 
@@ -62,3 +58,14 @@ Before delivering any report:
 | `tools/comparison-matrix.ts` | Generate a comparison table from criteria and options |
 | `tools/retro-scaffold.ts` | Create retro doc with timeline from git/issue history |
 | `tools/research-scaffold.ts` | Create research doc with structured sections and source tracking |
+
+## Key references
+
+| File | What it covers |
+|---|---|
+| `references/status.md` | Status report template, workflow, section guidance |
+| `references/analysis.md` | Analysis report template, methodology, findings format |
+| `references/comparison.md` | Comparison report template, criteria, scoring |
+| `references/retro.md` | Retrospective template, blameless tone, action items |
+| `references/research.md` | Research report template, source tracking, synthesis |
+| `documentation/writing-style` | Shared voice, tone, formatting, and quality standards |
