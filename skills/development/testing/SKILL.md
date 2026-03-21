@@ -10,7 +10,7 @@ allowed-tools: Read Grep Glob Bash Write Edit
 
 - What is the task?
   - **Design a test strategy for a new feature or module** → see "Strategy Design" below
-  - **Write tests for existing code** → see "Authoring Tests" below (TypeScript: unit/integration; Swift: see "Swift tests" subsection)
+  - **Write tests for existing code** → see "Authoring Tests" below (TypeScript: unit/integration; Hono routes: see "Hono route tests" subsection; Swift: see "Swift tests" subsection)
   - **Generate test file boilerplate** → run `tools/test-scaffold.ts <source-file>`, then populate
   - **Find untested code paths** → run `tools/coverage-gaps.ts`, then see "Authoring Tests" below
   - **Configure the test runner** → see "Runner Configuration" below
@@ -61,6 +61,100 @@ Rules:
 2. Seed known state before each test, tear down after
 3. Test at the module boundary — call the public API, not internal functions
 4. Assert on side effects (DB state, emitted events) not just return values
+
+### Hono route tests (TypeScript)
+
+For Hono APIs backed by Drizzle + SQLite/D1, integration tests run against a real in-memory database — never mock the data layer.
+
+**In-memory database setup**
+
+Create an in-memory SQLite instance and run the actual Drizzle migrations once, then clear tables between tests (faster than recreating):
+
+```ts
+import { Database } from "bun:sqlite"
+import { drizzle } from "drizzle-orm/bun-sqlite"
+import { migrate } from "drizzle-orm/bun-sqlite/migrator"
+import { beforeEach } from "bun:test"
+
+function createTestDb() {
+  const sqlite = new Database(":memory:")
+  sqlite.exec("PRAGMA foreign_keys = ON")
+  const db = drizzle(sqlite)
+  migrate(db, { migrationsFolder: "drizzle/migrations" })
+  return Object.assign(db, { $client: sqlite })
+}
+
+const db = createTestDb()
+
+beforeEach(() => {
+  db.$client.exec("PRAGMA foreign_keys = OFF")
+  const tables = db.$client
+    .prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE '__drizzle%'")
+    .all() as { name: string }[]
+  for (const { name } of tables) db.$client.exec(`DELETE FROM "${name}"`)
+  db.$client.exec("PRAGMA foreign_keys = ON")
+})
+```
+
+**Test app factory**
+
+Wrap the router under test in a minimal Hono app that injects DB and auth context via middleware — do not spin up a real server:
+
+```ts
+import { Hono } from "hono"
+import { usersRouter } from "./routes/users"
+
+function createTestApp(options: { userId?: string | null } = {}) {
+  const app = new Hono()
+  app.use("*", async (c, next) => {
+    c.set("db", db)
+    c.set("user", options.userId ? { id: options.userId } : null)
+    await next()
+  })
+  app.route("/", usersRouter)
+  return app
+}
+```
+
+**Writing tests**
+
+Call routes directly with `app.request()` — no real server, no port binding:
+
+```ts
+import { describe, expect, test } from "bun:test"
+
+describe("POST /users", () => {
+  test("creates a user and returns 201", async () => {
+    const app = createTestApp({ userId: "user-1" })
+    const res = await app.request("/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: "Alice", email: "alice@example.com" }),
+    })
+    expect(res.status).toBe(201)
+    const body = await res.json() as { ok: boolean; data: { name: string } }
+    expect(body.ok).toBe(true)
+    expect(body.data.name).toBe("Alice")
+  })
+
+  test("returns 401 when no user in context", async () => {
+    const app = createTestApp({ userId: null })
+    const res = await app.request("/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: "Alice", email: "alice@example.com" }),
+    })
+    expect(res.status).toBe(401)
+  })
+})
+```
+
+**Rules**
+
+- Use `bun:sqlite` in-memory DB with real migrations — test actual query behavior, not mocked clients
+- Only mock hard external boundaries: logger, email sending, HTTP calls to third-party services
+- Clear tables in `beforeEach`, not `afterEach` — a failing test leaves state intact for debugging
+- Create typed seed helper functions for common entities to keep test bodies readable
 
 ### E2E tests
 
