@@ -1,6 +1,6 @@
 ---
 name: cloudflare
-description: Deploys and manages Cloudflare Workers, Pages, D1, KV, and R2 resources using wrangler. Use when deploying a Worker or Pages project, creating or migrating D1 databases, managing KV namespaces, setting environment secrets, configuring routes or custom domains, or debugging Worker errors and performance issues.
+description: Deploys and manages Cloudflare Workers, Pages, D1, KV, R2, and Service Bindings using wrangler. Use when deploying a Worker or Pages project, creating or migrating D1 databases, managing KV namespaces, setting environment secrets, configuring routes or custom domains, wiring up inter-worker Service Bindings, or debugging Worker errors and performance issues.
 allowed-tools: Read Grep Glob Bash Write Edit
 ---
 
@@ -13,6 +13,7 @@ allowed-tools: Read Grep Glob Bash Write Edit
   - **Manage D1, KV, or R2 resources** → see "Resource Management" below
   - **Configure routes, domains, or DNS** → see "Routing and Domains" below
   - **Set or rotate environment secrets** → see "Secrets and Variables" below
+  - **Connect two Workers so one can call the other** → see "Service Bindings" below
   - **Diagnose errors or performance issues** → see "Observability" below
   - **Audit bundle size or routes** → run the relevant tool under "Key references"
 
@@ -71,6 +72,79 @@ allowed-tools: Read Grep Glob Bash Write Edit
 - **Secrets**: never put in `wrangler.toml`; use `bunx wrangler secret put <KEY> --env <env>` and input value interactively
 - List existing secrets: `bunx wrangler secret list --env <env>`
 - Rotate a secret: `bunx wrangler secret put <KEY> --env <env>` (overwrites silently)
+
+## Service Bindings
+
+Service Bindings let one Worker call another directly — no public URL, no HTTP round-trip, zero network overhead.
+
+### When to use
+
+- Internal services that should not be exposed to the public internet (auth, billing, internal APIs)
+- Worker-to-Worker calls within the same account where latency matters
+- Splitting a large Worker into smaller cooperating services
+
+### Configuration
+
+Declare the binding in the **calling** Worker's `wrangler.toml`:
+
+```toml
+[[services]]
+binding = "AUTH_API"
+service = "auth-api"       # must match the target Worker's `name` field
+```
+
+For per-environment targets (e.g. staging auth vs. production auth):
+
+```toml
+[env.staging]
+[[env.staging.services]]
+binding = "AUTH_API"
+service = "auth-api-staging"
+
+[env.production]
+[[env.production.services]]
+binding = "AUTH_API"
+service = "auth-api"
+```
+
+### Calling a bound Worker
+
+The binding is available on `env` and behaves like a `fetch` client:
+
+```ts
+// Pass a Request through to the bound Worker
+const response = await env.AUTH_API.fetch(request)
+
+// Or construct a new request
+const response = await env.AUTH_API.fetch(
+  new Request("https://internal/verify-session", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ token }),
+  })
+)
+```
+
+The URL host doesn't matter for internal routing — use a placeholder like `https://internal/` to keep it readable.
+
+### Local development
+
+When using `wrangler dev`, Wrangler resolves Service Bindings to locally running Workers. The target Worker must be running on its own port. In `wrangler.toml`, declare the local port for each bound service:
+
+```toml
+[[services]]
+binding = "AUTH_API"
+service = "auth-api"
+```
+
+Wrangler discovers the port from the target Worker's `wrangler dev --port` setting or from `process-compose`. If the target is not running, calls to the binding will fail immediately with a connection error.
+
+### Rules
+
+- Never expose the target Worker via a public route — the whole point is that it stays internal
+- The `service` name must exactly match the target Worker's `name` in its own `wrangler.toml`
+- Service Bindings do not support streaming request bodies — buffer the body before forwarding if needed
+- For typed calls between Hono Workers, use `hono/client` to generate a typed client from the bound Worker's app type
 
 ## Observability
 
