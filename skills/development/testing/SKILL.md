@@ -1,6 +1,6 @@
 ---
 name: testing
-description: Designs test strategies, authors tests at all levels (unit, integration, E2E), diagnoses broken or flaky tests, and configures CI pipelines. Use when writing new tests, generating scaffolds, identifying untested code, configuring runners, fixing consistent or intermittent failures, updating stale snapshots, triaging mass breakage after a refactor, setting up CI workflows, optimizing pipeline speed, managing caching, or configuring matrix builds.
+description: Designs test strategies, authors tests at all levels (unit, integration, E2E), diagnoses broken or flaky tests, and configures CI pipelines. Covers TypeScript (Bun/Vitest), web E2E (Playwright), React Native (Maestro), and Swift (Swift Testing framework). Use when writing new tests, generating scaffolds, identifying untested code, configuring runners, fixing consistent or intermittent failures, updating stale snapshots, triaging mass breakage after a refactor, setting up CI workflows, optimizing pipeline speed, managing caching, or configuring matrix builds.
 allowed-tools: Read Grep Glob Bash Write Edit
 ---
 
@@ -10,7 +10,7 @@ allowed-tools: Read Grep Glob Bash Write Edit
 
 - What is the task?
   - **Design a test strategy for a new feature or module** → see "Strategy Design" below
-  - **Write tests for existing code** → see "Authoring Tests" below
+  - **Write tests for existing code** → see "Authoring Tests" below (TypeScript: unit/integration; Swift: see "Swift tests" subsection)
   - **Generate test file boilerplate** → run `tools/test-scaffold.ts <source-file>`, then populate
   - **Find untested code paths** → run `tools/coverage-gaps.ts`, then see "Authoring Tests" below
   - **Configure the test runner** → see "Runner Configuration" below
@@ -74,10 +74,109 @@ For native (Maestro):
 2. Use `tapOn:` with text or accessibility IDs, not coordinates
 3. Assert screen state with `assertVisible:` after each significant action
 
+### Swift tests
+
+Use Swift Testing (`import Testing`) for all new Swift tests — not XCTest.
+
+**Basic test:**
+
+```swift
+import Testing
+
+@Test func formatsDateCorrectly() {
+    #expect(DateFormatter.display(Date(timeIntervalSince1970: 0)) == "Jan 1, 1970")
+}
+```
+
+**Test suites** — group related tests with `@Suite`:
+
+```swift
+@Suite("UserValidator")
+struct UserValidatorTests {
+    @Test func acceptsValidEmail() {
+        #expect(UserValidator.isValidEmail("user@example.com"))
+    }
+
+    @Test func rejectsEmptyEmail() {
+        #expect(!UserValidator.isValidEmail(""))
+    }
+
+    @Test func throwsOnMissingName() {
+        #expect(throws: ValidationError.missingField("name")) {
+            try UserValidator.validate(User(name: "", email: "a@b.com"))
+        }
+    }
+}
+```
+
+**Async tests** — async/await works natively, no special setup:
+
+```swift
+@Test func fetchesResourceSuccessfully() async throws {
+    let client = MockHTTPClient(response: .sampleUser)
+    let service = UserService(client: client)
+    let user = try await service.fetch(id: "usr_123")
+    #expect(user.id == "usr_123")
+}
+```
+
+**Parameterized tests** — test multiple inputs with one function:
+
+```swift
+@Test("rejects invalid emails", arguments: ["", "notanemail", "@no-user.com", "no-domain@"])
+func invalidEmailRejected(email: String) {
+    #expect(!UserValidator.isValidEmail(email))
+}
+```
+
+**`#require` for preconditions** — stops the test immediately if the condition fails (like an unwrap):
+
+```swift
+@Test func parsesResponseBody() throws {
+    let data = try #require(responseData, "Expected non-nil response data")
+    let decoded = try JSONDecoder().decode(User.self, from: data)
+    #expect(decoded.name == "Alice")
+}
+```
+
+**`@MainActor` tests** — for observable view models and UI-layer state:
+
+```swift
+@Test @MainActor
+func viewModelPopulatesItemsAfterLoad() async {
+    let vm = ItemListViewModel(store: MockItemStore(items: [.sample]))
+    await vm.load()
+    #expect(vm.items.count == 1)
+}
+```
+
+**Tagging** — group tests by concern for selective runs:
+
+```swift
+extension Tag {
+    @Tag static var networking: Self
+    @Tag static var validation: Self
+}
+
+@Test(.tags(.networking))
+func requestIncludesAuthHeader() async throws { ... }
+```
+
+Run tagged subset: `swift test --filter networking`.
+
+**Rules:**
+- Never use XCTest for new tests — Swift Testing is the standard from Swift 6.2
+- Use `#expect` for assertions — not `XCTAssertEqual`, `XCTAssertTrue`, etc.
+- Use `throws` on `@Test` for tests exercising throwing code; combine with `#require` for preconditions
+- Keep each `@Test` to one behavior — one assertion (or a small set of tightly related ones)
+- Name tests as behaviors: `"rejectsEmptyInput"` not `"testValidationEmpty"`
+- Prefer real implementations over mocks — only mock at hard system boundaries (network, filesystem)
+
 ## Runner Configuration
 
 - **Bun** — `bun test` with `bunfig.toml` for test globs and coverage thresholds
 - **Vitest** — `vitest.config.ts`, enable `coverage.provider: 'v8'` for accurate coverage
+- **Swift** — `swift test` for SPM packages; `xcodebuild test -scheme <Scheme>` for Xcode projects; `tuist test` for Tuist-managed projects
 - Coverage thresholds: set per-module, not project-wide; critical modules ≥80%, utilities ≥60%
 - CI: always run tests with `--bail` to fail fast, pipe results through `tools/failure-parse.ts`
 
