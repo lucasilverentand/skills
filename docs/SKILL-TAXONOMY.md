@@ -32,8 +32,7 @@ Small, focused, self-contained. Each one handles a single well-defined task. An 
 | Skill | What it does |
 |---|---|
 | `git/committing` | Writes a conventional commit message |
-| `git/branching` | Creates and manages branches |
-| `git/tagging` | Creates semver tags |
+| `git/conflicts` | Resolves merge conflicts |
 | `documentation/style` | Applies voice, tone, and formatting standards |
 | `security/audit` | Runs a security review |
 | `development/testing` | Authors tests for a given piece of code |
@@ -57,11 +56,10 @@ Combine atomic skills into a prescribed sequence. A workflow skill knows the ste
 
 | Skill | What it composes |
 |---|---|
-| `git` (parent) | Routes to `branching` → `committing` → `tagging` → `remote` and other atomic git skills in sequence |
-| `documentation/developer-docs` | Uses `style` for tone, `knowledge` for ADRs, then writes the actual doc |
+| `git` (parent) | Routes to committing → conflicts → history → clean and other git sections in sequence |
+| `documentation/developer-docs` | Uses `style` for tone, then writes the actual doc |
 | `documentation/reporting` | Picks report type → applies `style` → follows report-specific template |
 | `git/clean` | Analyzes dirty state → splits hunks → creates atomic commits → cleans branches → pushes |
-| `development/planning` | Breaks down a feature → creates ordered tasks → maps dependencies |
 
 **Composition patterns:**
 
@@ -73,14 +71,14 @@ Workflows reference atomic skills in two ways:
 flowchart LR
   A[git] -->|"What do you need?"| B{Decision tree}
   B --> C[git/committing]
-  B --> D[git/branching]
-  B --> E[git/tagging]
-  B --> F[git/stashing]
+  B --> D[git/conflicts]
+  B --> E[git/history]
+  B --> F[git/clean]
   style A fill:#4a9eff,color:#fff
   style C fill:#2d8a4e,color:#fff
   style D fill:#2d8a4e,color:#fff
   style E fill:#2d8a4e,color:#fff
-  style F fill:#2d8a4e,color:#fff
+  style F fill:#4a9eff,color:#fff
 ```
 
 2. **Cross-skill references** — a skill points to another skill for a specific concern:
@@ -88,10 +86,8 @@ flowchart LR
 ```mermaid
 flowchart LR
   A[documentation/developer-docs] -->|"tone & formatting"| B[documentation/style]
-  A -->|"ADR scaffolding"| C[development/knowledge]
   style A fill:#4a9eff,color:#fff
   style B fill:#2d8a4e,color:#fff
-  style C fill:#2d8a4e,color:#fff
 ```
 
 **When to use workflow:** The task has a known sequence of steps that are always (or almost always) the same. "Ship a PR", "clean up this repo", "write architecture docs".
@@ -171,7 +167,6 @@ The tier is about behavior, not location. A skill's folder path reflects its **d
 flowchart LR
   subgraph git["skills/git/"]
     A["committing ⚡"]
-    B["branching ⚡"]
     C["clean 🔗"]
     D["SKILL.md 🔗"]
   end
@@ -181,13 +176,11 @@ flowchart LR
     F["developer-docs 🔗"]
   end
 
-  D -.->|routes to| A
-  D -.->|routes to| B
-  D -.->|routes to| C
+  D -.->|contains| A
+  D -.->|contains| C
   F -.->|references| E
 
   style A fill:#2d8a4e,color:#fff
-  style B fill:#2d8a4e,color:#fff
   style E fill:#2d8a4e,color:#fff
   style C fill:#4a9eff,color:#fff
   style D fill:#4a9eff,color:#fff

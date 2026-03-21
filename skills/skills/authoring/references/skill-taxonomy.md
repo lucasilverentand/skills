@@ -8,7 +8,7 @@ Skills fall into three tiers based on scope and autonomy. Pick the right tier be
 
 Does one thing well. Self-contained, no dependencies on other skills, usually maps to one decision tree.
 
-Examples: `git/committing`, `git/branching`, `documentation/style`, `security/audit`
+Examples: `git/committing`, `git/conflicts`, `documentation/style`, `security/audit`
 
 Signals you're building an atomic skill:
 - The skill handles a single, well-defined task

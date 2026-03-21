@@ -1,6 +1,6 @@
 ---
 name: coauthoring
-description: Guide users through a structured workflow for co-authoring internal project documentation. Covers all doc types (specs, RFCs, proposals, decision docs, postmortems, ADRs, project briefs, etc.) with a 3-stage process — Context Gathering, Refinement & Structure, and Reader Testing. Uses AskUserQuestion heavily to guide decisions. Trigger when user mentions writing docs, creating proposals, drafting specs, or any substantial writing task.
+description: Guide users through a structured workflow for co-authoring project documentation — both internal (specs, RFCs, proposals, decision docs, postmortems, ADRs, project briefs) and external (blog posts, release notes, announcements, changelogs). Uses a 3-stage process — Context Gathering, Refinement & Structure, and Reader Testing. Uses AskUserQuestion heavily to guide decisions. Trigger when user mentions writing docs, creating proposals, drafting specs, writing blog posts, release notes, or any substantial writing task.
 ---
 
 # Doc Co-Authoring Workflow
@@ -28,6 +28,43 @@ These are sensible defaults. If the user expresses a different preference at any
 | **Doc length** | Depends on the doc — ask each time | User states a preference |
 | **Reader testing persona** | Match the actual target audience | User wants a generic reader or specific persona |
 | **Direct file edits** | If the doc changes between turns, assume the user edited it directly — read the file, detect changes, and adapt silently | N/A |
+
+## Doc Type Routing
+
+### Internal documents
+
+> Voice: Direct and precise. Lead with the proposal or conclusion, not the background. Tables for trade-offs and alternatives. Every decision needs stated reasoning. Blameless language for incidents.
+
+- **Technical specification** → follow `references/specs.md`
+- **RFC (request for comments)** → follow `references/rfcs.md`
+- **Proposal or business case** → follow `references/proposals.md`
+- **Decision document or ADR** → follow `references/decision-docs.md`
+- **Postmortem or incident report** → follow `references/postmortems.md`
+- **Project brief** → use the co-authoring workflow with a custom structure
+
+### External documents
+
+> Voice: Engaging and clear. Lead with what matters to the reader, not what was hard to build. Show, don't tell — examples over adjectives. Respect the reader's time. No internal jargon.
+
+- **Blog post** → follow `references/blog-posts.md`
+- **Release notes** → follow `references/release-notes.md`
+- **Announcement** → follow `references/announcements.md`
+- **Changelog** → follow `references/changelogs.md`
+
+### Key references
+
+| File | What it covers |
+|---|---|
+| `references/specs.md` | Technical specification template, section guidance, anti-patterns |
+| `references/rfcs.md` | RFC template, review process, lifecycle |
+| `references/proposals.md` | Proposal template, stakeholder alignment, success criteria |
+| `references/decision-docs.md` | Decision document template, ADR content guidance |
+| `references/postmortems.md` | Postmortem template, blameless format, prevention focus |
+| `references/blog-posts.md` | Blog post template, structure, audience targeting |
+| `references/release-notes.md` | Release notes template, versioning, categorization |
+| `references/announcements.md` | Announcement template, channel-specific formatting |
+| `references/changelogs.md` | Changelog format, Keep a Changelog standard |
+| `documentation/style` | Shared voice, tone, formatting, and quality standards |
 
 ## When to Offer This Workflow
 

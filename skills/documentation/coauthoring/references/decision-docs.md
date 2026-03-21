@@ -8,7 +8,7 @@ Recording a significant decision after it's been made — why it was made, what 
 
 ADRs (Architecture Decision Records) are a specific, lightweight format for technical decisions stored in the codebase. Decision docs are broader — they can cover organizational, process, or strategic decisions too.
 
-- **ADR tooling:** `development/knowledge` (tools/adr-create.ts) — use this to scaffold and manage ADRs
+- **ADR tooling:** `documentation/developer-docs` (tools/adr-create.ts) — use this to scaffold and manage ADRs
 - **ADR content guidance:** this reference — use these principles for writing the content
 
 ## Template

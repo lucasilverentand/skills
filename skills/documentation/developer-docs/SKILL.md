@@ -1,6 +1,6 @@
 ---
 name: developer-docs
-description: Writes and maintains project documentation — READMEs, CONTRIBUTING.md, architecture overviews, ADRs, GitHub templates, and Mermaid diagrams. Use when creating docs for a new project, updating existing documentation, or scaffolding contributor workflows.
+description: Writes and maintains project documentation — READMEs, CONTRIBUTING.md, architecture overviews, ADRs, GitHub templates, changelogs, and Mermaid diagrams — with built-in support for Library/CLI, Service, Monorepo, Expo, Rust, and Swift project types. Use when creating docs for a new project, updating existing documentation, scaffolding contributor workflows, or generating architecture diagrams from code.
 allowed-tools: Read Grep Glob Bash Write Edit
 ---
 
@@ -151,7 +151,7 @@ For a well-configured project, also set:
 
 ## ADR
 
-> **Cross-reference:** ADR scaffolding is handled by `development/knowledge` (tools/adr-create.ts). Use that skill to create new ADRs. Content guidance for decision docs: `documentation/internal-docs` → `references/decision-docs.md`.
+> **Cross-reference:** Use `tools/adr-create.ts` to scaffold new ADRs.
 
 1. Fill in the four sections:
    - **Context** — what situation forced a decision?
@@ -185,6 +185,13 @@ Badges provide at-a-glance project status. Use shields.io for consistency. Full 
 - Run `tools/example-validator.ts` after API changes to catch stale examples
 - Run `tools/setup-validator.ts` after tooling changes to verify setup docs still work
 
+## Changelog
+
+- Prefer a separate `CHANGELOG.md` or GitHub Releases over inlining in the README
+- Link from the README: `See [CHANGELOG.md](CHANGELOG.md) for a full list of changes.`
+- Follow [Keep a Changelog](https://keepachangelog.com/) format
+- Group changes: Added, Changed, Fixed, Removed, Security
+
 ## Social preview and SEO
 
 - Upload a social preview image (1280x640px) in repo Settings > General
@@ -208,5 +215,4 @@ Badges provide at-a-glance project status. Use shields.io for consistency. Full 
 | `tools/setup-validator.ts` | Verify documented setup steps run cleanly |
 | `tools/mermaid-gen.ts` | Generate Mermaid diagrams from modules and DB schema |
 | `documentation/style` | Shared voice, tone, formatting, and quality standards |
-| `development/knowledge` | ADR scaffolding (tools/adr-create.ts) |
-| `project/parts/config` | Environment variable documentation (tools/env-docs.ts) |
+| `project/scaffolding` | Project structure and environment config reference |
