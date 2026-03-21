@@ -27,7 +27,7 @@ allowed-tools: Read Grep Glob Bash Write Edit
 
 ## Conventions
 
-> **Note:** The `{ ok, error }` response shape follows the Result type pattern from `development/error-handling`.
+> **Note:** The `{ ok, error }` response shape follows the Result type pattern from `development/errors`.
 
 ### Response shape
 

@@ -70,7 +70,7 @@ export async function authMiddleware(req: Request): Promise<Session | null> {
 }
 ```
 
-- Hono API imports this middleware — see `development/api-design`
+- Hono API imports this middleware — see `development/api`
 - Never inline session logic in route handlers
 
 ## Session persistence

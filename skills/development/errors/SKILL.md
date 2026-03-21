@@ -6,7 +6,7 @@ allowed-tools: Read Grep Glob Bash Write Edit
 
 # Error Handling
 
-> **Cross-reference:** `development/api-design` builds on the Result type pattern defined here for its `{ ok, error }` API response shape.
+> **Cross-reference:** `development/api` builds on the Result type pattern defined here for its `{ ok, error }` API response shape.
 
 ## Decision Tree
 
