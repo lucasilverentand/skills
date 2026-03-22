@@ -15,6 +15,7 @@ allowed-tools: Read Grep Glob Bash Write Edit
   - **Adding logging/observability** → see `references/logging.md`
   - **Designing batch operations** → see `references/batch-operations.md`
   - **Adding outbound webhooks** → see `references/webhooks.md`
+  - **Receiving and verifying inbound webhooks from third parties** → see `references/webhooks.md`
   - **Setting up API key management** → see `references/api-keys.md`
   - **Designing authentication** → single API or multiple? See `references/auth.md`
   - **Generating or updating an OpenAPI spec** → see `references/hono.md` for generation workflow
