@@ -17,6 +17,7 @@ allowed-tools: Read Grep Glob Bash Write Edit
   - **Adding outbound webhooks** → see `references/webhooks.md`
   - **Receiving and verifying inbound webhooks from third parties** → see `references/webhooks.md`
   - **Setting up API key management** → see `references/api-keys.md`
+  - **Implementing file uploads (presigned URL or multipart)** → see `references/file-uploads.md`
   - **Designing authentication** → single API or multiple? See `references/auth.md`
   - **Generating or updating an OpenAPI spec** → see `references/hono.md` for generation workflow
   - **Checking for breaking changes** → see "Breaking change detection" below
@@ -118,6 +119,7 @@ Test API routes against a real local database. No mocked DB. Test the full reque
 | `references/batch-operations.md` | Batch endpoint conventions, response strategies, limits |
 | `references/webhooks.md` | Outbound webhook payload shape, HMAC signing, delivery |
 | `references/api-keys.md` | Key format, hashed storage, per-resource scopes, rotation |
+| `references/file-uploads.md` | Presigned URL uploads to R2, server-side multipart, private file serving, security |
 | `tools/openapi-gen.ts` | Generate an OpenAPI spec from route definitions |
 | `tools/breaking-changes.ts` | Diff two OpenAPI specs and report breaking changes |
 | `tools/route-lint.ts` | Check API routes for naming inconsistencies and missing validation |
