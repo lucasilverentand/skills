@@ -15,6 +15,7 @@ allowed-tools: Read Grep Glob Bash Write Edit
   - **Adding middleware or error handling** → see `references/middleware.md`
   - **Adding logging/observability** → see `references/logging.md`
   - **Designing batch operations** → see `references/batch-operations.md`
+  - **Offloading long-running work to a background queue** → see `references/background-jobs.md`
   - **Adding outbound webhooks** → see `references/webhooks.md`
   - **Receiving and verifying inbound webhooks from third parties** → see `references/webhooks.md`
   - **Setting up API key management** → see `references/api-keys.md`
@@ -118,6 +119,7 @@ Test API routes against a real local database. No mocked DB. Test the full reque
 | `references/middleware.md` | Middleware chain ordering, global error handler, health/readiness endpoints |
 | `references/logging.md` | LogTape setup, standard log fields, platform-specific sink configuration |
 | `references/batch-operations.md` | Batch endpoint conventions, response strategies, limits |
+| `references/background-jobs.md` | Queue producer pattern, job message schema, status endpoint, idempotency |
 | `references/webhooks.md` | Outbound webhook payload shape, HMAC signing, delivery |
 | `references/api-keys.md` | Key format, hashed storage, per-resource scopes, rotation |
 | `references/file-uploads.md` | Presigned URL uploads to R2, server-side multipart, private file serving, security |
