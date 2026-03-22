@@ -48,7 +48,7 @@ Each "part" is a workspace package with a dedicated responsibility. Parts live i
 | `auth` | Better Auth config, session types, middleware, RBAC |
 | `ui` | Shared component library (Tailwind, design tokens) |
 | `email` | React Email templates and sending utilities |
-| `logger` | Structured logging (pino), transports, redaction |
+| `logger` | Structured logging (LogTape), sinks, redaction |
 | `payments` | Stripe checkout, subscriptions, webhooks |
 | `analytics` | PostHog tracking, feature flags, user identification |
 | `notifications` | Push notifications (Expo, APNs, web push) |

@@ -1,57 +1,117 @@
 # Logger
 
-The `logger` part provides structured logging using pino.
+The `logger` part provides structured logging using LogTape.
 
 ## Setup
 
 1. Create `packages/logger/`
-2. Install: `bun add pino && bun add -d pino-pretty`
+2. Install: `bun add @logtape/logtape`
 
 ```ts
-import pino from "pino";
+import { configure, getConsoleSink, getLogger, type LogRecord } from "@logtape/logtape"
 
-export const logger = pino({
-  level: process.env.LOG_LEVEL ?? "info",
-  redact: ["password", "token", "secret", "authorization", "*.password", "*.token"],
-  transport: process.env.NODE_ENV === "development"
-    ? { target: "pino-pretty" }
-    : undefined,
-});
-
-export function createLogger(context: Record<string, unknown>) {
-  return logger.child(context);
+export async function setupLogger() {
+  await configure({
+    sinks: {
+      console:
+        process.env.NODE_ENV === "development"
+          ? getConsoleSink()
+          : {
+              handle(record: LogRecord) {
+                process.stdout.write(
+                  JSON.stringify({
+                    level: record.level,
+                    category: record.category.join("."),
+                    message: record.message,
+                    ...record.properties,
+                    timestamp: new Date(record.timestamp).toISOString(),
+                  }) + "\n"
+                )
+              },
+            },
+    },
+    loggers: [
+      { category: [], level: process.env.LOG_LEVEL ?? "info", sinks: ["console"] },
+    ],
+    reset: true,
+  })
 }
+
+export { getLogger }
 ```
+
+Call `setupLogger()` once at app startup before serving requests.
 
 ## Usage
 
 ```ts
-const log = createLogger({ service: "users", requestId: c.get("requestId") });
-log.info({ userId }, "user created");
-log.error({ err, userId }, "failed to send welcome email");
+const logger = getLogger(["users"])
+
+logger.info("user created", { userId })
+logger.error("failed to send welcome email", { userId, error })
+```
+
+For request-scoped context, pass shared fields on each call or wrap in a helper:
+
+```ts
+export function createLogger(category: string[], context: Record<string, unknown>) {
+  const base = getLogger(category)
+  return {
+    debug: (message: string, extra?: Record<string, unknown>) =>
+      base.debug(message, { ...context, ...extra }),
+    info: (message: string, extra?: Record<string, unknown>) =>
+      base.info(message, { ...context, ...extra }),
+    warn: (message: string, extra?: Record<string, unknown>) =>
+      base.warn(message, { ...context, ...extra }),
+    error: (message: string, extra?: Record<string, unknown>) =>
+      base.error(message, { ...context, ...extra }),
+  }
+}
+```
+
+```ts
+const log = createLogger(["api", "users"], { requestId: c.get("requestId") })
+log.info("user created", { userId })
+log.error("db write failed", { error })
 ```
 
 ### Log levels
 
-- `trace` — low-level internals, disabled in production
 - `debug` — per-request detail useful in development
 - `info` — normal operations (service started, job completed)
-- `warn` — recoverable issues (retrying, degraded mode)
-- `error` — unexpected failures, always include `err` field
+- `warning` — recoverable issues (retrying, degraded mode)
+- `error` — unexpected failures, always include the `error` field
+- `fatal` — process-crashing failures
 
 ## Request tracing
 
-Generate `requestId` per request with `crypto.randomUUID()`, attach in middleware, pass to every `createLogger()` call.
+Generate a `requestId` per request with `crypto.randomUUID()`, attach it in middleware, and pass it to every logger call. See the `api` skill's `middleware.md` for the full request ID middleware.
 
-## Transport configuration
+## Sink configuration
 
-- **Development** — `pino-pretty` for human-readable output
-- **Production** — raw JSON to stdout, let the platform aggregate
-- **Testing** — `level: "silent"` to suppress noise
+- **Development** — `getConsoleSink()` for human-readable, colored output
+- **Production (Cloudflare Workers)** — `getConsoleSink()` only; Workers captures `console.*` automatically. Enable Cloudflare Logpush to ship logs to R2 or an external service (Axiom, Datadog)
+- **Production (Node/Bun on Railway)** — custom JSON sink writing to stdout
+- **Testing** — configure no sinks, or set `level: "fatal"` to suppress noise
 
 ## Redaction
 
-Always redact: `password`, `token`, `secret`, `authorization`, `cookie`. Use dot-path patterns for nested fields. Run `tools/redact-check.ts` before shipping.
+Never log raw secrets. Keep a deny-list of fields to omit or mask:
+
+```ts
+const REDACTED_FIELDS = new Set(["password", "token", "secret", "authorization", "cookie"])
+
+export function redact(obj: Record<string, unknown>): Record<string, unknown> {
+  return Object.fromEntries(
+    Object.entries(obj).map(([k, v]) => [
+      k,
+      REDACTED_FIELDS.has(k.toLowerCase()) ? "[REDACTED]" : v,
+    ])
+  )
+}
+```
+
+Always pass user-supplied data through `redact()` before logging. Run `tools/redact-check.ts` before shipping.
 
 ## Tools
 
