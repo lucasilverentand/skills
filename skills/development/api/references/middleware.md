@@ -115,21 +115,125 @@ export const requireScope = (scope: string): MiddlewareHandler => async (c, next
 
 ### Rate limiter (sensitive routes only)
 
-Apply only to auth routes and other high-risk endpoints — not globally:
+Apply only to auth routes and other high-risk endpoints — not globally.
+
+**Do not use `@hono/rate-limiter` with its default in-memory store in Cloudflare Workers.** Worker instances share no memory across requests or isolates, so an in-memory counter resets on every cold start and is not shared between instances running in parallel. Use a KV-backed implementation instead.
+
+**The abstraction** — define a `RateLimiter` interface so the same code works with a real KV store in production and an in-memory store in tests:
 
 ```ts
-import { rateLimiter } from "@hono/rate-limiter"
+// src/middleware/rate-limit.ts
+type RateLimitRule = {
+  limit: number
+  windowMs: number
+}
 
-// In the auth router — not the root app
-authApp.use(
-  rateLimiter({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    limit: 10,
-    standardHeaders: true,
-    keyGenerator: (c) => c.req.header("x-forwarded-for") ?? "unknown",
-  })
-)
+type RateLimitResult =
+  | { allowed: true }
+  | { allowed: false; retryAfterSeconds: number }
+
+export type RateLimiter = {
+  check: (
+    key: string,
+    rule: RateLimitRule,
+    nowMs?: number
+  ) => RateLimitResult | Promise<RateLimitResult>
+}
+
+/** In-memory implementation — only for tests and local dev. Not distributed. */
+export function createInMemoryRateLimiter(): RateLimiter {
+  const buckets = new Map<string, number[]>()
+  return {
+    check(key, rule, nowMs = Date.now()): RateLimitResult {
+      const cutoff = nowMs - rule.windowMs
+      const existing = buckets.get(key) ?? []
+      const recent = existing.filter((ts) => ts > cutoff)
+      recent.push(nowMs)
+      buckets.set(key, recent)
+      if (recent.length <= rule.limit) return { allowed: true }
+      const retryAfterMs = Math.max(0, recent[0]! + rule.windowMs - nowMs)
+      return { allowed: false, retryAfterSeconds: Math.ceil(retryAfterMs / 1000) }
+    },
+  }
+}
+
+/**
+ * KV-backed sliding window rate limiter.
+ * Uses Cloudflare KV with TTL-based key expiration.
+ * Requires a [[kv_namespaces]] binding named RATE_LIMIT_KV in wrangler.toml.
+ */
+export function createKvRateLimiter(kv: KVNamespace): RateLimiter {
+  return {
+    async check(key, rule, nowMs = Date.now()): Promise<RateLimitResult> {
+      const windowSeconds = Math.ceil(rule.windowMs / 1000)
+      const stored = await kv.get<number[]>(`rate:${key}`, "json")
+      const timestamps: number[] = Array.isArray(stored) ? stored : []
+      const cutoff = nowMs - rule.windowMs
+      const recent = timestamps.filter((ts) => ts > cutoff)
+      recent.push(nowMs)
+      await kv.put(`rate:${key}`, JSON.stringify(recent), {
+        expirationTtl: windowSeconds + 60,
+      })
+      if (recent.length <= rule.limit) return { allowed: true }
+      const retryAfterMs = Math.max(0, recent[0]! + rule.windowMs - nowMs)
+      return { allowed: false, retryAfterSeconds: Math.ceil(retryAfterMs / 1000) }
+    },
+  }
+}
 ```
+
+**Wiring** — pick the right implementation based on the KV binding being present:
+
+```ts
+// src/app.ts
+const inMemoryRateLimiter = createInMemoryRateLimiter() // fallback for local dev
+let kvRateLimiter: RateLimiter | null = null
+
+function getRateLimiter(env: Env): RateLimiter {
+  if (env.RATE_LIMIT_KV) {
+    kvRateLimiter ??= createKvRateLimiter(env.RATE_LIMIT_KV)
+    return kvRateLimiter
+  }
+  return inMemoryRateLimiter
+}
+```
+
+**Calling it** — apply rate limiting inline where you need it, using per-IP and/or per-identity keys:
+
+```ts
+app.post("/auth/login", async (c) => {
+  const ip = c.req.header("cf-connecting-ip") ?? c.req.header("x-forwarded-for") ?? "unknown"
+  const rateLimiter = getRateLimiter(c.env)
+  const result = await rateLimiter.check(
+    `login:ip:${ip}`,
+    { limit: 10, windowMs: 60_000 } // 10 attempts per minute per IP
+  )
+  if (!result.allowed) {
+    return c.json(
+      { ok: false, error: { code: "RATE_LIMITED", message: "Too many requests" } },
+      429,
+      { "Retry-After": String(result.retryAfterSeconds) }
+    )
+  }
+  // ... handle login
+})
+```
+
+**wrangler.toml** — add the KV binding:
+
+```toml
+[[kv_namespaces]]
+binding = "RATE_LIMIT_KV"
+id = "<namespace-id>"
+```
+
+Create the namespace: `bunx wrangler kv:namespace create rate-limit`
+
+Rules:
+- Key format: `<action>:<dimension>:<identifier>` — e.g. `login:ip:1.2.3.4`, `signup:email:alice@example.com`
+- Use a short TTL (`windowSeconds + 60`) so KV keys expire automatically and you don't pay for stale data
+- Skip rate limiting in `NODE_ENV=development` or when running tests to avoid flakiness
+- Only rate limit high-risk routes (login, signup, password reset, magic link) — not general API routes
 
 ## Wiring the middleware chain in app.ts
 
