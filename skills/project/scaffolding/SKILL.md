@@ -1,6 +1,6 @@
 ---
 name: scaffolding
-description: Guides navigation, creation, and maintenance of monorepo workspace packages (parts). Covers infrastructure packages (config, types, schema, utils, logger), feature packages (auth, payments, email, analytics, notifications, i18n), and app packages (Expo, iOS, React dashboard, Astro website, CLI tools, UI component library). Use when working across workspace packages, adding a new part, understanding which part owns a concern, or setting up any package type from scratch.
+description: Guides navigation, creation, and maintenance of monorepo workspace packages (parts). Covers infrastructure packages (config, types, schema, utils, logger), feature packages (auth, payments, email, analytics, notifications, i18n), and app packages (Expo, iOS, React dashboard, Astro website, TanStack Router SPA, CLI tools, UI component library). Use when working across workspace packages, adding a new part, understanding which part owns a concern, or setting up any package type from scratch.
 allowed-tools: Read Write Edit Glob Grep Bash
 ---
 
@@ -28,7 +28,8 @@ Each "part" is a workspace package with a dedicated responsibility. Parts live i
   - **Building an app** → what kind?
     - Expo React Native app → `references/expo-app.md`
     - iOS Swift app → `references/ios-app.md`
-    - React admin dashboard → `references/react-dashboard.md`
+    - React admin dashboard (React Router v7) → `references/react-dashboard.md`
+    - React SPA with type-safe routing (TanStack Router) → `references/tanstack-app.md`
     - Astro marketing/content site → `references/website.md`
     - CLI tool (Bun or Rust) → `references/cli-tool.md`
   - **Adding a new part** → follow "Adding a part" below
