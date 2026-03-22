@@ -6,7 +6,7 @@ Admin dashboards and internal tools built with React Router v7, React 19, TanSta
 
 1. Scaffold: `bun create react-router@latest apps/dashboard -- --template remix`
 2. Set `"name": "@scope/dashboard"` in package.json
-3. Install: `bun add @tanstack/react-query @tanstack/react-query-devtools nanostores @nanostores/react`
+3. Install: `bun add @tanstack/react-query @tanstack/react-query-devtools nanostores @nanostores/react react-hook-form @hookform/resolvers`
 4. Dev dependencies: `bun add -d @tailwindcss/vite tailwindcss`
 5. Set up Biome: `bunx @biomejs/biome init` — remove any eslint/prettier config
 
@@ -216,6 +216,120 @@ function CreateUserForm() {
     },
   });
 
+  // ...
+}
+```
+
+## Forms
+
+Forms use react-hook-form with a Zod resolver for client-side validation. Server-side field errors from the API are mapped back to form fields using `setError`.
+
+### Basic form with Zod validation
+
+```tsx
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { z } from "zod";
+import { api } from "@/lib/api";
+
+const CreateUserSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email address"),
+  role: z.enum(["admin", "member"]),
+});
+
+type CreateUserInput = z.infer<typeof CreateUserSchema>;
+
+function CreateUserForm({ onClose }: { onClose: () => void }) {
+  const queryClient = useQueryClient();
+
+  const form = useForm<CreateUserInput>({
+    resolver: zodResolver(CreateUserSchema),
+    defaultValues: { role: "member" },
+  });
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: (data: CreateUserInput) => api.post("/api/users", data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+      onClose();
+    },
+    onError: (error) => {
+      // Map server-side field errors back to form fields
+      for (const { field, message } of error.details ?? []) {
+        form.setError(field as keyof CreateUserInput, { message });
+      }
+    },
+  });
+
+  return (
+    <form onSubmit={form.handleSubmit((data) => mutate(data))} className="space-y-4">
+      <div>
+        <label htmlFor="name" className="text-sm font-medium">Name</label>
+        <input id="name" className="mt-1 w-full rounded border px-3 py-2" {...form.register("name")} />
+        {form.formState.errors.name && (
+          <p className="mt-1 text-sm text-red-600">{form.formState.errors.name.message}</p>
+        )}
+      </div>
+      <div>
+        <label htmlFor="email" className="text-sm font-medium">Email</label>
+        <input id="email" type="email" className="mt-1 w-full rounded border px-3 py-2" {...form.register("email")} />
+        {form.formState.errors.email && (
+          <p className="mt-1 text-sm text-red-600">{form.formState.errors.email.message}</p>
+        )}
+      </div>
+      <button type="submit" disabled={isPending} className="rounded bg-primary px-4 py-2 text-white disabled:opacity-50">
+        {isPending ? "Creating..." : "Create user"}
+      </button>
+    </form>
+  );
+}
+```
+
+### Server error integration
+
+The API returns `{ ok: false, error: { code, message, details: [{ field, message }] } }` for validation failures (see `development/errors`). The `api` client should parse the error response and throw a structured error:
+
+```ts
+// lib/api.ts
+export class ApiError extends Error {
+  constructor(
+    public code: string,
+    message: string,
+    public details: { field: string; message: string }[] = [],
+  ) {
+    super(message);
+  }
+}
+
+async function post<T>(path: string, body: unknown): Promise<T> {
+  const res = await fetch(path, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  const json = await res.json();
+  if (!json.ok) throw new ApiError(json.error.code, json.error.message, json.error.details ?? []);
+  return json.data;
+}
+```
+
+The `onError` handler in the mutation maps `details` back to form fields so field-level errors appear inline next to the relevant input.
+
+### Edit forms
+
+Pre-populate with existing data using `defaultValues`:
+
+```tsx
+function EditUserForm({ user }: { user: User }) {
+  const form = useForm<UpdateUserInput>({
+    resolver: zodResolver(UpdateUserSchema),
+    defaultValues: {
+      name: user.name,
+      role: user.role,
+    },
+  });
   // ...
 }
 ```
