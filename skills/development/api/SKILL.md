@@ -11,6 +11,7 @@ allowed-tools: Read Grep Glob Bash Write Edit
 - What are you doing?
   - **Designing a new API or endpoints** → see "Designing endpoints" below
   - **Setting up a new API project** → see `references/hono.md` for Hono/TS project setup
+  - **Deploying the API as a Cloudflare Worker** → see `references/workers-project.md` for wrangler config, Env type, bindings, and Workers entry point
   - **Adding middleware or error handling** → see `references/middleware.md`
   - **Adding logging/observability** → see `references/logging.md`
   - **Designing batch operations** → see `references/batch-operations.md`
