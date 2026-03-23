@@ -54,6 +54,8 @@ const KNOWN_TOOLS = new Set([
   "Zsh",
 ]);
 
+const VALID_EFFORTS = ["low", "medium", "high", "max"] as const;
+
 const KNOWN_FRONTMATTER_FIELDS = new Set([
   "name",
   "description",
@@ -67,6 +69,7 @@ const KNOWN_FRONTMATTER_FIELDS = new Set([
   "model",
   "context",
   "agent",
+  "effort",
   "hooks",
 ]);
 
@@ -186,7 +189,7 @@ async function main() {
 
   // name
   if (!fm.name) {
-    fail(results, "name", "Frontmatter missing 'name' field");
+    fail(results, "name", "Frontmatter missing 'name' field — defaults to directory name", "warning");
   } else {
     if (!KEBAB.test(fm.name)) {
       fail(results, "name-format", `Name '${fm.name}' must be kebab-case (lowercase alphanumeric + hyphens)`);
@@ -207,7 +210,7 @@ async function main() {
 
   // description
   if (!fm.description) {
-    fail(results, "description", "Frontmatter missing 'description' field");
+    fail(results, "description", "Frontmatter missing 'description' field — recommended for skill discovery (falls back to first paragraph)", "warning");
   } else if (fm.description.length > MAX_DESCRIPTION_LENGTH) {
     fail(results, "description-length", `Description is ${fm.description.length} chars (max ${MAX_DESCRIPTION_LENGTH})`);
   } else {
@@ -233,6 +236,20 @@ async function main() {
       );
     } else {
       pass(results, "allowed-tools", `allowed-tools: ${tools.join(", ")}`);
+    }
+  }
+
+  // effort
+  if (fm.effort) {
+    if (!VALID_EFFORTS.includes(fm.effort as (typeof VALID_EFFORTS)[number])) {
+      fail(
+        results,
+        "effort-value",
+        `effort '${fm.effort}' must be one of: ${VALID_EFFORTS.join(", ")}`,
+        "warning",
+      );
+    } else {
+      pass(results, "effort-value", `effort: ${fm.effort}`);
     }
   }
 
