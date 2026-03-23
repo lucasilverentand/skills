@@ -60,7 +60,7 @@
     {
       "name": "documentation",
       "source": "./",
-      "description": "Documentation toolkit: coauthoring, developer-docs, external-docs, internal-docs, reporting, style, writing",
+      "description": "Documentation toolkit: coauthoring, developer-docs, external-docs, internal-docs, reporting, style",
       "category": "devtools",
       "skills": [
         "./skills/documentation/coauthoring",
@@ -68,8 +68,7 @@
         "./skills/documentation/external-docs",
         "./skills/documentation/internal-docs",
         "./skills/documentation/reporting",
-        "./skills/documentation/style",
-        "./skills/documentation/writing"
+        "./skills/documentation/style"
       ],
       "strict": false
     },
@@ -86,32 +85,20 @@
     {
       "name": "git",
       "source": "./",
-      "description": "Git toolkit: branching, cherry-pick, clean, committing, conflicts, git, history, remote, stashing, tagging, worktree",
+      "description": "Git toolkit: git",
       "category": "devtools",
       "skills": [
-        "./skills/git",
-        "./skills/git/branching",
-        "./skills/git/cherry-pick",
-        "./skills/git/clean",
-        "./skills/git/committing",
-        "./skills/git/conflicts",
-        "./skills/git/history",
-        "./skills/git/remote",
-        "./skills/git/stashing",
-        "./skills/git/tagging",
-        "./skills/git/worktree"
+        "./skills/git"
       ],
       "strict": false
     },
     {
       "name": "github",
       "source": "./",
-      "description": "Github toolkit: creating-pr, github, writing-pr-message",
+      "description": "Github toolkit: github",
       "category": "devtools",
       "skills": [
-        "./skills/github",
-        "./skills/github/creating-pr",
-        "./skills/github/writing-pr-message"
+        "./skills/github"
       ],
       "strict": false
     },
@@ -143,9 +130,10 @@
     {
       "name": "project",
       "source": "./",
-      "description": "Project toolkit: scaffolding, structure",
+      "description": "Project toolkit: description, scaffolding, structure",
       "category": "web-development",
       "skills": [
+        "./skills/project/description",
         "./skills/project/scaffolding",
         "./skills/project/structure"
       ],
