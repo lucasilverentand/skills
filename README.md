@@ -1,6 +1,6 @@
 # Skills
 
-72 skills organized into 16 atomic plugins and 7 intent-based bundles for Claude Code.
+73 skills organized into 16 atomic plugins and 7 intent-based bundles for Claude Code.
 
 **Plugins** are non-overlapping groups — each skill belongs to exactly one plugin.
 **Bundles** are user-intent collections that reference plugins — a plugin can appear in multiple bundles.
@@ -155,11 +155,12 @@
 </details>
 
 <details>
-<summary><strong>security</strong> — 1 skill</summary>
+<summary><strong>security</strong> — 2 skills</summary>
 
 | Skill | Description |
 | --- | --- |
-| `security/audit` | Code security review, dependency audit, auth/authz review |
+| `security/audit` | Comprehensive security audit — OWASP Top 10 code scanning, secret detection, dependency CVEs, config/infra audit, auth/authz review, permission matrix |
+| `security/scan` | Automated SAST/DAST scanning with semgrep, bandit, nuclei, ZAP — with built-in fallback scanners when external tools aren't installed |
 
 </details>
 
