@@ -37,20 +37,12 @@
     {
       "name": "development",
       "source": "./",
-      "description": "Development toolkit: accessibility, api, database, debugging, environment, errors, implementing, knowledge, performance, planning, refactoring, testing, type-safety, workers",
+      "description": "Development toolkit: api, database, errors, testing, type-safety, workers",
       "category": "devtools",
       "skills": [
-        "./skills/development/accessibility",
         "./skills/development/api",
         "./skills/development/database",
-        "./skills/development/debugging",
-        "./skills/development/environment",
         "./skills/development/errors",
-        "./skills/development/implementing",
-        "./skills/development/knowledge",
-        "./skills/development/performance",
-        "./skills/development/planning",
-        "./skills/development/refactoring",
         "./skills/development/testing",
         "./skills/development/type-safety",
         "./skills/development/workers"
@@ -60,14 +52,10 @@
     {
       "name": "documentation",
       "source": "./",
-      "description": "Documentation toolkit: coauthoring, developer-docs, external-docs, internal-docs, reporting, style",
+      "description": "Documentation toolkit: coauthoring, style",
       "category": "devtools",
       "skills": [
         "./skills/documentation/coauthoring",
-        "./skills/documentation/developer-docs",
-        "./skills/documentation/external-docs",
-        "./skills/documentation/internal-docs",
-        "./skills/documentation/reporting",
         "./skills/documentation/style"
       ],
       "strict": false
