@@ -16,15 +16,15 @@ export const CATEGORY_OVERRIDES: Record<string, string> = {
 export const BUNDLES: Record<string, { description: string; plugins: string[] }> = {
   "full-stack-web": {
     description: "Building web apps with Hono + React + Drizzle",
-    plugins: ["git", "development", "project", "deployment", "infrastructure", "documentation"],
+    plugins: ["git", "development", "project", "deployment", "infrastructure", "security", "documentation"],
   },
   "mobile-dev": {
     description: "Expo/iOS/macOS apps with a backend",
-    plugins: ["git", "development", "project", "macos", "communication", "documentation"],
+    plugins: ["git", "development", "project", "macos", "communication", "security", "documentation"],
   },
   "api-backend": {
     description: "Pure API/backend work",
-    plugins: ["git", "development", "project", "deployment", "infrastructure", "documentation"],
+    plugins: ["git", "development", "project", "deployment", "infrastructure", "security", "documentation"],
   },
   "devops-infra": {
     description: "CI/CD, infrastructure",
@@ -36,7 +36,7 @@ export const BUNDLES: Record<string, { description: string; plugins: string[] }>
   },
   "research-strategy": {
     description: "Research, analysis, planning",
-    plugins: ["git", "research", "development", "documentation"],
+    plugins: ["git", "research", "development", "security", "documentation"],
   },
   all: {
     description: "Everything",

@@ -58,11 +58,15 @@ allowed-tools: Read Grep Glob Bash Write Edit
 
 ## Environment Variables
 
+> **Agent rule (applies in all permission modes including `bypassPermissions`):** Never use `railway variables set KEY=<secret-value>` with the actual secret value — it appears in shell history and process lists. Use the interactive prompt or ask the user to set it via the Railway dashboard.
+
 1. Run `tools/env-sync.ts` to compare variables across environments and surface drift
-2. Set variables: `railway variables set KEY=value --environment <env>`
-3. Copy variables between environments via the Railway dashboard (Variables → Copy from Environment)
-4. Never commit `.env` files — Railway injects all variables at runtime
-5. For secrets (API keys, tokens): set them directly via CLI or dashboard, never in source
+2. Set non-secret variables: `railway variables set KEY=value --environment <env>`
+3. Set secrets: `railway variables set KEY --environment <env>` (interactive prompt for value), or via the Railway dashboard
+4. Copy variables between environments via the Railway dashboard (Variables → Copy from Environment)
+5. Never commit `.env` files — Railway injects all variables at runtime
+6. For secrets (API keys, tokens): set them directly via CLI interactive prompt or dashboard, never in source or as CLI arguments
+7. Local development uses Doppler for secret injection, not `.env` files — see `security/agent-safety`
 
 ### Environment strategy
 

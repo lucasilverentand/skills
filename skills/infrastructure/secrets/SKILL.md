@@ -6,9 +6,12 @@ allowed-tools: Read Grep Glob Bash Write Edit
 
 # Secrets
 
+> **No secrets on disk.** Secret values never exist as files in the project directory. `.env` and `.dev.vars` contain only non-secret config (URLs, ports, feature flags). Secrets are injected at runtime via Doppler (local dev), platform secret stores (staging/prod), or the user's shell environment. See `security/agent-safety` for full agent rules — these apply in all permission modes including `bypassPermissions`.
+
 ## Decision Tree
 
 - What is the task?
+  - **Verify agent compliance with secret handling** → see `security/agent-safety`
   - **Scan the repo for leaked secrets** → run `tools/secret-scan.ts`, then see "Remediating Leaks" below
   - **Audit .env files and git history** → run `tools/env-leak-audit.ts`
   - **Check which secrets need rotation** → run `tools/rotation-check.ts`
@@ -32,18 +35,20 @@ When `tools/secret-scan.ts` or `tools/env-leak-audit.ts` finds a leaked secret:
 
 ## Environment Strategy
 
-Secrets must never be committed. Use this hierarchy:
+Secrets must never be committed and must never exist as files. Use runtime injection:
 
 | Environment | How secrets are provided |
 |---|---|
-| Local development | `.env` file (gitignored), populated manually or via `cp .env.example .env` |
+| Local development | **Doppler** (`doppler run -- <command>`) injects secrets as env vars at process start. `.env` contains only non-secret config (URLs, ports, flags). |
 | CI/CD | Repository secrets (GitHub Actions secrets, etc.) injected as environment variables |
 | Staging / Production | Platform secret store (Railway variables, Cloudflare secrets, Kubernetes Secrets or SealedSecrets) |
 
 Rules:
 - Every secret has a corresponding entry in `.env.example` with a placeholder value and a comment describing what it is
-- `.env` and all `.env.*` variants (except `.env.example`) are in `.gitignore`
+- `.env` contains only non-secret config — it is safe to read and inspect
+- Secrets are never written to files — they exist only in Doppler, platform stores, or the user's shell environment
 - Never log secrets — ensure logging frameworks are configured to redact known secret patterns
+- See `security/agent-safety/references/secret-architecture.md` for the full architecture and migration guide
 
 ## Rotation
 

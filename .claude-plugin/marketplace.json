@@ -145,11 +145,13 @@
     {
       "name": "security",
       "source": "./",
-      "description": "Security toolkit: audit, scan",
+      "description": "Security toolkit: agent-safety, audit, scan, supply-chain",
       "category": "devtools",
       "skills": [
+        "./skills/security/agent-safety",
         "./skills/security/audit",
-        "./skills/security/scan"
+        "./skills/security/scan",
+        "./skills/security/supply-chain"
       ],
       "strict": false
     },
@@ -175,6 +177,7 @@
         "project",
         "deployment",
         "infrastructure",
+        "security",
         "documentation"
       ]
     },
@@ -187,6 +190,7 @@
         "project",
         "macos",
         "communication",
+        "security",
         "documentation"
       ]
     },
@@ -199,6 +203,7 @@
         "project",
         "deployment",
         "infrastructure",
+        "security",
         "documentation"
       ]
     },
@@ -231,6 +236,7 @@
         "git",
         "research",
         "development",
+        "security",
         "documentation"
       ]
     },

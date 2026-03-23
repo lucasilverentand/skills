@@ -44,6 +44,7 @@ Rules:
 - E2E tests run against a real local database, not in-memory fakes
 - Test behavior, not implementation — assert what the code produces, not how it does it
 - One test file per source module. Mirror the source tree under `tests/` or co-locate with `*.test.ts`
+- Tests must never depend on real secrets — use `.env.test` with fake/placeholder values, not production or development credentials. CI injects test-specific secrets via GitHub Actions secrets, never production values.
 
 ## Authoring Tests
 
@@ -349,14 +350,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
-      - run: bun install --frozen-lockfile
+      - run: bun install --frozen-lockfile  # Fail if lockfile is stale — prevents supply chain drift
       - run: bun run typecheck
       - run: bun run lint
       - run: bun test --coverage
 ```
 
 Rules:
-- Pin action versions to full SHA for security (`actions/checkout@<sha>` not `@latest`)
+- Pin action versions to full commit SHA — never use tags (`@v4`) as they can be moved to point to malicious code. Use `tools/action-pin.ts` from `security/supply-chain` to automate this. Format: `actions/checkout@<sha> # v4.1.1`
 - Use `--frozen-lockfile` for installs to catch lockfile drift early
 - Separate lint/typecheck from tests — they catch different problems and should report independently
 - Never use `continue-on-error: true` to hide failures
