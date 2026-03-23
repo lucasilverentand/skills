@@ -94,6 +94,11 @@ Check for `.github/PULL_REQUEST_TEMPLATE.md` first. If found, use it. Otherwise:
 ## Testing
 - [ ] {specific scenarios verified}
 
+## Security
+- [ ] No secrets committed or logged
+- [ ] New dependencies reviewed (`security/supply-chain`)
+- [ ] GitHub Actions pinned to SHA (if workflows changed)
+
 ## Notes
 {Deployment notes, env vars, breaking changes — omit if none.}
 
@@ -105,6 +110,7 @@ Section rules:
 - **Changes** (mandatory) — categorize as New/Updated/Removed/Migration, omit empty categories
 - **Dependencies** (conditional) — only when deps changed, run `tools/dep-diff.ts`. Omit entirely if no changes.
 - **Testing** (mandatory) — specific scenarios with checkboxes, not just "tests pass"
+- **Security** (conditional) — include when the PR adds dependencies, touches auth/secret handling, or modifies CI workflows. Omit otherwise.
 - **Notes** (conditional) — only for deployment/reviewer info. Omit if nothing.
 - End with `Closes #<issue>` or `Fixes #<issue>`
 

@@ -11,6 +11,8 @@ allowed-tools: Read Grep Glob Bash Agent
 - What kind of audit is needed?
   - **Full pre-release security review** → follow "Full audit" below
   - **Audit a specific file or feature** → follow "Targeted audit" below
+  - **Agent-safety compliance review** → verify no commands leak secrets, see `security/agent-safety`
+  - **Supply chain review** → run `tools/lockfile-verify.ts` and `tools/action-pin.ts --check`, see `security/supply-chain`
   - **Dependency CVE scan** → run `tools/dependency-audit.ts`
   - **Secret/credential scan** → run `tools/secret-scan.ts`
   - **Code vulnerability scan (OWASP Top 10)** → run `tools/code-audit.ts`
@@ -28,19 +30,20 @@ Run all automated checks first, then perform manual review:
 
 1. `tools/secret-scan.ts` — detect hardcoded secrets, API keys, credentials
 2. `tools/dependency-audit.ts` — check all dependencies for known CVEs
-3. `tools/code-audit.ts --verbose` — deep pattern-based vulnerability scan (OWASP Top 10)
-4. `tools/config-audit.ts` — audit Dockerfiles, CI workflows, env files, security headers, package.json
-5. `tools/permission-matrix.ts <src-dir>` — generate and review the route/role matrix
+3. Supply chain review: `tools/lockfile-verify.ts` and `tools/action-pin.ts --check` — see `security/supply-chain`
+4. `tools/code-audit.ts --verbose` — deep pattern-based vulnerability scan (OWASP Top 10)
+5. `tools/config-audit.ts` — audit Dockerfiles, CI workflows, env files, security headers, package.json
+6. `tools/permission-matrix.ts <src-dir>` — generate and review the route/role matrix
 
 ### Phase 2: Manual code review
 
 After reviewing automated findings, perform these manual checks:
 
-6. **Auth review** (see section below) — trace every authenticated and authorized route
-7. **Injection review** (see section below) — trace all trust boundaries and input handling
-8. **Data flow review** (see section below) — trace sensitive data through the application
-9. **CORS and security headers** (see section below) — verify defensive headers
-10. **Business logic review** (see section below) — look for logic flaws the tools can't catch
+7. **Auth review** (see section below) — trace every authenticated and authorized route
+8. **Injection review** (see section below) — trace all trust boundaries and input handling
+9. **Data flow review** (see section below) — trace sensitive data through the application
+10. **CORS and security headers** (see section below) — verify defensive headers
+11. **Business logic review** (see section below) — look for logic flaws the tools can't catch
 
 ### Phase 3: Report
 

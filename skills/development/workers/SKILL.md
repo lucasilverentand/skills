@@ -17,6 +17,8 @@ allowed-tools: Read Grep Glob Bash Write Edit
   - **Seeding or resetting databases** → see "Database operations" below
   - **Checking which workers have missing secrets** → run `tools/devvars-check.ts`
 
+> **Security:** Secrets never exist as files in the project directory. `.dev.vars` contains only non-secret config (ports, URLs, feature flags). Secrets are injected at runtime via Doppler. See `security/agent-safety` for full rules. These rules apply in all permission modes including `bypassPermissions`.
+
 ## Bootstrap
 
 First-time setup sequence:
@@ -31,24 +33,60 @@ If there's no setup script, follow ".dev.vars setup" and "D1 migrations" manuall
 
 ## .dev.vars setup
 
-Wrangler reads secrets from `.dev.vars` (not `.env`) when running Workers locally. This file is gitignored and must be created for each Worker.
+Wrangler reads local config from `.dev.vars`. This file contains **non-secret config only** — ports, URLs, feature flags, environment names. Secrets are injected at runtime via Doppler.
 
-**Source priority:**
-1. **Doppler** — if `doppler.yaml` exists at the project root, Doppler injects secrets into `process.env` automatically when using `mise` (via `_.source` in `mise.toml`) or `doppler run --`
-2. **`.env.secrets`** — fallback for devs who haven't configured Doppler
-3. **`.env`** — non-secret config (URLs, ports, feature flags); always present
+**What goes in `.dev.vars`:**
+- `ENVIRONMENT=development`
+- `WORKER_PORT=8787`
+- Local service URLs, feature flags
 
-**Manual `.dev.vars` creation:**
+**What does NOT go in `.dev.vars`:**
+- Database passwords, API keys, JWT secrets, OAuth secrets, encryption keys — these come from Doppler
+
+**Setup:**
 ```bash
-# Minimal .dev.vars for a single Worker
-cat apis/auth/.dev.vars.example  # see what vars are expected
+# See what variables are expected
+cat apis/auth/.dev.vars.example
+
+# Create .dev.vars with non-secret config
 cp apis/auth/.dev.vars.example apis/auth/.dev.vars
-# Fill in real values
+# Fill in non-secret values (URLs, ports, flags)
 ```
 
-**If the project has `scripts/setup.ts`**, run it instead — it handles Doppler loading, env interpolation (e.g. `${CLOUDFLARE_D1_TOKEN}`), and writes `.dev.vars` for all workers in one pass.
+**If the project has `scripts/setup.ts`**, run it — it handles Doppler configuration, non-secret env setup, and `.dev.vars` generation for all workers in one pass.
 
-**Checking coverage:** run `tools/devvars-check.ts` to see which workers are missing their `.dev.vars`.
+**Checking coverage:** Run `tools/devvars-check.ts` to see which workers are missing their `.dev.vars`.
+
+### Secret injection
+
+Secrets reach workers at runtime through Doppler, never through files:
+
+```bash
+# Start a worker with Doppler injecting secrets
+doppler run -- bunx wrangler dev
+
+# Start with a specific Doppler config
+doppler run --config dev_auth -- bunx wrangler dev --port 4804
+
+# List expected secret names (no values)
+doppler secrets --only-names
+```
+
+For multi-worker projects, `process-compose.yml` wraps each worker with Doppler:
+
+```yaml
+processes:
+  auth-api:
+    command: doppler run --config dev_auth -- bunx wrangler dev --port 4804
+  user-api:
+    command: doppler run --config dev_user -- bunx wrangler dev --port 4801
+```
+
+**How secrets reach workers locally:**
+1. **Doppler** — primary method. `doppler run --` injects secrets as env vars at process start
+2. **User's shell environment** — fallback. Secrets exported in `.zshrc`/`.bashrc`
+
+File-based secret storage (`.env.secrets`, `.env` with secret values) is not used. See `security/agent-safety/references/secret-architecture.md` for the full architecture.
 
 ## D1 migrations
 
@@ -93,8 +131,8 @@ Read `process-compose.yml` to find service names, ports, and readiness probes. E
 
 When a worker fails to start:
 
-1. Verify `.dev.vars` exists: `ls apis/<name>/.dev.vars`
-2. Compare with `.dev.vars.example` to find missing vars
+1. Verify non-secret config exists: `ls apis/<name>/.dev.vars`
+2. Check Doppler has required secrets: `doppler secrets --only-names`
 3. Run the worker directly to see the raw error:
    ```bash
    cd apis/<name> && bunx wrangler dev
@@ -104,7 +142,7 @@ When a worker fails to start:
 
 | Error | Cause | Fix |
 |---|---|---|
-| `Missing required env var` | `.dev.vars` incomplete | Run `bun scripts/setup.ts` or add missing var |
+| `Missing required env var` | `.dev.vars` incomplete | Check Doppler: `doppler secrets --only-names`. If the secret is missing, add it: `doppler secrets set KEY` |
 | `D1_ERROR: no such table` | Migrations not applied | Run `bun scripts/migrate.ts` or `wrangler d1 migrations apply --local` |
 | `EADDRINUSE` | Port already in use | `lsof -i :<port>` and kill the process |
 | `Cannot find module` | Missing deps | Run `bun install` |

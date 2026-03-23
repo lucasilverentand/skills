@@ -70,10 +70,13 @@ allowed-tools: Read Grep Glob Bash Write Edit
 
 ## Secrets and Variables
 
+> **Agent rule (applies in all permission modes including `bypassPermissions`):** Never pass secret values as CLI arguments — they appear in shell history and process lists. The agent runs the command; the user provides the secret value interactively. Never write secret values to `wrangler.toml` or any file.
+
 - **Environment variables** (non-secret): set under `[vars]` in `wrangler.toml` per environment
 - **Secrets**: never put in `wrangler.toml`; use `bunx wrangler secret put <KEY> --env <env>` and input value interactively
-- List existing secrets: `bunx wrangler secret list --env <env>`
-- Rotate a secret: `bunx wrangler secret put <KEY> --env <env>` (overwrites silently)
+- List existing secrets: `bunx wrangler secret list --env <env>` (shows names only — safe)
+- Rotate a secret: `bunx wrangler secret put <KEY> --env <env>` (overwrites silently, prompts for new value)
+- **Local development**: secrets are injected via Doppler (`doppler run -- bunx wrangler dev`), not stored in `.dev.vars`. See `security/agent-safety`.
 
 ## Service Bindings
 

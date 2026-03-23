@@ -43,7 +43,7 @@ Each "part" is a workspace package with a dedicated responsibility. Parts live i
 
 | Part | Owns |
 |---|---|
-| `config` | Env vars, feature flags, typed Zod-validated accessors |
+| `config` | Env vars, feature flags, typed Zod-validated accessors. **All secret access goes through this package — never read `process.env` directly.** |
 | `types` | Shared TypeScript types, Zod schemas, branded IDs |
 | `schema` | Drizzle ORM table definitions, migrations, DB client |
 | `auth` | Better Auth config, session types, middleware, RBAC |
@@ -79,6 +79,7 @@ Never create circular dependencies. Run `tools/part-deps.ts` to verify.
 2. Add to root `tsconfig.json` references
 3. Add as a dependency in consuming packages: `bun add @scope/<name>`
 4. Run `tools/part-validate.ts packages/<name>` to confirm structure
+5. If the part handles secrets or API keys, add a `.env.example` with placeholder values documenting expected variables. Secrets are injected at runtime via Doppler — never stored in files. Configure redaction in `packages/logger` for any secret-adjacent logging. See `security/agent-safety` and `infrastructure/secrets`.
 
 ## Workspace setup
 

@@ -113,6 +113,17 @@ HEALTHCHECK --interval=10s --timeout=5s --start-period=10s --retries=3 \
    - Do not `ARG` secrets — build arguments appear in image history
 4. Use non-root user in the final stage (always)
 5. Minimize the attack surface: use Alpine, remove package managers and shells if possible in distroless scenarios
+6. **Pin base images to digest** for reproducibility and supply chain integrity:
+   ```dockerfile
+   # Pin tag + digest — tag for readability, digest for immutability
+   FROM oven/bun:1.1-alpine@sha256:a1b2c3d4e5f6...
+   ```
+   Get the digest: `docker inspect --format='{{index .RepoDigests 0}}' <image>`
+7. **Use `--frozen-lockfile`** in the deps stage to prevent supply chain drift:
+   ```dockerfile
+   RUN bun install --frozen-lockfile --production
+   ```
+   See `security/supply-chain` for the full lockfile policy.
 
 ## Key references
 
