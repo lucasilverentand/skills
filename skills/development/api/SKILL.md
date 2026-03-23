@@ -21,7 +21,8 @@ allowed-tools: Read Grep Glob Bash Write Edit
   - **Setting up API key management** → see `references/api-keys.md`
   - **Implementing file uploads (presigned URL or multipart)** → see `references/file-uploads.md`
   - **Designing authentication** → single API or multiple? See `references/auth.md`
-  - **Generating or updating an OpenAPI spec** → see `references/hono.md` for generation workflow
+  - **Generating or updating an OpenAPI spec** → see `references/hono.md` for generation workflow (zod-openapi or static spec)
+  - **Setting up Scalar API docs** → see `references/hono.md` "Option B: Static spec + Scalar"
   - **Checking for breaking changes** → see "Breaking change detection" below
   - **Linting existing routes** → run `tools/route-lint.ts` and fix reported issues
   - **Generating a client SDK** → run `tools/client-gen.ts <spec-path>` and review output
