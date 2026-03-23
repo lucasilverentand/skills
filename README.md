@@ -106,7 +106,7 @@
 
 | Skill | Description |
 | --- | --- |
-| `documentation/writing` | READMEs, contributing guides, architecture overviews, GitHub templates |
+| `documentation/developer-docs` | READMEs, contributing guides, architecture overviews, GitHub templates |
 
 </details>
 
