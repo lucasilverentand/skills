@@ -89,6 +89,54 @@ const SECRET_PATTERNS: {
 
   // Twilio
   { name: "Twilio Key", pattern: /SK[a-f0-9]{32}/g, severity: "high" },
+  { name: "Twilio Account SID", pattern: /AC[a-f0-9]{32}/g, severity: "high" },
+
+  // OpenAI / Anthropic / AI providers
+  { name: "OpenAI API Key", pattern: /sk-[A-Za-z0-9]{20}T3BlbkFJ[A-Za-z0-9]{20}/g, severity: "critical" },
+  { name: "OpenAI Project Key", pattern: /sk-proj-[A-Za-z0-9_-]{40,}/g, severity: "critical" },
+  { name: "Anthropic API Key", pattern: /sk-ant-[A-Za-z0-9_-]{40,}/g, severity: "critical" },
+
+  // Cloudflare
+  { name: "Cloudflare Global Key", pattern: /(?:cf_api_key|cloudflare[_-]?api[_-]?key)\s*[=:]\s*['"]?[A-Za-z0-9]{37}['"]?/gi, severity: "critical" },
+
+  // Vercel
+  { name: "Vercel Token", pattern: /(?:vercel[_-]?token|VERCEL_TOKEN)\s*[=:]\s*['"]?[A-Za-z0-9]{24,}['"]?/gi, severity: "critical" },
+
+  // Supabase
+  { name: "Supabase Key", pattern: /(?:supabase[_-]?(?:key|anon|service))\s*[=:]\s*['"]?eyJ[A-Za-z0-9_-]+\.eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+['"]?/gi, severity: "critical" },
+
+  // Firebase
+  { name: "Firebase Key", pattern: /AIza[A-Za-z0-9_-]{35}/g, severity: "high" },
+
+  // Neon
+  { name: "Neon Database URL", pattern: /postgres(?:ql)?:\/\/[^:]+:[^@]+@[^.]+\.neon\.tech/g, severity: "critical" },
+
+  // Railway
+  { name: "Railway Token", pattern: /(?:railway[_-]?token|RAILWAY_TOKEN)\s*[=:]\s*['"]?[A-Za-z0-9_-]{30,}['"]?/gi, severity: "critical" },
+
+  // Google Cloud
+  { name: "Google API Key", pattern: /AIza[A-Za-z0-9\\_-]{35}/g, severity: "high" },
+  { name: "Google OAuth Secret", pattern: /GOCSPX-[A-Za-z0-9_-]+/g, severity: "critical" },
+  { name: "Google Service Account", pattern: /"type"\s*:\s*"service_account"/g, severity: "critical" },
+
+  // Azure
+  { name: "Azure Connection String", pattern: /DefaultEndpointsProtocol=https;AccountName=[^;]+;AccountKey=[A-Za-z0-9+/=]{44,}/g, severity: "critical" },
+
+  // Datadog
+  { name: "Datadog API Key", pattern: /(?:dd[_-]?api[_-]?key|datadog[_-]?api[_-]?key)\s*[=:]\s*['"]?[a-f0-9]{32}['"]?/gi, severity: "high" },
+
+  // Mailgun
+  { name: "Mailgun Key", pattern: /key-[A-Za-z0-9]{32}/g, severity: "high" },
+
+  // Sentry DSN
+  { name: "Sentry DSN", pattern: /https:\/\/[a-f0-9]{32}@[^.]+\.ingest\.sentry\.io\/\d+/g, severity: "medium" },
+
+  // NPM
+  { name: "NPM Token", pattern: /npm_[A-Za-z0-9]{36}/g, severity: "critical" },
+  { name: "NPM Auth Token", pattern: /\/\/registry\.npmjs\.org\/:_authToken=[^\s]+/g, severity: "critical" },
+
+  // Auth secrets
+  { name: "Auth Secret", pattern: /(?:BETTER_AUTH_SECRET|AUTH_SECRET|NEXTAUTH_SECRET)\s*[=:]\s*['"]?[A-Za-z0-9+/=_-]{16,}['"]?/gi, severity: "critical" },
 
   // Hardcoded password assignments
   { name: "Hardcoded Password", pattern: /(?:password|passwd|pwd)\s*=\s*['"][^'"]{4,}['"]/gi, severity: "high" },

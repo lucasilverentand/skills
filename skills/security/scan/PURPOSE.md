@@ -4,7 +4,7 @@ Automated security scanning using SAST and DAST tools — runs scanners, normali
 
 ## Responsibilities
 
-- Detect available SAST tools and run them against a codebase
+- Detect available SAST tools and run them against a codebase (falls back to built-in code-audit scanner when no external tools are installed)
 - Run DAST scans against target URLs using nuclei or ZAP
 - Normalize scan output across tools into a unified finding format
 - Triage and deduplicate findings by severity, confidence, and CWE
