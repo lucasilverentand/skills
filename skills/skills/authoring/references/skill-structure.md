@@ -7,14 +7,36 @@ skills/<category>/<skill-name>/
 ├── SKILL.md                # how: lean instructions, frontmatter, short decision trees
 ├── tools/                  # bun scripts the agent can run
 │   └── *.ts
-└── references/             # detailed docs, long decision trees, domain knowledge
-    └── *.md
+├── references/             # detailed docs, long decision trees, domain knowledge
+│   └── *.md
+└── examples/               # example outputs showing expected format
+    └── *
 ```
+
+## Skill locations
+
+| Location | Path | Scope |
+|---|---|---|
+| Enterprise | Managed settings | All users in the organization |
+| Personal | `~/.claude/skills/<skill-name>/SKILL.md` | All your projects |
+| Project | `.claude/skills/<skill-name>/SKILL.md` | This project only |
+| Plugin | `<plugin>/skills/<skill-name>/SKILL.md` | Where plugin is enabled |
+
+Priority: enterprise > personal > project. Plugin skills use `plugin-name:skill-name` namespacing (no conflicts with other locations).
+
+## Discovery
+
+Claude Code discovers skills automatically from:
+
+- `.claude/skills/` in the project root
+- Nested `.claude/skills/` directories in subdirectories (monorepo support — e.g., `packages/frontend/.claude/skills/`)
+- `.claude/skills/` in directories added via `--add-dir` (with live change detection)
+- Plugin `skills/` directories
 
 ## SKILL.md
 
 Rules:
-- Must have YAML frontmatter with at least `name` and `description`
+- Must have YAML frontmatter. `description` is recommended for skill discovery; `name` defaults to the directory name if omitted.
 - Keep under 5000 tokens (~500 lines)
 - Lead with the workflow — what does the agent do, in what order?
 - Link to references/ for anything needing more than a few lines

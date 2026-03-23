@@ -2,6 +2,8 @@
 
 Skills fall into three tiers based on scope and autonomy. Pick the right tier before writing — it shapes everything from the decision tree to allowed-tools.
 
+> **Note:** The atomic/workflow/agent taxonomy is a convention used by this skill repository for organizing and designing skills. It is not part of the official Anthropic Agent Skills specification. Skills work without following this taxonomy — but it provides useful design guidance when building a library of composable skills.
+
 ## Tiers
 
 ### Atomic

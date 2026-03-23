@@ -56,7 +56,7 @@ Proactively ask about edge cases, example files, success criteria, and dependenc
 ### 2. Write the skill
 
 1. Create the directory: `skills/<category>/<skill-name>/`
-2. Write `SKILL.md` with YAML frontmatter — at minimum `name` and `description` (see `references/skill-format.md`)
+2. Write `SKILL.md` with YAML frontmatter — `description` is recommended for discovery (see `references/skill-format.md`)
 4. Write the decision tree — see `references/decision-trees.md`
 5. Write conventions — the rules the agent must follow every time
 6. Add tools in `tools/` if the skill has automatable tasks (see "Adding a tool")
@@ -156,13 +156,13 @@ Steps:
 
 ## Validating
 
-1. Run `tools/skill-validate.ts <path>` — checks required files, frontmatter, naming, line count
+1. Run `tools/skill-validate.ts <path>` — checks files, frontmatter, naming, line count
 2. Run `tools/token-estimate.ts <path>/SKILL.md` — must be under 5000 tokens
 3. Run `tools/coverage-gap.ts <path>` — compares responsibilities against content and tools
 
 ## Publishing a skill
 
-1. Ensure the skill directory has a valid `SKILL.md` with correct frontmatter (`name`, `description`)
+1. Ensure the skill directory has a valid `SKILL.md` with frontmatter (`description` recommended)
 2. Run the validator: `bun run tools/skill-validate.ts <path>`
 3. Add the skill path to `.claude-plugin/marketplace.json`:
    - Find the plugin entry matching the skill's category directory
@@ -214,6 +214,16 @@ See `references/marketplace-schema.md` for the full schema. Key conventions:
 | `references/schemas.md` | JSON structures for evals, grading, benchmark, timing |
 | `references/marketplace-schema.md` | marketplace.json schema, plugin.json, source types, skill discovery |
 | `references/marketplace-errors.md` | Validation error codes and fixes |
+| `references/advanced-features.md` | Extended thinking, legacy commands, bundled skills, subagent preloading, hooks, permission control |
+
+## Official spec vs. repo conventions
+
+The skill format, structure, locations, and advanced features documented in the references above reflect the official [Claude Code Agent Skills specification](https://agentskills.io). The following are conventions specific to this repository — useful for organizing a skill library, but not required by the spec:
+
+- **Skill taxonomy** (`references/skill-taxonomy.md`) — atomic/workflow/agent tiers
+- **Decision trees** (`references/decision-trees.md`) — prescribed SKILL.md structure
+- **Eval framework** — testing, grading, benchmarking, blind comparison, description optimization
+- **Marketplace** — marketplace.json schema, plugin entries, catalog generation
 
 ## Subagent instructions
 
