@@ -85,32 +85,20 @@
     {
       "name": "git",
       "source": "./",
-      "description": "Git toolkit: branching, cherry-pick, clean, committing, conflicts, git, history, remote, stashing, tagging, worktree",
+      "description": "Git toolkit: git",
       "category": "devtools",
       "skills": [
-        "./skills/git",
-        "./skills/git/branching",
-        "./skills/git/cherry-pick",
-        "./skills/git/clean",
-        "./skills/git/committing",
-        "./skills/git/conflicts",
-        "./skills/git/history",
-        "./skills/git/remote",
-        "./skills/git/stashing",
-        "./skills/git/tagging",
-        "./skills/git/worktree"
+        "./skills/git"
       ],
       "strict": false
     },
     {
       "name": "github",
       "source": "./",
-      "description": "Github toolkit: creating-pr, github, writing-pr-message",
+      "description": "Github toolkit: github",
       "category": "devtools",
       "skills": [
-        "./skills/github",
-        "./skills/github/creating-pr",
-        "./skills/github/writing-pr-message"
+        "./skills/github"
       ],
       "strict": false
     },
