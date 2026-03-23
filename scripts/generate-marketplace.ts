@@ -19,7 +19,6 @@ import { CATEGORY_OVERRIDES, BUNDLES } from "./plugin-config";
 const REPO_ROOT = resolve(import.meta.dirname, "..");
 const SKILLS_DIR = resolve(REPO_ROOT, "skills");
 const OUTPUT_PATH = resolve(REPO_ROOT, ".claude-plugin/marketplace.json");
-const MANIFEST_PATH = resolve(REPO_ROOT, ".release-please-manifest.json");
 
 // --- Frontmatter parser ---
 
@@ -104,15 +103,6 @@ function buildPluginDescription(pluginName: string, skills: DiscoveredSkill[]): 
 // --- Read current version ---
 
 function readVersion(): string {
-  // Prefer release-please manifest
-  if (existsSync(MANIFEST_PATH)) {
-    try {
-      const manifest = JSON.parse(readFileSync(MANIFEST_PATH, "utf-8"));
-      if (manifest["."]) return manifest["."];
-    } catch {}
-  }
-
-  // Fall back to existing marketplace.json
   if (existsSync(OUTPUT_PATH)) {
     try {
       const existing = JSON.parse(readFileSync(OUTPUT_PATH, "utf-8"));
