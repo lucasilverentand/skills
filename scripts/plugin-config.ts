@@ -9,6 +9,7 @@
 
 /** Override the default "devtools" category for specific plugins. */
 export const CATEGORY_OVERRIDES: Record<string, string> = {
+  api: "web-development",
   project: "web-development",
 };
 
@@ -16,15 +17,15 @@ export const CATEGORY_OVERRIDES: Record<string, string> = {
 export const BUNDLES: Record<string, { description: string; plugins: string[] }> = {
   "full-stack-web": {
     description: "Building web apps with Hono + React + Drizzle",
-    plugins: ["git", "development", "project", "deployment", "infrastructure", "security", "documentation"],
+    plugins: ["git", "api", "development", "project", "deployment", "infrastructure", "security", "documentation"],
   },
   "mobile-dev": {
     description: "Expo/iOS/macOS apps with a backend",
-    plugins: ["git", "development", "project", "macos", "communication", "security", "documentation"],
+    plugins: ["git", "api", "development", "project", "macos", "communication", "security", "documentation"],
   },
   "api-backend": {
     description: "Pure API/backend work",
-    plugins: ["git", "development", "project", "deployment", "infrastructure", "security", "documentation"],
+    plugins: ["git", "api", "development", "project", "deployment", "infrastructure", "security", "documentation"],
   },
   "devops-infra": {
     description: "CI/CD, infrastructure",

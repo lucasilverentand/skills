@@ -13,6 +13,21 @@
   },
   "plugins": [
     {
+      "name": "api",
+      "source": "./",
+      "description": "Api toolkit: auth, background-jobs, data, errors, routing, validation",
+      "category": "web-development",
+      "skills": [
+        "./skills/api/auth",
+        "./skills/api/background-jobs",
+        "./skills/api/data",
+        "./skills/api/errors",
+        "./skills/api/routing",
+        "./skills/api/validation"
+      ],
+      "strict": false
+    },
+    {
       "name": "communication",
       "source": "./",
       "description": "Communication toolkit: discord",
@@ -173,6 +188,7 @@
       "description": "Building web apps with Hono + React + Drizzle",
       "plugins": [
         "git",
+        "api",
         "development",
         "project",
         "deployment",
@@ -186,6 +202,7 @@
       "description": "Expo/iOS/macOS apps with a backend",
       "plugins": [
         "git",
+        "api",
         "development",
         "project",
         "macos",
@@ -199,6 +216,7 @@
       "description": "Pure API/backend work",
       "plugins": [
         "git",
+        "api",
         "development",
         "project",
         "deployment",
