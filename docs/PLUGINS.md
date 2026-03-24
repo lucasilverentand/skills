@@ -223,36 +223,6 @@ Cursor/VS Code settings, extensions, keybindings, workspace config.
 
 ---
 
-## Bundles
-
-Bundles are named presets that combine project-type and cross-cutting plugins. They're defined in `scripts/plugin-config.ts` and compiled into `marketplace.json`.
-
-| Bundle | Description | Plugins |
-|---|---|---|
-| `full-stack-web` | Web apps with Hono + React + Drizzle | git, api, development, project, deployment, infrastructure, documentation |
-| `mobile-dev` | Expo/iOS/macOS apps with a backend | git, api, development, project, macos, communication, documentation |
-| `api-backend` | Pure API/backend work | git, api, development, project, deployment, infrastructure, documentation |
-| `devops-infra` | CI/CD and infrastructure | git, deployment, infrastructure, security, documentation |
-| `open-source` | Maintaining OSS projects | git, development, documentation, skills, security |
-| `research-strategy` | Research, analysis, planning | git, research, development, documentation |
-| `all` | Everything | * |
-
-### Planned bundle updates
-
-Once the new project-type plugins are created, bundles should be updated:
-
-| Bundle | Add |
-|---|---|
-| `mobile-dev` | `ios`, `android`, `expo` |
-| `full-stack-web` | `website`, `dashboard` |
-| New: `ios-app` | git, ios, development, project, documentation |
-| New: `android-app` | git, android, development, project, documentation |
-| New: `expo-app` | git, expo, api, development, project, documentation |
-| New: `marketing-site` | git, website, development, project, documentation, deployment |
-| New: `dashboard-app` | git, dashboard, api, development, project, documentation, deployment |
-
----
-
 ## Plugin Anatomy
 
 Every plugin lives under `skills/<plugin-name>/` and contains one or more skills.
