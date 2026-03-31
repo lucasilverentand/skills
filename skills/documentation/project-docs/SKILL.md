@@ -64,8 +64,8 @@ Ask the user to pick which docs to create and in what order. Suggest a sensible 
 
 For each selected doc type, follow this loop:
 
-1. **Interview** — Use AskUserQuestion to walk through the question set for that doc type. See `references/interview-guides.md` for the full question sets. Ask 3-5 questions at a time, not all at once.
-2. **Draft** — Write the doc to `docs/<filename>.md` using the structure from `references/doc-types.md`. Include only what the user confirmed — don't invent details.
+1. **Interview** — Use AskUserQuestion to walk through the question set for that doc type. See `references/interview-guides/<doc-type>.md` for the question set. Ask 3-5 questions at a time, not all at once.
+2. **Draft** — Write the doc to `docs/<filename>.md` using the structure from `references/doc-types/<doc-type>.md`. Include only what the user confirmed — don't invent details.
 3. **Review** — Share the file path and ask the user to review. Accept freeform feedback or direct file edits.
 4. **Refine** — Use Edit to make surgical changes based on feedback. Iterate until the user is satisfied.
 5. **Next** — Move to the next doc in the queue.
@@ -87,7 +87,7 @@ For existing docs:
 
 1. Read all files in `docs/`
 2. Scan the codebase for things that should be documented but aren't
-3. Check each doc against the structure in `references/doc-types.md` — what sections are missing?
+3. Check each doc against the structure in `references/doc-types/<doc-type>.md` — what sections are missing?
 4. Present a gap report using AskUserQuestion:
    - Missing doc types the project would benefit from
    - Existing docs with incomplete sections
@@ -114,7 +114,9 @@ For existing docs:
 
 ## Key references
 
-| File | What it covers |
+| Directory | What it covers |
 |---|---|
-| `references/doc-types.md` | Structure templates and section guidance for each doc type |
-| `references/interview-guides.md` | Question sets used during guided creation for each doc type |
+| `references/doc-types/` | Structure templates and section guidance, one file per doc type |
+| `references/interview-guides/` | Question sets used during guided creation, one file per doc type |
+
+Doc type filenames: `overview.md`, `architecture.md`, `getting-started.md`, `contributing.md`, `deployment.md`, `data-model.md`, `api.md`, `configuration.md`, `operations.md`, `decision-records.md`
