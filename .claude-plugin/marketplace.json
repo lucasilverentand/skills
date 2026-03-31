@@ -52,10 +52,11 @@
     {
       "name": "documentation",
       "source": "./",
-      "description": "Documentation toolkit: coauthoring, style",
+      "description": "Documentation toolkit: coauthoring, project-docs, style",
       "category": "devtools",
       "skills": [
         "./skills/documentation/coauthoring",
+        "./skills/documentation/project-docs",
         "./skills/documentation/style"
       ],
       "strict": false
