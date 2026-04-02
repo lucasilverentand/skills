@@ -1,11 +1,11 @@
 ---
 name: style
-description: Shared voice, tone, formatting, and co-authoring workflow for all documentation skills. Provides the consistent writing foundation that developer-docs, internal-docs, reports, and external-docs build on. Reference this skill when writing any substantial document.
+description: Shared voice, tone, and formatting standards for all documentation skills. Provides the consistent writing foundation that coauthoring and project-docs build on. Reference this skill when writing any substantial document.
 ---
 
 # Writing Style
 
-The shared foundation for all documentation. Every specialized documentation skill (developer-docs, internal-docs, reports, external-docs) builds on these standards.
+The shared foundation for all documentation. The `coauthoring` and `project-docs` skills build on these standards.
 
 ## Decision Tree
 
@@ -13,11 +13,8 @@ The shared foundation for all documentation. Every specialized documentation ski
   - **Writing tone/voice guidance** → see `references/voice-and-tone.md`
   - **Co-authoring a substantial document** → follow `references/co-authoring-workflow.md`
   - **Quality checklist before publishing** → see `references/quality-standards.md`
-  - **A specific document type** → use the specialized skill:
-    - READMEs, contributing guides, architecture docs → `documentation/developer-docs`
-    - Specs, RFCs, proposals, decision docs, postmortems → `documentation/internal-docs`
-    - Status updates, analyses, comparisons, retros, research → `documentation/reports`
-    - Blog posts, release notes, announcements, changelogs → `documentation/external-docs`
+  - **Co-authoring a substantial document (spec, RFC, proposal, decision doc, postmortem)** → use `documentation/coauthoring`
+  - **Documenting a project (README, architecture, setup, API surface)** → use `documentation/project-docs`
 
 ## Core Style Rules
 
