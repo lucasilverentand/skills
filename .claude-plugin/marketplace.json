@@ -37,15 +37,19 @@
     {
       "name": "development",
       "source": "./",
-      "description": "Development toolkit: api, database, errors, testing, type-safety, workers",
+      "description": "Development toolkit: TypeScript (api, database, errors, type-safety, workers), Swift (data, patterns, state, views), testing",
       "category": "devtools",
       "skills": [
-        "./skills/development/api",
-        "./skills/development/database",
-        "./skills/development/errors",
-        "./skills/development/testing",
-        "./skills/development/type-safety",
-        "./skills/development/workers"
+        "./skills/development/typescript/api",
+        "./skills/development/typescript/database",
+        "./skills/development/typescript/errors",
+        "./skills/development/typescript/type-safety",
+        "./skills/development/typescript/workers",
+        "./skills/development/swift/data",
+        "./skills/development/swift/patterns",
+        "./skills/development/swift/state",
+        "./skills/development/swift/views",
+        "./skills/development/testing"
       ],
       "strict": false
     },
@@ -104,19 +108,6 @@
       "strict": false
     },
     {
-      "name": "macos",
-      "source": "./",
-      "description": "Macos toolkit: data, patterns, state, views",
-      "category": "devtools",
-      "skills": [
-        "./skills/macos/data",
-        "./skills/macos/patterns",
-        "./skills/macos/state",
-        "./skills/macos/views"
-      ],
-      "strict": false
-    },
-    {
       "name": "project",
       "source": "./",
       "description": "Project toolkit: description, scaffolding, structure",
@@ -157,9 +148,9 @@
       "strict": false
     },
     {
-      "name": "skills",
+      "name": "skill-creation",
       "source": "./",
-      "description": "Skills toolkit: authoring, retrospecting",
+      "description": "Skill creation toolkit: authoring, retrospecting",
       "category": "devtools",
       "skills": [
         "./skills/skills/authoring",
@@ -189,7 +180,6 @@
         "git",
         "development",
         "project",
-        "macos",
         "communication",
         "security",
         "documentation"
@@ -226,7 +216,7 @@
         "git",
         "development",
         "documentation",
-        "skills",
+        "skill-creation",
         "security"
       ]
     },

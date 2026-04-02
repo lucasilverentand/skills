@@ -57,4 +57,4 @@ Interactive workflow to organize messy changes into atomic conventional commits.
 
 ## Lockfile conflicts
 
-Resolve by regenerating (`bun install` / `npm install`), not by manual editing.
+Resolve by regenerating (`bun install`), not by manual editing.

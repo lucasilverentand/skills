@@ -81,7 +81,7 @@ async function getUser(id: string): Promise<Result<User>> {
 Throwing is correct at **system boundaries** only:
 
 - **Unrecoverable errors**: corrupt state, missing required env vars at startup, assertion failures
-- **Framework expectations**: Hono/Express middleware that must throw `HTTPException`, React error boundaries that catch thrown errors
+- **Framework expectations**: Hono middleware that must throw `HTTPException`, React error boundaries that catch thrown errors
 - **Process-level handlers**: top-level `process.on("uncaughtException")` or `Bun.serve` error handlers
 
 At the boundary between result-based internal code and throw-expecting frameworks, convert explicitly:
