@@ -65,7 +65,7 @@ allowed-tools: Read Grep Glob Bash Write Edit
 
 Why this matters: `bun install` without `--frozen-lockfile` can silently update transitive dependencies to newer versions that may be compromised. The lockfile is the single source of truth for "what we've vetted."
 
-See `references/lockfile-policy.md` for rules across Bun, npm, and pnpm.
+See `references/lockfile-policy.md` for detailed lockfile rules.
 
 ## Post-install script safety
 
@@ -148,13 +148,13 @@ If a dependency is suspected or confirmed compromised:
    - Check for new entries in `package.json` scripts
    - Look for new files outside `node_modules/` that weren't there before
 5. **Notify the team** — if this is a shared project, others may be affected
-6. **Report the package** — report to npm security (`npm report <package>`) and the package's issue tracker
+6. **Report the package** — report to the package's issue tracker and npm security
 
 ## Key references
 
 | File | What it covers |
 |---|---|
-| `references/lockfile-policy.md` | Lockfile integrity rules for Bun, npm, and pnpm |
+| `references/lockfile-policy.md` | Lockfile integrity rules for Bun |
 | `tools/dep-review.ts` | Pre-addition dependency analysis (downloads, CVEs, typosquat) |
 | `tools/typosquat-check.ts` | Check package names against typosquatting patterns |
 | `tools/action-pin.ts` | Pin GitHub Actions to SHA, verify existing pins |

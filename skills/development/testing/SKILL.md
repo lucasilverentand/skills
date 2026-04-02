@@ -1,6 +1,6 @@
 ---
 name: testing
-description: Designs test strategies, authors tests at all levels (unit, integration, E2E), diagnoses broken or flaky tests, and configures CI pipelines. Covers TypeScript (Bun/Vitest), web E2E (Playwright), React Native (Maestro), and Swift (Swift Testing framework). Use when writing new tests, generating scaffolds, identifying untested code, configuring runners, fixing consistent or intermittent failures, updating stale snapshots, triaging mass breakage after a refactor, setting up CI workflows, optimizing pipeline speed, managing caching, or configuring matrix builds.
+description: Designs test strategies, authors tests at all levels (unit, integration, E2E), diagnoses broken or flaky tests, and configures CI pipelines. Covers TypeScript (Bun test), web E2E (Playwright), React Native (Maestro), and Swift (Swift Testing framework). Use when writing new tests, generating scaffolds, identifying untested code, configuring runners, fixing consistent or intermittent failures, updating stale snapshots, triaging mass breakage after a refactor, setting up CI workflows, optimizing pipeline speed, managing caching, or configuring matrix builds.
 allowed-tools: Read Grep Glob Bash Write Edit
 ---
 
@@ -266,7 +266,6 @@ Run tagged subset: `swift test --filter networking`.
 ## Runner Configuration
 
 - **Bun** — `bun test` with `bunfig.toml` for test globs and coverage thresholds
-- **Vitest** — `vitest.config.ts`, enable `coverage.provider: 'v8'` for accurate coverage
 - **Swift** — `swift test` for SPM packages; `xcodebuild test -scheme <Scheme>` for Xcode projects; `tuist test` for Tuist-managed projects
 - Coverage thresholds: set per-module, not project-wide; critical modules ≥80%, utilities ≥60%
 - CI: always run tests with `--bail` to fail fast, pipe results through `tools/failure-parse.ts`
