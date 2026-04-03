@@ -1,15 +1,15 @@
 # Skills Library
 
-A collection of 39 agent skills for Claude Code and Codex, organized into 12 plugins and 7 intent-based bundles.
+A collection of 39 agent skills for Codex, organized into 12 plugins and 7 intent-based bundles.
 
 ## Commands
 
 ```bash
-bun run generate             # regenerate generated plugin metadata from disk
-bun run generate -- --check  # verify generated metadata is up to date (CI uses this)
+bun run generate             # regenerate marketplace.json from disk
+bun run generate -- --check  # verify marketplace.json is up to date (CI uses this)
 bun run validate             # validate all skills pass structure checks
-bun run validate:marketplace # validate Claude marketplace integrity (no errors, warnings OK)
-bun run validate:metadata    # validate Codex + Claude generated metadata
+bun run validate:marketplace # validate marketplace integrity (no errors, warnings OK)
+bun run validate:metadata    # validate marketplace.json schema
 bun run validate:skill <dir> # validate a single skill directory
 ```
 
@@ -25,16 +25,14 @@ skills/
       references/            # detailed docs loaded on demand
       tools/                 # automation scripts (Bun/TypeScript)
 scripts/                     # repo-level tooling (generator, validators)
-.claude-plugin/
+.Codex-plugin/
   marketplace.json           # registry — maps skills to plugins and bundles
-.codex-plugin/
-  plugin.json                # repo-level Codex/OpenAI plugin manifest
 ```
 
-- **Skills** are the atomic unit — each teaches the assistant one domain
+- **Skills** are the atomic unit — each teaches Codex one domain
 - **Plugins** group related skills by category (development, security, deployment, etc.)
 - **Bundles** are intent-based collections of plugins (full-stack-web, mobile-dev, api-backend, etc.)
-- **marketplace.json** and **plugin.json** are generated from disk by `bun run generate`
+- **marketplace.json** is the registry — auto-generated from disk by `bun run generate`
 - **plugin-config.ts** defines bundle composition and category overrides
 
 ## Creating or modifying skills
@@ -45,7 +43,7 @@ Quick reference for the expected structure:
 1. Create `skills/<category>/<skill-name>/` with a `SKILL.md`
 2. SKILL.md has YAML frontmatter (`name`, `description` with "Use when" clause)
 3. Add `references/*.md` for detailed content, `tools/*.ts` for automation
-4. Run `bun run generate` to refresh both generated metadata files
+4. Run `bun run generate` to register in marketplace.json
 5. Run all three validation commands
 
 ## Conventions
@@ -71,8 +69,8 @@ Skills should reflect the active tech stack. When adding code examples:
 
 ## Gotchas
 
-- Don't create skills by hand — use the `skills/authoring` skill which handles validation and metadata registration
-- `bun run generate` overwrites the generated metadata files completely — manual edits to them will be lost
+- Don't create skills by hand — use the `skills/authoring` skill which handles validation and marketplace registration
+- `bun run generate` overwrites marketplace.json completely — manual edits to it will be lost
 - Bundle definitions live in `scripts/plugin-config.ts`, not in marketplace.json
 - Empty directories (no SKILL.md) are ignored by the generator — they won't appear in marketplace.json
 - The development plugin has nested platform dirs (`typescript/`, `swift/`) — other plugins are flat

@@ -1,6 +1,6 @@
 # Skills
 
-38 skills organized into 12 plugins and 7 intent-based bundles for Claude Code.
+39 skills organized into 12 plugins and 7 intent-based bundles for Claude Code and Codex.
 
 **Plugins** are non-overlapping groups — each skill belongs to exactly one plugin.
 **Bundles** are user-intent collections that reference plugins — a plugin can appear in multiple bundles.
@@ -152,6 +152,15 @@
 | **open-source** | git, development, documentation, skills, security | Maintaining OSS projects |
 | **research-strategy** | git, research, development, security, documentation | Research, analysis, planning |
 | **all** | *(all 12 plugins)* | Everything |
+
+## Generated metadata
+
+`bun run generate` writes both of the repo's generated metadata targets:
+
+- `.claude-plugin/marketplace.json` for the existing Claude-style multi-plugin marketplace output
+- `.codex-plugin/plugin.json` for the new Codex/OpenAI plugin manifest
+
+The skills themselves still live in `skills/`, and the Claude marketplace grouping remains the source of truth for category/bundle organization.
 
 ## Skill structure
 
