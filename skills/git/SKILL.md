@@ -17,6 +17,8 @@ Name branches: `feat/<desc>`, `fix/<desc>`, `refactor/<desc>`, `chore/<desc>`, `
 
 ## Commits
 
+**Commit after completing each distinct piece of work** — don't batch unrelated changes and don't wait until asked. Each commit should be atomic: one logical change that compiles and passes checks on its own.
+
 Conventional commit format: `<type>(<scope>): <short description>`
 
 - Types: `feat`, `fix`, `refactor`, `test`, `docs`, `chore`, `perf`, `ci`
