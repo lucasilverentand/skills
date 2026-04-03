@@ -110,9 +110,10 @@
     {
       "name": "project",
       "source": "./",
-      "description": "Project toolkit: description, scaffolding, structure",
+      "description": "Project toolkit: context, description, scaffolding, structure",
       "category": "devtools",
       "skills": [
+        "./skills/project/context",
         "./skills/project/description",
         "./skills/project/scaffolding",
         "./skills/project/structure"
