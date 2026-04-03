@@ -35,20 +35,23 @@ Compile project knowledge into context files that shape how LLMs behave in a cod
 
 For projects that already have context scattered across CLAUDE.md, .claude/rules/, .cursorrules, README sections, or inline comments — but no proper `/docs` structure. The goal: extract the knowledge into `/docs` as the source of truth, then re-derive clean context files from it.
 
-### Step 1: Inventory existing context
+### Step 1: Inventory all project knowledge
 
-Scan for all sources of project knowledge:
+Cast a wide net — scan for every markdown file and context source in the project:
 
-- `CLAUDE.md` at project root
-- `.claude/rules/*.md`
-- `.cursorrules`
+```
+Glob: **/*.md
+```
+
+Read every `.md` file found. Also check for:
+- `.cursorrules`, `.windsurfrules`, `.clinerules`
 - `.github/copilot-instructions.md`
-- `README.md` (architecture, setup, contributing sections)
-- `CONTRIBUTING.md`
-- `.env.example` (documents required config)
-- Inline `@doc` or `/** */` comments in entry points
+- `.env.example`, `.env.local` (documents required config)
+- `package.json` description/scripts, `Cargo.toml` metadata, `Package.swift` comments
 
-Use AskUserQuestion to present what you found: "I found context in these locations — are there other places where project knowledge lives that I should pull from?"
+This catches knowledge that lives in unexpected places — a `ARCHITECTURE.md` at the root, a `docs/internal/onboarding.md` from years ago, a `packages/api/README.md` with route documentation, a `scripts/README.md` with dev workflow notes. Don't skip anything — every markdown file is a potential source of project context.
+
+Use AskUserQuestion to present the full inventory: "I found [N] markdown files and [N] other context sources. Here's what each one contains — [list with one-line summaries]. Which of these contain knowledge that should be captured in the project context? Are there other sources I missed?"
 
 ### Step 2: Extract and classify
 
@@ -89,12 +92,11 @@ For projects with no documentation and no context files — start from zero.
 
 ### Step 1: Scan the codebase
 
-Silently gather signals:
+Glob for `**/*.md` and read every markdown file — even in a "no docs" project there's often a README.md, a CONTRIBUTING.md, or a forgotten doc file with useful context. Also gather:
 - Package files (`package.json`, `Cargo.toml`, `Package.swift`, `go.mod`)
 - Build config (`.github/workflows/*.yml`, `Dockerfile`, `wrangler.toml`, `process-compose.yml`, `mise.toml`)
 - Entry points and directory structure
 - `.env.example` or `.env.local`
-- README.md if it exists
 
 ### Step 2: Present findings and interview
 
@@ -117,13 +119,14 @@ For each selected doc type, write to `docs/<name>.md`, present for review. After
 ### Phase 1: Gather sources
 
 1. Read all files in `docs/` — this is the primary source of truth
-2. Read `CLAUDE.md` if it exists (may have manually-written content to preserve)
-3. Read `.claude/rules/*.md` if they exist
+2. Glob for `**/*.md` across the entire project — pick up READMEs in subdirectories, scattered docs, package-level documentation. Summarize what each file contains.
+3. Read `CLAUDE.md`, `.claude/rules/*.md`, `.cursorrules` if they exist (may have manually-written content to preserve)
 4. Scan codebase for signals not in docs:
    - `package.json` / `Cargo.toml` / `Package.swift` for stack info
    - `.github/workflows/*.yml` for CI commands
    - `wrangler.toml`, `Dockerfile`, `process-compose.yml` for infra
    - `.env.example` for required config
+5. Use AskUserQuestion to present the full inventory before proceeding: "Here's everything I found — are there sources I missed?"
 
 ### Phase 2: Assess project complexity
 
