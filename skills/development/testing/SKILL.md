@@ -347,8 +347,8 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: oven-sh/setup-bun@735343b667d3e6a283f1e0344db1c89b3c07d1c4 # v2.0.2
       - run: bun install --frozen-lockfile  # Fail if lockfile is stale — prevents supply chain drift
       - run: bun run typecheck
       - run: bun run lint
@@ -356,7 +356,7 @@ jobs:
 ```
 
 Rules:
-- Pin action versions to full commit SHA — never use tags (`@v4`) as they can be moved to point to malicious code. Use `tools/action-pin.ts` from `security/supply-chain` to automate this. Format: `actions/checkout@<sha> # v4.1.1`
+- Pin action versions to full commit SHA — never use tags (`@v4`) as they can be moved to point to malicious code. Use `tools/action-pin.ts` from `security/supply-chain` to automate pinning. Comment the human-readable version after the SHA.
 - Use `--frozen-lockfile` for installs to catch lockfile drift early
 - Separate lint/typecheck from tests — they catch different problems and should report independently
 - Never use `continue-on-error: true` to hide failures
