@@ -111,7 +111,7 @@
       "name": "project",
       "source": "./",
       "description": "Project toolkit: description, scaffolding, structure",
-      "category": "web-development",
+      "category": "devtools",
       "skills": [
         "./skills/project/description",
         "./skills/project/scaffolding",
