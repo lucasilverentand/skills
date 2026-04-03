@@ -275,7 +275,7 @@ Set in Base layout, allow per-page overrides:
 - `<meta name="description">`, OG tags, canonical URL
 - `<meta name="robots" content="index, follow">`
 
-For dynamic OG images, use `@vercel/og` or generate static images at build time.
+For dynamic OG images, generate static images at build time or use a Workers endpoint with `@cloudflare/pages-plugin-satori`.
 
 ## Integrations
 
