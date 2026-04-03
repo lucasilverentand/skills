@@ -190,21 +190,13 @@ Handle it:
 | `429` | Rate limited | Wait `retry_after` seconds |
 | `413` | Payload too large | Reduce embed count or field sizes |
 
-### Validation before sending
+### Limits
 
-- Total content: max 2000 chars
+- Content: max 2000 chars per message
 - Embeds: max 10 per message, ~6000 chars total across all embeds
 - Components: max 5 action rows, max 5 buttons per row
-- All URLs must be HTTPS
-- Timestamps use Unix seconds, not milliseconds
-
-## Constraints
-
-- Max 2000 chars per message content
-- Max 10 embeds per message, ~6000 chars total across embeds
-- Max 5 action rows per message, max 5 buttons per row
 - Webhook rate limit: 30 requests per 60 seconds per webhook
-- All URLs in embeds/components must be HTTPS
+- All URLs must be HTTPS
 - Timestamps use Unix seconds, not milliseconds
 - Thread names: max 100 characters
 - Forum posts must include an initial message

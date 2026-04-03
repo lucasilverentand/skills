@@ -239,4 +239,4 @@ These issues can't be found by automated scanners — they require understanding
 | `tools/config-audit.ts` | Audit Dockerfiles, CI workflows, env files, security headers, package.json |
 | `tools/dependency-audit.ts` | Scan package.json for CVEs in dependencies via OSV database |
 | `tools/secret-scan.ts` | Detect hardcoded secrets, API keys, credentials (35+ providers) |
-| `tools/permission-matrix.ts` | Generate route/role permission matrix (Hono, Express, Fastify, NestJS, file-based routing) |
+| `tools/permission-matrix.ts` | Generate route/role permission matrix (Hono, file-based routing) |

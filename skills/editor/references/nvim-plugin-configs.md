@@ -20,8 +20,7 @@ return {
           "ts_ls",
           "rust_analyzer",
           "lua_ls",
-          "basedpyright",
-          "gopls",
+          "tailwindcss",
         },
       })
     end,
@@ -84,7 +83,6 @@ return {
       ensure_installed = {
         "typescript", "tsx", "javascript",
         "rust", "lua", "swift",
-        "python", "go",
         "json", "toml", "yaml", "markdown",
         "html", "css", "bash",
       },
@@ -184,10 +182,8 @@ return {
       javascript = { "biome" },
       json = { "biome" },
       lua = { "stylua" },
-      python = { "ruff_format" },
-      go = { "gofumpt" },
       rust = { "rustfmt" },
-      swift = { "swiftformat" },
+      swift = { "swift_format" },
     },
     format_on_save = {
       timeout_ms = 2000,

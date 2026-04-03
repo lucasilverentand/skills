@@ -10,7 +10,7 @@
 | `invalid-name` | Must be kebab-case: lowercase alphanumeric + hyphens, 1-64 chars |
 | `reserved-name` | Marketplace name is reserved (e.g. `anthropic-marketplace`, `claude-code-plugins`) |
 | `invalid-version` | Must be valid semver: `X.Y.Z` |
-| `invalid-category` | Must be one of: `devtools`, `editor`, `web-development` |
+| `invalid-category` | Must be one of: `devtools` |
 | `invalid-path` | Skill paths must start with `./`, use forward slashes, no trailing slash or `..` segments |
 | `invalid-source` | Source object has unknown type or malformed fields (e.g. GitHub repo not `owner/repo`) |
 | `duplicate-name` | Each plugin/bundle name must be unique |

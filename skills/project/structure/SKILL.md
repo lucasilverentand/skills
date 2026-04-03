@@ -48,15 +48,15 @@ project-root/
   tsconfig.json        # root tsconfig with project references
   .github/workflows/
   packages/
-    config/            # env vars, feature flags → project/parts/config
-    types/             # shared types → project/parts/types
-    schema/            # db schema + migrations → project/parts/schema
-    auth/              # Better Auth setup → project/parts/auth
-    ui/                # component library → project/parts/ui
-    email/             # email templates → project/parts/email
-    api/               # Hono API → development/api
-    web/               # website → project/parts/website
-    app/               # Expo app → project/parts/expo-app
+    config/            # env vars, feature flags → project/scaffolding references/config.md
+    types/             # shared types → project/scaffolding references/types.md
+    schema/            # db schema + migrations → project/scaffolding references/schema.md
+    auth/              # Better Auth setup → project/scaffolding references/auth.md
+    ui/                # component library → project/scaffolding references/ui.md
+    email/             # email templates → project/scaffolding references/email.md
+    api/               # Hono API → development/typescript/api
+    web/               # website → project/scaffolding references/website.md
+    app/               # Expo app → project/scaffolding references/expo-app.md
 ```
 
 Only include packages the project actually needs — don't scaffold unused ones.
@@ -68,7 +68,7 @@ Only include packages the project actually needs — don't scaffold unused ones.
 3. Add `"references": [{ "path": "../<name>" }]` to root `tsconfig.json`
 4. Add `"<name>": "workspace:*"` to any packages that depend on it
 5. Run `bun install` to link the workspace
-6. If a project/parts skill exists for this package type, follow that skill for internal setup
+6. If `project/scaffolding` has a reference for this package type, follow it for internal setup
 
 ## Monorepo Management
 
@@ -127,11 +127,11 @@ bun run --filter './packages/shared-*' typecheck
   ```
 - Use `tsc --build` at root level — it follows project references and builds in dependency order
 
-### How project/parts skills plug in
+### How scaffolding references plug in
 
-Each `project/parts/*` skill handles the internals of one package type. This skill handles the monorepo-level concerns:
+The `project/scaffolding` skill has per-package-type references (config.md, auth.md, schema.md, etc.) that handle internals. This skill handles the monorepo-level concerns:
 
-| This skill handles | Parts skills handle |
+| This skill handles | Scaffolding references handle |
 |---|---|
 | Workspace layout and structure | Internal package setup and config |
 | Dependency linking between packages | Package-specific dependencies |
@@ -139,7 +139,7 @@ Each `project/parts/*` skill handles the internals of one package type. This ski
 | Naming conventions and directory layout | Package-internal file structure |
 | Adding/removing packages | Setting up package internals |
 
-When adding a new package: use this skill for workspace integration, then delegate to the relevant parts skill for internal setup.
+When adding a new package: use this skill for workspace integration, then follow the relevant `project/scaffolding` reference for internal setup.
 
 ### Dependency troubleshooting
 

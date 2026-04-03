@@ -33,15 +33,17 @@ export { authMiddleware } from "./middleware";
 Add to `betterAuth()` config:
 
 ```ts
+import { env } from "@scope/config";
+
 socialProviders: {
   github: {
-    clientId: process.env.GITHUB_CLIENT_ID!,
-    clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+    clientId: env.GITHUB_CLIENT_ID,
+    clientSecret: env.GITHUB_CLIENT_SECRET,
   },
 },
 ```
 
-- Store secrets in `@scope/config` via env vars
+- Always import `env` from `@scope/config` — never read `process.env` directly
 - Callback URL pattern: `https://<domain>/api/auth/callback/<provider>`
 
 ## RBAC
@@ -70,7 +72,7 @@ export async function authMiddleware(req: Request): Promise<Session | null> {
 }
 ```
 
-- Hono API imports this middleware — see `development/api`
+- Hono API imports this middleware — see `development/typescript/api`
 - Never inline session logic in route handlers
 
 ## Session persistence

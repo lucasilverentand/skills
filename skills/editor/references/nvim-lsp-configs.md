@@ -73,68 +73,6 @@ require("lspconfig").rust_analyzer.setup({
 })
 ```
 
-## Python
-
-```lua
--- Server: basedpyright (installed via Mason)
-require("lspconfig").basedpyright.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  settings = {
-    basedpyright = {
-      analysis = {
-        typeCheckingMode = "standard",
-        autoImportCompletions = true,
-        inlayHints = {
-          variableTypes = true,
-          functionReturnTypes = true,
-          callArgumentNames = true,
-        },
-      },
-    },
-  },
-})
-
--- Ruff for linting (separate from basedpyright)
-require("lspconfig").ruff.setup({
-  capabilities = capabilities,
-  on_attach = function(client, bufnr)
-    client.server_capabilities.hoverProvider = false  -- let basedpyright handle hover
-    on_attach(client, bufnr)
-  end,
-})
-```
-
-## Go
-
-```lua
--- Server: gopls (installed via Mason)
-require("lspconfig").gopls.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  settings = {
-    gopls = {
-      hints = {
-        assignVariableTypes = true,
-        compositeLiteralFields = true,
-        constantValues = true,
-        functionTypeParameters = true,
-        parameterNames = true,
-        rangeVariableTypes = true,
-      },
-      analyses = {
-        unusedparams = true,
-        shadow = true,
-        nilness = true,
-        unusedwrite = true,
-      },
-      staticcheck = true,
-      gofumpt = true,
-    },
-  },
-})
-```
-
 ## Swift
 
 ```lua

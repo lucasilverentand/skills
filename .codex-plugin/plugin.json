@@ -1,0 +1,45 @@
+{
+  "name": "skills-of-luca",
+  "version": "0.7.0",
+  "description": "Development workflow skills: debugging, testing, deployment, documentation, editor configuration, git workflows, infrastructure, project scaffolding, research, security audits, and skill authoring.",
+  "author": {
+    "name": "Luca Silverentand",
+    "url": "https://github.com/lucasilverentand"
+  },
+  "homepage": "https://github.com/lucasilverentand/skills",
+  "repository": "https://github.com/lucasilverentand/skills",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "codex",
+    "developer-tools",
+    "typescript",
+    "swift",
+    "research",
+    "security",
+    "deployment",
+    "documentation"
+  ],
+  "skills": "../skills/",
+  "interface": {
+    "displayName": "Luca Skills",
+    "shortDescription": "A broad, installable skills library for software work",
+    "longDescription": "Install Luca's curated skills library into Codex to get guidance and automation across TypeScript, Swift, testing, deployment, documentation, research, security, editor setup, and skill authoring workflows.",
+    "developerName": "Luca Silverentand",
+    "category": "Coding",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "privacyPolicyURL": "https://github.com/lucasilverentand/skills/blob/main/README.md",
+    "termsOfServiceURL": "https://github.com/lucasilverentand/skills/blob/main/README.md",
+    "defaultPrompt": [
+      "Help me use this repo's development, testing, deployment, research, and documentation skills in my project"
+    ],
+    "composerIcon": "./assets/luca-skills-small.svg",
+    "logo": "./assets/luca-skills.svg",
+    "brandColor": "#0F172A",
+    "websiteURL": "https://github.com/lucasilverentand/skills",
+    "screenshots": []
+  }
+}

@@ -291,6 +291,30 @@ export const Route = createFileRoute("/_auth/dashboard/users")({
 - `errorComponent` renders if the loader throws
 - Both are scoped to the route — they do not affect sibling routes
 
+## Client state
+
+Use **nanostores** for client-only state (UI toggles, form drafts, sidebar state). TanStack Query owns all server state — never duplicate server data in a client store.
+
+```ts
+import { atom, computed } from "nanostores";
+
+export const $sidebarOpen = atom(true);
+export const $theme = atom<"light" | "dark">("light");
+```
+
+```tsx
+import { useStore } from "@nanostores/react";
+import { $sidebarOpen } from "../stores/ui";
+
+function Sidebar() {
+  const open = useStore($sidebarOpen);
+  if (!open) return null;
+  return <nav>...</nav>;
+}
+```
+
+Install: `bun add nanostores @nanostores/react`
+
 ## Navigation
 
 Always use `<Link>` and `useNavigate` from `@tanstack/react-router` — never `<a>` or `window.location`:

@@ -128,7 +128,6 @@ Core global settings:
 | TypeScript/Bun | `biome`, `tailwindcss`, `toml`, `dockerfile`, `sql`, `env` |
 | Rust | `toml`, `dockerfile` |
 | Swift/iOS | `swift` |
-| Python | `ruff`, `basedpyright`, `toml` |
 | General | `git-firefly`, `html`, `csv`, `env` |
 
 Full list: `references/zed-extensions.md`. Per-language LSP configs: `references/zed-lsp-configs.md`.
@@ -165,7 +164,7 @@ For large repos, exclude directories from indexing:
 ```json
 {
   "file_scan_exclusions": [
-    "**/.git", "**/node_modules", "**/target", "**/.next", "**/dist"
+    "**/.git", "**/node_modules", "**/target", "**/dist", "**/.astro"
   ]
 }
 ```
@@ -226,9 +225,8 @@ return {
       javascript = { "biome" },
       json = { "biome" },
       lua = { "stylua" },
-      python = { "ruff_format" },
-      go = { "gofumpt" },
       rust = { "rustfmt" },
+      swift = { "swift_format" },
     },
     format_on_save = { timeout_ms = 2000, lsp_fallback = true },
   },

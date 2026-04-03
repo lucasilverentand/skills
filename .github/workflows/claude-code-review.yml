@@ -17,13 +17,13 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           fetch-depth: 0
 
       - name: Run Skill Review
         id: skill-review
-        uses: anthropics/claude-code-action@v1
+        uses: anthropics/claude-code-action@a0e1e7ea14809842f600950f9e5f4c18c2396f42 # v1.1.0
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           allowed_bots: "claude"
@@ -34,7 +34,6 @@ jobs:
 
             ## Structure
             - Has YAML frontmatter with `name` and `description` in SKILL.md
-            - Has PURPOSE.md with responsibilities and tools list
             - SKILL.md is under 5000 tokens (~500 lines)
             - Decision tree is present and covers all responsibilities
             - No content duplicated between SKILL.md and references/

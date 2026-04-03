@@ -1,10 +1,11 @@
 #!/usr/bin/env bun
 /**
- * Validate Claude Code metadata files (plugin.json, marketplace.json).
+ * Validate generated plugin metadata files.
  * Checks JSON syntax, required fields, naming conventions, and semver.
  */
 
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
 
 const RED = "\x1b[0;31m";
 const GREEN = "\x1b[0;32m";
@@ -30,7 +31,7 @@ const KEBAB = /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/;
 function validateJsonFile(
   path: string,
   label: string,
-  checks: (data: Record<string, unknown>) => void,
+  checks: (data: Record<string, unknown>, path: string) => void,
 ) {
   if (!existsSync(path)) {
     warn(`${label} not found at ${path}`);
@@ -41,21 +42,19 @@ function validateJsonFile(
 
   let data: Record<string, unknown>;
   try {
-    data = JSON.parse(Bun.file(path).text() as unknown as string);
+    data = JSON.parse(readFileSync(path, "utf-8"));
   } catch {
-    // Bun.file().text() returns a promise, use sync read instead
-    const text = require("node:fs").readFileSync(path, "utf-8");
-    try {
-      data = JSON.parse(text);
-    } catch {
-      fail("Invalid JSON syntax");
-      return;
-    }
+    fail("Invalid JSON syntax");
+    return;
   }
 
   pass("Valid JSON syntax");
-  checks(data);
+  checks(data, path);
   console.log();
+}
+
+function resolveRelativeToManifest(manifestPath: string, target: string): string {
+  return resolve(dirname(manifestPath), target);
 }
 
 function checkName(data: Record<string, unknown>) {
@@ -77,22 +76,66 @@ function checkVersion(data: Record<string, unknown>) {
   else warn(`version should follow semver (X.Y.Z): ${version}`);
 }
 
-console.log("🔍 Validating Claude Code metadata files...\n");
+console.log("🔍 Validating generated plugin metadata files...\n");
 
-// Validate plugin.json
-validateJsonFile(".claude-plugin/plugin.json", "plugin.json", (data) => {
+// Validate Codex plugin.json
+validateJsonFile(".codex-plugin/plugin.json", "Codex plugin.json", (data, manifestPath) => {
   checkName(data);
   checkDescription(data);
   checkVersion(data);
+
   const authorName = (data.author as Record<string, unknown>)?.name;
   if (authorName) pass(`author.name is present: ${authorName}`);
   else warn("author.name is recommended");
+
+  const skills = data.skills as string | undefined;
+  if (!skills) {
+    fail("Missing required field: skills");
+  } else if (!existsSync(resolveRelativeToManifest(manifestPath, skills))) {
+    fail(`skills path does not exist: ${skills}`);
+  } else {
+    pass(`skills path exists: ${skills}`);
+  }
+
+  const pluginInterface = data.interface as Record<string, unknown> | undefined;
+  if (!pluginInterface) {
+    fail("Missing required field: interface");
+    return;
+  }
+
+  if (pluginInterface.displayName) pass(`interface.displayName is present: ${pluginInterface.displayName}`);
+  else fail("interface.displayName is required");
+
+  if (pluginInterface.category) pass(`interface.category is present: ${pluginInterface.category}`);
+  else fail("interface.category is required");
+
+  if (Array.isArray(pluginInterface.capabilities) && pluginInterface.capabilities.length > 0) {
+    pass(`interface.capabilities has ${pluginInterface.capabilities.length} items`);
+  } else {
+    fail("interface.capabilities must be a non-empty array");
+  }
+
+  if (Array.isArray(pluginInterface.defaultPrompt) && pluginInterface.defaultPrompt.length > 0) {
+    pass(`interface.defaultPrompt has ${pluginInterface.defaultPrompt.length} item(s)`);
+  } else {
+    fail("interface.defaultPrompt must be a non-empty array");
+  }
+
+  for (const field of ["composerIcon", "logo"] as const) {
+    const assetPath = pluginInterface[field];
+    if (typeof assetPath !== "string" || assetPath.length === 0) continue;
+    if (existsSync(resolveRelativeToManifest(manifestPath, assetPath))) {
+      pass(`interface.${field} exists: ${assetPath}`);
+    } else {
+      fail(`interface.${field} path does not exist: ${assetPath}`);
+    }
+  }
 });
 
-// Validate marketplace.json
+// Validate Claude marketplace.json
 validateJsonFile(
   ".claude-plugin/marketplace.json",
-  "marketplace.json",
+  "Claude marketplace.json",
   (data) => {
     checkName(data);
 

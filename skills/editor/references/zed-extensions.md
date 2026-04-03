@@ -33,22 +33,6 @@ Rust support (rust-analyzer) is built into Zed — no extension needed.
 |---|---|
 | `swift` | Swift language support via SourceKit-LSP |
 
-### Python
-
-| Extension | Purpose |
-|---|---|
-| `basedpyright` | Type checking and completions (strict pyright fork) |
-| `ruff` | Fast linting and formatting |
-| `toml` | TOML for `pyproject.toml` |
-
-### Go
-
-| Extension | Purpose |
-|---|---|
-| `dockerfile` | Dockerfile syntax |
-
-Go support (gopls) is built into Zed — no extension needed.
-
 ### DevOps / Infrastructure
 
 | Extension | Purpose |
@@ -95,8 +79,6 @@ Zed has built-in support for many languages without extensions:
 |---|---|---|
 | TypeScript/JavaScript | Yes (tsserver) | `biome` for formatting |
 | Rust | Yes (rust-analyzer) | No |
-| Go | Yes (gopls) | No |
-| Python | Partial | `basedpyright` + `ruff` |
 | Swift | Partial | `swift` |
 | HTML/CSS | Partial | `html` for full support |
 | JSON | Yes | No |

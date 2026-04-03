@@ -4,7 +4,7 @@ Push notification support across Expo (iOS/Android) and web.
 
 ## Setup (Expo)
 
-1. Install: `npx expo install expo-notifications expo-device expo-constants`
+1. Install: `bunx expo install expo-notifications expo-device expo-constants`
 2. Configure `app.json` with expo-notifications plugin and `UIBackgroundModes`
 3. Create `packages/notifications/src/register.ts` for permission handling and token registration
 
@@ -67,7 +67,7 @@ const subscription = onNotificationTapped((response) => {
 
 ## Web push
 
-Use the Push API with service workers. Generate VAPID keys: `npx web-push generate-vapid-keys`.
+Use the Push API with service workers. Generate VAPID keys: `bunx web-push generate-vapid-keys`.
 
 ## Tools
 

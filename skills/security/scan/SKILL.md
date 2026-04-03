@@ -1,6 +1,6 @@
 ---
 name: scan
-description: Runs automated SAST and DAST security scans using tools like semgrep, bandit, eslint-plugin-security, nuclei, and ZAP — detects available scanners, executes them, normalizes and triages findings, generates scanner configs, and guides CI integration. Falls back to the built-in code-audit scanner when no external tools are installed. Use when the user wants to run a security scan, configure semgrep or nuclei, triage scan results, set up security scanning in CI, or suppress false positives from automated scanners.
+description: Runs automated SAST and DAST security scans using semgrep, nuclei, and ZAP — detects available scanners, executes them, normalizes and triages findings, generates scanner configs, and guides CI integration. Falls back to the built-in code-audit scanner when no external tools are installed. Use when the user wants to run a security scan, configure semgrep or nuclei, triage scan results, set up security scanning in CI, or suppress false positives from automated scanners.
 allowed-tools: Read Grep Glob Bash Write Edit
 ---
 

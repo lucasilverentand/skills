@@ -289,7 +289,7 @@ function CreateUserForm({ onClose }: { onClose: () => void }) {
 
 ### Server error integration
 
-The API returns `{ ok: false, error: { code, message, details: [{ field, message }] } }` for validation failures (see `development/errors`). The `api` client should parse the error response and throw a structured error:
+The API returns `{ ok: false, error: { code, message, details: [{ field, message }] } }` for validation failures (see `development/typescript/errors`). The `api` client should parse the error response and throw a structured error:
 
 ```ts
 // lib/api.ts

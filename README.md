@@ -1,6 +1,6 @@
 # Skills
 
-73 skills organized into 16 atomic plugins and 7 intent-based bundles for Claude Code.
+39 skills organized into 12 plugins and 7 intent-based bundles for Claude Code and Codex.
 
 **Plugins** are non-overlapping groups — each skill belongs to exactly one plugin.
 **Bundles** are user-intent collections that reference plugins — a plugin can appear in multiple bundles.
@@ -8,74 +8,31 @@
 ## Plugins
 
 <details>
-<summary><strong>git</strong> — 9 skills</summary>
+<summary><strong>development</strong> — 10 skills</summary>
 
 | Skill | Description |
 | --- | --- |
-| `git/branching` | Branch strategy, create/manage branches, rebase workflows, branch comparison |
-| `git/cherry-pick` | Apply specific commits across branches for backports and selective merges |
-| `git/committing` | Conventional commits, amend & fixup, pre-commit hooks |
-| `git/history` | Search history (log, blame, bisect), diff analysis |
-| `git/remote` | Manage remote repositories, sync forks, maintain remote-tracking branches |
-| `git/worktree` | Create/manage worktrees, cleanup stale ones |
-| `git/conflicts` | Resolve merge conflicts, conflict prevention |
-| `git/stashing` | Save and restore work-in-progress changes without committing |
-| `git/tagging` | Create and manage tags for releases, milestones, and version markers |
+| `development/typescript/api` | API design, OpenAPI specs, Hono implementation tooling |
+| `development/typescript/database` | Drizzle ORM patterns, schema design, queries, migrations |
+| `development/typescript/errors` | Result type error handling, error codes, migration from throws |
+| `development/typescript/type-safety` | Tighten types, remove `any`, add Zod schemas |
+| `development/typescript/workers` | Local Cloudflare Workers dev, .dev.vars, D1 migrations, process-compose |
+| `development/swift/data` | SwiftData persistence — models, queries, migrations |
+| `development/swift/patterns` | macOS-specific SwiftUI — windows, MenuBarExtra, Settings, toolbars |
+| `development/swift/state` | SwiftUI state management — @Observable, @State, @Environment |
+| `development/swift/views` | SwiftUI view composition, layout, animations, liquid glass |
+| `development/testing` | Test strategy, authoring, CI config (Bun, Playwright, Maestro, Swift Testing) |
 
 </details>
 
 <details>
-<summary><strong>planning</strong> — 3 skills</summary>
+<summary><strong>project</strong> — 3 skills</summary>
 
 | Skill | Description |
 | --- | --- |
-| `development/implementing` | Implement code based on a plan |
-| `development/knowledge` | Record development learnings and manage ADRs |
-| `development/planning` | Break down features into implementation plans and tasks |
-
-</details>
-
-<details>
-<summary><strong>workflow</strong> — 3 skills</summary>
-
-| Skill | Description |
-| --- | --- |
-| `development/debugging` | Systematic root cause analysis, log analysis |
-| `development/environment` | Bootstrap local dev setup, dev containers, tool version management |
-| `development/refactoring` | Restructure, extract, and clean up code without changing external behavior |
-
-</details>
-
-<details>
-<summary><strong>code-quality</strong> — 5 skills</summary>
-
-| Skill | Description |
-| --- | --- |
-| `development/accessibility` | Audit components for WCAG compliance, fix a11y issues |
-| `development/errors` | Error handling patterns, result types, error code standards |
-| `development/performance` | Identify bottlenecks, bundle optimization, benchmarking |
-| `development/testing` | Design test strategies and author tests (unit, integration, E2E) |
-| `development/type-safety` | Tighten types, remove `any`, add Zod schemas |
-
-</details>
-
-<details>
-<summary><strong>api-data</strong> — 2 skills</summary>
-
-| Skill | Description |
-| --- | --- |
-| `development/api` | Design endpoints, generate OpenAPI specs, review consistency |
-| `development/database` | Drizzle ORM patterns, schema design, queries, migrations |
-
-</details>
-
-<details>
-<summary><strong>project-scaffold</strong> — 2 skills</summary>
-
-| Skill | Description |
-| --- | --- |
+| `project/description` | Generate project overviews from codebase scanning |
 | `project/scaffolding` | Navigate, create, and maintain monorepo workspace packages |
-| `project/structure` | Scaffold projects, monorepo setup, convention docs |
+| `project/structure` | Scaffold projects, monorepo setup, bun workspaces |
 
 </details>
 
@@ -84,9 +41,9 @@
 
 | Skill | Description |
 | --- | --- |
-| `deployment/cloudflare` | Deploy Workers/Pages, manage D1/KV/R2, configure DNS |
-| `deployment/kubernetes` | Write/update manifests, Flux/GitOps deploys, scaling |
-| `deployment/railway` | Deploy services, provision databases, multi-environment |
+| `deployment/cloudflare` | Deploy Workers/Pages, manage D1/KV/R2, Service Bindings, Queues, Cron Triggers |
+| `deployment/kubernetes` | Write/update manifests, Flux/GitOps deploys, debug pods |
+| `deployment/railway` | Deploy services, provision databases, multi-environment config |
 
 </details>
 
@@ -97,16 +54,19 @@
 | --- | --- |
 | `infrastructure/docker` | Write Dockerfiles, image optimization, debug containers |
 | `infrastructure/gitops` | Flux CD management, repo structure, reconciliation |
-| `infrastructure/secrets` | Secret scanning, rotation, vault/store setup |
+| `infrastructure/secrets` | Secret scanning, rotation, Doppler setup |
 
 </details>
 
 <details>
-<summary><strong>docs</strong> — 1 skill</summary>
+<summary><strong>security</strong> — 4 skills</summary>
 
 | Skill | Description |
 | --- | --- |
-| `documentation/developer-docs` | READMEs, contributing guides, architecture overviews, GitHub templates |
+| `security/agent-safety` | No-secrets-on-disk architecture, forbidden commands, safe patterns |
+| `security/audit` | OWASP Top 10 code scanning, secret detection, dependency CVEs, permission matrix |
+| `security/scan` | Automated SAST/DAST with semgrep, nuclei, ZAP — built-in fallback scanners |
+| `security/supply-chain` | Dependency review, lockfile integrity, action pinning |
 
 </details>
 
@@ -115,21 +75,50 @@
 
 | Skill | Description |
 | --- | --- |
-| `research/codebase` | Architecture mapping, pattern discovery, dependency analysis |
+| `research/api` | Explore external APIs, compare SDKs, plan integrations |
+| `research/codebase` | Architecture mapping, pattern discovery, impact analysis |
 | `research/competitor` | Feature comparison, UX teardown, market positioning |
-| `research/technology` | Evaluate technologies, migration feasibility |
-| `research/api` | Explore external APIs, compare options, plan integrations |
 | `research/market` | Market sizing, user research synthesis, trend analysis |
-| `research/ux` | UI/UX research — design systems, component patterns, usability |
+| `research/technology` | Evaluate technologies, migration feasibility, dependency health |
+| `research/ux` | UI/UX research — design systems, accessibility, user flows |
 
 </details>
 
 <details>
-<summary><strong>editors</strong> — 1 skill</summary>
+<summary><strong>documentation</strong> — 3 skills</summary>
 
 | Skill | Description |
 | --- | --- |
-| `editor` | Config management across VS Code, Zed, Neovim, and Xcode |
+| `documentation/coauthoring` | 3-stage co-authoring workflow for specs, RFCs, proposals |
+| `documentation/project-docs` | Interactive project documentation generation |
+| `documentation/style` | Voice, tone, and formatting standards |
+
+</details>
+
+<details>
+<summary><strong>git</strong> — 1 skill</summary>
+
+| Skill | Description |
+| --- | --- |
+| `git` | Branching, commits, and repo cleanup conventions |
+
+</details>
+
+<details>
+<summary><strong>github</strong> — 1 skill</summary>
+
+| Skill | Description |
+| --- | --- |
+| `github` | PR workflow — clean history, structured descriptions, draft-first |
+
+</details>
+
+<details>
+<summary><strong>editor</strong> — 1 skill</summary>
+
+| Skill | Description |
+| --- | --- |
+| `editor` | VS Code, Zed, Neovim, and Xcode configuration |
 
 </details>
 
@@ -138,62 +127,42 @@
 
 | Skill | Description |
 | --- | --- |
-| `communication/discord` | Discord bots, webhooks, channel management |
+| `communication/discord` | Discord webhooks, embeds, polls, threads |
 
 </details>
 
 <details>
-<summary><strong>macos</strong> — 4 skills</summary>
-
-| Skill | Description |
-| --- | --- |
-| `macos/data` | SwiftData persistence — models, queries, migrations, ModelContainer |
-| `macos/patterns` | macOS SwiftUI patterns — windows, MenuBarExtra, Settings, toolbars, sandboxing |
-| `macos/state` | SwiftUI state management — @Observable, @State, @Environment, @Binding |
-| `macos/views` | SwiftUI view composition, layout, modifiers, animations, liquid glass |
-
-</details>
-
-<details>
-<summary><strong>security</strong> — 2 skills</summary>
-
-| Skill | Description |
-| --- | --- |
-| `security/audit` | Comprehensive security audit — OWASP Top 10 code scanning, secret detection, dependency CVEs, config/infra audit, auth/authz review, permission matrix |
-| `security/scan` | Automated SAST/DAST scanning with semgrep, bandit, nuclei, ZAP — with built-in fallback scanners when external tools aren't installed |
-
-</details>
-
-<details>
-<summary><strong>meta</strong> — 2 skills</summary>
+<summary><strong>skills</strong> — 2 skills</summary>
 
 | Skill | Description |
 | --- | --- |
 | `skills/authoring` | Create, test, publish, and maintain agent skills |
-| `skills/retrospecting` | Mine conversations and code changes for struggles, turn findings into skills |
+| `skills/retrospecting` | Mine conversations and git history for patterns, turn into skills |
 
 </details>
 
 ## Bundles
 
-<details>
-<summary><strong>Bundle reference</strong></summary>
-
 | Bundle | Plugins | Use case |
 | --- | --- | --- |
-| **full-stack-web** | git, planning, workflow, code-quality, api-data, project-scaffold, deployment, infrastructure, docs | Building web apps with Hono + React + Drizzle |
-| **mobile-dev** | git, planning, workflow, code-quality, api-data, project-scaffold, macos, docs | Expo/iOS apps with a backend |
-| **api-backend** | git, planning, workflow, code-quality, api-data, project-scaffold, deployment, docs | Pure API/backend work |
-| **devops-infra** | git, deployment, infrastructure, security, docs | CI/CD, deployment, infrastructure |
-| **open-source** | git, planning, workflow, code-quality, docs, meta, security | Maintaining OSS projects |
-| **research-strategy** | git, research, planning, workflow, docs | Research, analysis, planning |
-| **all** | *(all 16 plugins)* | Everything |
+| **full-stack-web** | git, development, project, deployment, infrastructure, security, documentation | Building web apps with Hono + React + Drizzle |
+| **mobile-dev** | git, development, project, communication, security, documentation | Expo/iOS/macOS apps with a backend |
+| **api-backend** | git, development, project, deployment, infrastructure, security, documentation | Pure API/backend work |
+| **devops-infra** | git, deployment, infrastructure, security, documentation | CI/CD, infrastructure |
+| **open-source** | git, development, documentation, skills, security | Maintaining OSS projects |
+| **research-strategy** | git, research, development, security, documentation | Research, analysis, planning |
+| **all** | *(all 12 plugins)* | Everything |
 
-</details>
+## Generated metadata
+
+`bun run generate` writes both of the repo's generated metadata targets:
+
+- `.claude-plugin/marketplace.json` for the existing Claude-style multi-plugin marketplace output
+- `.codex-plugin/plugin.json` for the new Codex/OpenAI plugin manifest
+
+The skills themselves still live in `skills/`, and the Claude marketplace grouping remains the source of truth for category/bundle organization.
 
 ## Skill structure
-
-Each skill follows a standard layout:
 
 ```
 skills/<category>/<skill-name>/
@@ -201,7 +170,3 @@ skills/<category>/<skill-name>/
 ├── references/       # Supporting reference docs
 └── tools/            # Automation scripts
 ```
-
-- **SKILL.md** — the core instructions Claude follows when the skill is triggered
-- **references/** — detailed reference material loaded on demand
-- **tools/** — scripts that extend Claude's capabilities for the skill

@@ -6,9 +6,14 @@ React Native app built with Expo and expo-router. Targets iOS, Android, and web 
 
 1. Scaffold: `bun create expo packages/app -- --template blank-typescript`
 2. Add expo-router: `bun add expo-router expo-linking expo-constants expo-status-bar`
-3. Enable New Architecture and React Compiler in `app.config.ts`
-4. Install NativeWind: `bun add nativewind && bun add -d tailwindcss`
-5. Enable typed routes: `{ router: { typedRoutes: true } }`
+3. Install NativeWind: `bun add nativewind && bun add -d tailwindcss`
+4. Configure `app.config.ts`:
+   ```ts
+   export default {
+     newArchEnabled: true,
+     experiments: { reactCompiler: true, typedRoutes: true },
+   };
+   ```
 
 ## Navigation
 

@@ -1,6 +1,6 @@
 ---
 name: git
-description: Git workflow conventions — branching, commits, and repo cleanup. Use for any git operation.
+description: Git workflow conventions — branching, commits, and repo cleanup. Use when committing, creating branches, resolving lockfile conflicts, or cleaning up a messy repo.
 allowed-tools: Read Grep Glob Bash Agent
 invocation: /clean-repo
 ---
@@ -16,6 +16,8 @@ Name branches: `feat/<desc>`, `fix/<desc>`, `refactor/<desc>`, `chore/<desc>`, `
 - Prefer `--force-with-lease` over `--force` when pushing rebased branches
 
 ## Commits
+
+**Commit after completing each distinct piece of work** — don't batch unrelated changes and don't wait until asked. Each commit should be atomic: one logical change that compiles and passes checks on its own.
 
 Conventional commit format: `<type>(<scope>): <short description>`
 
@@ -57,4 +59,4 @@ Interactive workflow to organize messy changes into atomic conventional commits.
 
 ## Lockfile conflicts
 
-Resolve by regenerating (`bun install` / `npm install`), not by manual editing.
+Resolve by regenerating (`bun install`), not by manual editing.
