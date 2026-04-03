@@ -21,7 +21,18 @@ allowed-tools: Read Grep Glob Bash Write Edit
 
 ## Bootstrap
 
-First-time setup sequence:
+### Prerequisites
+
+Verify these are installed before first-time setup:
+
+```bash
+bun --version          # runtime and package manager
+doppler --version      # secret injection — brew install dopplerhq/cli/doppler
+process-compose version  # service orchestration — brew install process-compose
+mise --version         # task runner (optional) — brew install mise
+```
+
+### First-time setup sequence
 
 1. Check `mise.toml` or `package.json` for a setup script (usually `bun run dev:setup` or `bun scripts/setup.ts`)
 2. If it exists, run it — it typically generates `.dev.vars` and can auto-migrate on first run
