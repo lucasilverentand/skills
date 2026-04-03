@@ -37,19 +37,19 @@
     {
       "name": "development",
       "source": "./",
-      "description": "Development toolkit: TypeScript (api, database, errors, type-safety, workers), Swift (data, patterns, state, views), testing",
+      "description": "Development toolkit: api, data, database, errors, patterns, state, testing, type-safety, views, workers",
       "category": "devtools",
       "skills": [
-        "./skills/development/typescript/api",
-        "./skills/development/typescript/database",
-        "./skills/development/typescript/errors",
-        "./skills/development/typescript/type-safety",
-        "./skills/development/typescript/workers",
         "./skills/development/swift/data",
         "./skills/development/swift/patterns",
         "./skills/development/swift/state",
         "./skills/development/swift/views",
-        "./skills/development/testing"
+        "./skills/development/testing",
+        "./skills/development/typescript/api",
+        "./skills/development/typescript/database",
+        "./skills/development/typescript/errors",
+        "./skills/development/typescript/type-safety",
+        "./skills/development/typescript/workers"
       ],
       "strict": false
     },
@@ -148,9 +148,9 @@
       "strict": false
     },
     {
-      "name": "skill-creation",
+      "name": "skills",
       "source": "./",
-      "description": "Skill creation toolkit: authoring, retrospecting",
+      "description": "Skills toolkit: authoring, retrospecting",
       "category": "devtools",
       "skills": [
         "./skills/skills/authoring",
@@ -216,7 +216,7 @@
         "git",
         "development",
         "documentation",
-        "skill-creation",
+        "skills",
         "security"
       ]
     },

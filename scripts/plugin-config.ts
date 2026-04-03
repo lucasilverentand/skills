@@ -8,9 +8,7 @@
  */
 
 /** Override the default "devtools" category for specific plugins. */
-export const CATEGORY_OVERRIDES: Record<string, string> = {
-  project: "web-development",
-};
+export const CATEGORY_OVERRIDES: Record<string, string> = {};
 
 /** Intent-based bundles — each references plugins by name. */
 export const BUNDLES: Record<string, { description: string; plugins: string[] }> = {
@@ -20,7 +18,7 @@ export const BUNDLES: Record<string, { description: string; plugins: string[] }>
   },
   "mobile-dev": {
     description: "Expo/iOS/macOS apps with a backend",
-    plugins: ["git", "development", "project", "macos", "communication", "security", "documentation"],
+    plugins: ["git", "development", "project", "communication", "security", "documentation"],
   },
   "api-backend": {
     description: "Pure API/backend work",
