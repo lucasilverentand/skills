@@ -1,7 +1,7 @@
 ---
 name: context
 description: Creates and maintains LLM context files that make autonomous agents effective in a codebase. Reads project documentation in /docs, interviews the user for undocumented knowledge, and compiles the result into tool-specific context files (CLAUDE.md, .claude/rules/, .cursorrules, .github/copilot-instructions.md). Use when setting up a new project for AI-assisted development, creating CLAUDE.md, generating .cursorrules, syncing context files after docs changed, auditing whether context files match the current codebase, or when someone says "set up this project for Claude" or "create AI context".
-allowed-tools: Read Write Edit Glob Grep Bash AskUserQuestion
+allowed-tools: Read Write Edit Glob Grep Bash AskUserQuestion Agent
 ---
 
 # Project Context for LLMs
@@ -35,27 +35,15 @@ Compile project knowledge into context files that shape how LLMs behave in a cod
 
 For projects that already have context scattered across CLAUDE.md, .claude/rules/, .cursorrules, README sections, or inline comments — but no proper `/docs` structure. The goal: extract the knowledge into `/docs` as the source of truth, then re-derive clean context files from it.
 
-### Step 1: Inventory all project knowledge
+### Step 1: Catalog all project knowledge
 
-Cast a wide net — scan for every markdown file and context source in the project:
+Use the catalog workflow described in "Building the catalog" below. This produces a structured inventory of every knowledge source in the project with summaries and classifications.
 
-```
-Glob: **/*.md
-```
+### Step 2: Present catalog and classify
 
-Read every `.md` file found. Also check for:
-- `.cursorrules`, `.windsurfrules`, `.clinerules`
-- `.github/copilot-instructions.md`
-- `.env.example`, `.env.local` (documents required config)
-- `package.json` description/scripts, `Cargo.toml` metadata, `Package.swift` comments
+Present the catalog to the user via AskUserQuestion: "I cataloged [N] files across the project. Here's what I found — [catalog summary grouped by type]. Which of these should feed into the project context? Are there sources I missed?"
 
-This catches knowledge that lives in unexpected places — a `ARCHITECTURE.md` at the root, a `docs/internal/onboarding.md` from years ago, a `packages/api/README.md` with route documentation, a `scripts/README.md` with dev workflow notes. Don't skip anything — every markdown file is a potential source of project context.
-
-Use AskUserQuestion to present the full inventory: "I found [N] markdown files and [N] other context sources. Here's what each one contains — [list with one-line summaries]. Which of these contain knowledge that should be captured in the project context? Are there other sources I missed?"
-
-### Step 2: Extract and classify
-
-Read all discovered sources. Classify each piece of content by doc type:
+Then classify the user-approved sources by doc type:
 
 | Content about... | Belongs in |
 |---|---|
@@ -90,17 +78,13 @@ Now that `/docs` is the source of truth, follow "Full context generation" Phase 
 
 For projects with no documentation and no context files — start from zero.
 
-### Step 1: Scan the codebase
+### Step 1: Catalog the project
 
-Glob for `**/*.md` and read every markdown file — even in a "no docs" project there's often a README.md, a CONTRIBUTING.md, or a forgotten doc file with useful context. Also gather:
-- Package files (`package.json`, `Cargo.toml`, `Package.swift`, `go.mod`)
-- Build config (`.github/workflows/*.yml`, `Dockerfile`, `wrangler.toml`, `process-compose.yml`, `mise.toml`)
-- Entry points and directory structure
-- `.env.example` or `.env.local`
+Use the catalog workflow described in "Building the catalog" below. Even in a "no docs" project, the catalog finds README files, config, CI workflows, and code structure.
 
 ### Step 2: Present findings and interview
 
-Use AskUserQuestion: "I scanned the project. Here's what I found — [brief summary]. Before I start writing docs, I need to understand the project from your perspective."
+Use AskUserQuestion to present the catalog: "I scanned the project and cataloged [N] files. Here's what I found — [catalog summary]. Before I start writing docs, I need to understand the project from your perspective."
 
 Then run through the same 5 interview rounds as "Full context generation" Phase 3 — commands, architecture, conventions, anti-patterns, workflow. But since there are no existing docs to reference, every round starts from the user's answers, not from discovered content.
 
@@ -118,15 +102,9 @@ For each selected doc type, write to `docs/<name>.md`, present for review. After
 
 ### Phase 1: Gather sources
 
-1. Read all files in `docs/` — this is the primary source of truth
-2. Glob for `**/*.md` across the entire project — pick up READMEs in subdirectories, scattered docs, package-level documentation. Summarize what each file contains.
-3. Read `CLAUDE.md`, `.claude/rules/*.md`, `.cursorrules` if they exist (may have manually-written content to preserve)
-4. Scan codebase for signals not in docs:
-   - `package.json` / `Cargo.toml` / `Package.swift` for stack info
-   - `.github/workflows/*.yml` for CI commands
-   - `wrangler.toml`, `Dockerfile`, `process-compose.yml` for infra
-   - `.env.example` for required config
-5. Use AskUserQuestion to present the full inventory before proceeding: "Here's everything I found — are there sources I missed?"
+Use the catalog workflow described in "Building the catalog" below. Then present via AskUserQuestion: "Here's everything I found — are there sources I missed?"
+
+The catalog covers `/docs` (primary source), all markdown files across the project, context files (CLAUDE.md, .cursorrules), and codebase signals (package files, CI, infra config).
 
 ### Phase 2: Assess project complexity
 
@@ -245,14 +223,81 @@ When `/docs` has been updated and context files need to match:
 
 Check if context files are accurate and complete:
 
-1. Read all context files
-2. Read `/docs` and scan the codebase
+1. Run the catalog workflow ("Building the catalog") to get a fresh inventory with staleness signals
+2. Compare the catalog against existing context files
 3. Report:
    - **Stale** — context files reference things that no longer exist (renamed files, removed commands, changed patterns)
    - **Missing** — important project knowledge not in any context file (new packages, changed architecture, new commands)
    - **Contradictions** — context files disagree with each other or with docs
    - **Generic filler** — content that applies to any project and wastes tokens
 4. Present findings via AskUserQuestion and offer to fix
+
+---
+
+## Building the catalog
+
+Every workflow starts by building a catalog of all project knowledge. This uses subagents to parallelize the work — a large project can have dozens of markdown files and config sources.
+
+### Step 1: Discover files
+
+Glob for all knowledge sources:
+
+```
+**/*.md
+**/*.cursorrules
+**/.windsurfrules
+**/.clinerules
+.env.example
+.env.local
+```
+
+Also list: `package.json`, `Cargo.toml`, `Package.swift`, `go.mod`, `.github/workflows/*.yml`, `Dockerfile`, `wrangler.toml`, `process-compose.yml`, `mise.toml`.
+
+### Step 2: Spawn catalog agents
+
+For each discovered file (or batch of small files), spawn a subagent with:
+
+> "Read this file and produce a catalog entry. Return:
+> - **path**: the file path
+> - **type**: one of: documentation, context-file, config, ci, readme, changelog, decision-record, api-spec, other
+> - **summary**: 1-2 sentence description of what knowledge this file contains
+> - **topics**: list of topics covered (e.g., architecture, commands, conventions, deployment, testing, data-model, auth, secrets)
+> - **staleness**: any signals that the content may be outdated (references to files that don't exist, old version numbers, deprecated patterns)
+> - **quality**: high (detailed, specific, current), medium (useful but incomplete), low (generic, stale, or near-empty)"
+
+Launch subagents in parallel — batch by directory to keep the number manageable. For projects with 50+ markdown files, batch 5-10 files per agent.
+
+### Step 3: Assemble the catalog
+
+Collect all subagent results into a structured catalog grouped by type:
+
+```
+## Documentation (N files)
+- docs/architecture.md — [summary] — topics: architecture, data-flow — quality: high
+- docs/getting-started.md — [summary] — topics: commands, setup — quality: medium (missing test commands)
+
+## Context files (N files)
+- CLAUDE.md — [summary] — topics: commands, conventions — quality: high
+- .cursorrules — [summary] — topics: conventions — quality: low (generic)
+
+## Package READMEs (N files)
+- packages/api/README.md — [summary] — topics: api, auth — quality: medium
+
+## Config & CI (N files)
+- .github/workflows/ci.yml — [summary] — topics: ci, testing
+- wrangler.toml — [summary] — topics: deployment, config
+```
+
+### Step 4: Identify what's useful
+
+From the catalog, determine:
+- **Primary sources** — high-quality files with substantive content to extract
+- **Supporting sources** — medium-quality files that fill gaps
+- **Redundant** — files that duplicate content in primary sources
+- **Stale** — files flagged by subagents as potentially outdated
+- **Gaps** — topics that no file covers (comparing against the full topic list: architecture, commands, conventions, testing, deployment, configuration, data-model, auth, api)
+
+This analysis feeds into the next step of whichever workflow invoked the catalog.
 
 ---
 
