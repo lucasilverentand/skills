@@ -36,11 +36,10 @@ export const apiKeys = sqliteTable("api_keys", {
 // modules/api-keys/generate.ts
 import { nanoid } from "nanoid";
 
-const ENV_PREFIX = process.env.NODE_ENV === "production" ? "sk_live_" : "sk_test_";
-
-export function generateApiKey(): { raw: string; hash: string; hint: string } {
+export function generateApiKey(isProduction: boolean): { raw: string; hash: string; hint: string } {
+  const prefix = isProduction ? "sk_live_" : "sk_test_";
   const body = nanoid(32);
-  const raw = `${ENV_PREFIX}${body}`;
+  const raw = `${prefix}${body}`;
 
   const encoder = new TextEncoder();
   const hashBuffer = await crypto.subtle.digest("SHA-256", encoder.encode(raw));
