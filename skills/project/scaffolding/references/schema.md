@@ -2,7 +2,7 @@
 
 The `schema` part provides the data layer using Drizzle ORM. Schema definitions live in a shared workspace package — consuming packages import the `db` client and typed schema from it.
 
-> **Cross-reference:** For migration generation, drift detection, and ordering validation, see `development/database`.
+> **Cross-reference:** For migration generation, drift detection, and ordering validation, see `development/typescript/database`.
 
 ## Setup
 

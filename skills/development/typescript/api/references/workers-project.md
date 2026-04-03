@@ -218,7 +218,7 @@ STRIPE_SECRET_KEY=sk_test_...
 2. Run the dev server: `bunx wrangler dev`
 3. Wrangler automatically connects to your local D1 database (stored in `.wrangler/state/`)
 
-`.dev.vars` is gitignored. See `development/workers` for generating it from Doppler or a secrets file.
+`.dev.vars` is gitignored. See `development/typescript/workers` for generating it from Doppler.
 
 ## Service Binding typed client
 

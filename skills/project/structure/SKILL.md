@@ -54,7 +54,7 @@ project-root/
     auth/              # Better Auth setup → project/parts/auth
     ui/                # component library → project/parts/ui
     email/             # email templates → project/parts/email
-    api/               # Hono API → development/api
+    api/               # Hono API → development/typescript/api
     web/               # website → project/parts/website
     app/               # Expo app → project/parts/expo-app
 ```
