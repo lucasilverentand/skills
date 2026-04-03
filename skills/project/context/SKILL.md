@@ -1,12 +1,12 @@
 ---
 name: context
-description: Creates and maintains LLM context files that make autonomous agents effective in a codebase. Reads project documentation in /docs, interviews the user for undocumented knowledge, and compiles the result into tool-specific context files (CLAUDE.md, .claude/rules/, .cursorrules, .github/copilot-instructions.md). Use when setting up a new project for AI-assisted development, creating CLAUDE.md, generating .cursorrules, syncing context files after docs changed, auditing whether context files match the current codebase, or when someone says "set up this project for Claude" or "create AI context".
+description: Creates and maintains CLAUDE.md and .claude/rules/ files that make Claude Code effective in a codebase. Reads project documentation in /docs, interviews the user for undocumented knowledge, and compiles the result into context files. Use when setting up a new project for Claude, creating CLAUDE.md, syncing context files after docs changed, auditing whether context files match the current codebase, or when someone says "set up this project for Claude" or "create AI context".
 allowed-tools: Read Write Edit Glob Grep Bash AskUserQuestion Agent
 ---
 
-# Project Context for LLMs
+# Project Context for Claude
 
-Compile project knowledge into context files that shape how LLMs behave in a codebase. The source of truth is human-readable documentation in `/docs` — context files are derived artifacts tailored to each tool's format.
+Compile project knowledge into context files that shape how Claude Code behaves in a codebase. The source of truth is human-readable documentation in `/docs` — CLAUDE.md and .claude/rules/ are derived artifacts.
 
 > **Behavioral rule:** Never assume you know the answer. You can scan the codebase for signals, but always confirm with the user via AskUserQuestion before writing anything. The user's mental model, preferences, and unwritten rules are more valuable than anything you can infer from code. Be inquisitive, be guiding — ask good questions with well-structured options, but let the user drive every decision.
 
@@ -16,15 +16,13 @@ Compile project knowledge into context files that shape how LLMs behave in a cod
 - Has docs/: !`test -d docs && echo "yes — $(ls docs/ 2>/dev/null | wc -l | tr -d ' ') files" || echo no`
 - Has CLAUDE.md: !`test -f CLAUDE.md && echo "yes — $(wc -l < CLAUDE.md | tr -d ' ') lines" || echo no`
 - Has .claude/rules/: !`test -d .claude/rules && echo "yes — $(ls .claude/rules/ 2>/dev/null | wc -l | tr -d ' ') files" || echo no`
-- Has .cursorrules: !`test -f .cursorrules && echo yes || echo no`
 
 ## Decision tree
 
 - What is the user doing?
   - **"Set up this project for Claude/AI"** → follow "Full context generation" below
-  - **"Organize existing context" / project has CLAUDE.md or .cursorrules but no /docs** → follow "Restructure existing context" below
+  - **"Organize existing context" / project has CLAUDE.md but no /docs** → follow "Restructure existing context" below
   - **"Create CLAUDE.md"** → follow "Generate CLAUDE.md" below
-  - **"Create .cursorrules"** → follow "Generate .cursorrules" below
   - **"Sync context files" / docs changed** → follow "Sync from docs" below
   - **"Audit context files"** → follow "Audit" below
   - **No context exists anywhere (no /docs, no CLAUDE.md, nothing)** → follow "Bootstrap from scratch" below
@@ -33,7 +31,7 @@ Compile project knowledge into context files that shape how LLMs behave in a cod
 
 ## Restructure existing context
 
-For projects that already have context scattered across CLAUDE.md, .claude/rules/, .cursorrules, README sections, or inline comments — but no proper `/docs` structure. The goal: extract the knowledge into `/docs` as the source of truth, then re-derive clean context files from it.
+For projects that already have context scattered across CLAUDE.md, .claude/rules/, README sections, or inline comments — but no proper `/docs` structure. The goal: extract the knowledge into `/docs` as the source of truth, then re-derive clean context files from it.
 
 ### Step 1: Catalog all project knowledge
 
@@ -70,7 +68,7 @@ For each doc type with content, write the file to `docs/<name>.md` following the
 
 ### Step 5: Re-derive context files
 
-Now that `/docs` is the source of truth, follow "Full context generation" Phase 3 onwards to interview for any remaining gaps and generate fresh context files. Use AskUserQuestion to ask: "Should I replace the existing CLAUDE.md/.cursorrules with versions derived from the new /docs, or keep them as-is?"
+Now that `/docs` is the source of truth, follow "Full context generation" Phase 3 onwards to interview for any remaining gaps and generate fresh context files. Use AskUserQuestion to ask: "Should I replace the existing CLAUDE.md with a version derived from the new /docs, or keep it as-is?"
 
 ---
 
@@ -104,7 +102,7 @@ For each selected doc type, write to `docs/<name>.md`, present for review. After
 
 Use the catalog workflow described in "Building the catalog" below. Then present via AskUserQuestion: "Here's everything I found — are there sources I missed?"
 
-The catalog covers `/docs` (primary source), all markdown files across the project, context files (CLAUDE.md, .cursorrules), and codebase signals (package files, CI, infra config).
+The catalog covers `/docs` (primary source), all markdown files across the project, existing context files (CLAUDE.md, .claude/rules/), and codebase signals (package files, CI, infra config).
 
 ### Phase 2: Assess project complexity
 
@@ -142,14 +140,12 @@ Use AskUserQuestion: "How should an agent working in this project behave?" Ask a
 
 ### Phase 4: Generate context files
 
-Use AskUserQuestion to ask which AI tools the user works with and which formats to generate. Don't assume — present the options:
+Based on the complexity assessment from Phase 2, generate:
 
-- `CLAUDE.md` — Claude Code
-- `.claude/rules/*.md` — Claude Code (large projects)
-- `.cursorrules` — Cursor
-- `.github/copilot-instructions.md` — GitHub Copilot
+- **Small project** → single `CLAUDE.md` — follow "Generate CLAUDE.md" below
+- **Large project** → `CLAUDE.md` index + `.claude/rules/*.md` — follow "Generate CLAUDE.md" → "For large projects: split into rules"
 
-For each selected format, draft the content, write it to the file, share the path, and ask the user to review before moving to the next format. Never generate all files silently — present each one for feedback.
+Draft the content, write it to the file, share the path, and ask the user to review. Never write silently — present for feedback.
 
 ---
 
@@ -200,17 +196,11 @@ See `references/rules-format.md` for the structure of each rules file.
 
 ---
 
-## Generate .cursorrules
-
-Read the same sources and write `.cursorrules` following the format in `references/cursorrules.md`. Cursor's format is a single file with a different tone — more concise, instruction-style.
-
----
-
 ## Sync from docs
 
 When `/docs` has been updated and context files need to match:
 
-1. Read the current context files (CLAUDE.md, .claude/rules/, .cursorrules)
+1. Read the current context files (CLAUDE.md, .claude/rules/)
 2. Read the updated docs
 3. Identify what changed in docs that isn't reflected in context files
 4. Use AskUserQuestion to present each discrepancy: "I found these differences between /docs and your context files — which should I update?" Don't silently edit — the user may have intentionally diverged.
@@ -244,9 +234,6 @@ Glob for all knowledge sources:
 
 ```
 **/*.md
-**/*.cursorrules
-**/.windsurfrules
-**/.clinerules
 .env.example
 .env.local
 ```
@@ -278,7 +265,7 @@ Collect all subagent results into a structured catalog grouped by type:
 
 ## Context files (N files)
 - CLAUDE.md — [summary] — topics: commands, conventions — quality: high
-- .cursorrules — [summary] — topics: conventions — quality: low (generic)
+- .claude/rules/architecture.md — [summary] — topics: architecture — quality: high
 
 ## Package READMEs (N files)
 - packages/api/README.md — [summary] — topics: api, auth — quality: medium
@@ -342,5 +329,4 @@ An LLM context file is good when an agent reading it can:
 |---|---|
 | `references/claude-md.md` | CLAUDE.md structure, section templates, examples |
 | `references/rules-format.md` | .claude/rules/ file structure for large projects |
-| `references/cursorrules.md` | .cursorrules format and conversion guidance |
 | `references/compilation.md` | How to derive context files from /docs source material |

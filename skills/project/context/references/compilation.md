@@ -1,6 +1,6 @@
 # Compiling /docs into Context Files
 
-The `/docs` directory is the human-readable source of truth. Context files (CLAUDE.md, .cursorrules, etc.) are derived from it — condensed, restructured, and optimized for LLM consumption.
+The `/docs` directory is the human-readable source of truth. CLAUDE.md and .claude/rules/ are derived from it — condensed, restructured, and optimized for Claude Code.
 
 ## The compilation mindset
 
@@ -64,16 +64,6 @@ Documentation explains. Context files instruct.
 4. **Omit setup narratives** — "Install Bun, then..." becomes `bun install`.
 5. **Keep specifics, drop generics** — "Files in `src/modules/` are organized by feature" is useful. "Follow clean code principles" is not.
 6. **One pass, not incremental** — read all docs, then write the context file. Don't append section by section.
-
-## Multi-format generation
-
-When generating multiple formats from the same sources:
-
-1. **Start with CLAUDE.md** — it's the most detailed format
-2. **Derive .cursorrules** from CLAUDE.md — condense, flatten, drop substitutions (see `cursorrules.md`)
-3. **Derive .github/copilot-instructions.md** from CLAUDE.md — similar format, drop Claude-specific features
-
-Never maintain formats independently — they should all trace back to the same `/docs` source material.
 
 ## Keeping context files current
 
