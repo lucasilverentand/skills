@@ -10,7 +10,7 @@ Options:
   --json    Output as JSON instead of plain text
   --help    Show this help message
 
-Scans Hono/Express route files and checks for:
+Scans Hono route files and checks for:
 - Non-plural resource names
 - Deep nesting (more than 2 levels)
 - Missing Zod validation on mutation endpoints
