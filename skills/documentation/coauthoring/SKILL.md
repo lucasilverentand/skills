@@ -1,6 +1,6 @@
 ---
 name: coauthoring
-description: Guide users through a structured workflow for co-authoring internal project documentation. Covers all doc types (specs, RFCs, proposals, decision docs, postmortems, ADRs, project briefs, etc.) with a 3-stage process — Context Gathering, Refinement & Structure, and Reader Testing. Uses AskUserQuestion heavily to guide decisions. Trigger when user mentions writing docs, creating proposals, drafting specs, or any substantial writing task.
+description: Guide users through a structured workflow for co-authoring internal project documentation. Covers all doc types (specs, RFCs, proposals, decision docs, postmortems, ADRs, project briefs, etc.) with a 3-stage process — Context Gathering, Refinement & Structure, and Reader Testing. Use when writing docs, creating proposals, drafting specs, or any substantial writing task.
 ---
 
 # Doc Co-Authoring Workflow

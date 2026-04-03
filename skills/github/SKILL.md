@@ -1,6 +1,6 @@
 ---
 name: github
-description: GitHub PR workflow — create pull requests with clean history, structured descriptions, pre-flight checks, and draft-first conventions. Use for creating PRs, writing PR descriptions, or preparing changes for review.
+description: GitHub PR workflow — create pull requests with clean history, structured descriptions, pre-flight checks, and draft-first conventions. Use when creating PRs, writing PR descriptions, or preparing changes for review.
 allowed-tools: Read Grep Glob Bash
 ---
 

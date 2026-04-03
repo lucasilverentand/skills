@@ -1,6 +1,6 @@
 ---
 name: style
-description: Shared voice, tone, and formatting standards for all documentation skills. Provides the consistent writing foundation that coauthoring and project-docs build on. Reference this skill when writing any substantial document.
+description: Shared voice, tone, and formatting standards for all documentation skills. Provides the consistent writing foundation that coauthoring and project-docs build on. Use when writing any substantial document, reviewing doc quality, or setting up writing conventions.
 ---
 
 # Writing Style

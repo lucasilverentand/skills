@@ -1,6 +1,6 @@
 ---
 name: git
-description: Git workflow conventions — branching, commits, and repo cleanup. Use for any git operation.
+description: Git workflow conventions — branching, commits, and repo cleanup. Use when committing, creating branches, resolving lockfile conflicts, or cleaning up a messy repo.
 allowed-tools: Read Grep Glob Bash Agent
 invocation: /clean-repo
 ---

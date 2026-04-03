@@ -1,6 +1,6 @@
 ---
 name: database
-description: Drizzle ORM patterns and database operations — schema design, queries, relations, seeding, indexing, performance tuning, and migrations for D1/SQLite and Postgres.
+description: Drizzle ORM patterns and database operations — schema design, queries, relations, seeding, indexing, performance tuning, and migrations for D1/SQLite and Postgres. Use when designing a schema, writing queries, adding indexes, generating or applying migrations, choosing between D1 and Postgres, seeding data, or debugging schema drift.
 allowed-tools: Read Grep Glob Bash Write Edit
 ---
 
