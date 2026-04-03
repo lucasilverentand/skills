@@ -285,31 +285,10 @@ Provide the final file link. Keep closing remarks brief — the user can read th
 - Using appendices to provide depth without bloating the main doc
 - Updating the doc as feedback is received from real readers
 
-## Tips for Effective Guidance
+## Operating Rules
 
-**Tone:**
-- Conversational but clear (default) — like a smart teammate explaining things
-- Explain rationale briefly when it affects decisions
-- Don't sell the approach — just execute it
-
-**Handling Deviations:**
-- If user wants to skip a stage: use AskUserQuestion to confirm, then adapt
-- If user seems frustrated: acknowledge and suggest ways to move faster
-- Always give the user agency to adjust the process
-- If user expresses different preferences from the defaults, adapt immediately and carry the new preference forward
-
-**Context Management:**
-- Proactively search connected tools when projects/entities are mentioned (default)
-- Don't let gaps accumulate — surface them immediately via AskUserQuestion
-- Track what's been learned and what's still unclear
-
-**File Management:**
-- Use `Edit` (str_replace) for all document edits — never rewrite the whole file
-- Share file links after every change
+- Use `Edit` for all document changes — never rewrite the whole file
 - Never use the document file for brainstorming — that's conversation
 - Detect and adapt to direct file edits silently
-
-**Quality over Speed:**
-- Don't rush through stages
-- Each iteration should make meaningful improvements
-- The goal is a document that actually works for the target audience
+- If user wants to skip a stage, confirm and adapt — don't fight them
+- If user expresses different preferences from the defaults, adapt immediately and carry forward
