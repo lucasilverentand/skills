@@ -1,6 +1,6 @@
 ---
 name: views
-description: SwiftUI view composition, layout, modifiers, animations, and liquid glass design for macOS apps. Use when building or modifying views, choosing layout containers, applying the liquid glass design language, creating animations, or building custom view modifiers. Trigger phrases: "build a view", "layout", "glass effect", "animation", "liquid glass", "SwiftUI view".
+description: SwiftUI view composition, layout, modifiers, animations, and liquid glass design for iOS and macOS apps. Use when building or modifying views, choosing layout containers, applying the liquid glass design language, creating animations, or building custom view modifiers. Trigger phrases: "build a view", "layout", "glass effect", "animation", "liquid glass", "SwiftUI view".
 allowed-tools: Read Grep Glob Bash Write Edit
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: state
-description: SwiftUI state management for macOS apps — @Observable, @State, @Environment, @Binding, @AppStorage, and @MainActor patterns. Use when choosing state primitives, designing observable models, wiring up environment dependencies, or debugging state issues. Trigger phrases: "state management", "@Observable", "@State", "@Environment", "observable model", "state not updating".
+description: SwiftUI state management for iOS and macOS apps — @Observable, @State, @Environment, @Binding, @AppStorage, and @MainActor patterns. Use when choosing state primitives, designing observable models, wiring up environment dependencies, or debugging state issues. Trigger phrases: "state management", "@Observable", "@State", "@Environment", "observable model", "state not updating".
 allowed-tools: Read Grep Glob Bash Write Edit
 ---
 

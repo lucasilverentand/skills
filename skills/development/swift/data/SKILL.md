@@ -1,6 +1,6 @@
 ---
 name: data
-description: SwiftData persistence for macOS apps — model design, queries, migrations, ModelContainer setup, @Query, and UserDefaults. Use when designing data models, writing queries, setting up persistence, or handling schema migrations in a SwiftUI macOS app. Trigger phrases: "SwiftData", "ModelContainer", "@Query", "data model", "persistence", "migration", "schema".
+description: SwiftData persistence for iOS and macOS apps — model design, queries, migrations, ModelContainer setup, @Query, and UserDefaults. Use when designing data models, writing queries, setting up persistence, or handling schema migrations in a SwiftUI app. Trigger phrases: "SwiftData", "ModelContainer", "@Query", "data model", "persistence", "migration", "schema".
 allowed-tools: Read Grep Glob Bash Write Edit
 ---
 
