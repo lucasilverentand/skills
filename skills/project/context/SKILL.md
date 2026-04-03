@@ -22,11 +22,93 @@ Compile project knowledge into context files that shape how LLMs behave in a cod
 
 - What is the user doing?
   - **"Set up this project for Claude/AI"** → follow "Full context generation" below
+  - **"Organize existing context" / project has CLAUDE.md or .cursorrules but no /docs** → follow "Restructure existing context" below
   - **"Create CLAUDE.md"** → follow "Generate CLAUDE.md" below
   - **"Create .cursorrules"** → follow "Generate .cursorrules" below
   - **"Sync context files" / docs changed** → follow "Sync from docs" below
   - **"Audit context files"** → follow "Audit" below
-  - **No /docs exists yet** → suggest running the `documentation/project-docs` skill first, then come back here
+  - **No context exists anywhere (no /docs, no CLAUDE.md, nothing)** → follow "Bootstrap from scratch" below
+
+---
+
+## Restructure existing context
+
+For projects that already have context scattered across CLAUDE.md, .claude/rules/, .cursorrules, README sections, or inline comments — but no proper `/docs` structure. The goal: extract the knowledge into `/docs` as the source of truth, then re-derive clean context files from it.
+
+### Step 1: Inventory existing context
+
+Scan for all sources of project knowledge:
+
+- `CLAUDE.md` at project root
+- `.claude/rules/*.md`
+- `.cursorrules`
+- `.github/copilot-instructions.md`
+- `README.md` (architecture, setup, contributing sections)
+- `CONTRIBUTING.md`
+- `.env.example` (documents required config)
+- Inline `@doc` or `/** */` comments in entry points
+
+Use AskUserQuestion to present what you found: "I found context in these locations — are there other places where project knowledge lives that I should pull from?"
+
+### Step 2: Extract and classify
+
+Read all discovered sources. Classify each piece of content by doc type:
+
+| Content about... | Belongs in |
+|---|---|
+| What the project is, who it's for | `docs/overview.md` |
+| Stack, structure, modules, data flow | `docs/architecture.md` |
+| Install, setup, commands, dev environment | `docs/getting-started.md` |
+| Commit style, naming, code patterns, PR process | `docs/contributing.md` |
+| Env vars, secrets, feature flags | `docs/configuration.md` |
+| Deploy targets, CI, rollback | `docs/deployment.md` |
+| DB schema, entities, migrations | `docs/data-model.md` |
+| Endpoints, auth, request/response | `docs/api.md` |
+
+Use AskUserQuestion to present the proposed mapping: "Here's how I'd organize the existing content into /docs — does this split make sense? Should anything move?"
+
+### Step 3: Interview for gaps
+
+The existing context files were likely written ad-hoc and may have gaps. Work through each doc type that has content and use AskUserQuestion to ask: "For [doc type], I extracted [summary]. Is this complete, or is there more you'd want captured here?"
+
+Also ask about doc types that have no content yet: "I didn't find anything about [deployment/testing/data model]. Should we create a doc for that, or is it not relevant for this project?"
+
+### Step 4: Write /docs
+
+For each doc type with content, write the file to `docs/<name>.md` following the structure from `references/compilation.md` (but in reverse — expanding terse context-file content into proper human-readable documentation). Present each file for review via AskUserQuestion before moving to the next.
+
+### Step 5: Re-derive context files
+
+Now that `/docs` is the source of truth, follow "Full context generation" Phase 3 onwards to interview for any remaining gaps and generate fresh context files. Use AskUserQuestion to ask: "Should I replace the existing CLAUDE.md/.cursorrules with versions derived from the new /docs, or keep them as-is?"
+
+---
+
+## Bootstrap from scratch
+
+For projects with no documentation and no context files — start from zero.
+
+### Step 1: Scan the codebase
+
+Silently gather signals:
+- Package files (`package.json`, `Cargo.toml`, `Package.swift`, `go.mod`)
+- Build config (`.github/workflows/*.yml`, `Dockerfile`, `wrangler.toml`, `process-compose.yml`, `mise.toml`)
+- Entry points and directory structure
+- `.env.example` or `.env.local`
+- README.md if it exists
+
+### Step 2: Present findings and interview
+
+Use AskUserQuestion: "I scanned the project. Here's what I found — [brief summary]. Before I start writing docs, I need to understand the project from your perspective."
+
+Then run through the same 5 interview rounds as "Full context generation" Phase 3 — commands, architecture, conventions, anti-patterns, workflow. But since there are no existing docs to reference, every round starts from the user's answers, not from discovered content.
+
+### Step 3: Choose scope
+
+Use AskUserQuestion: "Based on what you've told me, which docs should we create?" Present the doc types table and recommend a starting set based on what the project needs. Let the user pick.
+
+### Step 4: Write docs and context files
+
+For each selected doc type, write to `docs/<name>.md`, present for review. After docs are written, follow "Full context generation" Phase 4 to generate context files.
 
 ---
 
