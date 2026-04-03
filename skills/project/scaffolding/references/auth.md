@@ -33,15 +33,17 @@ export { authMiddleware } from "./middleware";
 Add to `betterAuth()` config:
 
 ```ts
+import { env } from "@scope/config";
+
 socialProviders: {
   github: {
-    clientId: process.env.GITHUB_CLIENT_ID!,
-    clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+    clientId: env.GITHUB_CLIENT_ID,
+    clientSecret: env.GITHUB_CLIENT_SECRET,
   },
 },
 ```
 
-- Store secrets in `@scope/config` via env vars
+- Always import `env` from `@scope/config` — never read `process.env` directly
 - Callback URL pattern: `https://<domain>/api/auth/callback/<provider>`
 
 ## RBAC

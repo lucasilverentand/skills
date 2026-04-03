@@ -30,7 +30,7 @@ export default defineConfig({
   schema: "./src/schema/*.ts",
   out: "./drizzle",
   dialect: "postgresql",
-  dbCredentials: { url: process.env.DATABASE_URL! },
+  dbCredentials: { url: process.env.DATABASE_URL! }, // drizzle-kit reads process.env directly (config file, not app code)
 });
 ```
 
@@ -79,7 +79,8 @@ export function createDb(d1: D1Database) { return drizzle(d1, { schema }); }
 // Postgres (Neon)
 import { drizzle } from "drizzle-orm/neon-http";
 import { neon } from "@neondatabase/serverless";
-const sql = neon(process.env.DATABASE_URL!);
+import { env } from "@scope/config";
+const sql = neon(env.DATABASE_URL);
 export const db = drizzle(sql, { schema });
 ```
 
