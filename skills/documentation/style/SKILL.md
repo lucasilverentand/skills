@@ -11,7 +11,6 @@ The shared foundation for all documentation. The `coauthoring` and `project-docs
 
 - What do you need?
   - **Writing tone/voice guidance** → see `references/voice-and-tone.md`
-  - **Co-authoring a substantial document** → follow `references/co-authoring-workflow.md`
   - **Quality checklist before publishing** → see `references/quality-standards.md`
   - **Co-authoring a substantial document (spec, RFC, proposal, decision doc, postmortem)** → use `documentation/coauthoring`
   - **Documenting a project (README, architecture, setup, API surface)** → use `documentation/project-docs`
@@ -31,5 +30,4 @@ These five rules apply to every document across all skills:
 | File | What it covers |
 |---|---|
 | `references/voice-and-tone.md` | Full voice, tone, and formatting guide |
-| `references/co-authoring-workflow.md` | 3-stage co-authoring process for substantial documents |
 | `references/quality-standards.md` | Universal quality checklist and anti-patterns |
