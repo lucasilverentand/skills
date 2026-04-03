@@ -10,9 +10,9 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@735343b667d3e6a283f1e0344db1c89b3c07d1c4 # v2.0.2
 
       - name: Check marketplace.json is up to date
         run: bun run generate -- --check
