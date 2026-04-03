@@ -8,6 +8,8 @@ allowed-tools: Read Write Edit Glob Grep Bash AskUserQuestion
 
 Compile project knowledge into context files that shape how LLMs behave in a codebase. The source of truth is human-readable documentation in `/docs` — context files are derived artifacts tailored to each tool's format.
 
+> **Behavioral rule:** Never assume you know the answer. You can scan the codebase for signals, but always confirm with the user via AskUserQuestion before writing anything. The user's mental model, preferences, and unwritten rules are more valuable than anything you can infer from code. Be inquisitive, be guiding — ask good questions with well-structured options, but let the user drive every decision.
+
 ## Current context
 
 - Project root: !`pwd`
@@ -43,40 +45,48 @@ Compile project knowledge into context files that shape how LLMs behave in a cod
 
 ### Phase 2: Assess project complexity
 
-Use AskUserQuestion to confirm the assessment:
+Scan the project for complexity signals, then present your assessment via AskUserQuestion and let the user decide the format. Don't assume — a seemingly simple project may have hidden complexity, or a large monorepo may want a single concise file.
 
-| Signal | Small project | Large project |
+Use AskUserQuestion: "Based on what I see, this looks like a [small/large] project — [reasons]. I'd suggest [single CLAUDE.md / split into .claude/rules/]. Does that match your sense, or would you prefer a different approach?"
+
+| Signal | Points to single CLAUDE.md | Points to .claude/rules/ split |
 |---|---|---|
 | Packages / crates | 1 | 3+ (monorepo) |
 | Languages | 1 | 2+ |
-| Deploy targets | 1 | 2+ (Workers + mobile + web) |
+| Deploy targets | 1 | 2+ |
 | Team size | solo | 2+ |
 
-- **Small project** → single `CLAUDE.md` at root (everything in one file)
-- **Large project** → thin `CLAUDE.md` at root + `.claude/rules/*.md` split by topic
+### Phase 3: Interview — never assume, always ask
 
-### Phase 3: Interview for gaps
+**Critical rule:** Do not guess or infer answers from scanning the codebase. The codebase tells you *what exists*, not *what the user wants agents to do*. Always use AskUserQuestion to confirm understanding and discover preferences.
 
-The docs may not cover everything an LLM needs. Interview the user for:
+Work through these areas one at a time. For each, first check if `/docs` already covers it — if it does, present what you found and ask the user to confirm or correct. If it doesn't, ask from scratch.
 
-1. **Build & test commands** — exact commands to build, test, lint, typecheck. These are the most critical — an agent that can't run tests is useless.
-2. **Architecture mental model** — how do the pieces fit together? What does a request flow through? What are the domain concepts?
-3. **Conventions the codebase enforces** — naming patterns, error handling style, file organization rules, things that would fail code review.
-4. **"Don't do this" rules** — anti-patterns specific to this project. Things a smart agent would try that are wrong here.
-5. **Workflow preferences** — how should the agent commit, test, deploy? What decisions can it make autonomously vs what requires asking?
+**Round 1: Commands**
+Use AskUserQuestion: "What commands does a developer need daily? I found these in package.json/Makefile/mise.toml — are they complete? Which ones should agents know about?" Present what you discovered as options, let the user correct. Commands are the most critical section — get them exactly right.
 
-For each area, check if `/docs` already covers it. Only ask about gaps.
+**Round 2: Architecture**
+Use AskUserQuestion: "How would you describe this project's architecture to a new team member in 30 seconds?" Don't present a wall of text you generated — ask the user to tell you how the pieces fit. Follow up: "What does a typical request flow through?" and "Which package/module owns which concern?"
+
+**Round 3: Conventions**
+Use AskUserQuestion: "What are the conventions that would cause you to reject a PR if violated?" Present categories (naming, error handling, file organization, imports, testing approach) and let the user fill in what matters. Don't assume conventions from the code — the code may have inconsistencies the user wants to fix, not preserve.
+
+**Round 4: Anti-patterns**
+Use AskUserQuestion: "What are the things a smart agent would try that are wrong in this project?" These are the highest-value entries in a context file — things that aren't obvious from reading the code. Give examples to prime the user: "e.g., using a certain library, accessing env vars a certain way, organizing files differently than expected."
+
+**Round 5: Workflow**
+Use AskUserQuestion: "How should an agent working in this project behave?" Ask about: commit style, when to run tests, what decisions it can make alone vs what requires asking, any CI/deploy steps it should handle or avoid.
 
 ### Phase 4: Generate context files
 
-Use AskUserQuestion to confirm which formats to generate:
+Use AskUserQuestion to ask which AI tools the user works with and which formats to generate. Don't assume — present the options:
 
-- `CLAUDE.md` — always (primary target)
-- `.claude/rules/*.md` — for large projects
-- `.cursorrules` — if the user uses Cursor
-- `.github/copilot-instructions.md` — if the user uses Copilot
+- `CLAUDE.md` — Claude Code
+- `.claude/rules/*.md` — Claude Code (large projects)
+- `.cursorrules` — Cursor
+- `.github/copilot-instructions.md` — GitHub Copilot
 
-Then follow the appropriate generation section below.
+For each selected format, draft the content, write it to the file, share the path, and ask the user to review before moving to the next format. Never generate all files silently — present each one for feedback.
 
 ---
 
@@ -139,9 +149,10 @@ When `/docs` has been updated and context files need to match:
 
 1. Read the current context files (CLAUDE.md, .claude/rules/, .cursorrules)
 2. Read the updated docs
-3. Diff mentally — what changed in docs that isn't reflected in context files?
-4. Edit context files surgically using Edit — don't rewrite from scratch
-5. Present changes to the user for review
+3. Identify what changed in docs that isn't reflected in context files
+4. Use AskUserQuestion to present each discrepancy: "I found these differences between /docs and your context files — which should I update?" Don't silently edit — the user may have intentionally diverged.
+5. For approved changes, edit context files surgically using Edit — don't rewrite from scratch
+6. Present the final result for review
 
 ---
 
