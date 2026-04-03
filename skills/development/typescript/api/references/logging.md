@@ -53,32 +53,32 @@ LOG_LEVEL = "info"
 
 Override `LOG_LEVEL` per environment via the Cloudflare dashboard (Secrets) — never commit production values.
 
-## Node/Bun initialization (local dev, Railway)
+## Bun initialization (local dev, Railway)
 
 ```ts
 import { configure, getConsoleSink, type LogRecord } from "@logtape/logtape"
+import { env } from "@scope/config"
 
 await configure({
   sinks: {
-    console:
-      process.env.NODE_ENV === "development"
-        ? getConsoleSink()
-        : {
-            handle(record: LogRecord) {
-              process.stdout.write(
-                JSON.stringify({
-                  level: record.level,
-                  category: record.category.join("."),
-                  message: record.message,
-                  ...record.properties,
-                  timestamp: new Date(record.timestamp).toISOString(),
-                }) + "\n"
-              )
-            },
+    console: env.NODE_ENV === "development"
+      ? getConsoleSink()
+      : {
+          handle(record: LogRecord) {
+            process.stdout.write(
+              JSON.stringify({
+                level: record.level,
+                category: record.category.join("."),
+                message: record.message,
+                ...record.properties,
+                timestamp: new Date(record.timestamp).toISOString(),
+              }) + "\n"
+            )
           },
+        },
   },
   loggers: [
-    { category: [], level: process.env.LOG_LEVEL ?? "info", sinks: ["console"] },
+    { category: [], level: env.LOG_LEVEL ?? "info", sinks: ["console"] },
   ],
   reset: true,
 })

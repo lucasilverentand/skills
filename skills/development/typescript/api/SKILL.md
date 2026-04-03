@@ -93,7 +93,7 @@ All important resources use `deletedAt` timestamp. Filter out by default, expose
 ## Designing endpoints
 
 1. Start from the resource, not the operation
-2. Define request and response schemas **before** writing the route handler (schema-first always). Use your language's validation library (Zod in TS, Pydantic in Python, serde in Rust, Codable in Swift, etc.)
+2. Define request and response schemas **before** writing the route handler (schema-first always). Use Zod for validation — derive TypeScript types from schemas, not the other way around.
 3. Standard HTTP verbs: `GET` read, `POST` create/action, `PUT`/`PATCH` update, `DELETE` soft-delete
 4. Follow all conventions above
 5. One router file per resource — each exports a router, mounted in the main app
