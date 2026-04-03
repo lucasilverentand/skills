@@ -94,10 +94,38 @@ function discoverSkills(): DiscoveredSkill[] {
 // --- Build plugin description from skills ---
 
 function buildPluginDescription(pluginName: string, skills: DiscoveredSkill[]): string {
-  const skillNames = skills.map((s) => s.name).sort();
-  const formatted = skillNames.join(", ");
   const label = pluginName.replace(/-/g, " ");
-  return `${label.charAt(0).toUpperCase() + label.slice(1)} toolkit: ${formatted}`;
+  const capitalized = label.charAt(0).toUpperCase() + label.slice(1);
+
+  // Group skills by immediate subdirectory under the plugin
+  const groups = new Map<string, string[]>();
+  for (const skill of skills) {
+    // relPath like "development/typescript/api" → relative is "typescript/api"
+    const relative = skill.relPath.replace(`${pluginName}/`, "");
+    const parts = relative.split("/");
+    const group = parts.length > 1 ? parts[0] : "";
+    if (!groups.has(group)) groups.set(group, []);
+    groups.get(group)!.push(skill.name);
+  }
+
+  // If only one group (flat or single subdir), list names directly
+  if (groups.size <= 1) {
+    const names = skills.map((s) => s.name).sort().join(", ");
+    return `${capitalized} toolkit: ${names}`;
+  }
+
+  // Multiple groups — format as "Group (names), Group (names), top-level"
+  const formatted: string[] = [];
+  for (const [group, names] of [...groups.entries()].sort()) {
+    const sorted = names.sort().join(", ");
+    if (group === "") {
+      formatted.push(sorted);
+    } else {
+      const groupLabel = group.charAt(0).toUpperCase() + group.slice(1);
+      formatted.push(`${groupLabel} (${sorted})`);
+    }
+  }
+  return `${capitalized} toolkit: ${formatted.join(", ")}`;
 }
 
 // --- Read current version ---

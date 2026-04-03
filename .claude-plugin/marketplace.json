@@ -37,7 +37,7 @@
     {
       "name": "development",
       "source": "./",
-      "description": "Development toolkit: api, data, database, errors, patterns, state, testing, type-safety, views, workers",
+      "description": "Development toolkit: testing, Swift (data, patterns, state, views), Typescript (api, database, errors, type-safety, workers)",
       "category": "devtools",
       "skills": [
         "./skills/development/swift/data",
