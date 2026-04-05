@@ -52,6 +52,5 @@ export const REPO_PLUGIN = {
 
 /** Override the default "devtools" category for specific plugins. */
 export const CATEGORY_OVERRIDES: Record<string, string> = {
-  api: "web-development",
   project: "web-development",
 };
