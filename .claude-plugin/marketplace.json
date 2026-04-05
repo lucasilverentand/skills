@@ -37,25 +37,30 @@
     {
       "name": "development",
       "source": "./",
-      "description": "Development toolkit: api, database, errors, testing, type-safety, workers",
+      "description": "Development toolkit: testing, Swift (data, patterns, state, views), Typescript (api, database, errors, type-safety, workers)",
       "category": "devtools",
       "skills": [
-        "./skills/development/api",
-        "./skills/development/database",
-        "./skills/development/errors",
+        "./skills/development/swift/data",
+        "./skills/development/swift/patterns",
+        "./skills/development/swift/state",
+        "./skills/development/swift/views",
         "./skills/development/testing",
-        "./skills/development/type-safety",
-        "./skills/development/workers"
+        "./skills/development/typescript/api",
+        "./skills/development/typescript/database",
+        "./skills/development/typescript/errors",
+        "./skills/development/typescript/type-safety",
+        "./skills/development/typescript/workers"
       ],
       "strict": false
     },
     {
       "name": "documentation",
       "source": "./",
-      "description": "Documentation toolkit: coauthoring, style",
+      "description": "Documentation toolkit: coauthoring, project-docs, style",
       "category": "devtools",
       "skills": [
         "./skills/documentation/coauthoring",
+        "./skills/documentation/project-docs",
         "./skills/documentation/style"
       ],
       "strict": false
@@ -103,24 +108,12 @@
       "strict": false
     },
     {
-      "name": "macos",
-      "source": "./",
-      "description": "Macos toolkit: data, patterns, state, views",
-      "category": "devtools",
-      "skills": [
-        "./skills/macos/data",
-        "./skills/macos/patterns",
-        "./skills/macos/state",
-        "./skills/macos/views"
-      ],
-      "strict": false
-    },
-    {
       "name": "project",
       "source": "./",
-      "description": "Project toolkit: description, scaffolding, structure",
-      "category": "web-development",
+      "description": "Project toolkit: context, description, scaffolding, structure",
+      "category": "devtools",
       "skills": [
+        "./skills/project/context",
         "./skills/project/description",
         "./skills/project/scaffolding",
         "./skills/project/structure"
@@ -188,7 +181,6 @@
         "git",
         "development",
         "project",
-        "macos",
         "communication",
         "security",
         "documentation"

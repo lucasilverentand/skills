@@ -12,13 +12,14 @@
  * --check:   Exit 1 if marketplace.json is out of date (for CI)
  */
 
-import { readFileSync, writeFileSync, existsSync } from "node:fs";
-import { resolve, dirname, relative } from "node:path";
-import { CATEGORY_OVERRIDES, BUNDLES } from "./plugin-config";
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
+import { resolve, dirname } from "node:path";
+import { CATEGORY_OVERRIDES, BUNDLES, REPO_PLUGIN } from "./plugin-config";
 
 const REPO_ROOT = resolve(import.meta.dirname, "..");
 const SKILLS_DIR = resolve(REPO_ROOT, "skills");
-const OUTPUT_PATH = resolve(REPO_ROOT, ".claude-plugin/marketplace.json");
+const CLAUDE_OUTPUT_PATH = resolve(REPO_ROOT, ".claude-plugin/marketplace.json");
+const CODEX_OUTPUT_PATH = resolve(REPO_ROOT, ".codex-plugin/plugin.json");
 
 // --- Frontmatter parser ---
 
@@ -94,19 +95,49 @@ function discoverSkills(): DiscoveredSkill[] {
 // --- Build plugin description from skills ---
 
 function buildPluginDescription(pluginName: string, skills: DiscoveredSkill[]): string {
-  const skillNames = skills.map((s) => s.name).sort();
-  const formatted = skillNames.join(", ");
   const label = pluginName.replace(/-/g, " ");
-  return `${label.charAt(0).toUpperCase() + label.slice(1)} toolkit: ${formatted}`;
+  const capitalized = label.charAt(0).toUpperCase() + label.slice(1);
+
+  // Group skills by immediate subdirectory under the plugin
+  const groups = new Map<string, string[]>();
+  for (const skill of skills) {
+    // relPath like "development/typescript/api" → relative is "typescript/api"
+    const relative = skill.relPath.replace(`${pluginName}/`, "");
+    const parts = relative.split("/");
+    const group = parts.length > 1 ? parts[0] : "";
+    if (!groups.has(group)) groups.set(group, []);
+    groups.get(group)!.push(skill.name);
+  }
+
+  // If only one group (flat or single subdir), list names directly
+  if (groups.size <= 1) {
+    const names = skills.map((s) => s.name).sort().join(", ");
+    return `${capitalized} toolkit: ${names}`;
+  }
+
+  // Multiple groups — format as "Group (names), Group (names), top-level"
+  const formatted: string[] = [];
+  for (const [group, names] of [...groups.entries()].sort()) {
+    const sorted = names.sort().join(", ");
+    if (group === "") {
+      formatted.push(sorted);
+    } else {
+      const groupLabel = group.charAt(0).toUpperCase() + group.slice(1);
+      formatted.push(`${groupLabel} (${sorted})`);
+    }
+  }
+  return `${capitalized} toolkit: ${formatted.join(", ")}`;
 }
 
 // --- Read current version ---
 
 function readVersion(): string {
-  if (existsSync(OUTPUT_PATH)) {
+  for (const path of [CODEX_OUTPUT_PATH, CLAUDE_OUTPUT_PATH]) {
+    if (!existsSync(path)) continue;
     try {
-      const existing = JSON.parse(readFileSync(OUTPUT_PATH, "utf-8"));
+      const existing = JSON.parse(readFileSync(path, "utf-8"));
       if (existing.metadata?.version) return existing.metadata.version;
+      if (existing.version) return existing.version;
     } catch {}
   }
 
@@ -184,48 +215,74 @@ function generate(dryRun: boolean, check: boolean) {
   }));
 
   const marketplace = {
-    name: "skills-of-luca",
-    owner: {
-      name: "Luca Silverentand",
-      url: "https://github.com/lucasilverentand",
-    },
+    name: REPO_PLUGIN.name,
+    owner: REPO_PLUGIN.owner,
     metadata: {
-      description:
-        "Development workflow skills: debugging, testing, deployment, documentation, editor configuration, git workflows, infrastructure, project scaffolding, research, security audits, and skill authoring.",
+      description: REPO_PLUGIN.description,
       version,
-      homepage: "https://github.com/lucasilverentand/skills",
-      repository: "https://github.com/lucasilverentand/skills",
-      license: "MIT",
+      homepage: REPO_PLUGIN.metadata.homepage,
+      repository: REPO_PLUGIN.metadata.repository,
+      license: REPO_PLUGIN.metadata.license,
     },
     plugins,
     bundles,
   };
 
-  const json = JSON.stringify(marketplace, null, 2) + "\n";
+  const claudeJson = JSON.stringify(marketplace, null, 2) + "\n";
+
+  const codexPlugin = {
+    name: REPO_PLUGIN.name,
+    version,
+    description: REPO_PLUGIN.description,
+    author: REPO_PLUGIN.owner,
+    homepage: REPO_PLUGIN.metadata.homepage,
+    repository: REPO_PLUGIN.metadata.repository,
+    license: REPO_PLUGIN.metadata.license,
+    keywords: REPO_PLUGIN.codex.keywords,
+    skills: "../skills/",
+    interface: {
+      ...REPO_PLUGIN.codex.interface,
+      websiteURL: REPO_PLUGIN.metadata.homepage,
+      screenshots: [],
+    },
+  };
+
+  const codexJson = JSON.stringify(codexPlugin, null, 2) + "\n";
 
   console.log(`\nTotal: ${skills.length} skills in ${plugins.length} plugins, ${bundles.length} bundles (v${version})`);
 
   if (check) {
-    if (!existsSync(OUTPUT_PATH)) {
-      console.error("\nmarketplace.json does not exist. Run `bun run generate` to create it.");
+    const missing = [CLAUDE_OUTPUT_PATH, CODEX_OUTPUT_PATH].filter((path) => !existsSync(path));
+    if (missing.length > 0) {
+      console.error("\nGenerated metadata is missing. Run `bun run generate` to create the output files.");
       process.exit(1);
     }
-    const existing = readFileSync(OUTPUT_PATH, "utf-8");
-    if (existing === json) {
-      console.log("\nmarketplace.json is up to date.");
+
+    const mismatches = [
+      { path: CLAUDE_OUTPUT_PATH, expected: claudeJson },
+      { path: CODEX_OUTPUT_PATH, expected: codexJson },
+    ].filter(({ path, expected }) => readFileSync(path, "utf-8") !== expected);
+
+    if (mismatches.length === 0) {
+      console.log("\nGenerated metadata is up to date.");
       process.exit(0);
     } else {
-      console.error("\nmarketplace.json is out of date. Run `bun run generate` to update it.");
+      console.error("\nGenerated metadata is out of date. Run `bun run generate` to update it.");
       process.exit(1);
     }
   }
 
   if (dryRun) {
     console.log("\n--- dry run, would write: ---\n");
-    console.log(json);
+    console.log(`# ${CLAUDE_OUTPUT_PATH}\n${claudeJson}`);
+    console.log(`# ${CODEX_OUTPUT_PATH}\n${codexJson}`);
   } else {
-    writeFileSync(OUTPUT_PATH, json);
-    console.log(`\nWrote ${OUTPUT_PATH}`);
+    mkdirSync(dirname(CLAUDE_OUTPUT_PATH), { recursive: true });
+    mkdirSync(dirname(CODEX_OUTPUT_PATH), { recursive: true });
+    writeFileSync(CLAUDE_OUTPUT_PATH, claudeJson);
+    writeFileSync(CODEX_OUTPUT_PATH, codexJson);
+    console.log(`\nWrote ${CLAUDE_OUTPUT_PATH}`);
+    console.log(`Wrote ${CODEX_OUTPUT_PATH}`);
   }
 }
 

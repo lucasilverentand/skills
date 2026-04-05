@@ -70,7 +70,7 @@ allowed-tools: Read Grep Glob Bash Write Edit
 
 ### Environment strategy
 
-- **development**: local overrides via `.env` (gitignored)
+- **development**: secrets injected via Doppler, non-secret config in `.dev.vars` (gitignored)
 - **staging**: mirrors production variables with staging-specific endpoints
 - **production**: production values only — set and rotated via CLI
 

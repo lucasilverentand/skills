@@ -189,7 +189,7 @@ For bulk additions, use "Regenerating from disk" below instead.
 
 See `references/marketplace-schema.md` for the full schema. Key conventions:
 
-- **Category mapping**: `communication`, `data`, `deployment`, `development`, `documentation`, `git`, `infrastructure`, `research`, `security`, `skills` -> `devtools` | `editors` -> `editor` | `project` -> `web-development`
+- **Category mapping**: all plugins use `devtools`
 - **Naming**: lowercase alphanumeric + hyphens, 1-64 characters
 - **Versioning**: `metadata.version` tracks overall marketplace version using semver
 - **`strict: false`**: this repo uses `strict: false` for all plugins — marketplace entry IS the full definition, no separate `plugin.json` needed

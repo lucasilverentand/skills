@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 /**
- * Run all validations: metadata, skills structure, and marketplace integrity.
+ * Run all validations: generated metadata, skills structure, and marketplace integrity.
  */
 
 import { existsSync } from "node:fs";
@@ -32,7 +32,7 @@ async function runScript(label: string, args: string[]): Promise<boolean> {
   return ok;
 }
 
-console.log("🔍 Validating all plugins and marketplace...\n");
+console.log("🔍 Validating generated plugin metadata, skills, and marketplace...\n");
 
 // 1. Custom metadata validation
 await runScript("Custom Metadata Validation", ["scripts/validate-metadata.ts"]);

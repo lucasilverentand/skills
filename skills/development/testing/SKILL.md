@@ -1,6 +1,6 @@
 ---
 name: testing
-description: Designs test strategies, authors tests at all levels (unit, integration, E2E), diagnoses broken or flaky tests, and configures CI pipelines. Covers TypeScript (Bun/Vitest), web E2E (Playwright), React Native (Maestro), and Swift (Swift Testing framework). Use when writing new tests, generating scaffolds, identifying untested code, configuring runners, fixing consistent or intermittent failures, updating stale snapshots, triaging mass breakage after a refactor, setting up CI workflows, optimizing pipeline speed, managing caching, or configuring matrix builds.
+description: Designs test strategies, authors tests at all levels (unit, integration, E2E), diagnoses broken or flaky tests, and configures CI pipelines. Covers TypeScript (Bun test), web E2E (Playwright), React Native (Maestro), and Swift (Swift Testing framework). Use when writing new tests, generating scaffolds, identifying untested code, configuring runners, fixing consistent or intermittent failures, updating stale snapshots, triaging mass breakage after a refactor, setting up CI workflows, optimizing pipeline speed, managing caching, or configuring matrix builds.
 allowed-tools: Read Grep Glob Bash Write Edit
 ---
 
@@ -266,7 +266,6 @@ Run tagged subset: `swift test --filter networking`.
 ## Runner Configuration
 
 - **Bun** — `bun test` with `bunfig.toml` for test globs and coverage thresholds
-- **Vitest** — `vitest.config.ts`, enable `coverage.provider: 'v8'` for accurate coverage
 - **Swift** — `swift test` for SPM packages; `xcodebuild test -scheme <Scheme>` for Xcode projects; `tuist test` for Tuist-managed projects
 - Coverage thresholds: set per-module, not project-wide; critical modules ≥80%, utilities ≥60%
 - CI: always run tests with `--bail` to fail fast, pipe results through `tools/failure-parse.ts`
@@ -348,8 +347,8 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: oven-sh/setup-bun@735343b667d3e6a283f1e0344db1c89b3c07d1c4 # v2.0.2
       - run: bun install --frozen-lockfile  # Fail if lockfile is stale — prevents supply chain drift
       - run: bun run typecheck
       - run: bun run lint
@@ -357,7 +356,7 @@ jobs:
 ```
 
 Rules:
-- Pin action versions to full commit SHA — never use tags (`@v4`) as they can be moved to point to malicious code. Use `tools/action-pin.ts` from `security/supply-chain` to automate this. Format: `actions/checkout@<sha> # v4.1.1`
+- Pin action versions to full commit SHA — never use tags (`@v4`) as they can be moved to point to malicious code. Use `tools/action-pin.ts` from `security/supply-chain` to automate pinning. Comment the human-readable version after the SHA.
 - Use `--frozen-lockfile` for installs to catch lockfile drift early
 - Separate lint/typecheck from tests — they catch different problems and should report independently
 - Never use `continue-on-error: true` to hide failures

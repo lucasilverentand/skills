@@ -140,7 +140,7 @@ When debugging issues that might involve configuration or secrets:
 5. Run the application's health check to verify connectivity: `curl -s http://localhost:3000/health`
 6. Check application logs for error messages — but never grep logs for secret values
 
-**Never dump the full environment** to diagnose config issues. Cross-reference: `development/debugging` for the full debugging workflow.
+**Never dump the full environment** to diagnose config issues.
 
 ## Safe test execution
 

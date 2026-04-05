@@ -1,6 +1,6 @@
 # Voice and Tone
 
-The shared writing voice for all documentation. Specialized skills may add constraints (e.g., external-docs may be more polished, internal-docs more concise), but these fundamentals always apply.
+The shared writing voice for all documentation. These fundamentals always apply.
 
 ## Voice
 

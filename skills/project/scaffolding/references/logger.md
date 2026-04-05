@@ -10,28 +10,27 @@ The `logger` part provides structured logging using LogTape.
 ```ts
 import { configure, getConsoleSink, getLogger, type LogRecord } from "@logtape/logtape"
 
-export async function setupLogger() {
+export async function setupLogger(opts: { isDev: boolean; level?: string }) {
   await configure({
     sinks: {
-      console:
-        process.env.NODE_ENV === "development"
-          ? getConsoleSink()
-          : {
-              handle(record: LogRecord) {
-                process.stdout.write(
-                  JSON.stringify({
-                    level: record.level,
-                    category: record.category.join("."),
-                    message: record.message,
-                    ...record.properties,
-                    timestamp: new Date(record.timestamp).toISOString(),
-                  }) + "\n"
-                )
-              },
+      console: opts.isDev
+        ? getConsoleSink()
+        : {
+            handle(record: LogRecord) {
+              process.stdout.write(
+                JSON.stringify({
+                  level: record.level,
+                  category: record.category.join("."),
+                  message: record.message,
+                  ...record.properties,
+                  timestamp: new Date(record.timestamp).toISOString(),
+                }) + "\n"
+              )
             },
+          },
     },
     loggers: [
-      { category: [], level: process.env.LOG_LEVEL ?? "info", sinks: ["console"] },
+      { category: [], level: opts.level ?? "info", sinks: ["console"] },
     ],
     reset: true,
   })
@@ -40,7 +39,7 @@ export async function setupLogger() {
 export { getLogger }
 ```
 
-Call `setupLogger()` once at app startup before serving requests.
+Call `setupLogger()` once at app startup before serving requests. Pass config values from the `config` package — never read `process.env` directly in the logger.
 
 ## Usage
 
@@ -85,13 +84,13 @@ log.error("db write failed", { error })
 
 ## Request tracing
 
-Generate a `requestId` per request with `crypto.randomUUID()`, attach it in middleware, and pass it to every logger call. See the `api` skill's `middleware.md` for the full request ID middleware.
+Generate a `requestId` per request with `nanoid(12)`, attach it in middleware, and pass it to every logger call. See the `api` skill's `middleware.md` for the full request ID middleware.
 
 ## Sink configuration
 
 - **Development** — `getConsoleSink()` for human-readable, colored output
 - **Production (Cloudflare Workers)** — `getConsoleSink()` only; Workers captures `console.*` automatically. Enable Cloudflare Logpush to ship logs to R2 or an external service (Axiom, Datadog)
-- **Production (Node/Bun on Railway)** — custom JSON sink writing to stdout
+- **Production (Bun on Railway)** — custom JSON sink writing to stdout
 - **Testing** — configure no sinks, or set `level: "fatal"` to suppress noise
 
 ## Redaction

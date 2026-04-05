@@ -6,6 +6,8 @@ allowed-tools: Read Grep Glob Bash Write Edit
 
 # Docker
 
+> **Local runtime:** OrbStack, not Docker Desktop. All `docker` and `docker compose` commands work the same — OrbStack provides the daemon. If the user hasn't installed it yet: `brew install orbstack`.
+
 ## Decision Tree
 
 - What is the task?

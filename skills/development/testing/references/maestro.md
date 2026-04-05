@@ -166,7 +166,7 @@ The app must already be running on a simulator/emulator or physical device. For 
 
 ```bash
 # Terminal 1 — start the app
-npx expo start
+bunx expo start
 
 # Terminal 2 — run flows
 maestro test .maestro/flows/

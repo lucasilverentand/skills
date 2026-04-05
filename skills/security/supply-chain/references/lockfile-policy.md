@@ -4,9 +4,7 @@
 
 The lockfile is the single source of truth for "what dependency versions we've vetted." It must never be regenerated silently, updated accidentally, or skipped.
 
-## Rules by package manager
-
-### Bun
+## Rules
 
 | Scenario | Command | Notes |
 |---|---|---|
@@ -22,38 +20,12 @@ The lockfile is the single source of truth for "what dependency versions we've v
 - Use `bun install --frozen-lockfile` as the default in all automated contexts
 - If `bun.lockb` is missing, do not run `bun install` to generate it silently — flag it
 
-### npm
-
-| Scenario | Command |
-|---|---|
-| CI / agent install | `npm ci` (not `npm install`) |
-| Adding a package | `npm install <package>` |
-| Auditing | `npm audit` |
-
-**npm-specific notes:**
-- `npm ci` deletes `node_modules/` and installs from `package-lock.json` exactly — equivalent to `--frozen-lockfile`
-- Never use `npm install` in CI — it may update `package-lock.json`
-
-### pnpm
-
-| Scenario | Command |
-|---|---|
-| CI / agent install | `pnpm install --frozen-lockfile` |
-| Adding a package | `pnpm add <package>` |
-
 ## CI enforcement
 
 Every CI workflow that installs dependencies must use the frozen variant:
 
 ```yaml
-# Bun
 - run: bun install --frozen-lockfile
-
-# npm
-- run: npm ci
-
-# pnpm
-- run: pnpm install --frozen-lockfile
 ```
 
 This catches lockfile drift immediately. If the lockfile is stale (someone changed `package.json` without updating the lockfile), CI fails — and that's correct.

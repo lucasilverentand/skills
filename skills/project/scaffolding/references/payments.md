@@ -9,7 +9,9 @@ The `payments` part provides payment processing using Stripe.
 
 ```ts
 import Stripe from "stripe";
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+import { env } from "@scope/config";
+
+export const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
   apiVersion: "2024-12-18.acacia",
   typescript: true,
 });
@@ -40,8 +42,8 @@ export async function createCheckout(priceId: string, userId: string, userEmail:
     mode: "subscription", // or "payment" for one-time
     line_items: [{ price: priceId, quantity: 1 }],
     customer_email: userEmail,
-    success_url: `${process.env.APP_URL}/billing?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.APP_URL}/pricing`,
+    success_url: `${env.APP_URL}/billing?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${env.APP_URL}/pricing`,
     client_reference_id: userId,
     metadata: { userId },
     subscription_data: {
@@ -64,7 +66,7 @@ The Stripe billing portal lets users manage their subscription (upgrade, downgra
 export async function createPortalSession(stripeCustomerId: string) {
   const session = await stripe.billingPortal.sessions.create({
     customer: stripeCustomerId,
-    return_url: `${process.env.APP_URL}/settings/billing`,
+    return_url: `${env.APP_URL}/settings/billing`,
   });
   return session;
 }
@@ -122,7 +124,7 @@ export async function handleWebhook(request: Request): Promise<Response> {
   let event: Stripe.Event;
 
   try {
-    event = stripe.webhooks.constructEvent(body, signature, process.env.STRIPE_WEBHOOK_SECRET!);
+    event = stripe.webhooks.constructEvent(body, signature, env.STRIPE_WEBHOOK_SECRET);
   } catch {
     return new Response("Invalid signature", { status: 400 });
   }

@@ -1,6 +1,6 @@
 ---
 name: github
-description: GitHub PR workflow — create pull requests with clean history, structured descriptions, pre-flight checks, and draft-first conventions. Use for creating PRs, writing PR descriptions, or preparing changes for review.
+description: GitHub PR workflow — create pull requests with clean history, structured descriptions, pre-flight checks, and draft-first conventions. Use when creating PRs, writing PR descriptions, or preparing changes for review.
 allowed-tools: Read Grep Glob Bash
 ---
 
@@ -35,6 +35,8 @@ Clean up commits before creating the PR:
 
 Run `tools/pr-preflight.ts` — checks: clean worktree, all pushed, conventional commits, no WIP/fixup, CI status, linked issues.
 
+**If CI checks are failing (lint, typecheck, tests), fix them before creating the PR.** Failing checks block merging anyway — fix proactively rather than creating a PR that can't be merged. Run `bun run check`, `bun run typecheck`, and `bun test` locally to verify.
+
 ### 3. Create
 
 ```sh
@@ -51,6 +53,7 @@ Always create as **draft**. The user decides when to mark ready.
 
 ## PR conventions
 
+- **Fix before shipping**: if CI checks fail (lint, typecheck, tests), fix them as part of the current work — don't create a PR with known failures
 - **Sizing**: bundle related work into one well-scoped PR over many small ones. Split only when changes are genuinely independent.
 - **Draft first**: always create as draft
 - **Clean history**: no fixup/squash/WIP commits in the final PR
