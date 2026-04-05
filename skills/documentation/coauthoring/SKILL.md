@@ -1,6 +1,6 @@
 ---
 name: coauthoring
-description: Guide users through a structured workflow for co-authoring internal project documentation. Covers all doc types (specs, RFCs, proposals, decision docs, postmortems, ADRs, project briefs, etc.) with a 3-stage process — Context Gathering, Refinement & Structure, and Reader Testing. Use when writing docs, creating proposals, drafting specs, or any substantial writing task.
+description: Guide users through a structured workflow for co-authoring internal project documentation. Covers all doc types (specs, RFCs, proposals, decision docs, postmortems, ADRs, project briefs, etc.) with a 3-stage process — Context Gathering, Refinement & Structure, and Reader Testing. Includes shared voice, tone, and quality standards. Use when writing docs, creating proposals, drafting specs, reviewing doc quality, setting writing conventions, or any substantial writing task.
 ---
 
 # Doc Co-Authoring Workflow
@@ -28,6 +28,19 @@ These are sensible defaults. If the user expresses a different preference at any
 | **Doc length** | Depends on the doc — ask each time | User states a preference |
 | **Reader testing persona** | Match the actual target audience | User wants a generic reader or specific persona |
 | **Direct file edits** | If the doc changes between turns, assume the user edited it directly — read the file, detect changes, and adapt silently | N/A |
+
+## Style Foundation
+
+These five rules apply to every document:
+
+1. **Conversational but clear** — reads like a smart teammate explaining things. No corporate speak, no filler
+2. **Every sentence earns its place** — if removing a sentence doesn't lose information, remove it
+3. **Tables for 3+ comparable items** — don't describe in prose what a table shows better
+4. **Evidence for every claim** — link to code, data, or sources. Unsupported claims are opinions
+5. **Audience in the intro** — state who the document is for so readers can self-select
+
+- **Writing tone/voice guidance** → see `references/voice-and-tone.md`
+- **Quality checklist before publishing** → see `references/quality-standards.md`
 
 ## When to Offer This Workflow
 
