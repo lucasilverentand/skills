@@ -14,7 +14,7 @@
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { resolve, dirname } from "node:path";
-import { CATEGORY_OVERRIDES, BUNDLES, REPO_PLUGIN } from "./plugin-config";
+import { CATEGORY_OVERRIDES, REPO_PLUGIN } from "./plugin-config";
 
 const REPO_ROOT = resolve(import.meta.dirname, "..");
 const SKILLS_DIR = resolve(REPO_ROOT, "skills");
@@ -170,26 +170,6 @@ function generate(dryRun: boolean, check: boolean) {
     }
   }
 
-  // Validate bundles reference valid plugins
-  console.log(`\n${Object.keys(BUNDLES).length} bundles:\n`);
-  for (const [bundleName, bundle] of Object.entries(BUNDLES)) {
-    if (bundle.plugins.includes("*")) {
-      console.log(`  ${bundleName}: all plugins — ${bundle.description}`);
-      continue;
-    }
-    for (const p of bundle.plugins) {
-      if (!pluginMap.has(p)) {
-        console.error(`  ERROR: Bundle '${bundleName}' references unknown plugin '${p}'`);
-        hasErrors = true;
-      }
-    }
-    const skillCount = bundle.plugins.reduce(
-      (sum, p) => sum + (pluginMap.get(p)?.length ?? 0),
-      0,
-    );
-    console.log(`  ${bundleName}: ${bundle.plugins.length} plugins, ${skillCount} skills — ${bundle.description}`);
-  }
-
   if (hasErrors) {
     console.error("\nErrors found — fix them before generating.");
     process.exit(1);
@@ -208,12 +188,6 @@ function generate(dryRun: boolean, check: boolean) {
     };
   });
 
-  const bundles = Object.entries(BUNDLES).map(([name, def]) => ({
-    name,
-    description: def.description,
-    plugins: def.plugins,
-  }));
-
   const marketplace = {
     name: REPO_PLUGIN.name,
     owner: REPO_PLUGIN.owner,
@@ -225,7 +199,6 @@ function generate(dryRun: boolean, check: boolean) {
       license: REPO_PLUGIN.metadata.license,
     },
     plugins,
-    bundles,
   };
 
   const claudeJson = JSON.stringify(marketplace, null, 2) + "\n";
@@ -249,7 +222,7 @@ function generate(dryRun: boolean, check: boolean) {
 
   const codexJson = JSON.stringify(codexPlugin, null, 2) + "\n";
 
-  console.log(`\nTotal: ${skills.length} skills in ${plugins.length} plugins, ${bundles.length} bundles (v${version})`);
+  console.log(`\nTotal: ${skills.length} skills in ${plugins.length} plugins (v${version})`);
 
   if (check) {
     const missing = [CLAUDE_OUTPUT_PATH, CODEX_OUTPUT_PATH].filter((path) => !existsSync(path));

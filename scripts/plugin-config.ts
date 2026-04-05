@@ -1,11 +1,8 @@
 /**
- * Shared plugin metadata, category overrides, and bundle definitions.
+ * Category overrides for the plugin auto-discovery system.
  *
  * Plugins are auto-discovered from the skills/ directory structure.
- * This file only defines:
- *   1. Category overrides for plugins that aren't "devtools" (the default)
- *   2. Bundle definitions (intent-based groups of plugins)
- *   3. Shared metadata for generated Claude/Codex manifests
+ * This file only defines category overrides for plugins that aren't "devtools" (the default).
  */
 
 export const REPO_PLUGIN = {
@@ -54,36 +51,7 @@ export const REPO_PLUGIN = {
 } as const;
 
 /** Override the default "devtools" category for specific plugins. */
-export const CATEGORY_OVERRIDES: Record<string, string> = {};
-
-/** Intent-based bundles — each references plugins by name. */
-export const BUNDLES: Record<string, { description: string; plugins: string[] }> = {
-  "full-stack-web": {
-    description: "Building web apps with Hono + React + Drizzle",
-    plugins: ["git", "development", "project", "deployment", "infrastructure", "security", "documentation"],
-  },
-  "mobile-dev": {
-    description: "Expo/iOS/macOS apps with a backend",
-    plugins: ["git", "development", "project", "communication", "security", "documentation"],
-  },
-  "api-backend": {
-    description: "Pure API/backend work",
-    plugins: ["git", "development", "project", "deployment", "infrastructure", "security", "documentation"],
-  },
-  "devops-infra": {
-    description: "CI/CD, infrastructure",
-    plugins: ["git", "deployment", "infrastructure", "security", "documentation"],
-  },
-  "open-source": {
-    description: "Maintaining OSS projects",
-    plugins: ["git", "development", "documentation", "skills", "security"],
-  },
-  "research-strategy": {
-    description: "Research, analysis, planning",
-    plugins: ["git", "research", "development", "security", "documentation"],
-  },
-  all: {
-    description: "Everything",
-    plugins: ["*"],
-  },
+export const CATEGORY_OVERRIDES: Record<string, string> = {
+  api: "web-development",
+  project: "web-development",
 };
