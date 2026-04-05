@@ -54,7 +54,6 @@ Quick reference for the expected structure:
 - **Description** must include a `Use when` clause for reliable triggering
 - **References** (`references/*.md`) hold detailed content; SKILL.md links to them
 - **Tools** (`tools/*.ts`) contain real logic — not thin wrappers around single commands
-- **No PURPOSE.md** — the SKILL.md description and decision tree serve this role
 - Pin GitHub Actions to SHA in all workflow examples (see `security/supply-chain`)
 
 ## Stack alignment
