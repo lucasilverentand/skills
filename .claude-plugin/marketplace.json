@@ -13,27 +13,26 @@
   },
   "plugins": [
     {
-      "name": "api",
-      "source": "./",
-      "description": "Api toolkit: auth, background-jobs, data, errors, routing, validation",
-      "category": "web-development",
-      "skills": [
-        "./skills/api/auth",
-        "./skills/api/background-jobs",
-        "./skills/api/data",
-        "./skills/api/errors",
-        "./skills/api/routing",
-        "./skills/api/validation"
-      ],
-      "strict": false
-    },
-    {
       "name": "communication",
       "source": "./",
       "description": "Communication toolkit: discord",
       "category": "devtools",
       "skills": [
         "./skills/communication/discord"
+      ],
+      "strict": false
+    },
+    {
+      "name": "conventions",
+      "source": "./",
+      "description": "Conventions toolkit: code-style, dependencies, error-handling, state-management, tooling",
+      "category": "devtools",
+      "skills": [
+        "./skills/conventions/code-style",
+        "./skills/conventions/dependencies",
+        "./skills/conventions/error-handling",
+        "./skills/conventions/state-management",
+        "./skills/conventions/tooling"
       ],
       "strict": false
     },
@@ -71,12 +70,11 @@
     {
       "name": "documentation",
       "source": "./",
-      "description": "Documentation toolkit: coauthoring, project-docs, style",
+      "description": "Documentation toolkit: coauthoring, project-docs",
       "category": "devtools",
       "skills": [
         "./skills/documentation/coauthoring",
-        "./skills/documentation/project-docs",
-        "./skills/documentation/style"
+        "./skills/documentation/project-docs"
       ],
       "strict": false
     },
@@ -126,7 +124,7 @@
       "name": "project",
       "source": "./",
       "description": "Project toolkit: context, description, scaffolding, structure",
-      "category": "devtools",
+      "category": "web-development",
       "skills": [
         "./skills/project/context",
         "./skills/project/description",
