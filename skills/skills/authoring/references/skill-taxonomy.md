@@ -10,7 +10,7 @@ Skills fall into three tiers based on scope and autonomy. Pick the right tier be
 
 Does one thing well. Self-contained, no dependencies on other skills, usually maps to one decision tree.
 
-Examples: `git/committing`, `git/branching`, `documentation/style`, `security/audit`
+Examples: `git/committing`, `git/branching`, `documentation/coauthoring`, `security/audit`
 
 Signals you're building an atomic skill:
 - The skill handles a single, well-defined task
@@ -31,7 +31,7 @@ Signals you're building a workflow skill:
 
 Workflow skills compose atomics in two ways:
 1. **Decision tree routing** — the parent's decision tree sends the user to the right child skill
-2. **Cross-skill references** — the skill points to another skill for a specific concern (e.g., "for tone → see `documentation/style`")
+2. **Cross-skill references** — the skill points to another skill for a specific concern (e.g., "for tone → see `documentation/coauthoring`")
 
 ### Agent
 
