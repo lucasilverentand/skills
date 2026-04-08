@@ -5,170 +5,30 @@
     "url": "https://github.com/lucasilverentand"
   },
   "metadata": {
-    "description": "Development workflow skills: debugging, testing, deployment, documentation, editor configuration, git workflows, infrastructure, project scaffolding, research, security audits, and skill authoring.",
-    "version": "0.7.0",
+    "version": "0.8.0",
     "homepage": "https://github.com/lucasilverentand/skills",
     "repository": "https://github.com/lucasilverentand/skills",
     "license": "MIT"
   },
   "plugins": [
     {
-      "name": "communication",
-      "source": "./",
-      "description": "Communication toolkit: discord",
+      "name": "frontend",
+      "source": "./plugins/frontend",
+      "description": "Frontend toolkit: design-options",
       "category": "devtools",
       "skills": [
-        "./skills/communication/discord"
+        "./plugins/frontend/skills/design-options"
       ],
       "strict": false
     },
     {
-      "name": "conventions",
-      "source": "./",
-      "description": "Conventions toolkit: code-style, dependencies, error-handling, state-management, tooling",
+      "name": "skill-creation",
+      "source": "./plugins/skill-creation",
+      "description": "Skill creation toolkit: authoring, retrospecting",
       "category": "devtools",
       "skills": [
-        "./skills/conventions/code-style",
-        "./skills/conventions/dependencies",
-        "./skills/conventions/error-handling",
-        "./skills/conventions/state-management",
-        "./skills/conventions/tooling"
-      ],
-      "strict": false
-    },
-    {
-      "name": "deployment",
-      "source": "./",
-      "description": "Deployment toolkit: cloudflare, kubernetes, railway",
-      "category": "devtools",
-      "skills": [
-        "./skills/deployment/cloudflare",
-        "./skills/deployment/kubernetes",
-        "./skills/deployment/railway"
-      ],
-      "strict": false
-    },
-    {
-      "name": "development",
-      "source": "./",
-      "description": "Development toolkit: testing, Swift (data, patterns, state, views), Typescript (api, database, errors, type-safety, workers)",
-      "category": "devtools",
-      "skills": [
-        "./skills/development/swift/data",
-        "./skills/development/swift/patterns",
-        "./skills/development/swift/state",
-        "./skills/development/swift/views",
-        "./skills/development/testing",
-        "./skills/development/typescript/api",
-        "./skills/development/typescript/database",
-        "./skills/development/typescript/errors",
-        "./skills/development/typescript/type-safety",
-        "./skills/development/typescript/workers"
-      ],
-      "strict": false
-    },
-    {
-      "name": "documentation",
-      "source": "./",
-      "description": "Documentation toolkit: coauthoring, project-docs",
-      "category": "devtools",
-      "skills": [
-        "./skills/documentation/coauthoring",
-        "./skills/documentation/project-docs"
-      ],
-      "strict": false
-    },
-    {
-      "name": "editor",
-      "source": "./",
-      "description": "Editor toolkit: editor",
-      "category": "devtools",
-      "skills": [
-        "./skills/editor"
-      ],
-      "strict": false
-    },
-    {
-      "name": "git",
-      "source": "./",
-      "description": "Git toolkit: git",
-      "category": "devtools",
-      "skills": [
-        "./skills/git"
-      ],
-      "strict": false
-    },
-    {
-      "name": "github",
-      "source": "./",
-      "description": "Github toolkit: github",
-      "category": "devtools",
-      "skills": [
-        "./skills/github"
-      ],
-      "strict": false
-    },
-    {
-      "name": "infrastructure",
-      "source": "./",
-      "description": "Infrastructure toolkit: docker, gitops, secrets",
-      "category": "devtools",
-      "skills": [
-        "./skills/infrastructure/docker",
-        "./skills/infrastructure/gitops",
-        "./skills/infrastructure/secrets"
-      ],
-      "strict": false
-    },
-    {
-      "name": "project",
-      "source": "./",
-      "description": "Project toolkit: context, description, scaffolding, structure",
-      "category": "web-development",
-      "skills": [
-        "./skills/project/context",
-        "./skills/project/description",
-        "./skills/project/scaffolding",
-        "./skills/project/structure"
-      ],
-      "strict": false
-    },
-    {
-      "name": "research",
-      "source": "./",
-      "description": "Research toolkit: api, codebase, competitor, market, technology, ux",
-      "category": "devtools",
-      "skills": [
-        "./skills/research/api",
-        "./skills/research/codebase",
-        "./skills/research/competitor",
-        "./skills/research/market",
-        "./skills/research/technology",
-        "./skills/research/ux"
-      ],
-      "strict": false
-    },
-    {
-      "name": "security",
-      "source": "./",
-      "description": "Security toolkit: agent-safety, audit, scan, supply-chain",
-      "category": "devtools",
-      "skills": [
-        "./skills/security/agent-safety",
-        "./skills/security/audit",
-        "./skills/security/scan",
-        "./skills/security/supply-chain"
-      ],
-      "strict": false
-    },
-    {
-      "name": "skills",
-      "source": "./",
-      "description": "Skills toolkit: authoring, retrospecting",
-      "category": "devtools",
-      "skills": [
-        "./skills/skills/authoring",
-        "./skills/skills/retrospecting"
+        "./plugins/skill-creation/skills/authoring",
+        "./plugins/skill-creation/skills/retrospecting"
       ],
       "strict": false
     }

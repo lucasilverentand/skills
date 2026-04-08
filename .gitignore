@@ -6,4 +6,5 @@ node_modules/
 .mise.local.toml
 
 # Claude Code
-.claude/
+.claude/*
+!.claude/skills/
