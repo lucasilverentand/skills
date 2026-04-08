@@ -1,0 +1,28 @@
+{
+  "name": "skills-of-luca",
+  "owner": {
+    "name": "Luca Silverentand",
+    "url": "https://github.com/lucasilverentand"
+  },
+  "metadata": {
+    "description": "Luca's personal skills for development",
+    "version": "0.8.0",
+    "homepage": "https://github.com/lucasilverentand/skills",
+    "repository": "https://github.com/lucasilverentand/skills",
+    "license": "MIT"
+  },
+  "plugins": [
+    {
+      "name": "frontend",
+      "category": "devtools",
+      "source": "./plugins/frontend",
+      "homepage": "https://github.com/lucasilverentand/skills/tree/main/plugins/frontend"
+    },
+    {
+      "name": "skill-creation",
+      "category": "ai",
+      "source": "./plugins/skill-creation",
+      "homepage": "https://github.com/lucasilverentand/skills/tree/main/plugins/skill-creation"
+    }
+  ]
+}
