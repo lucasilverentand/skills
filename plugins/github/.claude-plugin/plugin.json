@@ -1,0 +1,15 @@
+{
+  "name": "github",
+  "description": "GitHub workflow toolkit",
+  "skills": [
+    "./skills/creating-prs"
+  ],
+  "commands": [
+    "./commands/create-draft-pr.md",
+    "./commands/create-pr.md"
+  ],
+  "author": {
+    "name": "Luca Silverentand",
+    "email": "dev@lucasilverentand.com"
+  }
+}

@@ -17,6 +17,16 @@
       "category": "devtools"
     },
     {
+      "name": "git",
+      "source": "./plugins/git",
+      "category": "devtools"
+    },
+    {
+      "name": "github",
+      "source": "./plugins/github",
+      "category": "devtools"
+    },
+    {
       "name": "skill-creation",
       "source": "./plugins/skill-creation",
       "category": "devtools"

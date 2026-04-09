@@ -1,0 +1,12 @@
+{
+  "name": "git",
+  "description": "Git workflow toolkit",
+  "skills": [
+    "./skills/clean-repo",
+    "./skills/creating-commits"
+  ],
+  "author": {
+    "name": "Luca Silverentand",
+    "email": "dev@lucasilverentand.com"
+  }
+}
