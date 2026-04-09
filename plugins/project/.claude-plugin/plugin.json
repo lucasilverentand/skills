@@ -1,0 +1,11 @@
+{
+  "name": "project",
+  "description": "Project setup and context management",
+  "skills": [
+    "./skills/project-context"
+  ],
+  "author": {
+    "name": "Luca Silverentand",
+    "email": "dev@lucasilverentand.com"
+  }
+}

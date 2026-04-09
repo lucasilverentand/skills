@@ -30,6 +30,11 @@
       "name": "skill-creation",
       "source": "./plugins/skill-creation",
       "category": "devtools"
+    },
+    {
+      "name": "project",
+      "source": "./plugins/project",
+      "category": "devtools"
     }
   ]
 }
