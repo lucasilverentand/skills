@@ -146,22 +146,9 @@ Guidelines for the body:
 - Don't repeat the title in the body
 - Don't list every file changed — that's what the diff tab is for
 
-## Step 9: Ensure the PR is merge-ready
+## Step 9: Monitor CI
 
-After creating the PR, verify it's clean and mergeable:
-
-```bash
-gh pr view --json mergeable,mergeStateStatus --jq '{mergeable, mergeStateStatus}'
-```
-
-If there are merge conflicts:
-1. Rebase onto the target branch again
-2. Resolve conflicts (same rules as step 2)
-3. Force push with `--force-with-lease`
-
-If CI checks are failing, investigate and fix them — failing checks block merging anyway, so leaving them broken is leaving the PR unfinished. After fixing, push the changes.
-
-Also use this step proactively on existing PRs — if you're on a branch that already has an open PR and the target branch has moved ahead, rebase and push to keep it conflict-free.
+After creating the PR, use the `monitoring-ci` skill to watch CI in the background. It will diagnose and fix any failures automatically, then re-watch until green.
 
 ### If gh is unavailable
 

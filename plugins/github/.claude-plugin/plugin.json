@@ -2,11 +2,13 @@
   "name": "github",
   "description": "GitHub workflow toolkit",
   "skills": [
-    "./skills/creating-prs"
+    "./skills/creating-prs",
+    "./skills/monitoring-ci"
   ],
   "commands": [
     "./commands/create-draft-pr.md",
-    "./commands/create-pr.md"
+    "./commands/create-pr.md",
+    "./commands/ci.md"
   ],
   "author": {
     "name": "Luca Silverentand",
