@@ -2,8 +2,14 @@
   "name": "git",
   "description": "Git workflow toolkit",
   "skills": [
-    "./skills/clean-repo",
-    "./skills/creating-commits"
+    "./skills/cleaning-repos",
+    "./skills/creating-commits",
+    "./skills/resolving-conflicts"
+  ],
+  "commands": [
+    "./commands/create-commit.md",
+    "./commands/clean-repo.md",
+    "./commands/rebase.md"
   ],
   "author": {
     "name": "Luca Silverentand",

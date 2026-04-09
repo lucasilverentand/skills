@@ -1,5 +1,5 @@
 ---
-name: clean-repo
+name: cleaning-repos
 description: Leaves a repo in a pristine state — commits all changes cleanly, prompts about leftover files, clears stale stashes, opens a PR if on a feature branch, cleans up merged branches and stale worktrees, and returns to main. Use when the user says "clean up the repo", "wrap up this branch", "tidy up", or wants to get back to a clean main branch after finishing work.
 allowed-tools: Read Bash Glob Grep Edit Agent AskUserQuestion
 ---
