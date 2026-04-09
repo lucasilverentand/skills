@@ -1,6 +1,9 @@
 {
   "name": "frontend",
   "description": "Frontend development toolkit",
+  "skills": [
+    "./skills/design-options"
+  ],
   "author": {
     "name": "Luca Silverentand",
     "email": "dev@lucasilverentand.com"

@@ -1,6 +1,10 @@
 {
   "name": "skill-creation",
   "description": "Toolkit for skill creation and management",
+  "skills": [
+    "./skills/authoring",
+    "./skills/retrospecting"
+  ],
   "author": {
     "name": "Luca Silverentand",
     "email": "dev@lucasilverentand.com"

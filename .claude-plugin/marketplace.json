@@ -14,23 +14,12 @@
     {
       "name": "frontend",
       "source": "./plugins/frontend",
-      "description": "Frontend toolkit: design-options",
-      "category": "devtools",
-      "skills": [
-        "./plugins/frontend/skills/design-options"
-      ],
-      "strict": false
+      "category": "devtools"
     },
     {
       "name": "skill-creation",
       "source": "./plugins/skill-creation",
-      "description": "Skill creation toolkit: authoring, retrospecting",
-      "category": "devtools",
-      "skills": [
-        "./plugins/skill-creation/skills/authoring",
-        "./plugins/skill-creation/skills/retrospecting"
-      ],
-      "strict": false
+      "category": "devtools"
     }
   ]
 }
