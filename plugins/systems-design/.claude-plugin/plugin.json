@@ -1,0 +1,15 @@
+{
+  "name": "systems-design",
+  "description": "System and API architecture design, review, ADRs, and C4 diagrams",
+  "skills": [
+    "./skills/design-system",
+    "./skills/design-review",
+    "./skills/write-adr",
+    "./skills/c4-diagrams",
+    "./skills/api-design"
+  ],
+  "author": {
+    "name": "Luca Silverentand",
+    "email": "dev@lucasilverentand.com"
+  }
+}

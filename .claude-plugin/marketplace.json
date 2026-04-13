@@ -5,7 +5,7 @@
     "url": "https://github.com/lucasilverentand"
   },
   "metadata": {
-    "version": "0.8.0",
+    "version": "0.10.0",
     "homepage": "https://github.com/lucasilverentand/skills",
     "repository": "https://github.com/lucasilverentand/skills",
     "license": "MIT"
@@ -27,13 +27,18 @@
       "category": "devtools"
     },
     {
+      "name": "project",
+      "source": "./plugins/project",
+      "category": "devtools"
+    },
+    {
       "name": "skill-creation",
       "source": "./plugins/skill-creation",
       "category": "devtools"
     },
     {
-      "name": "project",
-      "source": "./plugins/project",
+      "name": "systems-design",
+      "source": "./plugins/systems-design",
       "category": "devtools"
     }
   ]
