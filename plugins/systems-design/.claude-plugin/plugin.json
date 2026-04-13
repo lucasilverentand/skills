@@ -1,12 +1,15 @@
 {
   "name": "systems-design",
-  "description": "System and API architecture design, review, ADRs, and C4 diagrams",
+  "description": "System architecture design — requirements, decomposition, data modeling, API design, diagrams, ADRs, design docs, and review",
   "skills": [
-    "./skills/design-system",
-    "./skills/design-review",
+    "./skills/requirements",
+    "./skills/architecture",
+    "./skills/data-modeling",
+    "./skills/api-design",
+    "./skills/write-design-doc",
     "./skills/write-adr",
     "./skills/c4-diagrams",
-    "./skills/api-design"
+    "./skills/design-review"
   ],
   "author": {
     "name": "Luca Silverentand",

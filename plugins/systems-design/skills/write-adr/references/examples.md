@@ -1,10 +1,8 @@
 # ADR Examples
 
-Two filled-in ADRs to show the shape — not the substance — of a good decision record.
+Two examples showing the shape of a good ADR.
 
----
-
-## Example 1: Outbox pattern for event publishing
+## Example 1: Outbox pattern
 
 ```markdown
 # 0002. Use the outbox pattern for publishing order events
@@ -16,77 +14,49 @@ Two filled-in ADRs to show the shape — not the substance — of a good decisio
 
 ## Context and problem statement
 
-The orders service writes to Postgres and then publishes a domain event to Cloudflare Queues for downstream consumers (inventory, notifications, analytics). Writing to two systems in sequence risks inconsistency: if the DB commits and the queue publish fails, consumers never learn about the event. We need publishing to be reliable without introducing distributed transactions.
+The orders service writes to Postgres then publishes to Cloudflare Queues. Two-step writes risk inconsistency: if the DB commits and the queue fails, consumers never see the event.
 
 ## Decision drivers
 
-- At-least-once delivery to downstream consumers is a hard requirement
-- No downstream consumer can run 2PC; Cloudflare Queues doesn't support it anyway
-- Publish latency isn't critical — consumers are async
-- Team is comfortable with Postgres but not with Kafka/Debezium
+- At-least-once delivery is a hard requirement
+- CF Queues doesn't support 2PC
+- Publish latency isn't critical (consumers are async)
+- Team knows Postgres, not Kafka/Debezium
 
 ## Considered options
 
-- **Option A:** Direct publish from the API after the DB commit
-- **Option B:** Transactional outbox table drained by a worker
-- **Option C:** Change data capture via logical replication
+- **A:** Direct publish after DB commit
+- **B:** Transactional outbox table drained by worker
+- **C:** CDC via logical replication
 
 ## Decision outcome
 
-Chosen option: **Option B (transactional outbox)**, because it gives at-least-once delivery with no dual-write risk, uses only Postgres (which the team already runs), and the drain worker is a few hundred lines of code with no new infrastructure.
+**Option B**, because it gives at-least-once delivery with no dual-write risk using only Postgres.
 
-### Positive consequences
+### Consequences
 
-- Event publishing is transactionally consistent with the state change that produced it
-- If the queue is down, events accumulate in the outbox table and drain when it recovers
-- Easy to replay events by resetting the drain cursor
+- Good: publishing is transactionally consistent with state change
+- Good: events accumulate in DB if queue is down, drain on recovery
+- Bad: drain latency bounded by poll interval (~1s)
+- Bad: outbox table needs retention cleanup
 
-### Negative consequences
+## Pros and cons
 
-- Publish latency is bounded below by the drain worker's poll interval (~1s)
-- The outbox table grows until drained; needs a retention job
-- Requires a separate worker process — more to deploy and monitor than direct publish
+### A: Direct publish
+- Good: lowest latency, trivial code
+- Bad: dual-write risk -- queue failure = lost event with no retry path
 
-## Pros and cons of the options
+### B: Transactional outbox
+- Good: state change + event are atomic
+- Good: survives queue outages
+- Bad: adds worker process + poll latency
 
-### Option A: Direct publish after DB commit
-
-API writes to Postgres, commits, then calls the queue. Simple but fragile.
-
-- Good: lowest latency, no extra infrastructure
-- Good: trivial to implement
-- Bad: dual-write risk — if the queue call fails, the event is lost with no retry path
-- Bad: retries risk double-publishing because the DB write is already committed
-
-### Option B: Transactional outbox table
-
-API writes the state change and the event row in the same DB transaction. A worker polls the outbox table and publishes to the queue, marking rows as sent.
-
-- Good: exactly-once relative to the DB; the state change and the event are atomic
-- Good: survives queue outages by buffering in the DB
-- Good: uses only tech the team already operates
-- Bad: adds drain latency (poll interval)
-- Bad: outbox table needs maintenance (retention, vacuum pressure)
-
-### Option C: CDC via logical replication
-
-Use Postgres logical replication to stream changes to a consumer that publishes to the queue.
-
-- Good: no application changes; works for any write
-- Bad: ops burden — replication slots, publication management, catchup after restart
-- Bad: no one on the team has run logical replication in production before
-- Bad: harder to reason about what triggers what
-
-## Links
-
-- [0001-postgres-for-orders.md](0001-postgres-for-orders.md)
-- Design doc: .context/architecture/orders-service.md
-- Reference: https://microservices.io/patterns/data/transactional-outbox.html
+### C: CDC via logical replication
+- Good: no application changes needed
+- Bad: replication slots are ops-heavy; nobody on team has run it in prod
 ```
 
----
-
-## Example 2: Superseding an earlier ADR
+## Example 2: Superseding an ADR
 
 ```markdown
 # 0007. Move session storage from Redis to Postgres
@@ -98,56 +68,20 @@ Use Postgres logical replication to stream changes to a consumer that publishes 
 
 ## Context and problem statement
 
-ADR-0003 chose Redis for session storage when we expected high read volume and short sessions. Nine months in: session volume is far lower than projected, Redis is the only stateful service in an otherwise stateless stack, and a Redis outage last month took down auth for 12 minutes despite sessions being short-lived.
+ADR-0003 chose Redis for sessions expecting high read volume. Nine months in: volume is 150/s (well within Postgres), Redis is the only stateful service, and a Redis outage took down auth for 12 minutes.
 
 ## Decision drivers
 
-- Reduce operational surface: fewer stateful services to monitor and back up
-- Availability: Postgres (Neon) has a better realized uptime than our Redis instance
-- Observed session read volume is ~150/s, well within Postgres capacity
-
-## Considered options
-
-- **Option A:** Keep Redis, improve its availability (replica, failover)
-- **Option B:** Move sessions to Postgres
-- **Option C:** Use Cloudflare KV for sessions
+- Reduce operational surface (fewer stateful services)
+- Postgres has better realized uptime than our Redis instance
+- Actual session volume is far below Redis's sweet spot
 
 ## Decision outcome
 
-Chosen option: **Option B (Postgres)**, because the expected benefit of Redis (latency) turned out not to matter at actual traffic, and consolidating on Postgres removes a stateful service we don't need.
+**Postgres**, because Redis's latency advantage doesn't matter at actual traffic, and consolidating removes a service we don't need.
 
-### Positive consequences
+### Consequences
 
-- One less service to operate
-- Better Auth already has a Postgres adapter
-- Session reads can join with user data in one query
-
-### Negative consequences
-
-- Adds ~5ms to session lookups vs Redis
-- Slight write pressure on Postgres (negligible at current volume)
-
-## Pros and cons of the options
-
-### Option A: Keep Redis, add replica + failover
-
-- Good: keeps the latency advantage
-- Bad: doubles the Redis cost for a service we barely use
-- Bad: replica setup adds operational complexity we don't need
-
-### Option B: Move sessions to Postgres
-
-- Good: consolidates state in one DB
-- Good: Better Auth supports this natively
-- Bad: ~5ms extra latency per auth check
-
-### Option C: Cloudflare KV
-
-- Good: globally distributed, no ops
-- Bad: eventually consistent — bad fit for session revocation
-- Bad: KV writes are slow; login would feel sluggish
-
-## Links
-
-- Supersedes [0003-redis-sessions.md](0003-redis-sessions.md)
+- Good: one less service to operate; Better Auth has Postgres adapter
+- Bad: ~5ms extra per session lookup (negligible at this volume)
 ```

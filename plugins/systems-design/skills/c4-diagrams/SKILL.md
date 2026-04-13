@@ -78,7 +78,7 @@ A good rule of thumb: if you can't label the *purpose* of an arrow in ~5 words, 
 
 #### Default stack primitives
 
-When diagramming systems built on the default stack (see `../../references/stack-defaults.md`), use these standard labels and shorthand:
+When diagramming systems built on the default stack (see `../architecture/references/third-party.md` and `../architecture/references/deploy.md`), use these standard labels and shorthand:
 
 | Primitive | Label format | Responsibility |
 |---|---|---|
@@ -148,5 +148,6 @@ Remember: the diagram is for the *reader*, not the writer. A junior engineer or 
 
 | File | Covers |
 |---|---|
-| `../../references/stack-defaults.md` | Default stack primitives and their responsibilities |
+| `../architecture/references/third-party.md` | Default vendors and stack primitives for diagram labels |
+| `../architecture/references/deploy.md` | Monorepo layout and Worker topology |
 | `references/mermaid-c4.md` | Mermaid templates for Context, Container, and Component levels with styling |

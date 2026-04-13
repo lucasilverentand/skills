@@ -24,7 +24,7 @@ An ADR is a timestamped, immutable record of a single architectural decision —
 
 ### What always warrants an ADR
 
-These topics always deserve a written record (per stack defaults — see `../../references/stack-defaults.md`):
+These topics always deserve a written record (per the convention references in sibling skills):
 
 - **New service or Worker** — adding a deployable unit changes the operational surface
 - **New external dependency** — new vendor, new SaaS, new API integration
@@ -37,7 +37,7 @@ These topics always deserve a written record (per stack defaults — see `../../
 - Library upgrades (patch, minor, or even major if non-breaking)
 - Styling choices (CSS, component design)
 - Internal refactors that don't change boundaries or behavior
-- Picking the stack default — the default is already documented in `stack-defaults.md`
+- Picking the established default — defaults are already documented in the convention references
 
 ## Writing an ADR
 
@@ -189,6 +189,8 @@ An ADR's job is to make the decision *reproducible* — a reader a year later sh
 
 | File | Covers |
 |---|---|
-| `../../references/stack-defaults.md` | Default technology choices — ADRs should reference deviations from these |
+| `../data-modeling/references/` | Data conventions — ADRs should reference deviations from these |
+| `../api-design/references/` | API conventions — ADRs should reference deviations from these |
+| `../architecture/references/` | Infrastructure conventions — ADRs should reference deviations from these |
 | `references/madr-template.md` | The raw template to copy |
 | `references/examples.md` | Two complete example ADRs (outbox pattern, data store choice) |
