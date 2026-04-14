@@ -1,0 +1,11 @@
+{
+  "name": "documentation",
+  "description": "Documentation authoring and structured knowledge capture",
+  "skills": [
+    "./skills/decision-trees"
+  ],
+  "author": {
+    "name": "Luca Silverentand",
+    "email": "dev@lucasilverentand.com"
+  }
+}
