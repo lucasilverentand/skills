@@ -67,6 +67,7 @@ bun run .claude/skills/marketplace/tools/sync-marketplace.ts
 ```
 
 This scans `plugins/*/skills/*/SKILL.md`, compares against marketplace.json, and reports:
+
 - Skills on disk but missing from marketplace (orphans)
 - Skills in marketplace but missing from disk (stale entries)
 
@@ -77,6 +78,7 @@ Always review the diff after syncing — it may add skills you didn't intend to 
 ## Bumping version
 
 The `metadata.version` field in marketplace.json uses semver:
+
 - **Patch** (0.8.0 -> 0.8.1): bug fixes, wording tweaks
 - **Minor** (0.8.0 -> 0.9.0): new skills, new plugins, backwards-compatible additions
 - **Major** (0.8.0 -> 1.0.0): removed skills, renamed categories, breaking changes
@@ -88,6 +90,7 @@ bun run plugins/skill-creation/skills/authoring/tools/marketplace-lint.ts
 ```
 
 Options:
+
 - `--fix` — auto-fix alphabetical ordering
 - `--json` — JSON output for scripting
 

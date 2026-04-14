@@ -92,11 +92,13 @@ For each conflict, gather context:
 #### d. Resolve
 
 For **clear-cut** conflicts:
+
 - Edit the file to remove conflict markers and apply the resolution
 - Stage the file: `git add <file>`
 - Move to the next conflicted file
 
 For **ambiguous** conflicts:
+
 - Prepare your best resolution based on understanding both sides' intent
 - Show the user:
   - What each side was trying to do (with commit context)
@@ -139,6 +141,7 @@ git log --oneline -10
 ```
 
 Show what the branch looks like after the operation. Summarize:
+
 - How many conflicts were resolved (and how many were auto-resolved vs. asked about)
 - Which commits were replayed (for rebase)
 
@@ -147,6 +150,7 @@ Show what the branch looks like after the operation. Summarize:
 If the branch has a remote tracking branch and this was a rebase (which rewrites history):
 
 Use `AskUserQuestion`:
+
 - **Force-push** — run `git push --force-with-lease` to update the remote branch
 - **Don't push** — leave the changes local for now
 

@@ -93,6 +93,7 @@ Present a table:
 ### 3. Update
 
 For each stale or missing item:
+
 1. Read the relevant current code
 2. Update the `.context/` file with accurate information
 3. Show the diff of what changed

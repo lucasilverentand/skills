@@ -42,6 +42,7 @@ git rebase origin/main
 ```
 
 If the rebase has conflicts:
+
 1. Show the conflicting files
 2. Attempt to resolve obvious conflicts (e.g., lockfile regeneration, import ordering)
 3. For non-obvious conflicts, stop and ask the user — don't guess at conflict resolution
@@ -80,6 +81,7 @@ gh pr list --state merged --limit 10 --json title --jq '.[].title'
 ```
 
 Match whatever style is used in the project:
+
 - If the repo uses conventional commit prefixes in PR titles (`feat:`, `fix:`), use them
 - If the repo uses plain descriptive titles, use those
 - If unclear, default to plain descriptive titles
@@ -101,6 +103,7 @@ git push --force-with-lease origin HEAD
 ## Step 7: Decide draft vs. ready
 
 Open as a **draft** when:
+
 - Work is still in progress but you want early visibility or CI feedback
 - The branch is missing tests, docs, or final polish
 - The user says "WIP", "draft", or "not ready yet"
@@ -138,6 +141,7 @@ EOF
 ```
 
 Guidelines for the body:
+
 - **Summary** explains intent, not mechanics — the diff shows the mechanics
 - **Bullet points** for concrete changes — keep them scannable
 - **Test plan** with actionable steps, not "run the tests"

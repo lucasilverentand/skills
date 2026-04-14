@@ -167,6 +167,7 @@ Different checks failing on different iterations is fine — keep fixing. The 3-
 ## Proactive use
 
 Use this skill proactively:
+
 - After the `creating-prs` skill creates a PR — start watching CI immediately
 - After pushing commits to a branch with an open PR
 - After pushing a CI fix — watch to confirm it worked

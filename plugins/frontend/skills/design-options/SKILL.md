@@ -18,6 +18,7 @@ allowed-tools: Read Write Bash Glob Grep
 ### 1. Understand the feature
 
 Ask if unclear:
+
 1. What's the feature or component? (e.g. "pricing card", "settings page", "onboarding flow")
 2. What scope — card/component, partial layout, or full screen?
 3. Any constraints — dark/light, mobile-first, specific brand colors?
@@ -198,6 +199,7 @@ bun run plugins/frontend/skills/design-options/tools/serve-options.ts {filename}
 ```
 
 This opens the browser with a "Pick this variant" bar at the bottom. The user can:
+
 - Switch between variants with the top bar or arrow keys
 - Type optional feedback in the text field
 - Hit "Pick this variant" (or Cmd+Enter) to submit
