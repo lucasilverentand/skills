@@ -28,6 +28,7 @@ Turn a vague "build X" into structured, prioritized requirements before any desi
 Pin down 7 areas using `AskUserQuestion`. Ask in batches of 3-4 — not all at once, not one at a time. Skip questions you can answer from the codebase. Call out assumptions explicitly so the user can correct them.
 
 Before asking, scan the project for existing context:
+
 - Read `.context/` files, README, and existing docs
 - Check the codebase for clues about scale, stack, integrations
 - Pre-fill what you can. Don't waste the user's time asking things the code already answers.

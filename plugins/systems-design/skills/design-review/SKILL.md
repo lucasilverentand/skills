@@ -34,6 +34,7 @@ If the doc doesn't say, ask — don't review against imagined requirements. A de
 Walk each lens below and write findings as you go. Not every lens applies to every design — skip the ones that don't fit, but skip *consciously*.
 
 #### Failure modes
+
 - What happens when each component is slow? Down? Returns garbage?
 - Are there single points of failure? Is that acceptable?
 - What's the blast radius of a bad deploy? A runaway query? A poisoned message?
@@ -41,6 +42,7 @@ Walk each lens below and write findings as you go. Not every lens applies to eve
 - Are timeouts set everywhere? Retries bounded? Circuit breakers where they matter?
 
 #### Scaling cliffs
+
 - Where's the bottleneck at 10x current load? At 100x?
 - Which component is hardest to scale — stateful DB, single-writer queue, a sync RPC chain?
 - Are hot keys / hot rows going to bite? (think: celebrity users, popular products, global counters)
@@ -48,6 +50,7 @@ Walk each lens below and write findings as you go. Not every lens applies to eve
 - Do caches thunder-herd on cold start or invalidation?
 
 #### Data & consistency
+
 - Who owns each piece of data? Is there exactly one source of truth?
 - How are cross-service writes handled? (dual-write risk, outbox, sagas?)
 - Are reads allowed to be stale? Where? For how long?
@@ -55,6 +58,7 @@ Walk each lens below and write findings as you go. Not every lens applies to eve
 - How do schema migrations happen without downtime?
 
 #### Security
+
 - Is input validated at every boundary?
 - AuthN and AuthZ — clear, enforced, not just "we'll add it later"
 - Secrets management — how, where, rotated?
@@ -63,6 +67,7 @@ Walk each lens below and write findings as you go. Not every lens applies to eve
 - What does an attacker gain by compromising each component?
 
 #### Operability
+
 - Can oncall debug this at 3am? What dashboards, logs, traces exist?
 - What pages a human vs what's just a ticket?
 - Is the deploy story clear? Rollback? Feature flags?
@@ -70,6 +75,7 @@ Walk each lens below and write findings as you go. Not every lens applies to eve
 - Is cost observable — can you tell who/what is burning money?
 
 #### Design coherence
+
 - Does the architecture match the stated requirements, or is it cargo-culted from somewhere else?
 - Are tech choices justified? ("We picked X because Y" — is Y actually true?)
 - Are there simpler alternatives that were genuinely considered?
@@ -93,6 +99,11 @@ Check the design against the convention references in sibling skills (`../data-m
 - Breaking schema changes use single-step migration instead of expand-contract
 - Missing `tenant_id` + RLS on tenant-scoped tables
 - Cron jobs run logic inline instead of enqueuing onto Queues
+- File uploads proxy bytes through the API instead of using presigned URLs to R2
+- Public endpoints lack rate limiting (per-user, not just per-IP)
+- Feature flags have no cleanup plan (release flags should be removed after full rollout)
+- D1 used for multi-tenant or compliance-sensitive data where Neon would be more appropriate (or vice versa without justification)
+- Cloudflare Pages used instead of Workers with Static Assets for new projects
 
 ### 3. Write the review
 

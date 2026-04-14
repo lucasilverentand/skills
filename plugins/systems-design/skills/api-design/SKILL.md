@@ -37,7 +37,7 @@ Before picking a protocol or drawing endpoints, ask (use `AskUserQuestion` for t
 
 ### 2. Pick the protocol — and say why in plain English
 
-Write the protocol choice with a one-paragraph justification. A weak reader should understand *why* without knowing the trade-offs in advance. Example:
+Write the protocol choice with a one-paragraph justification. A weak reader should understand _why_ without knowing the trade-offs in advance. Example:
 
 > **REST over HTTPS with JSON payloads.** Chosen because the primary clients are the storefront web app (browser) and a third-party partner dashboard, both of which work best with standard HTTP tooling and caching. GraphQL was considered but would add a server-side schema layer for no current benefit.
 
@@ -45,10 +45,10 @@ Write the protocol choice with a one-paragraph justification. A weak reader shou
 
 List resources and operations. Keep it simple:
 
-| Resource | Operations | Notes |
-|---|---|---|
-| `orders` | `POST`, `GET /:id`, `GET ?customer_id=...`, `POST /:id/refund` | `POST /:id/refund` is a sub-action, not `PUT` |
-| `customers` | `GET /:id`, `GET /:id/orders` | Read-only from this service |
+| Resource    | Operations                                                     | Notes                                         |
+| ----------- | -------------------------------------------------------------- | --------------------------------------------- |
+| `orders`    | `POST`, `GET /:id`, `GET ?customer_id=...`, `POST /:id/refund` | `POST /:id/refund` is a sub-action, not `PUT` |
+| `customers` | `GET /:id`, `GET /:id/orders`                                  | Read-only from this service                   |
 
 Conventions to pick once and stick to:
 
@@ -62,7 +62,7 @@ See `references/http-conventions.md` for the full set of HTTP conventions with e
 
 ### 4. Model the operations (GraphQL / gRPC)
 
-**GraphQL:** define types, queries, mutations, subscriptions in SDL. Every type, field, and argument gets a description string — the schema *is* the documentation.
+**GraphQL:** define types, queries, mutations, subscriptions in SDL. Every type, field, and argument gets a description string — the schema _is_ the documentation.
 
 **gRPC:** write the `.proto` file. Group related RPCs into services. Document each RPC with what it does and what errors it returns.
 
@@ -132,28 +132,28 @@ Output to `.context/architecture/api/<service>.md`. Structure:
 - **Explain every choice in plain language next to the choice.** Not just "cursor pagination" — "cursor pagination (clients pass an opaque string and get back the next one; stays stable when items are inserted between requests)".
 - **Expand jargon on first use.** mTLS, JWT, CORS, CSRF — all get a one-line gloss the first time.
 - **Show examples for every endpoint.** A curl example + JSON sample beats a schema table.
-- **Say *why* every constraint exists.** "Max page size 100 because responses over ~1 MB cause mobile clients to time out."
+- **Say _why_ every constraint exists.** "Max page size 100 because responses over ~1 MB cause mobile clients to time out."
 
 ## Cross-references
 
-| When | Use |
-|---|---|
-| Need the system architecture first | `architecture` |
-| Need the data model | `data-modeling` |
-| The API is part of a larger design | `write-design-doc` for the parent doc |
-| A choice deserves a permanent record | `write-adr` |
-| A diagram would make the flow clearer | `c4-diagrams` |
-| Review an existing API design | `design-review` |
+| When                                  | Use                                   |
+| ------------------------------------- | ------------------------------------- |
+| Need the system architecture first    | `architecture`                        |
+| Need the data model                   | `data-modeling`                       |
+| The API is part of a larger design    | `write-design-doc` for the parent doc |
+| A choice deserves a permanent record  | `write-adr`                           |
+| A diagram would make the flow clearer | `c4-diagrams`                         |
+| Review an existing API design         | `design-review`                       |
 
 ## Key references
 
-| File | Covers |
-|---|---|
-| `references/http-conventions.md` | URLs, HTTP verbs, status codes, request/response shapes, CORS |
-| `references/error-handling.md` | RFC 7807 Problem Details, error code taxonomy, validation errors, result types, Zod validation |
-| `references/auth.md` | Auth schemes by caller type, API key format, ABAC authorization, Hono middleware order |
-| `references/pagination.md` | Cursor-based (recommended) and offset-based pagination with trade-offs |
-| `references/api-patterns.md` | Idempotency, rate limiting, versioning, webhooks, file uploads, API documentation |
-| `references/example-rest.md` | REST example: Orders API with Zod schemas, endpoints, error codes |
-| `references/example-graphql.md` | GraphQL example: Orders SDL with types, queries, mutations |
-| `references/example-grpc.md` | gRPC example: Orders proto with services, messages, streaming |
+| File                             | Covers                                                                                         |
+| -------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `references/http-conventions.md` | URLs, HTTP verbs, status codes, request/response shapes, CORS                                  |
+| `references/error-handling.md`   | RFC 7807 Problem Details, error code taxonomy, validation errors, result types, Zod validation |
+| `references/auth.md`             | Auth schemes by caller type, API key format, ABAC authorization, Hono middleware order         |
+| `references/pagination.md`       | Cursor-based (recommended) and offset-based pagination with trade-offs                         |
+| `references/api-patterns.md`     | Idempotency, rate limiting, versioning, webhooks, file uploads, API documentation              |
+| `references/example-rest.md`     | REST example: Orders API with Zod schemas, endpoints, error codes                              |
+| `references/example-graphql.md`  | GraphQL example: Orders SDL with types, queries, mutations                                     |
+| `references/example-grpc.md`     | gRPC example: Orders proto with services, messages, streaming                                  |

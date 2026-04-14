@@ -49,6 +49,7 @@ Identify the bounded contexts — the natural seams in the system where one resp
 Trace 2-3 representative requests through the system end-to-end. Pick flows that exercise different paths: a happy-path read, a write with side effects, and an error case.
 
 For each hop between components:
+
 - Is it **synchronous** (HTTP call, gRPC) or **async** (queue, event)?
 - What **protocol** does it use?
 - What's the **latency budget** for this hop?
@@ -76,7 +77,7 @@ For each component, answer:
 
 ### 5. Tech selection
 
-Lean on the reference files (`references/async.md`, `references/resilience.md`, `references/deploy.md`, `references/third-party.md`) for all infrastructure choices. For each technology decision:
+Lean on the reference files (`references/async.md`, `references/resilience.md`, `references/deploy.md`, `references/third-party.md`) for all infrastructure choices. For the data store decision (D1 vs Neon), see `data-modeling`'s "Data store selection" section — the short version: D1 for small/simple, Neon for multi-tenant/complex/compliance. For each technology decision:
 
 - **What does this buy us?** Be specific — "Postgres gives us ACID transactions across these three tables in a single commit."
 - **What are we giving up?** Every choice has a cost — operational complexity, vendor lock-in, learning curve.

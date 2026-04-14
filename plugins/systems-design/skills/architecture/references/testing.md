@@ -31,6 +31,7 @@ Prior incident: mocked DB tests passed but prod migration failed because the moc
 ## E2E
 
 Split into two tiers:
+
 - **Quick smoke** (every PR): critical paths only — sign up, core action, payment. Runs in <5 minutes.
 - **In-depth** (nightly/main merge): broader coverage, edge cases, cross-browser. Can take 15-30 minutes.
 

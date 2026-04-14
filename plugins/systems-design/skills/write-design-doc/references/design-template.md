@@ -50,6 +50,7 @@ Prefixed ULIDs. `tenant_id` + RLS on every table. Soft delete. Outbox for reliab
 ## Key flows
 
 **Create order (happy path):**
+
 1. Client POSTs `/orders` with cart
 2. API validates, prices items
 3. Single transaction: insert order + line_items + payment + outbox event
@@ -58,6 +59,7 @@ Prefixed ULIDs. `tenant_id` + RLS on every table. Soft delete. Outbox for reliab
 6. Client confirms payment via Stripe; webhook transitions to `paid`
 
 **Payment fails:**
+
 1. Stripe webhook: `payment_failed`
 2. Order -> `payment_failed` (terminal) + outbox event
 3. Notification worker emails customer

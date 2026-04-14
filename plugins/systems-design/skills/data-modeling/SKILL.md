@@ -21,6 +21,25 @@ Turns a set of entities and relationships into a concrete schema — IDs, naming
 - **User wants to design the whole system** → hand off to `architecture`, come back here for the data layer
 - **User wants to design the API over this data** → hand off to `api-design`
 
+## Data store selection
+
+Pick the database before modeling the schema — the choice shapes what's possible.
+
+| Factor | D1 (SQLite on CF) | Neon (Postgres) |
+|---|---|---|
+| **Best for** | Small projects, prototypes, single-tenant tools, <100K rows | Multi-tenant SaaS, complex queries, compliance-sensitive data |
+| **Queries** | Simple CRUD, basic JOINs, no CTEs in older versions | Full SQL: CTEs, window functions, JSON operators, full-text search |
+| **Tenancy** | App-layer `WHERE tenant_id = ?` only — no RLS | Row-Level Security as defense-in-depth backstop |
+| **Compliance** | Data in CF's nearest region (unpredictable) | EU-primary region, column encryption, GDPR-friendly |
+| **Scale** | 10GB max per DB, limited concurrent writers | Autoscaling compute, read replicas, no hard row limits |
+| **Cost** | Extremely cheap, included in Workers plan | Per-compute-second, ~$0.10/hr active, scales to zero |
+| **Migration path** | D1 → Neon via Drizzle (same schema, different driver) | Already at the ceiling |
+| **Ecosystem** | SQLite dialect quirks (no `ALTER COLUMN`, limited types) | Full Postgres ecosystem: extensions, pg_dump, observability tools |
+
+**Decision rule:** Start with D1 when the project is small, single-purpose, and internal (e.g., a team tool with <500 users, simple CRUD, no multi-tenant isolation requirements). Graduate to Neon when you need RLS, complex queries, GDPR data residency, or the data will grow past what SQLite handles comfortably. The Drizzle schema is portable — switching is a driver change plus a migration, not a rewrite.
+
+**When in doubt:** ask how many tenants, whether RLS matters, and whether EU data residency is required. If any answer is "yes", pick Neon.
+
 ## Entity identification
 
 Use `AskUserQuestion` for the ones that aren't obvious from context:
@@ -115,14 +134,14 @@ Write schema definitions to:
 
 ## Key references
 
-| File                                   | Covers                                           |
-| -------------------------------------- | ------------------------------------------------ |
-| `references/ids.md` | Prefixed ULID strategy |
-| `references/naming.md` | Table, column, index naming conventions |
-| `references/soft-delete.md` | Timestamps and soft delete pattern |
-| `references/tenancy.md` | Multi-tenancy with tenant_id + RLS |
-| `references/jsonb.md` | When to use JSONB and when not to |
-| `references/audit.md` | Three audit logging patterns |
-| `references/schema-organization.md` | packages/db layout and domain files |
-| `references/migrations.md` | Migration workflow and expand-contract |
-| `references/schema-examples.md` | Full example schemas showing conventions applied |
+| File                                | Covers                                           |
+| ----------------------------------- | ------------------------------------------------ |
+| `references/ids.md`                 | Prefixed ULID strategy                           |
+| `references/naming.md`              | Table, column, index naming conventions          |
+| `references/soft-delete.md`         | Timestamps and soft delete pattern               |
+| `references/tenancy.md`             | Multi-tenancy with tenant_id + RLS               |
+| `references/jsonb.md`               | When to use JSONB and when not to                |
+| `references/audit.md`               | Three audit logging patterns                     |
+| `references/schema-organization.md` | packages/db layout and domain files              |
+| `references/migrations.md`          | Migration workflow and expand-contract           |
+| `references/schema-examples.md`     | Full example schemas showing conventions applied |

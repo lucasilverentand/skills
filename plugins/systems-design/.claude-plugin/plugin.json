@@ -2,6 +2,7 @@
   "name": "systems-design",
   "description": "System architecture design — requirements, decomposition, data modeling, API design, diagrams, ADRs, design docs, and review",
   "skills": [
+    "./skills/design-workflow",
     "./skills/requirements",
     "./skills/architecture",
     "./skills/data-modeling",
