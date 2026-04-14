@@ -1,74 +1,70 @@
 {
-  "name": "skills-of-luca",
-  "owner": {
-    "name": "Luca Silverentand",
-    "url": "https://github.com/lucasilverentand"
-  },
-  "metadata": {
-    "version": "0.10.0",
-    "homepage": "https://github.com/lucasilverentand/skills",
-    "repository": "https://github.com/lucasilverentand/skills",
-    "license": "MIT"
-  },
-  "plugins": [
-    {
-      "name": "frontend",
-      "source": "./plugins/frontend",
-      "category": "devtools",
-      "skills": [
-        "./plugins/frontend/skills/design-options"
-      ]
-    },
-    {
-      "name": "git",
-      "source": "./plugins/git",
-      "category": "devtools",
-      "skills": [
-        "./plugins/git/skills/cleaning-repos",
-        "./plugins/git/skills/creating-commits",
-        "./plugins/git/skills/resolving-conflicts"
-      ]
-    },
-    {
-      "name": "github",
-      "source": "./plugins/github",
-      "category": "devtools",
-      "skills": [
-        "./plugins/github/skills/creating-prs",
-        "./plugins/github/skills/monitoring-ci"
-      ]
-    },
-    {
-      "name": "project",
-      "source": "./plugins/project",
-      "category": "devtools",
-      "skills": [
-        "./plugins/project/skills/project-context"
-      ]
-    },
-    {
-      "name": "skill-creation",
-      "source": "./plugins/skill-creation",
-      "category": "devtools",
-      "skills": [
-        "./plugins/skill-creation/skills/authoring",
-        "./plugins/skill-creation/skills/retrospecting"
-      ]
-    },
-    {
-      "name": "systems-design",
-      "source": "./plugins/systems-design",
-      "category": "devtools",
-      "skills": [
-        "./plugins/systems-design/skills/api-design",
-        "./plugins/systems-design/skills/architecture",
-        "./plugins/systems-design/skills/c4-diagrams",
-        "./plugins/systems-design/skills/data-modeling",
-        "./plugins/systems-design/skills/design-review",
-        "./plugins/systems-design/skills/requirements",
-        "./plugins/systems-design/skills/write-adr",
-        "./plugins/systems-design/skills/write-design-doc"
-      ]
-    }
-  ]
+	"name": "skills-of-luca",
+	"owner": {
+		"name": "Luca Silverentand",
+		"url": "https://github.com/lucasilverentand"
+	},
+	"metadata": {
+		"version": "0.10.0",
+		"homepage": "https://github.com/lucasilverentand/skills",
+		"repository": "https://github.com/lucasilverentand/skills",
+		"license": "MIT"
+	},
+	"plugins": [
+		{
+			"name": "frontend",
+			"source": "./plugins/frontend",
+			"category": "devtools",
+			"skills": ["./plugins/frontend/skills/design-options"]
+		},
+		{
+			"name": "git",
+			"source": "./plugins/git",
+			"category": "devtools",
+			"skills": [
+				"./plugins/git/skills/cleaning-repos",
+				"./plugins/git/skills/creating-commits",
+				"./plugins/git/skills/resolving-conflicts"
+			]
+		},
+		{
+			"name": "github",
+			"source": "./plugins/github",
+			"category": "devtools",
+			"skills": [
+				"./plugins/github/skills/creating-prs",
+				"./plugins/github/skills/monitoring-ci"
+			]
+		},
+		{
+			"name": "project",
+			"source": "./plugins/project",
+			"category": "devtools",
+			"skills": ["./plugins/project/skills/project-context"]
+		},
+		{
+			"name": "skill-creation",
+			"source": "./plugins/skill-creation",
+			"category": "devtools",
+			"skills": [
+				"./plugins/skill-creation/skills/authoring",
+				"./plugins/skill-creation/skills/retrospecting"
+			]
+		},
+		{
+			"name": "systems-design",
+			"source": "./plugins/systems-design",
+			"category": "devtools",
+			"skills": [
+				"./plugins/systems-design/skills/api-design",
+				"./plugins/systems-design/skills/architecture",
+				"./plugins/systems-design/skills/c4-diagrams",
+				"./plugins/systems-design/skills/data-modeling",
+				"./plugins/systems-design/skills/design-review",
+				"./plugins/systems-design/skills/requirements",
+				"./plugins/systems-design/skills/write-adr",
+				"./plugins/systems-design/skills/write-design-doc"
+			]
+		}
+	]
 }
