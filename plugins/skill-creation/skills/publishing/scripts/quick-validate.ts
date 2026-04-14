@@ -10,6 +10,14 @@ const ALLOWED_PROPERTIES = new Set([
   "allowed-tools",
   "metadata",
   "compatibility",
+  "argument-hint",
+  "disable-model-invocation",
+  "user-invocable",
+  "model",
+  "context",
+  "agent",
+  "effort",
+  "hooks",
 ]);
 
 export function validateSkill(

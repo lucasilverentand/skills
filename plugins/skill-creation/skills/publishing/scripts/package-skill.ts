@@ -4,7 +4,7 @@ import { existsSync, readdirSync, statSync, readFileSync } from "node:fs";
 import { join, relative, basename, resolve } from "node:path";
 import { validateSkill } from "./quick-validate.ts";
 
-const EXCLUDE_DIRS = new Set(["__pycache__", "node_modules"]);
+const EXCLUDE_DIRS = new Set(["__pycache__", "node_modules", ".git"]);
 const EXCLUDE_GLOBS = new Set(["*.pyc"]);
 const EXCLUDE_FILES = new Set([".DS_Store"]);
 const ROOT_EXCLUDE_DIRS = new Set(["evals"]);

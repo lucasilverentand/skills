@@ -17,6 +17,10 @@ Mines recent Claude Code conversations and git history for struggles, repeated c
 
 **Tools:** `conversation-miner`, `rework-detector`
 
+### taste-encoding
+
+Interviews the user to extract their design taste and preferences for a domain, then encodes those into skill reference files, decision rules, conventions, comparison tables, and anti-patterns.
+
 ## Installation
 
 Add this plugin to your Claude Code configuration:
@@ -29,4 +33,4 @@ Add this plugin to your Claude Code configuration:
 
 ## Author
 
-Luca Silverentand (dev@lucasilverentand.com)
+Luca Silverentand (<dev@lucasilverentand.com>)

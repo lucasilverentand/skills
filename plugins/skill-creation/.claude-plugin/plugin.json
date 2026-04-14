@@ -1,12 +1,15 @@
 {
-  "name": "skill-creation",
-  "description": "Toolkit for skill creation and management",
-  "skills": [
-    "./skills/authoring",
-    "./skills/retrospecting"
-  ],
-  "author": {
-    "name": "Luca Silverentand",
-    "email": "dev@lucasilverentand.com"
-  }
+	"name": "skill-creation",
+	"description": "Toolkit for skill creation and management",
+	"skills": [
+		"./skills/authoring",
+		"./skills/tooling",
+		"./skills/publishing",
+		"./skills/retrospecting",
+		"./skills/taste-encoding"
+	],
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	}
 }

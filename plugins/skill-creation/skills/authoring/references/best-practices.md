@@ -9,17 +9,19 @@
 - **Offering too many options** — provide a default approach with an escape hatch, not a menu
 - **Time-sensitive information** — don't include dates or versions that will go stale
 - **Extraneous files** — no README.md, CHANGELOG.md, or other docs that aren't references
-- **Padding with thin-wrapper tools** — don't create tools just to hit a target count. A tool that wraps a single command with minor formatting isn't earning its place. Tools should exist because they compose multiple steps, contain real logic (validation, categorization, threshold detection), or automate a multi-command workflow that's error-prone to do by hand. If the task is a single command with a flag or two, put that command inline in SKILL.md instead.
+- **Padding with thin-wrapper tools** — use the `tooling` skill to decide whether a tool earns its place before creating one
 
 ## Keeping SKILL.md lean
 
 Move to references/ when:
+
 - A section is over ~10 lines of detailed documentation
 - Content is domain-specific knowledge (API schemas, field descriptions)
 - Content is a template or example that's referenced but not always needed
 - A decision tree exceeds ~20 lines
 
 Keep in SKILL.md:
+
 - The decision tree and workflow steps
 - A reference table linking to detailed docs
 - Critical rules that apply every time

@@ -14,13 +14,13 @@ Include the word "ultrathink" anywhere in your SKILL.md content to enable extend
 
 Claude Code ships with built-in skills that are always available:
 
-| Skill | Purpose |
-|---|---|
-| `/batch <instruction>` | Orchestrate large-scale parallel changes across a codebase using git worktrees |
-| `/claude-api` | Load Claude API reference material for your project's language |
-| `/debug [description]` | Troubleshoot your current Claude Code session |
-| `/loop [interval] <prompt>` | Run a prompt repeatedly on an interval |
-| `/simplify [focus]` | Review recently changed files for code reuse, quality, and efficiency |
+| Skill                       | Purpose                                                                        |
+| --------------------------- | ------------------------------------------------------------------------------ |
+| `/batch <instruction>`      | Orchestrate large-scale parallel changes across a codebase using git worktrees |
+| `/claude-api`               | Load Claude API reference material for your project's language                 |
+| `/debug [description]`      | Troubleshoot your current Claude Code session                                  |
+| `/loop [interval] <prompt>` | Run a prompt repeatedly on an interval                                         |
+| `/simplify [focus]`         | Review recently changed files for code reuse, quality, and efficiency          |
 
 ## Preloading skills into subagents
 

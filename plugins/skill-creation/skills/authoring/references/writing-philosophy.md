@@ -2,7 +2,7 @@
 
 ## Explain the why
 
-If you find yourself writing ALWAYS or NEVER in all caps, reframe and explain the reasoning instead. A model that understands *why* something matters will handle edge cases better than one following rigid rules. Today's LLMs have good theory of mind — when given a clear rationale, they go beyond rote instruction-following and handle novel situations well.
+If you find yourself writing ALWAYS or NEVER in all caps, reframe and explain the reasoning instead. A model that understands _why_ something matters will handle edge cases better than one following rigid rules. Today's LLMs have good theory of mind — when given a clear rationale, they go beyond rote instruction-following and handle novel situations well.
 
 ## Keep the prompt lean
 

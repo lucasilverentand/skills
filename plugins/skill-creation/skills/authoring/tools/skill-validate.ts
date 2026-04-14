@@ -51,6 +51,7 @@ const KNOWN_TOOLS = new Set([
   "WebFetch",
   "WebSearch",
   "Agent",
+  "AskUserQuestion",
   "Zsh",
 ]);
 

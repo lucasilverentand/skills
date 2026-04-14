@@ -58,6 +58,7 @@ grep -r "<keyword>" skills/*/SKILL.md
 ```
 
 Classify each cluster as:
+
 - **New skill needed** — no existing skill covers this area
 - **Existing skill update** — a skill exists but misses this pattern
 - **CLAUDE.md addition** — too small for a skill, better as a project instruction

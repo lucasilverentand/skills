@@ -34,7 +34,7 @@ interface LintError {
 
 const KEBAB = /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/;
 const SEMVER = /^\d+\.\d+\.\d+$/;
-const VALID_CATEGORIES = new Set(["devtools", "editor", "web-development"]);
+const VALID_CATEGORIES = new Set(["devtools"]);
 const MAX_DESCRIPTION_LENGTH = 1024;
 
 const RESERVED_MARKETPLACE_NAMES = new Set([
@@ -57,6 +57,7 @@ const KNOWN_TOOLS = new Set([
   "WebFetch",
   "WebSearch",
   "Agent",
+  "AskUserQuestion",
   "Zsh",
 ]);
 
@@ -209,6 +210,12 @@ async function main() {
           err(errors, "metadata.description", "description-too-long", `Metadata description is ${metadata.description.length} chars (max ${MAX_DESCRIPTION_LENGTH})`);
         }
       }
+      if (metadata.license !== undefined && typeof metadata.license !== "string") {
+        err(errors, "metadata.license", "invalid-type", "Field 'metadata.license' must be a string");
+      }
+      if (metadata.pluginRoot !== undefined && typeof metadata.pluginRoot !== "string") {
+        err(errors, "metadata.pluginRoot", "invalid-type", "Field 'metadata.pluginRoot' must be a string");
+      }
       for (const urlField of ["homepage", "repository"] as const) {
         if (metadata[urlField] !== undefined) {
           if (typeof metadata[urlField] !== "string") {
@@ -316,6 +323,12 @@ async function main() {
       }
     } else if (typeof plugin.source !== "string") {
       err(errors, `${prefix}.source`, "invalid-type", "Plugin source must be a string or object");
+    } else if (plugin.source.startsWith("./")) {
+      // Relative source path — verify it exists on disk
+      const resolvedSource = resolve(dir, plugin.source);
+      if (!existsSync(resolvedSource)) {
+        err(errors, `${prefix}.source`, "source-not-found", `Plugin source path does not exist: ${plugin.source}`);
+      }
     }
 
     // Optional: strict (must be boolean)
@@ -447,11 +460,17 @@ async function main() {
             } else {
               const sp = `${prefix}.skills[${j}]`;
 
-              // name field: must exist, be kebab-case
+              // name field: must exist, be kebab-case, match directory
               if (!fm.name) {
                 err(errors, sp, "missing-frontmatter-field", `SKILL.md at '${skillPath}' missing 'name' in frontmatter`);
               } else if (!KEBAB.test(fm.name)) {
                 err(errors, sp, "invalid-name", `SKILL.md name '${fm.name}' at '${skillPath}' must be kebab-case`);
+              } else {
+                const dirName = basename(resolved);
+                const normalizedDirName = dirName.replace(/_/g, "-");
+                if (fm.name !== dirName && fm.name !== normalizedDirName) {
+                  err(errors, sp, "name-mismatch", `SKILL.md name '${fm.name}' doesn't match directory '${dirName}' at '${skillPath}'`);
+                }
               }
 
               // description field: must exist, length check
@@ -603,13 +622,14 @@ async function main() {
   }
 
   // ── Orphan detection ──
-
-  const skillsDir = resolve(dir, "skills");
-  if (existsSync(skillsDir)) {
+  // Scan for SKILL.md files anywhere in the repo and check if they're registered
+  {
     const glob = new Bun.Glob("**/SKILL.md");
-    for (const match of glob.scanSync({ cwd: skillsDir })) {
+    for (const match of glob.scanSync({ cwd: dir })) {
+      // Skip SKILL.md files that aren't inside a skills/ directory
+      if (!match.includes("/skills/")) continue;
       const skillDir = dirname(match);
-      const marketplacePath = `./skills/${skillDir}`;
+      const marketplacePath = `./${skillDir}`;
       if (!allSkillPaths.has(marketplacePath)) {
         err(errors, "orphans", "orphan-skill", `Skill on disk not in any plugin: ${marketplacePath}`, "warning");
       }

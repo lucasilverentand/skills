@@ -13,6 +13,7 @@ Does one thing well. Self-contained, no dependencies on other skills, usually ma
 Examples: `git/committing`, `git/branching`, `documentation/coauthoring`, `security/audit`
 
 Signals you're building an atomic skill:
+
 - The skill handles a single, well-defined task
 - It doesn't need to call or reference other skills
 - Same input consistently produces the same kind of output
@@ -25,11 +26,13 @@ Chains atomic skills in a defined sequence. The path may branch, but the set of 
 Examples: `git` (parent routing to children), `documentation/developer-docs` (composes `style` + `knowledge`), `git/clean`
 
 Signals you're building a workflow skill:
+
 - The skill orchestrates multiple steps that always run in the same order
 - It references or delegates to atomic skills for individual steps
 - Users describe the task as a multi-step goal ("clean up this repo", "write architecture docs")
 
 Workflow skills compose atomics in two ways:
+
 1. **Decision tree routing** — the parent's decision tree sends the user to the right child skill
 2. **Cross-skill references** — the skill points to another skill for a specific concern (e.g., "for tone → see `documentation/coauthoring`")
 
@@ -38,6 +41,7 @@ Workflow skills compose atomics in two ways:
 Goal-driven. Receives an outcome and decides which workflows/atomics to use based on what it discovers. The path is determined at runtime, not prescribed.
 
 Signals you're building an agent skill:
+
 - The approach depends on what the skill finds when it inspects the codebase/context
 - Different inputs lead to fundamentally different sequences (not just branching within a fixed flow)
 - The skill needs to loop, retry, or change strategy on failure
