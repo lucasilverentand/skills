@@ -1,0 +1,14 @@
+{
+	"languages": {
+		"Markdown": {
+			"language_servers": ["!markdownlint", "!markdown-oxide"],
+			"format_on_save": "on",
+			"formatter": {
+				"external": {
+					"command": "bun",
+					"arguments": ["run", "scripts/check.ts", "--stdin"]
+				}
+			}
+		}
+	}
+}
