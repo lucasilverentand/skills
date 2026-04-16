@@ -1,5 +1,4 @@
 # Skill Taxonomy
-
 Skills fall into three tiers based on scope and autonomy. Pick the right tier before writing — it shapes everything from the decision tree to allowed-tools.
 
 > **Note:** The atomic/workflow/agent taxonomy is a convention used by this skill repository for organizing and designing skills. It is not part of the official Anthropic Agent Skills specification. Skills work without following this taxonomy — but it provides useful design guidance when building a library of composable skills.
@@ -7,7 +6,6 @@ Skills fall into three tiers based on scope and autonomy. Pick the right tier be
 ## Tiers
 
 ### Atomic
-
 Does one thing well. Self-contained, no dependencies on other skills, usually maps to one decision tree.
 
 Examples: `git/committing`, `git/branching`, `documentation/coauthoring`, `security/audit`
@@ -20,7 +18,6 @@ Signals you're building an atomic skill:
 - A user would invoke it with a short, specific request ("write a commit message")
 
 ### Workflow
-
 Chains atomic skills in a defined sequence. The path may branch, but the set of possible paths is known upfront.
 
 Examples: `git` (parent routing to children), `documentation/developer-docs` (composes `style` + `knowledge`), `git/clean`
@@ -37,7 +34,6 @@ Workflow skills compose atomics in two ways:
 2. **Cross-skill references** — the skill points to another skill for a specific concern (e.g., "for tone → see `documentation/coauthoring`")
 
 ### Agent
-
 Goal-driven. Receives an outcome and decides which workflows/atomics to use based on what it discovers. The path is determined at runtime, not prescribed.
 
 Signals you're building an agent skill:
@@ -50,7 +46,6 @@ Signals you're building an agent skill:
 Agent skills use `Agent` in `allowed-tools` to delegate subtasks to workflows and atomics.
 
 ## Choosing a tier
-
 Pick the lowest tier that covers the use case:
 
 1. Can it do its job without other skills? → **atomic**
@@ -58,11 +53,9 @@ Pick the lowest tier that covers the use case:
 3. Does the sequence depend on runtime context? → **agent**
 
 ## Extracting skills downward
-
 Higher-tier skills often contain steps that are valuable on their own. When you spot a reusable piece, extract it into its own lower-tier skill.
 
 ### Extracting atomics from workflows
-
 A workflow step that does real work inline (formatting, validation, generation) should become its own atomic when:
 
 - The same logic appears in multiple workflows
@@ -72,7 +65,6 @@ A workflow step that does real work inline (formatting, validation, generation) 
 Example: `git/committing` started as the commit-writing step inside `git/clean`. Extracted, it became independently useful — any workflow that creates commits can reference it.
 
 ### Extracting workflows from agents
-
 A fixed sequence inside an agent skill should become its own workflow when:
 
 - The agent always runs those steps in the same order for a particular sub-goal, regardless of what decisions led there

@@ -663,7 +663,7 @@ async function main() {
       }
     }
 
-    const fixed = JSON.stringify(data, null, 2) + "\n";
+    const fixed = JSON.stringify(data, null, '\t') + "\n";
     writeFileSync(target, fixed);
     console.log(
       "Auto-fixed: sorted plugins and skills arrays alphabetically.",

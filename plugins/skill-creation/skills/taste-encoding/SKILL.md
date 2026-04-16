@@ -5,13 +5,11 @@ allowed-tools: Read Grep Glob Bash Write Edit AskUserQuestion Agent
 ---
 
 # Taste Encoding
-
 Extracts a user's design taste through structured interviews and encodes it into skill artifacts — reference files, decision rules, conventions, comparison tables, and anti-patterns. Taste is the difference between a generic skill ("here are 5 database options") and an opinionated one ("use D1 for small projects, Neon when you need RLS or compliance — here's exactly why").
 
 ## Decision tree
-
 - What does the user want?
-  - **Encode taste into a new skill** → the skill doesn't exist yet. Hand off to the authoring skill (`create-skill`) to scaffold the skill first, then come back here for taste encoding.
+  - **Encode taste into a new skill** → the skill doesn't exist yet. Hand off to the authoring skill (`authoring`) to scaffold the skill first, then come back here for taste encoding.
   - **Encode taste into an existing skill** → what's the current state?
     - **Skill has no taste yet** (generic, presents options without opinions) → run the full process below
     - **Skill has some taste but gaps remain** → read the skill, identify which domains still lack opinions, run a focused interview on those gaps only
@@ -22,7 +20,6 @@ Extracts a user's design taste through structured interviews and encodes it into
 ## Full process
 
 ### 1. Scope the domain
-
 Read the target skill's SKILL.md and any existing reference files. Identify:
 
 - What decisions does this skill guide? (e.g., data modeling → ID strategy, naming, tenancy, migrations)
@@ -32,7 +29,6 @@ Read the target skill's SKILL.md and any existing reference files. Identify:
 List the taste gaps — these become the interview topics.
 
 ### 2. Interview
-
 Use `AskUserQuestion` for every question. Never type questions as plain text.
 
 Follow `references/interview-guide.md` for the full interview protocol. The essentials:
@@ -50,19 +46,17 @@ Follow `references/interview-guide.md` for the full interview protocol. The esse
 **Know when to stop.** If the user says "I don't have a strong opinion" or "whatever's standard" — that's a valid answer. Record it as "use industry default" and move on. Not every decision needs taste.
 
 ### 3. Organize findings
-
 Group interview answers into categories:
 
-| Category | What goes here | Becomes |
+|Category|What goes here|Becomes|
 |---|---|---|
-| **Principles** | Core beliefs that guide many decisions ("monolith-first", "lean on existing stack") | A `references/philosophy.md` or `references/principles.md` file |
-| **Defaults** | Concrete choices for specific decisions ("prefixed ULIDs for IDs", "snake_case for tables") | Conventions section in SKILL.md, or domain-specific reference files |
-| **Decision rules** | Conditional choices ("D1 when small, Neon when multi-tenant") | Decision tables or if/then rules in SKILL.md or references |
-| **Anti-patterns** | Things to avoid with reasoning ("never sequential integers — they leak count") | Anti-pattern sections in references |
-| **No opinion** | Decisions where the user defers to convention | Skip — don't encode absence of taste |
+|**Principles**|Core beliefs that guide many decisions ("monolith-first", "lean on existing stack")|A `references/philosophy.md` or `references/principles.md` file|
+|**Defaults**|Concrete choices for specific decisions ("prefixed ULIDs for IDs", "snake_case for tables")|Conventions section in SKILL.md, or domain-specific reference files|
+|**Decision rules**|Conditional choices ("D1 when small, Neon when multi-tenant")|Decision tables or if/then rules in SKILL.md or references|
+|**Anti-patterns**|Things to avoid with reasoning ("never sequential integers — they leak count")|Anti-pattern sections in references|
+|**No opinion**|Decisions where the user defers to convention|Skip — don't encode absence of taste|
 
 ### 4. Encode
-
 Transform organized findings into skill artifacts using the patterns in `references/encoding-patterns.md`. The key patterns:
 
 **The "because" pattern.** Every opinionated rule gets a rationale. Not "use ULIDs" but "use ULIDs — because they're time-sortable, prefix-distinguishable in logs, and don't leak count like sequential integers."
@@ -79,20 +73,20 @@ For each artifact:
 2. Update SKILL.md to reference it — add to the key references table, link from relevant decision tree branches or workflow steps
 3. Inline the most critical 1-2 sentence summary in SKILL.md itself so the agent gets the gist without reading the reference
 
-### 5. Validate
+**Multi-skill encoding:** When encoding taste across multiple skills at once, offer to fan out step 4 to parallel agents — one Encoder agent per target skill, each receiving only that skill's organized findings. This avoids serializing work on independent files. For a single skill, stay single-agent.
 
+### 5. Validate
 After encoding:
 
 1. Read the updated SKILL.md end-to-end — does an agent following it produce opinionated output aligned with the user's taste?
 2. Check that every encoded preference has a rationale (the "because")
 3. Check that decision rules have clear conditions, not vague ones ("when it makes sense" → bad, "when you need RLS or multi-tenant isolation" → good)
-4. Run `tools/token-estimate.ts` on the SKILL.md to verify it's still under 5000 tokens — taste encoding can bloat the main file if you inline too much
+4. Run the token-estimate tool from the authoring skill (`../authoring/tools/token-estimate.ts`) on the SKILL.md to verify it's still under 5000 tokens — taste encoding can bloat the main file if you inline too much
 5. Confirm no reference file exceeds ~300 lines — split if needed
 
 Present a summary to the user: what was encoded, where it lives, and any decisions that were left generic (with reasoning).
 
 ## Focused interview (for filling gaps)
-
 When a skill already has some taste but not enough:
 
 1. Read all existing reference files and conventions
@@ -101,8 +95,7 @@ When a skill already has some taste but not enough:
 4. Encode findings into the existing structure (update files, don't create parallel ones)
 
 ## Key references
-
-| File | Covers |
+|File|Covers|
 |---|---|
-| `references/interview-guide.md` | Question strategies by domain type, signal recognition, batching, depth calibration |
-| `references/encoding-patterns.md` | The six encoding patterns with examples from real skills |
+|`references/interview-guide.md`|Question strategies by domain type, signal recognition, batching, depth calibration|
+|`references/encoding-patterns.md`|The six encoding patterns with examples from real skills|

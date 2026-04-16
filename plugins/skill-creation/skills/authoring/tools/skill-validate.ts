@@ -72,6 +72,7 @@ const KNOWN_FRONTMATTER_FIELDS = new Set([
   "agent",
   "effort",
   "hooks",
+  "skills",
 ]);
 
 function pass(
@@ -108,17 +109,52 @@ function parseFrontmatter(
   if (endIdx === null) return null;
 
   const fm: Record<string, string> = {};
+  let currentKey = "";
+  let currentValue = "";
+
   for (const line of lines.slice(1, endIdx)) {
     const stripped = line.trim();
     if (!stripped || stripped.startsWith("#")) continue;
+
+    // Check if this is a continuation line (indented under previous key)
+    if (currentKey && (line.startsWith("  ") || line.startsWith("\t"))) {
+      currentValue += " " + stripped;
+      continue;
+    }
+
+    // Flush previous key-value pair
+    if (currentKey) {
+      const unquoted = stripYamlQuotes(currentValue.trim());
+      if (unquoted) fm[currentKey] = unquoted;
+      currentKey = "";
+      currentValue = "";
+    }
+
     const colonIdx = stripped.indexOf(":");
     if (colonIdx !== -1) {
       const key = stripped.slice(0, colonIdx).trim();
       const value = stripped.slice(colonIdx + 1).trim();
-      if (value) fm[key] = value;
+      currentKey = key;
+      currentValue = value;
     }
   }
+  // Flush last key-value pair
+  if (currentKey) {
+    const unquoted = stripYamlQuotes(currentValue.trim());
+    if (unquoted) fm[currentKey] = unquoted;
+  }
+
   return { fm, endIdx };
+}
+
+function stripYamlQuotes(value: string): string {
+  if (
+    (value.startsWith('"') && value.endsWith('"')) ||
+    (value.startsWith("'") && value.endsWith("'"))
+  ) {
+    return value.slice(1, -1);
+  }
+  return value;
 }
 
 async function main() {

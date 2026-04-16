@@ -1,14 +1,12 @@
 # Encoding Patterns
-
 Six patterns for turning interview findings into skill artifacts. Each pattern includes the structure, when to use it, and a real example from the systems-design skills.
 
 ## 1. The "because" pattern
-
 Every opinionated rule gets a rationale sentence. The rationale is what makes taste useful — without it, an agent follows the rule blindly and can't judge edge cases.
 
 **Structure:**
 
-```
+```markdown
 **Rule statement** — Because [rationale]. [Optional: consequence of not following].
 ```
 
@@ -19,7 +17,6 @@ Every opinionated rule gets a rationale sentence. The rationale is what makes ta
 **When to use:** Every concrete default or convention. If you can't write a "because", the opinion might not be strong enough to encode.
 
 ## 2. Comparison tables with decision rules
-
 When a choice depends on context, encode a side-by-side table followed by a clear decision rule. The table shows the trade-offs honestly; the decision rule gives the opinionated default.
 
 **Structure:**
@@ -49,7 +46,6 @@ The D1 vs Neon table compares 8 factors (best for, queries, tenancy, compliance,
 **Important:** Present trade-offs honestly. The table should give each option its real best case. Strawman comparisons ("Option B is bad at everything") are useless and undermine trust. The taste lives in the decision rule and the "when in doubt" tiebreaker, not in rigging the comparison.
 
 ## 3. Anti-patterns with stories
-
 Anti-patterns are taste expressed as "never do this" — but they need a story or consequence to stick. A bare prohibition is weaker than one grounded in a real failure.
 
 **Structure:**
@@ -69,7 +65,6 @@ Anti-patterns are taste expressed as "never do this" — but they need a story o
 **When to use:** When the user has a strong "never" backed by experience. The story turns "don't do this" into "here's what happens when you do."
 
 ## 4. Philosophy files
-
 When 3+ decisions share an underlying principle, extract it to a dedicated reference file. Philosophy files contain the *why* behind a cluster of conventions.
 
 **Structure:**
@@ -95,7 +90,6 @@ Three principles — monolith-first, extract early when the concept is clear, le
 **How many:** 3-5 principles per philosophy file. Fewer than 3 means the principles aren't distinct enough. More than 5 means some are specific conventions masquerading as principles.
 
 ## 5. Domain-specific reference files
-
 Detailed taste for a single topic — conventions, rules, examples — in a focused reference file. These are the workhorses of taste encoding.
 
 **Structure:**
@@ -111,7 +105,6 @@ A file covering table naming (plural snake_case), column naming (snake_case), in
 **Sizing:** Keep under 300 lines. If a reference file grows past this, split by sub-topic.
 
 ## 6. Trade-off tables in decision trees
-
 When a skill's decision tree hits a branch where the right path depends on trade-offs, embed a compact trade-off table at that branch point.
 
 **Structure:**
@@ -129,14 +122,13 @@ When a skill's decision tree hits a branch where the right path depends on trade
 
 **Example** (from `architecture` SKILL.md, tech selection step):
 
-> | Decision | Chose | Rejected | Why |
+> |Decision|Chose|Rejected|Why|
 > |---|---|---|---|
-> | Message passing | CF Queues | Kafka | Queues integrates natively with Workers; Kafka adds ops burden for throughput we don't need |
+> |Message passing|CF Queues|Kafka|Queues integrates natively with Workers; Kafka adds ops burden for throughput we don't need|
 
 **When to use:** At decision points in the skill workflow where the agent needs to make a choice. Keep these compact — full comparisons go in reference files.
 
 ## Weighing trade-offs with the user
-
 Taste encoding isn't just recording what the user says. During the interview, actively weigh pros and cons for decisions where the user might not have considered all angles:
 
 - **Surface trade-offs the user might not see.** "You mentioned always using Neon — have you considered that D1 is significantly cheaper for small single-purpose tools where you don't need RLS?" The goal isn't to change their mind, but to make sure the encoded taste reflects an informed decision.
@@ -147,18 +139,16 @@ Taste encoding isn't just recording what the user says. During the interview, ac
 The result should be taste that's both opinionated *and* well-reasoned — not just a list of preferences, but a set of decisions with clear rationale that an agent can apply confidently and explain when asked.
 
 ## Where each pattern lives
-
-| Pattern | Primary location | Linked from SKILL.md? |
+|Pattern|Primary location|Linked from SKILL.md?|
 |---|---|---|
-| "Because" rationale | Inline in conventions or reference files | When inline in SKILL.md, yes |
-| Comparison table + decision rule | Reference file or SKILL.md (if compact) | Yes, in decision tree or workflow |
-| Anti-pattern with story | Reference files | Summarized in SKILL.md conventions |
-| Philosophy file | `references/philosophy.md` or `references/principles.md` | Yes, in key references table |
-| Domain reference file | `references/<topic>.md` | Yes, in key references table |
-| Trade-off table in decision tree | SKILL.md decision tree | Already in SKILL.md |
+|"Because" rationale|Inline in conventions or reference files|When inline in SKILL.md, yes|
+|Comparison table + decision rule|Reference file or SKILL.md (if compact)|Yes, in decision tree or workflow|
+|Anti-pattern with story|Reference files|Summarized in SKILL.md conventions|
+|Philosophy file|`references/philosophy.md` or `references/principles.md`|Yes, in key references table|
+|Domain reference file|`references/<topic>.md`|Yes, in key references table|
+|Trade-off table in decision tree|SKILL.md decision tree|Already in SKILL.md|
 
 ## Choosing the right pattern
-
 Not every piece of taste uses the same pattern. Match to the shape of the opinion:
 
 - **Single concrete choice** → "because" pattern, inline or in a domain reference

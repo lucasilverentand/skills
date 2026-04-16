@@ -1,12 +1,12 @@
 {
 	"name": "skill-creation",
-	"description": "Toolkit for skill creation and management",
+	"description": "End-to-end toolkit for authoring, publishing, and continuously improving Claude Code skills",
 	"skills": [
 		"./skills/authoring",
-		"./skills/tooling",
 		"./skills/publishing",
 		"./skills/retrospecting",
-		"./skills/taste-encoding"
+		"./skills/taste-encoding",
+		"./skills/tooling"
 	],
 	"author": {
 		"name": "Luca Silverentand",

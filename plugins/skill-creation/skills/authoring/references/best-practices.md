@@ -1,7 +1,6 @@
 # Skill Authoring Best Practices
 
 ## Anti-patterns
-
 - **Explaining common knowledge** — don't describe what a PDF is, what git does, etc.
 - **Duplicating content** — information lives in EITHER SKILL.md OR references, not both
 - **Vague names** — `helper`, `utils`, `tools` tell nothing about what the skill does
@@ -11,8 +10,10 @@
 - **Extraneous files** — no README.md, CHANGELOG.md, or other docs that aren't references
 - **Padding with thin-wrapper tools** — use the `tooling` skill to decide whether a tool earns its place before creating one
 
-## Keeping SKILL.md lean
+## Markdown hygiene
+- **Always tag fenced code blocks with a language** — use the actual language (`yaml`, `bash`, `typescript`, etc.), `markdown` for markdown snippets, or `text` for plain output. Untagged blocks trigger linter warnings and lose syntax highlighting.
 
+## Keeping SKILL.md lean
 Move to references/ when:
 
 - A section is over ~10 lines of detailed documentation

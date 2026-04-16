@@ -1,8 +1,7 @@
 # Skill Structure
 
 ## Directory layout
-
-```
+```text
 skills/<category>/<skill-name>/
 ├── SKILL.md                # how: lean instructions, frontmatter, short decision trees
 ├── tools/                  # (optional) bun scripts the agent can run
@@ -16,18 +15,16 @@ skills/<category>/<skill-name>/
 Only `SKILL.md` is required. Add `tools/`, `references/`, or `examples/` when the skill needs them.
 
 ## Skill locations
-
-| Location   | Path                                     | Scope                         |
-| ---------- | ---------------------------------------- | ----------------------------- |
-| Enterprise | Managed settings                         | All users in the organization |
-| Personal   | `~/.claude/skills/<skill-name>/SKILL.md` | All your projects             |
-| Project    | `.claude/skills/<skill-name>/SKILL.md`   | This project only             |
-| Plugin     | `<plugin>/skills/<skill-name>/SKILL.md`  | Where plugin is enabled       |
+|Location|Path|Scope|
+|---|---|---|
+|Enterprise|Managed settings|All users in the organization|
+|Personal|`~/.claude/skills/<skill-name>/SKILL.md`|All your projects|
+|Project|`.claude/skills/<skill-name>/SKILL.md`|This project only|
+|Plugin|`<plugin>/skills/<skill-name>/SKILL.md`|Where plugin is enabled|
 
 Priority: enterprise > personal > project. Plugin skills use `plugin-name:skill-name` namespacing (no conflicts with other locations).
 
 ## Discovery
-
 Claude Code discovers skills automatically from:
 
 - `.claude/skills/` in the project root
@@ -36,16 +33,14 @@ Claude Code discovers skills automatically from:
 - Plugin `skills/` directories
 
 ## SKILL.md
-
 Rules:
 
 - Must have YAML frontmatter. `description` is recommended for skill discovery; `name` defaults to the directory name if omitted.
-- Keep under 5000 tokens (~500 lines)
+- Keep under 5000 tokens (roughly 300-500 lines depending on density — tokens are the real constraint, lines are a rough proxy)
 - Lead with the workflow — what does the agent do, in what order?
 - Link to references/ for anything needing more than a few lines
 
 ## references/
-
 Detailed documentation loaded on demand. Claude reads these when the SKILL.md points to them.
 
 Rules:
@@ -55,7 +50,6 @@ Rules:
 - One level deep from SKILL.md — don't reference files from within references
 
 ## Progressive disclosure
-
 Claude Code loads skills in three phases:
 
 1. **Metadata** (~100 tokens) — `name` and `description` from frontmatter. Loaded at startup for ALL skills. This is how Claude decides which skill to activate.

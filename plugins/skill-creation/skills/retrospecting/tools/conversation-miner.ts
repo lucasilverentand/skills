@@ -82,8 +82,11 @@ const CORRECTION_PATTERNS = [
 const DISSATISFACTION_PATTERNS = [
   /\b(doesn'?t|does not|didn'?t|did not)\s+(work|compile|build|run|pass)\b/i,
   /\b(still|again)\s+(broken|failing|wrong|not working)\b/i,
-  /\berror|bug|broken|crash/i,
   /\bthis\s+(is|looks)\s+(wrong|broken|off|bad)\b/i,
+  /\byou\s+(broke|messed up|ruined)\b/i,
+  /\b(undo|revert)\s+(that|this|it|the)\b/i,
+  /\bnot\s+what\s+I\s+(expected|wanted|asked)\b/i,
+  /\bwhy\s+(did|does|is)\s+(it|this|that)\s+(still|keep|not)\b/i,
 ];
 
 const TASTE_PATTERNS = [
@@ -103,17 +106,27 @@ async function main() {
   const { resolve, basename } = await import("node:path");
   const { homedir } = await import("node:os");
 
-  // Find the conversation directory
+  // Find the conversation directory.
+  // Assumption: Claude Code stores conversation JSONL files at
+  // ~/.claude/projects/<project-path-with-slashes-replaced-by-dashes>/
+  // This convention may change in future Claude Code versions.
   const projectKey = projectPath.replace(/\//g, "-");
   const conversationsDir = resolve(homedir(), ".claude", "projects", projectKey);
+
+  const { existsSync } = await import("node:fs");
+  if (!existsSync(conversationsDir)) {
+    console.warn(`Warning: conversation directory not found at ${conversationsDir}`);
+    console.warn("Claude Code may store conversations differently on this system, or --project may not point to a valid project root.");
+    process.exit(0);
+  }
 
   let files: string[];
   try {
     files = readdirSync(conversationsDir).filter((f) => f.endsWith(".jsonl"));
   } catch {
-    console.error(`No conversations found at ${conversationsDir}`);
-    console.error("Check that --project points to a valid project root.");
-    process.exit(1);
+    console.warn(`Warning: could not read conversations at ${conversationsDir}`);
+    console.warn("Check that --project points to a valid project root.");
+    process.exit(0);
   }
 
   // Filter by date

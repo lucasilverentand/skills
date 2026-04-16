@@ -18,7 +18,18 @@ const ALLOWED_PROPERTIES = new Set([
   "agent",
   "effort",
   "hooks",
+  "skills",
 ]);
+
+function stripQuotes(value: string): string {
+  if (
+    (value.startsWith('"') && value.endsWith('"')) ||
+    (value.startsWith("'") && value.endsWith("'"))
+  ) {
+    return value.slice(1, -1);
+  }
+  return value;
+}
 
 export function validateSkill(
   skillPath: string
@@ -46,14 +57,14 @@ export function validateSkill(
   for (const line of match[1].split("\n")) {
     const kvMatch = line.match(/^([a-z][a-z0-9-]*)\s*:\s*(.*)/);
     if (kvMatch) {
-      if (currentKey) frontmatter[currentKey] = currentValue.trim();
+      if (currentKey) frontmatter[currentKey] = stripQuotes(currentValue.trim());
       currentKey = kvMatch[1];
       currentValue = kvMatch[2];
     } else if (currentKey && (line.startsWith("  ") || line.startsWith("\t"))) {
       currentValue += " " + line.trim();
     }
   }
-  if (currentKey) frontmatter[currentKey] = currentValue.trim();
+  if (currentKey) frontmatter[currentKey] = stripQuotes(currentValue.trim());
 
   // Check for unexpected properties
   const unexpected = Object.keys(frontmatter).filter(
