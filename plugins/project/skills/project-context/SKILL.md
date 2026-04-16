@@ -5,17 +5,14 @@ allowed-tools: Read Grep Glob Bash Write Edit Agent
 ---
 
 # Project Context
-
 Build and maintain the `.context/` directory — a set of markdown files that give any LLM (Claude, Cursor, Copilot, Windsurf, etc.) the background it needs to work effectively in this codebase. These files are tool-agnostic. Agent-specific files like CLAUDE.md or .cursorrules reference them.
 
 ## Current context
-
 - Repo: !`basename $(git rev-parse --show-toplevel)`
 - Root: !`git rev-parse --show-toplevel`
 - Existing context: !`ls .context/ 2>/dev/null || echo "no .context/ directory"`
 
 ## Decision tree
-
 - What are you doing?
   - **Creating context for a new project** (no `.context/` exists) -> follow "Initial setup" below
   - **Updating existing context** (`.context/` exists) -> follow "Audit and update" below
@@ -25,7 +22,6 @@ Build and maintain the `.context/` directory — a set of markdown files that gi
 ## Initial setup
 
 ### 1. Analyze the project
-
 Run these to understand the codebase:
 
 - `ls` the root and major directories to understand structure
@@ -35,21 +31,19 @@ Run these to understand the codebase:
 - Glob for config files: `**/*.config.*`, `**/tsconfig*`, `biome.json`, `.eslintrc*`, etc.
 
 ### 2. Recommend a context plan
-
 Based on analysis, recommend which documents the project needs. Every project gets `overview.md`. The rest depend on complexity:
 
-| Document | When to include | What it covers |
+|Document|When to include|What it covers|
 |---|---|---|
-| `overview.md` | Always | Architecture, module boundaries, data flow, key decisions |
-| `conventions.md` | Projects with >5 files | Coding standards, naming, error handling, file organization |
-| `glossary.md` | Domain-heavy projects | Business terms, entity definitions, domain relationships |
-| `dependencies.md` | Projects with >3 external deps | Key deps, why chosen, how configured, what for |
-| `<dirname>.md` | Major subdirectories (src/, api/, lib/, etc.) | Subdirectory-specific architecture and conventions |
+|`overview.md`|Always|Architecture, module boundaries, data flow, key decisions|
+|`conventions.md`|Projects with >5 files|Coding standards, naming, error handling, file organization|
+|`glossary.md`|Domain-heavy projects|Business terms, entity definitions, domain relationships|
+|`dependencies.md`|Projects with >3 external deps|Key deps, why chosen, how configured, what for|
+|`<dirname>.md`|Major subdirectories (src/, api/, lib/, etc.)|Subdirectory-specific architecture and conventions|
 
 Present the plan as a checklist and get user confirmation before generating.
 
 ### 3. Generate documents
-
 For each document in the plan:
 
 1. Read the relevant code thoroughly — don't guess, read the actual files
@@ -59,7 +53,6 @@ For each document in the plan:
 Generate `overview.md` first since other documents reference it.
 
 ### 4. Wire up agent files
-
 After generating `.context/`, suggest additions to agent-specific files:
 
 - **CLAUDE.md**: add `See .context/ for project architecture, conventions, and domain knowledge.`
@@ -71,7 +64,6 @@ Don't overwrite existing content — append the pointer or suggest where to add 
 ## Audit and update
 
 ### 1. Diff analysis
-
 Compare the current `.context/` files against the actual codebase:
 
 1. Read each `.context/*.md` file
@@ -79,10 +71,9 @@ Compare the current `.context/` files against the actual codebase:
 3. Identify: **stale** (info contradicts current code), **missing** (new areas with no context), **accurate** (still correct)
 
 ### 2. Report
-
 Present a table:
 
-```
+```text
 | File | Status | What changed |
 |---|---|---|
 | overview.md | Stale | New api/ module added, auth rewritten |
@@ -91,7 +82,6 @@ Present a table:
 ```
 
 ### 3. Update
-
 For each stale or missing item:
 
 1. Read the relevant current code
@@ -99,7 +89,6 @@ For each stale or missing item:
 3. Show the diff of what changed
 
 ## Single document
-
 When the user asks for a specific document:
 
 1. Determine which document type from the table in "Initial setup"
@@ -108,7 +97,6 @@ When the user asks for a specific document:
 4. If `.context/` doesn't exist yet, create it and also generate `overview.md` as a baseline
 
 ## Writing principles
-
 Context documents serve LLMs, not humans. This changes how you write:
 
 - **Be explicit about relationships** — "OrderService calls PaymentGateway.charge() which calls Stripe" is better than "OrderService handles payments"
@@ -117,7 +105,6 @@ Context documents serve LLMs, not humans. This changes how you write:
 - **Keep it current or delete it** — wrong context is worse than no context. If something is stale and you can't verify it, remove it rather than leaving potentially wrong information
 
 ## Key references
-
-| File | What it covers |
+|File|What it covers|
 |---|---|
-| `references/document-formats.md` | Templates and structure for each document type |
+|`references/document-formats.md`|Templates and structure for each document type|

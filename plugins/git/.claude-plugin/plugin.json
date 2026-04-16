@@ -1,18 +1,18 @@
 {
-  "name": "git",
-  "description": "Git workflow toolkit",
-  "skills": [
-    "./skills/cleaning-repos",
-    "./skills/creating-commits",
-    "./skills/resolving-conflicts"
-  ],
-  "commands": [
-    "./commands/create-commit.md",
-    "./commands/clean-repo.md",
-    "./commands/rebase.md"
-  ],
-  "author": {
-    "name": "Luca Silverentand",
-    "email": "dev@lucasilverentand.com"
-  }
+	"name": "git",
+	"description": "Git workflow toolkit",
+	"skills": [
+		"./skills/cleaning-repos",
+		"./skills/creating-commits",
+		"./skills/resolving-conflicts"
+	],
+	"commands": [
+		"./commands/clean-repo.md",
+		"./commands/create-commit.md",
+		"./commands/rebase.md"
+	],
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	}
 }

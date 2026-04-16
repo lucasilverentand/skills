@@ -6,7 +6,6 @@ allowed-tools: Read Bash Glob Grep Edit Agent AskUserQuestion
 Clean up this repo and leave it in a pristine state.
 
 ## Current state
-
 - Branch: !`git branch --show-current`
 - Status: !`git status --short`
 - Stashes: !`git stash list`

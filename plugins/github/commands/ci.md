@@ -6,7 +6,6 @@ allowed-tools: Read Bash Glob Grep Edit Agent
 Check CI status for the current branch and take action.
 
 ## Current state
-
 - Branch: !`git branch --show-current`
 - PR: !`gh pr view --json number,url --jq '"\(.url)"' 2>/dev/null || echo "no PR"`
 - Latest run: !`gh run list --branch $(git branch --show-current) --limit 1 --json status,conclusion,name,databaseId --jq '.[0] | "\(.name): \(.status) \(.conclusion // "")" + " (ID: \(.databaseId))"' 2>/dev/null || echo "no runs found"`

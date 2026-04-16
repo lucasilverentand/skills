@@ -7,7 +7,6 @@ allowed-tools: Read Write Bash Glob Grep
 # Design Options
 
 ## Decision Tree
-
 - What are you doing?
   - **Generating design options for a feature** -> follow "Generating" below
   - **Adding a variant to an existing file** -> read the file, add a new `<section data-variant>`, increment the variant count in the switcher
@@ -16,7 +15,6 @@ allowed-tools: Read Write Bash Glob Grep
 ## Generating
 
 ### 1. Understand the feature
-
 Ask if unclear:
 
 1. What's the feature or component? (e.g. "pricing card", "settings page", "onboarding flow")
@@ -25,19 +23,16 @@ Ask if unclear:
 4. How many variants? Default to 3. Can be any number (2–6+).
 
 ### 2. Decide the scope
-
-| Scope | When | Skeleton approach |
+|Scope|When|Skeleton approach|
 |---|---|---|
-| **Component** | A card, button group, form, modal, nav bar | Render the component with realistic placeholder content, surrounded by a subtle container |
-| **Partial layout** | A section of a page — hero, feature grid, sidebar + content | Skeleton the surrounding page chrome, fully render the focus area |
-| **Full screen** | An entire view — dashboard, settings, landing page | Render everything with skeleton placeholders for content areas |
+|**Component**|A card, button group, form, modal, nav bar|Render the component with realistic placeholder content, surrounded by a subtle container|
+|**Partial layout**|A section of a page — hero, feature grid, sidebar + content|Skeleton the surrounding page chrome, fully render the focus area|
+|**Full screen**|An entire view — dashboard, settings, landing page|Render everything with skeleton placeholders for content areas|
 
 ### 3. Write the HTML
-
 Produce a **single self-contained HTML file** — all CSS and JS inline, no external dependencies. Follow the structure and conventions below exactly.
 
 #### File structure
-
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -62,7 +57,6 @@ Produce a **single self-contained HTML file** — all CSS and JS inline, no exte
 ```
 
 #### Switcher bar
-
 Hidden by the serve tool but required for variant metadata. One button per variant — label with A, B, C, D, E, F etc.
 
 ```html
@@ -77,25 +71,23 @@ Hidden by the serve tool but required for variant metadata. One button per varia
 ```
 
 #### Skeleton elements
-
 Use these CSS classes to represent placeholder content:
 
-| Class | Renders as |
+|Class|Renders as|
 |---|---|
-| `.skel` | Generic gray rounded block (set width/height inline) |
-| `.skel-text` | Text-line placeholder (full width, 12px tall, stacked with gap) |
-| `.skel-text.short` | Short text line (60% width) |
-| `.skel-text.heading` | Heading placeholder (16px tall, 40% width) |
-| `.skel-avatar` | Circle (40×40) |
-| `.skel-img` | Image placeholder rectangle with subtle icon |
-| `.skel-button` | Button-shaped placeholder |
-| `.skel-nav` | Horizontal nav bar placeholder |
-| `.skel-sidebar` | Vertical sidebar placeholder |
+|`.skel`|Generic gray rounded block (set width/height inline)|
+|`.skel-text`|Text-line placeholder (full width, 12px tall, stacked with gap)|
+|`.skel-text.short`|Short text line (60% width)|
+|`.skel-text.heading`|Heading placeholder (16px tall, 40% width)|
+|`.skel-avatar`|Circle (40×40)|
+|`.skel-img`|Image placeholder rectangle with subtle icon|
+|`.skel-button`|Button-shaped placeholder|
+|`.skel-nav`|Horizontal nav bar placeholder|
+|`.skel-sidebar`|Vertical sidebar placeholder|
 
 Skeleton elements should use a subtle pulse animation to feel alive.
 
 #### Design conventions
-
 - **Realistic content in the focus area** — don't skeleton the part being designed, use actual text, icons (inline SVG), and plausible data
 - **Skeleton everything else** — surrounding chrome, adjacent sections, background content
 - **Each variant should be meaningfully different** — not just color swaps. Vary layout, hierarchy, density, interaction patterns
@@ -105,7 +97,6 @@ Skeleton elements should use a subtle pulse animation to feel alive.
 - **Keyboard navigation** — left/right arrow keys to switch variants, number keys 1-9 for direct access
 
 #### CSS foundations
-
 Always include these base styles (customize per feature):
 
 ```css
@@ -148,7 +139,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 ```
 
 #### JavaScript
-
 ```js
 document.addEventListener('DOMContentLoaded', () => {
   const buttons = document.querySelectorAll('.switcher-btn');
@@ -186,7 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
 ```
 
 ### 4. Save and present
-
 Save to a descriptive filename: `{feature-name}-design-options.html`
 
 Default location: current working directory, or a `designs/` folder if one exists.

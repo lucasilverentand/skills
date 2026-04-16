@@ -6,7 +6,6 @@ allowed-tools: Read Bash Glob Grep Edit AskUserQuestion
 Rebase the current branch onto the target branch, resolving any conflicts that arise.
 
 ## Current state
-
 - Branch: !`git branch --show-current`
 - Status: !`git status --short`
 - Rebase in progress: !`test -d "$(git rev-parse --git-dir)/rebase-merge" -o -d "$(git rev-parse --git-dir)/rebase-apply" && echo "yes" || echo "no"`

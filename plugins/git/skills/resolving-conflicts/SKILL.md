@@ -5,11 +5,9 @@ allowed-tools: Read Bash Glob Grep Edit AskUserQuestion
 ---
 
 # Resolving Conflicts
-
 Resolve merge conflicts intelligently by understanding the intent behind both sides of each conflict.
 
 ## Current context
-
 - Branch: !`git branch --show-current`
 - Status: !`git status --short`
 - Rebase in progress: !`test -d "$(git rev-parse --git-dir)/rebase-merge" -o -d "$(git rev-parse --git-dir)/rebase-apply" && echo "yes" || echo "no"`
@@ -17,7 +15,6 @@ Resolve merge conflicts intelligently by understanding the intent behind both si
 - Cherry-pick in progress: !`test -f "$(git rev-parse --git-dir)/CHERRY_PICK_HEAD" && echo "yes" || echo "no"`
 
 ## Decision tree
-
 - What's the situation?
   - **Conflicts exist right now** (rebase/merge/cherry-pick in progress with unresolved conflicts) -> go to "Resolve conflicts"
   - **User wants to rebase onto another branch** (clean working tree, no operation in progress) -> go to "Start rebase"
@@ -27,11 +24,9 @@ Resolve merge conflicts intelligently by understanding the intent behind both si
 ## Start rebase
 
 ### 1. Determine the target
-
 Default target is `main` (or `master` if that's what the repo uses). If the user specified a branch, use that.
 
 ### 2. Fetch and rebase
-
 ```bash
 git fetch origin
 ```
@@ -44,7 +39,6 @@ git rebase origin/<target>
 - **Conflicts** -> go to "Resolve conflicts"
 
 ## Start merge
-
 ```bash
 git fetch origin
 ```
@@ -59,7 +53,6 @@ git merge origin/<target>
 ## Resolve conflicts
 
 ### 1. Inventory conflicted files
-
 ```bash
 git diff --name-only --diff-filter=U
 ```
@@ -69,11 +62,9 @@ List all conflicted files. Process them one at a time.
 ### 2. For each conflicted file
 
 #### a. Read the conflict
-
 Read the file to see the conflict markers (`<<<<<<<`, `=======`, `>>>>>>>`). Understand what each side changed.
 
 #### b. Understand intent
-
 For each conflict, gather context:
 
 - `git log --oneline -5 -- <file>` on the current branch — what recent changes were made and why
@@ -81,7 +72,6 @@ For each conflict, gather context:
 - Read surrounding code for context about what the conflicting section does
 
 #### c. Classify the conflict
-
 - **Clear-cut: one side only added** — the other side didn't touch those lines. Take the addition.
 - **Clear-cut: one side deleted, other unchanged** — the deletion wins (it was intentional).
 - **Clear-cut: non-overlapping edits** — both sides changed different things in the same region. Combine them.
@@ -90,7 +80,6 @@ For each conflict, gather context:
 - **Ambiguous: both sides made substantive, different changes to the same lines** — needs human judgment.
 
 #### d. Resolve
-
 For **clear-cut** conflicts:
 
 - Edit the file to remove conflict markers and apply the resolution
@@ -111,7 +100,6 @@ For **ambiguous** conflicts:
 - Apply the chosen resolution, edit the file, and stage it
 
 ### 3. Continue the operation
-
 After all conflicts in the current round are resolved:
 
 ```bash
@@ -125,17 +113,15 @@ If this produces **more conflicts** (common during rebase when replaying multipl
 If `git rebase --continue` needs a commit message, use the original commit message — don't modify it unless the resolution changed the commit's intent.
 
 ### 4. Repeat until done
-
 Keep resolving and continuing until the operation completes. Track progress:
 
-```
+```text
 Resolving commit 3/7: fix(auth): handle token expiry
 ```
 
 ## Finish
 
 ### Show the result
-
 ```bash
 git log --oneline -10
 ```
@@ -146,7 +132,6 @@ Show what the branch looks like after the operation. Summarize:
 - Which commits were replayed (for rebase)
 
 ### Offer to push
-
 If the branch has a remote tracking branch and this was a rebase (which rewrites history):
 
 Use `AskUserQuestion`:
@@ -159,7 +144,6 @@ Always use `--force-with-lease` over `--force` — it's safer because it fails i
 For merges (which don't rewrite history), offer a regular `git push` instead.
 
 ## Aborting
-
 If the user wants to stop mid-resolution, or if the conflicts are too complex:
 
 ```bash

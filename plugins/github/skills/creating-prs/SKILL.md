@@ -5,22 +5,18 @@ allowed-tools: Read Bash Glob Grep Edit Agent AskUserQuestion
 ---
 
 # Creating PRs
-
 Use this skill proactively when work on a feature branch is done and committed. A branch with commits that hasn't been turned into a PR is unfinished work. Always confirm with the user before actually creating the PR.
 
 ## Current context
-
 - Branch: !`git branch --show-current`
 - Remote: !`git remote get-url origin 2>/dev/null || echo "no remote"`
 
 ## Decision tree
-
 - What are you doing?
   - **Opening a PR for the current branch** -> follow the steps below
   - **On main/master** -> nothing to open a PR for, tell the user
 
 ## Step 1: Check if a PR already exists
-
 ```bash
 gh pr view --json number,title,url 2>/dev/null
 ```
@@ -28,7 +24,6 @@ gh pr view --json number,title,url 2>/dev/null
 If a PR already exists, tell the user and show the URL. Don't create a duplicate.
 
 ## Step 2: Rebase onto target branch
-
 Always rebase before opening a PR to keep history linear.
 
 Determine the target branch — usually `main`, fall back to `master`:
@@ -48,7 +43,6 @@ If the rebase has conflicts:
 3. For non-obvious conflicts, stop and ask the user — don't guess at conflict resolution
 
 ## Step 3: Check for project conventions
-
 Before writing the PR, look for guidance on how this project handles PRs:
 
 1. `CONTRIBUTING.md` or `CONTRIBUTING` in the repo root
@@ -59,7 +53,6 @@ Before writing the PR, look for guidance on how this project handles PRs:
 Follow any conventions found. Project-specific rules override the defaults below.
 
 ## Step 4: Understand the changes
-
 ```bash
 git log --oneline main..HEAD
 ```
@@ -73,7 +66,6 @@ Read the commit messages carefully — they contain the what and why. The PR des
 For larger branches, read key changed files to understand the full picture.
 
 ## Step 5: Determine the title style
-
 Check existing PR titles for the repo to match the convention:
 
 ```bash
@@ -89,7 +81,6 @@ Match whatever style is used in the project:
 Keep titles under 70 characters. They should communicate the purpose of the whole branch.
 
 ## Step 6: Push the branch
-
 ```bash
 git push -u origin HEAD
 ```
@@ -101,7 +92,6 @@ git push --force-with-lease origin HEAD
 ```
 
 ## Step 7: Decide draft vs. ready
-
 Open as a **draft** when:
 
 - Work is still in progress but you want early visibility or CI feedback
@@ -113,7 +103,6 @@ Open as **ready for review** when the work is complete, tests pass, and there's 
 When in doubt, default to draft — it's easy to mark ready later.
 
 ## Step 8: Create the PR
-
 If a PR template exists, fill it out. Otherwise use this structure:
 
 Add `--draft` if opening as a draft (see step 7).
@@ -151,9 +140,7 @@ Guidelines for the body:
 - Don't list every file changed — that's what the diff tab is for
 
 ## Step 9: Monitor CI
-
 After creating the PR, use the `monitoring-ci` skill to watch CI in the background. It will diagnose and fix any failures automatically, then re-watch until green.
 
 ### If gh is unavailable
-
 If `gh` is not installed or auth fails, print the branch name and remote URL so the user can create the PR manually.

@@ -5,16 +5,13 @@ allowed-tools: Read Bash Glob Grep Edit
 ---
 
 # Creating Commits
-
 Use this skill proactively whenever you finish implementing something — don't wait for the user to ask. After completing a task, check `git status` and if there are uncommitted changes, commit them using this workflow. Clean commits after each piece of work keeps the repo history readable and reviewable.
 
 ## Current context
-
 - Branch: !`git branch --show-current`
 - Repo: !`basename $(git rev-parse --show-toplevel)`
 
 ## Decision tree
-
 - What are you doing?
   - **Committing current changes** -> are the changes focused on one concern?
     - **Yes, one concern** -> follow "Single commit" below
@@ -24,7 +21,6 @@ Use this skill proactively whenever you finish implementing something — don't 
   - **Cleaning up a repo** (messy working tree, many unrelated changes) -> follow "Repo cleanup" below
 
 ## Commit scope discipline
-
 Every commit should touch **one logical concern**. If you find yourself needing "and" in the subject line, split it. Examples of clean scope:
 
 - Adding a new API endpoint (route + handler + types)
@@ -43,7 +39,6 @@ When in doubt, fewer larger commits are better than many trivial ones. Don't spl
 ## Single commit
 
 ### 1. Understand the changes
-
 Run these in parallel:
 
 - `git status` — see what's tracked, staged, untracked
@@ -53,7 +48,6 @@ Run these in parallel:
 Read changed files if you need more context. Don't commit blindly — understand what the changes do and why.
 
 ### 2. Stage the changes
-
 Stage files by name — avoid `git add -A` or `git add .` which can pull in secrets or binaries. If there are untracked files, decide whether they belong in this commit or should be ignored.
 
 Never stage files that look like secrets (`.env`, credentials, tokens, private keys). Warn the user if they ask to commit these.
@@ -61,10 +55,9 @@ Never stage files that look like secrets (`.env`, credentials, tokens, private k
 ### 3. Write the message
 
 #### Subject line
-
 Short, snappy, conventional commit format. Under 50 characters is ideal, 72 is the hard max.
 
-```
+```text
 type(scope): what changed
 ```
 
@@ -86,10 +79,9 @@ Bad subjects (too long, too vague, describes files not intent):
 - `feat(api): add new webhook endpoint for processing incoming events from third-party services` (way too long)
 
 #### Body
-
 The body has two jobs — **what changed** and **why**.
 
-```
+```text
 <blank line after subject>
 What changed — a brief summary of the concrete changes. What files,
 what was added/removed/modified, what behavior is different. A reader
@@ -103,7 +95,6 @@ the part that's invisible in the diff.
 Skip the body only for truly trivial changes (typo fix, version bump). Everything else gets a body.
 
 #### Format
-
 Always use a heredoc:
 
 ```bash
@@ -119,19 +110,15 @@ EOF
 ```
 
 ### 4. Verify
-
 Run `git status` after committing to confirm the working tree is clean or has only the expected remaining changes.
 
 ## Multi-commit split
-
 Use this when the working tree has unrelated changes mixed together.
 
 ### 1. Analyze the changeset
-
 Run `git diff` (and `git diff --staged`) to see all changes. Group them by logical concern — apply the scope discipline rules above. Each group becomes one commit.
 
 ### 2. Plan the commit order
-
 Order commits so dependencies come first:
 
 - Refactor before feature (the refactor enables the feature)
@@ -141,7 +128,6 @@ Order commits so dependencies come first:
 Present the plan to the user before starting — list the planned commits with their types, scopes, and subject lines.
 
 ### 3. Stage and commit each group
-
 For each planned commit:
 
 1. Stage only the files for this group: `git add <specific files>`
@@ -150,15 +136,12 @@ For each planned commit:
 4. Run `git status` to confirm remaining changes are as expected
 
 ### 4. Final check
-
 Run `git log --oneline -N` (N = number of commits created) to show the result. The sequence should read as a coherent narrative.
 
 ## Repo cleanup
-
 Use this when asked to "clean up" a repo, or when the working tree is a mess of interleaved changes across many files. This is the most rigorous mode — commits are split at the **line level**, not just the file level.
 
 ### 1. Full inventory
-
 Run `git diff` to get the complete picture. For each changed file, read the diff carefully and annotate which lines belong to which logical concern. A single file often contains changes for multiple concerns:
 
 - A function rename (refactor) + a bug fix in the same function (fix) -> two concerns
@@ -166,12 +149,11 @@ Run `git diff` to get the complete picture. For each changed file, read the diff
 - Whitespace/formatting changes mixed with logic changes -> two concerns
 
 ### 2. Build a commit plan
-
 Group every changed line into a logical concern. Each concern becomes a commit. Be granular — the goal is that every commit in the resulting history is independently reviewable and tells one story.
 
 Present the plan as a table:
 
-```
+```text
 | # | Type     | Scope   | Subject                        | Files (lines)                        |
 |---|----------|---------|--------------------------------|--------------------------------------|
 | 1 | refactor | auth    | extract token validation       | auth.ts (12-45), utils.ts (3-8)      |
@@ -182,7 +164,6 @@ Present the plan as a table:
 Wait for user approval before proceeding.
 
 ### 3. Line-level staging
-
 For each commit, use `git add -p` or targeted approaches to stage only the exact lines for that concern:
 
 - **Whole files** that belong entirely to one concern: `git add <file>`
@@ -196,7 +177,6 @@ For each commit, use `git add -p` or targeted approaches to stage only the exact
 This is tedious but produces a clean history. Take it one commit at a time.
 
 ### 4. Commit each group
-
 For each planned commit, after staging the right lines:
 
 1. Verify with `git diff --staged` that only the intended changes are staged
@@ -205,5 +185,4 @@ For each planned commit, after staging the right lines:
 4. `git diff` to confirm remaining unstaged changes are what you expect
 
 ### 5. Final check
-
 Run `git log --oneline -N` and `git status` to show the result. The working tree should be clean (or have only intentionally uncommitted files). The log should read as a clean, reviewable history.

@@ -1,17 +1,17 @@
 {
-  "name": "github",
-  "description": "GitHub workflow toolkit",
-  "skills": [
-    "./skills/creating-prs",
-    "./skills/monitoring-ci"
-  ],
-  "commands": [
-    "./commands/create-draft-pr.md",
-    "./commands/create-pr.md",
-    "./commands/ci.md"
-  ],
-  "author": {
-    "name": "Luca Silverentand",
-    "email": "dev@lucasilverentand.com"
-  }
+	"name": "github",
+	"description": "GitHub workflow toolkit",
+	"skills": [
+		"./skills/creating-prs",
+		"./skills/monitoring-ci"
+	],
+	"commands": [
+		"./commands/ci.md",
+		"./commands/create-draft-pr.md",
+		"./commands/create-pr.md"
+	],
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	}
 }

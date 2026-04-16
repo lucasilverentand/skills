@@ -1,9 +1,7 @@
 # Document Formats
-
 Templates for each `.context/` document type. These are starting structures — adapt sections based on what's actually relevant to the project.
 
 ## overview.md
-
 The single most important context file. An LLM reading only this file should understand the project's shape.
 
 ```markdown
@@ -48,7 +46,6 @@ What's actively being worked on, what's stable, what's deprecated.
 ```
 
 ## conventions.md
-
 Patterns and standards that code in this project should follow.
 
 ```markdown
@@ -99,7 +96,6 @@ Things to explicitly avoid and why:
 ```
 
 ## glossary.md
-
 Domain terms that have specific meaning in this project.
 
 ```markdown
@@ -132,7 +128,6 @@ How the core domain objects relate to each other:
 ```
 
 ## dependencies.md
-
 External libraries and services the project relies on.
 
 ```markdown
@@ -167,7 +162,6 @@ Where dependency configuration lives and what the non-obvious settings do.
 ```
 
 ## Subdirectory files (`<dirname>.md`)
-
 For major subdirectories that need their own context. Named after the directory: `api.md`, `src.md`, `packages.md`, etc.
 
 ```markdown
