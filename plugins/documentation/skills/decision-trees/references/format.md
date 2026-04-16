@@ -1,11 +1,9 @@
 # Decision Tree Format
 
 ## Syntax
-
 Decision trees use indented markdown bullet lists. Three node types:
 
 ### Questions (plain text)
-
 The decision point. Written as a question or observation prompt.
 
 ```markdown
@@ -13,7 +11,6 @@ The decision point. Written as a question or observation prompt.
 ```
 
 ### Conditions (bold text)
-
 The branches from a question. Must be mutually exclusive at each level.
 
 ```markdown
@@ -23,7 +20,6 @@ The branches from a question. Must be mutually exclusive at each level.
 ```
 
 ### Actions (after `->` arrow)
-
 What to do when a condition matches. Can be inline or point to a section/file.
 
 ```markdown
@@ -31,7 +27,6 @@ What to do when a condition matches. Can be inline or point to a section/file.
 ```
 
 ## Full example
-
 ```markdown
 - Is the deployment failing?
   - **Yes, during build** -> what's the build error?
@@ -47,26 +42,23 @@ What to do when a condition matches. Can be inline or point to a section/file.
 ```
 
 ## Nesting rules
-
 - **Max depth: 4 levels.** Root question → condition → sub-question → condition → action. If you need a 5th level, split into a sub-tree and link to it.
 - **Every condition set needs a fallback.** Add "**Something else**", "**None of the above**", or "**Not sure**" as the last sibling.
 - **Conditions at the same level must be mutually exclusive.** If two could match simultaneously, restructure — either make conditions more specific or add a disambiguating question above.
 
 ## Writing conditions
-
 Good conditions are observable — the reader can evaluate them right now:
 
-| Observable (good)                         | Unobservable (bad)         |
-| ----------------------------------------- | -------------------------- |
-| `curl /health` returns 503                | The service is unhealthy   |
-| The error message contains "ECONNREFUSED" | There's a connection issue |
-| `git status` shows uncommitted changes    | The repo is dirty          |
-| The file has more than 500 lines          | The file is too large      |
+|Observable (good)|Unobservable (bad)|
+|---|---|
+|`curl /health` returns 503|The service is unhealthy|
+|The error message contains "ECONNREFUSED"|There's a connection issue|
+|`git status` shows uncommitted changes|The repo is dirty|
+|The file has more than 500 lines|The file is too large|
 
 When a condition requires running a command, include the command inline so agents can execute it and humans know exactly what to check.
 
 ## Writing actions
-
 Actions at leaf nodes must be self-contained. Include:
 
 1. **What to do** — the specific action, not a category of action
@@ -78,7 +70,6 @@ Actions at leaf nodes must be self-contained. Include:
 ```
 
 ## Linking sub-trees
-
 When a branch is complex enough to warrant its own tree, link to it rather than inlining:
 
 ```markdown
@@ -88,7 +79,6 @@ When a branch is complex enough to warrant its own tree, link to it rather than 
 The linked tree should be self-contained — it has its own root question and doesn't assume the reader remembers where they came from.
 
 ## Agent-specific annotations
-
 For conditions that require judgment, add a parenthetical hint that includes both **what matches** and **what rules it out** from siblings:
 
 ```markdown
@@ -99,7 +89,6 @@ For conditions that require judgment, add a parenthetical hint that includes bot
 These hints serve the pro/con evaluation protocol — agents must argue for _and_ against each sibling before committing. When the condition itself names what would contradict it, the agent has a concrete check to perform rather than having to invent counter-evidence on its own.
 
 ### Writing conditions that support pro/con evaluation
-
 Each condition should make it easy to argue against it, not just for it. This means:
 
 - **Include distinguishing signals** — what would you see if this condition is true that you wouldn't see for any sibling? "The build fails at the `tsc` step" is better than "There's a TypeScript error" because it tells you exactly where to look.

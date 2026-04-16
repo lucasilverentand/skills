@@ -1,12 +1,10 @@
 # Mermaid C4 Templates
-
 Uses `flowchart` (not `C4Context`) for universal rendering (GitHub, Obsidian, VS Code, Notion).
 
 ## Styling
-
 Paste at the bottom of any diagram:
 
-```
+```text
 classDef person fill:#08427b,stroke:#052e56,color:#fff
 classDef container fill:#1168bd,stroke:#0b4884,color:#fff
 classDef db fill:#1168bd,stroke:#0b4884,color:#fff
@@ -17,7 +15,6 @@ classDef queue fill:#438dd5,stroke:#2a6496,color:#fff
 Shapes: Person `(( ))`, Data store `[( )]`, Queue `[/ /]`, System boundary `subgraph` with dashed border.
 
 ## Level 1 -- System Context
-
 ```mermaid
 flowchart TB
   Customer(("Customer<br/>[Person]<br/>Buys products"))
@@ -33,7 +30,6 @@ flowchart TB
 ```
 
 ## Level 2 -- Container
-
 ```mermaid
 flowchart TB
   Customer(("Customer"))
@@ -54,7 +50,6 @@ flowchart TB
 ```
 
 ## Level 3 -- Component
-
 ```mermaid
 flowchart TB
   Web["Storefront Web"]
@@ -76,7 +71,6 @@ flowchart TB
 ```
 
 ## Tips
-
 - Labels: 3 lines max per node. Protocol on the arrow, not the node.
 - Max ~15 elements per diagram. More = split or zoom out.
 - Reorder nodes to reduce arrow crossings. Try `TB` (default) or `LR` for wide systems.

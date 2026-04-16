@@ -5,15 +5,12 @@ allowed-tools: Read Grep Glob Bash Write Edit AskUserQuestion
 ---
 
 # Write a Design Doc
-
 Assembles a system design into a structured document that engineers and LLMs can understand, implement from, and maintain. This skill is about the DOCUMENT — structure, sections, writing quality, completeness. The intellectual work of decomposing systems, analyzing trade-offs, modeling data, and designing APIs happens in other skills; this skill pulls their outputs together into a coherent, readable artifact.
 
 ## Current context
-
 - Existing architecture artifacts: !`ls .context/architecture/ 2>/dev/null || echo "none yet"`
 
 ## Decision tree
-
 - What does the user need?
   - **Writing a full design doc for a new system** → follow the full process below
   - **Updating an existing design doc** → read the current doc, apply changes, preserve the existing structure
@@ -22,27 +19,21 @@ Assembles a system design into a structured document that engineers and LLMs can
   - **User wants to review an existing doc** → hand off to `design-review`
 
 ## Document structure
-
 Every design doc has these 10 sections. Each one has content or an explicit "N/A — reason."
 
 ### 1. Summary
-
 2-3 sentences: what is being built, who it's for, why now. A reader should know whether this doc is relevant to them after reading this paragraph alone.
 
 ### 2. Requirements
-
 Functional and non-functional. If requirements were gathered with the `requirements` skill, link to that output rather than duplicating. Otherwise, capture them inline. Non-functional requirements need concrete targets: "p99 latency < 200ms" not "fast."
 
 ### 3. High-level architecture
-
 Components and how they communicate. Include a Mermaid diagram — delegate to `c4-diagrams` if the system has more than 4-5 components. Name concrete technology for each component: "Orders Worker (Cloudflare Workers, Hono)" not "Orders Service."
 
 ### 4. Data model
-
 Entities, relationships, ownership, storage engine. If the model is detailed, link to the `data-modeling` output rather than duplicating the full schema here. At minimum, show the core entities and their relationships.
 
 ### 5. Key flows
-
 Walk 2-4 important request paths end-to-end. At least one happy path and one failure/error path. Use numbered steps, not prose paragraphs:
 
 1. Client sends POST /orders with cart_id
@@ -50,31 +41,25 @@ Walk 2-4 important request paths end-to-end. At least one happy path and one fai
 3. ...
 
 ### 6. API surface
-
 Main endpoints or operations. If the API is substantial (>5 endpoints), delegate to `api-design` and link to its output in `.context/architecture/api/`. Here, show only the most important operations with their signatures.
 
 ### 7. Non-functional story
-
 How the design meets EACH non-functional requirement from section 2. Be specific and tie back to concrete mechanisms: "handles 5k req/s because Workers auto-scale per-isolate and D1 read replicas serve reads from edge" — not "scales well."
 
 ### 8. Trade-offs
-
-| Decision | Chose | Rejected | Why |
+|Decision|Chose|Rejected|Why|
 |---|---|---|---|
-| ... | ... | ... | ... |
+|...|...|...|...|
 
 Every non-obvious choice gets a row. Give rejected options their real best case — strawman comparisons are useless.
 
 ### 9. Open questions
-
 What's unclear, what needs input from others, what was deliberately punted. Mark each with who needs to answer and a rough deadline if applicable.
 
 ### 10. Next steps
-
 Concrete first actions to de-risk the design. Not "implement the system" but "set up the D1 schema and seed test data to validate the query patterns."
 
 ## Writing principles
-
 These are non-negotiable. A design doc that violates these is worse than no doc at all.
 
 - **Write for a junior engineer or a weaker LLM model.** The next reader may not have been in the room when the design was discussed. They need to understand the system from the doc alone.
@@ -86,7 +71,6 @@ These are non-negotiable. A design doc that violates these is worse than no doc 
 - **Add a Glossary section** when the doc uses 5+ specialized terms. Place it at the end, keep it alphabetical and skimmable.
 
 ## Output
-
 Write the finished doc to `.context/architecture/<name>.md`. After writing:
 
 1. If `.context/overview.md` exists, add a pointer to the new doc from it
@@ -94,7 +78,6 @@ Write the finished doc to `.context/architecture/<name>.md`. After writing:
 3. If the user will build next, suggest concrete first implementation steps
 
 ## Verification checklist
-
 Before considering the doc done, verify:
 
 - [ ] Does every section have content or an explicit "N/A — reason"?
@@ -105,19 +88,17 @@ Before considering the doc done, verify:
 - [ ] Can a reader who missed all design discussions implement from this doc?
 
 ## Cross-references
-
-| When | Use |
+|When|Use|
 |---|---|
-| Need to gather requirements first | `requirements` |
-| Need to do architecture thinking | `architecture` |
-| Need a data model | `data-modeling` |
-| API surface is substantial | `api-design` |
-| Need a diagram | `c4-diagrams` |
-| Decisions deserve individual records | `write-adr` |
-| Want to review the finished doc | `design-review` |
+|Need to gather requirements first|`requirements`|
+|Need to do architecture thinking|`architecture`|
+|Need a data model|`data-modeling`|
+|API surface is substantial|`api-design`|
+|Need a diagram|`c4-diagrams`|
+|Decisions deserve individual records|`write-adr`|
+|Want to review the finished doc|`design-review`|
 
 ## Key references
-
-| File | Covers |
+|File|Covers|
 |---|---|
-| `references/design-template.md` | Filled-in example of the design doc structure |
+|`references/design-template.md`|Filled-in example of the design doc structure|

@@ -5,15 +5,12 @@ allowed-tools: Read Grep Glob Bash Write Edit AskUserQuestion
 ---
 
 # API Design
-
 Turns "we need an API for X" into a concrete spec — protocol, resources, schemas, and the cross-cutting concerns that actually bite in production.
 
 ## Current context
-
 - Existing API specs: !`ls .context/architecture/api/ 2>/dev/null || echo "(none yet)"`
 
 ## Decision tree
-
 - What kind of API does the user need?
   - **Public HTTP for external clients or humans** -> **REST** (or REST+JSON). Simple, cacheable, works in every language and tool. Default choice.
   - **Rich graph queries with client-driven field selection** -> **GraphQL**. Good when clients need flexible queries and would otherwise build N endpoints.
@@ -25,7 +22,6 @@ Turns "we need an API for X" into a concrete spec — protocol, resources, schem
 ## Design flow
 
 ### 1. Understand the shape of the problem
-
 Before picking a protocol or drawing endpoints, ask (use `AskUserQuestion` for the non-obvious ones):
 
 1. **Who calls this API?** Browsers, mobile apps, other services, third parties, oncall humans with curl?
@@ -36,19 +32,17 @@ Before picking a protocol or drawing endpoints, ask (use `AskUserQuestion` for t
 6. **Is there an existing API style the client follows?** Consistency with a sibling service is worth a lot.
 
 ### 2. Pick the protocol — and say why in plain English
-
 Write the protocol choice with a one-paragraph justification. A weak reader should understand _why_ without knowing the trade-offs in advance. Example:
 
 > **REST over HTTPS with JSON payloads.** Chosen because the primary clients are the storefront web app (browser) and a third-party partner dashboard, both of which work best with standard HTTP tooling and caching. GraphQL was considered but would add a server-side schema layer for no current benefit.
 
 ### 3. Model the resources (REST)
-
 List resources and operations. Keep it simple:
 
-| Resource    | Operations                                                     | Notes                                         |
-| ----------- | -------------------------------------------------------------- | --------------------------------------------- |
-| `orders`    | `POST`, `GET /:id`, `GET ?customer_id=...`, `POST /:id/refund` | `POST /:id/refund` is a sub-action, not `PUT` |
-| `customers` | `GET /:id`, `GET /:id/orders`                                  | Read-only from this service                   |
+|Resource|Operations|Notes|
+|---|---|---|
+|`orders`|`POST`, `GET /:id`, `GET ?customer_id=...`, `POST /:id/refund`|`POST /:id/refund` is a sub-action, not `PUT`|
+|`customers`|`GET /:id`, `GET /:id/orders`|Read-only from this service|
 
 Conventions to pick once and stick to:
 
@@ -61,7 +55,6 @@ Conventions to pick once and stick to:
 See `references/http-conventions.md` for the full set of HTTP conventions with explanations.
 
 ### 4. Model the operations (GraphQL / gRPC)
-
 **GraphQL:** define types, queries, mutations, subscriptions in SDL. Every type, field, and argument gets a description string — the schema _is_ the documentation.
 
 **gRPC:** write the `.proto` file. Group related RPCs into services. Document each RPC with what it does and what errors it returns.
@@ -69,7 +62,6 @@ See `references/http-conventions.md` for the full set of HTTP conventions with e
 See `references/examples.md` for full examples in all three protocols.
 
 ### 5. Define schemas
-
 For each endpoint/operation:
 
 - **Request schema** — path params, query params, body
@@ -79,7 +71,6 @@ For each endpoint/operation:
 Use Zod for internal services, OpenAPI for external REST, GraphQL SDL for GraphQL, proto for gRPC.
 
 ### 6. Address cross-cutting concerns
-
 For each of these, apply conventions from the reference files and document any deviation in the spec:
 
 - **Authentication** — who is the caller? Bearer token, session cookie, API key, mTLS?
@@ -107,7 +98,6 @@ For each of these, apply conventions from the reference files and document any d
 For details and rationale on each, see the reference files below.
 
 ### 7. Write the spec
-
 Output to `.context/architecture/api/<service>.md`. Structure:
 
 1. **Summary** — one paragraph: what the API does, who calls it, protocol choice + why
@@ -120,13 +110,11 @@ Output to `.context/architecture/api/<service>.md`. Structure:
 8. **Glossary** — plain-language definitions of every term a junior wouldn't know
 
 ### 8. Link it up
-
 - Add a link from any related design doc in `.context/architecture/`
 - If the API is for a new service, suggest writing ADRs (`write-adr`) for non-obvious choices
 - If there's a diagram, make sure it matches (`c4-diagrams`)
 
 ## Writing principles
-
 **Write specs for juniors and weaker LLM models.** A spec that only a senior can read is a spec that will be misimplemented:
 
 - **Explain every choice in plain language next to the choice.** Not just "cursor pagination" — "cursor pagination (clients pass an opaque string and get back the next one; stays stable when items are inserted between requests)".
@@ -135,25 +123,23 @@ Output to `.context/architecture/api/<service>.md`. Structure:
 - **Say _why_ every constraint exists.** "Max page size 100 because responses over ~1 MB cause mobile clients to time out."
 
 ## Cross-references
-
-| When                                  | Use                                   |
-| ------------------------------------- | ------------------------------------- |
-| Need the system architecture first    | `architecture`                        |
-| Need the data model                   | `data-modeling`                       |
-| The API is part of a larger design    | `write-design-doc` for the parent doc |
-| A choice deserves a permanent record  | `write-adr`                           |
-| A diagram would make the flow clearer | `c4-diagrams`                         |
-| Review an existing API design         | `design-review`                       |
+|When|Use|
+|---|---|
+|Need the system architecture first|`architecture`|
+|Need the data model|`data-modeling`|
+|The API is part of a larger design|`write-design-doc` for the parent doc|
+|A choice deserves a permanent record|`write-adr`|
+|A diagram would make the flow clearer|`c4-diagrams`|
+|Review an existing API design|`design-review`|
 
 ## Key references
-
-| File                             | Covers                                                                                         |
-| -------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `references/http-conventions.md` | URLs, HTTP verbs, status codes, request/response shapes, CORS                                  |
-| `references/error-handling.md`   | RFC 7807 Problem Details, error code taxonomy, validation errors, result types, Zod validation |
-| `references/auth.md`             | Auth schemes by caller type, API key format, ABAC authorization, Hono middleware order         |
-| `references/pagination.md`       | Cursor-based (recommended) and offset-based pagination with trade-offs                         |
-| `references/api-patterns.md`     | Idempotency, rate limiting, versioning, webhooks, file uploads, API documentation              |
-| `references/example-rest.md`     | REST example: Orders API with Zod schemas, endpoints, error codes                              |
-| `references/example-graphql.md`  | GraphQL example: Orders SDL with types, queries, mutations                                     |
-| `references/example-grpc.md`     | gRPC example: Orders proto with services, messages, streaming                                  |
+|File|Covers|
+|---|---|
+|`references/http-conventions.md`|URLs, HTTP verbs, status codes, request/response shapes, CORS|
+|`references/error-handling.md`|RFC 7807 Problem Details, error code taxonomy, validation errors, result types, Zod validation|
+|`references/auth.md`|Auth schemes by caller type, API key format, ABAC authorization, Hono middleware order|
+|`references/pagination.md`|Cursor-based (recommended) and offset-based pagination with trade-offs|
+|`references/api-patterns.md`|Idempotency, rate limiting, versioning, webhooks, file uploads, API documentation|
+|`references/example-rest.md`|REST example: Orders API with Zod schemas, endpoints, error codes|
+|`references/example-graphql.md`|GraphQL example: Orders SDL with types, queries, mutations|
+|`references/example-grpc.md`|gRPC example: Orders proto with services, messages, streaming|

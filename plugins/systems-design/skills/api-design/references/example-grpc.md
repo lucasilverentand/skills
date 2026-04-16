@@ -1,5 +1,4 @@
 # Example: gRPC API (Orders)
-
 Use gRPC for internal service-to-service with strong typing and streaming. Not for browsers (can't speak it natively, painful to debug with curl).
 
 ```proto

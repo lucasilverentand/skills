@@ -69,7 +69,7 @@ The reference files encode a complete set of architectural preferences:
 
 ## File structure
 
-```
+```text
 systems-design/
   .claude-plugin/
     plugin.json

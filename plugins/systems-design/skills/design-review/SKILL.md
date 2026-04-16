@@ -5,11 +5,9 @@ allowed-tools: Read Grep Glob Bash Write Edit AskUserQuestion
 ---
 
 # Review a System Design
-
 Read a design, stress-test it against real failure modes and scale pressures, and produce honest feedback — not a rubber stamp, not a wishlist, but the kind of review that would surface issues before prod does.
 
 ## Decision tree
-
 - What are you reviewing?
   - **A written design doc** (markdown file, paste, URL) → read it fully, then follow "Full review" below
   - **A diagram only, no doc** → ask for context: goals, scale, constraints. You can't review architecture from a picture alone.
@@ -20,7 +18,6 @@ Read a design, stress-test it against real failure modes and scale pressures, an
 ## Full review
 
 ### 1. Understand what you're reviewing
-
 Before criticizing anything, make sure you understand:
 
 - **Goal** — what is this system supposed to do?
@@ -30,11 +27,9 @@ Before criticizing anything, make sure you understand:
 If the doc doesn't say, ask — don't review against imagined requirements. A design is only wrong relative to something; make sure you know what that something is.
 
 ### 2. Stress-test with these lenses
-
 Walk each lens below and write findings as you go. Not every lens applies to every design — skip the ones that don't fit, but skip *consciously*.
 
 #### Failure modes
-
 - What happens when each component is slow? Down? Returns garbage?
 - Are there single points of failure? Is that acceptable?
 - What's the blast radius of a bad deploy? A runaway query? A poisoned message?
@@ -42,7 +37,6 @@ Walk each lens below and write findings as you go. Not every lens applies to eve
 - Are timeouts set everywhere? Retries bounded? Circuit breakers where they matter?
 
 #### Scaling cliffs
-
 - Where's the bottleneck at 10x current load? At 100x?
 - Which component is hardest to scale — stateful DB, single-writer queue, a sync RPC chain?
 - Are hot keys / hot rows going to bite? (think: celebrity users, popular products, global counters)
@@ -50,7 +44,6 @@ Walk each lens below and write findings as you go. Not every lens applies to eve
 - Do caches thunder-herd on cold start or invalidation?
 
 #### Data & consistency
-
 - Who owns each piece of data? Is there exactly one source of truth?
 - How are cross-service writes handled? (dual-write risk, outbox, sagas?)
 - Are reads allowed to be stale? Where? For how long?
@@ -58,7 +51,6 @@ Walk each lens below and write findings as you go. Not every lens applies to eve
 - How do schema migrations happen without downtime?
 
 #### Security
-
 - Is input validated at every boundary?
 - AuthN and AuthZ — clear, enforced, not just "we'll add it later"
 - Secrets management — how, where, rotated?
@@ -67,7 +59,6 @@ Walk each lens below and write findings as you go. Not every lens applies to eve
 - What does an attacker gain by compromising each component?
 
 #### Operability
-
 - Can oncall debug this at 3am? What dashboards, logs, traces exist?
 - What pages a human vs what's just a ticket?
 - Is the deploy story clear? Rollback? Feature flags?
@@ -75,7 +66,6 @@ Walk each lens below and write findings as you go. Not every lens applies to eve
 - Is cost observable — can you tell who/what is burning money?
 
 #### Design coherence
-
 - Does the architecture match the stated requirements, or is it cargo-culted from somewhere else?
 - Are tech choices justified? ("We picked X because Y" — is Y actually true?)
 - Are there simpler alternatives that were genuinely considered?
@@ -83,7 +73,6 @@ Walk each lens below and write findings as you go. Not every lens applies to eve
 - Are service boundaries drawn along responsibility lines or along org-chart lines?
 
 #### Stack defaults compliance
-
 Check the design against the convention references in sibling skills (`../data-modeling/references/`, `../api-design/references/`, `../architecture/references/`). Deviations aren't wrong, but they should be intentional and documented. Flag if:
 
 - Async work is handled inline instead of via Queues (for anything >50ms)
@@ -106,7 +95,6 @@ Check the design against the convention references in sibling skills (`../data-m
 - Cloudflare Pages used instead of Workers with Static Assets for new projects
 
 ### 3. Write the review
-
 Produce a structured review document. Write it back to the user in chat for discussion, and optionally save it to `.context/architecture/reviews/<design>-review-<date>.md` if they want a record.
 
 Structure:
@@ -146,18 +134,16 @@ Date: <YYYY-MM-DD>
 ```
 
 ### 4. Severity guide
-
 Use these to force calibration — don't label everything CRITICAL.
 
-| Severity | Meaning | Example |
+|Severity|Meaning|Example|
 |---|---|---|
-| **CRITICAL** | Will cause incidents in production or block a core requirement | Dual-write between DB and queue with no outbox → lost events |
-| **MAJOR** | Significant risk or cost you'd want to address before building | Single Redis instance for session store at 99.95% target |
-| **MINOR** | Worth fixing but won't sink the project | Missing rate limits on internal admin endpoint |
-| **QUESTION** | Reviewer can't assess without more info | "What's the expected write/read ratio on the orders table?" |
+|**CRITICAL**|Will cause incidents in production or block a core requirement|Dual-write between DB and queue with no outbox → lost events|
+|**MAJOR**|Significant risk or cost you'd want to address before building|Single Redis instance for session store at 99.95% target|
+|**MINOR**|Worth fixing but won't sink the project|Missing rate limits on internal admin endpoint|
+|**QUESTION**|Reviewer can't assess without more info|"What's the expected write/read ratio on the orders table?"|
 
 ### 5. Keep it useful
-
 - **Be specific** — "this will fall over under load" is useless; "Postgres write throughput caps around 5k/s on the current Neon tier; the design assumes 10k/s peak — what's the plan?" is a review
 - **Don't rewrite the design** — propose fixes, but a review is not a redesign. If the whole thing is wrong, say so clearly and suggest a reset rather than editing every section.
 - **Rank honestly** — the author will triage by severity. If everything is critical, nothing is.
@@ -165,7 +151,6 @@ Use these to force calibration — don't label everything CRITICAL.
 - **Ask, don't assume** — when you can't tell if something is a gap or an omission from the doc, put it in "Questions" rather than "Findings"
 
 ### 6. Write so a junior can learn from the review
-
 Reviews are a teaching tool. The author might be senior; the next person to read the doc might not be. That means:
 
 - **When you name a failure mode, explain it in one line.** Don't just say "thundering herd on cache expiry" — add "(when a cached value expires, every waiting request hits the backend at once, overwhelming it)". The extra sentence costs nothing and the finding becomes actionable without the reader having to google.
@@ -177,18 +162,16 @@ Reviews are a teaching tool. The author might be senior; the next person to read
 Embedded explainers make the review useful to a wider audience — including weaker LLM models that will read this doc later as context.
 
 ## Key references
-
-| File | Covers |
+|File|Covers|
 |---|---|
-| `../data-modeling/references/` | Data conventions — IDs, naming, tenancy, soft delete, JSONB, audit, migrations (one file per topic) |
-| `../api-design/references/` | API conventions — HTTP, errors, auth, pagination, API patterns (one file per topic) |
-| `../architecture/references/` | Infra conventions — async, resilience, observability, deploy, testing, privacy (one file per topic) |
-| `../requirements/references/nfr-checklist.md` | Non-functional requirements checklist — walk this when checking NFR coverage |
+|`../data-modeling/references/`|Data conventions — IDs, naming, tenancy, soft delete, JSONB, audit, migrations (one file per topic)|
+|`../api-design/references/`|API conventions — HTTP, errors, auth, pagination, API patterns (one file per topic)|
+|`../architecture/references/`|Infra conventions — async, resilience, observability, deploy, testing, privacy (one file per topic)|
+|`../requirements/references/nfr-checklist.md`|Non-functional requirements checklist — walk this when checking NFR coverage|
 
 ## Cross-references
-
-| Situation | Action |
+|Situation|Action|
 |---|---|
-| The design is missing a section entirely (e.g., no NFRs) | Flag the gap; hand off to `requirements` for NFRs or `write-design-doc` for structure |
-| The user wants the design rewritten after review | Hand off to `architecture` + `write-design-doc` with findings as input |
-| A finding deserves a permanent decision record | Suggest `write-adr` to capture the resolution |
+|The design is missing a section entirely (e.g., no NFRs)|Flag the gap; hand off to `requirements` for NFRs or `write-design-doc` for structure|
+|The user wants the design rewritten after review|Hand off to `architecture` + `write-design-doc` with findings as input|
+|A finding deserves a permanent decision record|Suggest `write-adr` to capture the resolution|

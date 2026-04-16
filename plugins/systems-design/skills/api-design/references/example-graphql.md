@@ -1,5 +1,4 @@
 # Example: GraphQL API (Orders)
-
 Use GraphQL when clients need flexible field selection across diverse query shapes (admin dashboards + mobile). For a single client type, REST is simpler.
 
 ```graphql

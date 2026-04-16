@@ -1,11 +1,14 @@
 {
-  "name": "documentation",
-  "description": "Documentation authoring and structured knowledge capture",
-  "skills": [
-    "./skills/decision-trees"
-  ],
-  "author": {
-    "name": "Luca Silverentand",
-    "email": "dev@lucasilverentand.com"
-  }
+	"name": "documentation",
+	"description": "Documentation authoring and structured knowledge capture",
+	"skills": [
+		"./skills/c4-diagrams",
+		"./skills/decision-trees",
+		"./skills/write-adr",
+		"./skills/write-design-doc"
+	],
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	}
 }

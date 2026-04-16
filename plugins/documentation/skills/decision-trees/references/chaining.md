@@ -1,7 +1,6 @@
 # Chaining Decision Trees
 
 ## When a single tree isn't enough
-
 A single decision tree handles one decision well. But many real problems involve multiple decisions in sequence, where the answer to one changes the landscape for the next. Examples:
 
 - **Incident response**: triage (what's broken?) → diagnosis (why is it broken?) → remediation (how do we fix it?) → verification (did the fix work?)
@@ -11,11 +10,9 @@ A single decision tree handles one decision well. But many real problems involve
 Each of these has branching logic at every phase, and the phases build on each other. Stuffing them all into one tree either blows past the depth limit or produces a tree so wide it's unusable.
 
 ## Chain anatomy
-
 A chain has three parts:
 
 ### 1. Chain overview
-
 A numbered list of phases that shows the full flow at a glance. Placed above all the trees.
 
 ```markdown
@@ -30,11 +27,9 @@ A numbered list of phases that shows the full flow at a glance. Placed above all
 Each entry names the phase, describes what it does, and states what it **produces** — the context that carries forward to the next tree.
 
 ### 2. Individual trees
-
 Each tree lives under its own heading and follows the standard format from `format.md`. Trees are numbered or named to match the overview.
 
 ### 3. Handoffs
-
 Leaf actions that continue the chain use a `→ continue with` pattern:
 
 ```markdown
@@ -42,13 +37,13 @@ Leaf actions that continue the chain use a `→ continue with` pattern:
 ```
 
 The handoff includes:
+
 - **Which tree to go to** — by name or number
 - **What context to carry** — the conclusions from this tree that the next one needs
 
 ## Full example: deployment failure chain
 
 ### Chain overview
-
 1. **Classify** — determine what kind of failure occurred → produces: failure category (build / rollout / post-deploy)
 2. **Diagnose** — find the root cause within the failure category → produces: specific cause and evidence
 3. **Fix** — apply the appropriate remediation → produces: fix applied
@@ -57,7 +52,6 @@ The handoff includes:
 ---
 
 ### Tree 1: Classify
-
 ```markdown
 - Did the deployment pipeline complete?
   - **No, it failed during the build stage** (CI logs show a build step failure before any deploy step ran)
@@ -70,7 +64,6 @@ The handoff includes:
 ```
 
 ### Tree 2: Diagnose
-
 ```markdown
 - What is the failure category? (carried from Classify)
   - **Build failure** → what does the build log say?
@@ -98,7 +91,6 @@ The handoff includes:
 ```
 
 ### Tree 3: Fix
-
 ```markdown
 - What is the cause? (carried from Diagnose)
   - **Dependency resolution** → run `bun install` locally. If it fails, fix the lockfile. If it passes locally, check if the CI environment has registry access. Push the fix.
@@ -122,7 +114,6 @@ The handoff includes:
 ```
 
 ### Tree 4: Verify
-
 ```markdown
 - Did the fix deploy successfully? Check CI: `gh run list --limit 1`
   - **Yes, pipeline passed** → is the original symptom resolved?
@@ -137,28 +128,25 @@ The handoff includes:
 ## Chain patterns
 
 ### Linear chain
-
 Most common. Each tree feeds into the next in order. The deployment example above is linear.
 
-```
+```text
 Classify → Diagnose → Fix → Verify
 ```
 
 ### Chain with loops
-
 When verification can fail and loop back to an earlier phase. Include a loop limit to prevent infinite cycles — if you've looped back twice, escalate instead of continuing.
 
-```
+```text
 Classify → Diagnose → Fix → Verify
                               ↓ (if failed)
                          back to Classify (max 2 loops, then escalate)
 ```
 
 ### Branching chain
-
 When different branches of one tree lead to entirely different follow-up trees rather than a single shared next phase.
 
-```
+```text
 Classify → Frontend issue → Frontend Diagnosis → Frontend Fix
          → Backend issue  → Backend Diagnosis  → Backend Fix
          → Infra issue    → Infra Diagnosis    → Infra Fix
@@ -167,17 +155,15 @@ Classify → Frontend issue → Frontend Diagnosis → Frontend Fix
 Use branching chains when the phases are genuinely different across branches — different tools, different expertise, different verification. If the phases are structurally similar, use a single chain with branch conditions inside each tree instead.
 
 ### Converging chain
-
 Multiple entry trees feed into a shared resolution tree. Useful when different triggers lead to the same resolution process.
 
-```
+```text
 Alert triage    →
 Customer report → Shared Diagnosis → Fix → Verify
 Monitoring flag →
 ```
 
 ## Writing handoffs
-
 A handoff is the most critical part of a chain — it's where information can be lost. Every handoff must include:
 
 1. **Destination** — which tree to continue with, by name
@@ -185,17 +171,18 @@ A handoff is the most critical part of a chain — it's where information can be
 3. **Confidence level** (optional but valuable for agents) — "confident this is a dependency issue" vs. "likely a dependency issue but could be a registry problem". If confidence is low, the next tree should verify before acting.
 
 Bad handoff:
+
 ```markdown
 → continue with Diagnosis
 ```
 
 Good handoff:
+
 ```markdown
 → continue with **Diagnosis** — failure category: rollout, pod status: CrashLoopBackOff, namespace: production
 ```
 
 ## Agent behavior at handoffs
-
 When an agent reaches a handoff:
 
 1. **Pause and summarize** — before entering the next tree, restate the carry-forward context in its own words. This is a comprehension check — if the summary doesn't match the handoff, something was lost.

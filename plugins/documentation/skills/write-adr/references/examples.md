@@ -1,9 +1,7 @@
 # ADR Examples
-
 Two examples showing the shape of a good ADR.
 
 ## Example 1: Outbox pattern
-
 ```markdown
 # 0002. Use the outbox pattern for publishing order events
 
@@ -57,7 +55,6 @@ The orders service writes to Postgres then publishes to Cloudflare Queues. Two-s
 ```
 
 ## Example 2: Superseding an ADR
-
 ```markdown
 # 0007. Move session storage from Redis to Postgres
 

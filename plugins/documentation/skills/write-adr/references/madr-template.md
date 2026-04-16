@@ -1,5 +1,4 @@
 # MADR Template
-
 Copy this into a new file at `.context/architecture/adr/<NNNN>-<kebab-title>.md` and fill in the angle-bracket placeholders.
 
 ```markdown

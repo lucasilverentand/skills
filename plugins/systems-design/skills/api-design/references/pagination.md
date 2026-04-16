@@ -1,9 +1,7 @@
 # Pagination
-
 Always paginate list endpoints. Returning unbounded lists is never acceptable — even "small" tables grow, and one slow query under load cascades into an outage.
 
 ## Cursor-based (recommended)
-
 Response format:
 
 ```json
@@ -27,7 +25,6 @@ With offset pagination, if item 0 is deleted between fetching page 1 and page 2,
 Cursor pagination also performs better on large tables. `OFFSET 10000` forces the database to scan and discard 10,000 rows. `WHERE id > 'last_seen'` seeks directly to the right position using an index.
 
 ## Offset-based (acceptable for small, stable data)
-
 Request format: `?page=2&per_page=50`
 
 Response format:
@@ -51,7 +48,6 @@ Response format:
 - Do not use for: feeds, activity streams, search results, or any data where rows are frequently created or deleted.
 
 ## Anti-patterns
-
 - **Unbounded lists** — `GET /orders` returning 50,000 rows. Always paginate, even if today the table has 12 rows. Because tables grow and the endpoint will be called by automation that does not paginate voluntarily.
 - **Exposing cursor internals** — documenting that the cursor is `base64(JSON({ id, created_at }))`. Clients will parse it, construct fake cursors, and break when you change the format.
 - **Offset for high-churn data** — using `?page=3` on a feed where items are posted every second. Pages will skip and duplicate items unpredictably.

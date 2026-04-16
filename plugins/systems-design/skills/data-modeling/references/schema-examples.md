@@ -1,9 +1,7 @@
 # Schema Examples
-
 Example schemas showing data conventions applied. Copy the patterns, adapt to your domain.
 
 ## Orders domain
-
 ```sql
 orders (
   id          text primary key,          -- ord_01HF2M3N...
@@ -57,7 +55,6 @@ create policy tenant_isolation on orders
 **Patterns shown:** prefixed ULIDs, tenant_id + RLS, soft delete, status as CHECK enum, money as cents, outbox table (append-only), partial index.
 
 ## Users domain
-
 ```sql
 users (
   id          text primary key,          -- usr_01HF...

@@ -5,16 +5,13 @@ allowed-tools: Read Grep Glob Bash Write Edit AskUserQuestion
 ---
 
 # Write an ADR
-
 An ADR is a timestamped, immutable record of a single architectural decision — the context, the options, the choice, the consequences. It exists so future-you (or a new team member, or an LLM) can reconstruct *why* the code looks the way it does without having to re-debate the decision.
 
 ## Current context
-
 - ADR directory: !`ls .context/architecture/adr/ 2>/dev/null || echo "(none — will be created)"`
 - Next ADR number: !`ls .context/architecture/adr/ 2>/dev/null | grep -E '^[0-9]{4}-' | sed 's/-.*//' | sort -n | tail -1 | awk '{printf "%04d", $1+1}' 2>/dev/null || echo "0001"`
 
 ## Decision tree
-
 - What's being decided?
   - **A genuine trade-off with multiple viable options** → write a full ADR (follow below)
   - **A choice forced by external constraints** (e.g., "we must use Postgres because the company standard says so") → still write it, but keep options short and be explicit that the decision was forced
@@ -23,7 +20,6 @@ An ADR is a timestamped, immutable record of a single architectural decision —
   - **A decision that might change** → still write it. ADRs are immutable but can be superseded. See "Superseding" below.
 
 ### What always warrants an ADR
-
 These topics always deserve a written record (per the convention references in sibling skills):
 
 - **New service or Worker** — adding a deployable unit changes the operational surface
@@ -33,7 +29,6 @@ These topics always deserve a written record (per the convention references in s
 - **Deviations from stack defaults** — choosing something other than the established default (e.g. DynamoDB instead of Neon, Redis instead of KV)
 
 ### What does NOT need an ADR
-
 - Library upgrades (patch, minor, or even major if non-breaking)
 - Styling choices (CSS, component design)
 - Internal refactors that don't change boundaries or behavior
@@ -42,7 +37,6 @@ These topics always deserve a written record (per the convention references in s
 ## Writing an ADR
 
 ### 1. Clarify the decision
-
 Before writing anything, pin these down with the user (use `AskUserQuestion` for the ones that aren't obvious):
 
 1. **What is the decision?** — frame it as a question: "How should we handle session storage?"
@@ -54,7 +48,6 @@ Before writing anything, pin these down with the user (use `AskUserQuestion` for
 Skip questions where the answer is in the conversation or the codebase. Don't invent drivers the user didn't state.
 
 ### 2. Find the file number
-
 ADRs are numbered sequentially: `0001-use-postgres.md`, `0002-outbox-pattern.md`, ...
 
 1. Check `.context/architecture/adr/` for the highest existing number
@@ -62,7 +55,6 @@ ADRs are numbered sequentially: `0001-use-postgres.md`, `0002-outbox-pattern.md`
 3. Create the `adr/` directory if it doesn't exist
 
 ### 3. Write the ADR
-
 Use the MADR template below. Keep it focused — an ADR is not a design doc. One decision per file.
 
 ```markdown
@@ -138,7 +130,6 @@ Chosen option: **<Option B>**, because <concise justification tied to decision d
 ```
 
 ### 4. Status lifecycle
-
 - **proposed** — written but not yet agreed on. Use while discussing.
 - **accepted** — the decision is in force. This is the default state once agreed.
 - **deprecated** — no longer the approach but not replaced. Rare.
@@ -147,7 +138,6 @@ Chosen option: **<Option B>**, because <concise justification tied to decision d
 Default new ADRs to **proposed** unless the user says the decision is already made.
 
 ### 5. Index (optional but nice)
-
 If you create `.context/architecture/adr/`, also create or update `.context/architecture/adr/README.md` with a one-line index:
 
 ```markdown
@@ -162,7 +152,6 @@ If you create `.context/architecture/adr/`, also create or update `.context/arch
 Append new entries; don't reorder.
 
 ## Writing principles
-
 - **One decision per ADR** — if you're tempted to write "database and queue and auth", that's three ADRs
 - **Immutable** — once accepted, don't edit the body. If the decision changes, write a new ADR that supersedes it. The history matters.
 - **Write options honestly** — if you pre-decided and wrote the options as strawmen, the ADR is useless. Give each option its real best case.
@@ -170,7 +159,6 @@ Append new entries; don't reorder.
 - **Date it** — ADRs age. A reader needs to know whether "low team Kafka experience" was a driver in 2022 or last month.
 
 ### Write so a junior (or a weaker LLM) can follow along
-
 An ADR's job is to make the decision *reproducible* — a reader a year later should be able to walk the same reasoning. If they can't, the ADR failed. Assume the reader is smart but new to this specific problem:
 
 - **Explain each option in plain language first, then with jargon.** Instead of "Option B: transactional outbox", write "Option B: transactional outbox — write the event to a DB table in the same transaction as the state change, then a separate worker publishes it to the queue. This means the state change and the event record are atomic; if the queue is down, events queue up in the DB instead of being lost."
@@ -180,17 +168,15 @@ An ADR's job is to make the decision *reproducible* — a reader a year later sh
 - **Skip the generic tutorial.** Don't explain what Postgres is. Do explain what's specific to *this* decision — "Neon's autoscaling matters here because our load is spiky, not sustained".
 
 ## When to supersede vs edit
-
 - **Fixing a typo or broken link** → edit in place, it's not a content change
 - **Adding a missed consequence discovered later** → add a dated "Addendum" section at the bottom, don't rewrite the original
 - **The decision itself changed** → write a new ADR, link it from the old one's status, don't touch the old body
 
 ## Key references
-
-| File | Covers |
+|File|Covers|
 |---|---|
-| `../data-modeling/references/` | Data conventions — ADRs should reference deviations from these |
-| `../api-design/references/` | API conventions — ADRs should reference deviations from these |
-| `../architecture/references/` | Infrastructure conventions — ADRs should reference deviations from these |
-| `references/madr-template.md` | The raw template to copy |
-| `references/examples.md` | Two complete example ADRs (outbox pattern, data store choice) |
+|`../data-modeling/references/`|Data conventions — ADRs should reference deviations from these|
+|`../api-design/references/`|API conventions — ADRs should reference deviations from these|
+|`../architecture/references/`|Infrastructure conventions — ADRs should reference deviations from these|
+|`references/madr-template.md`|The raw template to copy|
+|`references/examples.md`|Two complete example ADRs (outbox pattern, data store choice)|
