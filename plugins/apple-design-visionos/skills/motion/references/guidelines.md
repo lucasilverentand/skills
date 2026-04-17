@@ -1,0 +1,31 @@
+# Motion — full guidelines
+When designing custom motion, please follow the guidelines provided below.
+
+### Best practices
+- **Introduce motion with intent, allowing it to enhance the experience without becoming overwhelming.** Do not add movement simply for aesthetic effect. Unnecessary or excessive animation can distract users and potentially lead to feelings of disconnection or physical unease.
+- **Ensure motion is optional.** As not every user wishes to experience the movement within your application or game, it is critical that motion is never the exclusive means of communicating important information. To accommodate all users and enhance their experience, supplement visual feedback by also utilizing alternatives like [haptics](playing-haptics.md) and [audio](playing-audio.md).
+
+### Providing feedback
+- **Ensure feedback motion realistically matches user gestures and expectations.** In non-game applications, accurate and lifelike movement aids comprehension of functionality; conversely, confusing feedback motion can cause user disorientation. For instance, if a view is revealed by sliding it down from the top, users do not anticipate dismissing that same view by sliding it sideways.
+- **Prioritize brevity and accuracy in feedback animations.** When animated responses are concise and precise, they feel unobtrusive and lightweight, often conveying information more efficiently than highly prominent animation. For example, a game's succinct animation tied to a successful action allows players to instantly grasp the message without losing focus on gameplay. Similarly, in visionOS, tapping a panorama in Photos causes it to smoothly and quickly expand into the viewing space, allowing users to track the transition without delay.
+- **Generally refrain from adding motion to frequently used UI interactions within apps.** The system already includes subtle animations for standard interface elements. For custom components, you should generally prevent users from needing to dedicate extra attention to superfluous motion during repeated interactions.
+- **Allow users to interrupt motion.** Whenever feasible, do not require users to wait for an animation sequence to finish before they can perform another action, particularly if the animation might need to be experienced more than once.
+- **Evaluate the use of animated symbols when appropriate.** If you are utilizing SF Symbols 5 or later, you have the option to animate either SF Symbols or custom symbols. Refer to [Animations](sf-symbols.md#Animations) for detailed guidance.
+
+### Leveraging platform capabilities
+- **Ensure your game's motion presents high quality by default across all supported platforms.** A consistent frame rate between 30 and 60 fps generally provides a visually appealing and smooth experience in most titles. For every platform you support, leverage the device's graphics hardware to establish default settings that allow users to enjoy your game immediately without needing configuration changes.
+- **Allow players to tailor the visual experience of your game for performance or battery optimization.** For instance, consider enabling a switch between power modes when the system detects an external power source is connected.
+
+## Platform guidance — visionOS
+Motion in visionOS can serve multiple purposes—subtly setting context, drawing attention to specific information, and enhancing immersive experiences. When combined with [Depth](spatial-layout.md#Depth), motion can also provide critical feedback when users view interactive elements. Given that motion will likely be a significant part of the visionOS experience, it is essential to prevent any causes of confusion, discomfort, or distraction.
+
+- **Whenever possible, keep motion away from the edges of a user’s field of view.** Individuals can be highly sensitive to movement occurring in their periphery. Such motion is not only distracting but can also induce discomfort by creating the sensation that either the user or their environment is moving. If you must display an object moving in the periphery during an immersive session, ensure its brightness level matches that of the surrounding visible content.
+- **Assist users in maintaining comfort when displaying large virtual object movements.** If an object is sizable enough to occupy much of the [Field of view](spatial-layout.md#Field-of-view) and blocks most or all of [Immersion and passthrough](immersive-experiences.md#Immersion-and-passthrough), users may naturally perceive it as part of their actual surroundings. To allow users to track the object's movement without making them feel they or their environment is moving, you can either increase the object’s translucency so users see through it, or decrease its contrast to minimize the perceived motion.
+
+> **Note**
+> Discomfort can occur even when users themselves are moving a large virtual object, such as a window. While adjusting translucency and contrast helps in this scenario, also consider keeping the window size relatively small.
+
+- **Utilize fades when you need to transition an object between locations.** When an object shifts from one position to another, users naturally track this movement. If this movement does not convey important information, you can fade the object out before relocating it and fade it back in once it reaches its new spot.
+- **Generally, avoid allowing users to rotate the virtual world.** When a virtual environment rotates, it typically disrupts people's sense of stability, even if the rotation is subtle and controlled by the user. Instead, consider using instantaneous directional changes during a brief fade-out sequence.
+- **Provide users with a stationary frame of reference.** It is easier for people to process visual movement when it is confined within an area that remains still. Conversely, if the entire visible environment appears to move—for instance, in a game that automatically advances the player through space—users may feel uneasy.
+- **Do not display objects undergoing sustained oscillation.** Specifically, you must avoid oscillations with a frequency near 0.2 Hz, as people are extremely sensitive to this particular frequency. If oscillation must be shown, aim for low amplitude and consider making the content translucent.

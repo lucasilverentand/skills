@@ -1,0 +1,10 @@
+# Keyboards
+Keyboard users benefit from mapping controls to keyboard bindings, which accelerates their interaction with applications and games.
+
+- **Prioritize single-key commands.** Single-key bindings are generally faster and more intuitive for players, especially when they are also operating a mouse or trackpad. For instance, you could assign the initial letter of a menu item as a shortcut (e.g., `I` for Inventory or `M` for Map); alternatively, mapping the game's primary action to the Space bar capitalizes on its large physical presence.
+- **Test key binding comfort game using an Apple keyboard.** For example, if a non-Apple keyboard uses the Control key (`^`) for a binding, consider mapping it to the Command key (`⌘`) when targeting an Apple keyboard. On Apple keyboards, the Command key is conveniently positioned adjacent to the Space bar, making it easily reachable when players are using `W`, `A`, `S`, and `D`.
+- **Take the proximity of keys into account.** For example, if players use `W`, `A`, `S`, and `D` for movement, consider assigning nearby keys to other high-value commands. Similarly, if a set of actions is closely related, mapping their bindings to physically adjacent keys works well, such as using the number row for inventory categories.
+- **Let players customize key bindings.** While users often expect a reasonable default configuration, many individuals require the ability to tailor game controls to suit their personal comfort and play style.
+
+## Platform guidance — visionOS
+**Match spatial game controller behavior to hand input.** While supporting a wide range of wireless controllers, your visionOS application should also accommodate spatial game controllers like the PlayStation VR2 Sense controller. Enable players to engage with your game as if they were using their hands. Specifically, implement support for two interaction methods: indirectly interacting by gazing at an object and activating the controller’s left or right trigger, or directly interacting by reaching out while pressing the left or right trigger. For further details, consult [visionOS](gestures.md#visionOS).

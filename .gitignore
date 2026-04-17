@@ -2,6 +2,11 @@
 *.log
 node_modules/
 
+# extractor scratch tooling + caches
+build/
+.cache/
+tools/
+
 # mise
 .mise.local.toml
 

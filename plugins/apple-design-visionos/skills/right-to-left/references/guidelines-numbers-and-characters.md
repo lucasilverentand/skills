@@ -1,0 +1,7 @@
+# Numbers and characters
+Different RTL languages may utilize different number systems. For instance, Hebrew text employs Western Arabic numerals, while Arabic text might accept either Western or Eastern Arabic numerals. The choice between Western and Eastern Arabic numeral usage varies based on country, region, or even specific areas within a single locale.
+
+If your application addresses mathematical concepts or other subjects heavily reliant on numbers, it is advisable to determine the correct method for displaying this information within each supported locale. Conversely, applications that do not involve number-related topics can typically rely on the system's default numeral representation.
+
+- **Do not alter the sequence of numerals within a specific number.** Regardless of the current language or surrounding content, the digits comprising a particular number—such as "541," a phone number, or a credit card number—must always maintain the same sequence.
+- **Reverse the numeral order when indicating progress or a counting direction; never invert the numerals themselves.** Controls like rating controls, sliders, and progress bars frequently use numerals to enhance clarity. If you employ numerals in this manner, ensure their sequence is reversed to align with the direction of the control. Additionally, reverse a sequence of numerals if that sequence is used to convey a specific order.

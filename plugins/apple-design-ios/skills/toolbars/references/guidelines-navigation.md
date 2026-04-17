@@ -1,0 +1,4 @@
+# Navigation
+A toolbar containing navigation controls typically appears at the top of a window, facilitating movement through content hierarchies. This toolbar frequently includes a [Search fields](search-fields.md) for rapid navigation between content areas or specific items. In iOS, a toolbar dedicated to navigation is sometimes referred to as a navigation bar.
+
+**Use the standard Back and Close buttons.** Users expect the conventional Back button to allow them to reverse navigation steps within a hierarchy, and the standard Close button is used to dismiss a modal view. Always favor the established symbols for these actions, and avoid using text labels such as *Back* or *Close*. Should you implement a customized version of either control, it must maintain the expected appearance and behavior, align with the rest of your interface, and be consistently applied throughout your application or game. Refer to [Icons](icons.md) for detailed guidance.

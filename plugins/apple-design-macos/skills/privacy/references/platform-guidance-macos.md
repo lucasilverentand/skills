@@ -1,0 +1,4 @@
+# Platform guidance — macOS
+- **Sign your app with a valid Developer ID.** When distributing your application outside of the App Store, signing it with a Developer ID establishes you as an Apple developer and assures users that your application is secure. Refer to [Xcode Help](https://developer.apple.com/go/?id=ios-app-distribution-guide) for developer guidance.
+- **Protect users' data through app sandboxing.** Sandboxing grants your application access to system resources and user information while simultaneously shielding it from malicious software. All applications destined for the Mac App Store must utilize sandboxing. See [Configuring the macOS App Sandbox](apple:Xcode/configuring-the-macos-app-sandbox) for implementation details.
+- **Do not assume the identity of the currently signed-in user.** Due to rapid user switching, several individuals may be using the same system.

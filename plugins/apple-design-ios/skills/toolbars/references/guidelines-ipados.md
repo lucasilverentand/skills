@@ -1,0 +1,2 @@
+# iPadOS
+Combining a toolbar with a tab bar is an option. On iPadOS, both a toolbar and [Tab bars](tab-bars.md) can coexist within the same horizontal space at the top of a view. This configuration is particularly valuable for designs that require users to navigate between several core application areas while maintaining the full available width of the window for content. For implementation details, consult [Layout](layout.md) and [Windows](windows.md).

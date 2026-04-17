@@ -1,0 +1,36 @@
+---
+name: segmented-controls
+description: "A segmented control presents as a linear arrangement of two or more segments, each acting as a button. Use when designing segmented controls for tvOS, auditing segmented controls against Apple's tvOS guidelines, or when the user says things like \"design segmented controls for Apple TV\", \"segmented controls on tvOS\", \"how should segmented controls work on Apple TV\"."
+allowed-tools: Read Grep Glob
+---
+
+# Segmented controls
+A segmented control presents as a linear arrangement of two or more segments, each acting as a button
+
+## When to use
+- User asks about **segmented controls** on tvOS (e.g. `"how do I design segmented controls for Apple TV"`).
+- User is building an Apple TV UI that needs segmented controls and wants to follow Apple's guidelines.
+- User asks to audit or review segmented controls in a tvOS design.
+- User mentions segmented controls in the context of an Apple TV app, game, or interface.
+
+Typically, all segments within a segmented control share equal width. Similar to [Buttons](buttons.md), these segments may display either text or images, and they can also feature associated text labels located beneath them (or beneath the control as a whole).
+
+A segmented control serves to represent either a single selection from available options or, in the macOS environment, it may support multiple selections. For instance, within macOS Keynote, users might select only one segment in the alignment options control to align selected text. Conversely, the font attributes control allows users to select multiple segments to combine styles such as bold, italics, and underline. Furthermore, the toolbar in a Keynote window utilizes a segmented control to enable users to display or hide different editing panes within the main window area.
+
+Beyond representing the state of a single-choice or multiple-choice selection, a segmented control can also operate as a collection of buttons that execute actions without needing to display a selection state. A prime example is the Reply, Reply all, and Forward buttons found in macOS Mail. For developer guidance on this behavior, refer to [isMomentary](apple:UIKit/UISegmentedControl/isMomentary) and [NSSegmentedControl.SwitchTracking.momentary](apple:AppKit/NSSegmentedControl/SwitchTracking/momentary).
+
+### Best practices
+- **Employ a segmented control when presenting closely related options that influence an object, its state, or the current view.** For instance, in a property inspector, it could allow users to select one or more attributes for a selection; similarly, in a toolbar, it might offer different actions applicable to the current view.
+- **Select a segmented control when grouping functions is crucial, or when clearly indicating selection status is important.** Unlike other button styles, segmented controls maintain their grouping context regardless of the view size or placement. This inherent grouping also aids users in quickly grasping which controls are currently active.
+- **Maintain uniformity regarding control types within a single segmented control.** Do not assign actions to segments in a control that primarily indicates selection state, nor should you display a selection state for segments whose primary function is performing actions.
+- **Restrict the segment count in a control.** A large number of segments can impede comprehension and navigation. Aim for no more than five to seven segments in a wide interface, and limit usage to about five segments on iPhone.
+- **Generally, ensure segment sizes are uniform.** When all segments share equal width, the segmented control appears balanced. Whenever feasible, strive to keep both icon and title widths consistent as well.
+
+### Content
+- **Choose either text or images, but avoid mixing them within a single segmented control.** While individual segments may contain text labels or imagery, combining both types in one control can result in a disconnected and confusing interface.
+- **Ensure that the content size is comparable across all segments.** Given that all segments typically possess equal width, it appears poorly if some segments are filled while others are not.
+- **Use nouns or noun phrases for segment labels.** The text should describe each segment and utilize [title-style capitalization](https://support.apple.com/guide/applestyleguide/c-apsgb744e4a3/web#apdca93e113f1d64). A segmented control displaying text labels does not require introductory phrasing.
+
+## Platform guidance — tvOS
+- **Use a split view instead of a segmented control on screens that handle content filtering.** A split view generally allows users to navigate between content and filtering options more intuitively. Conversely, the accessibility of a segmented control depends heavily on its placement.
+- **Do not place other focusable elements near segmented controls.** Segments are selected when the interface gains focus on them, not solely upon a click. Therefore, carefully consider the segmented control's positioning relative to other UI components. If nearby elements are also focusable, users may inadvertently shift focus onto them while attempting to switch segments.

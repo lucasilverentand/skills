@@ -1,0 +1,7 @@
+# Playing video — full guidelines — overview
+The system-provided video players support different aspect ratio playback modes and, on most platforms, Picture in Picture (PiP) viewing. While users can adjust modes during playback, the system defaults to one of the following modes based on the video's aspect ratio:
+
+- **Aspect Fill (Full-screen):** The video scales to completely fill the display, which may result in cropping at the edges. This mode is the default for wide videos (ranging from 2:1 to 2.40:1). For detailed guidance, refer to [resizeAspectFill](apple:AVFoundation/AVLayerVideoGravity/resizeAspectFill).
+- **Aspect (Fit-to-screen):** The entire video remains visible on screen, requiring letterboxing or pillarboxing as necessary. This mode is the default for standard video (4:3, 16:9, and up to 2:1) and ultrawide video (above 2.40:1). For detailed guidance, refer to [resizeAspect](apple:AVFoundation/AVLayerVideoGravity/resizeAspect).
+
+In visionOS and tvOS, the integrated video player also includes *transport controls*, allowing users to manage playback tasks (such as enabling subtitles or changing audio language) and perform actions (like adding a show to a library or favoriting a clip). Below these transport controls, the video player displays *content tabs* (e.g., Info, Episodes, or Chapters), which provide supplementary information and aid in navigation. In visionOS, the transport controls are presented as [Ornaments](ornaments.md).

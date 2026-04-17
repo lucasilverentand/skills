@@ -1,0 +1,2 @@
+# Platform guidance — tvOS
+**Incorporate a safe area to prevent the operating system from cropping your content.** When the app icon is focused, scaling, or moving, the system may crop surrounding elements. To guarantee that your icon's content remains fully visible, maintain a safe zone around it. Be advised that the required safe zone is variable, depending on image dimensions, layer depth, and movement. Additionally, the system crops foreground layers more aggressively than background layers.

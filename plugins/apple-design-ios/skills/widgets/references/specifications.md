@@ -1,0 +1,58 @@
+# Specifications
+[Waiting for content to paraphrase.]
+
+#### iOS dimensions
+|Screen size (portrait, pt)|Small (pt)|Medium (pt)|Large (pt)|Circular (pt)|Rectangular (pt)|Inline (pt)|
+|---|---|---|---|---|---|---|
+|430×932|170x170|364x170|364x382|76x76|172x76|257x26|
+|428x926|170x170|364x170|364x382|76x76|172x76|257x26|
+|414x896|169x169|360x169|360x379|76x76|160x72|248x26|
+|414x736|159x159|348x157|348x357|76x76|170x76|248x26|
+|393x852|158x158|338x158|338x354|72x72|160x72|234x26|
+|390x844|158x158|338x158|338x354|72x72|160x72|234x26|
+|375x812|155x155|329x155|329x345|72x72|157x72|225x26|
+|375x667|148x148|321x148|321x324|68x68|153x68|225x26|
+|360x780|155x155|329x155|329x345|72x72|157x72|225x26|
+|320x568|141x141|292x141|292x311|N/A|N/A|N/A|
+
+#### iPadOS dimensions
+|Screen size (portrait, pt)|Target|Small (pt)|Medium (pt)|Large (pt)|Extra large (pt)|
+|---|---|---|---|---|---|
+|768x1024|Canvas|141x141|305.5x141|305.5x305.5|634.5x305.5|
+||Device|120x120|260x120|260x260|540x260|
+|744x1133|Canvas|141x141|305.5x141|305.5x305.5|634.5x305.5|
+||Device|120x120|260x120|260x260|540x260|
+|810x1080|Canvas|146x146|320.5x146|320.5x320.5|669x320.5|
+||Device|124x124|272x124|272x272|568x272|
+|820x1180|Canvas|155x155|342x155|342x342|715.5x342|
+||Device|136x136|300x136|300x300|628x300|
+|834x1112|Canvas|150x150|327.5x150|327.5x327.5|682x327.5|
+||Device|132x132|288x132|288x288|600x288|
+|834x1194|Canvas|155x155|342x155|342x342|715.5x342|
+||Device|136x136|300x136|300x300|628x300|
+|954x1373 *|Canvas|162x162|350x162|350x350|726x350|
+||Device|162x162|350x162|350x350|726x350|
+|970x1389 *|Canvas|162x162|350x162|350x350|726x350|
+||Device|162x162|350x162|350x350|726x350|
+|1024x1366|Canvas|170x170|378.5x170|378.5x378.5|795x378.5|
+||Device|160x160|356x160|356x356|748x356|
+|1192x1590 *|Canvas|188x188|412x188|412x412|860x412|
+||Device|188x188|412x188|412x412|860x412|
+
+#### visionOS dimensions
+|Widget Type|Point Size (pt)|Millimeter Scale (100%)|
+|---|---|---|
+|Small|158x158|268x268|
+|Medium|338x158|574x268|
+|Large|338x354|574x600|
+|Extra large|450x338|763x574|
+|Extra large portrait|338x450|574x763|
+
+#### watchOS dimensions
+|Apple Watch Case Size|Smart Stack Widget Dimensions (pt)|
+|---|---|
+|40mm|152x69.5|
+|41mm|165x72.5|
+|44mm|173x76.5|
+|45mm|184x80.5|
+|49mm|191x81.5|

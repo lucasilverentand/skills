@@ -1,0 +1,119 @@
+# apple-design-visionos
+Apple's visionOS design guidelines — spatial layout, ornaments, immersive experiences, eye and hand input, and 3D interaction for Apple Vision Pro.
+
+Ships 109 skills covering Apple's visionOS design guidelines — one skill per guideline page, paraphrased and restructured for use inside Claude Code.
+
+## Skills
+- `accessibility` — Accessibility
+- `activity-views` — Activity views
+- `airplay` — AirPlay
+- `alerts` — Alerts
+- `app-clips` — App Clips
+- `app-icons` — App icons
+- `apple-pay` — Apple Pay
+- `augmented-reality` — Augmented reality
+- `branding` — Branding
+- `buttons` — Buttons
+- `camera-control` — Camera Control
+- `carekit` — CareKit
+- `charting-data` — Charting data
+- `collaboration-and-sharing` — Collaboration and sharing
+- `color` — Color
+- `components` — Components
+- `content` — Content
+- `context-menus` — Context menus
+- `controls` — Controls
+- `designing-for-games` — Designing for games
+- `designing-for-visionos` — Designing for visionOS
+- `digit-entry-views` — Digit entry views
+- `disclosure-controls` — Disclosure controls
+- `drag-and-drop` — Drag and drop
+- `eyes` — Eyes
+- `foundations` — Foundations
+- `game-controls` — Game controls
+- `generative-ai` — Generative AI
+- `gestures` — Gestures
+- `getting-started` — Getting started
+- `gyro-and-accelerometer` — Gyroscope and accelerometer
+- `healthkit` — HealthKit
+- `homekit` — HomeKit
+- `icloud` — iCloud
+- `id-verifier` — ID Verifier
+- `image-views` — Image views
+- `image-wells` — Image wells
+- `images` — Images
+- `imessage-apps-and-stickers` — iMessage apps and stickers
+- `immersive-experiences` — Immersive experiences
+- `inclusion` — Inclusion
+- `index` — Human Interface Guidelines
+- `inputs` — Inputs
+- `keyboards` — Keyboards
+- `launching` — Launching
+- `layout` — Layout
+- `layout-and-organization` — Layout and organization
+- `lists-and-tables` — Lists and tables
+- `live-photos` — Live Photos
+- `live-viewing-apps` — Live-viewing apps
+- `lockups` — Lockups
+- `machine-learning` — Machine learning
+- `materials` — Materials
+- `menus` — Menus
+- `menus-and-actions` — Menus and actions
+- `modality` — Modality
+- `motion` — Motion
+- `multitasking` — Multitasking
+- `navigation-and-search` — Navigation and search
+- `nfc` — NFC
+- `offering-help` — Offering help
+- `onboarding` — Onboarding
+- `ornaments` — Ornaments
+- `outline-views` — Outline views
+- `page-controls` — Page controls
+- `patterns` — Patterns
+- `photo-editing` — Photo editing
+- `pickers` — Pickers
+- `playing-audio` — Playing audio
+- `playing-haptics` — Playing haptics
+- `playing-video` — Playing video
+- `pointing-devices` — Pointing devices
+- `presentation` — Presentation
+- `privacy` — Privacy
+- `progress-indicators` — Progress indicators
+- `rating-indicators` — Rating indicators
+- `ratings-and-reviews` — Ratings and reviews
+- `researchkit` — ResearchKit
+- `right-to-left` — Right to left
+- `scroll-views` — Scroll views
+- `search-fields` — Search fields
+- `searching` — Searching
+- `segmented-controls` — Segmented controls
+- `selection-and-input` — Selection and input
+- `sf-symbols` — SF Symbols
+- `shareplay` — SharePlay
+- `shazamkit` — ShazamKit
+- `sheets` — Sheets
+- `sidebars` — Sidebars
+- `sign-in-with-apple` — Sign in with Apple
+- `siri` — Siri
+- `sliders` — Sliders
+- `spatial-layout` — Spatial layout
+- `split-views` — Split views
+- `status` — Status
+- `status-bars` — Status bars
+- `system-experiences` — System experiences
+- `tab-bars` — Tab bars
+- `technologies` — Technologies
+- `text-fields` — Text fields
+- `toolbars` — Toolbars
+- `typography` — Typography
+- `virtual-keyboards` — Virtual keyboards
+- `voiceover` — VoiceOver
+- `wallet` — Wallet
+- `web-views` — Web views
+- `widgets` — Widgets
+- `windows` — Windows
+- `writing` — Writing
+
+---
+
+Source: Apple Human Interface Guidelines (<https://developer.apple.com/design/human-interface-guidelines/>). Content paraphrased in our own voice; not verbatim. Refer to Apple's originals for the canonical text.
