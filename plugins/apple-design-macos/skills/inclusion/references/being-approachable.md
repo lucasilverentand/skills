@@ -1,5 +1,0 @@
-# Being approachable
-An approachable app or game does not require users to possess specific skills or knowledge before use, but it must also offer a clear path for them to deepen their understanding over time. Here are two ways to achieve approachability:
-
-- Present a clear, straightforward interface. To assist in designing a simple interface that aligns with the conventions of each platform, consult [Designing for iOS](designing-for-ios.md), [Designing for iPadOS](designing-for-ipados.md), [Designing for macOS](designing-for-macos.md), [Designing for tvOS](designing-for-tvos.md), [Designing for visionOS](designing-for-visionos.md), [Designing for watchOS](designing-for-watchos.md), and [Designing for games](designing-for-games.md).
-- Build in mechanisms that teach users how to operate your app or game. Consider implementing an onboarding flow that allows those new to the experience to proceed step-by-step, while allowing experienced users to skip directly to the desired content. For more information, see [Onboarding](onboarding.md).

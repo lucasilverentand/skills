@@ -1,0 +1,9 @@
+# Action button
+The Action button provides users with swift access to preferred features on compatible iPhone and Apple Watch models
+
+## Platform guidance — watchOS
+In watchOS, the initial press of the Action button can initiate actions such as dropping a waypoint, starting a dive, or beginning a specific workout. Furthermore, the Action button supports secondary functions beyond a single press, such as marking a segment or moving to the next phase during a multi-part workout.
+
+- **Propose a secondary function that logically supports or progresses the primary action selected by the user.** Since users frequently operate the Action button without visual confirmation, any subsequent press must follow logically from the initial action and remain relevant to the current context. If your application supports workout or dive activities, design a simple, intuitive secondary function that is easily learned and recalled. Exercise caution before implementing more than one secondary function, as this can increase cognitive load and negatively impact perceived usability.
+- **Utilize subsequent button presses to enable additional features rather than to halt or conclude a function.** If the user needs to terminate their primary task (as opposed to merely pausing the current operation), provide this option within the application's interface.
+- **Pause the active function when users simultaneously press the Action button and side button.** An exception exists for diving applications where pausing a dive might be hazardous to the diver, potentially causing them to lose track of their depth or misunderstanding the duration underwater. Unless pausing the current activity creates a negative user experience, ensure you meet user expectations by allowing them to pause their activity when both buttons are pressed concurrently.

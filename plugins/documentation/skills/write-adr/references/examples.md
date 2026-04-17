@@ -58,7 +58,7 @@ The orders service writes to Postgres then publishes to Cloudflare Queues. Two-s
 ```markdown
 # 0007. Move session storage from Redis to Postgres
 
-- Status: accepted, supersedes [0003](0003-redis-sessions.md)
+- Status: accepted, supersedes **0003**
 - Date: 2026-05-22
 - Deciders: Luca
 - Tags: auth, data

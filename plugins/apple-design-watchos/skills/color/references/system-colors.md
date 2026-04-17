@@ -1,6 +1,0 @@
-# System colors
-**Do not hardcode system color values within your application.** The documented color values should only serve as a reference during the design phase. Actual color values are subject to change across releases due to different environmental factors. Apply system colors using APIs such as [Color](apple:SwiftUI/Color).
-
-iOS, iPadOS, macOS, and visionOS also provide collections of *dynamic system colors*. These match the color schemes used by standard UI elements and automatically adjust to both light and dark modes. Each dynamic color is defined semantically by its function, rather than by its specific appearance or numerical value. For instance, certain colors designate view backgrounds at different levels of hierarchy, while others represent foreground content like labels, links, and dividers.
-
-**Do not redefine the inherent meaning of dynamic system colors.** To guarantee a cohesive user experience and maintain visual quality when the platform's appearance shifts, utilize dynamic system colors according to their intended purpose. For example, do not employ the [separator](apple:uikit/uicolor/separator) color for text, nor should you use the [secondary text label](apple:uikit/uicolor/secondarylabel) color as a background.

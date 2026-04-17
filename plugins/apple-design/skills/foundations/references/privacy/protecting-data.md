@@ -1,0 +1,9 @@
+# Protecting data
+Protecting user data is critical. Build confidence in your app's security and help maintain user privacy by leveraging system-provided security features when you need to persist data locally, authorize operations, or transmit information over a network.
+
+Here are some high-level guidelines.
+
+- **Avoid relying solely on passwords for authentication.** Whenever feasible, utilize [passkeys](apple:authenticationservices/public-private_key_authentication/supporting_passkeys/) instead of passwords. If password authentication remains necessary, enhance security by requiring two-factor authentication (refer to [Securing Logins with iCloud Keychain Verification Codes](apple:AuthenticationServices/securing-logins-with-icloud-keychain-verification-codes/) for developer guidance). To further safeguard access to apps where users remain logged in on their device, employ biometric identification methods such as Face ID, Touch ID, or Optical ID. See [Local Authentication](apple:LocalAuthentication) for developer guidance.
+- **Store sensitive information in a keychain.** A keychain offers a secure and predictable experience when managing private user data. See [Keychain services](apple:Security/keychain-services) for developer guidance.
+- **Never store passwords or other secure content in plain-text files.** Even if you restrict file access using permissions, sensitive data is significantly safer when stored within an encrypted keychain.
+- **Avoid inventing custom authentication schemes.** If your application requires authentication, prioritize system-provided features like [passkeys](apple:authenticationservices/public-private_key_authentication/supporting_passkeys/), **Sign in with Apple**, or [Password AutoFill](apple:Security/password-autofill). Consult **Managing accounts** for related guidance.
