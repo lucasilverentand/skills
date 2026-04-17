@@ -1,9 +1,7 @@
 # Agent Workflow for Skill Creation
-
 An optional workflow that uses specialized agents to research, write, and validate a skill. Useful for complex skills — overkill for simple ones.
 
 ## When to offer
-
 Offer the agent workflow when the skill being created is:
 - **Workflow or agent tier** — chains multiple concerns, has 2+ reference files, or needs domain research
 - **Targeting an unfamiliar domain** — the orchestrator doesn't have deep context on the domain's conventions or existing skills
@@ -46,7 +44,6 @@ Runs after the Writer finishes:
 Reports pass/fail with specific issues to fix.
 
 ## Flow
-
 ```
 Orchestrator (you)
   1. Capture intent — ask clarifying questions, determine tier

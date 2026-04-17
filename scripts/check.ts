@@ -232,17 +232,26 @@ function flag(filePath: string, content: string): Flag[] {
 	const flags: Flag[] = [];
 	const lines = content.split("\n");
 	const isSkill = filePath.endsWith("SKILL.md");
+	// References and supporting docs are only loaded when Claude explicitly
+	// reads them — they can be larger than the auto-injected SKILL.md.
+	const isReference = /\/references\//.test(filePath);
 
 	// ── Token budget ──
+	// Thresholds are tighter for SKILL.md because it's auto-injected into
+	// context whenever the skill triggers. References are opt-in reads.
 
 	const tokens = estimateTokens(content);
-	if (tokens > 4000) {
+	const tokenWarn = isReference ? 3000 : 2000;
+	const tokenError = isReference ? 6000 : 4000;
+	if (tokens > tokenError) {
 		flags.push({
 			file: rel,
 			severity: "error",
-			message: `~${tokens} tokens — very large for a context-injected file`,
+			message: isSkill
+				? `~${tokens} tokens — very large for a context-injected file`
+				: `~${tokens} tokens — very large, split into multiple files`,
 		});
-	} else if (tokens > 2000) {
+	} else if (tokens > tokenWarn) {
 		flags.push({
 			file: rel,
 			severity: "warn",
@@ -303,14 +312,28 @@ function flag(filePath: string, content: string): Flag[] {
 		}
 	}
 
-	// Blank-line ratio
-	const blankCount = lines.filter((l) => l.trim() === "").length;
-	const ratio = blankCount / lines.length;
-	if (ratio > 0.35 && lines.length > 30) {
+	// Consecutive-blank bloat: the optimizer collapses 3+ blanks to 2 and
+	// strips blanks immediately after headings. Anything leftover is
+	// semantic paragraph separation, which is fine. We only flag files that
+	// still have runs of 2+ blanks that slipped past the optimizer (should
+	// be zero after --fix). This replaces the old blank-line-ratio heuristic
+	// that incorrectly penalized naturally concise reference prose.
+
+	let maxBlankRun = 0;
+	let currentBlank = 0;
+	for (const line of lines) {
+		if (line.trim() === "") {
+			currentBlank++;
+			if (currentBlank > maxBlankRun) maxBlankRun = currentBlank;
+		} else {
+			currentBlank = 0;
+		}
+	}
+	if (maxBlankRun >= 3) {
 		flags.push({
 			file: rel,
 			severity: "warn",
-			message: `${Math.round(ratio * 100)}% blank lines (${blankCount}/${lines.length}) — unusually sparse`,
+			message: `${maxBlankRun} consecutive blank lines — run \`bun scripts/check.ts --fix\` to collapse`,
 		});
 	}
 
@@ -322,8 +345,8 @@ function flag(filePath: string, content: string): Flag[] {
 const glob = new Glob("**/*.md");
 const files: string[] = [];
 for await (const path of glob.scan({ cwd: ROOT, absolute: true })) {
-	// Skip node_modules, .git, memory files
-	if (/node_modules|\.git\//.test(path)) continue;
+	// Skip node_modules, .git, build artifacts, and caches
+	if (/node_modules|\.git\/|\/build\/|\/\.cache\//.test(path)) continue;
 	files.push(path);
 }
 files.sort();

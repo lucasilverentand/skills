@@ -24,7 +24,6 @@ The `description` field determines whether Claude activates the skill. It is the
 - Max 1024 characters
 
 ### Before/after examples
-
 |Problem|Before|After|
 |---|---|---|
 |Too vague — matches everything, triggers on noise|"Helps with database tasks"|"Generates and applies Drizzle ORM migration files. Use when the user changes a schema file, asks to migrate, or says 'update the database'."|

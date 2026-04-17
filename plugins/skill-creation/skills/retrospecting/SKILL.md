@@ -19,7 +19,6 @@ Retrospective analysis of recent Claude sessions and code changes to continuousl
   - **Create skills from findings** -> follow "Acting on findings" below
 
 ## Running a full retro
-
 A full retro has two phases: gathering data and cross-referencing existing skills. For larger skill libraries or longer time ranges, offer to use agents — a Miner to gather and cluster, and a Cross-Referrer to classify findings against existing skills. For smaller retros, single-agent is fine. Let the user decide.
 
 ### Single-agent flow

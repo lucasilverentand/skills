@@ -1,5 +1,4 @@
 # skill-creation
-
 End-to-end toolkit for authoring, publishing, and continuously improving Claude Code skills.
 
 ## Skills
@@ -20,7 +19,6 @@ Interviews the user to extract design taste and preferences for a domain, then e
 Creates and improves bun-based tools for skills — decides when a tool earns its place, scaffolds zero-dependency scripts with dual output, validates tool quality, and wires tools into SKILL.md decision trees.
 
 ## Installation
-
 Add this plugin to your Claude Code configuration:
 
 ```json
@@ -30,5 +28,4 @@ Add this plugin to your Claude Code configuration:
 ```
 
 ## Author
-
 Luca Silverentand (<dev@lucasilverentand.com>)
