@@ -1,5 +1,0 @@
-# In-game menus
-In-game menus allow players to manage gameplay controls and configure [settings](settings.md) for the entire application.
-
-- **Players must navigate in-game menus using the platform’s standard interaction methods.** Users anticipate that navigating your game menus will utilize the same interactions they use for other device menus. For instance, players expect to move through game menus using touch on iOS and iPadOS, and employing direct or indirect gestures in visionOS.
-- **Ensure your menus are readily accessible and legible across all supported platforms.** Each platform has specific dimensions optimized for interaction targets and font sizes. If scaling your game content to fit different screens—particularly mobile devices—results in menus that are too small for users to read or interact with, you must adjust the size of the tap targets and consider alternative methods for conveying menu content. Refer to [Typography](typography.md) and [Touch controls](game-controls.md#Touch-controls) for guidance.

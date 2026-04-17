@@ -1,0 +1,2 @@
+# Icons — full guidelines — overview
+You may either design interface icons—also referred to as *glyphs*—or select symbols from the SF Symbols application, using them as they are or modifying them to meet your specific needs. Both interface icons and symbols define their shapes using black and clear colors; the system is capable of applying other colors to these black areas. For detailed guidance, consult **SF Symbols**.

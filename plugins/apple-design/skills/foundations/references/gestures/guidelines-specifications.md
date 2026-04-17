@@ -1,0 +1,16 @@
+# Specifications
+
+#### Standard gestures
+The system offers APIs that accommodate the gestures users employ across their devices, regardless of whether they are using a touchscreen, an indirect gesture in visionOS, or dedicated input hardware such as a trackpad, mouse, remote control, or game controller. For developer instructions, refer to [Gestures](apple:SwiftUI/Gestures).
+
+|Gesture|Supported in|Common action|
+|---|---|---|
+|Tap|iOS, iPadOS, macOS, tvOS, visionOS, watchOS|To activate a control or select an item.|
+|Swipe|iOS, iPadOS, macOS, tvOS, visionOS, watchOS|To dismiss views, reveal controls/actions, or scroll.|
+|Drag|iOS, iPadOS, macOS, tvOS, visionOS, watchOS|To move a UI component.|
+|Touch (or pinch) and hold|iOS, iPadOS, tvOS, visionOS, watchOS|To display extra controls or functionality.|
+|Double tap|iOS, iPadOS, macOS, tvOS, visionOS, watchOS|To zoom in; to zoom out if already magnified; or to execute a primary action on Apple Watch Series 9 and Apple Watch Ultra 2.|
+|Zoom|iOS, iPadOS, macOS, tvOS, visionOS|To magnify content or zoom a view.|
+|Rotate|iOS, iPadOS, macOS, tvOS, visionOS|To change the orientation of a selected object.|
+
+For detailed guidance on supporting additional button presses or gestures specific to certain input devices, consult **Pointing devices**, **Remotes**, and **Game controls**.

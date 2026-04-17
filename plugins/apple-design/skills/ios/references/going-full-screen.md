@@ -1,0 +1,5 @@
+# Going full screen
+iPhone, iPad, and Mac devices support full-screen modes, allowing users to expand a window to occupy the entire display area. This feature conceals system controls and creates an environment free from distractions
+
+## Platform guidance — iOS & iPadOS
+**Consider delaying system gestures to prevent unintended exits when running in full-screen mode within an application or game.** By default, the Home Screen indicator automatically minimizes shortly after a user navigates to your application or game. It becomes visible again when the bottom portion of the screen is touched, enabling a single swipe to exit. Because this behavior aligns with user expectations and familiarity, it should be maintained whenever feasible. If implementing this feature leads to accidental exits, you have the option to require two swipes instead of one for exiting. For implementation guidance, consult [preferredScreenEdgesDeferringSystemGestures](apple:SwiftUI/UIHostingController/preferredScreenEdgesDeferringSystemGestures).

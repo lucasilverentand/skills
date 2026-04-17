@@ -12,28 +12,8 @@
 	},
 	"plugins": [
 		{
-			"name": "apple-design-ios",
-			"source": "./plugins/apple-design-ios",
-			"category": "devtools"
-		},
-		{
-			"name": "apple-design-macos",
-			"source": "./plugins/apple-design-macos",
-			"category": "devtools"
-		},
-		{
-			"name": "apple-design-tvos",
-			"source": "./plugins/apple-design-tvos",
-			"category": "devtools"
-		},
-		{
-			"name": "apple-design-visionos",
-			"source": "./plugins/apple-design-visionos",
-			"category": "devtools"
-		},
-		{
-			"name": "apple-design-watchos",
-			"source": "./plugins/apple-design-watchos",
+			"name": "apple-design",
+			"source": "./plugins/apple-design",
 			"category": "devtools"
 		},
 		{

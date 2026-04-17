@@ -1,0 +1,17 @@
+{
+	"name": "apple-design",
+	"description": "Apple Human Interface Guidelines as a single plugin: foundations (shared principles), services (framework integrations), and a skill per platform (iOS, macOS, tvOS, visionOS, watchOS).",
+	"skills": [
+		"./skills/foundations",
+		"./skills/ios",
+		"./skills/macos",
+		"./skills/services",
+		"./skills/tvos",
+		"./skills/visionos",
+		"./skills/watchos"
+	],
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "luca.silverentand@gmail.com"
+	}
+}

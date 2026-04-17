@@ -1,0 +1,7 @@
+# Going full screen
+iPhone, iPad, and Mac devices support full-screen modes, allowing users to expand a window to occupy the entire display area. This feature conceals system controls and creates an environment free from distractions
+
+## Platform guidance — macOS
+- **Utilize the operating system's full-screen capabilities.** Relying on the OS's native support ensures your application behaves correctly across all environments. For instance, certain Mac models feature a camera assembly in the upper-center of the screen; using system support automatically handles this physical obstruction. Developers can find guidance here: [toggleFullScreen(_:)](apple:AppKit/NSWindow/toggleFullScreen(_:)).
+- **If developing a game, refrain from altering display modes when users enter full screen.** Users expect to maintain control over their display settings, and automatic changes do not inherently enhance performance. For further developer resources, consult [Managing your game window for Metal in macOS](apple:Metal/managing-your-game-window-for-metal-in-macos).
+- **Always allow the user to initiate full-screen mode.** It is best practice to allow users to enter full screen via your window's dedicated Enter Full Screen button, the View menu item, or the Control-Command-F keyboard shortcut. Do not introduce a custom menu listing different window modes. In game applications, you may optionally include a custom [toggle](toggles.md) to switch full-screen mode on and off.
