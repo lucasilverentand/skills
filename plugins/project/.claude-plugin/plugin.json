@@ -3,7 +3,8 @@
 	"description": "Project setup and context management",
 	"skills": [
 		"./skills/project-context",
-		"./skills/requirements"
+		"./skills/requirements",
+		"./skills/task-spec"
 	],
 	"author": {
 		"name": "Luca Silverentand",
