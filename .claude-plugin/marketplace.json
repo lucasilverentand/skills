@@ -42,6 +42,11 @@
 			"category": "devtools"
 		},
 		{
+			"name": "project-docs",
+			"source": "./plugins/project-docs",
+			"category": "devtools"
+		},
+		{
 			"name": "skill-creation",
 			"source": "./plugins/skill-creation",
 			"category": "devtools"
