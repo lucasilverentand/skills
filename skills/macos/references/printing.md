@@ -1,0 +1,10 @@
+# Printing
+Apps targeting iOS, iPadOS, macOS, or visionOS may incorporate the operating system's native printing features when contextually appropriate. If needed, these applications can present custom options specific to the document or printer
+
+## Platform guidance — macOS
+- **If your macOS app provides printing options unique to the application, consider implementing a custom category within the print panel.** The default print panel includes categories like Layout, Paper Handling, and Media & Quality. Assign a distinct name to your custom category (such as your app's title) and include options that enhance the printing experience specific to your application. For instance, Keynote offers specialized choices like printing presenter notes, slide backgrounds, or skipping slides.
+- **If your application supports page settings unique to the document, consider implementing a page setup dialog.** A *page setup dialog* manages rarely adjusted settings—such as scaling, orientation, and page size—that apply when printing a specific document. If this feature fits your app's workflow, ensure you do not duplicate functions already handled by the system. For example, options for changing page orientation or printing in reverse order are managed natively by the operating system.
+- **Ensure that the dependencies between options are clearly communicated.** For example, if double-sided printing is enabled, the option to print on transparencies must become unavailable.
+- **Distinguish advanced features from those used frequently.** Consider utilizing a disclosure control to conceal complex options until they are required. Label these advanced choices as *Advanced Options*.
+- **Consider allowing users to preview the impact of a setting.** For example, you might update a thumbnail image dynamically to reflect changes made to a tone control.
+- **Consider persisting modified settings with the document.** At minimum, it is advisable to retain print configuration until the document is closed in case the user wishes to print it again.

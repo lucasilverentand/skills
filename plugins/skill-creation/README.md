@@ -1,31 +1,25 @@
-# skill-creation
-End-to-end toolkit for authoring, publishing, and continuously improving Claude Code skills.
+# Skill Creation
+End-to-end toolkit for authoring, publishing, tooling, and improving reusable agent skills.
 
 ## Skills
+- `skill-creation:authoring`
+- `skill-creation:publishing`
+- `skill-creation:retrospecting`
+- `skill-creation:taste-encoding`
+- `skill-creation:tooling`
 
-### authoring
-Scaffolds skill directories, writes SKILL.md files with frontmatter and decision trees, adds references, and validates structure and token budgets. Also handles refactoring bloated skills into smaller pieces.
+## Install
+Codex:
 
-### publishing
-Publishes skills to the marketplace catalog — bumps versions, removes entries, packages skills for distribution, regenerates marketplace.json from disk, and validates catalog integrity.
-
-### retrospecting
-Mines recent Claude Code conversations and git history for struggles, repeated corrections, rework patterns, and taste signals — then turns findings into new skills or improvements to existing ones.
-
-### taste-encoding
-Interviews the user to extract design taste and preferences for a domain, then encodes those into skill reference files, decision rules, conventions, comparison tables, and anti-patterns.
-
-### tooling
-Creates and improves bun-based tools for skills — decides when a tool earns its place, scaffolds zero-dependency scripts with dual output, validates tool quality, and wires tools into SKILL.md decision trees.
-
-## Installation
-Add this plugin to your Claude Code configuration:
-
-```json
-{
-  "plugins": ["plugins/skill-creation"]
-}
+```bash
+codex plugin marketplace add lucasilverentand/skills
 ```
 
-## Author
-Luca Silverentand (<dev@lucasilverentand.com>)
+Claude Code:
+
+```text
+/plugin marketplace add lucasilverentand/skills
+/plugin install skill-creation@skills-of-luca
+```
+
+This plugin package is generated from the root `skills/` source tree. Edit canonical skills there, then run `bun run marketplace:write`.

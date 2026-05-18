@@ -1,0 +1,8 @@
+# Toggled items
+Menu options frequently represent attributes or objects that users can enable or disable. To maintain efficiency and avoid listing a separate menu entry for every possible state, consider using a single, toggled menu item that communicates the current status and allows users to change it.
+
+- **Consider using a changeable label that describes an item’s current state.** For instance, instead of having distinct menu items like "Show Map" and "Hide Map," you could employ one item whose label dynamically switches between "Show Map" and "Hide Map," depending on the map's visibility.
+- **Include a verb if a changeable label isn’t clear enough.** If users might be unsure whether labels like "HDR On" and "HDR Off" denote actions or current states, you should add verbs to clarify their function, such as "Turn HDR On" and "Turn HDR Off."
+- **If necessary, display both menu items instead of one toggled item.** In certain situations, presenting both actions or states simultaneously aids the user experience. For example, a game might list both "Take Account Online" and "Take Account Offline," allowing only the relevant item to be selectable when the account is online.
+- **Consider using a checkmark to show that an attribute is currently in effect.** Checkmarks allow users to quickly scan a list of attributes and identify which ones are selected. For example, in the standard Format > Font menu, checkmarks help users easily notice which styles are applied to selected text.
+- **Consider offering a menu item that makes it easy to remove multiple toggled attributes.** If users apply several styles to selected text, providing a menu item—such as "Plain"—that removes all applied formatting attributes at once is beneficial.

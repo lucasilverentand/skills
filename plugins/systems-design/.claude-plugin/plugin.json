@@ -1,15 +1,30 @@
 {
 	"name": "systems-design",
-	"description": "System architecture design — decomposition, data modeling, API design, and design review",
+	"description": "Opinionated system design toolkit from requirements to architecture, data modeling, APIs, documentation, diagrams, ADRs, and review.",
+	"version": "1.1.0",
 	"skills": [
 		"./skills/api-design",
 		"./skills/architecture",
+		"./skills/c4-diagrams",
 		"./skills/data-modeling",
 		"./skills/design-review",
-		"./skills/design-workflow"
+		"./skills/design-workflow",
+		"./skills/requirements",
+		"./skills/write-adr",
+		"./skills/write-design-doc"
 	],
 	"author": {
 		"name": "Luca Silverentand",
 		"email": "dev@lucasilverentand.com"
-	}
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"architecture",
+		"api",
+		"database",
+		"design-doc",
+		"adr"
+	]
 }

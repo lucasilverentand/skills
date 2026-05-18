@@ -1,0 +1,6 @@
+# Provide default phrases for shortcuts
+Your application provides default phrases for shortcuts during setup. Users can customize these phrases when adding your shortcuts to Siri.
+
+- **Keep phrases short and memorable.** Since users must speak the phrase exactly as suggested, lengthy or ambiguous phrasing can lead to errors and user frustration. Phrases consisting of two or three words are generally most effective. Longer phrases increase the cognitive load for users, and excessively long phrases may be cut off by Siri.
+- **Make sure the phrases you suggest are accurate and specific.** Phrases such as *Reorder coffee* or *Order my usual coffee* clearly communicate the shortcut's function, aiding user recall. Furthermore, ensure your suggested phrases precisely match each shortcut’s defined scope. For instance, *Watch baseball* is a clearer and more memorable instruction than *Watch sports*. Crucially, do not imply that users can modify the invocation phrase to achieve a different outcome. For example, a phrase like *Order a large clam chowder* might lead users to believe that substituting "small" for "large" or "lobster bisque" for "clam chowder" will yield a different result.
+- **Don’t commandeer core Siri commands.** For example, never suggest phrases such as *Call 911* or include the phrase *Hey Siri*.

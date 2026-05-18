@@ -4,8 +4,10 @@
 		"name": "Luca Silverentand",
 		"url": "https://github.com/lucasilverentand"
 	},
+	"description": "Reusable agent skills by Luca Silverentand.",
+	"version": "1.1.0",
 	"metadata": {
-		"version": "1.0.0",
+		"version": "1.1.0",
 		"homepage": "https://github.com/lucasilverentand/skills",
 		"repository": "https://github.com/lucasilverentand/skills",
 		"license": "MIT"
@@ -14,42 +16,139 @@
 		{
 			"name": "apple-design",
 			"source": "./plugins/apple-design",
-			"category": "devtools"
+			"description": "Apple Human Interface Guidelines as a single plugin: foundations, services, and a skill per Apple platform.",
+			"version": "1.1.0",
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "luca.silverentand@gmail.com"
+			},
+			"category": "Design",
+			"keywords": [
+				"apple",
+				"design",
+				"hig",
+				"ios",
+				"macos",
+				"visionos"
+			]
 		},
 		{
 			"name": "documentation",
 			"source": "./plugins/documentation",
-			"category": "devtools"
+			"description": "Documentation authoring and structured knowledge capture for design docs, ADRs, C4 diagrams, and decision trees.",
+			"version": "1.1.0",
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			},
+			"category": "Documentation",
+			"keywords": [
+				"documentation",
+				"adr",
+				"c4",
+				"decision-tree"
+			]
 		},
 		{
 			"name": "frontend",
 			"source": "./plugins/frontend",
-			"category": "devtools"
+			"description": "Frontend design exploration toolkit for interactive HTML design options.",
+			"version": "1.1.0",
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			},
+			"category": "Development",
+			"keywords": [
+				"frontend",
+				"design",
+				"ui",
+				"prototype"
+			]
 		},
 		{
 			"name": "git",
 			"source": "./plugins/git",
-			"category": "devtools"
+			"description": "Git workflow toolkit for commits, conflict resolution, rebases, and repository cleanup.",
+			"version": "1.1.0",
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			},
+			"category": "Development",
+			"keywords": [
+				"git",
+				"commits",
+				"rebase",
+				"conflicts"
+			]
 		},
 		{
 			"name": "github",
 			"source": "./plugins/github",
-			"category": "devtools"
+			"description": "GitHub workflow toolkit for creating pull requests and monitoring CI.",
+			"version": "1.1.0",
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			},
+			"category": "Development",
+			"keywords": [
+				"github",
+				"pull-request",
+				"ci"
+			]
 		},
 		{
 			"name": "project",
 			"source": "./plugins/project",
-			"category": "devtools"
+			"description": "Project setup and context management skills for requirements and shared agent context.",
+			"version": "1.1.0",
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			},
+			"category": "Development",
+			"keywords": [
+				"project",
+				"requirements",
+				"context"
+			]
 		},
 		{
 			"name": "skill-creation",
 			"source": "./plugins/skill-creation",
-			"category": "devtools"
+			"description": "End-to-end toolkit for authoring, publishing, tooling, and improving reusable agent skills.",
+			"version": "1.1.0",
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			},
+			"category": "Development",
+			"keywords": [
+				"skills",
+				"authoring",
+				"publishing",
+				"tooling"
+			]
 		},
 		{
 			"name": "systems-design",
 			"source": "./plugins/systems-design",
-			"category": "devtools"
+			"description": "Opinionated system design toolkit from requirements to architecture, data modeling, APIs, documentation, diagrams, ADRs, and review.",
+			"version": "1.1.0",
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			},
+			"category": "Architecture",
+			"keywords": [
+				"architecture",
+				"api",
+				"database",
+				"design-doc",
+				"adr"
+			]
 		}
 	]
 }

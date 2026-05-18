@@ -1,0 +1,3 @@
+# iOS
+- **Prioritize only the most critical items within the main toolbar.** Given the spatial constraints, carefully select and include only the actions vital to your application. Use a "More" menu for supplementary items.
+- **Utilize a large title to maintain user orientation during navigation and scrolling.** By default, the large title automatically shrinks to a standard size when content scrolling begins, and reverts to its large state upon reaching the top, indicating the user's current location. For developer guidance, see [prefersLargeTitles](apple:UIKit/UINavigationBar/prefersLargeTitles).

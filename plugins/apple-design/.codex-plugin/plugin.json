@@ -1,0 +1,36 @@
+{
+	"name": "apple-design",
+	"version": "1.1.0",
+	"description": "Apple Human Interface Guidelines as a single plugin: foundations, services, and a skill per Apple platform.",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "luca.silverentand@gmail.com"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"apple",
+		"design",
+		"hig",
+		"ios",
+		"macos",
+		"visionos"
+	],
+	"skills": "./skills/",
+	"interface": {
+		"displayName": "Apple Design",
+		"shortDescription": "Apple HIG guidance by platform",
+		"longDescription": "Apple Human Interface Guidelines as a single plugin: foundations, services, and a skill per Apple platform.",
+		"developerName": "Luca Silverentand",
+		"category": "Design",
+		"capabilities": [
+			"Read",
+			"Write"
+		],
+		"websiteURL": "https://github.com/lucasilverentand/skills",
+		"defaultPrompt": [
+			"Use Apple Design when the task matches one of its bundled skills."
+		]
+	}
+}

@@ -1,0 +1,4 @@
+# Keyboards — overview
+Keyboard users often appreciate using shortcuts to accelerate their interactions with applications and games. A *keyboard shortcut* is a specific command mapped to a combination of a primary key and one or more modifier keys (Control, Option, Shift, Command). In contrast, a keyboard shortcut used within a game—referred to as a *key binding*—often consists of just one key.
+
+Apple defines standard keyboard shortcuts to function consistently across the system and most applications, allowing users to easily apply existing knowledge to new experiences. Specific apps may define custom keyboard shortcuts for their unique commands, while most games implement custom key bindings to enable quick and efficient control of the game via keyboard. For further information, consult **Keyboards**.

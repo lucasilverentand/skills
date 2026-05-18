@@ -1,0 +1,35 @@
+{
+	"name": "systems-design",
+	"version": "1.1.0",
+	"description": "Opinionated system design toolkit from requirements to architecture, data modeling, APIs, documentation, diagrams, ADRs, and review.",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"architecture",
+		"api",
+		"database",
+		"design-doc",
+		"adr"
+	],
+	"skills": "./skills/",
+	"interface": {
+		"displayName": "Systems Design",
+		"shortDescription": "End-to-end system design",
+		"longDescription": "Opinionated system design toolkit from requirements to architecture, data modeling, APIs, documentation, diagrams, ADRs, and review.",
+		"developerName": "Luca Silverentand",
+		"category": "Architecture",
+		"capabilities": [
+			"Read",
+			"Write"
+		],
+		"websiteURL": "https://github.com/lucasilverentand/skills",
+		"defaultPrompt": [
+			"Use Systems Design when the task matches one of its bundled skills."
+		]
+	}
+}

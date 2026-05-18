@@ -1,0 +1,12 @@
+# Achievements
+Achievements provide players with extra motivation to maintain engagement in your game. Game Center achievements are presented as a collectible card format that both highlights the player's journey and features your unique artwork. For detailed developer instructions, refer to [Rewarding players with achievements](apple:GameKit/rewarding-players-with-achievements).
+
+#### Integrating achievements into your game
+- **Align with Game Center achievement states.** Game Center utilizes four defined achievement statuses: locked, in-progress, hidden, and completed. The system organizes achievements based on their completion status, placing finished achievements in the Completed group while grouping all others into the Locked group. By mapping your achievements to these four states, you ensure a cohesive player experience and allow players to quickly grasp the range of achievements available in your game.
+- **Determine a display order.** The sequence in which you upload achievements dictates their on-screen appearance, so establish the desired display order before uploading assets. For instance, you may wish to arrange them in a sequence that mirrors the typical progression path through your game.
+- **Be succinct when describing achievements.** The achievement card imposes a two-line limit for both the title and description. Should either the title or description exceed this two-line constraint, the card will truncate the text. Use title case for the achievement title and sentence case for the description.
+- **Give players a sense of progress.** When implementing progressive achievements, the system displays the player's current advancement and delivers motivational prompts—such as “Youʼre more than halfway to completing Great Lakes Freighter in The Coast. Keep going!”—to encourage completion.
+
+#### Creating achievement images
+- **Design rich, high-quality images that help players feel rewarded.** Given that achievements are a prominent feature within the Game Center UI, it is crucial to provide high-quality assets that capture attention and encourage players to return to your game. Do not repurpose the same asset for more than one achievement. If an image is not supplied for a specific achievement, the card will instead display a placeholder graphic.
+- **Create artwork in the appropriate size and format.** The system applies a circular mask to your achievement image, so ensure that all content is kept centered. Please use the following specifications when creating these images.
