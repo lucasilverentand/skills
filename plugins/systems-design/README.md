@@ -1,16 +1,12 @@
 # Systems Design
-Opinionated system design toolkit from requirements to architecture, data modeling, APIs, documentation, diagrams, ADRs, and review.
+Opinionated system design toolkit for architecture, data modeling, API design, workflow sequencing, and design review.
 
 ## Skills
 - `systems-design:api-design`
 - `systems-design:architecture`
-- `systems-design:c4-diagrams`
 - `systems-design:data-modeling`
 - `systems-design:design-review`
 - `systems-design:design-workflow`
-- `systems-design:requirements`
-- `systems-design:write-adr`
-- `systems-design:write-design-doc`
 
 ## Install
 Codex:
@@ -26,4 +22,4 @@ Claude Code:
 /plugin install systems-design@skills-of-luca
 ```
 
-This plugin package is generated from the root `skills/` source tree. Edit canonical skills there, then run `bun run marketplace:write`.
+This plugin owns its skill source under `plugins/systems-design/skills/`. Edit those files directly, then run `bun run marketplace:write` to refresh generated manifests and marketplaces.

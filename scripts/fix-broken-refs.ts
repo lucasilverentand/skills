@@ -2,7 +2,7 @@
 /**
  * Cleans broken cross-reference links in plugin reference files.
  *
- * Scope: every `.md` file under `skills/* /references/ **`.
+ * Scope: every `.md` file under `plugins/*/skills/*/references/**`.
  *
  * For each markdown link `[Label](target.md)` or `[Label](target.md#anchor)`:
  *   - Resolve `target.md` relative to the file's directory.
@@ -22,7 +22,7 @@ import { readFile, stat, writeFile } from "node:fs/promises";
 import { dirname, relative, resolve } from "node:path";
 
 const ROOT = resolve(import.meta.dir, "..");
-const SKILLS_DIR = resolve(ROOT, "skills");
+const PLUGINS_DIR = resolve(ROOT, "plugins");
 const write = process.argv.includes("--write");
 
 const dim = (s: string) => `\x1b[2m${s}\x1b[0m`;
@@ -54,9 +54,9 @@ interface FileResult {
 	droppedSamples: string[];
 }
 
-const glob = new Glob("*/references/**/*.md");
+const glob = new Glob("*/skills/*/references/**/*.md");
 const files: string[] = [];
-for await (const path of glob.scan({ cwd: SKILLS_DIR, absolute: true })) {
+for await (const path of glob.scan({ cwd: PLUGINS_DIR, absolute: true })) {
 	files.push(path);
 }
 files.sort();

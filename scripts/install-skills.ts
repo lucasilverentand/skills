@@ -1,11 +1,11 @@
 #!/usr/bin/env bun
 /**
- * Installs canonical root-level skills into a local agent skill directory.
+ * Installs plugin-owned skills into a local agent skill directory.
  *
  * Examples:
  *   bun scripts/install-skills.ts --target codex
  *   bun scripts/install-skills.ts --target claude creating-commits creating-prs
- *   bun scripts/install-skills.ts --target codex --symlink --force
+ *   bun scripts/install-skills.ts --target codex --symlink --force git:creating-commits
  */
 
 import { existsSync, lstatSync } from "node:fs";
@@ -14,7 +14,7 @@ import { homedir } from "node:os";
 import { join, resolve } from "node:path";
 
 const ROOT = resolve(import.meta.dir, "..");
-const SKILLS_DIR = resolve(ROOT, "skills");
+const PLUGINS_DIR = resolve(ROOT, "plugins");
 const args = process.argv.slice(2);
 
 const targetIndex = args.indexOf("--target");
@@ -27,12 +27,20 @@ const selected = args.filter((arg, index) => {
 	return !arg.startsWith("--");
 });
 
+interface SkillEntry {
+	plugin: string;
+	skill: string;
+	path: string;
+}
+
 function usage(): never {
 	console.error(
 		[
 			"Usage:",
 			"  bun scripts/install-skills.ts --target codex [--force] [--symlink] [skill...]",
 			"  bun scripts/install-skills.ts --target claude [--force] [--symlink] [skill...]",
+			"",
+			"Skill names can be plain names such as creating-commits, or plugin-qualified names such as git:creating-commits.",
 		].join("\n"),
 	);
 	process.exit(1);
@@ -45,47 +53,75 @@ const destination =
 		? join(homedir(), ".agents", "skills")
 		: join(homedir(), ".claude", "skills");
 
-async function allSkills(): Promise<string[]> {
-	const entries = await readdir(SKILLS_DIR, { withFileTypes: true });
-	return entries
-		.filter((entry) => entry.isDirectory())
-		.map((entry) => entry.name)
-		.sort();
-}
+async function collectSkills(): Promise<Map<string, SkillEntry>> {
+	const registry = new Map<string, SkillEntry>();
+	if (!existsSync(PLUGINS_DIR)) return registry;
 
-async function installSkill(skill: string): Promise<"installed" | "skipped"> {
-	const src = resolve(SKILLS_DIR, skill);
-	const dest = resolve(destination, skill);
-	if (!existsSync(src)) {
-		throw new Error(`Unknown skill: ${skill}`);
+	const plugins = await readdir(PLUGINS_DIR, { withFileTypes: true });
+	for (const plugin of plugins) {
+		if (!plugin.isDirectory()) continue;
+		const skillsRoot = resolve(PLUGINS_DIR, plugin.name, "skills");
+		if (!existsSync(skillsRoot)) continue;
+
+		const skills = await readdir(skillsRoot, { withFileTypes: true });
+		for (const skill of skills) {
+			if (!skill.isDirectory()) continue;
+			const entry = {
+				plugin: plugin.name,
+				skill: skill.name,
+				path: resolve(skillsRoot, skill.name),
+			};
+			if (!existsSync(resolve(entry.path, "SKILL.md"))) continue;
+			const existing = registry.get(skill.name);
+			if (existing) {
+				throw new Error(
+					`Duplicate skill "${skill.name}" in ${existing.plugin} and ${plugin.name}; use one owning plugin before direct install`,
+				);
+			}
+			registry.set(skill.name, entry);
+			registry.set(`${plugin.name}:${skill.name}`, entry);
+			registry.set(`${plugin.name}/${skill.name}`, entry);
+		}
 	}
 
+	return registry;
+}
+
+async function installSkill(entry: SkillEntry): Promise<"installed" | "skipped"> {
+	const dest = resolve(destination, entry.skill);
 	if (existsSync(dest)) {
 		const existing = lstatSync(dest);
 		if (!force && !(link && existing.isSymbolicLink())) {
-			console.log(`skipped  ${skill}  exists; rerun with --force to replace`);
+			console.log(`skipped  ${entry.skill}  exists; rerun with --force to replace`);
 			return "skipped";
 		}
 		await rm(dest, { recursive: true, force: true });
 	}
 
 	if (link) {
-		await symlink(src, dest, "dir");
+		await symlink(entry.path, dest, "dir");
 	} else {
-		await cp(src, dest, { recursive: true, dereference: true });
+		await cp(entry.path, dest, { recursive: true, dereference: true });
 	}
-	console.log(`${link ? "linked" : "copied"}   ${skill}`);
+	console.log(`${link ? "linked" : "copied"}   ${entry.skill}  ${entry.plugin}`);
 	return "installed";
 }
 
 await mkdir(destination, { recursive: true });
 
-const skills = selected.length > 0 ? selected : await allSkills();
+const registry = await collectSkills();
+const names =
+	selected.length > 0
+		? selected
+		: [...new Set([...registry.values()].map((entry) => entry.skill))].sort();
+
 let installed = 0;
 let skipped = 0;
 
-for (const skill of skills) {
-	const result = await installSkill(skill);
+for (const name of names) {
+	const entry = registry.get(name);
+	if (!entry) throw new Error(`Unknown skill: ${name}`);
+	const result = await installSkill(entry);
 	if (result === "installed") installed++;
 	else skipped++;
 }

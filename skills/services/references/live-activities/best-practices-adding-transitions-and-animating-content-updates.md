@@ -1,8 +1,0 @@
-# Adding transitions and animating content updates
-Beyond expansion and contraction transitions, Live Activities utilize system and custom animations with a maximum duration of two seconds. Note that the system does not perform these animations on Always-On displays when luminance is reduced.
-
-- **Use animations to reinforce the information you’re communicating and to bring attention to updates.** In addition to shifting element positions, elements can be animated in or out using the default content-replace transition, or custom transitions involving scale, opacity, and movement can be created. For example, a sports application might use numeric content transitions for score changes or fade a timer in and out when it reaches zero.
-- **Animate layout changes.** Content updates may require a change to your Live Activity's layout—for example, when it expands to fill the screen in StandBy or when more information becomes available. During the transition to a new layout, preserve as much of the existing layout by animating current elements into their new positions rather than removing and reintroducing them.
-- **Try to avoid overlapping elements.** Sometimes, it is best to animate certain elements out and then re-animate them in at a new location to prevent collision with other parts of your transition. For instance, when animating items in lists, only animate the element that moves to a new position and use fade-in-and-out transitions for the other list items.
-
-For developer guidance, see [Animating data updates in widgets and Live Activities](apple:WidgetKit/Animating-data-updates-in-widgets-and-live-activities).

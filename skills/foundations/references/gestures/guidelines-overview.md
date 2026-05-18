@@ -1,2 +1,0 @@
-# Gestures — full guidelines — overview
-All platforms support fundamental gestures like tap, swipe, and drag. Although the specific movements required to perform these basic gestures may vary depending on the platform or input device, users are familiar with the underlying functionality and expect these gestures to be available universally. For a complete list of these gestures, consult [Standard gestures](#Standard-gestures).

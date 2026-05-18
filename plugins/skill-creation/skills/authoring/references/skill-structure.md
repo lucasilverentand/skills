@@ -2,7 +2,7 @@
 
 ## Directory layout
 ```text
-skills/<skill-name>/
+plugins/<plugin-name>/skills/<skill-name>/
 ├── SKILL.md                # how: lean instructions, frontmatter, short decision trees
 ├── tools/                  # (optional) bun scripts the agent can run
 │   └── *.ts
@@ -15,7 +15,7 @@ skills/<skill-name>/
 Only `SKILL.md` is required. Add `tools/`, `references/`, or `examples/` when the skill needs them.
 
 ## Repository layout
-This repository uses `skills/<skill-name>/` as the canonical authoring tree. The `plugins/` directory is generated from `plugin-groups.json` and exists so Codex and Claude Code can install versioned plugin packages. Edit root skills first, then run `bun run marketplace:write`.
+This repository uses `plugins/<plugin-name>/skills/<skill-name>/` as the authoring tree. Each skill has one owning plugin. `plugin-groups.json` records the plugin metadata and skill ownership, and `bun run marketplace:write` regenerates manifests, READMEs, and marketplace catalogs.
 
 ## Skill locations
 |Consumer|Path|Scope|
@@ -24,7 +24,7 @@ This repository uses `skills/<skill-name>/` as the canonical authoring tree. The
 |Codex project|`.agents/skills/<skill-name>/SKILL.md`|Project or folder-specific skills|
 |Claude Code personal|`~/.claude/skills/<skill-name>/SKILL.md`|All Claude Code projects for that user|
 |Claude Code project|`.claude/skills/<skill-name>/SKILL.md`|Project or folder-specific skills|
-|Plugin package|`<plugin>/skills/<skill-name>/SKILL.md`|Where the plugin is enabled|
+|Plugin package|`plugins/<plugin-name>/skills/<skill-name>/SKILL.md`|Where the plugin is enabled|
 
 Plugin skills use `plugin-name:skill-name` namespacing in both Codex and Claude Code, preventing collisions with direct personal or project skills.
 

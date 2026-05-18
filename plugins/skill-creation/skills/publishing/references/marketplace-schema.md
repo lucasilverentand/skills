@@ -1,14 +1,14 @@
 # Marketplace & Plugin Schema
-This repository has one authored skill tree and two generated plugin surfaces.
+This repository has plugin-owned skills and two generated marketplace surfaces.
 
 ## Source of truth
 |Path|Purpose|
 |---|---|
-|`skills/<skill-name>/SKILL.md`|Canonical open Agent Skills source|
-|`plugin-groups.json`|Marketplace metadata, plugin grouping, Codex install copy, Claude install copy|
-|`scripts/marketplace.ts`|Generator and validator for plugin packages and marketplaces|
+|`plugins/<name>/skills/<skill-name>/SKILL.md`|Open Agent Skills source owned by one plugin|
+|`plugin-groups.json`|Marketplace metadata and plugin skill ownership|
+|`scripts/marketplace.ts`|Generator and validator for plugin manifests and marketplaces|
 
-Do not edit generated skill copies under `plugins/<name>/skills/`. Edit `skills/<skill-name>/`, then run `bun run marketplace:write`.
+Edit skills in place under their owning plugin. Do not create root-level skill copies.
 
 ## Generated surfaces
 |Consumer|Generated path|Notes|
@@ -17,7 +17,7 @@ Do not edit generated skill copies under `plugins/<name>/skills/`. Edit `skills/
 |Codex plugin manifest|`plugins/<name>/.codex-plugin/plugin.json`|Required Codex plugin entry point|
 |Claude marketplace|`.claude-plugin/marketplace.json`|Claude Code plugin catalog|
 |Claude plugin manifest|`plugins/<name>/.claude-plugin/plugin.json`|Claude Code plugin entry point|
-|Plugin skill copies|`plugins/<name>/skills/<skill-name>/`|Materialized copies; no symlink dependency on root skills|
+|Plugin README|`plugins/<name>/README.md`|Generated install notes for that plugin|
 
 Codex can also read `.claude-plugin/marketplace.json` as a legacy-compatible marketplace, but this repo generates the Codex-native `.agents/plugins/marketplace.json` so install behavior is explicit.
 
@@ -28,7 +28,7 @@ Top-level fields:
 |---|---|---|
 |`name`|Yes|Marketplace identifier, kebab-case|
 |`owner`|Yes|Maintainer metadata|
-|`metadata.version`|Yes|Shared semver for generated marketplace/plugin packages|
+|`metadata.version`|Yes|Shared semver for generated marketplaces and plugin manifests|
 |`metadata.homepage`|No|Homepage URL|
 |`metadata.repository`|No|Repository URL|
 |`metadata.license`|No|SPDX license identifier|
@@ -43,12 +43,12 @@ Plugin group fields:
 |`description`|Yes|Long plugin description|
 |`shortDescription`|Yes|Codex short display copy|
 |`category`|Yes|Install-surface category|
-|`skills`|Yes|Canonical skill directory names to copy into the plugin|
+|`skills`|Yes|Skill directory names owned by this plugin under `plugins/<name>/skills/`|
 |`commands`|No|Claude-only legacy command shims under `plugins/<name>/commands/*.md`|
 |`author`|Yes|Plugin author metadata|
 |`keywords`|No|Discovery tags|
 
-A skill can appear in multiple plugin groups. Use this for workflow bundles such as `systems-design`, which packages `requirements`, ADR, design-doc, and diagram skills alongside the core architecture/data/API skills.
+A skill belongs to exactly one plugin. For cross-plugin workflows, reference companion skills by name instead of copying their files into another plugin.
 
 ## Codex marketplace shape
 Generated at `.agents/plugins/marketplace.json`:
@@ -135,11 +135,11 @@ Generated at `plugins/<name>/.claude-plugin/plugin.json`:
 Commands are included only in Claude plugin manifests. New portable workflows should be authored as skills.
 
 ## Direct skill installation
-Direct skill consumers can install from the canonical root tree:
+Direct skill consumers can install from the plugin-owned skill tree:
 
 ```bash
 bun run install:codex-skills -- creating-commits creating-prs
 bun run install:claude-skills -- creating-commits creating-prs
 ```
 
-Without skill names, the installer targets every canonical skill. Add `--symlink` for local development and `--force` to replace an existing installed skill.
+Without skill names, the installer targets every plugin-owned skill. Add `--symlink` for local development and `--force` to replace an existing installed skill.

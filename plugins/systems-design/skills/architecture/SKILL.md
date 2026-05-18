@@ -5,7 +5,7 @@ allowed-tools: Read Grep Glob Bash Write Edit AskUserQuestion
 ---
 
 # Architecture
-Turns requirements into a concrete system shape — components, boundaries, data flow, failure modes, and technology choices. This is the thinking skill: it's about decomposition and trade-offs, not about writing the document (that's `write-design-doc`), modeling data (that's `data-modeling`), or designing APIs (that's `api-design`).
+Turns requirements into a concrete system shape — components, boundaries, data flow, failure modes, and technology choices. This is the thinking skill: it's about decomposition and trade-offs, not about writing the document (that's `documentation:write-design-doc` when installed), modeling data (that's `data-modeling`), or designing APIs (that's `api-design`).
 
 ## Current context
 - Project: !`basename "$(git rev-parse --show-toplevel 2>/dev/null)" 2>/dev/null || echo "(not a git repo)"`
@@ -17,9 +17,9 @@ Turns requirements into a concrete system shape — components, boundaries, data
   - **Adding a new feature or service to an existing system** → read existing `.context/` first, scope the work to the new slice only
   - **Rough sketch or whiteboard discussion** → talk through components and trade-offs in chat, skip the formal output
   - **User already has requirements documented** → read them, proceed to decomposition
-  - **User doesn't have clear requirements yet** → hand off to `requirements` first
-  - **User wants a picture** → hand off to `c4-diagrams`
-  - **User wants to capture a specific decision** → hand off to `write-adr`
+  - **User doesn't have clear requirements yet** → hand off to `project:requirements` first when available
+  - **User wants a picture** → hand off to `documentation:c4-diagrams` when available
+  - **User wants to capture a specific decision** → hand off to `documentation:write-adr` when available
 
 ## Philosophy
 These principles come from `references/philosophy.md` and apply to every architecture decision:
@@ -89,10 +89,10 @@ Give rejected options their real best case — strawman comparisons are useless.
 |---|---|
 |Need to design the data model|`data-modeling`|
 |Need to design the API|`api-design`|
-|Need a diagram|`c4-diagrams`|
-|Ready to write the doc|`write-design-doc`|
-|A decision deserves recording|`write-adr`|
-|Need to gather requirements first|`requirements`|
+|Need a diagram|`documentation:c4-diagrams` if installed|
+|Ready to write the doc|`documentation:write-design-doc` if installed|
+|A decision deserves recording|`documentation:write-adr` if installed|
+|Need to gather requirements first|`project:requirements` if installed|
 
 ## Key references
 |File|Covers|

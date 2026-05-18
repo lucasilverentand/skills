@@ -47,13 +47,13 @@ Before proposing new skills, check what already exists:
 Use Glob to list existing skills:
 
 ```
-Glob pattern: skills/*/SKILL.md
+Glob pattern: plugins/*/skills/*/SKILL.md
 ```
 
 For each cluster, search existing skills for overlap:
 
 ```
-Grep pattern: "<keyword>" in skills/*/SKILL.md
+Grep pattern: "<keyword>" in plugins/*/skills/*/SKILL.md
 ```
 
 Classify each cluster as:
@@ -68,7 +68,7 @@ When the skill library is large or the retro covers many days, agents keep conte
 
 **Miner** (general-purpose agent) — runs both tools, clusters raw findings by theme, produces a structured findings document with clusters, evidence, and frequency counts.
 
-**Cross-Referrer** (Explore agent, read-only) — receives the Miner's clusters, reads all existing skills in the repo (Glob for `skills/*/SKILL.md`), searches for overlap, and classifies each cluster as new skill / skill update / project-instructions addition / memory entry. Returns an annotated report.
+**Cross-Referrer** (Explore agent, read-only) — receives the Miner's clusters, reads all existing skills in the repo (Glob for `plugins/*/skills/*/SKILL.md`), searches for overlap, and classifies each cluster as new skill / skill update / project-instructions addition / memory entry. Returns an annotated report.
 
 Flow: spawn Miner → read its clusters → spawn Cross-Referrer with clusters → read its classifications → format the report below.
 

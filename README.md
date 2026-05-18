@@ -1,7 +1,7 @@
 # Skills of Luca
 Reusable Agent Skills for Codex, Claude Code, and other agents that understand the open `SKILL.md` format.
 
-Canonical skills live in `skills/<skill-name>/`. Generated plugin packages live in `plugins/<name>/`, with marketplaces at `.agents/plugins/marketplace.json` for Codex and `.claude-plugin/marketplace.json` for Claude Code.
+Each plugin is the source of truth for its own skills under `plugins/<plugin>/skills/<skill>/`. The repo publishes both Codex and Claude Code marketplaces from those plugin packages.
 
 ## Install
 Codex:
@@ -25,7 +25,7 @@ bun run install:claude-skills -- creating-commits creating-prs
 ```
 
 ## Development
-Edit root `skills/`, update `plugin-groups.json` when bundle membership changes, then run:
+Edit `plugins/<plugin>/skills/`, update `plugin-groups.json` when plugin membership changes, then run:
 
 ```bash
 bun run marketplace:write

@@ -4,13 +4,14 @@ Reusable Agent Skills for Codex, Claude Code, and other agents that understand t
 ## Layout
 |Path|Purpose|
 |---|---|
-|`skills/<skill-name>/`|Canonical skill source. Edit these files first.|
-|`plugin-groups.json`|Defines which skills are bundled into each plugin.|
-|`plugins/<name>/`|Generated installable plugin packages for Codex and Claude Code.|
+|`plugins/<name>/skills/<skill-name>/`|Authored skill source for that plugin. Edit these files first.|
+|`plugin-groups.json`|Defines plugin metadata and the skills owned by each plugin.|
+|`plugins/<name>/.codex-plugin/plugin.json`|Generated Codex plugin manifest.|
+|`plugins/<name>/.claude-plugin/plugin.json`|Generated Claude Code plugin manifest.|
 |`.agents/plugins/marketplace.json`|Generated Codex marketplace.|
 |`.claude-plugin/marketplace.json`|Generated Claude Code marketplace.|
 
-The `plugins/` tree is committed because plugin users should not need Bun just to install. Treat generated skill copies under `plugins/<name>/skills/` as build output.
+The `plugins/` tree is committed because it is the installable package tree and the authored skill source. Generated files are limited to manifests, marketplaces, and plugin READMEs.
 
 ## Install
 ### Codex
@@ -39,25 +40,25 @@ Add the marketplace and install a plugin:
 Claude Code reads `.claude-plugin/marketplace.json`, then loads plugin manifests from `plugins/<name>/.claude-plugin/plugin.json`. Claude-only legacy command shims live under `plugins/<name>/commands/`; prefer skills for portable workflows.
 
 ### Direct Skills
-Use the canonical root skills without plugin packaging:
+Install plugin-owned skills directly into a personal skills directory:
 
 ```bash
 bun run install:codex-skills -- creating-commits creating-prs
 bun run install:claude-skills -- creating-commits creating-prs
 ```
 
-Omit skill names to install every canonical skill. Add `--symlink` for local development and `--force` to replace existing installed skills.
+Omit skill names to install every skill. Add `--symlink` for local development and `--force` to replace existing installed skills. Skill names can be plain (`creating-commits`) or plugin-qualified (`git:creating-commits`).
 
 ## Development
 - `bun run check` — token and structure check for Markdown skills and docs
 - `bun run check:fix` — apply safe Markdown compaction
 - `bun run marketplace` — dry-run generator and validation
-- `bun run marketplace:write` — regenerate plugin packages and both marketplaces
+- `bun run marketplace:write` — regenerate plugin manifests, plugin READMEs, and both marketplaces
 
 Workflow:
 
-1. Edit `skills/<skill-name>/`.
-2. Update `plugin-groups.json` if plugin membership or install copy changes.
+1. Edit `plugins/<plugin>/skills/<skill-name>/`.
+2. Update `plugin-groups.json` if plugin membership changes.
 3. Run `bun run marketplace:write`.
 4. Run `bun run marketplace`; it should report everything up to date.
 5. Run `bun run check`.
@@ -73,7 +74,6 @@ Workflow:
 - `systems-design` — requirements through architecture, data modeling, API design, docs, diagrams, ADRs, and review
 
 ## Notes for Agents
-- Use root `skills/` as source of truth.
-- Do not hand-edit generated skill copies in `plugins/<name>/skills/`.
+- Use `plugins/<name>/skills/` as the source of truth.
 - Keep `SKILL.md` files close to the open Agent Skills spec. Put product-specific behavior in generated plugin manifests or product-specific metadata where possible.
-- A canonical skill may be bundled into more than one plugin when that makes the plugin self-contained.
+- A skill belongs to exactly one plugin. Cross-plugin workflows should reference the other skill by name instead of copying its files.

@@ -1,2 +1,0 @@
-# SharePlay — overview
-When content is being shared during a FaceTime call, the system prompts each participant to launch the application to begin. If participants lack the app installation, the SharePlay notification suggests they download it from the App Store. Should you offer platform-specific versions of your app as a [Universal Purchase](https://developer.apple.com/support/universal-purchase/), users can make a single purchase and utilize your app and its in-app purchases across all supported platforms.

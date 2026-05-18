@@ -1,39 +1,30 @@
 #!/usr/bin/env bun
 /**
- * Regenerates installable Claude Code and Codex plugin packages from the
- * canonical root-level skills tree.
+ * Regenerates marketplace manifests from plugin-owned skill packages.
  *
  * Source of truth:
- *   - skills/<skill>/SKILL.md
+ *   - plugins/<plugin>/skills/<skill>/SKILL.md
  *   - plugin-groups.json
  *
  * Generated output:
- *   - plugins/<name>/skills/<skill>/
- *   - plugins/<name>/.claude-plugin/plugin.json
- *   - plugins/<name>/.codex-plugin/plugin.json
- *   - plugins/<name>/README.md
+ *   - plugins/<plugin>/.claude-plugin/plugin.json
+ *   - plugins/<plugin>/.codex-plugin/plugin.json
+ *   - plugins/<plugin>/README.md
  *   - .claude-plugin/marketplace.json
  *   - .agents/plugins/marketplace.json
  */
 
 import { existsSync } from "node:fs";
-import {
-	cp,
-	mkdir,
-	readFile,
-	readdir,
-	rm,
-	writeFile,
-} from "node:fs/promises";
-import { createHash } from "node:crypto";
+import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { basename, dirname, join, relative, resolve } from "node:path";
 
 const ROOT = resolve(import.meta.dir, "..");
-const SKILLS_DIR = resolve(ROOT, "skills");
 const PLUGINS_DIR = resolve(ROOT, "plugins");
 const GROUPS_PATH = resolve(ROOT, "plugin-groups.json");
 const CLAUDE_MARKETPLACE_PATH = resolve(ROOT, ".claude-plugin/marketplace.json");
 const CODEX_MARKETPLACE_PATH = resolve(ROOT, ".agents/plugins/marketplace.json");
+const OBSOLETE_ROOT_CODEX_PLUGIN_DIR = resolve(ROOT, ".codex-plugin");
+const OBSOLETE_ROOT_SKILLS_DIR = resolve(ROOT, "skills");
 const write = process.argv.includes("--write");
 
 const dim = (s: string) => `\x1b[2m${s}\x1b[0m`;
@@ -107,73 +98,23 @@ async function writeIfChanged(path: string, content: string): Promise<void> {
 	await writeFile(path, content);
 }
 
-async function walkFiles(dir: string): Promise<Map<string, string>> {
-	const files = new Map<string, string>();
-	if (!existsSync(dir)) return files;
+async function removeIfExists(path: string, reason: string): Promise<void> {
+	if (!existsSync(path)) return;
 
-	async function walk(current: string) {
-		const entries = await readdir(current, { withFileTypes: true });
-		for (const entry of entries) {
-			if (entry.name === ".DS_Store") continue;
-			const abs = join(current, entry.name);
-			if (entry.isDirectory()) {
-				await walk(abs);
-			} else if (entry.isFile()) {
-				const body = await readFile(abs);
-				const hash = createHash("sha256").update(body).digest("hex");
-				files.set(relative(dir, abs), hash);
-			}
-		}
-	}
-
-	await walk(dir);
-	return files;
+	changes.push({ path: rel(path), reason });
+	if (write) await rm(path, { recursive: true, force: true });
 }
 
-async function dirsMatch(src: string, dest: string): Promise<boolean> {
-	const [srcFiles, destFiles] = await Promise.all([walkFiles(src), walkFiles(dest)]);
-	if (srcFiles.size !== destFiles.size) return false;
-
-	for (const [path, hash] of srcFiles) {
-		if (destFiles.get(path) !== hash) return false;
-	}
-
-	return true;
+function pluginRoot(group: PluginGroup): string {
+	return resolve(PLUGINS_DIR, group.name);
 }
 
-async function syncSkills(group: PluginGroup): Promise<void> {
-	const pluginSkillsDir = resolve(PLUGINS_DIR, group.name, "skills");
-	let dirty = false;
+function skillDir(group: PluginGroup, skill: string): string {
+	return resolve(pluginRoot(group), "skills", skill);
+}
 
-	const expected = new Set(group.skills);
-	if (!existsSync(pluginSkillsDir)) {
-		dirty = true;
-	} else {
-		const entries = await readdir(pluginSkillsDir, { withFileTypes: true });
-		for (const entry of entries) {
-			if (entry.isDirectory() && !expected.has(entry.name)) dirty = true;
-		}
-	}
-
-	for (const skill of group.skills) {
-		const src = resolve(SKILLS_DIR, skill);
-		const dest = resolve(pluginSkillsDir, skill);
-		if (!(await dirsMatch(src, dest))) dirty = true;
-	}
-
-	if (!dirty) return;
-
-	changes.push({ path: rel(pluginSkillsDir), reason: "generated skills changed" });
-	if (!write) return;
-
-	await rm(pluginSkillsDir, { recursive: true, force: true });
-	await mkdir(pluginSkillsDir, { recursive: true });
-	for (const skill of group.skills) {
-		await cp(resolve(SKILLS_DIR, skill), resolve(pluginSkillsDir, skill), {
-			recursive: true,
-			dereference: true,
-		});
-	}
+function skillLabel(group: PluginGroup, skill: string): string {
+	return `plugins/${group.name}/skills/${skill}`;
 }
 
 function parseFrontmatter(content: string): Record<string, string> | null {
@@ -196,32 +137,32 @@ function parseFrontmatter(content: string): Record<string, string> | null {
 	return fields;
 }
 
-async function validateSkill(skill: string): Promise<void> {
-	const skillDir = resolve(SKILLS_DIR, skill);
-	const skillPath = resolve(skillDir, "SKILL.md");
+async function validateSkill(group: PluginGroup, skill: string): Promise<void> {
+	const dir = skillDir(group, skill);
+	const skillPath = resolve(dir, "SKILL.md");
 
-	if (!existsSync(skillDir)) {
-		errors.push(`plugin-groups.json references missing skill "${skill}"`);
+	if (!existsSync(dir)) {
+		errors.push(`plugin "${group.name}" references missing skill "${skill}" at ${skillLabel(group, skill)}`);
 		return;
 	}
 	if (!existsSync(skillPath)) {
-		errors.push(`skills/${skill} has no SKILL.md`);
+		errors.push(`${skillLabel(group, skill)} has no SKILL.md`);
 		return;
 	}
 
 	const content = await readFile(skillPath, "utf-8");
 	const fm = parseFrontmatter(content);
 	if (!fm) {
-		errors.push(`skills/${skill}/SKILL.md has no YAML frontmatter`);
+		errors.push(`${skillLabel(group, skill)}/SKILL.md has no YAML frontmatter`);
 		return;
 	}
 	if (fm.name && fm.name !== skill) {
-		errors.push(`skills/${skill}/SKILL.md name "${fm.name}" does not match directory`);
+		errors.push(`${skillLabel(group, skill)}/SKILL.md name "${fm.name}" does not match directory`);
 	}
 	if (!fm.description) {
-		errors.push(`skills/${skill}/SKILL.md is missing description`);
+		errors.push(`${skillLabel(group, skill)}/SKILL.md is missing description`);
 	} else if (fm.description.length > 1024) {
-		errors.push(`skills/${skill}/SKILL.md description exceeds 1024 characters`);
+		errors.push(`${skillLabel(group, skill)}/SKILL.md description exceeds 1024 characters`);
 	}
 }
 
@@ -231,9 +172,12 @@ async function validateGroups(groups: PluginGroups): Promise<void> {
 	}
 	if (!groups.owner?.name) errors.push("plugin-groups.json owner.name is required");
 	if (!groups.metadata?.version) errors.push("plugin-groups.json metadata.version is required");
+	if (existsSync(OBSOLETE_ROOT_SKILLS_DIR)) {
+		errors.push("root skills/ is not used; move skills into plugins/<plugin>/skills/<skill>");
+	}
 
 	const seenPlugins = new Set<string>();
-	const seenSkills = new Set<string>();
+	const skillOwners = new Map<string, string>();
 	for (const group of groups.plugins) {
 		if (!/^[a-z0-9][a-z0-9-]*[a-z0-9]$/.test(group.name)) {
 			errors.push(`plugin "${group.name}" must use kebab-case`);
@@ -247,25 +191,50 @@ async function validateGroups(groups: PluginGroups): Promise<void> {
 		if (!group.category) errors.push(`plugin "${group.name}" missing category`);
 		if (!group.skills?.length) errors.push(`plugin "${group.name}" has no skills`);
 
+		const localSeenSkills = new Set<string>();
 		for (const skill of group.skills) {
-			seenSkills.add(skill);
-			await validateSkill(skill);
+			if (localSeenSkills.has(skill)) errors.push(`plugin "${group.name}" lists skill "${skill}" twice`);
+			localSeenSkills.add(skill);
+
+			const existingOwner = skillOwners.get(skill);
+			if (existingOwner && existingOwner !== group.name) {
+				errors.push(
+					`skill "${skill}" is listed in both "${existingOwner}" and "${group.name}"; each skill needs one owning plugin`,
+				);
+			} else {
+				skillOwners.set(skill, group.name);
+			}
+
+			await validateSkill(group, skill);
+		}
+
+		const skillsRoot = resolve(pluginRoot(group), "skills");
+		if (existsSync(skillsRoot)) {
+			const entries = await readdir(skillsRoot, { withFileTypes: true });
+			for (const entry of entries) {
+				if (entry.isDirectory() && !localSeenSkills.has(entry.name)) {
+					errors.push(`${rel(resolve(skillsRoot, entry.name))} exists but is not listed in plugin-groups.json`);
+				}
+			}
 		}
 
 		for (const command of group.commands ?? []) {
-			const commandPath = resolve(PLUGINS_DIR, group.name, "commands", `${command}.md`);
+			const commandPath = resolve(pluginRoot(group), "commands", `${command}.md`);
 			if (!existsSync(commandPath)) {
 				errors.push(`plugin "${group.name}" references missing command "${command}"`);
 			}
 		}
 	}
 
-	const rootEntries = existsSync(SKILLS_DIR)
-		? await readdir(SKILLS_DIR, { withFileTypes: true })
-		: [];
-	for (const entry of rootEntries) {
-		if (entry.isDirectory() && !seenSkills.has(entry.name)) {
-			errors.push(`skills/${entry.name} is not included in any plugin group`);
+	if (existsSync(PLUGINS_DIR)) {
+		const pluginDirs = await readdir(PLUGINS_DIR, { withFileTypes: true });
+		for (const entry of pluginDirs) {
+			if (!entry.isDirectory()) continue;
+			if (seenPlugins.has(entry.name)) continue;
+			const skillsRoot = resolve(PLUGINS_DIR, entry.name, "skills");
+			if (existsSync(skillsRoot)) {
+				errors.push(`plugins/${entry.name}/skills exists but "${entry.name}" is not listed in plugin-groups.json`);
+			}
 		}
 	}
 }
@@ -370,9 +339,28 @@ function pluginReadme(group: PluginGroup, marketplaceName: string, source: strin
 		? `\nClaude Code also exposes legacy command shims for this plugin: ${group.commands.map((c) => `\`/${group.name}:${c}\``).join(", ")}. Prefer the portable skills above for Codex and other agents.\n`
 		: "";
 
-	return `# ${group.displayName}\n${group.description}\n\n## Skills\n${group.skills
-		.map((skill) => `- \`${group.name}:${skill}\``)
-		.join("\n")}\n${commandNote}\n## Install\nCodex:\n\n\`\`\`bash\ncodex plugin marketplace add ${source}\n\`\`\`\n\nClaude Code:\n\n\`\`\`text\n/plugin marketplace add ${source}\n/plugin install ${group.name}@${marketplaceName}\n\`\`\`\n\nThis plugin package is generated from the root \`skills/\` source tree. Edit canonical skills there, then run \`bun run marketplace:write\`.\n`;
+	return `# ${group.displayName}
+${group.description}
+
+## Skills
+${group.skills.map((skill) => `- \`${group.name}:${skill}\``).join("\n")}
+${commandNote}
+## Install
+Codex:
+
+\`\`\`bash
+codex plugin marketplace add ${source}
+\`\`\`
+
+Claude Code:
+
+\`\`\`text
+/plugin marketplace add ${source}
+/plugin install ${group.name}@${marketplaceName}
+\`\`\`
+
+This plugin owns its skill source under \`plugins/${group.name}/skills/\`. Edit those files directly, then run \`bun run marketplace:write\` to refresh generated manifests and marketplaces.
+`;
 }
 
 async function validateRelativeRefs(root: string, label: string): Promise<void> {
@@ -430,17 +418,13 @@ async function walkMarkdown(root: string): Promise<string[]> {
 	return files.sort();
 }
 
-async function removeStalePlugins(groups: PluginGroups): Promise<void> {
-	if (!existsSync(PLUGINS_DIR)) return;
-	const expected = new Set(groups.plugins.map((group) => group.name));
-	const entries = await readdir(PLUGINS_DIR, { withFileTypes: true });
+async function failIfErrors(): Promise<void> {
+	if (errors.length === 0) return;
 
-	for (const entry of entries) {
-		if (!entry.isDirectory() || expected.has(entry.name)) continue;
-		const path = resolve(PLUGINS_DIR, entry.name);
-		changes.push({ path: rel(path), reason: "stale plugin package" });
-		if (write) await rm(path, { recursive: true, force: true });
-	}
+	console.log("");
+	console.log(bold(red("Validation errors:")));
+	for (const error of errors) console.log(`  ${red("ERR")} ${error}`);
+	process.exit(1);
 }
 
 async function main() {
@@ -449,24 +433,23 @@ async function main() {
 	for (const group of groups.plugins) group.skills.sort();
 
 	await validateGroups(groups);
-	await validateRelativeRefs(SKILLS_DIR, "canonical skills");
+	await validateRelativeRefs(PLUGINS_DIR, "plugins");
+	await failIfErrors();
 
-	await removeStalePlugins(groups);
+	await removeIfExists(OBSOLETE_ROOT_CODEX_PLUGIN_DIR, "remove obsolete root Codex plugin manifest");
 
 	for (const group of groups.plugins) {
-		const pluginRoot = resolve(PLUGINS_DIR, group.name);
-
-		await syncSkills(group);
+		const root = pluginRoot(group);
 		await writeIfChanged(
-			resolve(pluginRoot, ".claude-plugin/plugin.json"),
+			resolve(root, ".claude-plugin/plugin.json"),
 			json(claudePluginManifest(group, groups.metadata.version, groups.metadata)),
 		);
 		await writeIfChanged(
-			resolve(pluginRoot, ".codex-plugin/plugin.json"),
+			resolve(root, ".codex-plugin/plugin.json"),
 			json(codexPluginManifest(group, groups.metadata.version, groups.metadata)),
 		);
 		await writeIfChanged(
-			resolve(pluginRoot, "README.md"),
+			resolve(root, "README.md"),
 			pluginReadme(group, groups.name, marketplaceSource(groups.metadata)),
 		);
 	}
@@ -475,14 +458,8 @@ async function main() {
 	await writeIfChanged(CODEX_MARKETPLACE_PATH, json(codexMarketplace(groups)));
 
 	if (write || changes.length === 0) {
-		await validateRelativeRefs(PLUGINS_DIR, "generated plugins");
-	}
-
-	if (errors.length > 0) {
-		console.log("");
-		console.log(bold(red("Validation errors:")));
-		for (const error of errors) console.log(`  ${red("ERR")} ${error}`);
-		process.exit(1);
+		await validateRelativeRefs(PLUGINS_DIR, "plugins");
+		await failIfErrors();
 	}
 
 	console.log("");

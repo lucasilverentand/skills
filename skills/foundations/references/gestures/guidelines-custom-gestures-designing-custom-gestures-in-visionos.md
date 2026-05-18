@@ -1,6 +1,0 @@
-# Designing custom gestures in visionOS
-If your experience requires an interaction beyond existing system gestures, consider implementing a custom gesture. To support this type of interaction, your app must operate within a Full Space and obtain user permission to access hand information. For technical guidance, consult [Setting up access to ARKit data](apple:visionOS/setting-up-access-to-arkit-data).
-
-- **Prioritize comfort.** Thoroughly test the ergonomics of all interactions that rely on custom gestures. Sustained arm elevation, even for short periods, can cause physical fatigue, and repeating highly similar movements in quick succession may stress muscles and joints.
-- **Carefully consider complex custom gestures that involve multiple fingers or both hands.** Users may not always have both hands available when using your app or game. If a complex gesture is necessary for your experience, also provide an alternative that requires less movement.
-- **Avoid custom gestures that require using a specific hand.** Requiring users to remember which hand triggers the gesture increases cognitive load. Additionally, this may make your experience less welcoming to individuals with limb differences or strong hand dominance.

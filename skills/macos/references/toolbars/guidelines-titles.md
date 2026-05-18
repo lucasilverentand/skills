@@ -1,4 +1,0 @@
-# Titles
-- **Ensure each window has a descriptive title.** A title assists users in confirming their current location within the application and distinguishes between multiple concurrently open windows. If titling a toolbar feels unnecessary, you may leave the title area blank. For instance, Notes does not automatically title a note when it is viewed in a single window because the initial content line usually provides adequate context. However, if notes are opened across separate windows, the system uses the first line of content to differentiate them.
-- **Avoid using your application name for window titles.** Since your app's name does not convey useful information regarding the content hierarchy or any specific window within your application, it makes a poor title.
-- **Keep titles brief and focused.** Aim for a single word or short phrase that encapsulates the view's purpose, ensuring the title remains under 15 characters to accommodate other controls.

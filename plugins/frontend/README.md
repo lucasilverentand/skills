@@ -18,4 +18,4 @@ Claude Code:
 /plugin install frontend@skills-of-luca
 ```
 
-This plugin package is generated from the root `skills/` source tree. Edit canonical skills there, then run `bun run marketplace:write`.
+This plugin owns its skill source under `plugins/frontend/skills/`. Edit those files directly, then run `bun run marketplace:write` to refresh generated manifests and marketplaces.

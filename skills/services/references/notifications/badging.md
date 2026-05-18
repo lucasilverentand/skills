@@ -1,7 +1,0 @@
-# Badging
-A badge is a small, filled oval displaying a number that can appear on an app icon to indicate the count of unread notifications. Once users view and address these notifications, the badge vanishes from the icon, reappearing when new alerts arrive. Users have control over whether they allow an app to display these badges through their notification settings.
-
-- **Use a badge only to indicate the number of unread notifications.** Do not employ a badge to convey numerical data unrelated to notifications, such as weather information, dates/times, stock values, or game scores.
-- **Ensure badging is not the sole method for conveying essential information.** Since users can disable badging for your app, relying on it to signal important content risks the user missing the message. Always guarantee that critical information is easily discoverable upon opening your application.
-- **Keep badges current.** Update your app’s badge count immediately after users view the corresponding notifications. Users should not believe new alerts are available only to discover they have already seen them all. Note that decrementing a badge count to zero removes all associated notifications from Notification Center.
-- **Do not create custom images or components that imitate the appearance or behavior of a badge.** Users can disable notification badges, and they will become frustrated if they have done so only to encounter something that resembles a badge.

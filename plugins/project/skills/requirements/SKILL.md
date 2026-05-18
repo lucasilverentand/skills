@@ -17,8 +17,8 @@ Turn a vague "build X" into structured, prioritized requirements before any desi
   - **Full requirements gathering for a new system** → follow the full process below
   - **Quick NFR analysis for an existing design** → jump straight to "NFR analysis"
   - **Single-question scope check** ("do I need X?") → answer directly, then suggest full gathering if the question reveals gaps
-  - **User already has a design and wants feedback** → hand off to `design-review`
-  - **User wants to start designing** → capture requirements first, then hand off to `architecture`
+  - **User already has a design and wants feedback** → hand off to `systems-design:design-review` when available
+  - **User wants to start designing** → capture requirements first, then hand off to `systems-design:architecture` when available
 
 ## Interview framework
 Pin down 7 areas using `AskUserQuestion`. Ask in batches of 3-4 — not all at once, not one at a time. Skip questions you can answer from the codebase. Call out assumptions explicitly so the user can correct them.
@@ -67,9 +67,9 @@ Include an "Open questions" section for anything unresolved. These become the fi
 ## Cross-references
 |Situation|Hand off to|
 |---|---|
-|Requirements done, ready to decompose into components|`architecture`|
-|Requirements done, ready to write a design doc|`write-design-doc`|
-|Need to review an existing design against these requirements|`design-review`|
+|Requirements done, ready to decompose into components|`systems-design:architecture` if installed|
+|Requirements done, ready to write a design doc|`documentation:write-design-doc` if installed|
+|Need to review an existing design against these requirements|`systems-design:design-review` if installed|
 
 ## Key references
 |File|Covers|

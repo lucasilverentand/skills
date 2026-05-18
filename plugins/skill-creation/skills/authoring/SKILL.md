@@ -43,7 +43,7 @@ Proactively ask about edge cases, example files, success criteria, and dependenc
 For workflow or agent-tier skills with multiple references or unfamiliar domains, offer a research-write-validate pipeline using specialized agents. See `references/agent-workflow.md` for roles, flow, and the research brief format. Skip this for atomic skills or small improvements — it's overhead without quality gain. Always let the user decide.
 
 ### 2. Write the skill
-1. Create the directory: `skills/<skill-name>/`
+1. Pick the owning plugin and create the directory: `plugins/<plugin>/skills/<skill-name>/`
 2. Write `SKILL.md` with YAML frontmatter — `description` is recommended for discovery (see `references/skill-format.md`)
 3. Write the decision tree — use the **decision-trees** skill for this
 4. Write conventions — the rules the agent must follow every time

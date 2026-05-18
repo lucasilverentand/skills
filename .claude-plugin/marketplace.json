@@ -135,7 +135,7 @@
 		{
 			"name": "systems-design",
 			"source": "./plugins/systems-design",
-			"description": "Opinionated system design toolkit from requirements to architecture, data modeling, APIs, documentation, diagrams, ADRs, and review.",
+			"description": "Opinionated system design toolkit for architecture, data modeling, API design, workflow sequencing, and design review.",
 			"version": "1.1.0",
 			"author": {
 				"name": "Luca Silverentand",
@@ -146,8 +146,7 @@
 				"architecture",
 				"api",
 				"database",
-				"design-doc",
-				"adr"
+				"design-review"
 			]
 		}
 	]

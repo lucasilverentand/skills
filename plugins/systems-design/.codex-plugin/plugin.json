@@ -1,7 +1,7 @@
 {
 	"name": "systems-design",
 	"version": "1.1.0",
-	"description": "Opinionated system design toolkit from requirements to architecture, data modeling, APIs, documentation, diagrams, ADRs, and review.",
+	"description": "Opinionated system design toolkit for architecture, data modeling, API design, workflow sequencing, and design review.",
 	"author": {
 		"name": "Luca Silverentand",
 		"email": "dev@lucasilverentand.com"
@@ -13,14 +13,13 @@
 		"architecture",
 		"api",
 		"database",
-		"design-doc",
-		"adr"
+		"design-review"
 	],
 	"skills": "./skills/",
 	"interface": {
 		"displayName": "Systems Design",
-		"shortDescription": "End-to-end system design",
-		"longDescription": "Opinionated system design toolkit from requirements to architecture, data modeling, APIs, documentation, diagrams, ADRs, and review.",
+		"shortDescription": "System architecture and design review",
+		"longDescription": "Opinionated system design toolkit for architecture, data modeling, API design, workflow sequencing, and design review.",
 		"developerName": "Luca Silverentand",
 		"category": "Architecture",
 		"capabilities": [
