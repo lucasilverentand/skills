@@ -6,6 +6,7 @@ node_modules/
 build/
 .cache/
 tools/
+local/
 
 # mise
 .mise.local.toml
