@@ -101,6 +101,22 @@
 			}
 		},
 		{
+			"name": "project-docs",
+			"source": {
+				"source": "local",
+				"path": "./plugins/project-docs"
+			},
+			"policy": {
+				"installation": "AVAILABLE",
+				"authentication": "ON_INSTALL"
+			},
+			"category": "Documentation",
+			"interface": {
+				"displayName": "Project Docs",
+				"shortDescription": "Project document templates"
+			}
+		},
+		{
 			"name": "skill-creation",
 			"source": {
 				"source": "local",

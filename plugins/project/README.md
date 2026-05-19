@@ -4,6 +4,7 @@ Project setup and context management skills for requirements and shared agent co
 ## Skills
 - `project:project-context`
 - `project:requirements`
+- `project:task-spec`
 
 ## Install
 Codex:

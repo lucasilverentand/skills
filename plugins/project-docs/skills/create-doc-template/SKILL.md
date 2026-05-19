@@ -1,6 +1,6 @@
 ---
 name: create-doc-template
-description: Creates or updates Markdown document templates in the project-docs plugin, especially files under documents/. Guides research, structure, section prompts, README updates, and validation. Use when the user asks to add a project document template, update an existing planning template, change the project-docs template library, or create docs like a feature spec, project brief, testing strategy, release readiness checklist, research brief, or decision record.
+description: Creates or updates Markdown document templates in the project-docs plugin, especially template references under document-type skills. Guides research, structure, section prompts, README updates, and validation. Use when the user asks to add a project document template, update an existing planning template, change the project-docs template library, or create docs like a feature spec, project brief, testing strategy, release readiness checklist, research brief, or decision record.
 ---
 
 # Create Doc Template
@@ -12,13 +12,21 @@ Create document templates that fit the project-docs library instead of importing
 - The outline borrows from industry practice, then cuts anything that would create stale paperwork.
 - The template works across project types unless the requested document is intentionally narrow.
 
+## Decision tree
+- What is being changed?
+  - **A new document template** -> follow the full workflow below, create the matching document-type skill if needed, update `README.body.txt`, and run the project checks.
+  - **An existing template** -> read the current template, identify the ownership or prompt gap, then update the smallest section that fixes it.
+  - **A document-type authoring skill** -> create or update the matching skill under `skills/` and keep the template in that skill's `references/template.md`.
+  - **A specific project document instance** -> use the matching document-type skill; this skill is for reusable templates under `skills/<document-type>/references/template.md`.
+  - **Something else** -> ask whether the user wants a reusable project-docs template or a filled project document.
+
 ## Workflow
-1. Read `README.md` and nearby templates before drafting. Use the closest existing template for pacing, prompt density, and section size.
+1. Read `README.md` and nearby `references/template.md` files before drafting. Use the closest existing template for pacing, prompt density, and section size.
 2. Define the template contract in plain language: when it is written, who reads it, what decision or review it supports, and which template owns adjacent details.
 3. Do a lightweight research pass on current examples, standards, or common outlines for the document type. Keep notes on useful section ideas, not source prose.
 4. Build the outline by subtraction. Start from the common industry shape, then remove sections that duplicate another template, ask for facts no one will maintain, or exist only to look complete.
 5. Draft the Markdown using the repo conventions below.
-6. Update `README.md` when adding a public template under `documents/`: add the table row and any relationship note needed to prevent duplicate ownership.
+6. Update `README.body.txt` when adding a public template: add the table row and any relationship note needed to prevent duplicate ownership.
 7. Run `bun run check` before finishing. If dependencies are missing, run `bun install` first.
 
 ## Repo conventions
@@ -50,5 +58,5 @@ Before handing off, verify:
 - Each section has a useful prompt or intentionally needs no prompt.
 - The outline is short enough to fill during real project work.
 - Tables and diagrams are suggested where they clarify review, not everywhere.
-- `README.md` lists the template if it belongs in `documents/`.
+- `README.body.txt` lists the template if it belongs in the public template library.
 - `bun run check` passes, or the blocker is recorded with the exact failure.
