@@ -8,7 +8,7 @@ Use this skill to turn settled product scope into an engineering plan that revie
 
 ## Decision tree
 - What is the user asking for?
-  - **A new technical design** -> read `../../README.md` and `../../documents/technical-design.md`, then draft the design in the requested destination.
+  - **A new technical design** -> read `../../README.md` and `references/template.md`, then draft the design in the requested destination.
   - **Product behavior or acceptance criteria are still unclear** -> use the `feature-spec` skill first, then return to technical design.
   - **A cross-cutting system architecture decision** -> use this skill for implementation structure and a `decision-record` for the chosen direction if it creates precedent.
   - **Testing expectations** -> link to `testing-strategy` for project-wide rules and write only the feature-specific testing plan here.
@@ -16,7 +16,7 @@ Use this skill to turn settled product scope into an engineering plan that revie
 
 ## Workflow
 1. Read `../../README.md` for shared conventions and relationship rules.
-2. Read `../../documents/technical-design.md` before drafting or editing.
+2. Read `references/template.md` before drafting or editing.
 3. Gather goals, non-goals, proposed design, state model, interfaces, contracts, failure modes, security, privacy, migration, rollout, testing plan, alternatives, and open questions.
 4. Use diagrams or tables for flows, state ownership, API contracts, data models, rollout phases, and alternatives when they make review easier.
 5. Preserve trade-offs and rejected options. They are often the part future maintainers need.

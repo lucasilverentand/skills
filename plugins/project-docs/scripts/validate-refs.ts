@@ -23,6 +23,10 @@ const markdownFiles = await collectMarkdownFiles(targets);
 
 for (const file of markdownFiles) {
   const content = await readFile(file, "utf8");
+  if (isTemplateReference(file)) {
+    continue;
+  }
+
   errors.push(...validateRelatedEntries(file, content));
   errors.push(...validateMarkdownLinks(file, content));
 }
@@ -99,6 +103,10 @@ function validateRelatedEntries(
   return parseRelated(frontmatter.text, frontmatter.startLine).flatMap(
     (entry) => validateLocalTarget(file, entry.target, entry.line, "related")
   );
+}
+
+function isTemplateReference(file: string): boolean {
+  return file.endsWith(`${path.sep}references${path.sep}template.md`);
 }
 
 function validateMarkdownLinks(

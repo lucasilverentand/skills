@@ -377,6 +377,8 @@ async function validateRelativeRefs(root: string, label: string): Promise<void> 
 	const backtickPath = /`((?:\.\.?\/)[^`]+)`/g;
 
 	for (const file of files) {
+		if (isTemplateReference(file)) continue;
+
 		const content = stripFencedCode(await readFile(file, "utf-8"));
 		const dir = dirname(file);
 
@@ -402,6 +404,10 @@ async function validateRelativeRefs(root: string, label: string): Promise<void> 
 
 function stripFencedCode(content: string): string {
 	return content.replace(/^(```|~~~)[\s\S]*?^\1/gm, "");
+}
+
+function isTemplateReference(file: string): boolean {
+	return file.endsWith(join("references", "template.md"));
 }
 
 async function walkMarkdown(root: string): Promise<string[]> {

@@ -8,7 +8,7 @@ Use this skill to capture audience truth for a project so briefs and feature spe
 
 ## Decision tree
 - What is the user asking for?
-  - **A new customer profile** -> read `../../README.md` and `../../documents/customer-profile.md`, then draft the profile in the requested destination.
+  - **A new customer profile** -> read `../../README.md` and `references/template.md`, then draft the profile in the requested destination.
   - **A project brief audience section** -> keep the brief short and link to the customer profile for detailed audience, alternatives, and assumption risks.
   - **Feature-specific user stories** -> use the `feature-spec` skill and reference this profile for audience context.
   - **Research evidence or source trail** -> use the `research-brief` skill and link it from the customer profile where claims depend on evidence.
@@ -16,7 +16,7 @@ Use this skill to capture audience truth for a project so briefs and feature spe
 
 ## Workflow
 1. Read `../../README.md` for shared conventions and relationship rules.
-2. Read `../../documents/customer-profile.md` before drafting or editing.
+2. Read `references/template.md` before drafting or editing.
 3. Gather who the project serves, what they are trying to do, current alternatives, value drivers, market shape, risks, and unknowns.
 4. Separate evidence from assumption. Mark unverified claims as assumptions or open questions.
 5. Avoid collecting personal data unless the project genuinely needs it and the user approved that scope.

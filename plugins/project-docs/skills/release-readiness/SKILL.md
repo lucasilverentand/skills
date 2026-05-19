@@ -8,7 +8,7 @@ Use this skill to collect the evidence for a ship, hold, or phased rollout decis
 
 ## Decision tree
 - What is the user asking for?
-  - **A new release readiness doc** -> read `../../README.md` and `../../documents/release-readiness.md`, then draft the release check in the requested destination.
+  - **A new release readiness doc** -> read `../../README.md` and `references/template.md`, then draft the release check in the requested destination.
   - **Feature behavior is still being defined** -> use the `feature-spec` skill first and link to it from release readiness.
   - **Test evidence is missing** -> use `testing-strategy` for expected layers and record the actual release evidence here.
   - **A post-ship review** -> use the `post-release-review` skill after the release ships, stalls, rolls back, or is abandoned.
@@ -16,7 +16,7 @@ Use this skill to collect the evidence for a ship, hold, or phased rollout decis
 
 ## Workflow
 1. Read `../../README.md` for shared conventions and relationship rules.
-2. Read `../../documents/release-readiness.md` before drafting or editing.
+2. Read `references/template.md` before drafting or editing.
 3. Gather release summary, user-facing scope, operational scope, known risks, test coverage, support docs, privacy, security, legal checks, rollout, rollback, and launch decision.
 4. Use tables for risks, rollout phases, rollback steps, and evidence gaps.
 5. Do not hide missing evidence. A readiness doc can recommend hold when that is the honest result.

@@ -8,7 +8,7 @@ Use this skill to preserve evidence, source quality, implications, and follow-up
 
 ## Decision tree
 - What is the user asking for?
-  - **A new research brief** -> read `../../README.md` and `../../documents/research-brief.md`, then draft the brief around one focused research question.
+  - **A new research brief** -> read `../../README.md` and `references/template.md`, then draft the brief around one focused research question.
   - **Evidence for a decision already made** -> use the `decision-record` skill for the decision and link to this research brief for source detail.
   - **Vendor, API, OS, framework, or hardware analysis** -> use `platform-dependency` when the dependency itself is the durable subject; use this skill for focused supporting research.
   - **Live or recent facts** -> verify with current primary sources before writing findings.
@@ -16,7 +16,7 @@ Use this skill to preserve evidence, source quality, implications, and follow-up
 
 ## Workflow
 1. Read `../../README.md` for shared conventions and relationship rules.
-2. Read `../../documents/research-brief.md` before drafting or editing.
+2. Read `references/template.md` before drafting or editing.
 3. Frame one research question. Split broad investigations into multiple briefs.
 4. Capture sources, findings, evidence quality, implications, risks, recommendation, and follow-up questions.
 5. Keep source summaries short. Link to source material and explain why it matters.

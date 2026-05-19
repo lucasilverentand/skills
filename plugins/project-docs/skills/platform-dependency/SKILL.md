@@ -8,7 +8,7 @@ Use this skill to document an external system that shapes what the product can b
 
 ## Decision tree
 - What is the user asking for?
-  - **A new platform dependency doc** -> read `../../README.md` and `../../documents/platform-dependency.md`, then draft the dependency analysis in the requested destination.
+  - **A new platform dependency doc** -> read `../../README.md` and `references/template.md`, then draft the dependency analysis in the requested destination.
   - **Evidence about the dependency** -> use the `research-brief` skill for focused source trails and link it from this document.
   - **A product decision to adopt or reject the dependency** -> use the `decision-record` skill and link to this document for limits, risks, costs, and exit strategy.
   - **Feature behavior using the dependency** -> use the `feature-spec` skill and link to this document for shared dependency truth.
@@ -16,7 +16,7 @@ Use this skill to document an external system that shapes what the product can b
 
 ## Workflow
 1. Read `../../README.md` for shared conventions and relationship rules.
-2. Read `../../documents/platform-dependency.md` before drafting or editing.
+2. Read `references/template.md` before drafting or editing.
 3. Gather the dependency, capabilities, limits, interfaces, versions, observed behavior, costs, fallback path, monitoring, risks, and exit strategy.
 4. Verify current vendor or platform details from primary sources when they could have changed.
 5. State how the project should degrade when the dependency is unavailable or behaves differently than expected.

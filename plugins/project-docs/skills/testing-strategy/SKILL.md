@@ -8,7 +8,7 @@ Use this skill to define the project-wide confidence model that feature specs, t
 
 ## Decision tree
 - What is the user asking for?
-  - **A new testing strategy** -> read `../../README.md` and `../../documents/testing-strategy.md`, then draft the strategy for the requested project or repo.
+  - **A new testing strategy** -> read `../../README.md` and `references/template.md`, then draft the strategy for the requested project or repo.
   - **A feature-level test plan** -> prefer the `technical-design` skill for implementation-specific tests, and link back to the testing strategy for shared layers and CI expectations.
   - **A release confidence check** -> prefer the `release-readiness` skill, using the testing strategy as the source for expected evidence.
   - **Changes to tools, coverage, fixtures, CI, or flaky-test handling** -> update the matching section and call out downstream docs that should link to it.
@@ -16,7 +16,7 @@ Use this skill to define the project-wide confidence model that feature specs, t
 
 ## Workflow
 1. Read `../../README.md` for shared conventions and relationship rules.
-2. Read `../../documents/testing-strategy.md` before drafting or editing.
+2. Read `references/template.md` before drafting or editing.
 3. Gather the project type, test frameworks, CI provider, release risk, data model, and manual testing needs.
 4. Define test layers by responsibility. Avoid naming a tool unless the project actually uses it or is choosing it now.
 5. State what evidence reviewers should expect before a feature or release is considered ready.

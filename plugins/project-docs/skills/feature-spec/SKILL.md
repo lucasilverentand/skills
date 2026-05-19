@@ -8,7 +8,7 @@ Use this skill to capture user-visible behavior, acceptance criteria, lifecycle,
 
 ## Decision tree
 - What is the user asking for?
-  - **A new feature spec** -> read `../../README.md` and `../../documents/feature-spec.md`, then draft the spec in the requested destination.
+  - **A new feature spec** -> read `../../README.md` and `references/template.md`, then draft the spec in the requested destination.
   - **Project-level framing** -> use the `project-brief` skill and link to that brief from the feature spec.
   - **Technical implementation shape** -> use the `technical-design` skill after feature behavior is clear enough to design.
   - **Audience detail or dependency truth** -> link to `customer-profile` or `platform-dependency` documents instead of repeating them.
@@ -16,7 +16,7 @@ Use this skill to capture user-visible behavior, acceptance criteria, lifecycle,
 
 ## Workflow
 1. Read `../../README.md` for shared conventions and the project-docs chain.
-2. Read `../../documents/feature-spec.md` before drafting or editing.
+2. Read `references/template.md` before drafting or editing.
 3. Gather user stories, acceptance criteria, design references, model concepts, lifecycle, behavior rules, persistence, performance budget, telemetry, edge cases, rollout, and non-goals.
 4. Keep acceptance criteria reviewable. Use tables when states, roles, or conditions matter.
 5. Link related project brief, customer profile, platform dependency, research brief, and decision record documents.

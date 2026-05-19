@@ -8,7 +8,7 @@ Use this skill to compare what happened against the plan and turn useful lessons
 
 ## Decision tree
 - What is the user asking for?
-  - **A new post-release review** -> read `../../README.md` and `../../documents/post-release-review.md`, then draft the review in the requested destination.
+  - **A new post-release review** -> read `../../README.md` and `references/template.md`, then draft the review in the requested destination.
   - **The release has not shipped yet** -> use the `release-readiness` skill until there is an outcome to review.
   - **A decision worth preserving** -> use the `decision-record` skill and link it from the review.
   - **Follow-up work outside the review** -> file or draft issues only when the user asks, or when repo instructions require filing later work.
@@ -16,7 +16,7 @@ Use this skill to compare what happened against the plan and turn useful lessons
 
 ## Workflow
 1. Read `../../README.md` for shared conventions and relationship rules.
-2. Read `../../documents/post-release-review.md` before drafting or editing.
+2. Read `references/template.md` before drafting or editing.
 3. Gather what happened, what changed from the plan, what worked, what did not, decisions worth keeping, debt created, and follow-up issues.
 4. Link release readiness, feature specs, decision records, incidents, PRs, changelog entries, and follow-up issues where they explain the outcome.
 5. Keep the review factual. Avoid blame language and vague lessons that no one can act on.
