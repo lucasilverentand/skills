@@ -345,8 +345,8 @@ function flag(filePath: string, content: string): Flag[] {
 const glob = new Glob("**/*.md");
 const files: string[] = [];
 for await (const path of glob.scan({ cwd: ROOT, absolute: true })) {
-	// Skip node_modules, .git, build artifacts, and caches
-	if (/node_modules|\.git\/|\/build\/|\/\.cache\//.test(path)) continue;
+	// Skip generated/vendor areas and local-only private agent setup.
+	if (/node_modules|\.git\/|\/build\/|\/\.cache\/|\/local\//.test(path)) continue;
 	files.push(path);
 }
 files.sort();
