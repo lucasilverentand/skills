@@ -13,13 +13,13 @@ SKILL.md uses YAML frontmatter between `---` fences. Most skills only need `desc
 |`metadata`|No|Arbitrary key-value pairs.|
 |`allowed-tools`|No|Space-delimited list of pre-approved tools.|
 
-### Claude Code extensions
-These fields only work in Claude Code, not in other agents.
+### Product extensions
+These fields are valid in Claude Code. Other Agent Skills clients may ignore them unless they explicitly document support.
 
 |Field|Default|Description|
 |---|---|---|
 |`argument-hint`|—|Hint shown in autocomplete. Example: `[issue-number]`|
-|`disable-model-invocation`|`false`|Set `true` to prevent Claude from auto-loading. User-only via `/name`.|
+|`disable-model-invocation`|`false`|Set `true` to prevent Claude Code from auto-loading. User-only via `/name`.|
 |`user-invocable`|`true`|Set `false` to hide from `/` menu. Background knowledge only.|
 |`model`|—|Override model when skill is active.|
 |`effort`|—|Thinking effort level: `low`, `medium`, `high`, or `max`. Opus 4.6 only. Overrides session effort level.|
@@ -29,7 +29,7 @@ These fields only work in Claude Code, not in other agents.
 |`hooks`|—|Hooks scoped to this skill's lifecycle.|
 
 ### Invocation control
-|Configuration|User can invoke|Claude can invoke|
+|Configuration|User can invoke|Agent can invoke|
 |---|---|---|
 |(default)|Yes|Yes|
 |`disable-model-invocation: true`|Yes|No|
@@ -71,11 +71,11 @@ Names are **short and direct** — the category provides context, so the skill n
 |---|---|
 |`$ARGUMENTS`|All arguments passed when invoking.|
 |`$ARGUMENTS[N]` or `$N`|Specific argument by 0-based index.|
-|`${CLAUDE_SESSION_ID}`|Current session ID.|
-|`${CLAUDE_SKILL_DIR}`|Directory containing the SKILL.md file.|
+|`${CLAUDE_SESSION_ID}`|Claude Code session ID. Claude-specific.|
+|`${CLAUDE_SKILL_DIR}`|Directory containing the SKILL.md file in Claude Code. Claude-specific.|
 
 ## Dynamic context injection
-The `` !`command` `` syntax runs shell commands and injects output before the skill content reaches Claude:
+In Claude Code, the `` !`command` `` syntax runs shell commands and injects output before the skill content reaches the model:
 
 ```markdown
 ## Current context

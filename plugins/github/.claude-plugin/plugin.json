@@ -1,17 +1,26 @@
 {
 	"name": "github",
-	"description": "GitHub workflow toolkit",
+	"description": "GitHub workflow toolkit for creating pull requests and monitoring CI.",
+	"version": "1.1.0",
 	"skills": [
 		"./skills/creating-prs",
 		"./skills/monitoring-ci"
+	],
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"github",
+		"pull-request",
+		"ci"
 	],
 	"commands": [
 		"./commands/ci.md",
 		"./commands/create-draft-pr.md",
 		"./commands/create-pr.md"
-	],
-	"author": {
-		"name": "Luca Silverentand",
-		"email": "dev@lucasilverentand.com"
-	}
+	]
 }

@@ -1,6 +1,7 @@
 {
 	"name": "apple-design",
-	"description": "Apple Human Interface Guidelines as a single plugin: foundations (shared principles), services (framework integrations), and a skill per platform (iOS, macOS, tvOS, visionOS, watchOS).",
+	"description": "Apple Human Interface Guidelines as a single plugin: foundations, services, and a skill per Apple platform.",
+	"version": "1.1.0",
 	"skills": [
 		"./skills/foundations",
 		"./skills/ios",
@@ -13,5 +14,16 @@
 	"author": {
 		"name": "Luca Silverentand",
 		"email": "luca.silverentand@gmail.com"
-	}
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"apple",
+		"design",
+		"hig",
+		"ios",
+		"macos",
+		"visionos"
+	]
 }

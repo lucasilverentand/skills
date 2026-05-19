@@ -1,6 +1,6 @@
 ---
 name: publishing
-description: Manages the skill marketplace catalog — publishes skills, updates versions, removes entries, packages skills for distribution, regenerates marketplace.json from disk, and validates catalog integrity. Use when publishing a skill to the marketplace, bumping a version, removing a skill from the catalog, packaging a skill as a .skill file, regenerating marketplace.json, moving a skill between plugins, or fixing marketplace validation errors.
+description: Manages dual Codex and Claude Code skill marketplaces — publishes plugin-owned skills, updates plugin groups, removes entries, packages skills for distribution, regenerates plugin manifests, and validates catalog integrity. Use when publishing a skill to the marketplace, bumping a version, removing a skill from the catalog, packaging a skill as a .skill file, regenerating marketplace files, moving a skill between plugins, or fixing marketplace validation errors.
 allowed-tools: Read Grep Glob Bash Write Edit
 ---
 
@@ -14,50 +14,57 @@ allowed-tools: Read Grep Glob Bash Write Edit
     - **New skills, new tools, or backwards-compatible additions** -> bump minor version
     - **Breaking changes (removed skills, renamed categories, restructured)** -> bump major version
   - **Removing a skill from the marketplace** -> follow "Removing" below
-  - **Moving a skill to a different category** -> remove the path from the old plugin's `skills` array, add it to the new one (create a new plugin entry if needed — see `references/marketplace-schema.md` "Plugin entry fields"), then run `tools/marketplace-lint.ts`
+  - **Moving a skill to a different plugin** -> move `plugins/<old>/skills/<skill>` to `plugins/<new>/skills/<skill>`, update `plugin-groups.json`, then run `bun run marketplace:write`
   - **Packaging a skill for distribution** -> run `scripts/package-skill.ts <path/to/skill-folder>`
-  - **Validating marketplace.json** -> run `tools/marketplace-lint.ts`, fix any errors per `references/marketplace-errors.md`
-  - **Regenerating marketplace.json from disk** -> follow "Regenerating from disk" below
+  - **Validating marketplace.json** -> run `bun run marketplace`, fix any errors per `references/marketplace-errors.md`
+  - **Regenerating marketplace.json from disk** -> follow "Regenerating manifests" below
 
 ## Publishing
-1. Ensure the skill directory has a valid `SKILL.md` with frontmatter (`description` recommended)
-2. Run the validator: `bun run scripts/quick-validate.ts <path>` to check frontmatter
-3. Add the skill path to `.claude-plugin/marketplace.json`:
-   - Find the plugin entry matching the skill's category directory
-   - Add `"./skills/<category>/<skill-name>"` to the plugin's `skills` array
-   - If no matching plugin exists, create a new plugin entry (see `references/marketplace-schema.md` "Plugin entry fields")
-4. Run `tools/marketplace-lint.ts` to validate — fix any errors before committing
+1. Ensure the skill directory exists at `plugins/<plugin>/skills/<skill-name>/SKILL.md`
+2. Run the validator: `bun run plugins/skill-creation/skills/publishing/scripts/quick-validate.ts plugins/<plugin>/skills/<skill-name>`
+3. Add the skill name to exactly one plugin entry in `plugin-groups.json`
+4. Run `bun run marketplace:write` to regenerate:
+   - `plugins/<name>/.claude-plugin/plugin.json`
+   - `plugins/<name>/.codex-plugin/plugin.json`
+   - `plugins/<name>/README.md`
+   - `.claude-plugin/marketplace.json`
+   - `.agents/plugins/marketplace.json`
+5. Run `bun run marketplace` again; it must report everything up to date
 
-For bulk additions, use "Regenerating from disk" below instead.
+For bulk additions, update `plugin-groups.json` first, then regenerate once.
 
 ## Removing
-1. Remove the skill path from the plugin's `skills` array in marketplace.json
-2. If the plugin has no remaining skills, remove the entire plugin entry
-3. Run `tools/marketplace-lint.ts` to validate
-4. Bump the marketplace version — minor if backwards-compatible, major if consumers depended on it
+1. Remove the skill name from its plugin in `plugin-groups.json`
+2. Delete `plugins/<plugin>/skills/<skill-name>/`
+3. Bump the marketplace version — minor if backwards-compatible, major if consumers depended on it
+4. Run `bun run marketplace:write`, then `bun run marketplace`
 
-## Regenerating from disk
-To rebuild marketplace.json from the current directory structure:
+## Regenerating manifests
+To rebuild plugin manifests and marketplaces from the plugin-owned source tree:
 
-1. Scan all `plugins/*/skills/*/SKILL.md` files to discover skills
-2. Group them by plugin directory name
-3. Write the result to `.claude-plugin/marketplace.json`, preserving existing `name`, `owner`, and `metadata` fields
-4. Run `tools/marketplace-lint.ts` to validate the generated file
-5. Review the diff — regeneration may add skills you didn't intend or lose manual edits (descriptions, ordering)
+1. Edit skills under `plugins/<plugin>/skills/`
+2. Edit plugin metadata or skill ownership in `plugin-groups.json`
+3. Run `bun run marketplace:write`
+4. Review the generated diff under plugin manifests, plugin READMEs, `.claude-plugin/`, and `.agents/plugins/`
+5. Run `bun run marketplace` to confirm no generated files are stale
 
 ## Marketplace conventions
 See `references/marketplace-schema.md` for the full schema. Key conventions:
 
-- **Category mapping**: all plugins use `devtools`
+- **Skill source**: `plugins/<name>/skills/<skill-name>/` directories are authored directly
+- **Generated files**: plugin manifests, plugin READMEs, and marketplace files are overwritten by `bun run marketplace:write`
 - **Naming**: lowercase alphanumeric + hyphens, 1-64 characters
-- **Versioning**: `metadata.version` tracks overall marketplace version using semver
-- **`strict: false`**: this repo uses `strict: false` for all plugins — marketplace entry IS the full definition, no separate `plugin.json` needed
+- **Versioning**: `plugin-groups.json` `metadata.version` tracks both marketplace versions using semver
+- **Codex marketplace**: generated at `.agents/plugins/marketplace.json`
+- **Claude marketplace**: generated at `.claude-plugin/marketplace.json`
+- **Commands**: legacy command shims stay Claude-only; portable workflows should be skills
 
 ## Key references
 |File|What it covers|
 |---|---|
-|`references/marketplace-schema.md`|marketplace.json schema, plugin.json, bundles, source types, skill discovery|
+|`references/marketplace-schema.md`|Codex + Claude marketplace schemas, plugin manifests, and source types|
 |`references/marketplace-errors.md`|Validation error codes and fixes|
-|`tools/marketplace-lint.ts`|Validates marketplace.json (run with `--fix` to auto-sort, `--json` for CI)|
+|`plugin-groups.json`|Source of truth for plugin grouping and metadata|
+|`scripts/marketplace.ts`|Regenerates both marketplaces and plugin manifests|
 |`scripts/quick-validate.ts`|Quick SKILL.md frontmatter validation|
 |`scripts/package-skill.ts`|Packages a skill folder into a distributable `.skill` zip file|

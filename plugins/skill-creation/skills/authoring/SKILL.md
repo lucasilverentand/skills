@@ -33,7 +33,7 @@ allowed-tools: Read Grep Glob Bash Write Edit Agent
 ### 1. Capture intent
 Start by understanding what the skill should do. If the conversation already contains a workflow to capture (e.g., "turn this into a skill"), extract answers from it — tools used, sequence of steps, corrections made, input/output formats. Otherwise, ask:
 
-1. What should this skill enable Claude to do?
+1. What should this skill enable an agent to do?
 2. When should this skill trigger? (what user phrases/contexts)
 3. What's the expected output format?
 4. What tier is this skill? See `references/skill-taxonomy.md` — atomic (does one thing), workflow (chains atomics in a known sequence), or agent (goal-driven, decides its own path). The tier shapes the decision tree, allowed-tools, and composition strategy.
@@ -43,7 +43,7 @@ Proactively ask about edge cases, example files, success criteria, and dependenc
 For workflow or agent-tier skills with multiple references or unfamiliar domains, offer a research-write-validate pipeline using specialized agents. See `references/agent-workflow.md` for roles, flow, and the research brief format. Skip this for atomic skills or small improvements — it's overhead without quality gain. Always let the user decide.
 
 ### 2. Write the skill
-1. Create the directory: `skills/<category>/<skill-name>/`
+1. Pick the owning plugin and create the directory: `plugins/<plugin>/skills/<skill-name>/`
 2. Write `SKILL.md` with YAML frontmatter — `description` is recommended for discovery (see `references/skill-format.md`)
 3. Write the decision tree — use the **decision-trees** skill for this
 4. Write conventions — the rules the agent must follow every time
@@ -95,7 +95,7 @@ Read SKILL.md to get the skill's responsibilities, then ensure each one has a de
 |`references/advanced-features.md`|Extended thinking, legacy commands, bundled skills, subagent preloading, hooks, permission control|
 
 ## Official spec vs. repo conventions
-The skill format, structure, locations, and advanced features documented in the references above reflect the official [Claude Code Agent Skills specification](https://agentskills.io). The following are conventions specific to this repository — useful for organizing a skill library, but not required by the spec:
+The skill format, structure, locations, and advanced features documented in the references above reflect the open [Agent Skills specification](https://agentskills.io), with Codex and Claude Code extensions called out when they are product-specific. The following are conventions specific to this repository — useful for organizing a skill library, but not required by the spec:
 
 - **Skill taxonomy** (`references/skill-taxonomy.md`) — atomic/workflow/agent tiers
 - **Decision trees** (via the **decision-trees** skill) — prescribed SKILL.md structure

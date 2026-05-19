@@ -73,7 +73,7 @@ Use the MADR template below. Keep it focused — an ADR is not a design doc. One
 
 - <Driver 1 — e.g., must support 10k writes/sec>
 - <Driver 2 — e.g., team has no Kafka experience>
-- <Driver 3 — e.g., Cloudflare-first stack per CLAUDE.md>
+- <Driver 3 — e.g., Cloudflare-first stack per project instructions>
 
 ## Considered options
 
@@ -175,8 +175,8 @@ An ADR's job is to make the decision *reproducible* — a reader a year later sh
 ## Key references
 |File|Covers|
 |---|---|
-|`../data-modeling/references/`|Data conventions — ADRs should reference deviations from these|
-|`../api-design/references/`|API conventions — ADRs should reference deviations from these|
-|`../architecture/references/`|Infrastructure conventions — ADRs should reference deviations from these|
+|Data-modeling skill references, when bundled|Data conventions — ADRs should reference deviations from these|
+|API-design skill references, when bundled|API conventions — ADRs should reference deviations from these|
+|Architecture skill references, when bundled|Infrastructure conventions — ADRs should reference deviations from these|
 |`references/madr-template.md`|The raw template to copy|
 |`references/examples.md`|Two complete example ADRs (outbox pattern, data store choice)|

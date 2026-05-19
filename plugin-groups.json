@@ -1,0 +1,121 @@
+{
+	"name": "skills-of-luca",
+	"owner": {
+		"name": "Luca Silverentand",
+		"url": "https://github.com/lucasilverentand"
+	},
+	"metadata": {
+		"version": "1.1.0",
+		"homepage": "https://github.com/lucasilverentand/skills",
+		"repository": "https://github.com/lucasilverentand/skills",
+		"license": "MIT"
+	},
+	"plugins": [
+		{
+			"name": "apple-design",
+			"displayName": "Apple Design",
+			"description": "Apple Human Interface Guidelines as a single plugin: foundations, services, and a skill per Apple platform.",
+			"shortDescription": "Apple HIG guidance by platform",
+			"category": "Design",
+			"keywords": ["apple", "design", "hig", "ios", "macos", "visionos"],
+			"skills": ["foundations", "ios", "macos", "services", "tvos", "visionos", "watchos"],
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "luca.silverentand@gmail.com"
+			}
+		},
+		{
+			"name": "documentation",
+			"displayName": "Documentation",
+			"description": "Documentation authoring and structured knowledge capture for design docs, ADRs, C4 diagrams, and decision trees.",
+			"shortDescription": "Structured engineering documentation",
+			"category": "Documentation",
+			"keywords": ["documentation", "adr", "c4", "decision-tree"],
+			"skills": ["c4-diagrams", "decision-trees", "write-adr", "write-design-doc"],
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			}
+		},
+		{
+			"name": "frontend",
+			"displayName": "Frontend",
+			"description": "Frontend design exploration toolkit for interactive HTML design options.",
+			"shortDescription": "Interactive frontend design options",
+			"category": "Development",
+			"keywords": ["frontend", "design", "ui", "prototype"],
+			"skills": ["design-options"],
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			}
+		},
+		{
+			"name": "git",
+			"displayName": "Git",
+			"description": "Git workflow toolkit for commits, conflict resolution, rebases, and repository cleanup.",
+			"shortDescription": "Git workflow automation",
+			"category": "Development",
+			"keywords": ["git", "commits", "rebase", "conflicts"],
+			"skills": ["cleaning-repos", "creating-commits", "resolving-conflicts"],
+			"commands": ["clean-repo", "create-commit", "rebase"],
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			}
+		},
+		{
+			"name": "github",
+			"displayName": "GitHub",
+			"description": "GitHub workflow toolkit for creating pull requests and monitoring CI.",
+			"shortDescription": "Pull request and CI workflows",
+			"category": "Development",
+			"keywords": ["github", "pull-request", "ci"],
+			"skills": ["creating-prs", "monitoring-ci"],
+			"commands": ["ci", "create-draft-pr", "create-pr"],
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			}
+		},
+		{
+			"name": "project",
+			"displayName": "Project",
+			"description": "Project setup and context management skills for requirements and shared agent context.",
+			"shortDescription": "Project context and requirements",
+			"category": "Development",
+			"keywords": ["project", "requirements", "context"],
+			"skills": ["project-context", "requirements"],
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			}
+		},
+		{
+			"name": "skill-creation",
+			"displayName": "Skill Creation",
+			"description": "End-to-end toolkit for authoring, publishing, tooling, and improving reusable agent skills.",
+			"shortDescription": "Author and publish agent skills",
+			"category": "Development",
+			"keywords": ["skills", "authoring", "publishing", "tooling"],
+			"skills": ["authoring", "publishing", "retrospecting", "taste-encoding", "tooling"],
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			}
+		},
+		{
+			"name": "systems-design",
+			"displayName": "Systems Design",
+			"description": "Opinionated system design toolkit for architecture, data modeling, API design, workflow sequencing, and design review.",
+			"shortDescription": "System architecture and design review",
+			"category": "Architecture",
+			"keywords": ["architecture", "api", "database", "design-review"],
+			"skills": ["api-design", "architecture", "data-modeling", "design-review", "design-workflow"],
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			}
+		}
+	]
+}

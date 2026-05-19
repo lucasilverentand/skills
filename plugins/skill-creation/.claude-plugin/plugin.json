@@ -1,6 +1,7 @@
 {
 	"name": "skill-creation",
-	"description": "End-to-end toolkit for authoring, publishing, and continuously improving Claude Code skills",
+	"description": "End-to-end toolkit for authoring, publishing, tooling, and improving reusable agent skills.",
+	"version": "1.1.0",
 	"skills": [
 		"./skills/authoring",
 		"./skills/publishing",
@@ -11,5 +12,14 @@
 	"author": {
 		"name": "Luca Silverentand",
 		"email": "dev@lucasilverentand.com"
-	}
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"skills",
+		"authoring",
+		"publishing",
+		"tooling"
+	]
 }

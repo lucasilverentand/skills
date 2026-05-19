@@ -6,9 +6,9 @@ Recognizable patterns in conversations and git history, with detection heuristic
 ### Corrections
 **Signal**: User says "no", "wrong", "not that", "instead do X", "don't do Y".
 
-**What it means**: Claude made a choice the user disagrees with. If this happens repeatedly for the same kind of choice, there's a missing convention or decision rule.
+**What it means**: The agent made a choice the user disagrees with. If this happens repeatedly for the same kind of choice, there's a missing convention or decision rule.
 
-**Action**: Extract the correction into a skill convention or CLAUDE.md rule. Example: "User corrected framework choice 3x → add a preference rule to the relevant skill."
+**Action**: Extract the correction into a skill convention or project instruction rule. Example: "User corrected framework choice 3x -> add a preference rule to the relevant skill."
 
 ### Retries / Try Again
 **Signal**: User asks to "try again", "redo this", or provides the same instruction a second time with more detail.
@@ -20,9 +20,9 @@ Recognizable patterns in conversations and git history, with detection heuristic
 ### Long Back-and-Forths
 **Signal**: 8+ user turns in a single conversation on the same topic.
 
-**What it means**: The task was either unclear, the skill was missing, or Claude kept getting blocked and needed course corrections.
+**What it means**: The task was either unclear, the skill was missing, or the agent kept getting blocked and needed course corrections.
 
-**Action**: Review the conversation — if the task is repeatable, create a skill for it. If Claude kept hitting the same wall, add a reference or tool to unblock it.
+**Action**: Review the conversation — if the task is repeatable, create a skill for it. If the agent kept hitting the same wall, add a reference or tool to unblock it.
 
 ### Tool Failures
 **Signal**: Same tool called multiple times with errors, or user reports "it doesn't work" / "still broken".
@@ -45,7 +45,7 @@ Recognizable patterns in conversations and git history, with detection heuristic
 
 **What it means**: The user has a technology stack preference that isn't codified.
 
-**Action**: Add to CLAUDE.md tech preferences, or if it's domain-specific, add to the relevant skill's conventions.
+**Action**: Add to project instruction tech preferences, or if it's domain-specific, add to the relevant skill's conventions.
 
 ### Style Preferences
 **Signal**: "format it like", "keep it simple", "too verbose", "less boilerplate".
@@ -59,14 +59,14 @@ Recognizable patterns in conversations and git history, with detection heuristic
 
 **What it means**: The user has a workflow preference.
 
-**Action**: Add to CLAUDE.md workflow section, or if skill-specific, add as a convention in the skill.
+**Action**: Add to the project instruction workflow section, or if skill-specific, add as a convention in the skill.
 
 ### Naming / Convention Preferences
 **Signal**: "use kebab-case", "name it like X", "the convention here is Y".
 
 **What it means**: Project has naming conventions not yet captured.
 
-**Action**: Add to CLAUDE.md or the relevant skill's conventions section.
+**Action**: Add to the project instructions or the relevant skill's conventions section.
 
 ## Git Rework Patterns
 
@@ -101,7 +101,7 @@ Recognizable patterns in conversations and git history, with detection heuristic
 ## From Finding to Skill
 When a pattern is confirmed, follow this decision process:
 
-1. **Is it project-specific?** → Add to CLAUDE.md, not a skill
+1. **Is it project-specific?** → Add to project instructions, not a skill
 2. **Is it personal preference?** → Save as a memory (feedback or user type)
 3. **Is it a single rule?** → Add as a convention to an existing skill
 4. **Is it a repeatable workflow?** → Create a new skill with the lifecycle skill

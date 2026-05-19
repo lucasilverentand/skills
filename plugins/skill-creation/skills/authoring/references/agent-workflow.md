@@ -24,7 +24,7 @@ Deliverable — a **research brief** containing:
 5. **Domain context** — if the skill targets a specific domain, what the codebase already does in that area
 
 What to read:
-- All `skills/*/SKILL.md` in the target plugin (Glob + Read)
+- All `plugins/<plugin>/skills/*/SKILL.md` in the target plugin (Glob + Read)
 - `references/skill-format.md`, `references/skill-taxonomy.md`, `references/skill-structure.md`
 - Codebase files relevant to the skill's domain
 

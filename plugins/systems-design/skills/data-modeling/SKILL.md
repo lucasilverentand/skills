@@ -112,9 +112,9 @@ Write schema definitions to:
 |When|Use|
 |---|---|
 |Need the system architecture first|`architecture`|
-|Data store choice deserves an ADR|`write-adr`|
+|Data store choice deserves an ADR|`documentation:write-adr` if installed|
 |Designing the API over this data|`api-design`|
-|Documenting the whole design|`write-design-doc`|
+|Documenting the whole design|`documentation:write-design-doc` if installed|
 
 ## Key references
 |File|Covers|

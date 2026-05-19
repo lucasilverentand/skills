@@ -73,7 +73,7 @@ Walk each lens below and write findings as you go. Not every lens applies to eve
 - Are service boundaries drawn along responsibility lines or along org-chart lines?
 
 #### Stack defaults compliance
-Check the design against the convention references in sibling skills (`../data-modeling/references/`, `../api-design/references/`, `../architecture/references/`). Deviations aren't wrong, but they should be intentional and documented. Flag if:
+Check the design against the convention references in sibling skills (`../data-modeling/references/`, `../api-design/references/`, `../architecture/references/`). If the `project:requirements` skill is installed, use its NFR checklist for non-functional coverage; otherwise evaluate NFRs from the design text and ask for missing targets. Deviations aren't wrong, but they should be intentional and documented. Flag if:
 
 - Async work is handled inline instead of via Queues (for anything >50ms)
 - Write endpoints lack `Idempotency-Key` enforcement
@@ -101,7 +101,7 @@ Structure:
 
 ```markdown
 # Review: <design name>
-Reviewer: Claude
+Reviewer: Agent
 Date: <YYYY-MM-DD>
 
 ## Summary
@@ -167,11 +167,11 @@ Embedded explainers make the review useful to a wider audience — including wea
 |`../data-modeling/references/`|Data conventions — IDs, naming, tenancy, soft delete, JSONB, audit, migrations (one file per topic)|
 |`../api-design/references/`|API conventions — HTTP, errors, auth, pagination, API patterns (one file per topic)|
 |`../architecture/references/`|Infra conventions — async, resilience, observability, deploy, testing, privacy (one file per topic)|
-|`../requirements/references/nfr-checklist.md`|Non-functional requirements checklist — walk this when checking NFR coverage|
+|`project:requirements`|Companion requirements skill — use for NFR coverage if the plugin is installed|
 
 ## Cross-references
 |Situation|Action|
 |---|---|
-|The design is missing a section entirely (e.g., no NFRs)|Flag the gap; hand off to `requirements` for NFRs or `write-design-doc` for structure|
-|The user wants the design rewritten after review|Hand off to `architecture` + `write-design-doc` with findings as input|
-|A finding deserves a permanent decision record|Suggest `write-adr` to capture the resolution|
+|The design is missing a section entirely (e.g., no NFRs)|Flag the gap; hand off to `project:requirements` for NFRs or `documentation:write-design-doc` for structure if installed|
+|The user wants the design rewritten after review|Hand off to `architecture` plus `documentation:write-design-doc` with findings as input if installed|
+|A finding deserves a permanent decision record|Suggest `documentation:write-adr` to capture the resolution if installed|

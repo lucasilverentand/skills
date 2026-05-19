@@ -184,7 +184,7 @@ Serve it with the pick tool to collect the user's choice. Run it in the backgrou
 
 ```bash
 # Run with Bash tool's run_in_background: true
-bun run plugins/frontend/skills/design-options/tools/serve-options.ts {filename}
+bun run <this-skill-directory>/tools/serve-options.ts {filename}
 ```
 
 This opens the browser with a "Pick this variant" bar at the bottom. The user can:

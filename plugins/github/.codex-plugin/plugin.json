@@ -1,0 +1,33 @@
+{
+	"name": "github",
+	"version": "1.1.0",
+	"description": "GitHub workflow toolkit for creating pull requests and monitoring CI.",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"github",
+		"pull-request",
+		"ci"
+	],
+	"skills": "./skills/",
+	"interface": {
+		"displayName": "GitHub",
+		"shortDescription": "Pull request and CI workflows",
+		"longDescription": "GitHub workflow toolkit for creating pull requests and monitoring CI.",
+		"developerName": "Luca Silverentand",
+		"category": "Development",
+		"capabilities": [
+			"Read",
+			"Write"
+		],
+		"websiteURL": "https://github.com/lucasilverentand/skills",
+		"defaultPrompt": [
+			"Use GitHub when the task matches one of its bundled skills."
+		]
+	}
+}

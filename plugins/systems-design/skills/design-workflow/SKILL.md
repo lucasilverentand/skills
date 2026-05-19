@@ -7,7 +7,7 @@ allowed-tools: Read Grep Glob Bash Write Edit AskUserQuestion
 # Design Workflow
 Orchestrates a full system design by sequencing the focused skills in the right order. Each skill does one thing well — this skill decides which ones to invoke, in what order, and handles the transitions between them.
 
-The individual skills are: `requirements`, `architecture`, `data-modeling`, `api-design`, `write-design-doc`, `write-adr`, `c4-diagrams`, `design-review`.
+This plugin owns the core design skills: `architecture`, `data-modeling`, `api-design`, `design-review`. For full end-to-end work, compose with companion plugin skills when they are installed: `project:requirements`, `documentation:write-design-doc`, `documentation:write-adr`, and `documentation:c4-diagrams`.
 
 ## When to use this vs a specific skill
 - **User says "design me a system for X"** → use this workflow
@@ -33,7 +33,7 @@ If significant work already exists, don't start from scratch — pick up where t
 
 **When to skip:** The user has a clear, specific ask with known constraints, or existing documentation covers the requirements.
 
-**What to do:** Follow the `requirements` skill. The output is a structured requirements doc in `.context/architecture/requirements/`. The key deliverables are: functional requirements (MoSCoW-prioritized, numbered), NFR targets with concrete numbers, constraints, and open questions.
+**What to do:** If `project:requirements` is installed, follow it. Otherwise gather the minimum requirements inline. The output is a structured requirements doc in `.context/architecture/requirements/`. The key deliverables are: functional requirements (MoSCoW-prioritized, numbered), NFR targets with concrete numbers, constraints, and open questions.
 
 **Transition:** Once requirements are captured, move to architecture. Carry the requirements doc forward — the architecture skill reads it as input.
 
@@ -67,12 +67,12 @@ If significant work already exists, don't start from scratch — pick up where t
 
 **When to skip:** Small features, quick additions, or when the user prefers to keep things informal.
 
-**What to do:** Follow the `write-design-doc` skill. Pull together the outputs from steps 2-5 into a single coherent document. The design doc is the artifact that engineers implement from.
+**What to do:** If `documentation:write-design-doc` is installed, follow it. Otherwise write the design doc inline from the outputs of steps 2-5. The design doc is the artifact that engineers implement from.
 
 ### Step 7: ADRs and diagrams (as needed)
-**ADRs:** If any non-obvious decisions were made during the design (new service, new vendor, deviation from defaults), suggest capturing them as ADRs via `write-adr`. Don't create ADRs for every decision — only for genuine trade-offs where the rejected option had real merit.
+**ADRs:** If any non-obvious decisions were made during the design (new service, new vendor, deviation from defaults), suggest capturing them as ADRs via `documentation:write-adr` when available. Don't create ADRs for every decision — only for genuine trade-offs where the rejected option had real merit.
 
-**Diagrams:** If the system has >4 components or the user wants a visual, produce a C4 diagram via `c4-diagrams`. A Container-level diagram is the most useful default.
+**Diagrams:** If the system has >4 components or the user wants a visual, produce a C4 diagram via `documentation:c4-diagrams` when available. A Container-level diagram is the most useful default.
 
 ### Step 8: Self-review
 Before declaring the design done, run a quick self-review using the `design-review` lens:

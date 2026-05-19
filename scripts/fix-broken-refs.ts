@@ -2,7 +2,7 @@
 /**
  * Cleans broken cross-reference links in plugin reference files.
  *
- * Scope: every `.md` file under `plugins/* /skills/* /references/ **`.
+ * Scope: every `.md` file under `plugins/*/skills/*/references/**`.
  *
  * For each markdown link `[Label](target.md)` or `[Label](target.md#anchor)`:
  *   - Resolve `target.md` relative to the file's directory.

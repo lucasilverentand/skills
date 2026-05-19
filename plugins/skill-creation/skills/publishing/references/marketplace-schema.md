@@ -1,151 +1,145 @@
 # Marketplace & Plugin Schema
+This repository has plugin-owned skills and two generated marketplace surfaces.
 
-## Where skills are discovered
-|Scope|Location|Applies to|
+## Source of truth
+|Path|Purpose|
+|---|---|
+|`plugins/<name>/skills/<skill-name>/SKILL.md`|Open Agent Skills source owned by one plugin|
+|`plugin-groups.json`|Marketplace metadata and plugin skill ownership|
+|`scripts/marketplace.ts`|Generator and validator for plugin manifests and marketplaces|
+
+Edit skills in place under their owning plugin. Do not create root-level skill copies.
+
+## Generated surfaces
+|Consumer|Generated path|Notes|
 |---|---|---|
-|Personal|`~/.claude/skills/<skill-name>/SKILL.md`|All your projects|
-|Project|`.claude/skills/<skill-name>/SKILL.md`|This project only|
-|Plugin|`<plugin>/skills/<skill-name>/SKILL.md`|Where plugin is enabled|
-|Enterprise|Managed settings|All org users|
+|Codex marketplace|`.agents/plugins/marketplace.json`|Repo-scoped Codex plugin catalog|
+|Codex plugin manifest|`plugins/<name>/.codex-plugin/plugin.json`|Required Codex plugin entry point|
+|Claude marketplace|`.claude-plugin/marketplace.json`|Claude Code plugin catalog|
+|Claude plugin manifest|`plugins/<name>/.claude-plugin/plugin.json`|Claude Code plugin entry point|
+|Plugin README|`plugins/<name>/README.md`|Generated install notes for that plugin|
 
-Plugin skills use namespaced invocation: `plugin-name:skill-name`.
+Codex can also read `.claude-plugin/marketplace.json` as a legacy-compatible marketplace, but this repo generates the Codex-native `.agents/plugins/marketplace.json` so install behavior is explicit.
 
-## marketplace.json
-Lives at `.claude-plugin/marketplace.json` in a repo. Defines available plugins and their skills.
+## `plugin-groups.json`
+Top-level fields:
 
-### Top-level fields
-|Field|Required|Type|Description|
-|---|---|---|---|
-|`name`|Yes|string|Marketplace identifier (kebab-case)|
-|`owner`|Yes|object|`{ name: string, url?: string, email?: string }`|
-|`plugins`|Yes|array|Plugin definitions|
-|`metadata`|No|object|Marketplace-level metadata|
-
-### metadata fields
-|Field|Type|Description|
+|Field|Required|Description|
 |---|---|---|
-|`metadata.description`|string|Marketplace description|
-|`metadata.version`|string|Marketplace version (semver)|
-|`metadata.homepage`|string|URL to homepage|
-|`metadata.repository`|string|URL to source repository|
-|`metadata.license`|string|License identifier|
-|`metadata.pluginRoot`|string|Base directory prepended to relative source paths|
+|`name`|Yes|Marketplace identifier, kebab-case|
+|`owner`|Yes|Maintainer metadata|
+|`metadata.version`|Yes|Shared semver for generated marketplaces and plugin manifests|
+|`metadata.homepage`|No|Homepage URL|
+|`metadata.repository`|No|Repository URL|
+|`metadata.license`|No|SPDX license identifier|
+|`plugins`|Yes|Plugin group definitions|
 
-### Plugin entry fields
-Required:
+Plugin group fields:
 
-|Field|Type|Description|
+|Field|Required|Description|
 |---|---|---|
-|`name`|string|Plugin identifier (kebab-case)|
-|`source`|string/object|Where to fetch the plugin|
+|`name`|Yes|Plugin identifier and namespace|
+|`displayName`|Yes|Codex install-surface display name|
+|`description`|Yes|Long plugin description|
+|`shortDescription`|Yes|Codex short display copy|
+|`category`|Yes|Install-surface category|
+|`skills`|Yes|Skill directory names owned by this plugin under `plugins/<name>/skills/`|
+|`commands`|No|Claude-only legacy command shims under `plugins/<name>/commands/*.md`|
+|`author`|Yes|Plugin author metadata|
+|`keywords`|No|Discovery tags|
 
-Optional:
+A skill belongs to exactly one plugin. For cross-plugin workflows, reference companion skills by name instead of copying their files into another plugin.
 
-|Field|Type|Description|
-|---|---|---|
-|`description`|string|What the plugin does|
-|`version`|string|Semver version|
-|`category`|string|Category for organization|
-|`skills`|array|Paths to skill directories|
-|`strict`|boolean|If `false`, marketplace entry IS the full definition (no plugin.json needed). Default: `true`.|
-|`commands`|string/array|Paths to command files|
-|`agents`|string/array|Paths to agent files|
-|`hooks`|string/object|Hook configurations|
-|`mcpServers`|string/object|MCP server configurations|
-|`keywords`|array|String tags for search and discovery|
-|`homepage`|string|URL to plugin homepage|
-|`repository`|string|URL to source repository|
-
-New plugin entry template:
+## Codex marketplace shape
+Generated at `.agents/plugins/marketplace.json`:
 
 ```json
 {
-  "name": "<category-directory-name>",
-  "source": "./",
-  "description": "Skills for <what this category covers>",
-  "category": "<marketplace-category>",
-  "skills": ["./skills/<category>/<skill-name>"],
-  "strict": false
-}
-```
-
-### Source types
-The plugin `source` field is either a string (for relative paths) or an object (for remote sources). These examples show the value of the `source` field in a plugin entry.
-
-**Relative path** (string):
-
-```json
-"source": "./"
-```
-
-**GitHub** (object — `source` inside the object identifies the type):
-
-```json
-"source": { "source": "github", "repo": "owner/repo", "ref": "v2.0" }
-```
-
-**Git URL:**
-
-```json
-"source": { "source": "url", "url": "https://gitlab.com/team/plugin.git" }
-```
-
-**Git subdirectory:**
-
-```json
-"source": { "source": "git-subdir", "url": "https://github.com/org/monorepo.git", "path": "plugins/my-plugin" }
-```
-
-**npm:**
-
-```json
-"source": { "source": "npm", "package": "pkg-name", "version": "1.0.0" }
-```
-
-### Bundles
-Optional top-level `bundles` array groups plugins into installable collections.
-
-|Field|Required|Type|Description|
-|---|---|---|---|
-|`name`|Yes|string|Bundle identifier (kebab-case, must not collide with plugin names)|
-|`description`|Yes|string|What the bundle provides|
-|`plugins`|Yes|array|Plugin names to include, or `["*"]` for all|
-
-```json
-{
-  "bundles": [
+  "name": "skills-of-luca",
+  "interface": {
+    "displayName": "Skills of Luca"
+  },
+  "plugins": [
     {
-      "name": "full-stack",
-      "description": "All development skills",
-      "plugins": ["git", "github", "frontend"]
+      "name": "git",
+      "source": {
+        "source": "local",
+        "path": "./plugins/git"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Development"
     }
   ]
 }
 ```
 
-Using `"*"` as the only element includes all plugins. It cannot be mixed with specific names.
+Codex resolves `source.path` relative to the marketplace root. For a repo marketplace, keep plugin paths inside the repo and start them with `./`.
 
-## plugin.json
-Lives at `.claude-plugin/plugin.json` in a plugin repo. Optional when marketplace uses `strict: false`.
+## Codex plugin shape
+Generated at `plugins/<name>/.codex-plugin/plugin.json`:
 
-|Field|Required|Type|Description|
-|---|---|---|---|
-|`name`|Yes|string|Unique identifier, becomes skill namespace|
-|`version`|No|string|Semver version|
-|`description`|No|string|What the plugin does|
-|`skills`|No|array|Paths to skill directories|
-|`commands`|No|array|Paths to command files|
-|`agents`|No|array|Paths to agent files|
-|`hooks`|No|object|Hook configurations|
-|`mcpServers`|No|object|MCP server configurations|
-
-## External distribution
-Skills can be distributed via the `npx skills` CLI:
-
-```bash
-npx skills add owner/repo          # install from GitHub
-npx skills find "query"            # search available skills
-npx skills list                    # list installed skills
+```json
+{
+  "name": "git",
+  "version": "1.1.0",
+  "description": "Git workflow toolkit",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Git",
+    "shortDescription": "Git workflow automation",
+    "category": "Development"
+  }
+}
 ```
 
-Installed skills go to `~/.agents/skills/` with a lock file at `~/.agents/.skill-lock.json`.
+Codex plugin manifests use `.codex-plugin/plugin.json`; only the manifest belongs in `.codex-plugin/`. Skills stay at the plugin root under `skills/`.
+
+## Claude marketplace shape
+Generated at `.claude-plugin/marketplace.json`:
+
+```json
+{
+  "name": "skills-of-luca",
+  "owner": {
+    "name": "Luca Silverentand"
+  },
+  "plugins": [
+    {
+      "name": "git",
+      "source": "./plugins/git",
+      "description": "Git workflow toolkit",
+      "version": "1.1.0"
+    }
+  ]
+}
+```
+
+Relative plugin sources resolve from the repository root containing `.claude-plugin/`.
+
+## Claude plugin shape
+Generated at `plugins/<name>/.claude-plugin/plugin.json`:
+
+```json
+{
+  "name": "git",
+  "description": "Git workflow toolkit",
+  "version": "1.1.0",
+  "skills": ["./skills/creating-commits"],
+  "commands": ["./commands/create-commit.md"]
+}
+```
+
+Commands are included only in Claude plugin manifests. New portable workflows should be authored as skills.
+
+## Direct skill installation
+Direct skill consumers can install from the plugin-owned skill tree:
+
+```bash
+bun run install:codex-skills -- creating-commits creating-prs
+bun run install:claude-skills -- creating-commits creating-prs
+```
+
+Without skill names, the installer targets every plugin-owned skill. Add `--symlink` for local development and `--force` to replace an existing installed skill.

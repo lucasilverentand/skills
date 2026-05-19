@@ -180,7 +180,7 @@ function flagTriggerQuality(
 			file: rel,
 			line: descLine,
 			severity: "error",
-			message: 'description has no trigger clause — add "Use when..." to tell Claude when to activate',
+			message: 'description has no trigger clause — add "Use when..." to tell agents when to activate',
 		});
 	}
 
@@ -232,7 +232,7 @@ function flag(filePath: string, content: string): Flag[] {
 	const flags: Flag[] = [];
 	const lines = content.split("\n");
 	const isSkill = filePath.endsWith("SKILL.md");
-	// References and supporting docs are only loaded when Claude explicitly
+	// References and supporting docs are only loaded when an agent explicitly
 	// reads them — they can be larger than the auto-injected SKILL.md.
 	const isReference = /\/references\//.test(filePath);
 
@@ -276,7 +276,7 @@ function flag(filePath: string, content: string): Flag[] {
 			flags.push({
 				file: rel,
 				severity: "error",
-				message: "missing description — Claude cannot trigger this skill without one",
+				message: "missing description — agents cannot trigger this skill without one",
 			});
 		} else {
 			flags.push(

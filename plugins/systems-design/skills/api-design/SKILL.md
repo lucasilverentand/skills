@@ -111,8 +111,8 @@ Output to `.context/architecture/api/<service>.md`. Structure:
 
 ### 8. Link it up
 - Add a link from any related design doc in `.context/architecture/`
-- If the API is for a new service, suggest writing ADRs (`write-adr`) for non-obvious choices
-- If there's a diagram, make sure it matches (`c4-diagrams`)
+- If the API is for a new service, suggest writing ADRs (`documentation:write-adr`) for non-obvious choices when available
+- If there's a diagram, make sure it matches (`documentation:c4-diagrams`) when available
 
 ## Writing principles
 **Write specs for juniors and weaker LLM models.** A spec that only a senior can read is a spec that will be misimplemented:
@@ -127,9 +127,9 @@ Output to `.context/architecture/api/<service>.md`. Structure:
 |---|---|
 |Need the system architecture first|`architecture`|
 |Need the data model|`data-modeling`|
-|The API is part of a larger design|`write-design-doc` for the parent doc|
-|A choice deserves a permanent record|`write-adr`|
-|A diagram would make the flow clearer|`c4-diagrams`|
+|The API is part of a larger design|`documentation:write-design-doc` for the parent doc if installed|
+|A choice deserves a permanent record|`documentation:write-adr` if installed|
+|A diagram would make the flow clearer|`documentation:c4-diagrams` if installed|
 |Review an existing API design|`design-review`|
 
 ## Key references

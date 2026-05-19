@@ -68,7 +68,7 @@ Walk through the system and list:
 A good rule of thumb: if you can't label the *purpose* of an arrow in ~5 words, the relationship is too vague to draw.
 
 #### Default stack primitives
-When diagramming systems built on the default stack (see `../architecture/references/third-party.md` and `../architecture/references/deploy.md`), use these standard labels and shorthand:
+When diagramming systems built on the default stack, use these standard labels and shorthand. If the architecture skill is installed in the same package, its `references/third-party.md` and `references/deploy.md` files contain the fuller stack rationale.
 
 |Primitive|Label format|Responsibility|
 |---|---|---|
@@ -132,6 +132,5 @@ Remember: the diagram is for the *reader*, not the writer. A junior engineer or 
 ## Key references
 |File|Covers|
 |---|---|
-|`../architecture/references/third-party.md`|Default vendors and stack primitives for diagram labels|
-|`../architecture/references/deploy.md`|Monorepo layout and Worker topology|
+|Architecture skill references, when bundled|Default vendors, stack primitives, monorepo layout, and Worker topology|
 |`references/mermaid-c4.md`|Mermaid templates for Context, Container, and Component levels with styling|

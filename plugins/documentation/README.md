@@ -1,28 +1,24 @@
-# Documentation Plugin
-Skills for creating structured documentation artifacts — decision trees, runbooks, and other formats that serve both human readers and AI agents. This plugin helps turn tribal knowledge and design thinking into durable, machine-readable, and human-auditable documentation.
+# Documentation
+Documentation authoring and structured knowledge capture for design docs, ADRs, C4 diagrams, and decision trees.
 
 ## Skills
+- `documentation:c4-diagrams`
+- `documentation:decision-trees`
+- `documentation:write-adr`
+- `documentation:write-design-doc`
 
-### c4-diagrams
-Generates C4 model architecture diagrams (System Context, Container, Component) as Mermaid for embedding in docs. Picks the right level and labels elements with technology and responsibility.
+## Install
+Codex:
 
-### decision-trees
-Creates decision trees that both humans and AI agents can follow reliably — captures expert knowledge as branching logic with concrete conditions, clear enough actions, and visible reasoning traces.
-
-### write-adr
-Writes Architecture Decision Records (ADRs) in MADR format — captures context and problem, decision drivers, considered options with pros/cons, the chosen option and why, and consequences.
-
-### write-design-doc
-Assembles architecture, data modeling, and API design work into a structured, readable system design document. Focuses on writing quality, document structure, and completeness.
-
-## Installation
-Add this plugin to your Claude Code configuration:
-
-```json
-{
-  "plugins": ["plugins/documentation"]
-}
+```bash
+codex plugin marketplace add lucasilverentand/skills
 ```
 
-## Author
-Luca Silverentand (<dev@lucasilverentand.com>)
+Claude Code:
+
+```text
+/plugin marketplace add lucasilverentand/skills
+/plugin install documentation@skills-of-luca
+```
+
+This plugin owns its skill source under `plugins/documentation/skills/`. Edit those files directly, then run `bun run marketplace:write` to refresh generated manifests and marketplaces.

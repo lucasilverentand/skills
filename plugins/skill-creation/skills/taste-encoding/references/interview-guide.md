@@ -3,7 +3,7 @@ How to conduct a taste interview that extracts actionable, encodable preferences
 
 ## Before you start
 1. **Read the target skill** — understand what decisions it guides and where it's currently generic.
-2. **Read the user's CLAUDE.md and memory** — don't re-ask things already settled. If CLAUDE.md says "Bun over Node", that's encoded taste — acknowledge it and move deeper.
+2. **Read the user's agent instructions and memory** — don't re-ask things already settled. If project instructions say "Bun over Node", that's encoded taste — acknowledge it and move deeper.
 3. **Read existing reference files** in the target skill — know what's already opinionated.
 4. **Prepare a topic list** — the decisions that need taste, grouped by theme.
 
@@ -69,7 +69,7 @@ Not every topic deserves the same depth. Calibrate based on:
 
 **Skip entirely** when:
 
-- Already encoded in CLAUDE.md or the skill's existing references
+- Already encoded in project instructions or the skill's existing references
 - The user explicitly says they don't want to opine
 - The decision doesn't apply to the user's stack
 

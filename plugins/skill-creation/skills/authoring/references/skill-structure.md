@@ -2,7 +2,7 @@
 
 ## Directory layout
 ```text
-skills/<category>/<skill-name>/
+plugins/<plugin-name>/skills/<skill-name>/
 ├── SKILL.md                # how: lean instructions, frontmatter, short decision trees
 ├── tools/                  # (optional) bun scripts the agent can run
 │   └── *.ts
@@ -14,23 +14,19 @@ skills/<category>/<skill-name>/
 
 Only `SKILL.md` is required. Add `tools/`, `references/`, or `examples/` when the skill needs them.
 
+## Repository layout
+This repository uses `plugins/<plugin-name>/skills/<skill-name>/` as the authoring tree. Each skill has one owning plugin. `plugin-groups.json` records the plugin metadata and skill ownership, and `bun run marketplace:write` regenerates manifests, READMEs, and marketplace catalogs.
+
 ## Skill locations
-|Location|Path|Scope|
+|Consumer|Path|Scope|
 |---|---|---|
-|Enterprise|Managed settings|All users in the organization|
-|Personal|`~/.claude/skills/<skill-name>/SKILL.md`|All your projects|
-|Project|`.claude/skills/<skill-name>/SKILL.md`|This project only|
-|Plugin|`<plugin>/skills/<skill-name>/SKILL.md`|Where plugin is enabled|
+|Open Agent Skills / Codex personal|`~/.agents/skills/<skill-name>/SKILL.md`|All projects for that user|
+|Codex project|`.agents/skills/<skill-name>/SKILL.md`|Project or folder-specific skills|
+|Claude Code personal|`~/.claude/skills/<skill-name>/SKILL.md`|All Claude Code projects for that user|
+|Claude Code project|`.claude/skills/<skill-name>/SKILL.md`|Project or folder-specific skills|
+|Plugin package|`plugins/<plugin-name>/skills/<skill-name>/SKILL.md`|Where the plugin is enabled|
 
-Priority: enterprise > personal > project. Plugin skills use `plugin-name:skill-name` namespacing (no conflicts with other locations).
-
-## Discovery
-Claude Code discovers skills automatically from:
-
-- `.claude/skills/` in the project root
-- Nested `.claude/skills/` directories in subdirectories (monorepo support — e.g., `packages/frontend/.claude/skills/`)
-- `.claude/skills/` in directories added via `--add-dir` (with live change detection)
-- Plugin `skills/` directories
+Plugin skills use `plugin-name:skill-name` namespacing in both Codex and Claude Code, preventing collisions with direct personal or project skills.
 
 ## SKILL.md
 Rules:
@@ -41,7 +37,7 @@ Rules:
 - Link to references/ for anything needing more than a few lines
 
 ## references/
-Detailed documentation loaded on demand. Claude reads these when the SKILL.md points to them.
+Detailed documentation loaded on demand. Agents read these when the SKILL.md points to them.
 
 Rules:
 
@@ -50,9 +46,9 @@ Rules:
 - One level deep from SKILL.md — don't reference files from within references
 
 ## Progressive disclosure
-Claude Code loads skills in three phases:
+Codex, Claude Code, and other Agent Skills clients load skills progressively:
 
-1. **Metadata** (~100 tokens) — `name` and `description` from frontmatter. Loaded at startup for ALL skills. This is how Claude decides which skill to activate.
+1. **Metadata** (~100 tokens) — `name` and `description` from frontmatter. Loaded at startup for all visible skills. This is how the agent decides which skill to activate.
 2. **Instructions** (<5000 tokens) — full SKILL.md body. Loaded when the skill is activated.
 3. **Resources** (as needed) — files in references/ and tools/. Loaded only when the SKILL.md tells the agent to read them.
 

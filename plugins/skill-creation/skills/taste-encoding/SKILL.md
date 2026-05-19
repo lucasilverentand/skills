@@ -33,7 +33,7 @@ Use `AskUserQuestion` for every question. Never type questions as plain text.
 
 Follow `references/interview-guide.md` for the full interview protocol. The essentials:
 
-**Open with context, not cold questions.** Before asking about preferences, state what you already know from the skill and the user's CLAUDE.md / memory. "I see you use Drizzle with Neon for complex projects and D1 for simple ones. Let me ask about the decisions within that — ID strategy, naming conventions, etc." This avoids re-asking settled questions and shows the user you've done your homework.
+**Open with context, not cold questions.** Before asking about preferences, state what you already know from the skill and the user's agent instructions / memory. "I see you use Drizzle with Neon for complex projects and D1 for simple ones. Let me ask about the decisions within that — ID strategy, naming conventions, etc." This avoids re-asking settled questions and shows the user you've done your homework.
 
 **Ask about decisions, not preferences directly.** "When you have a new table, how do you decide between a `jsonb` column and a dedicated table?" is better than "Do you prefer JSONB or normalized tables?" The decision framing reveals the reasoning, which is what gets encoded.
 

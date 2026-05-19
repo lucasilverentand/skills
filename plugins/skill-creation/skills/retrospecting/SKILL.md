@@ -1,11 +1,11 @@
 ---
 name: retrospecting
-description: Mines recent Claude Code conversations and git history for struggles, repeated corrections, rework patterns, and taste signals — then turns findings into new skills or updates to existing ones. Use when you want to retrospect on recent coding sessions to extract learnings, identify skill gaps, improve existing skills based on real usage patterns, or codify preferences that keep coming up in conversations.
+description: Mines recent agent conversations and git history for struggles, repeated corrections, rework patterns, and taste signals — then turns findings into new skills or updates to existing ones. Use when you want to retrospect on recent coding sessions to extract learnings, identify skill gaps, improve existing skills based on real usage patterns, or codify preferences that keep coming up in conversations.
 allowed-tools: Read Grep Glob Bash Write Edit Agent
 ---
 
 # Retro
-Retrospective analysis of recent Claude sessions and code changes to continuously improve the skill library.
+Retrospective analysis of recent agent sessions and code changes to continuously improve the skill library.
 
 ## Current context
 - Branch: !`git branch --show-current`
@@ -47,20 +47,20 @@ Before proposing new skills, check what already exists:
 Use Glob to list existing skills:
 
 ```
-Glob pattern: skills/*/SKILL.md
+Glob pattern: plugins/*/skills/*/SKILL.md
 ```
 
 For each cluster, search existing skills for overlap:
 
 ```
-Grep pattern: "<keyword>" in skills/*/SKILL.md
+Grep pattern: "<keyword>" in plugins/*/skills/*/SKILL.md
 ```
 
 Classify each cluster as:
 
 - **New skill needed** — no existing skill covers this area
 - **Existing skill update** — a skill exists but misses this pattern
-- **CLAUDE.md addition** — too small for a skill, better as a project instruction
+- **AGENTS.md / CLAUDE.md addition** — too small for a skill, better as a project instruction
 - **Memory entry** — a personal preference that should be saved to memory
 
 ### Agent flow (optional)
@@ -68,7 +68,7 @@ When the skill library is large or the retro covers many days, agents keep conte
 
 **Miner** (general-purpose agent) — runs both tools, clusters raw findings by theme, produces a structured findings document with clusters, evidence, and frequency counts.
 
-**Cross-Referrer** (Explore agent, read-only) — receives the Miner's clusters, reads all existing skills in the repo (Glob for `skills/*/SKILL.md`), searches for overlap, and classifies each cluster as new skill / skill update / CLAUDE.md addition / memory entry. Returns an annotated report.
+**Cross-Referrer** (Explore agent, read-only) — receives the Miner's clusters, reads all existing skills in the repo (Glob for `plugins/*/skills/*/SKILL.md`), searches for overlap, and classifies each cluster as new skill / skill update / project-instructions addition / memory entry. Returns an annotated report.
 
 Flow: spawn Miner → read its clusters → spawn Cross-Referrer with clusters → read its classifications → format the report below.
 
@@ -83,7 +83,7 @@ For each struggle:
 - **Pattern**: what kept going wrong
 - **Evidence**: quotes from conversations, git commits
 - **Frequency**: how many times it appeared
-- **Suggested action**: new skill / skill update / CLAUDE.md / memory
+- **Suggested action**: new skill / skill update / project instructions / memory
 
 ### Taste Signals Found
 For each taste:
@@ -105,7 +105,7 @@ For each approved finding:
 
 - **New skill** -> use the authoring skill to create it. Pass the finding's evidence as context for intent capture — the struggle patterns become the skill's decision tree branches, the taste signals become its conventions.
 - **Skill update** -> read the existing SKILL.md, identify where the new pattern fits, and edit it in. Add new decision tree branches, conventions, or tool behaviors as needed.
-- **CLAUDE.md addition** -> append the preference or rule to the project's CLAUDE.md file.
+- **AGENTS.md / CLAUDE.md addition** -> append the preference or rule to the project's agent instruction file.
 - **Memory entry** -> save to memory using the appropriate memory type (feedback for corrections, user for preferences).
 
 ## Key references

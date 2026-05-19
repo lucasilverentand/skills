@@ -15,8 +15,8 @@ Assembles a system design into a structured document that engineers and LLMs can
   - **Writing a full design doc for a new system** → follow the full process below
   - **Updating an existing design doc** → read the current doc, apply changes, preserve the existing structure
   - **Quick informal sketch** → talk through it in chat, offer to formalize into a doc later
-  - **User hasn't done the design thinking yet** → hand off to `architecture` first, come back here when the thinking is done
-  - **User wants to review an existing doc** → hand off to `design-review`
+  - **User hasn't done the design thinking yet** → hand off to `systems-design:architecture` first when available, come back here when the thinking is done
+  - **User wants to review an existing doc** → hand off to `systems-design:design-review` when available
 
 ## Document structure
 Every design doc has these 10 sections. Each one has content or an explicit "N/A — reason."
@@ -25,13 +25,13 @@ Every design doc has these 10 sections. Each one has content or an explicit "N/A
 2-3 sentences: what is being built, who it's for, why now. A reader should know whether this doc is relevant to them after reading this paragraph alone.
 
 ### 2. Requirements
-Functional and non-functional. If requirements were gathered with the `requirements` skill, link to that output rather than duplicating. Otherwise, capture them inline. Non-functional requirements need concrete targets: "p99 latency < 200ms" not "fast."
+Functional and non-functional. If requirements were gathered with the `project:requirements` skill, link to that output rather than duplicating. Otherwise, capture them inline. Non-functional requirements need concrete targets: "p99 latency < 200ms" not "fast."
 
 ### 3. High-level architecture
-Components and how they communicate. Include a Mermaid diagram — delegate to `c4-diagrams` if the system has more than 4-5 components. Name concrete technology for each component: "Orders Worker (Cloudflare Workers, Hono)" not "Orders Service."
+Components and how they communicate. Include a Mermaid diagram — delegate to `documentation:c4-diagrams` if the system has more than 4-5 components. Name concrete technology for each component: "Orders Worker (Cloudflare Workers, Hono)" not "Orders Service."
 
 ### 4. Data model
-Entities, relationships, ownership, storage engine. If the model is detailed, link to the `data-modeling` output rather than duplicating the full schema here. At minimum, show the core entities and their relationships.
+Entities, relationships, ownership, storage engine. If the model is detailed, link to the `systems-design:data-modeling` output rather than duplicating the full schema here. At minimum, show the core entities and their relationships.
 
 ### 5. Key flows
 Walk 2-4 important request paths end-to-end. At least one happy path and one failure/error path. Use numbered steps, not prose paragraphs:
@@ -41,7 +41,7 @@ Walk 2-4 important request paths end-to-end. At least one happy path and one fai
 3. ...
 
 ### 6. API surface
-Main endpoints or operations. If the API is substantial (>5 endpoints), delegate to `api-design` and link to its output in `.context/architecture/api/`. Here, show only the most important operations with their signatures.
+Main endpoints or operations. If the API is substantial (>5 endpoints), delegate to `systems-design:api-design` and link to its output in `.context/architecture/api/`. Here, show only the most important operations with their signatures.
 
 ### 7. Non-functional story
 How the design meets EACH non-functional requirement from section 2. Be specific and tie back to concrete mechanisms: "handles 5k req/s because Workers auto-scale per-isolate and D1 read replicas serve reads from edge" — not "scales well."
@@ -74,7 +74,7 @@ These are non-negotiable. A design doc that violates these is worse than no doc 
 Write the finished doc to `.context/architecture/<name>.md`. After writing:
 
 1. If `.context/overview.md` exists, add a pointer to the new doc from it
-2. If major decisions were made during the writing, suggest capturing them individually as ADRs via `write-adr`
+2. If major decisions were made during the writing, suggest capturing them individually as ADRs via `documentation:write-adr`
 3. If the user will build next, suggest concrete first implementation steps
 
 ## Verification checklist
@@ -90,13 +90,13 @@ Before considering the doc done, verify:
 ## Cross-references
 |When|Use|
 |---|---|
-|Need to gather requirements first|`requirements`|
-|Need to do architecture thinking|`architecture`|
-|Need a data model|`data-modeling`|
-|API surface is substantial|`api-design`|
-|Need a diagram|`c4-diagrams`|
-|Decisions deserve individual records|`write-adr`|
-|Want to review the finished doc|`design-review`|
+|Need to gather requirements first|`project:requirements` if installed|
+|Need to do architecture thinking|`systems-design:architecture` if installed|
+|Need a data model|`systems-design:data-modeling` if installed|
+|API surface is substantial|`systems-design:api-design` if installed|
+|Need a diagram|`documentation:c4-diagrams`|
+|Decisions deserve individual records|`documentation:write-adr`|
+|Want to review the finished doc|`systems-design:design-review` if installed|
 
 ## Key references
 |File|Covers|
