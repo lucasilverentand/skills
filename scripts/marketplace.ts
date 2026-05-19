@@ -48,6 +48,7 @@ interface PluginGroup {
 	keywords?: string[];
 	skills: string[];
 	commands?: string[];
+	readmeBody?: string;
 	author: {
 		name: string;
 		email?: string;
@@ -190,6 +191,9 @@ async function validateGroups(groups: PluginGroups): Promise<void> {
 		if (!group.shortDescription) errors.push(`plugin "${group.name}" missing shortDescription`);
 		if (!group.category) errors.push(`plugin "${group.name}" missing category`);
 		if (!group.skills?.length) errors.push(`plugin "${group.name}" has no skills`);
+		if (group.readmeBody && !existsSync(resolve(pluginRoot(group), group.readmeBody))) {
+			errors.push(`plugin "${group.name}" readmeBody file is missing: ${group.readmeBody}`);
+		}
 
 		const localSeenSkills = new Set<string>();
 		for (const skill of group.skills) {
@@ -334,10 +338,12 @@ function marketplaceSource(metadata: PluginGroups["metadata"]): string {
 	return match?.[1] ?? "owner/repo";
 }
 
-function pluginReadme(group: PluginGroup, marketplaceName: string, source: string): string {
+function pluginReadme(group: PluginGroup, marketplaceName: string, source: string, readmeBody = ""): string {
 	const commandNote = group.commands?.length
 		? `\nClaude Code also exposes legacy command shims for this plugin: ${group.commands.map((c) => `\`/${group.name}:${c}\``).join(", ")}. Prefer the portable skills above for Codex and other agents.\n`
 		: "";
+	const body = readmeBody.trim();
+	const bodySection = body ? `\n${body}\n` : "";
 
 	return `# ${group.displayName}
 ${group.description}
@@ -360,7 +366,7 @@ Claude Code:
 \`\`\`
 
 This plugin owns its skill source under \`plugins/${group.name}/skills/\`. Edit those files directly, then run \`bun run marketplace:write\` to refresh generated manifests and marketplaces.
-`;
+${bodySection}`;
 }
 
 async function validateRelativeRefs(root: string, label: string): Promise<void> {
@@ -450,7 +456,12 @@ async function main() {
 		);
 		await writeIfChanged(
 			resolve(root, "README.md"),
-			pluginReadme(group, groups.name, marketplaceSource(groups.metadata)),
+			pluginReadme(
+				group,
+				groups.name,
+				marketplaceSource(groups.metadata),
+				group.readmeBody ? await readFile(resolve(root, group.readmeBody), "utf-8") : "",
+			),
 		);
 	}
 

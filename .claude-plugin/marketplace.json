@@ -118,7 +118,21 @@
 		{
 			"name": "project-docs",
 			"source": "./plugins/project-docs",
-			"category": "devtools"
+			"description": "Project document templates and document-specific authoring skills for briefs, specs, designs, decisions, release checks, and reviews.",
+			"version": "1.1.0",
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			},
+			"category": "Documentation",
+			"keywords": [
+				"project-docs",
+				"templates",
+				"briefs",
+				"specs",
+				"designs",
+				"release-readiness"
+			]
 		},
 		{
 			"name": "skill-creation",

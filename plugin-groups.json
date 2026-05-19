@@ -85,7 +85,34 @@
 			"shortDescription": "Project context and requirements",
 			"category": "Development",
 			"keywords": ["project", "requirements", "context"],
-			"skills": ["project-context", "requirements"],
+			"skills": ["project-context", "requirements", "task-spec"],
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			}
+		},
+		{
+			"name": "project-docs",
+			"displayName": "Project Docs",
+			"description": "Project document templates and document-specific authoring skills for briefs, specs, designs, decisions, release checks, and reviews.",
+			"shortDescription": "Project document templates",
+			"category": "Documentation",
+			"keywords": ["project-docs", "templates", "briefs", "specs", "designs", "release-readiness"],
+			"readmeBody": "README.body.txt",
+			"skills": [
+				"create-doc-template",
+				"customer-profile",
+				"decision-record",
+				"documentation-placement-rules",
+				"feature-spec",
+				"platform-dependency",
+				"post-release-review",
+				"project-brief",
+				"release-readiness",
+				"research-brief",
+				"technical-design",
+				"testing-strategy"
+			],
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"

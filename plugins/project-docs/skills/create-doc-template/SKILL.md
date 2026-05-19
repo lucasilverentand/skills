@@ -12,6 +12,14 @@ Create document templates that fit the project-docs library instead of importing
 - The outline borrows from industry practice, then cuts anything that would create stale paperwork.
 - The template works across project types unless the requested document is intentionally narrow.
 
+## Decision tree
+- What is being changed?
+  - **A new document template** -> follow the full workflow below, update `README.md`, and run the project checks.
+  - **An existing template** -> read the current template, identify the ownership or prompt gap, then update the smallest section that fixes it.
+  - **A document-type authoring skill** -> create or update the matching skill under `skills/` and point it at the template instead of duplicating the template text.
+  - **A specific project document instance** -> use the matching document-type skill; this skill is for the reusable templates in `documents/`.
+  - **Something else** -> ask whether the user wants a reusable project-docs template or a filled project document.
+
 ## Workflow
 1. Read `README.md` and nearby templates before drafting. Use the closest existing template for pacing, prompt density, and section size.
 2. Define the template contract in plain language: when it is written, who reads it, what decision or review it supports, and which template owns adjacent details.

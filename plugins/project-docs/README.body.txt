@@ -1,36 +1,3 @@
-# Project Docs
-Project document templates and document-specific authoring skills for briefs, specs, designs, decisions, release checks, and reviews.
-
-## Skills
-- `project-docs:create-doc-template`
-- `project-docs:customer-profile`
-- `project-docs:decision-record`
-- `project-docs:documentation-placement-rules`
-- `project-docs:feature-spec`
-- `project-docs:platform-dependency`
-- `project-docs:post-release-review`
-- `project-docs:project-brief`
-- `project-docs:release-readiness`
-- `project-docs:research-brief`
-- `project-docs:technical-design`
-- `project-docs:testing-strategy`
-
-## Install
-Codex:
-
-```bash
-codex plugin marketplace add lucasilverentand/skills
-```
-
-Claude Code:
-
-```text
-/plugin marketplace add lucasilverentand/skills
-/plugin install project-docs@skills-of-luca
-```
-
-This plugin owns its skill source under `plugins/project-docs/skills/`. Edit those files directly, then run `bun run marketplace:write` to refresh generated manifests and marketplaces.
-
 ## Template library
 Starter templates for the documents kept around a product.
 
