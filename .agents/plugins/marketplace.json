@@ -85,6 +85,22 @@
 			}
 		},
 		{
+			"name": "linear-planner",
+			"source": {
+				"source": "local",
+				"path": "./plugins/linear-planner"
+			},
+			"policy": {
+				"installation": "AVAILABLE",
+				"authentication": "ON_INSTALL"
+			},
+			"category": "Productivity",
+			"interface": {
+				"displayName": "Linear Planner",
+				"shortDescription": "Create Linear planning projects"
+			}
+		},
+		{
 			"name": "project",
 			"source": {
 				"source": "local",
