@@ -100,6 +100,23 @@
 			]
 		},
 		{
+			"name": "linear-planner",
+			"source": "./plugins/linear-planner",
+			"description": "Linear planning workflows for creating real project records from reusable planner structures without keeping template issues live.",
+			"version": "1.1.0",
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			},
+			"category": "Productivity",
+			"keywords": [
+				"linear",
+				"planning",
+				"projects",
+				"issues"
+			]
+		},
+		{
 			"name": "project",
 			"source": "./plugins/project",
 			"description": "Project setup and context management skills for requirements and shared agent context.",
