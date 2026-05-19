@@ -1,0 +1,11 @@
+{
+	"name": "project-docs",
+	"description": "Project document templates and document-template authoring guidance",
+	"skills": [
+		"./skills/create-doc-template"
+	],
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	}
+}
