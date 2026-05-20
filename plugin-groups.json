@@ -119,6 +119,19 @@
 			}
 		},
 		{
+			"name": "linear-planner",
+			"displayName": "Linear Planner",
+			"description": "Linear planning workflows for creating real project records from reusable planner structures without keeping template issues live.",
+			"shortDescription": "Create Linear planning projects",
+			"category": "Productivity",
+			"keywords": ["linear", "planning", "projects", "issues"],
+			"skills": ["create-planner-project"],
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			}
+		},
+		{
 			"name": "skill-creation",
 			"displayName": "Skill Creation",
 			"description": "End-to-end toolkit for authoring, publishing, tooling, and improving reusable agent skills.",
