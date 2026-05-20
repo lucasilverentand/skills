@@ -11,6 +11,19 @@ This is the reusable Linear planning structure that replaced the live "Project P
 |Cycle|Do not set by default|
 |Base labels|`<Product>`, `Planning` where useful|
 
+## Project type profiles
+Choose one primary profile before creating issues. For mixed products, keep one planning project and mention secondary surfaces in the relevant issue descriptions.
+
+|Profile|Use for|Planning emphasis|
+|---|---|---|
+|Web product|Browser apps, marketing-backed SaaS, dashboards, customer portals|Browser support, frontend stack, hosting, SEO where relevant, analytics, accessibility, API boundaries.|
+|Native mobile or tablet|iOS, iPadOS, Android, cross-platform mobile apps|Store distribution, OS targets, permissions, push, offline/sync, native capabilities, crash reporting, review constraints.|
+|Native desktop|macOS, Windows, Linux, menu bar apps, desktop utilities|Installer/signing/notarization, auto-update, OS integration, filesystem access, background behavior, crash reporting.|
+|Backend, API, or service|APIs, workers, sync engines, internal services|Client contracts, data model, jobs/queues, rate limits, auth/service accounts, SLAs, observability, operational runbooks.|
+|Automation, CLI, or internal tool|CLIs, scripts, schedulers, operator tooling|Packaging, credentials, audit logs, retries, idempotency, dry-run behavior, operator UX, support handoff.|
+|AI, agent, or data product|Agent workflows, model-backed features, analytics/data products|Model/provider choice, evals, prompt/versioning, data retention, safety boundaries, inference cost, human review.|
+|Integration-heavy or other|Browser extensions, plugins, hardware-adjacent work, vendor integrations|Host platform rules, protocol/API limits, permissions, vendor failure modes, portability, support and fallback paths.|
+
 ## Milestones
 |Order|Name|Purpose|
 |---|---|---|
@@ -22,6 +35,8 @@ This is the reusable Linear planning structure that replaced the live "Project P
 
 ## Issue records
 Replace `<Product>` in labels and wording with the actual product label. Keep issue titles, milestone placement, priority, estimates, acceptance criteria, and out-of-scope boundaries.
+
+The issue set is intentionally platform-neutral. Adapt each issue description with the chosen project type profile instead of creating separate web-only, native-only, backend-only, or tool-only variants.
 
 ### Phase 0 — Frame
 |Title|Priority|Estimate|Labels|
@@ -51,21 +66,25 @@ Out of scope: naming, branding, detailed user flows, pricing model.
 #### Choose target platform
 Goal: A defended v1 platform choice tied to where users actually are.
 Acceptance criteria:
-- Primary platform chosen.
-- Secondary platforms decided or deferred with rationale.
+- Primary project type profile chosen.
+- Primary platform or surface chosen.
+- Secondary surfaces decided or deferred with rationale.
 - Capability requirements listed.
 - Minimum OS or browser versions chosen.
-- Store or distribution model decided.
+- Store, hosting, package, or distribution model decided.
+- Platform-specific constraints and review risks listed.
 - Decision recorded as a Linear ADR or project decision document.
 Out of scope: UI library choices, native module selection.
 
 #### Confirm or override tech stack
 Goal: A one-pager stating the v1 stack, with overrides justified.
 Acceptance criteria:
-- Runtime, API framework, ORM/database, auth library, linter/formatter, validation library, frontend stack, hosting target, state management, and object storage confirmed.
+- Runtime/language, app framework, API or backend framework, persistence, auth or identity model, validation, package/build tooling, hosting or distribution target, state/sync model, and storage confirmed or explicitly marked not applicable.
+- Native capability bridges, SDKs, background execution, and store tooling decided where relevant.
+- Crash reporting, analytics, and observability libraries chosen where relevant.
 - Each override carries a one-line rationale.
 - Decision recorded as a Linear ADR or project decision document.
-Default stack to evaluate: Bun, Hono, Drizzle, Better Auth, Tailwind, Biome, Cloudflare, Zod.
+Default web/API stack to evaluate: Bun, Hono, Drizzle, Better Auth, Tailwind, Biome, Cloudflare, Zod. For native, backend-only, automation, AI, data, or integration-heavy projects, evaluate only the pieces that apply and use the platform's normal build, packaging, and distribution tools.
 Out of scope: exact package versions, code style minutiae.
 
 #### Define success metrics
@@ -101,42 +120,42 @@ Out of scope: feature parity analysis, full market sizing.
 
 #### Map core user flows
 Goal: A document covering two to five primary happy paths plus edge and failure paths that change scope, architecture, or MVP shape.
-Acceptance criteria: primary journeys mapped trigger-to-success, meaningful edge cases listed, failure paths listed, offline behavior described where relevant, document linked from product brief.
+Acceptance criteria: primary journeys mapped trigger-to-success, platform-specific entry points listed, meaningful edge cases listed, failure paths listed, offline/background behavior described where relevant, document linked from product brief.
 Out of scope: pixel-level UX, every theoretical edge case.
 
 #### Design initial data model
 Goal: First-cut model with entities, key fields, relationships, meaningful state machines, tenancy, ID, soft-delete, audit, and timestamp decisions.
-Acceptance criteria: core entities, relationships, state machines, tenancy boundary, ID strategy, soft-delete posture, audit posture, timestamps, Mermaid ER or equivalent diagram, Linear data model document, ADR.
+Acceptance criteria: core entities, relationships, state machines, tenancy boundary, ID strategy, soft-delete posture, audit posture, timestamps, local/offline data needs where relevant, sync/cache rules where relevant, Mermaid ER or equivalent diagram, Linear data model document, ADR.
 Out of scope: indexing strategy, migration strategy.
 
 #### Sketch system architecture
 Goal: One-page architecture overview with 3-7 components, interactions, trust boundaries, external dependencies, and real-time/sync model.
-Acceptance criteria: component responsibilities, interaction diagram with payload and sync/async notes, trust boundaries, external dependencies, Mermaid C4 container-level diagram, ADR.
+Acceptance criteria: component responsibilities, surface/client responsibilities where relevant, interaction diagram with payload and sync/async notes, trust boundaries, external dependencies, native bridges/background jobs/vendor APIs where relevant, Mermaid C4 container-level diagram, ADR.
 Out of scope: code-level file structure, specific API endpoints.
 
 #### Pick auth and identity model
 Goal: Decided identity model covering user types, sign-in, sessions, recovery, deletion, guest access, and multi-device behavior.
-Acceptance criteria: user types, sign-in methods, session strategy, recovery, deletion, anonymous/guest posture, multi-device policy, Better Auth config sketch, ADR.
+Acceptance criteria: user types, sign-in methods, session or token strategy, recovery, deletion, anonymous/guest posture, device identity or service accounts where relevant, multi-device policy, Better Auth or equivalent config sketch, ADR.
 Out of scope: per-resource authorization, SSO/SAML unless v1 needs it.
 
 #### Decide privacy and compliance posture
 Goal: Short posture statement covering data residency, regulatory exposure, retention, consent, and deletion behavior.
-Acceptance criteria: data categories, residency, retention, consent surfaces, GDPR/CCPA/COPPA applicability, account deletion, data export/DSAR, privacy policy and ToS target date, ADR.
+Acceptance criteria: data categories, residency, retention, consent surfaces, platform permissions and store privacy disclosures where relevant, GDPR/CCPA/COPPA applicability, account deletion, data export/DSAR, privacy policy and ToS target date, ADR.
 Out of scope: final legal text, SOC2/ISO.
 
 #### Build cost model and budget guardrails
 Goal: Cost per active user at 10, 1k, and 100k users; dominant cost drivers; provider budget alarms; monetization posture.
-Acceptance criteria: vendor pricing list, per-user-month model, dominant drivers, cost controls, budget alarms, monthly cost target, monetization model, pricing sketch if paid, ADR.
+Acceptance criteria: vendor pricing list, store/developer/model/API fees where relevant, per-user-month model, dominant drivers, cost controls, budget alarms, monthly cost target, monetization model, pricing sketch if paid, ADR.
 Out of scope: Stripe integration, final pricing page copy.
 
 #### Choose observability stack
 Goal: Decide logs, metrics, traces, error tracking, product analytics, session replay posture, alert destination, sampling, and retention.
-Acceptance criteria: sink choices recorded for logs/metrics/tracing/errors/analytics, replay consent noted, alert destination chosen, sampling/retention chosen, ADR.
+Acceptance criteria: sink choices recorded for logs/metrics/tracing/errors/analytics, native crash/performance reporting where relevant, replay consent noted, alert destination chosen, sampling/retention chosen, ADR.
 Out of scope: event taxonomy, SDK wiring.
 
 #### Run security sanity check
 Goal: Lightweight security checklist with each item mitigated, accepted, or deferred.
-Acceptance criteria: auth basics, data handling, input validation, secrets handling, third-party integration safety, dependency hygiene, disposition per item, follow-up issues for deferred work, notes at agreed location.
+Acceptance criteria: auth basics, data handling, input validation, secrets handling, local storage safety where relevant, platform permission/deep-link/signing checks where relevant, third-party integration safety, dependency hygiene, disposition per item, follow-up issues for deferred work, notes at agreed location.
 Out of scope: full pen test, compliance audit prep, bug bounty.
 
 ### Phase 2 — Living docs
@@ -172,27 +191,27 @@ Out of scope: API/schema naming conventions, marketing copy.
 
 #### Initialize repository and workspace
 Goal: Working repository with agreed layout, dev tooling, agent scaffolding, Linear planning links, and local hello-world path.
-Acceptance criteria: GitHub repo, layout, Bun workspaces if needed, Biome, strict tsconfig, gitignore/README/license, agent configs, repo links back to Linear docs, no manual duplication of Linear planning, `bun run dev` works, cloneable setup notes.
+Acceptance criteria: GitHub repo, layout, package/workspace strategy where relevant, formatter/linter/typecheck choices, gitignore/README/license, agent configs, repo links back to Linear docs, no manual duplication of Linear planning, canonical local run command works for every v1 surface, cloneable setup notes.
 Out of scope: feature code, production deploy, rewriting Linear docs into repo-local docs.
 
 #### Define environment strategy
 Goal: Strategy for environments, config, secrets, data, access, and branch-to-deploy mapping.
-Acceptance criteria: environments and purpose, per-env database/storage/auth, secret manager, config mapping, branch mapping, `.env.example`, document location.
+Acceptance criteria: environments and purpose, per-env database/storage/auth, app identifiers or bundle IDs where relevant, store/developer sandboxes where relevant, secret manager, config mapping, branch mapping, `.env.example` or equivalent sample config, document location.
 Out of scope: production runbooks, per-env feature flags.
 
 #### Define testing strategy
 Goal: Shared test-layer contract for frameworks, DB strategy, fixtures, mocking policy, coverage, and CI scope.
-Acceptance criteria: layers, frameworks, DB reset strategy, fixtures, mock policy, coverage target or none, PR/main/scheduled CI scope, long-running/flaky segregation, document location.
+Acceptance criteria: layers, frameworks, DB reset strategy where relevant, simulator/device/browser/CLI/API test targets where relevant, fixtures, mock policy, coverage target or none, PR/main/scheduled CI scope, long-running/flaky segregation, document location.
 Out of scope: feature-specific test cases, load testing.
 
 #### Set up CI/CD baseline
 Goal: GitHub Actions for lint/typecheck/test/build on PRs, main deploy path, dependency automation, branch protection, and rollback plan.
-Acceptance criteria: PR workflow, gates, deploy workflow, Bun caching, Renovate/Dependabot, required checks, branch naming convention, release/versioning choice, rollback strategy, first green pipeline on main.
+Acceptance criteria: PR workflow, gates, build/deploy/release workflow, dependency automation, required checks, branch naming convention, release/versioning choice, signing/store/notarization path where relevant, rollback strategy, first green pipeline or first reproducible native build on main.
 Out of scope: advanced deploy-preview infra, multi-environment promotion.
 
 #### Wire observability and error tracking
 Goal: Logs, errors, traces where applicable, analytics, PII scrubbing, one verified alert, and first dashboard.
-Acceptance criteria: production logs, verified error tracking, test analytics event, traces where applicable, PII rules, alert firing to destination, dashboard/saved view, cost controls.
+Acceptance criteria: production logs, verified error or crash tracking, test analytics event, traces where applicable, native performance signals where relevant, PII rules, alert firing to destination, dashboard/saved view, cost controls.
 Out of scope: full event taxonomy, on-call rotation.
 
 ### Phase 4 — Gate
@@ -203,7 +222,7 @@ Out of scope: full event taxonomy, on-call rotation.
 
 #### Draft launch checklist
 Goal: Draft v1 launch checklist covering product, technical, legal, marketing, and support readiness.
-Acceptance criteria: readiness items for product, technical, legal, marketing, and support; lead-time target dates; rollback/kill-switch reference; document linked from product brief.
+Acceptance criteria: readiness items for product, technical, legal, marketing, distribution/store review where relevant, and support; lead-time target dates; rollback/kill-switch reference; document linked from product brief.
 Out of scope: day-of-launch comms plan, post-launch growth experiments.
 
 #### Planning retrospective and exit sign-off
