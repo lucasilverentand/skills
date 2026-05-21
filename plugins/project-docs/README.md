@@ -1,19 +1,9 @@
 # Project Docs
-Project document templates and document-specific authoring skills for briefs, specs, designs, decisions, release checks, and reviews.
+Project document templates with one authoring skill for briefs, specs, designs, decisions, release checks, and reviews.
 
 ## Skills
 - `project-docs:create-doc-template`
-- `project-docs:customer-profile`
-- `project-docs:decision-record`
-- `project-docs:documentation-placement-rules`
-- `project-docs:feature-spec`
-- `project-docs:platform-dependency`
-- `project-docs:post-release-review`
-- `project-docs:project-brief`
-- `project-docs:release-readiness`
-- `project-docs:research-brief`
-- `project-docs:technical-design`
-- `project-docs:testing-strategy`
+- `project-docs:project-docs`
 
 ## Install
 Codex:
@@ -37,17 +27,17 @@ Starter templates for the documents kept around a product.
 ## What's in here
 |Template|When to write it|How many|
 |---|---|---|
-|[Documentation placement rules](skills/documentation-placement-rules/references/template.md)|When contributors need one rulebook for where planning, repo, and code-level docs belong.|One per app, product area, or repo|
-|[Testing strategy](skills/testing-strategy/references/template.md)|When a project needs one shared testing contract across features, packages, services, and releases.|One per app, product area, repo, or long-running project|
-|[Project brief](skills/project-brief/references/template.md)|At the start of a project, before commitment. The one-pager that justifies it.|One per project|
-|[Customer profile](skills/customer-profile/references/template.md)|Once there is a rough sense of who this is for. A living document that grows as the team learns.|One per project|
-|[Research brief](skills/research-brief/references/template.md)|When evidence needs its own source trail before a product, dependency, or implementation decision.|One per focused research question|
-|[Platform dependency](skills/platform-dependency/references/template.md)|When the product builds on something external — API, OS framework, hardware, vendor.|One per load-bearing dependency|
-|[Feature spec](skills/feature-spec/references/template.md)|Before building a feature with real scope.|One per feature|
-|[Technical design](skills/technical-design/references/template.md)|After product scope is clear enough to choose implementation shape.|One per feature, system, or infrastructure change that needs engineering review|
-|[Decision record](skills/decision-record/references/template.md)|After choosing a product, technical, operational, or process direction that future work may need to understand.|One per important decision|
-|[Release readiness](skills/release-readiness/references/template.md)|Before shipping a release, feature, service change, library version, CLI update, or infrastructure change.|One per release or launch decision|
-|[Post-release review](skills/post-release-review/references/template.md)|After something ships, stalls, or gets abandoned and the team needs to preserve what happened.|One per release or abandoned effort|
+|[Documentation placement rules](skills/project-docs/references/documentation-placement-rules-template.md)|When contributors need one rulebook for where planning, repo, and code-level docs belong.|One per app, product area, or repo|
+|[Testing strategy](skills/project-docs/references/testing-strategy-template.md)|When a project needs one shared testing contract across features, packages, services, and releases.|One per app, product area, repo, or long-running project|
+|[Project brief](skills/project-docs/references/project-brief-template.md)|At the start of a project, before commitment. The one-pager that justifies it.|One per project|
+|[Customer profile](skills/project-docs/references/customer-profile-template.md)|Once there is a rough sense of who this is for. A living document that grows as the team learns.|One per project|
+|[Research brief](skills/project-docs/references/research-brief-template.md)|When evidence needs its own source trail before a product, dependency, or implementation decision.|One per focused research question|
+|[Platform dependency](skills/project-docs/references/platform-dependency-template.md)|When the product builds on something external — API, OS framework, hardware, vendor.|One per load-bearing dependency|
+|[Feature spec](skills/project-docs/references/feature-spec-template.md)|Before building a feature with real scope.|One per feature|
+|[Technical design](skills/project-docs/references/technical-design-template.md)|After product scope is clear enough to choose implementation shape.|One per feature, system, or infrastructure change that needs engineering review|
+|[Decision record](skills/project-docs/references/decision-record-template.md)|After choosing a product, technical, operational, or process direction that future work may need to understand.|One per important decision|
+|[Release readiness](skills/project-docs/references/release-readiness-template.md)|Before shipping a release, feature, service change, library version, CLI update, or infrastructure change.|One per release or launch decision|
+|[Post-release review](skills/project-docs/references/post-release-review-template.md)|After something ships, stalls, or gets abandoned and the team needs to preserve what happened.|One per release or abandoned effort|
 
 ## Project types they cover
 The templates are designed to flex across project shapes — iOS apps, cross-platform Expo apps, backend APIs, open-source libraries, CLIs, almost any coding project. Each section's prompt either applies generically or names how to adapt it for non-UI projects. Sections that genuinely do not apply to a given project should be deleted, not left empty.
@@ -97,7 +87,7 @@ The frontmatter `related:` list is for automation and planning context. Inline M
 - **Markdown** is formatted with Prettier (`proseWrap: never`) and linted with markdownlint-cli2. Run `bun run check` before committing; `bun run check:fix` to auto-fix.
 
 ## Creating a new template
-Agents should use the plugin skill at [skills/create-doc-template/SKILL.md](skills/create-doc-template/SKILL.md). It captures the workflow for researching the document type, trimming the outline, matching the templates already in `skills/<document-type>/references/template.md`, and writing section prompts that are useful to both humans and LLMs.
+Agents should use the maintenance skill at [skills/create-doc-template/SKILL.md](skills/create-doc-template/SKILL.md). It captures the workflow for researching the document type, trimming the outline, matching the templates already in `skills/project-docs/references/<document-type>-template.md`, and writing section prompts that are useful to both humans and LLMs.
 
 ## Status values
 - **Active** — maintained template or current rulebook.
@@ -107,7 +97,7 @@ Agents should use the plugin skill at [skills/create-doc-template/SKILL.md](skil
 - **Archived** — superseded; kept for history.
 
 ## Using a template
-1. Copy the matching `skills/<document-type>/references/template.md` file into the destination repo or doc store.
+1. Copy the matching `skills/project-docs/references/<document-type>-template.md` file into the destination repo or doc store.
 2. Fill in the frontmatter.
 3. Walk the sections top to bottom. Delete a section if it is genuinely not relevant; do not leave it empty.
 4. Replace each `<!-- Prompt: ... -->` comment with the content it asks for. The prompts are guidance, not section descriptions; they should not survive into the final doc.
