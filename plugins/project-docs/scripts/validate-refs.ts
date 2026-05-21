@@ -106,7 +106,10 @@ function validateRelatedEntries(
 }
 
 function isTemplateReference(file: string): boolean {
-  return file.endsWith(`${path.sep}references${path.sep}template.md`);
+  return (
+    file.endsWith(`${path.sep}references${path.sep}template.md`) ||
+    file.endsWith("-template.md")
+  );
 }
 
 function validateMarkdownLinks(

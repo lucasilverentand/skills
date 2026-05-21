@@ -407,7 +407,7 @@ function stripFencedCode(content: string): string {
 }
 
 function isTemplateReference(file: string): boolean {
-	return file.endsWith(join("references", "template.md"));
+	return file.endsWith(join("references", "template.md")) || file.endsWith("-template.md");
 }
 
 async function walkMarkdown(root: string): Promise<string[]> {

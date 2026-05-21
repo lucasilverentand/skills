@@ -1,6 +1,6 @@
 ---
 name: create-doc-template
-description: Creates or updates Markdown document templates in the project-docs plugin, especially template references under document-type skills. Guides research, structure, section prompts, README updates, and validation. Use when the user asks to add a project document template, update an existing planning template, change the project-docs template library, or create docs like a feature spec, project brief, testing strategy, release readiness checklist, research brief, or decision record.
+description: Maintains Markdown document templates in the project-docs plugin. Use when working in this skills repo and the user asks to add a reusable project document template, update an existing template reference, change the project-docs template library, or adjust README/template validation for project-docs.
 ---
 
 # Create Doc Template
@@ -14,14 +14,14 @@ Create document templates that fit the project-docs library instead of importing
 
 ## Decision tree
 - What is being changed?
-  - **A new document template** -> follow the full workflow below, create the matching document-type skill if needed, update `README.body.txt`, and run the project checks.
+  - **A new document template** -> follow the full workflow below, add the template under the consolidated project-docs references directory, update `project-docs` routing if needed, update `README.body.txt`, and run the project checks.
   - **An existing template** -> read the current template, identify the ownership or prompt gap, then update the smallest section that fixes it.
-  - **A document-type authoring skill** -> create or update the matching skill under `skills/` and keep the template in that skill's `references/template.md`.
-  - **A specific project document instance** -> use the matching document-type skill; this skill is for reusable templates under `skills/<document-type>/references/template.md`.
+  - **Project document routing** -> update `../project-docs/SKILL.md` so the selector, routing rules, and references table point to the maintained template.
+  - **A specific project document instance** -> use the `project-docs` skill; this skill is only for reusable templates in the consolidated project-docs references directory.
   - **Something else** -> ask whether the user wants a reusable project-docs template or a filled project document.
 
 ## Workflow
-1. Read `README.md` and nearby `references/template.md` files before drafting. Use the closest existing template for pacing, prompt density, and section size.
+1. Read `../../README.md`, `../project-docs/SKILL.md`, and nearby `../project-docs/references/*-template.md` files before drafting. Use the closest existing template for pacing, prompt density, and section size.
 2. Define the template contract in plain language: when it is written, who reads it, what decision or review it supports, and which template owns adjacent details.
 3. Do a lightweight research pass on current examples, standards, or common outlines for the document type. Keep notes on useful section ideas, not source prose.
 4. Build the outline by subtraction. Start from the common industry shape, then remove sections that duplicate another template, ask for facts no one will maintain, or exist only to look complete.
