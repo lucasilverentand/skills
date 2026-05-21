@@ -6,6 +6,7 @@ last_updated: 2026-05-21
 related:
   - ../skills/create-planner-project/SKILL.md
   - ../skills/create-planner-project/references/planner-project-structure.md
+  - ../skills/create-planner-project/references/linear-issue-creation.md
 ---
 
 # Linear planner project brief
@@ -55,7 +56,7 @@ Codex and Claude must consume the same authored skill source under `plugins/line
 2. **Project type adaptation**
    Web, native, backend, automation, AI, data, integration-heavy, and mixed products without forcing one default stack.
 3. **Linear record creation rules**
-   How to create or select initiatives, projects, milestones, issues, labels, documents, comments, and status updates.
+   How to create or select initiatives, projects, milestones, issues, labels, relationships, documents, comments, and status updates.
 4. **Planning document boundaries**
    When Linear documents stay canonical, when repo docs link back, and when durable findings move out of issue comments.
 5. **Plugin maintenance guidance**
@@ -82,6 +83,7 @@ Codex and Claude must consume the same authored skill source under `plugins/line
 |Complete planning spine|Setup creates the five expected milestones and 23 planning issues.|
 |Profile-aware output|Descriptions and acceptance criteria reflect the selected project type.|
 |Linear field discipline|No cycle by default; committed work starts in Todo; speculative work can start in Suggestion.|
+|Issue relationship discipline|Blockers, parent issues, related issues, labels, priorities, milestones, and status updates follow the shared issue-creation rules.|
 |Document ownership|Linear planning docs stay canonical until a repo exists; repo docs link back instead of duplicating the plan.|
 |Codex and Claude parity|Both surfaces use the same skill source, project document, and generated package metadata.|
 |Maintenance traceability|Behavior changes update this brief and the planner structure in the same PR.|
@@ -102,6 +104,7 @@ Codex and Claude must consume the same authored skill source under `plugins/line
 
 ## 9. Implementation links
 - Current document task: [ST-1109](https://linear.app/seventwo/issue/ST-1109/write-and-maintain-the-planning-plugin-project-document).
+- Issue-creation rules task: [ST-1110](https://linear.app/seventwo/issue/ST-1110/review-and-merge-linear-issue-creation-instructions).
 - Related follow-up: [GitHub #49](https://github.com/lucasilverentand/skills/issues/49) tracks splitting the large planner structure reference.
 
 ---
