@@ -112,6 +112,7 @@
 			"shortDescription": "Create Linear planning projects",
 			"category": "Productivity",
 			"keywords": ["linear", "planning", "projects", "issues"],
+			"readmeBody": "README.body.txt",
 			"skills": ["create-planner-project"],
 			"author": {
 				"name": "Luca Silverentand",

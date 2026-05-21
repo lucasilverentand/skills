@@ -9,6 +9,9 @@ Use this skill to create a real Linear planning project from a reusable structur
 ## Core rule
 Never keep a reusable "Project Planning Template" project alive in Linear. Linear should contain real initiatives, real projects, and real work only. This skill creates fresh project records for a specific app or product area.
 
+## Maintenance rule
+When changing what this plugin does, how it uses Linear, or how the reusable planner structure works, read `../../documents/project-brief.md` first and keep it aligned with the skill and reference changes.
+
 ## Workflow
 1. Confirm the project name, Linear team, matching initiative, project type, and intended surfaces. If the initiative does not exist, propose creating it first.
 2. Read `references/planner-project-structure.md` before creating anything.
