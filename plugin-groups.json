@@ -67,11 +67,11 @@
 		{
 			"name": "github",
 			"displayName": "GitHub",
-			"description": "GitHub workflow toolkit for creating pull requests and monitoring CI.",
+			"description": "GitHub workflow toolkit for creating pull requests, monitoring CI, and getting PRs ready to merge.",
 			"shortDescription": "Pull request and CI workflows",
 			"category": "Development",
-			"keywords": ["github", "pull-request", "ci"],
-			"skills": ["creating-prs", "monitoring-ci"],
+			"keywords": ["github", "pull-request", "ci", "merge-readiness"],
+			"skills": ["creating-prs", "monitoring-ci", "preparing-prs-to-merge"],
 			"commands": ["ci", "create-draft-pr", "create-pr"],
 			"author": {
 				"name": "Luca Silverentand",
