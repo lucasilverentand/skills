@@ -71,8 +71,8 @@
 			"shortDescription": "Pull request and CI workflows",
 			"category": "Development",
 			"keywords": ["github", "pull-request", "ci", "merge-readiness"],
-			"skills": ["creating-prs", "monitoring-ci", "preparing-prs-to-merge"],
-			"commands": ["ci", "create-draft-pr", "create-pr"],
+			"skills": ["creating-prs", "fix-pr", "monitoring-ci"],
+			"commands": ["ci", "create-draft-pr", "create-pr", "fix-pr"],
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"

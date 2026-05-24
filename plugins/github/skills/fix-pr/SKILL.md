@@ -1,10 +1,10 @@
 ---
-name: preparing-prs-to-merge
+name: fix-pr
 description: Gets an existing GitHub pull request ready to merge when the user gives only a PR number. Checks out the PR, inspects mergeability, resolves or reports conflicts, syncs with the base branch, runs appropriate local validation, watches CI until green, handles draft/review/conversation blockers, pushes fixes when needed, and reports the exact remaining merge blockers. Use when the user asks to get a PR ready to merge, prepare a PR for merge, make PR #123 mergeable, or verify whether a PR can be merged.
 allowed-tools: Read Bash Glob Grep Edit Agent AskUserQuestion
 ---
 
-# Preparing PRs To Merge
+# Fix PR
 Use this when the user gives a PR number and wants the PR ready to merge. Assume the current repository is the target repo unless the PR lookup fails.
 
 Do not merge the PR unless the user explicitly asks for that. The job is to make the PR merge-ready and report the exact state.

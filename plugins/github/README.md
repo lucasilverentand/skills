@@ -3,10 +3,10 @@ GitHub workflow toolkit for creating pull requests, monitoring CI, and getting P
 
 ## Skills
 - `github:creating-prs`
+- `github:fix-pr`
 - `github:monitoring-ci`
-- `github:preparing-prs-to-merge`
 
-Claude Code also exposes legacy command shims for this plugin: `/github:ci`, `/github:create-draft-pr`, `/github:create-pr`. Prefer the portable skills above for Codex and other agents.
+Codex and Claude Code also expose command shims for this plugin: `/github:ci`, `/github:create-draft-pr`, `/github:create-pr`, `/github:fix-pr`. Prefer the portable skills above for automatic loading.
 
 ## Install
 Codex:
