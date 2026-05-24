@@ -112,7 +112,8 @@
 			"shortDescription": "Create Linear planning projects",
 			"category": "Productivity",
 			"keywords": ["linear", "planning", "projects", "issues"],
-			"skills": ["create-planner-project"],
+			"skills": ["create-planner-project", "pickup-work"],
+			"commands": ["pickup-work"],
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
