@@ -3,6 +3,7 @@ Linear planning workflows for creating real project records from reusable planne
 
 ## Skills
 - `linear-planner:create-planner-project`
+- `linear-planner:estimate-issue-complexity`
 
 ## Install
 Codex:
