@@ -44,7 +44,7 @@ Plugin group fields:
 |`shortDescription`|Yes|Codex short display copy|
 |`category`|Yes|Install-surface category|
 |`skills`|Yes|Skill directory names owned by this plugin under `plugins/<name>/skills/`|
-|`commands`|No|Claude-only legacy command shims under `plugins/<name>/commands/*.md`|
+|`commands`|No|Command shims under `plugins/<name>/commands/*.md` for explicit slash-command entrypoints|
 |`author`|Yes|Plugin author metadata|
 |`keywords`|No|Discovery tags|
 
@@ -132,7 +132,7 @@ Generated at `plugins/<name>/.claude-plugin/plugin.json`:
 }
 ```
 
-Commands are included only in Claude plugin manifests. New portable workflows should be authored as skills.
+Commands are included in Claude plugin manifests and kept under the plugin `commands/` directory for Codex. New portable workflows should still be authored as skills.
 
 ## Direct skill installation
 Direct skill consumers can install from the plugin-owned skill tree:

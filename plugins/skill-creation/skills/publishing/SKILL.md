@@ -57,7 +57,7 @@ See `references/marketplace-schema.md` for the full schema. Key conventions:
 - **Versioning**: `plugin-groups.json` `metadata.version` tracks both marketplace versions using semver
 - **Codex marketplace**: generated at `.agents/plugins/marketplace.json`
 - **Claude marketplace**: generated at `.claude-plugin/marketplace.json`
-- **Commands**: legacy command shims stay Claude-only; portable workflows should be skills
+- **Commands**: command shims may be used for explicit Codex and Claude slash-command entrypoints; portable workflows should still be skills
 
 ## Key references
 |File|What it covers|
