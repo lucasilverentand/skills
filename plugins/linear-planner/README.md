@@ -3,6 +3,7 @@ Linear planning workflows for creating real project records from reusable planne
 
 ## Skills
 - `linear-planner:create-planner-project`
+- `linear-planner:estimate-issue-complexity`
 - `linear-planner:pickup-work`
 
 Claude Code also exposes legacy command shims for this plugin: `/linear-planner:pickup-work`. Prefer the portable skills above for Codex and other agents.
