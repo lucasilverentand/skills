@@ -2,7 +2,7 @@
 	"name": "linear-planner",
 	"displayName": "Linear Planner",
 	"version": "1.1.0",
-	"description": "Linear planning workflows for creating real project records from reusable planner structures without keeping template issues live.",
+	"description": "Linear planning workflows and project document templates for turning product ideas into traceable plans, specs, decisions, and release checks.",
 	"author": {
 		"name": "Luca Silverentand",
 		"email": "dev@lucasilverentand.com"
@@ -12,6 +12,8 @@
 		"linear",
 		"planning",
 		"projects",
-		"issues"
+		"issues",
+		"project-docs",
+		"templates"
 	]
 }
