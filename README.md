@@ -32,3 +32,5 @@ bun run marketplace:write
 bun run marketplace
 bun run check
 ```
+
+Agent and contributor guidance lives in `AGENTS.md`.
