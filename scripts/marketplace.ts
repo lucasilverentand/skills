@@ -340,7 +340,7 @@ function marketplaceSource(metadata: PluginGroups["metadata"]): string {
 
 function pluginReadme(group: PluginGroup, marketplaceName: string, source: string, readmeBody = ""): string {
 	const commandNote = group.commands?.length
-		? `\nClaude Code also exposes legacy command shims for this plugin: ${group.commands.map((c) => `\`/${group.name}:${c}\``).join(", ")}. Prefer the portable skills above for Codex and other agents.\n`
+		? `\nCodex and Claude Code also expose command shims for this plugin: ${group.commands.map((c) => `\`/${group.name}:${c}\``).join(", ")}. Prefer the portable skills above for automatic loading.\n`
 		: "";
 	const body = readmeBody.trim();
 	const bodySection = body ? `\n${body}\n` : "";

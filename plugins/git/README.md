@@ -6,7 +6,7 @@ Git workflow toolkit for commits, conflict resolution, rebases, and repository c
 - `git:creating-commits`
 - `git:resolving-conflicts`
 
-Claude Code also exposes legacy command shims for this plugin: `/git:clean-repo`, `/git:create-commit`, `/git:rebase`. Prefer the portable skills above for Codex and other agents.
+Codex and Claude Code also expose command shims for this plugin: `/git:clean-repo`, `/git:create-commit`, `/git:rebase`. Prefer the portable skills above for automatic loading.
 
 ## Install
 Codex:
