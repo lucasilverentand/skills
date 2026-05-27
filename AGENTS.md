@@ -57,3 +57,10 @@ bun run install:claude-skills -- creating-commits creating-prs
 ```
 
 Omit skill names to install every skill. Add `--symlink` for local development and `--force` to replace existing installed skills. Skill names can be plain (`creating-commits`) or plugin-qualified (`git:creating-commits`).
+
+## Cursor Cloud specific instructions
+- **Runtime**: Bun is the sole runtime dependency. There are no `node_modules`, no lockfile, and no npm/yarn/pnpm usage. The update script ensures Bun is installed and on `PATH`.
+- **No services to start**: This is a content-only repo (Markdown skills + TypeScript validation scripts). There are no servers, databases, or Docker containers.
+- **Validation commands** are documented in the Development Workflow section above. After any skill or metadata change, run `bun run marketplace:write` then `bun run marketplace` then `bun run check`.
+- **`bun run check` exit codes**: exit 0 means pass (warnings are informational only). Exit 1 means there are errors that must be fixed.
+- **Generated plugin READMEs**: `marketplace:write` regenerates `plugins/*/README.md` files. If your diff includes only these generated files, that is expected—commit them alongside source changes.
