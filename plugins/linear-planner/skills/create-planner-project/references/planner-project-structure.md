@@ -1,6 +1,8 @@
 # Planner project structure
 This is the reusable Linear planning structure that replaced the live "Project Planning Template" project. Use it to create fresh Linear records for a specific product. Do not store these as reusable live issues in Linear.
 
+For labels, priorities, milestones, parent issues, related issues, blockers, and status updates, use `linear-issue-creation.md`.
+
 ## Project defaults
 |Field|Value|
 |---|---|

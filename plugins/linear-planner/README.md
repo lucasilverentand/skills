@@ -44,6 +44,8 @@ The project source of truth for this plugin is [documents/project-brief.md](docu
 
 The detailed operational structure lives in [skills/create-planner-project/references/planner-project-structure.md](skills/create-planner-project/references/planner-project-structure.md).
 
+The shared Linear issue-creation rules live in [skills/create-planner-project/references/linear-issue-creation.md](skills/create-planner-project/references/linear-issue-creation.md).
+
 ## Template library
 Starter templates for the documents kept around a product.
 
