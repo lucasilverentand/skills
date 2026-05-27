@@ -1,0 +1,21 @@
+{
+	"name": "systems-design",
+	"displayName": "Systems Design",
+	"description": "Opinionated system design toolkit for architecture, data modeling, API design, workflow sequencing, and design review.",
+	"version": "1.1.0",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"architecture",
+		"api",
+		"database",
+		"design-review"
+	],
+	"category": "Architecture",
+	"skills": "./skills/"
+}

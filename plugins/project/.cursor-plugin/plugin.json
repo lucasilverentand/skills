@@ -1,0 +1,20 @@
+{
+	"name": "project",
+	"displayName": "Project",
+	"description": "Project setup and context management skills for requirements and shared agent context.",
+	"version": "1.1.0",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"project",
+		"requirements",
+		"context"
+	],
+	"category": "Development",
+	"skills": "./skills/"
+}

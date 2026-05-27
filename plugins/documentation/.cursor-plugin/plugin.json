@@ -1,0 +1,21 @@
+{
+	"name": "documentation",
+	"displayName": "Documentation",
+	"description": "Documentation authoring and structured knowledge capture for design docs, ADRs, C4 diagrams, and decision trees.",
+	"version": "1.1.0",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"documentation",
+		"adr",
+		"c4",
+		"decision-tree"
+	],
+	"category": "Documentation",
+	"skills": "./skills/"
+}

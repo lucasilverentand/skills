@@ -9,8 +9,10 @@
  * Generated output:
  *   - plugins/<plugin>/.claude-plugin/plugin.json
  *   - plugins/<plugin>/.codex-plugin/plugin.json
+ *   - plugins/<plugin>/.cursor-plugin/plugin.json
  *   - plugins/<plugin>/README.md
  *   - .claude-plugin/marketplace.json
+ *   - .cursor-plugin/marketplace.json
  *   - .agents/plugins/marketplace.json
  */
 
@@ -22,6 +24,7 @@ const ROOT = resolve(import.meta.dir, "..");
 const PLUGINS_DIR = resolve(ROOT, "plugins");
 const GROUPS_PATH = resolve(ROOT, "plugin-groups.json");
 const CLAUDE_MARKETPLACE_PATH = resolve(ROOT, ".claude-plugin/marketplace.json");
+const CURSOR_MARKETPLACE_PATH = resolve(ROOT, ".cursor-plugin/marketplace.json");
 const CODEX_MARKETPLACE_PATH = resolve(ROOT, ".agents/plugins/marketplace.json");
 const OBSOLETE_ROOT_CODEX_PLUGIN_DIR = resolve(ROOT, ".codex-plugin");
 const OBSOLETE_ROOT_SKILLS_DIR = resolve(ROOT, "skills");
@@ -289,6 +292,28 @@ function codexPluginManifest(group: PluginGroup, version: string, metadata: Plug
 	};
 }
 
+function cursorPluginManifest(group: PluginGroup, version: string, metadata: PluginGroups["metadata"]) {
+	const manifest: Record<string, unknown> = {
+		name: group.name,
+		displayName: group.displayName,
+		description: group.description,
+		version,
+		author: group.author,
+		homepage: metadata.homepage,
+		repository: metadata.repository,
+		license: metadata.license,
+		keywords: group.keywords ?? [],
+		category: group.category,
+		skills: "./skills/",
+	};
+
+	if (group.commands?.length) {
+		manifest.commands = group.commands.map((command) => `./commands/${command}.md`).sort();
+	}
+
+	return manifest;
+}
+
 function claudeMarketplace(groups: PluginGroups) {
 	return {
 		name: groups.name,
@@ -296,6 +321,26 @@ function claudeMarketplace(groups: PluginGroups) {
 		description: "Reusable agent skills by Luca Silverentand.",
 		version: groups.metadata.version,
 		metadata: groups.metadata,
+		plugins: groups.plugins.map((group) => ({
+			name: group.name,
+			source: `./plugins/${group.name}`,
+			description: group.description,
+			version: groups.metadata.version,
+			author: group.author,
+			category: group.category,
+			keywords: group.keywords ?? [],
+		})),
+	};
+}
+
+function cursorMarketplace(groups: PluginGroups) {
+	return {
+		name: groups.name,
+		owner: groups.owner,
+		metadata: {
+			description: "Reusable agent skills by Luca Silverentand.",
+			...groups.metadata,
+		},
 		plugins: groups.plugins.map((group) => ({
 			name: group.name,
 			source: `./plugins/${group.name}`,
@@ -359,6 +404,13 @@ codex plugin marketplace add ${source}
 \`\`\`
 
 Claude Code:
+
+\`\`\`text
+/plugin marketplace add ${source}
+/plugin install ${group.name}@${marketplaceName}
+\`\`\`
+
+Cursor:
 
 \`\`\`text
 /plugin marketplace add ${source}
@@ -461,6 +513,10 @@ async function main() {
 			json(codexPluginManifest(group, groups.metadata.version, groups.metadata)),
 		);
 		await writeIfChanged(
+			resolve(root, ".cursor-plugin/plugin.json"),
+			json(cursorPluginManifest(group, groups.metadata.version, groups.metadata)),
+		);
+		await writeIfChanged(
 			resolve(root, "README.md"),
 			pluginReadme(
 				group,
@@ -472,6 +528,7 @@ async function main() {
 	}
 
 	await writeIfChanged(CLAUDE_MARKETPLACE_PATH, json(claudeMarketplace(groups)));
+	await writeIfChanged(CURSOR_MARKETPLACE_PATH, json(cursorMarketplace(groups)));
 	await writeIfChanged(CODEX_MARKETPLACE_PATH, json(codexMarketplace(groups)));
 
 	if (write || changes.length === 0) {

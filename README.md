@@ -1,7 +1,7 @@
 # Skills of Luca
-Reusable Agent Skills for Codex, Claude Code, and other agents that understand the open `SKILL.md` format.
+Reusable Agent Skills for Codex, Claude Code, Cursor, and other agents that understand the open `SKILL.md` format.
 
-Each plugin is the source of truth for its own skills under `plugins/<plugin>/skills/<skill>/`. The repo publishes both Codex and Claude Code marketplaces from those plugin packages.
+Each plugin is the source of truth for its own skills under `plugins/<plugin>/skills/<skill>/`. The repo publishes Codex, Claude Code, and Cursor marketplaces from those plugin packages.
 
 ## Install
 Codex:
@@ -11,6 +11,13 @@ codex plugin marketplace add lucasilverentand/skills
 ```
 
 Claude Code:
+
+```text
+/plugin marketplace add lucasilverentand/skills
+/plugin install git@skills-of-luca
+```
+
+Cursor:
 
 ```text
 /plugin marketplace add lucasilverentand/skills

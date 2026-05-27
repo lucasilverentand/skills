@@ -1,6 +1,6 @@
 ---
 name: publishing
-description: Manages dual Codex and Claude Code skill marketplaces — publishes plugin-owned skills, updates plugin groups, removes entries, packages skills for distribution, regenerates plugin manifests, and validates catalog integrity. Use when publishing a skill to the marketplace, bumping a version, removing a skill from the catalog, packaging a skill as a .skill file, regenerating marketplace files, moving a skill between plugins, or fixing marketplace validation errors.
+description: Manages Codex, Claude Code, and Cursor skill marketplaces — publishes plugin-owned skills, updates plugin groups, removes entries, packages skills for distribution, regenerates plugin manifests, and validates catalog integrity. Use when publishing a skill to the marketplace, bumping a version, removing a skill from the catalog, packaging a skill as a .skill file, regenerating marketplace files, moving a skill between plugins, or fixing marketplace validation errors.
 allowed-tools: Read Grep Glob Bash Write Edit
 ---
 
@@ -26,8 +26,10 @@ allowed-tools: Read Grep Glob Bash Write Edit
 4. Run `bun run marketplace:write` to regenerate:
    - `plugins/<name>/.claude-plugin/plugin.json`
    - `plugins/<name>/.codex-plugin/plugin.json`
+   - `plugins/<name>/.cursor-plugin/plugin.json`
    - `plugins/<name>/README.md`
    - `.claude-plugin/marketplace.json`
+   - `.cursor-plugin/marketplace.json`
    - `.agents/plugins/marketplace.json`
 5. Run `bun run marketplace` again; it must report everything up to date
 
@@ -45,7 +47,7 @@ To rebuild plugin manifests and marketplaces from the plugin-owned source tree:
 1. Edit skills under `plugins/<plugin>/skills/`
 2. Edit plugin metadata or skill ownership in `plugin-groups.json`
 3. Run `bun run marketplace:write`
-4. Review the generated diff under plugin manifests, plugin READMEs, `.claude-plugin/`, and `.agents/plugins/`
+4. Review the generated diff under plugin manifests, plugin READMEs, `.claude-plugin/`, `.cursor-plugin/`, and `.agents/plugins/`
 5. Run `bun run marketplace` to confirm no generated files are stale
 
 ## Marketplace conventions
@@ -57,12 +59,13 @@ See `references/marketplace-schema.md` for the full schema. Key conventions:
 - **Versioning**: `plugin-groups.json` `metadata.version` tracks both marketplace versions using semver
 - **Codex marketplace**: generated at `.agents/plugins/marketplace.json`
 - **Claude marketplace**: generated at `.claude-plugin/marketplace.json`
-- **Commands**: command shims may be used for explicit Codex and Claude slash-command entrypoints; portable workflows should still be skills
+- **Cursor marketplace**: generated at `.cursor-plugin/marketplace.json`
+- **Commands**: command shims may be used for explicit Codex, Claude, and Cursor slash-command entrypoints; portable workflows should still be skills
 
 ## Key references
 |File|What it covers|
 |---|---|
-|`references/marketplace-schema.md`|Codex + Claude marketplace schemas, plugin manifests, and source types|
+|`references/marketplace-schema.md`|Codex, Claude, and Cursor marketplace schemas, plugin manifests, and source types|
 |`references/marketplace-errors.md`|Validation error codes and fixes|
 |`plugin-groups.json`|Source of truth for plugin grouping and metadata|
 |`scripts/marketplace.ts`|Regenerates both marketplaces and plugin manifests|

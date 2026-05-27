@@ -1,0 +1,26 @@
+{
+	"name": "git",
+	"displayName": "Git",
+	"description": "Git workflow toolkit for commits, conflict resolution, rebases, and repository cleanup.",
+	"version": "1.1.0",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"git",
+		"commits",
+		"rebase",
+		"conflicts"
+	],
+	"category": "Development",
+	"skills": "./skills/",
+	"commands": [
+		"./commands/clean-repo.md",
+		"./commands/create-commit.md",
+		"./commands/rebase.md"
+	]
+}

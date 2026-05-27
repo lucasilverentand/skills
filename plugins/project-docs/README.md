@@ -19,6 +19,13 @@ Claude Code:
 /plugin install project-docs@skills-of-luca
 ```
 
+Cursor:
+
+```text
+/plugin marketplace add lucasilverentand/skills
+/plugin install project-docs@skills-of-luca
+```
+
 This plugin owns its skill source under `plugins/project-docs/skills/`. Edit those files directly, then run `bun run marketplace:write` to refresh generated manifests and marketplaces.
 
 ## Template library
