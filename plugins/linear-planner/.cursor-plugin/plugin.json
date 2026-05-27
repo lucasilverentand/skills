@@ -1,0 +1,17 @@
+{
+	"name": "linear-planner",
+	"displayName": "Linear Planner",
+	"version": "1.1.0",
+	"description": "Linear planning workflows for creating real project records from reusable planner structures without keeping template issues live.",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"license": "MIT",
+	"keywords": [
+		"linear",
+		"planning",
+		"projects",
+		"issues"
+	]
+}

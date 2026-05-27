@@ -2,6 +2,7 @@
 	"name": "skills-of-luca",
 	"owner": {
 		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com",
 		"url": "https://github.com/lucasilverentand"
 	},
 	"description": "Reusable agent skills by Luca Silverentand.",
