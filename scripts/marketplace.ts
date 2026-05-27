@@ -552,6 +552,7 @@ async function main() {
 	} else {
 		console.log(bold(`${changes.length} generated path(s) to update.`));
 		console.log(dim("Run with --write to apply changes."));
+		process.exit(1);
 	}
 }
 

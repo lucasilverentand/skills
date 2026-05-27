@@ -42,9 +42,9 @@ Edit `plugins/<plugin>/skills/`, update `plugin-groups.json` when plugin members
 
 ```bash
 bun run marketplace:write
-bun run marketplace
-bun run validate:cursor
-bun run check
+bun run ci
 ```
+
+`bun run ci` is the same validation GitHub Actions runs on pull requests (marketplace sync, Cursor marketplace layout, skill checks, markdown format, JSON manifests). Use `bun run check` locally for a non-strict dry-run with warnings only.
 
 Agent and contributor guidance lives in `AGENTS.md`.

@@ -21,17 +21,22 @@ The `plugins/` tree is committed because it is both the installable package tree
 - Run `bun run marketplace:write` after changing plugin membership, skill metadata, plugin README source, command lists, or anything that affects generated manifests or marketplaces.
 - Run `bun run marketplace` after generation; it should report everything up to date.
 - Run `bun run check` before finishing docs or skill changes.
+- Run `bun run ci` before opening a PR; it matches the GitHub Actions `validate` job.
 
 Useful commands:
 
 ```bash
+bun run ci
 bun run check
 bun run check:fix
 bun run marketplace
 bun run marketplace:write
 ```
 
-`bun run check` validates token and structure expectations for Markdown skills and docs. `bun run check:fix` applies safe Markdown compaction only; use it deliberately and review the diff.
+`bun run ci` runs `marketplace` (dry-run, fails if generated files are stale), `validate:cursor`, `check --strict` (fails on skill errors and uncommitted markdown compaction), and JSON smoke-parse of manifests. `bun run check` validates token and structure expectations for Markdown skills and docs; warnings are informational. `bun run check:fix` applies safe Markdown compaction only; use it deliberately and review the diff.
+
+## Continuous integration
+GitHub Actions workflow [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs `bun run ci` on pull requests and pushes to `main`. After merging, enable branch protection on `main` and require the **`validate`** status check before merge.
 
 ## Generated Artifacts
 - Do not hand-edit generated plugin manifests, generated plugin READMEs, or marketplace JSON unless the generator is being changed.
@@ -65,6 +70,6 @@ Omit skill names to install every skill. Add `--symlink` for local development a
 ## Cursor Cloud specific instructions
 - **Runtime**: Bun is the sole runtime dependency. There are no `node_modules`, no lockfile, and no npm/yarn/pnpm usage. The update script ensures Bun is installed and on `PATH`.
 - **No services to start**: This is a content-only repo (Markdown skills + TypeScript validation scripts). There are no servers, databases, or Docker containers.
-- **Validation commands** are documented in the Development Workflow section above. After any skill or metadata change, run `bun run marketplace:write` then `bun run marketplace` then `bun run check`.
-- **`bun run check` exit codes**: exit 0 means pass (warnings are informational only). Exit 1 means there are errors that must be fixed.
+- **Validation commands** are documented in the Development Workflow section above. After any skill or metadata change, run `bun run marketplace:write` then `bun run ci` (or `marketplace` then `check --strict`).
+- **`bun run check` exit codes**: exit 0 means pass (warnings are informational only). Exit 1 means there are errors that must be fixed. `check --strict` also fails when markdown would be reformatted without `--fix`.
 - **Generated plugin READMEs**: `marketplace:write` regenerates `plugins/*/README.md` files. If your diff includes only these generated files, that is expected—commit them alongside source changes.

@@ -4,6 +4,7 @@
 	"scripts": {
 		"check": "bun scripts/check.ts",
 		"check:fix": "bun scripts/check.ts --fix",
+		"ci": "bun run marketplace && bun run validate:cursor && bun run check --strict && bun scripts/validate-json.ts",
 		"install:claude-skills": "bun scripts/install-skills.ts --target claude",
 		"install:codex-skills": "bun scripts/install-skills.ts --target codex",
 		"marketplace": "bun scripts/marketplace.ts",
