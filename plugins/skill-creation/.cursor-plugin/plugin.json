@@ -1,0 +1,17 @@
+{
+	"name": "skill-creation",
+	"displayName": "Skill Creation",
+	"version": "1.1.0",
+	"description": "End-to-end toolkit for authoring, publishing, tooling, and improving reusable agent skills.",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"license": "MIT",
+	"keywords": [
+		"skills",
+		"authoring",
+		"publishing",
+		"tooling"
+	]
+}

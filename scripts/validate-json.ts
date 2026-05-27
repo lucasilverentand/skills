@@ -23,6 +23,7 @@ async function parseJson(path: string): Promise<void> {
 const staticPaths = [
 	join(ROOT, "plugin-groups.json"),
 	join(ROOT, ".claude-plugin/marketplace.json"),
+	join(ROOT, ".cursor-plugin/marketplace.json"),
 	join(ROOT, ".agents/plugins/marketplace.json"),
 ];
 
@@ -35,7 +36,11 @@ if (existsSync(pluginsDir)) {
 	for (const plugin of await readdir(pluginsDir, { withFileTypes: true })) {
 		if (!plugin.isDirectory()) continue;
 		const root = join(pluginsDir, plugin.name);
-		for (const sub of [".codex-plugin/plugin.json", ".claude-plugin/plugin.json"]) {
+		for (const sub of [
+			".codex-plugin/plugin.json",
+			".claude-plugin/plugin.json",
+			".cursor-plugin/plugin.json",
+		]) {
 			const path = join(root, sub);
 			if (existsSync(path)) await parseJson(path);
 		}

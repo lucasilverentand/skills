@@ -1,5 +1,5 @@
 # Skills of Luca
-Reusable Agent Skills for Codex, Claude Code, and other agents that understand the open `SKILL.md` format.
+Reusable Agent Skills for Codex, Claude Code, Cursor, and other agents that understand the open `SKILL.md` format.
 
 ## Repository Layout
 |Path|Purpose|
@@ -8,8 +8,10 @@ Reusable Agent Skills for Codex, Claude Code, and other agents that understand t
 |`plugin-groups.json`|Defines plugin metadata and the skills owned by each plugin.|
 |`plugins/<name>/.codex-plugin/plugin.json`|Generated Codex plugin manifest.|
 |`plugins/<name>/.claude-plugin/plugin.json`|Generated Claude Code plugin manifest.|
+|`plugins/<name>/.cursor-plugin/plugin.json`|Generated Cursor plugin manifest.|
 |`.agents/plugins/marketplace.json`|Generated Codex marketplace.|
 |`.claude-plugin/marketplace.json`|Generated Claude Code marketplace.|
+|`.cursor-plugin/marketplace.json`|Generated Cursor marketplace.|
 
 The `plugins/` tree is committed because it is both the installable package tree and the authored skill source. Generated files are limited to plugin manifests, marketplaces, and plugin READMEs.
 
@@ -31,7 +33,7 @@ bun run marketplace
 bun run marketplace:write
 ```
 
-`bun run ci` runs `marketplace` (dry-run, fails if generated files are stale), `check --strict` (fails on skill errors and uncommitted markdown compaction), and JSON smoke-parse of manifests. `bun run check` validates token and structure expectations for Markdown skills and docs; warnings are informational. `bun run check:fix` applies safe Markdown compaction only; use it deliberately and review the diff.
+`bun run ci` runs `marketplace` (dry-run, fails if generated files are stale), `validate:cursor`, `check --strict` (fails on skill errors and uncommitted markdown compaction), and JSON smoke-parse of manifests. `bun run check` validates token and structure expectations for Markdown skills and docs; warnings are informational. `bun run check:fix` applies safe Markdown compaction only; use it deliberately and review the diff.
 
 ## Continuous integration
 GitHub Actions workflow [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs `bun run ci` on pull requests and pushes to `main`. After merging, enable branch protection on `main` and require the **`validate`** status check before merge.
@@ -53,6 +55,8 @@ GitHub Actions workflow [`.github/workflows/ci.yml`](.github/workflows/ci.yml) r
 Codex reads `.agents/plugins/marketplace.json`, then loads plugin manifests from `plugins/<name>/.codex-plugin/plugin.json`.
 
 Claude Code reads `.claude-plugin/marketplace.json`, then loads plugin manifests from `plugins/<name>/.claude-plugin/plugin.json`. Claude-only legacy command shims live under `plugins/<name>/commands/`; prefer skills for portable workflows.
+
+Cursor reads `.cursor-plugin/marketplace.json` (team-marketplace layout with `metadata.pluginRoot: "plugins"`), then loads plugin manifests from `plugins/<name>/.cursor-plugin/plugin.json`. Skills and commands are folder-discovered; prefer skills for portable workflows. Run `bun run validate:cursor` before publishing Cursor marketplace changes.
 
 Direct local skill installs are available for personal skills directories:
 

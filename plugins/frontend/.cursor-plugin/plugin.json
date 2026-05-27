@@ -1,0 +1,17 @@
+{
+	"name": "frontend",
+	"displayName": "Frontend",
+	"version": "1.1.0",
+	"description": "Frontend design exploration toolkit for interactive HTML design options.",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"license": "MIT",
+	"keywords": [
+		"frontend",
+		"design",
+		"ui",
+		"prototype"
+	]
+}

@@ -1,0 +1,17 @@
+{
+	"name": "github",
+	"displayName": "GitHub",
+	"version": "1.1.0",
+	"description": "GitHub workflow toolkit for creating pull requests, monitoring CI, and getting PRs ready to merge.",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"license": "MIT",
+	"keywords": [
+		"github",
+		"pull-request",
+		"ci",
+		"merge-readiness"
+	]
+}
