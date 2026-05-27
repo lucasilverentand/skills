@@ -6,6 +6,7 @@
  * Usage:
  *   bun run check          # dry-run — show what would change
  *   bun run check:fix      # apply changes in-place
+ *   bun run check --strict # fail if markdown would be reformatted (CI)
  *   bun run check --stdin   # read from stdin, write optimized to stdout (for editors)
  */
 
@@ -15,6 +16,8 @@ import { relative } from "node:path";
 
 const ROOT = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
 const fix = process.argv.includes("--fix");
+const strict =
+	process.argv.includes("--strict") || process.env.CHECK_STRICT === "1";
 const stdin = process.argv.includes("--stdin");
 
 // ── Stdin mode (for editors: stdin → optimized stdout) ──────────────
@@ -443,7 +446,11 @@ console.log(fix ? green(summary) : bold(summary));
 
 if (!fix && filesChanged > 0) {
 	console.log(dim("Run with --fix to apply changes."));
+	if (strict) {
+		console.log(red("Strict mode: commit formatted markdown or run `bun run check:fix`."));
+	}
 }
 
 const hasErrors = allFlags.some((f) => f.severity === "error");
-process.exit(hasErrors ? 1 : 0);
+const hasStrictFailure = strict && !fix && filesChanged > 0;
+process.exit(hasErrors || hasStrictFailure ? 1 : 0);
