@@ -39,17 +39,12 @@
 		{
 			"name": "linear-planner",
 			"source": "linear-planner",
-			"description": "Linear planning workflows for creating real project records from reusable planner structures without keeping template issues live."
+			"description": "Linear planning workflows and project document templates for turning product ideas into traceable plans, specs, decisions, and release checks."
 		},
 		{
 			"name": "project",
 			"source": "project",
 			"description": "Project setup and context management skills for requirements and shared agent context."
-		},
-		{
-			"name": "project-docs",
-			"source": "project-docs",
-			"description": "Project document templates with one authoring skill for briefs, specs, designs, decisions, release checks, and reviews."
 		},
 		{
 			"name": "skill-creation",
