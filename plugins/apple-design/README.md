@@ -24,7 +24,13 @@ Claude Code:
 /plugin install apple-design@skills-of-luca
 ```
 
-Cursor:
+Cursor (team marketplace):
+
+1. Dashboard → Settings → Plugins → Import
+2. Paste `https://github.com/lucasilverentand/skills`
+3. Install `apple-design` (Required or Optional)
+
+Cursor (IDE slash commands):
 
 ```text
 /plugin marketplace add lucasilverentand/skills

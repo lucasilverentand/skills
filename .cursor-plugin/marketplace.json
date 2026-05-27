@@ -1,189 +1,65 @@
 {
 	"name": "skills-of-luca",
+	"displayName": "Skills of Luca",
 	"owner": {
 		"name": "Luca Silverentand",
-		"url": "https://github.com/lucasilverentand"
+		"email": "dev@lucasilverentand.com"
 	},
 	"metadata": {
 		"description": "Reusable agent skills by Luca Silverentand.",
 		"version": "1.1.0",
-		"homepage": "https://github.com/lucasilverentand/skills",
-		"repository": "https://github.com/lucasilverentand/skills",
-		"license": "MIT"
+		"pluginRoot": "plugins"
 	},
 	"plugins": [
 		{
 			"name": "apple-design",
-			"source": "./plugins/apple-design",
-			"description": "Apple Human Interface Guidelines as a single plugin: foundations, services, and a skill per Apple platform.",
-			"version": "1.1.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "luca.silverentand@gmail.com"
-			},
-			"category": "Design",
-			"keywords": [
-				"apple",
-				"design",
-				"hig",
-				"ios",
-				"macos",
-				"visionos"
-			]
+			"source": "apple-design",
+			"description": "Apple Human Interface Guidelines as a single plugin: foundations, services, and a skill per Apple platform."
 		},
 		{
 			"name": "documentation",
-			"source": "./plugins/documentation",
-			"description": "Documentation authoring and structured knowledge capture for design docs, ADRs, C4 diagrams, and decision trees.",
-			"version": "1.1.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			},
-			"category": "Documentation",
-			"keywords": [
-				"documentation",
-				"adr",
-				"c4",
-				"decision-tree"
-			]
+			"source": "documentation",
+			"description": "Documentation authoring and structured knowledge capture for design docs, ADRs, C4 diagrams, and decision trees."
 		},
 		{
 			"name": "frontend",
-			"source": "./plugins/frontend",
-			"description": "Frontend design exploration toolkit for interactive HTML design options.",
-			"version": "1.1.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			},
-			"category": "Development",
-			"keywords": [
-				"frontend",
-				"design",
-				"ui",
-				"prototype"
-			]
+			"source": "frontend",
+			"description": "Frontend design exploration toolkit for interactive HTML design options."
 		},
 		{
 			"name": "git",
-			"source": "./plugins/git",
-			"description": "Git workflow toolkit for commits, conflict resolution, rebases, and repository cleanup.",
-			"version": "1.1.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			},
-			"category": "Development",
-			"keywords": [
-				"git",
-				"commits",
-				"rebase",
-				"conflicts"
-			]
+			"source": "git",
+			"description": "Git workflow toolkit for commits, conflict resolution, rebases, and repository cleanup."
 		},
 		{
 			"name": "github",
-			"source": "./plugins/github",
-			"description": "GitHub workflow toolkit for creating pull requests, monitoring CI, and getting PRs ready to merge.",
-			"version": "1.1.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			},
-			"category": "Development",
-			"keywords": [
-				"github",
-				"pull-request",
-				"ci",
-				"merge-readiness"
-			]
+			"source": "github",
+			"description": "GitHub workflow toolkit for creating pull requests, monitoring CI, and getting PRs ready to merge."
 		},
 		{
 			"name": "linear-planner",
-			"source": "./plugins/linear-planner",
-			"description": "Linear planning workflows for creating real project records from reusable planner structures without keeping template issues live.",
-			"version": "1.1.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			},
-			"category": "Productivity",
-			"keywords": [
-				"linear",
-				"planning",
-				"projects",
-				"issues"
-			]
+			"source": "linear-planner",
+			"description": "Linear planning workflows for creating real project records from reusable planner structures without keeping template issues live."
 		},
 		{
 			"name": "project",
-			"source": "./plugins/project",
-			"description": "Project setup and context management skills for requirements and shared agent context.",
-			"version": "1.1.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			},
-			"category": "Development",
-			"keywords": [
-				"project",
-				"requirements",
-				"context"
-			]
+			"source": "project",
+			"description": "Project setup and context management skills for requirements and shared agent context."
 		},
 		{
 			"name": "project-docs",
-			"source": "./plugins/project-docs",
-			"description": "Project document templates with one authoring skill for briefs, specs, designs, decisions, release checks, and reviews.",
-			"version": "1.1.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			},
-			"category": "Documentation",
-			"keywords": [
-				"project-docs",
-				"templates",
-				"briefs",
-				"specs",
-				"designs",
-				"release-readiness"
-			]
+			"source": "project-docs",
+			"description": "Project document templates with one authoring skill for briefs, specs, designs, decisions, release checks, and reviews."
 		},
 		{
 			"name": "skill-creation",
-			"source": "./plugins/skill-creation",
-			"description": "End-to-end toolkit for authoring, publishing, tooling, and improving reusable agent skills.",
-			"version": "1.1.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			},
-			"category": "Development",
-			"keywords": [
-				"skills",
-				"authoring",
-				"publishing",
-				"tooling"
-			]
+			"source": "skill-creation",
+			"description": "End-to-end toolkit for authoring, publishing, tooling, and improving reusable agent skills."
 		},
 		{
 			"name": "systems-design",
-			"source": "./plugins/systems-design",
-			"description": "Opinionated system design toolkit for architecture, data modeling, API design, workflow sequencing, and design review.",
-			"version": "1.1.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			},
-			"category": "Architecture",
-			"keywords": [
-				"architecture",
-				"api",
-				"database",
-				"design-review"
-			]
+			"source": "systems-design",
+			"description": "Opinionated system design toolkit for architecture, data modeling, API design, workflow sequencing, and design review."
 		}
 	]
 }

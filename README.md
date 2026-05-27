@@ -17,7 +17,13 @@ Claude Code:
 /plugin install git@skills-of-luca
 ```
 
-Cursor:
+Cursor (team marketplace):
+
+1. Dashboard → Settings → Plugins → Import
+2. Paste `https://github.com/lucasilverentand/skills`
+3. Install plugins as Required or Optional
+
+Cursor (IDE):
 
 ```text
 /plugin marketplace add lucasilverentand/skills
@@ -37,6 +43,7 @@ Edit `plugins/<plugin>/skills/`, update `plugin-groups.json` when plugin members
 ```bash
 bun run marketplace:write
 bun run marketplace
+bun run validate:cursor
 bun run check
 ```
 

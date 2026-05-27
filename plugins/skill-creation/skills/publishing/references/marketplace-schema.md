@@ -137,30 +137,32 @@ Generated at `plugins/<name>/.claude-plugin/plugin.json`:
 Commands are included in Claude plugin manifests and kept under the plugin `commands/` directory for Codex. New portable workflows should still be authored as skills.
 
 ## Cursor marketplace shape
-Generated at `.cursor-plugin/marketplace.json`:
+Generated at `.cursor-plugin/marketplace.json` (aligned with [cursor-team-marketplace-template](https://github.com/fieldsphere/cursor-team-marketplace-template)):
 
 ```json
 {
   "name": "skills-of-luca",
+  "displayName": "Skills of Luca",
   "owner": {
-    "name": "Luca Silverentand"
+    "name": "Luca Silverentand",
+    "email": "dev@lucasilverentand.com"
   },
   "metadata": {
     "description": "Reusable agent skills by Luca Silverentand.",
-    "version": "1.1.0"
+    "version": "1.1.0",
+    "pluginRoot": "plugins"
   },
   "plugins": [
     {
       "name": "git",
-      "source": "./plugins/git",
-      "description": "Git workflow toolkit",
-      "version": "1.1.0"
+      "source": "git",
+      "description": "Git workflow toolkit"
     }
   ]
 }
 ```
 
-Relative plugin sources resolve from the repository root containing `.cursor-plugin/`.
+Plugin `source` values are plugin folder names relative to `metadata.pluginRoot`, not full repo paths like Codex or Claude use. Codex and Claude marketplaces keep their own path conventions.
 
 ## Cursor plugin shape
 Generated at `plugins/<name>/.cursor-plugin/plugin.json`:
@@ -169,15 +171,15 @@ Generated at `plugins/<name>/.cursor-plugin/plugin.json`:
 {
   "name": "git",
   "displayName": "Git",
-  "description": "Git workflow toolkit",
   "version": "1.1.0",
-  "skills": "./skills/",
-  "commands": ["./commands/create-commit.md"],
-  "category": "Development"
+  "description": "Git workflow toolkit",
+  "author": { "name": "Luca Silverentand", "email": "dev@lucasilverentand.com" },
+  "license": "MIT",
+  "keywords": ["git", "commits"]
 }
 ```
 
-Cursor discovers skills under the plugin skills directory when the manifest uses the same skills path as Codex (see the Cursor plugin shape example above). Commands are optional and mirror Claude plugin command paths.
+Cursor discovers `skills/`, `commands/`, `rules/`, and `agents/` by folder; manifests omit explicit component paths. Validate with `bun run validate:cursor`.
 
 ## Direct skill installation
 Direct skill consumers can install from the plugin-owned skill tree:

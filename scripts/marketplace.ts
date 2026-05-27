@@ -293,25 +293,21 @@ function codexPluginManifest(group: PluginGroup, version: string, metadata: Plug
 }
 
 function cursorPluginManifest(group: PluginGroup, version: string, metadata: PluginGroups["metadata"]) {
-	const manifest: Record<string, unknown> = {
+	return {
 		name: group.name,
 		displayName: group.displayName,
-		description: group.description,
 		version,
+		description: group.description,
 		author: group.author,
-		homepage: metadata.homepage,
-		repository: metadata.repository,
 		license: metadata.license,
 		keywords: group.keywords ?? [],
-		category: group.category,
-		skills: "./skills/",
 	};
+}
 
-	if (group.commands?.length) {
-		manifest.commands = group.commands.map((command) => `./commands/${command}.md`).sort();
-	}
-
-	return manifest;
+function cursorMarketplaceOwner(owner: Owner): { name: string; email?: string } {
+	const cursorOwner: { name: string; email?: string } = { name: owner.name };
+	if (owner.email) cursorOwner.email = owner.email;
+	return cursorOwner;
 }
 
 function claudeMarketplace(groups: PluginGroups) {
@@ -336,19 +332,17 @@ function claudeMarketplace(groups: PluginGroups) {
 function cursorMarketplace(groups: PluginGroups) {
 	return {
 		name: groups.name,
-		owner: groups.owner,
+		displayName: "Skills of Luca",
+		owner: cursorMarketplaceOwner(groups.owner),
 		metadata: {
 			description: "Reusable agent skills by Luca Silverentand.",
-			...groups.metadata,
+			version: groups.metadata.version,
+			pluginRoot: "plugins",
 		},
 		plugins: groups.plugins.map((group) => ({
 			name: group.name,
-			source: `./plugins/${group.name}`,
+			source: group.name,
 			description: group.description,
-			version: groups.metadata.version,
-			author: group.author,
-			category: group.category,
-			keywords: group.keywords ?? [],
 		})),
 	};
 }
@@ -410,7 +404,13 @@ Claude Code:
 /plugin install ${group.name}@${marketplaceName}
 \`\`\`
 
-Cursor:
+Cursor (team marketplace):
+
+1. Dashboard → Settings → Plugins → Import
+2. Paste \`https://github.com/${source}\`
+3. Install \`${group.name}\` (Required or Optional)
+
+Cursor (IDE slash commands):
 
 \`\`\`text
 /plugin marketplace add ${source}

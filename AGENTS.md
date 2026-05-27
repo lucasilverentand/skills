@@ -51,7 +51,7 @@ Codex reads `.agents/plugins/marketplace.json`, then loads plugin manifests from
 
 Claude Code reads `.claude-plugin/marketplace.json`, then loads plugin manifests from `plugins/<name>/.claude-plugin/plugin.json`. Claude-only legacy command shims live under `plugins/<name>/commands/`; prefer skills for portable workflows.
 
-Cursor reads `.cursor-plugin/marketplace.json`, then loads plugin manifests from `plugins/<name>/.cursor-plugin/plugin.json`. Command shims under `plugins/<name>/commands/` are also available in Cursor plugins; prefer skills for portable workflows.
+Cursor reads `.cursor-plugin/marketplace.json` (team-marketplace layout with `metadata.pluginRoot: "plugins"`), then loads plugin manifests from `plugins/<name>/.cursor-plugin/plugin.json`. Skills and commands are folder-discovered; prefer skills for portable workflows. Run `bun run validate:cursor` before publishing Cursor marketplace changes.
 
 Direct local skill installs are available for personal skills directories:
 
