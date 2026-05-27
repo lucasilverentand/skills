@@ -1,6 +1,6 @@
 ---
 name: create-doc-template
-description: Maintains Markdown document templates in the project-docs plugin. Use when working in this skills repo and the user asks to add a reusable project document template, update an existing template reference, change the project-docs template library, or adjust README/template validation for project-docs.
+description: Maintains Markdown document templates in the linear-planner plugin's project-docs library. Use when working in this skills repo and the user asks to add a reusable project document template, update an existing template reference, change the project-docs template library, or adjust README/template validation for project-docs.
 ---
 
 # Create Doc Template
@@ -14,7 +14,7 @@ Create document templates that fit the project-docs library instead of importing
 
 ## Decision tree
 - What is being changed?
-  - **A new document template** -> follow the full workflow below, add the template under the consolidated project-docs references directory, update `project-docs` routing if needed, update `README.body.txt`, and run the project checks.
+  - **A new document template** -> follow the full workflow below, add the template under the consolidated project-docs references directory, update `project-docs` routing if needed, update the plugin `README.body.txt`, and run the project checks.
   - **An existing template** -> read the current template, identify the ownership or prompt gap, then update the smallest section that fixes it.
   - **Project document routing** -> update `../project-docs/SKILL.md` so the selector, routing rules, and references table point to the maintained template.
   - **A specific project document instance** -> use the `project-docs` skill; this skill is only for reusable templates in the consolidated project-docs references directory.
@@ -26,7 +26,7 @@ Create document templates that fit the project-docs library instead of importing
 3. Do a lightweight research pass on current examples, standards, or common outlines for the document type. Keep notes on useful section ideas, not source prose.
 4. Build the outline by subtraction. Start from the common industry shape, then remove sections that duplicate another template, ask for facts no one will maintain, or exist only to look complete.
 5. Draft the Markdown using the repo conventions below.
-6. Update `README.body.txt` when adding a public template: add the table row and any relationship note needed to prevent duplicate ownership.
+6. Update the plugin `README.body.txt` when adding a public template: add the table row and any relationship note needed to prevent duplicate ownership.
 7. Run `bun run check` before finishing. If dependencies are missing, run `bun install` first.
 
 ## Repo conventions
@@ -58,5 +58,5 @@ Before handing off, verify:
 - Each section has a useful prompt or intentionally needs no prompt.
 - The outline is short enough to fill during real project work.
 - Tables and diagrams are suggested where they clarify review, not everywhere.
-- `README.body.txt` lists the template if it belongs in the public template library.
+- The plugin `README.body.txt` lists the template if it belongs in the public template library.
 - `bun run check` passes, or the blocker is recorded with the exact failure.

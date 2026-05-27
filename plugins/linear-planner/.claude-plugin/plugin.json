@@ -1,9 +1,13 @@
 {
 	"name": "linear-planner",
-	"description": "Linear planning workflows for creating real project records from reusable planner structures without keeping template issues live.",
+	"description": "Linear planning workflows and project document templates for turning product ideas into traceable plans, specs, decisions, and release checks.",
 	"version": "1.1.0",
 	"skills": [
-		"./skills/create-planner-project"
+		"./skills/create-doc-template",
+		"./skills/create-planner-project",
+		"./skills/estimate-issue-complexity",
+		"./skills/pickup-work",
+		"./skills/project-docs"
 	],
 	"author": {
 		"name": "Luca Silverentand",
@@ -16,6 +20,11 @@
 		"linear",
 		"planning",
 		"projects",
-		"issues"
+		"issues",
+		"project-docs",
+		"templates"
+	],
+	"commands": [
+		"./commands/pickup-work.md"
 	]
 }

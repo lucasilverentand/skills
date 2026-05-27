@@ -1,5 +1,5 @@
 # Marketplace & Plugin Schema
-This repository has plugin-owned skills and two generated marketplace surfaces.
+This repository has plugin-owned skills and three generated marketplace surfaces.
 
 ## Source of truth
 |Path|Purpose|
@@ -17,6 +17,8 @@ Edit skills in place under their owning plugin. Do not create root-level skill c
 |Codex plugin manifest|`plugins/<name>/.codex-plugin/plugin.json`|Required Codex plugin entry point|
 |Claude marketplace|`.claude-plugin/marketplace.json`|Claude Code plugin catalog|
 |Claude plugin manifest|`plugins/<name>/.claude-plugin/plugin.json`|Claude Code plugin entry point|
+|Cursor marketplace|`.cursor-plugin/marketplace.json`|Cursor plugin catalog|
+|Cursor plugin manifest|`plugins/<name>/.cursor-plugin/plugin.json`|Cursor plugin entry point|
 |Plugin README|`plugins/<name>/README.md`|Generated install notes for that plugin|
 
 Codex can also read `.claude-plugin/marketplace.json` as a legacy-compatible marketplace, but this repo generates the Codex-native `.agents/plugins/marketplace.json` so install behavior is explicit.
@@ -44,7 +46,7 @@ Plugin group fields:
 |`shortDescription`|Yes|Codex short display copy|
 |`category`|Yes|Install-surface category|
 |`skills`|Yes|Skill directory names owned by this plugin under `plugins/<name>/skills/`|
-|`commands`|No|Claude-only legacy command shims under `plugins/<name>/commands/*.md`|
+|`commands`|No|Command shims under `plugins/<name>/commands/*.md` for explicit slash-command entrypoints|
 |`author`|Yes|Plugin author metadata|
 |`keywords`|No|Discovery tags|
 
@@ -132,7 +134,52 @@ Generated at `plugins/<name>/.claude-plugin/plugin.json`:
 }
 ```
 
-Commands are included only in Claude plugin manifests. New portable workflows should be authored as skills.
+Commands are included in Claude plugin manifests and kept under the plugin `commands/` directory for Codex. New portable workflows should still be authored as skills.
+
+## Cursor marketplace shape
+Generated at `.cursor-plugin/marketplace.json` (aligned with [cursor-team-marketplace-template](https://github.com/fieldsphere/cursor-team-marketplace-template)):
+
+```json
+{
+  "name": "skills-of-luca",
+  "displayName": "Skills of Luca",
+  "owner": {
+    "name": "Luca Silverentand",
+    "email": "dev@lucasilverentand.com"
+  },
+  "metadata": {
+    "description": "Reusable agent skills by Luca Silverentand.",
+    "version": "1.1.0",
+    "pluginRoot": "plugins"
+  },
+  "plugins": [
+    {
+      "name": "git",
+      "source": "git",
+      "description": "Git workflow toolkit"
+    }
+  ]
+}
+```
+
+Plugin `source` values are plugin folder names relative to `metadata.pluginRoot`, not full repo paths like Codex or Claude use. Codex and Claude marketplaces keep their own path conventions.
+
+## Cursor plugin shape
+Generated at `plugins/<name>/.cursor-plugin/plugin.json`:
+
+```json
+{
+  "name": "git",
+  "displayName": "Git",
+  "version": "1.1.0",
+  "description": "Git workflow toolkit",
+  "author": { "name": "Luca Silverentand", "email": "dev@lucasilverentand.com" },
+  "license": "MIT",
+  "keywords": ["git", "commits"]
+}
+```
+
+Cursor discovers `skills/`, `commands/`, `rules/`, and `agents/` by folder; manifests omit explicit component paths. Validate with `bun run validate:cursor`.
 
 ## Direct skill installation
 Direct skill consumers can install from the plugin-owned skill tree:

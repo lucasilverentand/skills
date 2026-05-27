@@ -1,0 +1,60 @@
+{
+	"name": "skills-of-luca",
+	"displayName": "Skills of Luca",
+	"owner": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"metadata": {
+		"description": "Reusable agent skills by Luca Silverentand.",
+		"version": "1.1.0",
+		"pluginRoot": "plugins"
+	},
+	"plugins": [
+		{
+			"name": "apple-design",
+			"source": "apple-design",
+			"description": "Apple Human Interface Guidelines as a single plugin: foundations, services, and a skill per Apple platform."
+		},
+		{
+			"name": "documentation",
+			"source": "documentation",
+			"description": "Documentation authoring and structured knowledge capture for design docs, ADRs, C4 diagrams, and decision trees."
+		},
+		{
+			"name": "frontend",
+			"source": "frontend",
+			"description": "Frontend design exploration toolkit for interactive HTML design options."
+		},
+		{
+			"name": "git",
+			"source": "git",
+			"description": "Git workflow toolkit for commits, conflict resolution, rebases, and repository cleanup."
+		},
+		{
+			"name": "github",
+			"source": "github",
+			"description": "GitHub workflow toolkit for creating pull requests, monitoring CI, and getting PRs ready to merge."
+		},
+		{
+			"name": "linear-planner",
+			"source": "linear-planner",
+			"description": "Linear planning workflows and project document templates for turning product ideas into traceable plans, specs, decisions, and release checks."
+		},
+		{
+			"name": "project",
+			"source": "project",
+			"description": "Project setup and context management skills for requirements and shared agent context."
+		},
+		{
+			"name": "skill-creation",
+			"source": "skill-creation",
+			"description": "End-to-end toolkit for authoring, publishing, tooling, and improving reusable agent skills."
+		},
+		{
+			"name": "systems-design",
+			"source": "systems-design",
+			"description": "Opinionated system design toolkit for architecture, data modeling, API design, workflow sequencing, and design review."
+		}
+	]
+}

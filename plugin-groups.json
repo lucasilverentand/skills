@@ -2,6 +2,7 @@
 	"name": "skills-of-luca",
 	"owner": {
 		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com",
 		"url": "https://github.com/lucasilverentand"
 	},
 	"metadata": {
@@ -67,12 +68,12 @@
 		{
 			"name": "github",
 			"displayName": "GitHub",
-			"description": "GitHub workflow toolkit for creating pull requests and monitoring CI.",
+			"description": "GitHub workflow toolkit for creating pull requests, monitoring CI, and getting PRs ready to merge.",
 			"shortDescription": "Pull request and CI workflows",
 			"category": "Development",
-			"keywords": ["github", "pull-request", "ci"],
-			"skills": ["creating-prs", "monitoring-ci"],
-			"commands": ["ci", "create-draft-pr", "create-pr"],
+			"keywords": ["github", "pull-request", "ci", "merge-readiness"],
+			"skills": ["creating-prs", "fix-pr", "monitoring-ci"],
+			"commands": ["ci", "create-draft-pr", "create-pr", "fix-pr"],
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -92,28 +93,15 @@
 			}
 		},
 		{
-			"name": "project-docs",
-			"displayName": "Project Docs",
-			"description": "Project document templates with one authoring skill for briefs, specs, designs, decisions, release checks, and reviews.",
-			"shortDescription": "Project document templates",
-			"category": "Documentation",
-			"keywords": ["project-docs", "templates", "briefs", "specs", "designs", "release-readiness"],
-			"readmeBody": "README.body.txt",
-			"skills": ["create-doc-template", "project-docs"],
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			}
-		},
-		{
 			"name": "linear-planner",
 			"displayName": "Linear Planner",
-			"description": "Linear planning workflows for creating real project records from reusable planner structures without keeping template issues live.",
-			"shortDescription": "Create Linear planning projects",
+			"description": "Linear planning workflows and project document templates for turning product ideas into traceable plans, specs, decisions, and release checks.",
+			"shortDescription": "Linear planning and project docs",
 			"category": "Productivity",
-			"keywords": ["linear", "planning", "projects", "issues"],
+			"keywords": ["linear", "planning", "projects", "issues", "project-docs", "templates"],
 			"readmeBody": "README.body.txt",
-			"skills": ["create-planner-project"],
+			"skills": ["create-doc-template", "create-planner-project", "estimate-issue-complexity", "pickup-work", "project-docs"],
+			"commands": ["pickup-work"],
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"

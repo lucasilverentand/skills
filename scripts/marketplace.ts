@@ -9,8 +9,10 @@
  * Generated output:
  *   - plugins/<plugin>/.claude-plugin/plugin.json
  *   - plugins/<plugin>/.codex-plugin/plugin.json
+ *   - plugins/<plugin>/.cursor-plugin/plugin.json
  *   - plugins/<plugin>/README.md
  *   - .claude-plugin/marketplace.json
+ *   - .cursor-plugin/marketplace.json
  *   - .agents/plugins/marketplace.json
  */
 
@@ -22,6 +24,7 @@ const ROOT = resolve(import.meta.dir, "..");
 const PLUGINS_DIR = resolve(ROOT, "plugins");
 const GROUPS_PATH = resolve(ROOT, "plugin-groups.json");
 const CLAUDE_MARKETPLACE_PATH = resolve(ROOT, ".claude-plugin/marketplace.json");
+const CURSOR_MARKETPLACE_PATH = resolve(ROOT, ".cursor-plugin/marketplace.json");
 const CODEX_MARKETPLACE_PATH = resolve(ROOT, ".agents/plugins/marketplace.json");
 const OBSOLETE_ROOT_CODEX_PLUGIN_DIR = resolve(ROOT, ".codex-plugin");
 const OBSOLETE_ROOT_SKILLS_DIR = resolve(ROOT, "skills");
@@ -289,6 +292,24 @@ function codexPluginManifest(group: PluginGroup, version: string, metadata: Plug
 	};
 }
 
+function cursorPluginManifest(group: PluginGroup, version: string, metadata: PluginGroups["metadata"]) {
+	return {
+		name: group.name,
+		displayName: group.displayName,
+		version,
+		description: group.description,
+		author: group.author,
+		license: metadata.license,
+		keywords: group.keywords ?? [],
+	};
+}
+
+function cursorMarketplaceOwner(owner: Owner): { name: string; email?: string } {
+	const cursorOwner: { name: string; email?: string } = { name: owner.name };
+	if (owner.email) cursorOwner.email = owner.email;
+	return cursorOwner;
+}
+
 function claudeMarketplace(groups: PluginGroups) {
 	return {
 		name: groups.name,
@@ -304,6 +325,24 @@ function claudeMarketplace(groups: PluginGroups) {
 			author: group.author,
 			category: group.category,
 			keywords: group.keywords ?? [],
+		})),
+	};
+}
+
+function cursorMarketplace(groups: PluginGroups) {
+	return {
+		name: groups.name,
+		displayName: "Skills of Luca",
+		owner: cursorMarketplaceOwner(groups.owner),
+		metadata: {
+			description: "Reusable agent skills by Luca Silverentand.",
+			version: groups.metadata.version,
+			pluginRoot: "plugins",
+		},
+		plugins: groups.plugins.map((group) => ({
+			name: group.name,
+			source: group.name,
+			description: group.description,
 		})),
 	};
 }
@@ -340,7 +379,7 @@ function marketplaceSource(metadata: PluginGroups["metadata"]): string {
 
 function pluginReadme(group: PluginGroup, marketplaceName: string, source: string, readmeBody = ""): string {
 	const commandNote = group.commands?.length
-		? `\nClaude Code also exposes legacy command shims for this plugin: ${group.commands.map((c) => `\`/${group.name}:${c}\``).join(", ")}. Prefer the portable skills above for Codex and other agents.\n`
+		? `\nCodex and Claude Code also expose command shims for this plugin: ${group.commands.map((c) => `\`/${group.name}:${c}\``).join(", ")}. Prefer the portable skills above for automatic loading.\n`
 		: "";
 	const body = readmeBody.trim();
 	const bodySection = body ? `\n${body}\n` : "";
@@ -359,6 +398,19 @@ codex plugin marketplace add ${source}
 \`\`\`
 
 Claude Code:
+
+\`\`\`text
+/plugin marketplace add ${source}
+/plugin install ${group.name}@${marketplaceName}
+\`\`\`
+
+Cursor (team marketplace):
+
+1. Dashboard → Settings → Plugins → Import
+2. Paste \`https://github.com/${source}\`
+3. Install \`${group.name}\` (Required or Optional)
+
+Cursor (IDE slash commands):
 
 \`\`\`text
 /plugin marketplace add ${source}
@@ -461,6 +513,10 @@ async function main() {
 			json(codexPluginManifest(group, groups.metadata.version, groups.metadata)),
 		);
 		await writeIfChanged(
+			resolve(root, ".cursor-plugin/plugin.json"),
+			json(cursorPluginManifest(group, groups.metadata.version, groups.metadata)),
+		);
+		await writeIfChanged(
 			resolve(root, "README.md"),
 			pluginReadme(
 				group,
@@ -472,6 +528,7 @@ async function main() {
 	}
 
 	await writeIfChanged(CLAUDE_MARKETPLACE_PATH, json(claudeMarketplace(groups)));
+	await writeIfChanged(CURSOR_MARKETPLACE_PATH, json(cursorMarketplace(groups)));
 	await writeIfChanged(CODEX_MARKETPLACE_PATH, json(codexMarketplace(groups)));
 
 	if (write || changes.length === 0) {
@@ -495,6 +552,7 @@ async function main() {
 	} else {
 		console.log(bold(`${changes.length} generated path(s) to update.`));
 		console.log(dim("Run with --write to apply changes."));
+		process.exit(1);
 	}
 }
 
