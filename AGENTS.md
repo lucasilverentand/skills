@@ -1,5 +1,5 @@
 # Skills of Luca
-Reusable Agent Skills for Codex, Claude Code, and other agents that understand the open `SKILL.md` format.
+Reusable Agent Skills for Codex, Claude Code, Cursor, and other agents that understand the open `SKILL.md` format.
 
 ## Repository Layout
 |Path|Purpose|
@@ -8,8 +8,10 @@ Reusable Agent Skills for Codex, Claude Code, and other agents that understand t
 |`plugin-groups.json`|Defines plugin metadata and the skills owned by each plugin.|
 |`plugins/<name>/.codex-plugin/plugin.json`|Generated Codex plugin manifest.|
 |`plugins/<name>/.claude-plugin/plugin.json`|Generated Claude Code plugin manifest.|
+|`plugins/<name>/.cursor-plugin/plugin.json`|Generated Cursor plugin manifest.|
 |`.agents/plugins/marketplace.json`|Generated Codex marketplace.|
 |`.claude-plugin/marketplace.json`|Generated Claude Code marketplace.|
+|`.cursor-plugin/marketplace.json`|Generated Cursor marketplace.|
 
 The `plugins/` tree is committed because it is both the installable package tree and the authored skill source. Generated files are limited to plugin manifests, marketplaces, and plugin READMEs.
 
@@ -19,17 +21,22 @@ The `plugins/` tree is committed because it is both the installable package tree
 - Run `bun run marketplace:write` after changing plugin membership, skill metadata, plugin README source, command lists, or anything that affects generated manifests or marketplaces.
 - Run `bun run marketplace` after generation; it should report everything up to date.
 - Run `bun run check` before finishing docs or skill changes.
+- Run `bun run ci` before opening a PR; it matches the GitHub Actions `validate` job.
 
 Useful commands:
 
 ```bash
+bun run ci
 bun run check
 bun run check:fix
 bun run marketplace
 bun run marketplace:write
 ```
 
-`bun run check` validates token and structure expectations for Markdown skills and docs. `bun run check:fix` applies safe Markdown compaction only; use it deliberately and review the diff.
+`bun run ci` runs `marketplace` (dry-run, fails if generated files are stale), `validate:cursor`, `check --strict` (fails on skill errors and uncommitted markdown compaction), and JSON smoke-parse of manifests. `bun run check` validates token and structure expectations for Markdown skills and docs; warnings are informational. `bun run check:fix` applies safe Markdown compaction only; use it deliberately and review the diff.
+
+## Continuous integration
+GitHub Actions workflow [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs `bun run ci` on pull requests and pushes to `main`. After merging, enable branch protection on `main` and require the **`validate`** status check before merge.
 
 ## Generated Artifacts
 - Do not hand-edit generated plugin manifests, generated plugin READMEs, or marketplace JSON unless the generator is being changed.
@@ -49,6 +56,8 @@ Codex reads `.agents/plugins/marketplace.json`, then loads plugin manifests from
 
 Claude Code reads `.claude-plugin/marketplace.json`, then loads plugin manifests from `plugins/<name>/.claude-plugin/plugin.json`. Claude-only legacy command shims live under `plugins/<name>/commands/`; prefer skills for portable workflows.
 
+Cursor reads `.cursor-plugin/marketplace.json` (team-marketplace layout with `metadata.pluginRoot: "plugins"`), then loads plugin manifests from `plugins/<name>/.cursor-plugin/plugin.json`. Skills and commands are folder-discovered; prefer skills for portable workflows. Run `bun run validate:cursor` before publishing Cursor marketplace changes.
+
 Direct local skill installs are available for personal skills directories:
 
 ```bash
@@ -57,3 +66,10 @@ bun run install:claude-skills -- creating-commits creating-prs
 ```
 
 Omit skill names to install every skill. Add `--symlink` for local development and `--force` to replace existing installed skills. Skill names can be plain (`creating-commits`) or plugin-qualified (`git:creating-commits`).
+
+## Cursor Cloud specific instructions
+- **Runtime**: Bun is the sole runtime dependency. There are no `node_modules`, no lockfile, and no npm/yarn/pnpm usage. The update script ensures Bun is installed and on `PATH`.
+- **No services to start**: This is a content-only repo (Markdown skills + TypeScript validation scripts). There are no servers, databases, or Docker containers.
+- **Validation commands** are documented in the Development Workflow section above. After any skill or metadata change, run `bun run marketplace:write` then `bun run ci` (or `marketplace` then `check --strict`).
+- **`bun run check` exit codes**: exit 0 means pass (warnings are informational only). Exit 1 means there are errors that must be fixed. `check --strict` also fails when markdown would be reformatted without `--fix`.
+- **Generated plugin READMEs**: `marketplace:write` regenerates `plugins/*/README.md` files. If your diff includes only these generated files, that is expected—commit them alongside source changes.

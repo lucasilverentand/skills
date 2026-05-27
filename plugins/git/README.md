@@ -22,4 +22,17 @@ Claude Code:
 /plugin install git@skills-of-luca
 ```
 
+Cursor (team marketplace):
+
+1. Dashboard → Settings → Plugins → Import
+2. Paste `https://github.com/lucasilverentand/skills`
+3. Install `git` (Required or Optional)
+
+Cursor (IDE slash commands):
+
+```text
+/plugin marketplace add lucasilverentand/skills
+/plugin install git@skills-of-luca
+```
+
 This plugin owns its skill source under `plugins/git/skills/`. Edit those files directly, then run `bun run marketplace:write` to refresh generated manifests and marketplaces.
