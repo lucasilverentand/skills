@@ -100,8 +100,15 @@
 			"category": "Productivity",
 			"keywords": ["linear", "planning", "projects", "issues", "project-docs", "templates"],
 			"readmeBody": "README.body.txt",
-			"skills": ["create-doc-template", "create-planner-project", "estimate-issue-complexity", "pickup-work", "project-docs"],
-			"commands": ["pickup-work"],
+			"skills": [
+				"create-doc-template",
+				"create-planner-project",
+				"estimate-issue-complexity",
+				"pickup-work",
+				"project-docs",
+				"tidy-linear-project"
+			],
+			"commands": ["pickup-work", "tidy-linear-project"],
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"

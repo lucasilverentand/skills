@@ -7,7 +7,8 @@
 		"./skills/create-planner-project",
 		"./skills/estimate-issue-complexity",
 		"./skills/pickup-work",
-		"./skills/project-docs"
+		"./skills/project-docs",
+		"./skills/tidy-linear-project"
 	],
 	"author": {
 		"name": "Luca Silverentand",
@@ -25,6 +26,7 @@
 		"templates"
 	],
 	"commands": [
-		"./commands/pickup-work.md"
+		"./commands/pickup-work.md",
+		"./commands/tidy-linear-project.md"
 	]
 }

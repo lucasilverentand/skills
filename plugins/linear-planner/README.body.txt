@@ -5,6 +5,8 @@ The detailed operational structure lives in [skills/create-planner-project/refer
 
 The shared Linear issue-creation rules live in [skills/create-planner-project/references/linear-issue-creation.md](skills/create-planner-project/references/linear-issue-creation.md).
 
+The Linear project tidy-up workflow lives in [skills/tidy-linear-project/SKILL.md](skills/tidy-linear-project/SKILL.md).
+
 ## Template library
 Starter templates for the documents kept around a product.
 

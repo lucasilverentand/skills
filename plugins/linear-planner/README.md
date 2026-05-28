@@ -7,8 +7,9 @@ Linear planning workflows and project document templates for turning product ide
 - `linear-planner:estimate-issue-complexity`
 - `linear-planner:pickup-work`
 - `linear-planner:project-docs`
+- `linear-planner:tidy-linear-project`
 
-Codex and Claude Code also expose command shims for this plugin: `/linear-planner:pickup-work`. Prefer the portable skills above for automatic loading.
+Codex and Claude Code also expose command shims for this plugin: `/linear-planner:pickup-work`, `/linear-planner:tidy-linear-project`. Prefer the portable skills above for automatic loading.
 
 ## Install
 Codex:
@@ -45,6 +46,8 @@ The project source of truth for this plugin is [documents/project-brief.md](docu
 The detailed operational structure lives in [skills/create-planner-project/references/planner-project-structure.md](skills/create-planner-project/references/planner-project-structure.md).
 
 The shared Linear issue-creation rules live in [skills/create-planner-project/references/linear-issue-creation.md](skills/create-planner-project/references/linear-issue-creation.md).
+
+The Linear project tidy-up workflow lives in [skills/tidy-linear-project/SKILL.md](skills/tidy-linear-project/SKILL.md).
 
 ## Template library
 Starter templates for the documents kept around a product.
