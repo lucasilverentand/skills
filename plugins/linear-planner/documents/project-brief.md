@@ -2,7 +2,7 @@
 title: Linear planner project brief
 status: Approved
 owner: Luca Silverentand
-last_updated: 2026-05-21
+last_updated: 2026-05-28
 related:
   - ../skills/create-planner-project/SKILL.md
   - ../skills/create-planner-project/references/planner-project-structure.md
@@ -53,7 +53,9 @@ Codex and Claude must consume the same authored skill source under `plugins/line
    How to create or select initiatives, projects, milestones, issues, labels, relationships, documents, comments, and status updates.
 4. **Planning document boundaries**
    Which issues require actual product docs, which templates guide them, when Linear docs stay canonical, and when repo docs link back.
-5. **Plugin maintenance guidance**
+5. **Project tidy-up workflow**
+   Periodic audit of duplicates, stale blockers, field hygiene, document drift, state hygiene, and missing links on existing projects.
+6. **Plugin maintenance guidance**
    Keep this brief, the skill workflow, and the planner structure aligned.
 
 ### 6.2. Out of scope
@@ -61,8 +63,8 @@ Codex and Claude must consume the same authored skill source under `plugins/line
    The plugin must not depend on active template projects or reusable template issues.
 2. **Implementation backlog generation**
    The planner creates planning and foundation work only.
-3. **Generic Linear automation**
-   Triage, sprint management, reporting, and issue cleanup outside planner setup belong elsewhere.
+3. **Generic Linear automation outside this plugin**
+   Triage, sprint management, and reporting belong elsewhere. Project tidy-up after setup is in scope via `tidy-linear-project`.
 4. **Product-specific documents after setup**
    Each product owns its own brief, risk register, decisions, and launch material.
 5. **Project-doc template ownership**
@@ -79,6 +81,7 @@ Codex and Claude must consume the same authored skill source under `plugins/line
 |Document ownership|Linear planning docs stay canonical until a repo exists; repo docs link back instead of duplicating the plan.|
 |Codex and Claude parity|Both surfaces use the same skill source, project document, and generated package metadata.|
 |Maintenance traceability|Behavior changes update this brief and the planner structure in the same PR.|
+|Project tidy-up|Agents can run `tidy-linear-project` on an existing project, separate tidy actions from scope changes, prefer suggestions for destructive edits, and report unresolved findings.|
 |Repo validation|`bun run marketplace`, `bun run check`, and relevant formatting or type checks pass before PR.|
 
 ## 8. Risks and assumptions
@@ -94,6 +97,7 @@ Codex and Claude must consume the same authored skill source under `plugins/line
 ## 9. Implementation links
 - Current document task: [ST-1109](https://linear.app/seventwo/issue/ST-1109/write-and-maintain-the-planning-plugin-project-document).
 - Issue-creation rules task: [ST-1110](https://linear.app/seventwo/issue/ST-1110/review-and-merge-linear-issue-creation-instructions).
+- Tidy-up workflow task: [ST-1113](https://linear.app/seventwo/issue/ST-1113/write-linear-tidy-agent-instructions).
 - Related follow-up: [GitHub #49](https://github.com/lucasilverentand/skills/issues/49) tracks splitting the large planner structure reference.
 
 ## 10. Open questions
