@@ -15,11 +15,11 @@
 		{
 			"name": "apple-design",
 			"displayName": "Apple Design",
-			"description": "Apple Human Interface Guidelines as a single plugin: foundations, platform guidance, and services.",
-			"shortDescription": "Apple HIG guidance",
+			"description": "Apple Human Interface Guidelines as a single plugin: foundations, services, and a platform selector for iOS, macOS, watchOS, tvOS, and visionOS.",
+			"shortDescription": "Apple HIG guidance by platform",
 			"category": "Design",
 			"keywords": ["apple", "design", "hig", "ios", "macos", "visionos"],
-			"skills": ["foundations", "ios", "macos", "services", "tvos", "visionos", "watchos"],
+			"skills": ["foundations", "platforms", "services"],
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "luca.silverentand@gmail.com"

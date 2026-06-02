@@ -2,7 +2,7 @@
 	"name": "apple-design",
 	"displayName": "Apple Design",
 	"version": "1.2.0",
-	"description": "Apple Human Interface Guidelines as a single plugin: foundations, platform guidance, and services.",
+	"description": "Apple Human Interface Guidelines as a single plugin: foundations, services, and a platform selector for iOS, macOS, watchOS, tvOS, and visionOS.",
 	"author": {
 		"name": "Luca Silverentand",
 		"email": "luca.silverentand@gmail.com"

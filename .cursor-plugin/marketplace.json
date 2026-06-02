@@ -14,7 +14,7 @@
 		{
 			"name": "apple-design",
 			"source": "apple-design",
-			"description": "Apple Human Interface Guidelines as a single plugin: foundations, platform guidance, and services."
+			"description": "Apple Human Interface Guidelines as a single plugin: foundations, services, and a platform selector for iOS, macOS, watchOS, tvOS, and visionOS."
 		},
 		{
 			"name": "design",
