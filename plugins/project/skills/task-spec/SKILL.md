@@ -10,7 +10,7 @@ Turn a loose task idea into a concrete brief that can drive an issue, implementa
 ## Decision tree
 - What is the user trying to start?
   - **Whole-system requirements or architecture intake** -> hand off to `requirements`; this skill is for bounded tasks, issues, and implementation briefs.
-  - **Linear or GitHub issue creation** -> run "Spec intake", then write ticket-ready issue text. Use the relevant issue-creation workflow only after the brief is coherent.
+  - **Linear or GitHub issue creation** -> run "Spec intake", then write ticket-ready issue text. For Linear, hand off to `linear-planner:linear-issues` when available. Use the relevant issue-creation workflow only after the brief is coherent.
   - **Code implementation** -> inspect the repo, run "Spec intake" for missing intent, then use the brief as the implementation plan. If open questions are non-blocking, record assumptions and continue.
   - **General task, process, research, or delegation** -> run "Spec intake", then produce a task brief with owner-ready next actions.
   - **Tiny low-risk change** (typo, obvious config tweak, simple command) -> do the task directly; do not slow the user down with ceremony.
@@ -80,7 +80,7 @@ The brief should be specific enough that another competent agent could pick it u
 ### 6. Continue or hand off
 After the brief:
 
-- **If the user asked for an issue** -> create or update the issue using the relevant Linear/GitHub workflow, preserving the brief structure.
+- **If the user asked for an issue** -> create or update the issue using the relevant Linear/GitHub workflow, preserving the brief structure. For Linear, use `linear-planner:linear-issues` when available.
 - **If the user asked for code** -> implement from the brief unless a blocking question remains.
 - **If the user asked for planning only** -> stop at the brief and call out the next concrete action.
 - **If the task belongs to another skill** -> pass the brief forward so the next skill has the user's intent without another intake loop.

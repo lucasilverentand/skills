@@ -1,5 +1,5 @@
-# Linear issue creation rules
-Use this reference when turning planning material into Linear issues for a planner project. It is the shared issue-creation contract for Codex and Claude packaging.
+# Linear issue rules
+Use this reference when creating, updating, or tidying Linear issues. It is the shared issue contract for planner setup, issue authoring, and issue hygiene workflows.
 
 ## Contents
 - [Creation workflow](#creation-workflow)
@@ -10,7 +10,7 @@ Use this reference when turning planning material into Linear issues for a plann
 - [What not to encode as Linear structure](#what-not-to-encode-as-linear-structure)
 
 ## Creation workflow
-1. Read the project brief and `planner-project-structure.md`.
+1. Read the source material: project brief, task spec, planner structure, existing issue, or user request.
 2. Inspect the target Linear project before creating anything: existing issues, milestones, labels, statuses, project documents, and obvious duplicates.
 3. Create small executable issues. Each issue needs one clear outcome, context, acceptance criteria, and an out-of-scope boundary when scope could sprawl.
 4. Use Linear fields for machine-readable structure: priority, milestone, labels, parent, blockers, related issues, and project status updates.
@@ -26,7 +26,7 @@ Each created issue should have:
 - Out of scope: what this issue should not turn into.
 - Links: the smallest useful planning doc or decision, not the whole document chain.
 
-Keep implementation tickets out of this workflow. The planner creates planning and foundation work; feature execution starts after the Phase 4 gate or an explicit user request.
+Keep implementation tickets out of planner setup. Create implementation issues only when the user explicitly asks for execution backlog creation or when refining an existing execution issue.
 
 ## Field rules and examples
 |Field|Use it for|Example|Do not use it for|
