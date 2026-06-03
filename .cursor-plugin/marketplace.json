@@ -47,6 +47,11 @@
 			"description": "Project setup and context management skills for requirements and shared agent context."
 		},
 		{
+			"name": "repository-docs",
+			"source": "repository-docs",
+			"description": "Repository documentation maintenance for public open-source projects and private internal project hubs."
+		},
+		{
 			"name": "skill-creation",
 			"source": "skill-creation",
 			"description": "End-to-end toolkit for authoring, publishing, tooling, and improving reusable agent skills."

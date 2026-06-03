@@ -1,0 +1,35 @@
+{
+	"name": "repository-docs",
+	"version": "1.1.0",
+	"description": "Repository documentation maintenance for public open-source projects and private internal project hubs.",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"readme",
+		"contributing",
+		"documentation",
+		"open-source",
+		"internal-docs"
+	],
+	"skills": "./skills/",
+	"interface": {
+		"displayName": "Repository Docs",
+		"shortDescription": "README and contributor docs",
+		"longDescription": "Repository documentation maintenance for public open-source projects and private internal project hubs.",
+		"developerName": "Luca Silverentand",
+		"category": "Documentation",
+		"capabilities": [
+			"Read",
+			"Write"
+		],
+		"websiteURL": "https://github.com/lucasilverentand/skills",
+		"defaultPrompt": [
+			"Use Repository Docs when the task matches one of its bundled skills."
+		]
+	}
+}
