@@ -9,7 +9,7 @@ Apple framework/service integration guidance — design rules and constraints fo
 
 ## How to use
 1. **Identify the framework or service** the user wants to integrate, find it in the glossary.
-2. **Read the topic's references**. Multi-file topics (`×N`) typically split overview, design, privacy, and platform notes.
+2. **Read the topic's references**. Directory topics typically split overview, design, privacy, and platform notes.
 3. **Combine with the platform skill** when the service surfaces UI on a specific device (e.g., Apple Pay button on iOS).
 4. **Honor service-mandated rules strictly** — many services (Pay, Sign in with Apple, Wallet) carry legal/branding requirements.
 
@@ -17,41 +17,41 @@ Apple framework/service integration guidance — design rules and constraints fo
 |Topic|Reference|Summary|
 |---|---|---|
 |`airplay`|`airplay.md`|Prefer the system-provided media player|
-|`app-clips`|`app-clips/` ×14|Users encounter and initiate App Clips across many scenarios and contexts|
-|`app-shortcuts`|`app-shortcuts/` ×2|Since App Shortcuts are integral to your application, they become available…|
-|`apple-pay`|`apple-pay/` ×13|Apps and websites that accept Apple Pay must display it as a payment option and…|
-|`apple-pencil-and-scribble`|`apple-pencil-and-scribble/` ×8|For comprehensive information regarding Apple Pencil features and…|
+|`app-clips`|`app-clips/`|Users encounter and initiate App Clips across many scenarios and contexts|
+|`app-shortcuts`|`app-shortcuts/`|Since App Shortcuts are integral to your application, they become available…|
+|`apple-pay`|`apple-pay/`|Apps and websites that accept Apple Pay must display it as a payment option and…|
+|`apple-pencil-and-scribble`|`apple-pencil-and-scribble/`|For comprehensive information regarding Apple Pencil features and…|
 |`camera-control`|`camera-control.md`|Camera Control grants immediate access to your application's camera…|
-|`carekit`|`carekit/` ×8|CareKit 2.0 comprises two distinct projects: CareKit UI and CareKit Store|
+|`carekit`|`carekit/`|CareKit 2.0 comprises two distinct projects: CareKit UI and CareKit Store|
 |`carplay`|`carplay.md`|CarPlay is specifically engineered for drivers to use while operating a vehicle|
 |`controls`|`controls.md`|Users can add controls to Control Center by pressing and holding in an empty…|
-|`game-center`|`game-center/` ×8|Find new games that their friends are playing|
-|`generative-ai`|`generative-ai/` ×7|Design your experience responsibly|
+|`game-center`|`game-center/`|Find new games that their friends are playing|
+|`generative-ai`|`generative-ai/`|Design your experience responsibly|
 |`gyro-and-accelerometer`|`gyro-and-accelerometer.md`|On-device gyroscopes and accelerometers provide information regarding a…|
-|`healthkit`|`healthkit/` ×5|For instance, a nutrition application may need permission to retrieve users'…|
+|`healthkit`|`healthkit/`|For instance, a nutrition application may need permission to retrieve users'…|
 |`home-screen-quick-actions`|`home-screen-quick-actions.md`|Home Screen quick actions allow users to execute app-specific functions…|
-|`homekit`|`homekit/` ×7|Your application (iOS, tvOS, or watchOS) can integrate with HomeKit—and…|
+|`homekit`|`homekit/`|Your application (iOS, tvOS, or watchOS) can integrate with HomeKit—and…|
 |`icloud`|`icloud.md`|iCloud is a service that allows users to access their important…|
 |`id-verifier`|`id-verifier.md`|ID Verifier allows your iPhone application to read mobile IDs in person without…|
 |`imessage-apps-and-stickers`|`imessage-apps-and-stickers.md`|iMessage applications enable users to share content, collaborate, and play…|
-|`in-app-purchase`|`in-app-purchase/` ×7|When implementing in-app purchases, you have four content models available:|
-|`live-activities`|`live-activities/` ×13|For instance, a Live Activity could display the estimated arrival time for a…|
+|`in-app-purchase`|`in-app-purchase/`|When implementing in-app purchases, you have four content models available:|
+|`live-activities`|`live-activities/`|For instance, a Live Activity could display the estimated arrival time for a…|
 |`live-photos`|`live-photos.md`|Live Photos transforms cherished moments into a dynamic, interactive experience…|
 |`live-viewing-apps`|`live-viewing-apps.md`|When developing a live-viewing application, the content must be elevated and…|
-|`machine-learning`|`machine-learning/` ×12|For related guidance on utilizing machine learning models to facilitate…|
-|`managing-accounts`|`managing-accounts/` ×2|Explain the benefits of creating an account and how to sign up|
+|`machine-learning`|`machine-learning/`|For related guidance on utilizing machine learning models to facilitate…|
+|`managing-accounts`|`managing-accounts/`|Explain the benefits of creating an account and how to sign up|
 |`managing-notifications`|`managing-notifications.md`|People value being informed about matters important to them, but they may not…|
-|`maps`|`maps/` ×5|In general, ensure your map is interactive|
-|`nearby-interactions`|`nearby-interactions/` ×2|Nearby interactions enable on-device experiences that incorporate the presence…|
+|`maps`|`maps/`|In general, ensure your map is interactive|
+|`nearby-interactions`|`nearby-interactions/`|Nearby interactions enable on-device experiences that incorporate the presence…|
 |`nfc`|`nfc.md`|Near-field communication (NFC) enables devices located within a few centimeters…|
-|`notifications`|`notifications/` ×6|Notifications may utilize different styles depending on the platform, including:|
+|`notifications`|`notifications/`|Notifications may utilize different styles depending on the platform, including:|
 |`photo-editing`|`photo-editing.md`|Photo-editing extensions enable users to modify photos and videos within the…|
 |`ratings-and-reviews`|`ratings-and-reviews.md`|Potential users frequently consult ratings and reviews before downloading an…|
 |`researchkit`|`researchkit.md`|When a user launches a research application for the first time, they encounter…|
-|`shareplay`|`shareplay/` ×6|When content is being shared during a FaceTime call, the system prompts each…|
+|`shareplay`|`shareplay/`|When content is being shared during a FaceTime call, the system prompts each…|
 |`shazamkit`|`shazamkit.md`|ShazamKit enables audio recognition by comparing an audio sample against either…|
-|`sign-in-with-apple`|`sign-in-with-apple/` ×6|You are able to implement Sign in with Apple across any version of your website…|
-|`siri`|`siri/` ×18|Ask Siri to execute a system-defined task that your application supports, such…|
-|`tap-to-pay-on-iphone`|`tap-to-pay-on-iphone/` ×6|To integrate Tap to Pay on iPhone into your iOS application, you must…|
-|`wallet`|`wallet/` ×14|When you integrate Apple Wallet into your application, you can generate custom…|
-|`widgets`|`widgets/` ×17|On the Home Screen and Lock Screen of their iPhone and iPad|
+|`sign-in-with-apple`|`sign-in-with-apple/`|You are able to implement Sign in with Apple across any version of your website…|
+|`siri`|`siri/`|Ask Siri to execute a system-defined task that your application supports, such…|
+|`tap-to-pay-on-iphone`|`tap-to-pay-on-iphone/`|To integrate Tap to Pay on iPhone into your iOS application, you must…|
+|`wallet`|`wallet/`|When you integrate Apple Wallet into your application, you can generate custom…|
+|`widgets`|`widgets/`|On the Home Screen and Lock Screen of their iPhone and iPad|

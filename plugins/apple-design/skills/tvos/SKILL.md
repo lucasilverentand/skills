@@ -9,7 +9,7 @@ Platform-specific HIG for tvOS. Components, controls, navigation patterns, and c
 
 ## How to use
 1. **Match the user's UI element to a topic** — most map directly to component or pattern names.
-2. **Read only the matched references**. Multi-file topics (`×N`) live in `references/<topic>/`.
+2. **Read only the matched references**. Directory topics live in `references/<topic>/`.
 3. **Pull in `foundations`** for shared principles (color, typography, layout, accessibility, shared UI like rating indicators).
 4. **Pull in `services`** when integrating Apple frameworks (Pay, HealthKit, Siri, sensors, media playback).
 5. **Stay on tvOS.** For another Apple platform, point to the matching skill.
@@ -21,7 +21,7 @@ Platform-specific HIG for tvOS. Components, controls, navigation patterns, and c
 |`buttons`|`buttons.md`|Style|
 |`context-menus`|`context-menus.md`|context menu grants access to item-specific functionality without adding visual…|
 |`designing-for-tvos`|`designing-for-tvos.md`|tvOS provides vibrant content, deeply immersive experiences, and streamlined…|
-|`drag-and-drop`|`drag-and-drop/` ×4|Depending on different factors, the drag and drop action may *move* the…|
+|`drag-and-drop`|`drag-and-drop/`|Depending on different factors, the drag and drop action may *move* the…|
 |`focus-and-selection`|`focus-and-selection.md`|Focus assists users in visually confirming the element they intend to interact…|
 |`image-views`|`image-views.md`|image view presents either a static image or an animated sequence against a…|
 |`images`|`images.md`|Different devices render visuals at varying resolutions|
@@ -31,7 +31,7 @@ Platform-specific HIG for tvOS. Components, controls, navigation patterns, and c
 |`pickers`|`pickers.md`|picker presents one or more scrollable lists containing unique values from…|
 |`playing-audio`|`playing-audio.md`|Silence|
 |`playing-haptics`|`playing-haptics.md`|Haptic feedback can involve users' sense of touch, allowing you to integrate a…|
-|`playing-video`|`playing-video/` ×3|system-provided video players support different aspect ratio playback modes…|
+|`playing-video`|`playing-video/`|system-provided video players support different aspect ratio playback modes…|
 |`progress-indicators`|`progress-indicators.md`|Progress indicators inform users that your application is actively working,…|
 |`remotes`|`remotes.md`|Use standard gestures for common actions|
 |`scroll-views`|`scroll-views.md`|scroll view enables users to examine content that exceeds the display…|
@@ -44,6 +44,6 @@ Platform-specific HIG for tvOS. Components, controls, navigation patterns, and c
 |`tab-bars`|`tab-bars.md`|tab bar enables users to navigate between the application's highest-level…|
 |`text-fields`|`text-fields.md`|text field is a rectangular region where users input or modify brief, specific…|
 |`text-views`|`text-views.md`|TextView presents multi-line, styled text content that may or may not be…|
-|`toolbars`|`toolbars/` ×6|Toolbars perform actions on content within the view, facilitate movement…|
-|`top-shelf`|`top-shelf/` ×3|Top Shelf presents a unique chance to highlight new, featured, or recommended…|
+|`toolbars`|`toolbars/`|Toolbars perform actions on content within the view, facilitate movement…|
+|`top-shelf`|`top-shelf/`|Top Shelf presents a unique chance to highlight new, featured, or recommended…|
 |`windows`|`windows.md`|window displays the user interface views and components within your application…|
