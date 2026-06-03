@@ -1,7 +1,7 @@
 {
 	"name": "apple-design",
 	"version": "1.1.0",
-	"description": "Apple Human Interface Guidelines as a single plugin: foundations, services, and a skill per Apple platform.",
+	"description": "Apple Human Interface Guidelines as a single plugin: foundations, platform guidance, and services.",
 	"author": {
 		"name": "Luca Silverentand",
 		"email": "luca.silverentand@gmail.com"
@@ -20,8 +20,8 @@
 	"skills": "./skills/",
 	"interface": {
 		"displayName": "Apple Design",
-		"shortDescription": "Apple HIG guidance by platform",
-		"longDescription": "Apple Human Interface Guidelines as a single plugin: foundations, services, and a skill per Apple platform.",
+		"shortDescription": "Apple HIG guidance",
+		"longDescription": "Apple Human Interface Guidelines as a single plugin: foundations, platform guidance, and services.",
 		"developerName": "Luca Silverentand",
 		"category": "Design",
 		"capabilities": [

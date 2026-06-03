@@ -9,7 +9,7 @@ Platform-specific HIG for macOS. Components, controls, navigation patterns, and 
 
 ## How to use
 1. **Match the user's UI element to a topic** — most map directly to component or pattern names.
-2. **Read only the matched references**. Multi-file topics (`×N`) live in `references/<topic>/`.
+2. **Read only the matched references**. Directory topics live in `references/<topic>/`.
 3. **Pull in `foundations`** for shared principles (color, typography, layout, accessibility, shared UI like rating indicators).
 4. **Pull in `services`** when integrating Apple frameworks (Pay, HealthKit, Siri, sensors, media playback).
 5. **Stay on macOS.** For another Apple platform, point to the matching skill.
@@ -19,14 +19,14 @@ Platform-specific HIG for macOS. Components, controls, navigation patterns, and 
 |---|---|---|
 |`alerts`|`alerts.md`|Use alerts sparingly|
 |`boxes`|`boxes.md`|box groups related information and components into a visually distinct unit|
-|`buttons`|`buttons/` ×5|Style|
+|`buttons`|`buttons/`|Style|
 |`color-wells`|`color-wells.md`|color well enables users to modify the hue of text, shapes, guides, and other…|
 |`column-views`|`column-views.md`|column view, also referred to as a *browser*, allows users to visualize and…|
 |`combo-boxes`|`combo-boxes.md`|combo box integrates a text field and a pull-down button into a single control|
 |`context-menus`|`context-menus.md`|context menu grants access to item-specific functionality without adding visual…|
 |`designing-for-macos`|`designing-for-macos.md`|Macs are relied upon for demanding tasks—including deep productivity work,…|
 |`dock-menus`|`dock-menus.md`|On macOS, a secondary click on an application or game icon in the Dock displays…|
-|`drag-and-drop`|`drag-and-drop/` ×5|Depending on different factors, the drag and drop action may *move* the…|
+|`drag-and-drop`|`drag-and-drop/`|Depending on different factors, the drag and drop action may *move* the…|
 |`edit-menus`|`edit-menus.md`|edit menu allows users to modify selected content within the current view,…|
 |`entering-data`|`entering-data.md`|When collecting information from users, design processes that facilitate…|
 |`file-management`|`file-management.md`|Users also anticipate being able to browse documents without first launching a…|
@@ -36,7 +36,7 @@ Platform-specific HIG for macOS. Components, controls, navigation patterns, and 
 |`images`|`images.md`|To ensure optimal visual quality across all supported devices, familiarize…|
 |`labels`|`labels.md`|label is static text that users can read and often copy, but they cannot modify|
 |`lists-and-tables`|`lists-and-tables.md`|Tables and lists display information arranged across one or more columns of rows|
-|`mac-catalyst`|`mac-catalyst/` ×3|Many iPad applications are excellent candidates for conversion into a Mac…|
+|`mac-catalyst`|`mac-catalyst/`|Many iPad applications are excellent candidates for conversion into a Mac…|
 |`multitasking`|`multitasking.md`|Multitasking enables users to rapidly transition between applications and…|
 |`page-controls`|`page-controls.md`|page control presents a horizontal row of indicator images, with each image…|
 |`panels`|`panels.md`|On macOS, a panel typically overlays other open windows, providing…|
@@ -44,7 +44,7 @@ Platform-specific HIG for macOS. Components, controls, navigation patterns, and 
 |`pickers`|`pickers.md`|picker presents one or more scrollable lists containing unique values from…|
 |`playing-audio`|`playing-audio.md`|Silence|
 |`playing-haptics`|`playing-haptics.md`|Beyond inherent haptic capabilities, certain external input devices can also…|
-|`playing-video`|`playing-video/` ×3|system-provided video players support different aspect ratio playback modes…|
+|`playing-video`|`playing-video/`|system-provided video players support different aspect ratio playback modes…|
 |`pop-up-buttons`|`pop-up-buttons.md`|pop-up button presents a menu containing options that are mutually exclusive|
 |`popovers`|`popovers.md`|popover functions as a temporary view that overlays other content upon…|
 |`printing`|`printing.md`|Apps targeting iOS, iPadOS, macOS, or visionOS may incorporate the operating…|
@@ -60,9 +60,9 @@ Platform-specific HIG for macOS. Components, controls, navigation patterns, and 
 |`steppers`|`steppers.md`|stepper is a dual-segmented control used to increment or decrement an…|
 |`tab-bars`|`tab-bars.md`|tab bar enables users to navigate between the application's highest-level…|
 |`text-fields`|`text-fields.md`|text field is a rectangular region where users input or modify brief, specific…|
-|`the-menu-bar`|`the-menu-bar/` ×13|Menu bar menus on iPad are comparable to those on Mac, appearing in the same…|
+|`the-menu-bar`|`the-menu-bar/`|Menu bar menus on iPad are comparable to those on Mac, appearing in the same…|
 |`toggles`|`toggles.md`|Furthermore, all platforms support buttons that function as toggles if they…|
 |`token-fields`|`token-fields.md`|token field is a specialized text input that transforms entered text into…|
-|`toolbars`|`toolbars/` ×6|Toolbars perform actions on content within the view, facilitate movement…|
+|`toolbars`|`toolbars/`|Toolbars perform actions on content within the view, facilitate movement…|
 |`undo-and-redo`|`undo-and-redo.md`|Undo and redo provide users with simple mechanisms to reverse different actions|
 |`windows`|`windows.md`|Conceptually, applications utilize two kinds of windows to display content:|

@@ -1,5 +1,5 @@
 # Apple Design
-Apple Human Interface Guidelines as a single plugin: foundations, services, and a skill per Apple platform.
+Apple Human Interface Guidelines as a single plugin: foundations, platform guidance, and services.
 
 ## Skills
 - `apple-design:foundations`
