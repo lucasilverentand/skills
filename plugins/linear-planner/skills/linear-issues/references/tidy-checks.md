@@ -33,7 +33,7 @@ Use this reference during a `tidy-linear-project` run. Each section lists what t
 
 ### Look for
 - `blocked by` relations where the blocker is Done, Canceled, or will not be done.
-- Blockers that only expressed "read this first" or soft ordering (see linear-issue-creation rules).
+- Blockers that only expressed "read this first" or soft ordering (see issue rules).
 - Blocked issues making progress in comments or PRs despite the blocker.
 - Circular or long blocker chains with no active unblocker.
 

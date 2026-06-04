@@ -6,7 +6,8 @@ last_updated: 2026-05-28
 related:
   - ../skills/create-planner-project/SKILL.md
   - ../skills/create-planner-project/references/planner-project-structure.md
-  - ../skills/create-planner-project/references/linear-issue-creation.md
+  - ../skills/linear-issues/SKILL.md
+  - ../skills/linear-issues/references/issue-rules.md
 ---
 
 # Linear planner project brief
@@ -40,7 +41,7 @@ A user asks for a planner project for a real product. The agent confirms the pro
 
 Planner issues ask for actual product documents where planning needs them: brief, platform decision, stack decision, risk register, open questions log, launch checklist, and similar records. They may point to `project-docs` templates, but completed documents belong to the product's Linear project or repo, not to the planner plugin.
 
-Codex and Claude must consume the same authored skill source under `plugins/linear-planner/skills/`; generated manifests and READMEs are packaging outputs. Update this brief when a change alters purpose, Linear behavior, scope boundaries, or maintenance rules.
+Codex and Claude must consume the same authored skill source under `plugins/linear-planner/skills/`; generated manifests and READMEs are packaging outputs. The `linear-issues` skill owns shared issue authoring, field semantics, relationship rules, complexity scoring, and issue hygiene. Update this brief when a change alters purpose, Linear behavior, scope boundaries, or maintenance rules.
 
 ## 6. Scope
 
@@ -51,11 +52,13 @@ Codex and Claude must consume the same authored skill source under `plugins/line
    Web, native, backend, automation, AI, data, integration-heavy, and mixed products.
 3. **Linear record creation rules**
    How to create or select initiatives, projects, milestones, issues, labels, relationships, documents, comments, and status updates.
-4. **Planning document boundaries**
+4. **Linear issue authoring and hygiene**
+   Reusable issue creation, refinement, relationship, complexity, and tidy-up rules shared by planner setup and existing-project maintenance.
+5. **Planning document boundaries**
    Which issues require actual product docs, which templates guide them, when Linear docs stay canonical, and when repo docs link back.
-5. **Project tidy-up workflow**
+6. **Project tidy-up workflow**
    Periodic audit of duplicates, stale blockers, field hygiene, document drift, state hygiene, and missing links on existing projects.
-6. **Plugin maintenance guidance**
+7. **Plugin maintenance guidance**
    Keep this brief, the skill workflow, and the planner structure aligned.
 
 ### 6.2. Out of scope
@@ -78,6 +81,7 @@ Codex and Claude must consume the same authored skill source under `plugins/line
 |Profile-aware output|Descriptions and acceptance criteria reflect the selected project type.|
 |Linear field discipline|No cycle by default; committed work starts in Todo; speculative work can start in Suggestion.|
 |Issue relationship discipline|Blockers, parent issues, related issues, labels, priorities, milestones, and status updates follow the shared issue-creation rules.|
+|Issue workflow reuse|Planner setup, issue refinement, complexity scoring, and tidy-up share the `linear-issues` rules instead of copying issue semantics across skills.|
 |Document ownership|Linear planning docs stay canonical until a repo exists; repo docs link back instead of duplicating the plan.|
 |Codex and Claude parity|Both surfaces use the same skill source, project document, and generated package metadata.|
 |Maintenance traceability|Behavior changes update this brief and the planner structure in the same PR.|

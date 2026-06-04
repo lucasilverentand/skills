@@ -117,6 +117,7 @@
 				"create-doc-template",
 				"create-planner-project",
 				"estimate-issue-complexity",
+				"linear-issues",
 				"pickup-work",
 				"project-docs",
 				"tidy-linear-project"

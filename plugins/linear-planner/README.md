@@ -5,6 +5,7 @@ Linear planning workflows and project document templates for turning product ide
 - `linear-planner:create-doc-template`
 - `linear-planner:create-planner-project`
 - `linear-planner:estimate-issue-complexity`
+- `linear-planner:linear-issues`
 - `linear-planner:pickup-work`
 - `linear-planner:project-docs`
 - `linear-planner:tidy-linear-project`
@@ -45,9 +46,9 @@ The project source of truth for this plugin is [documents/project-brief.md](docu
 
 The detailed operational structure lives in [skills/create-planner-project/references/planner-project-structure.md](skills/create-planner-project/references/planner-project-structure.md).
 
-The shared Linear issue-creation rules live in [skills/create-planner-project/references/linear-issue-creation.md](skills/create-planner-project/references/linear-issue-creation.md).
+The shared Linear issue workflow lives in [skills/linear-issues/SKILL.md](skills/linear-issues/SKILL.md). It owns issue creation, issue refinement, field and relationship rules, complexity scoring, and tidy-up issue hygiene.
 
-The Linear project tidy-up workflow lives in [skills/tidy-linear-project/SKILL.md](skills/tidy-linear-project/SKILL.md).
+The compatibility entrypoints [skills/estimate-issue-complexity/SKILL.md](skills/estimate-issue-complexity/SKILL.md) and [skills/tidy-linear-project/SKILL.md](skills/tidy-linear-project/SKILL.md) route old triggers to `linear-issues`.
 
 ## Template library
 Starter templates for the documents kept around a product.
