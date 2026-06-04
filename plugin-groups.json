@@ -39,6 +39,19 @@
 			}
 		},
 		{
+			"name": "repository-docs",
+			"displayName": "Repository Docs",
+			"description": "Repository documentation maintenance for public open-source projects and private internal project hubs.",
+			"shortDescription": "README and contributor docs",
+			"category": "Documentation",
+			"keywords": ["readme", "contributing", "documentation", "open-source", "internal-docs"],
+			"skills": ["closed-source-docs", "open-source-docs"],
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			}
+		},
+		{
 			"name": "frontend",
 			"displayName": "Frontend",
 			"description": "Frontend design exploration toolkit for interactive HTML design options.",

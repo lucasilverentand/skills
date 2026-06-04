@@ -117,6 +117,22 @@
 			}
 		},
 		{
+			"name": "repository-docs",
+			"source": {
+				"source": "local",
+				"path": "./plugins/repository-docs"
+			},
+			"policy": {
+				"installation": "AVAILABLE",
+				"authentication": "ON_INSTALL"
+			},
+			"category": "Documentation",
+			"interface": {
+				"displayName": "Repository Docs",
+				"shortDescription": "README and contributor docs"
+			}
+		},
+		{
 			"name": "skill-creation",
 			"source": {
 				"source": "local",
