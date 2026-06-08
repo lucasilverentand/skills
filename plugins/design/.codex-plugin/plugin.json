@@ -1,0 +1,38 @@
+{
+	"name": "design",
+	"version": "1.2.0",
+	"description": "Design system synthesis from screenshots, moodboards, videos, URLs, chat briefs, and mixed visual references.",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"design",
+		"design-system",
+		"moodboard",
+		"screenshots",
+		"video",
+		"ui",
+		"ux",
+		"DESIGN.md"
+	],
+	"skills": "./skills/",
+	"interface": {
+		"displayName": "Design",
+		"shortDescription": "Design system synthesis",
+		"longDescription": "Design system synthesis from screenshots, moodboards, videos, URLs, chat briefs, and mixed visual references.",
+		"developerName": "Luca Silverentand",
+		"category": "Design",
+		"capabilities": [
+			"Read",
+			"Write"
+		],
+		"websiteURL": "https://github.com/lucasilverentand/skills",
+		"defaultPrompt": [
+			"Use Design when the task matches one of its bundled skills."
+		]
+	}
+}

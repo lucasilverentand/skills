@@ -17,6 +17,11 @@
 			"description": "Apple Human Interface Guidelines as a single plugin: foundations, platform guidance, and services."
 		},
 		{
+			"name": "design",
+			"source": "design",
+			"description": "Design system synthesis from screenshots, moodboards, videos, URLs, chat briefs, and mixed visual references."
+		},
+		{
 			"name": "documentation",
 			"source": "documentation",
 			"description": "Documentation authoring and structured knowledge capture for design docs, ADRs, C4 diagrams, and decision trees."

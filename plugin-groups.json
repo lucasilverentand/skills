@@ -39,6 +39,19 @@
 			}
 		},
 		{
+			"name": "design",
+			"displayName": "Design",
+			"description": "Design system synthesis from screenshots, moodboards, videos, URLs, chat briefs, and mixed visual references.",
+			"shortDescription": "Design system synthesis",
+			"category": "Design",
+			"keywords": ["design", "design-system", "moodboard", "screenshots", "video", "ui", "ux", "DESIGN.md"],
+			"skills": ["design-system"],
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			}
+		},
+		{
 			"name": "repository-docs",
 			"displayName": "Repository Docs",
 			"description": "Repository documentation maintenance for public open-source projects and private internal project hubs.",
