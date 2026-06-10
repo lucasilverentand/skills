@@ -1,6 +1,6 @@
 ---
 name: authoring
-description: Use when the user asks to create, update, review, or refactor an agent skill, including requests like "turn this workflow into a skill", "fix this SKILL.md", "add references to this skill", "make this skill work in Codex and Claude", or "split this bloated skill". Creates skill directories, writes portable SKILL.md frontmatter and workflows, adds references, validates structure and token budgets. For adding executable helpers, use the tooling skill.
+description: Use when the user asks to create, update, review, or refactor an agent skill, including requests like "turn this workflow into a skill", "make a skill for this", "fix this SKILL.md", "add references to this skill", "make this skill work in Codex and Claude", or "split this bloated skill". Creates skill directories, writes portable SKILL.md frontmatter and workflows, adds references, validates structure and token budgets. For adding executable helpers, use the tooling skill.
 allowed-tools: Read Grep Glob Bash Write Edit Agent
 ---
 
