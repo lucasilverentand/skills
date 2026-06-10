@@ -18,17 +18,17 @@ Pay attention to context cues about the user's technical level. Some users are e
 ## Description writing
 The `description` field determines whether agents activate the skill. It is the single most important line you write — a perfect skill with a bad description never fires. Descriptions tend to undertrigger, so lean slightly pushy.
 
-- Third person: "Generates migration files from schema changes"
-- Include BOTH what and when: "... Use when the user modifies Drizzle schema files or asks to create a migration."
+- Prefer trigger phrasing: "Use this skill when..." or "Use when..." tells the agent when to act.
+- Include BOTH what and when: "Use this skill when the user modifies Drizzle schema files or asks to create a migration."
 - Include edge cases: "even if they don't explicitly ask for a 'migration'"
 - Max 1024 characters
 
 ### Before/after examples
 |Problem|Before|After|
 |---|---|---|
-|Too vague — matches everything, triggers on noise|"Helps with database tasks"|"Generates and applies Drizzle ORM migration files. Use when the user changes a schema file, asks to migrate, or says 'update the database'."|
-|Too narrow — misses common phrasings|"Creates a PR when the user says 'open a pull request'"|"Opens a pull request for the current branch — rebases, writes a description from commits, and creates via gh CLI. Use when the user says 'open a PR', 'submit for review', 'send this upstream', or finishes a feature branch."|
-|Overlapping — competes with another skill|"Writes and runs tests for code" (collides with a general testing skill)|"Writes Playwright end-to-end tests for browser flows. Use when the user asks for E2E tests, browser tests, or integration tests that need a real browser."|
+|Too vague — matches everything, triggers on noise|"Helps with database tasks"|"Use this skill when the user changes Drizzle schema files, asks to create a migration, or says 'update the database'. Generates and applies Drizzle ORM migrations."|
+|Too narrow — misses common phrasings|"Creates a PR when the user says 'open a pull request'"|"Use this skill when the user says 'open a PR', 'submit for review', 'send this upstream', or finishes a feature branch. Opens a pull request from the current branch."|
+|Overlapping — competes with another skill|"Writes and runs tests for code" (collides with a general testing skill)|"Use this skill when the user asks for Playwright E2E tests, browser tests, or integration tests that need a real browser. Avoid for unit tests."|
 
 ### Common failure modes
 - **Too short / abstract** — agents can't distinguish it from other skills. Add the "Use when..." clause.

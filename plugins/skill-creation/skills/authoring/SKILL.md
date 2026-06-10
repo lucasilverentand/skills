@@ -1,6 +1,6 @@
 ---
 name: authoring
-description: Creates and improves agent skills — scaffolds skill directories, writes SKILL.md with frontmatter and decision trees, adds references, validates structure and token budgets. Use when creating a new skill from scratch, improving an existing skill's instructions or decision tree, adding a reference to a skill, validating a skill, or refactoring a bloated skill into smaller pieces. For adding tools to a skill, use the tooling skill.
+description: Use when the user asks to create, update, review, or refactor an agent skill, including requests like "turn this workflow into a skill", "fix this SKILL.md", "add references to this skill", "make this skill work in Codex and Claude", or "split this bloated skill". Creates skill directories, writes portable SKILL.md frontmatter and workflows, adds references, validates structure and token budgets. For adding executable helpers, use the tooling skill.
 allowed-tools: Read Grep Glob Bash Write Edit Agent
 ---
 
@@ -15,7 +15,7 @@ allowed-tools: Read Grep Glob Bash Write Edit Agent
     - **Skill instructions are too rigid or verbose** -> see `references/writing-philosophy.md` and rewrite: explain the why, drop heavy-handed MUSTs, remove lines that aren't pulling their weight
     - **Automatable tasks would benefit from a tool** -> use the `tooling` skill
     - **Missing references for detailed content** -> follow "Adding a reference" below
-    - **Frontmatter is wrong or incomplete** -> see `references/skill-format.md` for all fields and fix
+    - **Frontmatter is wrong or incomplete** -> see `references/skill-format.md` for portable fields and product-specific extensions, then fix
     - **Description is vague or undertriggering** -> rewrite per `references/writing-philosophy.md` "Description writing"
     - **Not sure what's wrong** -> run `tools/coverage-gap.ts <path>` and `tools/skill-validate.ts <path>`, fix reported issues
   - **Adding a tool to a skill** -> use the `tooling` skill
@@ -36,7 +36,7 @@ Start by understanding what the skill should do. If the conversation already con
 1. What should this skill enable an agent to do?
 2. When should this skill trigger? (what user phrases/contexts)
 3. What's the expected output format?
-4. What tier is this skill? See `references/skill-taxonomy.md` — atomic (does one thing), workflow (chains atomics in a known sequence), or agent (goal-driven, decides its own path). The tier shapes the decision tree, allowed-tools, and composition strategy.
+4. What tier is this skill? See `references/skill-taxonomy.md` — atomic (does one thing), workflow (chains atomics in a known sequence), or agent (goal-driven, decides its own path). The tier shapes the decision tree, supporting resources, validation, and composition strategy.
 Proactively ask about edge cases, example files, success criteria, and dependencies. Check available MCPs for research and the codebase for similar existing skills to avoid overlap. Come prepared with context.
 
 ### Agent workflow (optional)
@@ -44,10 +44,10 @@ For workflow or agent-tier skills with multiple references or unfamiliar domains
 
 ### 2. Write the skill
 1. Pick the owning plugin and create the directory: `plugins/<plugin>/skills/<skill-name>/`
-2. Write `SKILL.md` with YAML frontmatter — `description` is recommended for discovery (see `references/skill-format.md`)
+2. Write `SKILL.md` with portable YAML frontmatter — include `name` and `description` first, then add client-specific fields only when the target client supports them (see `references/skill-format.md`)
 3. Write the decision tree — use the **decision-trees** skill for this
 4. Write conventions — the rules the agent must follow every time
-5. Optionally add tools in `tools/` if the skill has automatable tasks — use the `tooling` skill for this. Many skills work fine without any tools.
+5. Optionally add executable helpers if the skill has automatable tasks — use the `tooling` skill for this. Many skills work fine without any helpers.
 6. Add references in `references/` for any detailed content over ~10 lines
 
 Follow the writing principles in `references/writing-philosophy.md` — explain reasoning over rigid rules, keep the prompt lean, generalize rather than overfit to test cases.
@@ -88,14 +88,14 @@ Read SKILL.md to get the skill's responsibilities, then ensure each one has a de
 |---|---|
 |`references/skill-taxonomy.md`|Skill tiers (atomic, workflow, agent), choosing a tier, extracting skills downward|
 |`references/skill-structure.md`|Directory layout, SKILL.md structure, progressive disclosure|
-|`references/skill-format.md`|Frontmatter fields, naming rules, Claude Code extensions, string substitutions|
+|`references/skill-format.md`|Portable frontmatter, Codex metadata, Claude Code extensions, naming rules, string substitutions|
 |`references/writing-philosophy.md`|Explain the why, keep prompts lean, generalize, description writing|
 |`references/best-practices.md`|Anti-patterns, keeping SKILL.md lean|
 |`references/agent-workflow.md`|Optional research-write-validate agent pipeline for complex skills|
-|`references/advanced-features.md`|Extended thinking, legacy commands, bundled skills, subagent preloading, hooks, permission control|
+|`references/advanced-features.md`|Agent-specific advanced features: Codex metadata, Claude Code dynamic context, invocation control, forked execution, hooks, permissions|
 
 ## Official spec vs. repo conventions
-The skill format, structure, locations, and advanced features documented in the references above reflect the open [Agent Skills specification](https://agentskills.io), with Codex and Claude Code extensions called out when they are product-specific. The following are conventions specific to this repository — useful for organizing a skill library, but not required by the spec:
+The skill format and structure references separate the portable Agent Skills baseline from Codex and Claude Code extensions. Check `references/skill-format.md` before adding client-specific frontmatter. The following are conventions specific to this repository — useful for organizing a skill library, but not required by the spec:
 
 - **Skill taxonomy** (`references/skill-taxonomy.md`) — atomic/workflow/agent tiers
 - **Decision trees** (via the **decision-trees** skill) — prescribed SKILL.md structure
