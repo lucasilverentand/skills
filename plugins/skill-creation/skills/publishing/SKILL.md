@@ -1,6 +1,6 @@
 ---
 name: publishing
-description: Manages Codex, Claude Code, and Cursor skill marketplaces — publishes plugin-owned skills, updates plugin groups, removes entries, packages skills for distribution, regenerates plugin manifests, and validates catalog integrity. Use when publishing a skill to the marketplace, bumping a version, removing a skill from the catalog, packaging a skill as a .skill file, regenerating marketplace files, moving a skill between plugins, or fixing marketplace validation errors.
+description: Manages Codex, Claude Code, and Cursor skill/plugin marketplaces — publishes plugin-owned skills, updates plugin groups, removes entries, packages skills for distribution, regenerates plugin manifests, and validates catalog integrity. Use when publishing a skill to the marketplace, bumping a version, removing a skill from the catalog, packaging a skill as a .skill file, regenerating marketplace files, moving a skill between plugins, fixing marketplace validation errors, or when the user says "publish this skill", "regenerate the marketplace", "move this skill to another plugin", or "package this skill".
 allowed-tools: Read Grep Glob Bash Write Edit
 ---
 

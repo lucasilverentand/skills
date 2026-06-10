@@ -1,6 +1,6 @@
 ---
 name: retrospecting
-description: Mines recent agent conversations and git history for struggles, repeated corrections, rework patterns, and taste signals — then turns findings into new skills or updates to existing ones. Use when you want to retrospect on recent coding sessions to extract learnings, identify skill gaps, improve existing skills based on real usage patterns, or codify preferences that keep coming up in conversations.
+description: Mines recent Codex or Claude agent conversations and git history for struggles, repeated corrections, rework patterns, and taste signals — then turns findings into new skills or updates to existing ones. Use when retrospecting on recent coding sessions, extracting learnings, identifying skill gaps, improving skills from real usage patterns, codifying recurring preferences, or when the user says "retro this repo", "mine recent conversations", "what should become a skill", or "find repeated agent mistakes".
 allowed-tools: Read Grep Glob Bash Write Edit Agent
 ---
 

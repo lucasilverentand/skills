@@ -1,6 +1,6 @@
 ---
 name: tooling
-description: Creates and improves bun-based tools for skills — decides when a tool earns its place, scaffolds zero-dependency scripts with dual output, validates tool quality, and wires tools into SKILL.md decision trees. Use when adding a tool to a skill, improving an existing tool, deciding whether something should be a tool or inline instructions, or reviewing tool quality.
+description: Creates and improves Bun-based tools for skills — decides when a tool earns its place, scaffolds zero-dependency scripts with dual output, validates tool quality, and wires tools into SKILL.md decision trees. Use when adding a tool to a skill, improving an existing tool, deciding whether something should be a tool or inline instructions, reviewing tool quality, or when the user says "add a tool to this skill", "write a validator for this skill", "make this repeatable", or "check this tool".
 allowed-tools: Read Grep Glob Bash Write Edit
 ---
 
