@@ -1,6 +1,6 @@
 {
 	"name": "systems-design",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "Opinionated system design toolkit for architecture, data modeling, API design, workflow sequencing, and design review.",
 	"author": {
 		"name": "Luca Silverentand",

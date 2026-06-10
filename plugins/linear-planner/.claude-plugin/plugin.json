@@ -1,7 +1,7 @@
 {
 	"name": "linear-planner",
 	"description": "Linear planning workflows and project document templates for turning product ideas into traceable plans, specs, decisions, and release checks.",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"skills": [
 		"./skills/create-doc-template",
 		"./skills/create-planner-project",
@@ -9,6 +9,7 @@
 		"./skills/linear-issues",
 		"./skills/pickup-work",
 		"./skills/project-docs",
+		"./skills/project-intent",
 		"./skills/tidy-linear-project"
 	],
 	"author": {
@@ -22,6 +23,7 @@
 		"linear",
 		"planning",
 		"projects",
+		"intent",
 		"issues",
 		"project-docs",
 		"templates"

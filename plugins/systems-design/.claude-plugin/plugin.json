@@ -1,7 +1,7 @@
 {
 	"name": "systems-design",
 	"description": "Opinionated system design toolkit for architecture, data modeling, API design, workflow sequencing, and design review.",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"skills": [
 		"./skills/api-design",
 		"./skills/architecture",
