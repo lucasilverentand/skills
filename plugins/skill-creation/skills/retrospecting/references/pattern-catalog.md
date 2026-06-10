@@ -104,5 +104,5 @@ When a pattern is confirmed, follow this decision process:
 1. **Is it project-specific?** → Add to project instructions, not a skill
 2. **Is it personal preference?** → Save as a memory (feedback or user type)
 3. **Is it a single rule?** → Add as a convention to an existing skill
-4. **Is it a repeatable workflow?** → Create a new skill with the lifecycle skill
+4. **Is it a repeatable workflow?** → Create a new skill with the authoring skill
 5. **Is it a validation need?** → Add a tool to an existing or new skill
