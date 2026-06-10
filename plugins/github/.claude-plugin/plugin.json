@@ -1,7 +1,7 @@
 {
 	"name": "github",
 	"description": "GitHub workflow toolkit for creating pull requests, monitoring CI, and getting PRs ready to merge.",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"skills": [
 		"./skills/creating-prs",
 		"./skills/fix-pr",

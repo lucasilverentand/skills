@@ -6,9 +6,9 @@
 		"url": "https://github.com/lucasilverentand"
 	},
 	"description": "Reusable agent skills by Luca Silverentand.",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"metadata": {
-		"version": "1.1.0",
+		"version": "1.2.0",
 		"homepage": "https://github.com/lucasilverentand/skills",
 		"repository": "https://github.com/lucasilverentand/skills",
 		"license": "MIT"
@@ -18,7 +18,7 @@
 			"name": "apple-design",
 			"source": "./plugins/apple-design",
 			"description": "Apple Human Interface Guidelines as a single plugin: foundations, platform guidance, and services.",
-			"version": "1.1.0",
+			"version": "1.2.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "luca.silverentand@gmail.com"
@@ -37,7 +37,7 @@
 			"name": "documentation",
 			"source": "./plugins/documentation",
 			"description": "Documentation authoring and structured knowledge capture for design docs, ADRs, C4 diagrams, and decision trees.",
-			"version": "1.1.0",
+			"version": "1.2.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -54,7 +54,7 @@
 			"name": "frontend",
 			"source": "./plugins/frontend",
 			"description": "Frontend design exploration toolkit for interactive HTML design options.",
-			"version": "1.1.0",
+			"version": "1.2.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -71,7 +71,7 @@
 			"name": "git",
 			"source": "./plugins/git",
 			"description": "Git workflow toolkit for commits, conflict resolution, rebases, and repository cleanup.",
-			"version": "1.1.0",
+			"version": "1.2.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -88,7 +88,7 @@
 			"name": "github",
 			"source": "./plugins/github",
 			"description": "GitHub workflow toolkit for creating pull requests, monitoring CI, and getting PRs ready to merge.",
-			"version": "1.1.0",
+			"version": "1.2.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -105,7 +105,7 @@
 			"name": "linear-planner",
 			"source": "./plugins/linear-planner",
 			"description": "Linear planning workflows and project document templates for turning product ideas into traceable plans, specs, decisions, and release checks.",
-			"version": "1.1.0",
+			"version": "1.2.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -115,6 +115,7 @@
 				"linear",
 				"planning",
 				"projects",
+				"intent",
 				"issues",
 				"project-docs",
 				"templates"
@@ -124,7 +125,7 @@
 			"name": "project",
 			"source": "./plugins/project",
 			"description": "Project setup and context management skills for requirements and shared agent context.",
-			"version": "1.1.0",
+			"version": "1.2.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -140,7 +141,7 @@
 			"name": "repository-docs",
 			"source": "./plugins/repository-docs",
 			"description": "Repository documentation maintenance for public open-source projects and private internal project hubs.",
-			"version": "1.1.0",
+			"version": "1.2.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -158,7 +159,7 @@
 			"name": "skill-creation",
 			"source": "./plugins/skill-creation",
 			"description": "End-to-end toolkit for authoring, publishing, tooling, and improving reusable agent skills.",
-			"version": "1.1.0",
+			"version": "1.2.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -175,7 +176,7 @@
 			"name": "systems-design",
 			"source": "./plugins/systems-design",
 			"description": "Opinionated system design toolkit for architecture, data modeling, API design, workflow sequencing, and design review.",
-			"version": "1.1.0",
+			"version": "1.2.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"

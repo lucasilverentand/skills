@@ -5,6 +5,8 @@ The detailed operational structure lives in [skills/create-planner-project/refer
 
 The shared Linear issue workflow lives in [skills/linear-issues/SKILL.md](skills/linear-issues/SKILL.md). It owns issue creation, issue refinement, field and relationship rules, complexity scoring, and tidy-up issue hygiene.
 
+The project intent workflow lives in [skills/project-intent/SKILL.md](skills/project-intent/SKILL.md). Use it before docs, projects, or issues when an idea needs structured interviews, A/B/C narrowing, portfolio triage, or an LLM alignment packet.
+
 The compatibility entrypoints [skills/estimate-issue-complexity/SKILL.md](skills/estimate-issue-complexity/SKILL.md) and [skills/tidy-linear-project/SKILL.md](skills/tidy-linear-project/SKILL.md) route old triggers to `linear-issues`.
 
 ## Template library

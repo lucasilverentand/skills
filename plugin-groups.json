@@ -6,7 +6,7 @@
 		"url": "https://github.com/lucasilverentand"
 	},
 	"metadata": {
-		"version": "1.1.0",
+		"version": "1.2.0",
 		"homepage": "https://github.com/lucasilverentand/skills",
 		"repository": "https://github.com/lucasilverentand/skills",
 		"license": "MIT"
@@ -111,7 +111,7 @@
 			"description": "Linear planning workflows and project document templates for turning product ideas into traceable plans, specs, decisions, and release checks.",
 			"shortDescription": "Linear planning and project docs",
 			"category": "Productivity",
-			"keywords": ["linear", "planning", "projects", "issues", "project-docs", "templates"],
+			"keywords": ["linear", "planning", "projects", "intent", "issues", "project-docs", "templates"],
 			"readmeBody": "README.body.txt",
 			"skills": [
 				"create-doc-template",
@@ -119,6 +119,7 @@
 				"estimate-issue-complexity",
 				"linear-issues",
 				"pickup-work",
+				"project-intent",
 				"project-docs",
 				"tidy-linear-project"
 			],

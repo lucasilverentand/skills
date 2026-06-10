@@ -1,7 +1,7 @@
 {
 	"name": "project",
 	"displayName": "Project",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "Project setup and context management skills for requirements and shared agent context.",
 	"author": {
 		"name": "Luca Silverentand",

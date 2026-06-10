@@ -1,7 +1,7 @@
 {
 	"name": "apple-design",
 	"description": "Apple Human Interface Guidelines as a single plugin: foundations, platform guidance, and services.",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"skills": [
 		"./skills/foundations",
 		"./skills/ios",

@@ -1,7 +1,7 @@
 {
 	"name": "linear-planner",
 	"displayName": "Linear Planner",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "Linear planning workflows and project document templates for turning product ideas into traceable plans, specs, decisions, and release checks.",
 	"author": {
 		"name": "Luca Silverentand",
@@ -12,6 +12,7 @@
 		"linear",
 		"planning",
 		"projects",
+		"intent",
 		"issues",
 		"project-docs",
 		"templates"

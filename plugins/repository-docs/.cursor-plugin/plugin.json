@@ -1,7 +1,7 @@
 {
 	"name": "repository-docs",
 	"displayName": "Repository Docs",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "Repository documentation maintenance for public open-source projects and private internal project hubs.",
 	"author": {
 		"name": "Luca Silverentand",
