@@ -31,19 +31,7 @@ List the taste gaps — these become the interview topics.
 ### 2. Interview
 Use the host's structured question mechanism when one is available, such as `AskUserQuestion`, `request_user_input`, or an equivalent UI prompt. If no structured question tool is available, ask concise plain-text questions directly. In either mode, ask 1-3 related questions at a time and wait for answers before continuing.
 
-Follow `references/interview-guide.md` for the full interview protocol. The essentials:
-
-**Open with context, not cold questions.** Before asking about preferences, state what you already know from the skill and any available agent instructions, memory, or project docs. "I see you use Drizzle with Neon for complex projects and D1 for simple ones. Let me ask about the decisions within that — ID strategy, naming conventions, etc." This avoids re-asking settled questions and shows the user you've done your homework.
-
-**Ask about decisions, not preferences directly.** "When you have a new table, how do you decide between a `jsonb` column and a dedicated table?" is better than "Do you prefer JSONB or normalized tables?" The decision framing reveals the reasoning, which is what gets encoded.
-
-**Listen for the "because."** Every strong opinion has a story — a past incident, a scaling problem, a debugging nightmare. When the user states a preference, ask what happened that made them feel strongly. The story becomes the rationale in the encoded taste.
-
-**Batch questions by theme.** Group related decisions together (all naming conventions, then all tenancy decisions, then all migration decisions). Don't jump between unrelated topics.
-
-**Weigh pros and cons actively.** Don't just record preferences — challenge them constructively. Surface trade-offs the user might not have considered, present the other side fairly, and flag where a preference has real costs. The goal is informed taste, not a transcription of habits. See `references/encoding-patterns.md` "Weighing trade-offs with the user" for specifics.
-
-**Know when to stop.** If the user says "I don't have a strong opinion" or "whatever's standard" — that's a valid answer. Record it as "use industry default" and move on. Not every decision needs taste.
+Follow `references/interview-guide.md` for the full interview protocol. The essentials: open with known context, ask about decisions rather than abstract preferences, capture the "because" behind strong opinions, batch questions by theme, weigh trade-offs actively, and stop when the user has no strong opinion.
 
 ### 3. Organize findings
 Group interview answers into categories:
@@ -57,15 +45,7 @@ Group interview answers into categories:
 |**No opinion**|Decisions where the user defers to convention|Skip — don't encode absence of taste|
 
 ### 4. Encode
-Transform organized findings into skill artifacts using the patterns in `references/encoding-patterns.md`. The key patterns:
-
-**The "because" pattern.** Every opinionated rule gets a rationale. Not "use ULIDs" but "use ULIDs — because they're time-sortable, prefix-distinguishable in logs, and don't leak count like sequential integers."
-
-**Comparison tables for either/or decisions.** When a choice depends on context (D1 vs Neon, REST vs GraphQL), encode a comparison table with clear factors, then a decision rule underneath: "Start with X when [conditions]. Graduate to Y when [conditions]."
-
-**Anti-patterns with stories.** "Anti-pattern: mocking the database in tests. Prior incident: mocked tests passed but prod migration failed because the mock didn't enforce the same constraints."
-
-**Philosophy files for cross-cutting principles.** When 3+ decisions share the same underlying principle, extract them to a focused philosophy or principles reference file with 3-5 principles, each with rationale and anti-pattern example.
+Transform organized findings into skill artifacts using `references/encoding-patterns.md`. Prefer rationale-backed rules, comparison tables for context-dependent choices, anti-patterns with stories, and a philosophy or principles reference when three or more decisions share the same underlying principle.
 
 For each artifact:
 
