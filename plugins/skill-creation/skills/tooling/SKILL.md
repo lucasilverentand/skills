@@ -24,7 +24,7 @@ allowed-tools: Read Grep Glob Bash Write Edit
 Before writing any code, confirm the tool passes at least one bar from `references/when-to-create-tools.md`. If it doesn't, put the command inline in SKILL.md instead.
 
 ### 2. Write the tool
-Create `tools/<tool-name>.ts` following the conventions in `references/tool-conventions.md`. The structural patterns there reflect how tools in this repo are built — follow them for consistency.
+Create `scripts/<tool-name>.ts` following the conventions in `references/tool-conventions.md`. Agent Skills, Codex, and Claude Code all treat `scripts/` as the portable executable-code directory. If you are improving an existing repo skill that already has `tools/`, keep that path stable unless the task is explicitly to migrate it.
 
 Key principles:
 
