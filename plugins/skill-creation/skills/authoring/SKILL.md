@@ -92,7 +92,7 @@ Read SKILL.md to get the skill's responsibilities, then ensure each one has a de
 |`references/writing-philosophy.md`|Explain the why, keep prompts lean, generalize, description writing|
 |`references/best-practices.md`|Anti-patterns, keeping SKILL.md lean|
 |`references/agent-workflow.md`|Optional research-write-validate agent pipeline for complex skills|
-|`references/advanced-features.md`|Claude Code-only advanced features: dynamic context, invocation control, forked execution, hooks, permissions|
+|`references/advanced-features.md`|Agent-specific advanced features: Codex metadata, Claude Code dynamic context, invocation control, forked execution, hooks, permissions|
 
 ## Official spec vs. repo conventions
 The skill format and structure references separate the portable Agent Skills baseline from Codex and Claude Code extensions. Check `references/skill-format.md` before adding client-specific frontmatter. The following are conventions specific to this repository — useful for organizing a skill library, but not required by the spec:
