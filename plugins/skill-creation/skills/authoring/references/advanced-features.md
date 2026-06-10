@@ -57,6 +57,16 @@ Do not add `skills` to a normal portable `SKILL.md` unless the target client doc
 ## Claude Code hooks in skills
 Claude Code supports hooks scoped to a skill's lifecycle. Hooks can enforce deterministic checks or guardrails around tool use.
 
+```yaml
+---
+name: secure-ops
+hooks:
+  PreToolUse:
+    - matcher: "Bash"
+      hooks: [{ type: command, command: "${CLAUDE_SKILL_DIR}/scripts/security-check.sh" }]
+---
+```
+
 Hooks are powerful and product-specific. Keep them out of portable skills unless the skill is explicitly Claude Code-only, document what they run, and check the current Claude Code hook schema before writing them.
 
 ## Claude Code built-in and legacy behavior
