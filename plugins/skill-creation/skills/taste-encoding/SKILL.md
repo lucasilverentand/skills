@@ -1,7 +1,7 @@
 ---
 name: taste-encoding
-description: Interviews the user to extract their design taste, technology preferences, and opinionated defaults for a domain — then encodes those preferences into skill reference files, decision rules, conventions, and anti-patterns. Use when the user wants to encode their preferences into a skill, capture their taste for a domain, add opinionated defaults, make a skill reflect their style, or says things like "encode my taste", "add my preferences to this skill", "make this skill opinionated", or "interview me about my preferences for X".
-allowed-tools: Read Grep Glob Bash Write Edit AskUserQuestion Agent
+description: Interviews the user to extract their design taste, technology preferences, and opinionated defaults for a domain, then encodes those preferences into skill reference files, decision rules, conventions, and anti-patterns. Use when the user says "encode my taste", "add my preferences to this skill", "make this skill opinionated", "interview me about my preferences for X", or asks to capture style/defaults in a reusable skill.
+allowed-tools: Read Grep Glob Bash Write Edit Agent
 ---
 
 # Taste Encoding
@@ -29,11 +29,11 @@ Read the target skill's SKILL.md and any existing reference files. Identify:
 List the taste gaps — these become the interview topics.
 
 ### 2. Interview
-Use `AskUserQuestion` for every question. Never type questions as plain text.
+Use the host's structured question mechanism when one is available, such as `AskUserQuestion`, `request_user_input`, or an equivalent UI prompt. If no structured question tool is available, ask concise plain-text questions directly. In either mode, ask 1-3 related questions at a time and wait for answers before continuing.
 
 Follow `references/interview-guide.md` for the full interview protocol. The essentials:
 
-**Open with context, not cold questions.** Before asking about preferences, state what you already know from the skill and the user's agent instructions / memory. "I see you use Drizzle with Neon for complex projects and D1 for simple ones. Let me ask about the decisions within that — ID strategy, naming conventions, etc." This avoids re-asking settled questions and shows the user you've done your homework.
+**Open with context, not cold questions.** Before asking about preferences, state what you already know from the skill and any available agent instructions, memory, or project docs. "I see you use Drizzle with Neon for complex projects and D1 for simple ones. Let me ask about the decisions within that — ID strategy, naming conventions, etc." This avoids re-asking settled questions and shows the user you've done your homework.
 
 **Ask about decisions, not preferences directly.** "When you have a new table, how do you decide between a `jsonb` column and a dedicated table?" is better than "Do you prefer JSONB or normalized tables?" The decision framing reveals the reasoning, which is what gets encoded.
 
@@ -50,7 +50,7 @@ Group interview answers into categories:
 
 |Category|What goes here|Becomes|
 |---|---|---|
-|**Principles**|Core beliefs that guide many decisions ("monolith-first", "lean on existing stack")|A `references/philosophy.md` or `references/principles.md` file|
+|**Principles**|Core beliefs that guide many decisions ("monolith-first", "lean on existing stack")|A focused philosophy or principles reference file|
 |**Defaults**|Concrete choices for specific decisions ("prefixed ULIDs for IDs", "snake_case for tables")|Conventions section in SKILL.md, or domain-specific reference files|
 |**Decision rules**|Conditional choices ("D1 when small, Neon when multi-tenant")|Decision tables or if/then rules in SKILL.md or references|
 |**Anti-patterns**|Things to avoid with reasoning ("never sequential integers — they leak count")|Anti-pattern sections in references|
@@ -65,7 +65,7 @@ Transform organized findings into skill artifacts using the patterns in `referen
 
 **Anti-patterns with stories.** "Anti-pattern: mocking the database in tests. Prior incident: mocked tests passed but prod migration failed because the mock didn't enforce the same constraints."
 
-**Philosophy files for cross-cutting principles.** When 3+ decisions share the same underlying principle, extract it to a `references/philosophy.md` or `references/principles.md` with 3-5 principles, each with rationale and anti-pattern example.
+**Philosophy files for cross-cutting principles.** When 3+ decisions share the same underlying principle, extract them to a focused philosophy or principles reference file with 3-5 principles, each with rationale and anti-pattern example.
 
 For each artifact:
 
