@@ -1,14 +1,10 @@
 # Apple Design
-Apple Human Interface Guidelines as a single plugin: foundations, platform guidance, and services.
+Apple Human Interface Guidelines as a single plugin: foundations, services, and a platform selector for iOS, macOS, watchOS, tvOS, and visionOS.
 
 ## Skills
 - `apple-design:foundations`
-- `apple-design:ios`
-- `apple-design:macos`
+- `apple-design:platforms`
 - `apple-design:services`
-- `apple-design:tvos`
-- `apple-design:visionos`
-- `apple-design:watchos`
 
 ## Install
 Codex:

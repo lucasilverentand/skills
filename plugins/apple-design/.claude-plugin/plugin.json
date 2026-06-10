@@ -1,15 +1,11 @@
 {
 	"name": "apple-design",
-	"description": "Apple Human Interface Guidelines as a single plugin: foundations, platform guidance, and services.",
+	"description": "Apple Human Interface Guidelines as a single plugin: foundations, services, and a platform selector for iOS, macOS, watchOS, tvOS, and visionOS.",
 	"version": "1.2.0",
 	"skills": [
 		"./skills/foundations",
-		"./skills/ios",
-		"./skills/macos",
-		"./skills/services",
-		"./skills/tvos",
-		"./skills/visionos",
-		"./skills/watchos"
+		"./skills/platforms",
+		"./skills/services"
 	],
 	"author": {
 		"name": "Luca Silverentand",
