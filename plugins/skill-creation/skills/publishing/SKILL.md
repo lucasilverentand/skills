@@ -10,9 +10,9 @@ allowed-tools: Read Grep Glob Bash Write Edit
 - What are you doing?
   - **Publishing a skill to the marketplace** -> follow "Publishing" below
   - **Updating a published skill** -> what changed?
-    - **Bug fix or wording tweak** -> bump patch version in `metadata.version` of marketplace.json
-    - **New skills, new tools, or backwards-compatible additions** -> bump minor version
-    - **Breaking changes (removed skills, renamed categories, restructured)** -> bump major version
+    - **Bug fix or wording tweak** -> bump patch version in `plugin-groups.json` `metadata.version`
+    - **New skills, new tools, or backwards-compatible additions** -> bump minor version in `plugin-groups.json` `metadata.version`
+    - **Breaking changes (removed skills, renamed categories, restructured)** -> bump major version in `plugin-groups.json` `metadata.version`
   - **Removing a skill from the marketplace** -> follow "Removing" below
   - **Moving a skill to a different plugin** -> move `plugins/<old>/skills/<skill>` to `plugins/<new>/skills/<skill>`, update `plugin-groups.json`, then run `bun run marketplace:write`
   - **Packaging a skill for distribution** -> run `scripts/package-skill.ts <path/to/skill-folder>`
@@ -38,7 +38,7 @@ For bulk additions, update `plugin-groups.json` first, then regenerate once.
 ## Removing
 1. Remove the skill name from its plugin in `plugin-groups.json`
 2. Delete `plugins/<plugin>/skills/<skill-name>/`
-3. Bump the marketplace version — minor if backwards-compatible, major if consumers depended on it
+3. Bump `plugin-groups.json` `metadata.version` — minor if backwards-compatible, major if consumers depended on it
 4. Run `bun run marketplace:write`, then `bun run marketplace`
 
 ## Regenerating manifests
@@ -56,7 +56,7 @@ See `references/marketplace-schema.md` for the full schema. Key conventions:
 - **Skill source**: `plugins/<name>/skills/<skill-name>/` directories are authored directly
 - **Generated files**: plugin manifests, plugin READMEs, and marketplace files are overwritten by `bun run marketplace:write`
 - **Naming**: lowercase alphanumeric + hyphens, 1-64 characters
-- **Versioning**: `plugin-groups.json` `metadata.version` tracks both marketplace versions using semver
+- **Versioning**: `plugin-groups.json` `metadata.version` is the source for generated marketplace and plugin manifest versions. Do not hand-edit generated marketplace JSON to bump a version.
 - **Codex marketplace**: generated at `.agents/plugins/marketplace.json`
 - **Claude marketplace**: generated at `.claude-plugin/marketplace.json`
 - **Cursor marketplace**: generated at `.cursor-plugin/marketplace.json` (team-template layout with `metadata.pluginRoot`)
