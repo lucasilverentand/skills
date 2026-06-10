@@ -47,7 +47,7 @@ For workflow or agent-tier skills with multiple references or unfamiliar domains
 2. Write `SKILL.md` with portable YAML frontmatter — include `name` and `description` first, then add client-specific fields only when the target client supports them (see `references/skill-format.md`)
 3. Write the decision tree — use the **decision-trees** skill for this
 4. Write conventions — the rules the agent must follow every time
-5. Optionally add executable helpers if the skill has automatable tasks — use the `tooling` skill for this. Many skills work fine without any helpers.
+5. Optionally add executable helpers in `scripts/` if the skill has automatable tasks — use the `tooling` skill for this. Many skills work fine without any scripts. Existing skills in this repo may still use `tools/`; keep those paths stable unless the task is an explicit migration.
 6. Add references in `references/` for any detailed content over ~10 lines
 
 Follow the writing principles in `references/writing-philosophy.md` — explain reasoning over rigid rules, keep the prompt lean, generalize rather than overfit to test cases.
@@ -81,7 +81,7 @@ Read SKILL.md to get the skill's responsibilities, then ensure each one has a de
 ## Validating
 1. Run `tools/skill-validate.ts <path>` — checks files, frontmatter, naming, line count
 2. Run `tools/token-estimate.ts <path>/SKILL.md` — must be under 5000 tokens
-3. Run `tools/coverage-gap.ts <path>` — compares responsibilities against content and tools
+3. Run `tools/coverage-gap.ts <path>` — compares responsibilities against content and bundled scripts/tools
 
 ## Key references
 |File|What it covers|

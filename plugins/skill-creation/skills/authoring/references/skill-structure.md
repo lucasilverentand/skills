@@ -14,7 +14,7 @@ skill-name/
     └── openai.yaml         # optional Codex app metadata and dependencies
 ```
 
-Only `SKILL.md` is required. Add supporting folders when they reduce repeated work or keep `SKILL.md` lean. The open spec allows additional folders, but standard names travel best across clients.
+Only `SKILL.md` is required. Add supporting folders when they reduce repeated work or keep `SKILL.md` lean. New portable skills should use `scripts/` for executable helper code. The open spec allows additional folders, but standard names travel best across clients. Some older skills in this repo still use `tools/`; treat those as legacy paths and keep them stable unless you are doing a deliberate migration.
 
 ## Repository layout
 This repository uses `plugins/<plugin-name>/skills/<skill-name>/` as the authoring tree. Each skill has one owning plugin. `plugin-groups.json` records plugin metadata and skill ownership, and `bun run marketplace:write` regenerates manifests, READMEs, and marketplace catalogs.
@@ -62,8 +62,8 @@ Rules:
 ## Progressive disclosure
 Codex, Claude Code, and other Agent Skills clients load skills progressively:
 
-1. Metadata - `name`, `description`, and sometimes path. This is how the agent decides which skill to activate.
-2. Instructions - full `SKILL.md` body when the skill is activated.
-3. Resources - supporting files such as `references/`, `scripts/`, and `assets/` only when the skill points the agent to them.
+1. **Metadata** (~100 tokens) — `name` and `description` from frontmatter. Loaded at startup for all visible skills. This is how the agent decides which skill to activate.
+2. **Instructions** (<5000 tokens) — full SKILL.md body. Loaded when the skill is activated.
+3. **Resources** (as needed) — files in `references/`, `scripts/`, `assets/`, or legacy `tools/`. Loaded only when the SKILL.md tells the agent to read them.
 
 Codex caps the initial skills list at roughly 2% of the context window, or 8,000 characters when the context window is unknown. Front-load descriptions so shortening still preserves the trigger. Claude Code also keeps skill content in context after invocation and preserves the first 5,000 tokens per skill during compaction, so every line still has a recurring cost.

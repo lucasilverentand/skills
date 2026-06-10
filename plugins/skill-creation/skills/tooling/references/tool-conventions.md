@@ -8,6 +8,9 @@ How tools are built in this repo. These conventions aren't arbitrary — they ex
 
 **Dynamic imports for node stdlib.** Use `await import("node:fs")` inside `main()` rather than top-level imports. This keeps the arg-parsing and help-text path fast and dependency-free.
 
+## Location
+Put new executable helper code under `scripts/`. That is the portable Agent Skills convention used by Codex and Claude Code. Existing skills in this repository may still have `tools/` directories; improve those files in place unless the requested change is a mechanical migration.
+
 ## Interface contract
 Every tool supports these flags:
 
