@@ -9,12 +9,12 @@
 |`invalid-name`|Must be kebab-case: lowercase alphanumeric + hyphens, 1-64 chars|
 |`reserved-name`|Marketplace name is reserved (e.g. `anthropic-marketplace`, `claude-code-plugins`)|
 |`invalid-version`|Must be valid semver: `X.Y.Z`|
-|`invalid-category`|Must be one of: `devtools`|
+|`invalid-category`|Use one of the repository's supported install-surface categories, such as `Development`, `Documentation`, `Design`, `Architecture`, or `Productivity`|
 |`invalid-path`|Skill paths must start with `./`, use forward slashes, no trailing slash or `..` segments|
 |`invalid-source`|Source object has unknown type or malformed fields (e.g. GitHub repo not `owner/repo`)|
 |`duplicate-name`|Each plugin/bundle name must be unique|
 |`duplicate-skill`|A skill path appears twice in the same plugin or across plugins|
-|`source-not-found`|The skill path must point to an existing directory|
+|`source-not-found`|The plugin or skill path must point to an existing directory|
 |`missing-skill-md`|The skill directory exists but has no SKILL.md — create one|
 |`invalid-frontmatter`|SKILL.md has no valid frontmatter block (must start and end with `---`)|
 |`missing-frontmatter-field`|SKILL.md frontmatter missing `name` or `description`|
@@ -30,7 +30,7 @@
 |Code|Fix|
 |---|---|
 |`unsorted`|Plugins or skills not in alphabetical order — run with `--fix` to auto-sort|
-|`orphan-skill`|Skill exists on disk but isn't registered in any plugin|
+|`orphan-skill`|Skill exists on disk but isn't registered in `plugin-groups.json`|
 |`empty-skill-body`|SKILL.md has frontmatter but no content body|
 |`unknown-tool`|SKILL.md `allowed-tools` references an unrecognized tool name|
 |`description-too-long`|SKILL.md frontmatter description exceeds 1024 characters (warning, not error)|
