@@ -55,7 +55,7 @@ const KNOWN_TOOLS = new Set([
   "Zsh",
 ]);
 
-const VALID_EFFORTS = ["low", "medium", "high", "max"] as const;
+const VALID_EFFORTS = ["low", "medium", "high", "xhigh", "max"] as const;
 
 const KNOWN_FRONTMATTER_FIELDS = new Set([
   "name",
@@ -64,14 +64,19 @@ const KNOWN_FRONTMATTER_FIELDS = new Set([
   "license",
   "compatibility",
   "metadata",
+  "when_to_use",
   "argument-hint",
+  "arguments",
   "disable-model-invocation",
   "user-invocable",
+  "disallowed-tools",
   "model",
   "context",
   "agent",
   "effort",
   "hooks",
+  "paths",
+  "shell",
   "skills",
 ]);
 
@@ -157,6 +162,23 @@ function stripYamlQuotes(value: string): string {
   return value;
 }
 
+function extractExplicitReferenceFiles(content: string): string[] {
+  const referencedFiles = new Set<string>();
+
+  const add = (file: string) => {
+    if (!file.includes("<") && !file.includes(">")) referencedFiles.add(file);
+  };
+
+  const tableRowPattern = /^\|`references\/([^`]+)`\|/gm;
+  for (const match of content.matchAll(tableRowPattern)) add(match[1]);
+
+  const actionPattern =
+    /\b(?:see|read|load|open|follow|check|use|update|add to|link from|linked from)\s+`references\/([^`]+)`/gi;
+  for (const match of content.matchAll(actionPattern)) add(match[1]);
+
+  return [...referencedFiles];
+}
+
 async function main() {
   const target = filteredArgs[0];
   if (!target) {
@@ -226,7 +248,7 @@ async function main() {
 
   // name
   if (!fm.name) {
-    fail(results, "name", "Frontmatter missing 'name' field — defaults to directory name", "warning");
+    fail(results, "name", "Frontmatter missing required 'name' field");
   } else {
     if (!KEBAB.test(fm.name)) {
       fail(results, "name-format", `Name '${fm.name}' must be kebab-case (lowercase alphanumeric + hyphens)`);
@@ -247,7 +269,7 @@ async function main() {
 
   // description
   if (!fm.description) {
-    fail(results, "description", "Frontmatter missing 'description' field — recommended for skill discovery (falls back to first paragraph)", "warning");
+    fail(results, "description", "Frontmatter missing required 'description' field");
   } else if (fm.description.length > MAX_DESCRIPTION_LENGTH) {
     fail(results, "description-length", `Description is ${fm.description.length} chars (max ${MAX_DESCRIPTION_LENGTH})`);
   } else {
@@ -348,10 +370,7 @@ async function main() {
   const refsDir = resolve(skillPath, "references");
   if (existsSync(refsDir)) {
     // Check that referenced files in SKILL.md actually exist
-    const refMatches = content.match(/`references\/[^`]+`/g) ?? [];
-    const referencedFiles = refMatches
-      .map((m) => m.replace(/^`references\//, "").replace(/`$/, ""))
-      .filter((f) => !f.includes("<") && !f.includes(">")); // Skip template placeholders
+    const referencedFiles = extractExplicitReferenceFiles(content);
     for (const refFile of referencedFiles) {
       const refPath = resolve(refsDir, refFile);
       if (!existsSync(refPath)) {

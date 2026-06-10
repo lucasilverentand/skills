@@ -30,6 +30,23 @@ interface Gap {
   issue: string;
 }
 
+function extractExplicitReferenceFiles(content: string): Set<string> {
+  const referencedFiles = new Set<string>();
+
+  const add = (file: string) => {
+    if (!file.includes("<") && !file.includes(">")) referencedFiles.add(file);
+  };
+
+  const tableRowPattern = /^\|`references\/([^`]+)`\|/gm;
+  for (const match of content.matchAll(tableRowPattern)) add(match[1]);
+
+  const actionPattern =
+    /\b(?:see|read|load|open|follow|check|use|update|add to|link from|linked from)\s+`references\/([^`]+)`/gi;
+  for (const match of content.matchAll(actionPattern)) add(match[1]);
+
+  return referencedFiles;
+}
+
 async function main() {
   const target = filteredArgs[0];
   if (!target) {
@@ -51,18 +68,9 @@ async function main() {
   const skillMd = readFileSync(skillMdPath, "utf-8");
   const gaps: Gap[] = [];
 
-  // ── Extract references mentioned anywhere in SKILL.md ──
+  // ── Extract references that are actionable links from SKILL.md ──
 
-  // Backtick-quoted references: `references/foo.md`
-  const backtickRefPattern = /`references\/([^`]+)`/g;
-  const referencedFiles = new Set<string>();
-  for (const match of skillMd.matchAll(backtickRefPattern)) {
-    const file = match[1];
-    // Skip template placeholders like <topic>.md
-    if (!file.includes("<") && !file.includes(">")) {
-      referencedFiles.add(file);
-    }
-  }
+  const referencedFiles = extractExplicitReferenceFiles(skillMd);
 
   // Backtick-quoted tools: `tools/foo.ts` or `tools/foo.ts <args>`
   const backtickToolPattern = /`tools\/([^`]+)`/g;
@@ -71,7 +79,7 @@ async function main() {
     // Extract just the filename, stripping any trailing arguments
     const raw = match[1];
     const filename = raw.split(/\s/)[0];
-    referencedTools.add(filename);
+    if (!filename.includes("<") && !filename.includes(">")) referencedTools.add(filename);
   }
 
   // ── Check referenced files exist on disk ──
@@ -97,23 +105,6 @@ async function main() {
         item: `tools/${toolFile}`,
         issue: "Referenced in SKILL.md but does not exist on disk",
       });
-    }
-  }
-
-  // ── Check "Key references" table entries exist ──
-
-  const tableRowPattern = /^\|`references\/([^`]+)`\|/gm;
-  for (const match of skillMd.matchAll(tableRowPattern)) {
-    const file = match[1];
-    if (!file.includes("<") && !file.includes(">")) {
-      const refPath = resolve(refsDir, file);
-      if (!existsSync(refPath)) {
-        gaps.push({
-          type: "broken-ref",
-          item: `references/${file}`,
-          issue: "Listed in Key references table but does not exist on disk",
-        });
-      }
     }
   }
 
@@ -156,7 +147,7 @@ async function main() {
       const hasSection = /\bfollow\b.*\bbelow\b/i.test(target) || /\bsee\b.*\bbelow\b/i.test(target);
       const hasSkillRef = /\buse\b.*\bskill\b/i.test(target);
       const hasRunCommand = /\brun\b/i.test(target);
-      const hasInlineAction = /\b(check|fix|rewrite|extract|split|read|ask|create|write|add|delete|remove|update|route|focus)\b/i.test(target);
+      const hasInlineAction = /\b(check|fix|rewrite|extract|split|read|ask|create|write|add|delete|remove|update|route|focus|bump)\b/i.test(target);
 
       if (!hasReference && !hasTool && !hasSection && !hasSkillRef && !hasRunCommand && !hasInlineAction) {
         gaps.push({

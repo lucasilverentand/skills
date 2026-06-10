@@ -10,14 +10,19 @@ const ALLOWED_PROPERTIES = new Set([
   "allowed-tools",
   "metadata",
   "compatibility",
+  "when_to_use",
   "argument-hint",
+  "arguments",
   "disable-model-invocation",
   "user-invocable",
+  "disallowed-tools",
   "model",
   "context",
   "agent",
   "effort",
   "hooks",
+  "paths",
+  "shell",
   "skills",
 ]);
 
@@ -55,7 +60,7 @@ export function validateSkill(
   let currentValue = "";
 
   for (const line of match[1].split("\n")) {
-    const kvMatch = line.match(/^([a-z][a-z0-9-]*)\s*:\s*(.*)/);
+    const kvMatch = line.match(/^([a-z][a-z0-9_-]*)\s*:\s*(.*)/);
     if (kvMatch) {
       if (currentKey) frontmatter[currentKey] = stripQuotes(currentValue.trim());
       currentKey = kvMatch[1];
