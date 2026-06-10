@@ -1,26 +1,30 @@
 const args = Bun.argv.slice(2);
 
 const HELP = `
-conversation-miner — Scan Claude Code conversation transcripts for struggle patterns and taste signals
+conversation-miner — Scan agent conversation transcripts for struggle patterns and taste signals
 
 Usage:
   bun run tools/conversation-miner.ts [options]
 
 Options:
   --project <path>   Project root to find conversations for (default: cwd)
+  --source <name>    Transcript source: auto, claude, or codex (default: auto)
+  --transcripts <path>  Scan JSONL transcripts under this directory instead of a known source
   --days <n>         How many days back to scan (default: 7)
   --min-confidence <n>  Minimum confidence threshold 0-1 (default: 0.3)
   --json             Output as JSON
   --help             Show this help message
 
-Scans ~/.claude/projects/<project-path>/ for conversation JSONL files and
-analyzes them for:
+Scans Claude Code transcripts, Codex session JSONL, or an explicit transcript
+directory and analyzes them for:
   - Struggle patterns: corrections, retries, long back-and-forths, tool failures
   - Taste signals: preferences, style guidance, technology choices
   - Skill gaps: repeated manual work that could be automated
 
 Examples:
   bun run tools/conversation-miner.ts --project /Users/me/myproject --days 14
+  bun run tools/conversation-miner.ts --source codex --days 14 --json
+  bun run tools/conversation-miner.ts --transcripts ~/exports/session-jsonl --json
   bun run tools/conversation-miner.ts --json
 `.trim();
 
@@ -38,9 +42,16 @@ function getFlag(name: string, fallback: string): string {
 }
 
 const projectPath = getFlag("--project", process.cwd());
+const source = getFlag("--source", "auto");
+const transcriptsPath = getFlag("--transcripts", "");
 const daysBack = parseInt(getFlag("--days", "7"), 10);
 const minConfidence = parseFloat(getFlag("--min-confidence", "0.3"));
 const jsonOutput = args.includes("--json");
+
+if (!["auto", "claude", "codex"].includes(source)) {
+  console.error("Error: --source must be one of: auto, claude, codex");
+  process.exit(1);
+}
 
 // ── Types ──
 
@@ -60,6 +71,30 @@ interface ConversationMessage {
   content: string;
   timestamp: string;
   isMeta?: boolean;
+  source: "claude" | "codex" | "custom";
+}
+
+interface TranscriptFile {
+  path: string;
+  source: "claude" | "codex" | "custom";
+}
+
+interface DirectoryEntryLike {
+  name: string;
+  isDirectory: () => boolean;
+  isFile: () => boolean;
+}
+
+interface FindTranscriptFilesOptions {
+  homedir: string;
+  projectPath: string;
+  requestedSource: "auto" | "claude" | "codex";
+  transcriptsPath: string;
+  cutoff: number;
+  existsSync: (path: string) => boolean;
+  readdirSync: (path: string, options?: { withFileTypes?: boolean }) => Array<string | DirectoryEntryLike>;
+  statSync: (path: string) => { mtimeMs: number; isFile: () => boolean; isDirectory: () => boolean };
+  resolve: (...paths: string[]) => string;
 }
 
 // ── Struggle detection patterns ──
@@ -101,47 +136,120 @@ const TASTE_PATTERNS = [
 
 // ── Main ──
 
+function findTranscriptFiles(options: FindTranscriptFilesOptions): TranscriptFile[] {
+  const roots: TranscriptFile[] = [];
+
+  if (options.transcriptsPath) {
+    roots.push({
+      path: options.resolve(options.transcriptsPath),
+      source: "custom",
+    });
+  } else {
+    if (options.requestedSource === "auto" || options.requestedSource === "claude") {
+      const projectKey = options.projectPath.replace(/\//g, "-");
+      roots.push({
+        path: options.resolve(options.homedir, ".claude", "projects", projectKey),
+        source: "claude",
+      });
+    }
+
+    if (options.requestedSource === "auto" || options.requestedSource === "codex") {
+      roots.push({
+        path: options.resolve(options.homedir, ".codex", "sessions"),
+        source: "codex",
+      });
+      roots.push({
+        path: options.resolve(options.homedir, ".codex", "archived_sessions"),
+        source: "codex",
+      });
+    }
+  }
+
+  const files: TranscriptFile[] = [];
+  for (const root of roots) {
+    if (!options.existsSync(root.path)) continue;
+    files.push(...collectJsonlFiles(root.path, root.source, options));
+  }
+
+  const seen = new Set<string>();
+  return files
+    .filter((file) => {
+      if (seen.has(file.path)) return false;
+      seen.add(file.path);
+      return true;
+    })
+    .sort((a, b) => a.path.localeCompare(b.path));
+}
+
+function collectJsonlFiles(
+  dir: string,
+  sourceName: TranscriptFile["source"],
+  options: FindTranscriptFilesOptions,
+): TranscriptFile[] {
+  const files: TranscriptFile[] = [];
+
+  let entries: Array<string | DirectoryEntryLike>;
+  try {
+    entries = options.readdirSync(dir, { withFileTypes: true });
+  } catch {
+    return files;
+  }
+
+  for (const entry of entries) {
+    const name = typeof entry === "string" ? entry : entry.name;
+    const fullPath = options.resolve(dir, name);
+
+    if (typeof entry !== "string" && entry.isDirectory()) {
+      files.push(...collectJsonlFiles(fullPath, sourceName, options));
+      continue;
+    }
+
+    try {
+      const stat = options.statSync(fullPath);
+      const isFile = typeof entry === "string" ? stat.isFile() : entry.isFile();
+      if (isFile && name.endsWith(".jsonl") && stat.mtimeMs >= options.cutoff) {
+        files.push({ path: fullPath, source: sourceName });
+      }
+    } catch {
+      // Ignore files that disappear during scanning.
+    }
+  }
+
+  return files;
+}
+
+function summarizeSources(files: TranscriptFile[]): Record<string, number> {
+  const counts: Record<string, number> = {};
+  for (const file of files) counts[file.source] = (counts[file.source] ?? 0) + 1;
+  return counts;
+}
+
+function formatSourceSummary(counts: Record<string, number>): string {
+  return Object.entries(counts)
+    .map(([name, count]) => `${name}=${count}`)
+    .join(", ");
+}
+
 async function main() {
-  const { readdirSync, readFileSync, statSync } = await import("node:fs");
-  const { resolve, basename } = await import("node:path");
+  const { existsSync, readdirSync, readFileSync, statSync } = await import("node:fs");
+  const { resolve } = await import("node:path");
   const { homedir } = await import("node:os");
 
-  // Find the conversation directory.
-  // Assumption: Claude Code stores conversation JSONL files at
-  // ~/.claude/projects/<project-path-with-slashes-replaced-by-dashes>/
-  // This convention may change in future Claude Code versions.
-  const projectKey = projectPath.replace(/\//g, "-");
-  const conversationsDir = resolve(homedir(), ".claude", "projects", projectKey);
-
-  const { existsSync } = await import("node:fs");
-  if (!existsSync(conversationsDir)) {
-    console.warn(`Warning: conversation directory not found at ${conversationsDir}`);
-    console.warn("Claude Code may store conversations differently on this system, or --project may not point to a valid project root.");
-    process.exit(0);
-  }
-
-  let files: string[];
-  try {
-    files = readdirSync(conversationsDir).filter((f) => f.endsWith(".jsonl"));
-  } catch {
-    console.warn(`Warning: could not read conversations at ${conversationsDir}`);
-    console.warn("Check that --project points to a valid project root.");
-    process.exit(0);
-  }
-
-  // Filter by date
   const cutoff = Date.now() - daysBack * 24 * 60 * 60 * 1000;
-  const recentFiles = files.filter((f) => {
-    try {
-      const stat = statSync(resolve(conversationsDir, f));
-      return stat.mtimeMs >= cutoff;
-    } catch {
-      return false;
-    }
+  const recentFiles = findTranscriptFiles({
+    homedir: homedir(),
+    projectPath,
+    requestedSource: source as "auto" | "claude" | "codex",
+    transcriptsPath,
+    cutoff,
+    existsSync,
+    readdirSync,
+    statSync,
+    resolve,
   });
 
   if (recentFiles.length === 0) {
-    console.error(`No conversations found in the last ${daysBack} days.`);
+    console.error(`No transcript files found in the last ${daysBack} days.`);
     process.exit(0);
   }
 
@@ -152,8 +260,7 @@ async function main() {
   const longExchanges: { file: string; turns: number; topic: string }[] = [];
 
   for (const file of recentFiles) {
-    const filePath = resolve(conversationsDir, file);
-    const messages = parseConversationFile(filePath, readFileSync);
+    const messages = parseConversationFile(file.path, file.source, readFileSync);
 
     // Filter to real user messages (not meta, not commands)
     const userMessages = messages.filter(
@@ -173,7 +280,7 @@ async function main() {
           const existing = correctionCounts.get(key) ?? { evidence: [], files: [] };
           const snippet = extractSnippet(content, match.index ?? 0);
           if (existing.evidence.length < 5) existing.evidence.push(snippet);
-          if (!existing.files.includes(file)) existing.files.push(file);
+          if (!existing.files.includes(file.path)) existing.files.push(file.path);
           correctionCounts.set(key, existing);
         }
       }
@@ -186,7 +293,7 @@ async function main() {
           const existing = correctionCounts.get(key) ?? { evidence: [], files: [] };
           const snippet = extractSnippet(content, match.index ?? 0);
           if (existing.evidence.length < 5) existing.evidence.push(snippet);
-          if (!existing.files.includes(file)) existing.files.push(file);
+          if (!existing.files.includes(file.path)) existing.files.push(file.path);
           correctionCounts.set(key, existing);
         }
       }
@@ -199,7 +306,7 @@ async function main() {
           const existing = tasteCounts.get(key) ?? { evidence: [], files: [], tasteType };
           const snippet = extractSnippet(content, match.index ?? 0);
           if (existing.evidence.length < 5) existing.evidence.push(snippet);
-          if (!existing.files.includes(file)) existing.files.push(file);
+          if (!existing.files.includes(file.path)) existing.files.push(file.path);
           tasteCounts.set(key, existing);
         }
       }
@@ -209,7 +316,7 @@ async function main() {
     if (userMessages.length >= 8) {
       const firstMsg = userMessages[0];
       const topic = extractTextContent(firstMsg.content)?.slice(0, 100) ?? "unknown";
-      longExchanges.push({ file, turns: userMessages.length, topic });
+      longExchanges.push({ file: file.path, turns: userMessages.length, topic });
     }
   }
 
@@ -269,6 +376,7 @@ async function main() {
       JSON.stringify(
         {
           scanned: recentFiles.length,
+          sources: summarizeSources(recentFiles),
           daysBack,
           findings: allFindings,
           summary: {
@@ -282,7 +390,8 @@ async function main() {
       ),
     );
   } else {
-    console.log(`Scanned ${recentFiles.length} conversations from the last ${daysBack} days.\n`);
+    console.log(`Scanned ${recentFiles.length} transcript file(s) from the last ${daysBack} days.`);
+    console.log(`Sources: ${formatSourceSummary(summarizeSources(recentFiles))}\n`);
 
     const struggles = allFindings.filter((f) => f.type === "struggle");
     const tastes = allFindings.filter((f) => f.type === "taste");
@@ -331,6 +440,7 @@ async function main() {
 
 function parseConversationFile(
   filePath: string,
+  sourceName: ConversationMessage["source"],
   readFileSync: (path: string, enc: string) => string,
 ): ConversationMessage[] {
   const messages: ConversationMessage[] = [];
@@ -340,27 +450,76 @@ function parseConversationFile(
     if (!line.trim()) continue;
     try {
       const parsed = JSON.parse(line);
-      const type = parsed.type;
-      if (type !== "user" && type !== "assistant") continue;
-
-      const message = parsed.message ?? {};
-      const content = message.content ?? "";
-      const timestamp = parsed.timestamp ?? "";
-      const isMeta = parsed.isMeta ?? false;
-
-      messages.push({
-        type,
-        role: message.role,
-        content: typeof content === "string" ? content : JSON.stringify(content),
-        timestamp,
-        isMeta,
-      });
+      const message = normalizeTranscriptRecord(parsed, sourceName);
+      if (message) messages.push(message);
     } catch {
       // Skip malformed lines
     }
   }
 
   return messages;
+}
+
+function normalizeTranscriptRecord(
+  parsed: Record<string, unknown>,
+  sourceName: ConversationMessage["source"],
+): ConversationMessage | null {
+  const nested = parsed.item ?? parsed.message ?? parsed.payload;
+  const record = isRecord(nested) ? nested : parsed;
+  const role = stringValue(record.role) ?? stringValue(parsed.role);
+  const rawType = stringValue(record.type) ?? stringValue(parsed.type);
+  const type = role === "user" || rawType === "user"
+    ? "user"
+    : role === "assistant" || rawType === "assistant"
+      ? "assistant"
+      : "";
+
+  if (type !== "user" && type !== "assistant") return null;
+
+  const content =
+    record.content ??
+    record.text ??
+    parsed.content ??
+    (isRecord(parsed.message) ? parsed.message.content : undefined) ??
+    "";
+
+  return {
+    type,
+    role,
+    content: normalizeContent(content),
+    timestamp: stringValue(record.timestamp) ?? stringValue(parsed.timestamp) ?? "",
+    isMeta: Boolean(parsed.isMeta ?? record.isMeta ?? false),
+    source: sourceName,
+  };
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return Boolean(value && typeof value === "object" && !Array.isArray(value));
+}
+
+function stringValue(value: unknown): string | undefined {
+  return typeof value === "string" ? value : undefined;
+}
+
+function normalizeContent(content: unknown): string {
+  if (typeof content === "string") return content;
+  if (Array.isArray(content)) {
+    return content
+      .map((block) => {
+        if (typeof block === "string") return block;
+        if (!isRecord(block)) return "";
+        if (typeof block.text === "string") return block.text;
+        if (typeof block.content === "string") return block.content;
+        return "";
+      })
+      .filter(Boolean)
+      .join(" ");
+  }
+  if (isRecord(content)) {
+    if (typeof content.text === "string") return content.text;
+    if (typeof content.content === "string") return content.content;
+  }
+  return "";
 }
 
 function extractTextContent(content: string): string {
@@ -405,10 +564,10 @@ function suggestAction(type: string, key: string, evidence: string[]): string {
     if (key.includes("dissatisfaction")) {
       return "Repeated issues — investigate if a skill could catch or prevent these errors.";
     }
-    return "User corrections detected — consider a skill or CLAUDE.md rule to prevent this pattern.";
+    return "User corrections detected — consider a skill or project instruction rule to prevent this pattern.";
   }
   if (type === "taste") {
-    return "Consistent preference — codify in a skill's conventions or add to CLAUDE.md.";
+    return "Consistent preference — codify in a skill's conventions or add to project instructions.";
   }
   return "Review for skill opportunity.";
 }

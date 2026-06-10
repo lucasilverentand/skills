@@ -7,14 +7,10 @@ allowed-tools: Read Grep Glob Bash Write Edit Agent
 # Retro
 Retrospective analysis of recent agent sessions and code changes to continuously improve the skill library.
 
-## Current context
-- Branch: !`git branch --show-current`
-- Project: !`basename $(git rev-parse --show-toplevel)`
-
 ## Decision tree
 - What do you want to do?
   - **Full retro** (conversations + git) -> follow "Running a full retro" below
-  - **Just mine conversations** -> run `tools/conversation-miner.ts --project $(git rev-parse --show-toplevel)` and review findings
+  - **Just mine conversations** -> run `tools/conversation-miner.ts --project $(git rev-parse --show-toplevel) --source auto` and review findings
   - **Just check git rework** -> run `tools/rework-detector.ts` and review findings
   - **Create skills from findings** -> follow "Acting on findings" below
 
@@ -22,16 +18,22 @@ Retrospective analysis of recent agent sessions and code changes to continuously
 A full retro has two phases: gathering data and cross-referencing existing skills. For larger skill libraries or longer time ranges, offer to use agents — a Miner to gather and cluster, and a Cross-Referrer to classify findings against existing skills. For smaller retros, single-agent is fine. Let the user decide.
 
 ### Single-agent flow
+Start by identifying the current project root and, if useful for the report, the branch:
+
+```bash
+git rev-parse --show-toplevel
+git branch --show-current
+```
 
 #### 1. Gather data
 Run both tools in parallel to collect findings:
 
 ```bash
-tools/conversation-miner.ts --project $(git rev-parse --show-toplevel) --days 7 --json
+tools/conversation-miner.ts --project $(git rev-parse --show-toplevel) --source auto --days 7 --json
 tools/rework-detector.ts --days 7 --json
 ```
 
-Adjust `--days` based on how far back the user wants to look (default: 7 days).
+Adjust `--days` based on how far back the user wants to look (default: 7 days). Use `--source codex` or `--source claude` when the user wants a specific agent's transcript store. Use `--transcripts <path>` for exported JSONL sessions or custom transcript archives.
 
 #### 2. Review and cluster
 Read the JSON output from both tools. Look for clusters — multiple findings that point to the same underlying issue or preference. Group them by theme:
@@ -60,13 +62,13 @@ Classify each cluster as:
 
 - **New skill needed** — no existing skill covers this area
 - **Existing skill update** — a skill exists but misses this pattern
-- **AGENTS.md / CLAUDE.md addition** — too small for a skill, better as a project instruction
+- **Project instruction addition** — too small for a skill, better in AGENTS.md, CLAUDE.md, or another repo instruction file
 - **Memory entry** — a personal preference that should be saved to memory
 
 ### Agent flow (optional)
 When the skill library is large or the retro covers many days, agents keep context focused:
 
-**Miner** (general-purpose agent) — runs both tools, clusters raw findings by theme, produces a structured findings document with clusters, evidence, and frequency counts.
+**Miner** (general-purpose agent) — runs both tools, uses `--source auto` unless the user asks for a specific transcript source, clusters raw findings by theme, produces a structured findings document with clusters, evidence, and frequency counts.
 
 **Cross-Referrer** (Explore agent, read-only) — receives the Miner's clusters, reads all existing skills in the repo (Glob for `plugins/*/skills/*/SKILL.md`), searches for overlap, and classifies each cluster as new skill / skill update / project-instructions addition / memory entry. Returns an annotated report.
 
@@ -105,7 +107,7 @@ For each approved finding:
 
 - **New skill** -> use the authoring skill to create it. Pass the finding's evidence as context for intent capture — the struggle patterns become the skill's decision tree branches, the taste signals become its conventions.
 - **Skill update** -> read the existing SKILL.md, identify where the new pattern fits, and edit it in. Add new decision tree branches, conventions, or tool behaviors as needed.
-- **AGENTS.md / CLAUDE.md addition** -> append the preference or rule to the project's agent instruction file.
+- **Project instruction addition** -> append the preference or rule to the repo's agent instruction file, such as AGENTS.md or CLAUDE.md.
 - **Memory entry** -> save to memory using the appropriate memory type (feedback for corrections, user for preferences).
 
 ## Key references
