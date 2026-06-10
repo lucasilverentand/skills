@@ -1,51 +1,60 @@
-# Advanced Features
-Official Claude Code skill features beyond the core format and structure.
+# Claude Code Advanced Features
+These features are useful when a skill intentionally targets Claude Code. Do not treat them as portable Agent Skills features unless another client documents support.
+
+## Dynamic context injection
+Claude Code can run shell commands before the skill content reaches the model:
+
+```markdown
+## Current changes
+
+!`git diff HEAD`
+```
+
+Use dynamic context injection when the skill needs a small, fresh snapshot such as current branch, diff, or dependency metadata. Avoid commands that are slow, destructive, or leak sensitive data. The `shell` frontmatter field controls which shell runs injected commands.
+
+## Invocation control
+Claude Code supports two frontmatter fields for visibility and invocation:
+
+|Field|Effect|
+|---|---|
+|`disable-model-invocation: true`|The user can invoke the skill directly, but Claude will not auto-load it. Use for side-effectful tasks like deploys.|
+|`user-invocable: false`|The skill is hidden from the `/` menu but can still be auto-loaded by Claude. Use for background context.|
+
+Use permission rules or `skillOverrides` for user-level visibility decisions you do not want to encode in shared skill source.
+
+## Tool permission fields
+`allowed-tools` pre-approves the listed tools while the skill is active; it does not restrict every other tool. `disallowed-tools` removes tools from Claude's available pool while the skill is active.
+
+Keep tool permissions narrow and concrete. For project skills, remember that users must trust the workspace before skill tool grants take effect.
 
 ## Extended thinking
-Include the word "ultrathink" anywhere in your SKILL.md content to enable extended thinking mode when the skill is active. This is a trigger word recognized by Claude Code, not a frontmatter field.
+Include the word `ultrathink` in the skill content to request deeper reasoning when the skill runs. Use this sparingly for work that genuinely needs more deliberation, such as complex architecture analysis or multi-file safety review. Do not add it to routine formatting or small edit skills.
 
-## Legacy command compatibility
-`.claude/commands/*.md` files are treated as skills. Both `.claude/commands/deploy.md` and `.claude/skills/deploy/SKILL.md` create the `/deploy` command and work identically. Existing command files keep working. If a skill and a legacy command share the same name, the skill takes precedence.
-
-## Bundled skills
-Claude Code ships with built-in skills that are always available:
-
-|Skill|Purpose|
-|---|---|
-|`/batch <instruction>`|Orchestrate large-scale parallel changes across a codebase using git worktrees|
-|`/claude-api`|Load Claude API reference material for your project's language|
-|`/debug [description]`|Troubleshoot your current Claude Code session|
-|`/loop [interval] <prompt>`|Run a prompt repeatedly on an interval|
-|`/simplify [focus]`|Review recently changed files for code reuse, quality, and efficiency|
-
-## Preloading skills into subagents
-Subagents can preload skills via the `skills` field in their frontmatter. The full skill content is injected into the subagent's context at startup — not just made available for invocation.
+## Forked execution
+Add `context: fork` when the skill should run in an isolated subagent context:
 
 ```yaml
 ---
-name: api-developer
-description: Implement API endpoints following team conventions
-skills:
-  - api-conventions
-  - error-handling-patterns
+name: deep-research
+description: Research a topic thoroughly.
+context: fork
+agent: Explore
 ---
 ```
 
-Subagents don't inherit skills from the parent conversation. Only explicitly listed skills are available.
+The skill content becomes the subagent task. Forked skills need explicit action instructions; a reference-only skill usually has no useful task to execute in isolation. `agent` can name a built-in agent such as `Explore`, `Plan`, `general-purpose`, or a custom subagent.
+
+## Subagents with preloaded skills
+Subagents can preload skills via the subagent's `skills` frontmatter field. This is the inverse of `context: fork`: the subagent receives the user's delegated task, plus the full content of the listed skills as reference material.
+
+Do not add `skills` to a normal portable `SKILL.md` unless the target client documents that behavior.
 
 ## Hooks in skills
-The `hooks` frontmatter field scopes hooks to a skill's lifecycle. Hooks are registered when the skill becomes active and automatically cleaned up when it finishes. All hook events are supported with the same format as settings-based hooks.
+Claude Code supports hooks scoped to a skill's lifecycle. Hooks can enforce deterministic checks or guardrails around tool use.
 
-```yaml
----
-name: secure-ops
-hooks:
-  PreToolUse:
-    - matcher: "Bash"
-      hooks:
-        - type: command
-          command: "${CLAUDE_SKILL_DIR}/scripts/security-check.sh"
----
-```
+Hooks are powerful and product-specific. Keep them out of portable skills unless the skill is explicitly Claude Code-only, document what they run, and check the current Claude Code hook schema before writing them.
 
-Four handler types: `command`, `http`, `prompt`, `agent`. Paths can use `$CLAUDE_PROJECT_DIR` and `${CLAUDE_SKILL_DIR}`.
+## Built-in and legacy behavior
+Claude Code includes bundled skills and built-in commands that may change by version. Reference current Claude Code docs instead of hardcoding a long built-in list in a reusable skill.
+
+Legacy `.claude/commands/*.md` files still work and support similar frontmatter. Prefer skills for new portable workflows because skills can include supporting files and can be packaged in plugins.
