@@ -1,0 +1,25 @@
+{
+	"name": "design",
+	"description": "Design system synthesis from screenshots, moodboards, videos, URLs, chat briefs, and mixed visual references.",
+	"version": "1.2.0",
+	"skills": [
+		"./skills/design-system"
+	],
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"design",
+		"design-system",
+		"moodboard",
+		"screenshots",
+		"video",
+		"ui",
+		"ux",
+		"DESIGN.md"
+	]
+}

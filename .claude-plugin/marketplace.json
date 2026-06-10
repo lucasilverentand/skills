@@ -34,6 +34,27 @@
 			]
 		},
 		{
+			"name": "design",
+			"source": "./plugins/design",
+			"description": "Design system synthesis from screenshots, moodboards, videos, URLs, chat briefs, and mixed visual references.",
+			"version": "1.2.0",
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			},
+			"category": "Design",
+			"keywords": [
+				"design",
+				"design-system",
+				"moodboard",
+				"screenshots",
+				"video",
+				"ui",
+				"ux",
+				"DESIGN.md"
+			]
+		},
+		{
 			"name": "documentation",
 			"source": "./plugins/documentation",
 			"description": "Documentation authoring and structured knowledge capture for design docs, ADRs, C4 diagrams, and decision trees.",
