@@ -1,8 +1,20 @@
 # Design
-Design system synthesis from screenshots, moodboards, videos, URLs, chat briefs, and mixed visual references.
+Design and architecture skills for product UI, Apple platforms, system architecture, data modeling, API design, technical design docs, ADRs, C4 diagrams, and design reviews.
 
 ## Skills
+- `design:api-design`
+- `design:architecture`
+- `design:c4-diagrams`
+- `design:data-modeling`
+- `design:design-options`
+- `design:design-review`
 - `design:design-system`
+- `design:design-workflow`
+- `design:foundations`
+- `design:platforms`
+- `design:services`
+- `design:write-adr`
+- `design:write-design-doc`
 
 ## Install
 Codex:

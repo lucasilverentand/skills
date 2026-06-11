@@ -1,0 +1,19 @@
+{
+	"name": "delivery",
+	"displayName": "Delivery",
+	"version": "2.0.0",
+	"description": "Operations, reliability, and delivery workflows for opening pull requests, cleaning repositories, preparing releases, and getting work safely shipped.",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"license": "MIT",
+	"keywords": [
+		"delivery",
+		"pull-request",
+		"release",
+		"cleanup",
+		"operations",
+		"reliability"
+	]
+}

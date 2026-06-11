@@ -6,208 +6,154 @@
 		"url": "https://github.com/lucasilverentand"
 	},
 	"description": "Reusable agent skills by Luca Silverentand.",
-	"version": "1.2.0",
+	"version": "2.0.0",
 	"metadata": {
-		"version": "1.2.0",
+		"version": "2.0.0",
 		"homepage": "https://github.com/lucasilverentand/skills",
 		"repository": "https://github.com/lucasilverentand/skills",
 		"license": "MIT"
 	},
 	"plugins": [
 		{
-			"name": "apple-design",
-			"source": "./plugins/apple-design",
-			"description": "Apple Human Interface Guidelines as a single plugin: foundations, services, and a platform selector for iOS, macOS, watchOS, tvOS, and visionOS.",
-			"version": "1.2.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "luca.silverentand@gmail.com"
-			},
-			"category": "Design",
-			"keywords": [
-				"apple",
-				"design",
-				"hig",
-				"ios",
-				"macos",
-				"visionos"
-			]
-		},
-		{
-			"name": "design",
-			"source": "./plugins/design",
-			"description": "Design system synthesis from screenshots, moodboards, videos, URLs, chat briefs, and mixed visual references.",
-			"version": "1.2.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			},
-			"category": "Design",
-			"keywords": [
-				"design",
-				"design-system",
-				"moodboard",
-				"screenshots",
-				"video",
-				"ui",
-				"ux",
-				"DESIGN.md"
-			]
-		},
-		{
-			"name": "documentation",
-			"source": "./plugins/documentation",
-			"description": "Documentation authoring and structured knowledge capture for design docs, ADRs, C4 diagrams, and decision trees.",
-			"version": "1.2.0",
+			"name": "collaboration",
+			"source": "./plugins/collaboration",
+			"description": "Collaboration and communication skills for shared understanding: repository docs, decision trees, onboarding context, and human-readable coordination artifacts.",
+			"version": "2.0.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
 			},
 			"category": "Documentation",
 			"keywords": [
+				"collaboration",
+				"communication",
 				"documentation",
-				"adr",
-				"c4",
-				"decision-tree"
+				"readme",
+				"decision-tree",
+				"onboarding"
 			]
 		},
 		{
-			"name": "frontend",
-			"source": "./plugins/frontend",
-			"description": "Frontend design exploration toolkit for interactive HTML design options.",
-			"version": "1.2.0",
+			"name": "delivery",
+			"source": "./plugins/delivery",
+			"description": "Operations, reliability, and delivery workflows for opening pull requests, cleaning repositories, preparing releases, and getting work safely shipped.",
+			"version": "2.0.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
 			},
-			"category": "Development",
+			"category": "DevOps",
 			"keywords": [
-				"frontend",
-				"design",
-				"ui",
-				"prototype"
-			]
-		},
-		{
-			"name": "git",
-			"source": "./plugins/git",
-			"description": "Git workflow toolkit for commits, conflict resolution, rebases, and repository cleanup.",
-			"version": "1.2.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			},
-			"category": "Development",
-			"keywords": [
-				"git",
-				"commits",
-				"rebase",
-				"conflicts"
-			]
-		},
-		{
-			"name": "github",
-			"source": "./plugins/github",
-			"description": "GitHub workflow toolkit for creating pull requests, monitoring CI, and getting PRs ready to merge.",
-			"version": "1.2.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			},
-			"category": "Development",
-			"keywords": [
-				"github",
+				"delivery",
 				"pull-request",
-				"ci",
-				"merge-readiness"
+				"release",
+				"cleanup",
+				"operations",
+				"reliability"
 			]
 		},
 		{
-			"name": "linear-planner",
-			"source": "./plugins/linear-planner",
-			"description": "Linear planning workflows and project document templates for turning product ideas into traceable plans, specs, decisions, and release checks.",
-			"version": "1.2.0",
+			"name": "design",
+			"source": "./plugins/design",
+			"description": "Design and architecture skills for product UI, Apple platforms, system architecture, data modeling, API design, technical design docs, ADRs, C4 diagrams, and design reviews.",
+			"version": "2.0.0",
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			},
+			"category": "Design",
+			"keywords": [
+				"design",
+				"architecture",
+				"api",
+				"database",
+				"apple",
+				"hig",
+				"ui",
+				"ux",
+				"adr",
+				"c4"
+			]
+		},
+		{
+			"name": "development",
+			"source": "./plugins/development",
+			"description": "Implementation and code craft workflows for commits, skill authoring, reusable tooling, and publishing agent skills as maintained software artifacts.",
+			"version": "2.0.0",
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			},
+			"category": "Development",
+			"keywords": [
+				"development",
+				"implementation",
+				"code",
+				"commits",
+				"skills",
+				"authoring",
+				"tooling",
+				"publishing"
+			]
+		},
+		{
+			"name": "intent",
+			"source": "./plugins/intent",
+			"description": "Intent and problem-understanding workflows for requirements, task shaping, Linear planning, project documents, issue hygiene, and turning vague goals into traceable work.",
+			"version": "2.0.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
 			},
 			"category": "Productivity",
 			"keywords": [
-				"linear",
-				"planning",
-				"projects",
 				"intent",
+				"requirements",
+				"planning",
+				"linear",
 				"issues",
 				"project-docs",
-				"templates"
-			]
-		},
-		{
-			"name": "project",
-			"source": "./plugins/project",
-			"description": "Project setup and context management skills for requirements and shared agent context.",
-			"version": "1.2.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			},
-			"category": "Development",
-			"keywords": [
-				"project",
-				"requirements",
+				"task-spec",
 				"context"
 			]
 		},
 		{
-			"name": "repository-docs",
-			"source": "./plugins/repository-docs",
-			"description": "Repository documentation maintenance for public open-source projects and private internal project hubs.",
-			"version": "1.2.0",
+			"name": "maintenance",
+			"source": "./plugins/maintenance",
+			"description": "Evolution and maintenance workflows for resolving conflicts, mining agent sessions for durable improvements, and encoding long-term user taste into reusable skills.",
+			"version": "2.0.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
 			},
-			"category": "Documentation",
+			"category": "Maintenance",
 			"keywords": [
-				"readme",
-				"contributing",
-				"documentation",
-				"open-source",
-				"internal-docs"
+				"maintenance",
+				"evolution",
+				"conflicts",
+				"retrospective",
+				"taste",
+				"refactoring"
 			]
 		},
 		{
-			"name": "skill-creation",
-			"source": "./plugins/skill-creation",
-			"description": "End-to-end toolkit for authoring, publishing, tooling, and improving reusable agent skills.",
-			"version": "1.2.0",
+			"name": "verification",
+			"source": "./plugins/verification",
+			"description": "Quality and verification workflows for CI monitoring, pull request repair, merge readiness, and evidence-driven validation.",
+			"version": "2.0.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
 			},
-			"category": "Development",
+			"category": "Testing",
 			"keywords": [
-				"skills",
-				"authoring",
-				"publishing",
-				"tooling"
-			]
-		},
-		{
-			"name": "systems-design",
-			"source": "./plugins/systems-design",
-			"description": "Opinionated system design toolkit for architecture, data modeling, API design, workflow sequencing, and design review.",
-			"version": "1.2.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			},
-			"category": "Architecture",
-			"keywords": [
-				"architecture",
-				"api",
-				"database",
-				"design-review"
+				"verification",
+				"quality",
+				"ci",
+				"checks",
+				"pull-request",
+				"validation",
+				"review"
 			]
 		}
 	]
