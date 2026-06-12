@@ -1,0 +1,25 @@
+{
+	"name": "collaboration",
+	"description": "Collaboration and communication skills for shared understanding: repository docs, decision trees, onboarding context, and human-readable coordination artifacts.",
+	"version": "2.0.0",
+	"skills": [
+		"./skills/closed-source-docs",
+		"./skills/decision-trees",
+		"./skills/open-source-docs"
+	],
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"collaboration",
+		"communication",
+		"documentation",
+		"readme",
+		"decision-tree",
+		"onboarding"
+	]
+}

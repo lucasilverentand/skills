@@ -6,33 +6,34 @@
 		"url": "https://github.com/lucasilverentand"
 	},
 	"metadata": {
-		"version": "1.2.0",
+		"version": "2.0.0",
 		"homepage": "https://github.com/lucasilverentand/skills",
 		"repository": "https://github.com/lucasilverentand/skills",
 		"license": "MIT"
 	},
 	"plugins": [
 		{
-			"name": "apple-design",
-			"displayName": "Apple Design",
-			"description": "Apple Human Interface Guidelines as a single plugin: foundations, services, and a platform selector for iOS, macOS, watchOS, tvOS, and visionOS.",
-			"shortDescription": "Apple HIG guidance by platform",
-			"category": "Design",
-			"keywords": ["apple", "design", "hig", "ios", "macos", "visionos"],
-			"skills": ["foundations", "platforms", "services"],
+			"name": "collaboration",
+			"displayName": "Collaboration",
+			"description": "Collaboration and communication skills for shared understanding: repository docs, decision trees, onboarding context, and human-readable coordination artifacts.",
+			"shortDescription": "Shared context and coordination",
+			"category": "Documentation",
+			"keywords": ["collaboration", "communication", "documentation", "readme", "decision-tree", "onboarding"],
+			"skills": ["closed-source-docs", "decision-trees", "open-source-docs"],
 			"author": {
 				"name": "Luca Silverentand",
-				"email": "luca.silverentand@gmail.com"
+				"email": "dev@lucasilverentand.com"
 			}
 		},
 		{
-			"name": "documentation",
-			"displayName": "Documentation",
-			"description": "Documentation authoring and structured knowledge capture for design docs, ADRs, C4 diagrams, and decision trees.",
-			"shortDescription": "Structured engineering documentation",
-			"category": "Documentation",
-			"keywords": ["documentation", "adr", "c4", "decision-tree"],
-			"skills": ["c4-diagrams", "decision-trees", "write-adr", "write-design-doc"],
+			"name": "delivery",
+			"displayName": "Delivery",
+			"description": "Operations, reliability, and delivery workflows for opening pull requests, cleaning repositories, preparing releases, and getting work safely shipped.",
+			"shortDescription": "Ship and clean up work",
+			"category": "DevOps",
+			"keywords": ["delivery", "pull-request", "release", "cleanup", "operations", "reliability"],
+			"skills": ["cleaning-repos", "creating-prs"],
+			"commands": ["clean-repo", "create-draft-pr", "create-pr"],
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -41,90 +42,51 @@
 		{
 			"name": "design",
 			"displayName": "Design",
-			"description": "Design system synthesis from screenshots, moodboards, videos, URLs, chat briefs, and mixed visual references.",
-			"shortDescription": "Design system synthesis",
+			"description": "Design and architecture skills for product UI, Apple platforms, system architecture, data modeling, API design, technical design docs, ADRs, C4 diagrams, and design reviews.",
+			"shortDescription": "Product and system design",
 			"category": "Design",
-			"keywords": ["design", "design-system", "moodboard", "screenshots", "video", "ui", "ux", "DESIGN.md"],
-			"skills": ["design-system"],
+			"keywords": ["design", "architecture", "api", "database", "apple", "hig", "ui", "ux", "adr", "c4"],
+			"skills": [
+				"api-design",
+				"architecture",
+				"c4-diagrams",
+				"data-modeling",
+				"design-options",
+				"design-review",
+				"design-system",
+				"design-workflow",
+				"foundations",
+				"platforms",
+				"services",
+				"write-adr",
+				"write-design-doc"
+			],
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
 			}
 		},
 		{
-			"name": "repository-docs",
-			"displayName": "Repository Docs",
-			"description": "Repository documentation maintenance for public open-source projects and private internal project hubs.",
-			"shortDescription": "README and contributor docs",
-			"category": "Documentation",
-			"keywords": ["readme", "contributing", "documentation", "open-source", "internal-docs"],
-			"skills": ["closed-source-docs", "open-source-docs"],
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			}
-		},
-		{
-			"name": "frontend",
-			"displayName": "Frontend",
-			"description": "Frontend design exploration toolkit for interactive HTML design options.",
-			"shortDescription": "Interactive frontend design options",
+			"name": "development",
+			"displayName": "Development",
+			"description": "Implementation and code craft workflows for commits, skill authoring, reusable tooling, and publishing agent skills as maintained software artifacts.",
+			"shortDescription": "Build and package work",
 			"category": "Development",
-			"keywords": ["frontend", "design", "ui", "prototype"],
-			"skills": ["design-options"],
+			"keywords": ["development", "implementation", "code", "commits", "skills", "authoring", "tooling", "publishing"],
+			"skills": ["authoring", "creating-commits", "publishing", "tooling"],
+			"commands": ["create-commit"],
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
 			}
 		},
 		{
-			"name": "git",
-			"displayName": "Git",
-			"description": "Git workflow toolkit for commits, conflict resolution, rebases, and repository cleanup.",
-			"shortDescription": "Git workflow automation",
-			"category": "Development",
-			"keywords": ["git", "commits", "rebase", "conflicts"],
-			"skills": ["cleaning-repos", "creating-commits", "resolving-conflicts"],
-			"commands": ["clean-repo", "create-commit", "rebase"],
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			}
-		},
-		{
-			"name": "github",
-			"displayName": "GitHub",
-			"description": "GitHub workflow toolkit for creating pull requests, monitoring CI, and getting PRs ready to merge.",
-			"shortDescription": "Pull request and CI workflows",
-			"category": "Development",
-			"keywords": ["github", "pull-request", "ci", "merge-readiness"],
-			"skills": ["creating-prs", "fix-pr", "monitoring-ci"],
-			"commands": ["ci", "create-draft-pr", "create-pr", "fix-pr"],
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			}
-		},
-		{
-			"name": "project",
-			"displayName": "Project",
-			"description": "Project setup and context management skills for requirements and shared agent context.",
-			"shortDescription": "Project context and requirements",
-			"category": "Development",
-			"keywords": ["project", "requirements", "context"],
-			"skills": ["project-context", "requirements", "task-spec"],
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			}
-		},
-		{
-			"name": "linear-planner",
-			"displayName": "Linear Planner",
-			"description": "Linear planning workflows and project document templates for turning product ideas into traceable plans, specs, decisions, and release checks.",
-			"shortDescription": "Linear planning and project docs",
+			"name": "intent",
+			"displayName": "Intent",
+			"description": "Intent and problem-understanding workflows for requirements, task shaping, Linear planning, project documents, issue hygiene, and turning vague goals into traceable work.",
+			"shortDescription": "Clarify and plan work",
 			"category": "Productivity",
-			"keywords": ["linear", "planning", "projects", "intent", "issues", "project-docs", "templates"],
+			"keywords": ["intent", "requirements", "planning", "linear", "issues", "project-docs", "task-spec", "context"],
 			"readmeBody": "README.body.txt",
 			"skills": [
 				"create-doc-template",
@@ -132,8 +94,11 @@
 				"estimate-issue-complexity",
 				"linear-issues",
 				"pickup-work",
-				"project-intent",
+				"project-context",
 				"project-docs",
+				"project-intent",
+				"requirements",
+				"task-spec",
 				"tidy-linear-project"
 			],
 			"commands": ["pickup-work", "tidy-linear-project"],
@@ -143,26 +108,28 @@
 			}
 		},
 		{
-			"name": "skill-creation",
-			"displayName": "Skill Creation",
-			"description": "End-to-end toolkit for authoring, publishing, tooling, and improving reusable agent skills.",
-			"shortDescription": "Author and publish agent skills",
-			"category": "Development",
-			"keywords": ["skills", "authoring", "publishing", "tooling"],
-			"skills": ["authoring", "publishing", "retrospecting", "taste-encoding", "tooling"],
+			"name": "maintenance",
+			"displayName": "Maintenance",
+			"description": "Evolution and maintenance workflows for resolving conflicts, mining agent sessions for durable improvements, and encoding long-term user taste into reusable skills.",
+			"shortDescription": "Evolve the skill library",
+			"category": "Maintenance",
+			"keywords": ["maintenance", "evolution", "conflicts", "retrospective", "taste", "refactoring"],
+			"skills": ["resolving-conflicts", "retrospecting", "taste-encoding"],
+			"commands": ["rebase"],
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
 			}
 		},
 		{
-			"name": "systems-design",
-			"displayName": "Systems Design",
-			"description": "Opinionated system design toolkit for architecture, data modeling, API design, workflow sequencing, and design review.",
-			"shortDescription": "System architecture and design review",
-			"category": "Architecture",
-			"keywords": ["architecture", "api", "database", "design-review"],
-			"skills": ["api-design", "architecture", "data-modeling", "design-review", "design-workflow"],
+			"name": "verification",
+			"displayName": "Verification",
+			"description": "Quality and verification workflows for CI monitoring, pull request repair, merge readiness, and evidence-driven validation.",
+			"shortDescription": "Validate and repair work",
+			"category": "Testing",
+			"keywords": ["verification", "quality", "ci", "checks", "pull-request", "validation", "review"],
+			"skills": ["fix-pr", "monitoring-ci"],
+			"commands": ["ci", "fix-pr"],
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"

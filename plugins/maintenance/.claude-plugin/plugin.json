@@ -1,0 +1,28 @@
+{
+	"name": "maintenance",
+	"description": "Evolution and maintenance workflows for resolving conflicts, mining agent sessions for durable improvements, and encoding long-term user taste into reusable skills.",
+	"version": "2.0.0",
+	"skills": [
+		"./skills/resolving-conflicts",
+		"./skills/retrospecting",
+		"./skills/taste-encoding"
+	],
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"maintenance",
+		"evolution",
+		"conflicts",
+		"retrospective",
+		"taste",
+		"refactoring"
+	],
+	"commands": [
+		"./commands/rebase.md"
+	]
+}

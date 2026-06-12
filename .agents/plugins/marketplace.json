@@ -5,19 +5,35 @@
 	},
 	"plugins": [
 		{
-			"name": "apple-design",
+			"name": "collaboration",
 			"source": {
 				"source": "local",
-				"path": "./plugins/apple-design"
+				"path": "./plugins/collaboration"
 			},
 			"policy": {
 				"installation": "AVAILABLE",
 				"authentication": "ON_INSTALL"
 			},
-			"category": "Design",
+			"category": "Documentation",
 			"interface": {
-				"displayName": "Apple Design",
-				"shortDescription": "Apple HIG guidance by platform"
+				"displayName": "Collaboration",
+				"shortDescription": "Shared context and coordination"
+			}
+		},
+		{
+			"name": "delivery",
+			"source": {
+				"source": "local",
+				"path": "./plugins/delivery"
+			},
+			"policy": {
+				"installation": "AVAILABLE",
+				"authentication": "ON_INSTALL"
+			},
+			"category": "DevOps",
+			"interface": {
+				"displayName": "Delivery",
+				"shortDescription": "Ship and clean up work"
 			}
 		},
 		{
@@ -33,30 +49,14 @@
 			"category": "Design",
 			"interface": {
 				"displayName": "Design",
-				"shortDescription": "Design system synthesis"
+				"shortDescription": "Product and system design"
 			}
 		},
 		{
-			"name": "documentation",
+			"name": "development",
 			"source": {
 				"source": "local",
-				"path": "./plugins/documentation"
-			},
-			"policy": {
-				"installation": "AVAILABLE",
-				"authentication": "ON_INSTALL"
-			},
-			"category": "Documentation",
-			"interface": {
-				"displayName": "Documentation",
-				"shortDescription": "Structured engineering documentation"
-			}
-		},
-		{
-			"name": "frontend",
-			"source": {
-				"source": "local",
-				"path": "./plugins/frontend"
+				"path": "./plugins/development"
 			},
 			"policy": {
 				"installation": "AVAILABLE",
@@ -64,47 +64,15 @@
 			},
 			"category": "Development",
 			"interface": {
-				"displayName": "Frontend",
-				"shortDescription": "Interactive frontend design options"
+				"displayName": "Development",
+				"shortDescription": "Build and package work"
 			}
 		},
 		{
-			"name": "git",
+			"name": "intent",
 			"source": {
 				"source": "local",
-				"path": "./plugins/git"
-			},
-			"policy": {
-				"installation": "AVAILABLE",
-				"authentication": "ON_INSTALL"
-			},
-			"category": "Development",
-			"interface": {
-				"displayName": "Git",
-				"shortDescription": "Git workflow automation"
-			}
-		},
-		{
-			"name": "github",
-			"source": {
-				"source": "local",
-				"path": "./plugins/github"
-			},
-			"policy": {
-				"installation": "AVAILABLE",
-				"authentication": "ON_INSTALL"
-			},
-			"category": "Development",
-			"interface": {
-				"displayName": "GitHub",
-				"shortDescription": "Pull request and CI workflows"
-			}
-		},
-		{
-			"name": "linear-planner",
-			"source": {
-				"source": "local",
-				"path": "./plugins/linear-planner"
+				"path": "./plugins/intent"
 			},
 			"policy": {
 				"installation": "AVAILABLE",
@@ -112,72 +80,40 @@
 			},
 			"category": "Productivity",
 			"interface": {
-				"displayName": "Linear Planner",
-				"shortDescription": "Linear planning and project docs"
+				"displayName": "Intent",
+				"shortDescription": "Clarify and plan work"
 			}
 		},
 		{
-			"name": "project",
+			"name": "maintenance",
 			"source": {
 				"source": "local",
-				"path": "./plugins/project"
+				"path": "./plugins/maintenance"
 			},
 			"policy": {
 				"installation": "AVAILABLE",
 				"authentication": "ON_INSTALL"
 			},
-			"category": "Development",
+			"category": "Maintenance",
 			"interface": {
-				"displayName": "Project",
-				"shortDescription": "Project context and requirements"
+				"displayName": "Maintenance",
+				"shortDescription": "Evolve the skill library"
 			}
 		},
 		{
-			"name": "repository-docs",
+			"name": "verification",
 			"source": {
 				"source": "local",
-				"path": "./plugins/repository-docs"
+				"path": "./plugins/verification"
 			},
 			"policy": {
 				"installation": "AVAILABLE",
 				"authentication": "ON_INSTALL"
 			},
-			"category": "Documentation",
+			"category": "Testing",
 			"interface": {
-				"displayName": "Repository Docs",
-				"shortDescription": "README and contributor docs"
-			}
-		},
-		{
-			"name": "skill-creation",
-			"source": {
-				"source": "local",
-				"path": "./plugins/skill-creation"
-			},
-			"policy": {
-				"installation": "AVAILABLE",
-				"authentication": "ON_INSTALL"
-			},
-			"category": "Development",
-			"interface": {
-				"displayName": "Skill Creation",
-				"shortDescription": "Author and publish agent skills"
-			}
-		},
-		{
-			"name": "systems-design",
-			"source": {
-				"source": "local",
-				"path": "./plugins/systems-design"
-			},
-			"policy": {
-				"installation": "AVAILABLE",
-				"authentication": "ON_INSTALL"
-			},
-			"category": "Architecture",
-			"interface": {
-				"displayName": "Systems Design",
-				"shortDescription": "System architecture and design review"
+				"displayName": "Verification",
+				"shortDescription": "Validate and repair work"
 			}
 		}
 	]

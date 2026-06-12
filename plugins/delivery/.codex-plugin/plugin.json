@@ -1,0 +1,36 @@
+{
+	"name": "delivery",
+	"version": "2.0.0",
+	"description": "Operations, reliability, and delivery workflows for opening pull requests, cleaning repositories, preparing releases, and getting work safely shipped.",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"delivery",
+		"pull-request",
+		"release",
+		"cleanup",
+		"operations",
+		"reliability"
+	],
+	"skills": "./skills/",
+	"interface": {
+		"displayName": "Delivery",
+		"shortDescription": "Ship and clean up work",
+		"longDescription": "Operations, reliability, and delivery workflows for opening pull requests, cleaning repositories, preparing releases, and getting work safely shipped.",
+		"developerName": "Luca Silverentand",
+		"category": "DevOps",
+		"capabilities": [
+			"Read",
+			"Write"
+		],
+		"websiteURL": "https://github.com/lucasilverentand/skills",
+		"defaultPrompt": [
+			"Use Delivery when the task matches one of its bundled skills."
+		]
+	}
+}

@@ -1,0 +1,20 @@
+{
+	"name": "verification",
+	"displayName": "Verification",
+	"version": "2.0.0",
+	"description": "Quality and verification workflows for CI monitoring, pull request repair, merge readiness, and evidence-driven validation.",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"license": "MIT",
+	"keywords": [
+		"verification",
+		"quality",
+		"ci",
+		"checks",
+		"pull-request",
+		"validation",
+		"review"
+	]
+}

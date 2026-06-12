@@ -1,9 +1,21 @@
 {
 	"name": "design",
-	"description": "Design system synthesis from screenshots, moodboards, videos, URLs, chat briefs, and mixed visual references.",
-	"version": "1.2.0",
+	"description": "Design and architecture skills for product UI, Apple platforms, system architecture, data modeling, API design, technical design docs, ADRs, C4 diagrams, and design reviews.",
+	"version": "2.0.0",
 	"skills": [
-		"./skills/design-system"
+		"./skills/api-design",
+		"./skills/architecture",
+		"./skills/c4-diagrams",
+		"./skills/data-modeling",
+		"./skills/design-options",
+		"./skills/design-review",
+		"./skills/design-system",
+		"./skills/design-workflow",
+		"./skills/foundations",
+		"./skills/platforms",
+		"./skills/services",
+		"./skills/write-adr",
+		"./skills/write-design-doc"
 	],
 	"author": {
 		"name": "Luca Silverentand",
@@ -14,12 +26,14 @@
 	"license": "MIT",
 	"keywords": [
 		"design",
-		"design-system",
-		"moodboard",
-		"screenshots",
-		"video",
+		"architecture",
+		"api",
+		"database",
+		"apple",
+		"hig",
 		"ui",
 		"ux",
-		"DESIGN.md"
+		"adr",
+		"c4"
 	]
 }

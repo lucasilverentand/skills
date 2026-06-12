@@ -1,0 +1,29 @@
+{
+	"name": "delivery",
+	"description": "Operations, reliability, and delivery workflows for opening pull requests, cleaning repositories, preparing releases, and getting work safely shipped.",
+	"version": "2.0.0",
+	"skills": [
+		"./skills/cleaning-repos",
+		"./skills/creating-prs"
+	],
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"delivery",
+		"pull-request",
+		"release",
+		"cleanup",
+		"operations",
+		"reliability"
+	],
+	"commands": [
+		"./commands/clean-repo.md",
+		"./commands/create-draft-pr.md",
+		"./commands/create-pr.md"
+	]
+}
