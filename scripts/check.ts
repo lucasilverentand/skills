@@ -1,4 +1,5 @@
 #!/usr/bin/env bun
+
 /**
  * Optimizes all .md files in the repo for token efficiency without altering content.
  * Also flags structural issues.
@@ -10,9 +11,9 @@
  *   bun run check --stdin   # read from stdin, write optimized to stdout (for editors)
  */
 
-import { Glob } from "bun";
 import { readFile, writeFile } from "node:fs/promises";
 import { relative } from "node:path";
+import { Glob } from "bun";
 
 const ROOT = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
 const fix = process.argv.includes("--fix");
@@ -34,7 +35,10 @@ const estimateTokens = (text: string) => Math.ceil(text.length / 4);
 // ── Optimizations ───────────────────────────────────────────────────
 
 /** Split text into alternating [prose, code, prose, code, …] segments. */
-function splitCodeBlocks(text: string): { segments: string[]; fenced: boolean[] } {
+function splitCodeBlocks(text: string): {
+	segments: string[];
+	fenced: boolean[];
+} {
 	const segments: string[] = [];
 	const fenced: boolean[] = [];
 	const fence = /^(`{3,}|~{3,})/gm;
@@ -141,8 +145,10 @@ function parseFrontmatter(content: string): Record<string, string> | null {
 	return fields;
 }
 
-const VAGUE_WORDS = /\b(helper|handler|processor|utility|misc|various|stuff|general)\b/i;
-const TRIGGER_PHRASE = /\buse\s+(this\s+)?(skill\s+)?(when|for|if|after|before|proactively)\b/i;
+const VAGUE_WORDS =
+	/\b(helper|handler|processor|utility|misc|various|stuff|general)\b/i;
+const TRIGGER_PHRASE =
+	/\buse\s+(this\s+)?(skill\s+)?(when|for|if|after|before|proactively)\b/i;
 const USER_SAYS = /\buser\s+(says|asks|wants|mentions|references|requests)\b/i;
 const PROACTIVE = /\bproactively\b/i;
 const FIRST_PERSON = /^(I |My |We |Our )/;
@@ -172,7 +178,8 @@ function flagTriggerQuality(
 			file: rel,
 			line: descLine,
 			severity: "error",
-			message: 'description uses first person — use third person ("Generates..." not "I generate...")',
+			message:
+				'description uses first person — use third person ("Generates..." not "I generate...")',
 		});
 	}
 
@@ -183,14 +190,17 @@ function flagTriggerQuality(
 			file: rel,
 			line: descLine,
 			severity: "error",
-			message: 'description has no trigger clause — add "Use when..." to tell agents when to activate',
+			message:
+				'description has no trigger clause — add "Use when..." to tell agents when to activate',
 		});
 	}
 
 	// ── Trigger quality signals ──
 
 	// Count distinct trigger contexts (phrases after "Use when" separated by commas/or)
-	const triggerSection = desc.match(/use\s+(?:this\s+)?(?:skill\s+)?when\b(.*)/is);
+	const triggerSection = desc.match(
+		/use\s+(?:this\s+)?(?:skill\s+)?when\b(.*)/is,
+	);
 	if (triggerSection) {
 		// Split on commas and "or" to count distinct triggers
 		const triggers = triggerSection[1]
@@ -212,7 +222,8 @@ function flagTriggerQuality(
 			file: rel,
 			line: descLine,
 			severity: "warn",
-			message: "no user language examples — add phrases like 'when the user says \"...\"' for better matching",
+			message:
+				"no user language examples — add phrases like 'when the user says \"...\"' for better matching",
 		});
 	}
 
@@ -267,7 +278,8 @@ function flag(filePath: string, content: string): Flag[] {
 	const fm = parseFrontmatter(content);
 
 	if (isSkill) {
-		const descLineNum = lines.findIndex((l) => l.startsWith("description:")) + 1;
+		const descLineNum =
+			lines.findIndex((l) => l.startsWith("description:")) + 1;
 
 		if (!fm) {
 			flags.push({
@@ -279,12 +291,11 @@ function flag(filePath: string, content: string): Flag[] {
 			flags.push({
 				file: rel,
 				severity: "error",
-				message: "missing description — agents cannot trigger this skill without one",
+				message:
+					"missing description — agents cannot trigger this skill without one",
 			});
 		} else {
-			flags.push(
-				...flagTriggerQuality(rel, descLineNum, fm.description, fm),
-			);
+			flags.push(...flagTriggerQuality(rel, descLineNum, fm.description, fm));
 		}
 
 		// Check name matches directory
@@ -349,7 +360,8 @@ const glob = new Glob("**/*.md");
 const files: string[] = [];
 for await (const path of glob.scan({ cwd: ROOT, absolute: true })) {
 	// Skip generated/vendor areas and local-only private agent setup.
-	if (/node_modules|\.git\/|\/build\/|\/\.cache\/|\/local\//.test(path)) continue;
+	if (/node_modules|\.git\/|\/build\/|\/\.cache\/|\/local\//.test(path))
+		continue;
 	files.push(path);
 }
 files.sort();
@@ -370,9 +382,12 @@ async function printDiff(rel: string, original: string, optimized: string) {
 	await writeFile(oldTmp, original);
 	await writeFile(newTmp, optimized);
 
-	const proc = Bun.spawn(["diff", "-u", "--label", rel, "--label", rel, oldTmp, newTmp], {
-		stdout: "pipe",
-	});
+	const proc = Bun.spawn(
+		["diff", "-u", "--label", rel, "--label", rel, oldTmp, newTmp],
+		{
+			stdout: "pipe",
+		},
+	);
 	const output = await new Response(proc.stdout).text();
 	await proc.exited;
 
@@ -420,7 +435,9 @@ for (const filePath of files) {
 			await writeFile(filePath, optimized);
 			const rel = relative(ROOT, filePath);
 			const pct = ((saved / original.length) * 100).toFixed(1);
-			console.log(`  ${green("fixed")}  ${rel}  ${dim(`-${saved} chars (${pct}%)`)}`);
+			console.log(
+				`  ${green("fixed")}  ${rel}  ${dim(`-${saved} chars (${pct}%)`)}`,
+			);
 		} else {
 			await printDiff(relative(ROOT, filePath), original, optimized);
 		}
@@ -447,7 +464,9 @@ console.log(fix ? green(summary) : bold(summary));
 if (!fix && filesChanged > 0) {
 	console.log(dim("Run with --fix to apply changes."));
 	if (strict) {
-		console.log(red("Strict mode: commit formatted markdown or run `bun run check:fix`."));
+		console.log(
+			red("Strict mode: commit formatted markdown or run `bun run check:fix`."),
+		);
 	}
 }
 
