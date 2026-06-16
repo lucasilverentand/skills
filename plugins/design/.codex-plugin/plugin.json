@@ -1,7 +1,7 @@
 {
 	"name": "design",
 	"version": "2.0.0",
-	"description": "Design and architecture skills for product UI, Apple platforms, system architecture, data modeling, API design, technical design docs, ADRs, C4 diagrams, and design reviews.",
+	"description": "Design and architecture skills for product UI, Apple platforms, system architecture, data modeling, API design, technical design docs, ADRs, C4 diagrams, interactive HTML system diagrams, and design reviews.",
 	"author": {
 		"name": "Luca Silverentand",
 		"email": "dev@lucasilverentand.com"
@@ -12,6 +12,9 @@
 	"keywords": [
 		"design",
 		"architecture",
+		"diagram",
+		"interactive",
+		"html",
 		"api",
 		"database",
 		"apple",
@@ -25,7 +28,7 @@
 	"interface": {
 		"displayName": "Design",
 		"shortDescription": "Product and system design",
-		"longDescription": "Design and architecture skills for product UI, Apple platforms, system architecture, data modeling, API design, technical design docs, ADRs, C4 diagrams, and design reviews.",
+		"longDescription": "Design and architecture skills for product UI, Apple platforms, system architecture, data modeling, API design, technical design docs, ADRs, C4 diagrams, interactive HTML system diagrams, and design reviews.",
 		"developerName": "Luca Silverentand",
 		"category": "Design",
 		"capabilities": [

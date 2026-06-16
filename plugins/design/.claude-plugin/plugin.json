@@ -1,6 +1,6 @@
 {
 	"name": "design",
-	"description": "Design and architecture skills for product UI, Apple platforms, system architecture, data modeling, API design, technical design docs, ADRs, C4 diagrams, and design reviews.",
+	"description": "Design and architecture skills for product UI, Apple platforms, system architecture, data modeling, API design, technical design docs, ADRs, C4 diagrams, interactive HTML system diagrams, and design reviews.",
 	"version": "2.0.0",
 	"skills": [
 		"./skills/api-design",
@@ -12,6 +12,7 @@
 		"./skills/design-system",
 		"./skills/design-workflow",
 		"./skills/foundations",
+		"./skills/interactive-system-design",
 		"./skills/platforms",
 		"./skills/services",
 		"./skills/write-adr",
@@ -27,6 +28,9 @@
 	"keywords": [
 		"design",
 		"architecture",
+		"diagram",
+		"interactive",
+		"html",
 		"api",
 		"database",
 		"apple",
