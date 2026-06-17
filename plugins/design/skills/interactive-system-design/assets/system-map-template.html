@@ -139,10 +139,11 @@
 
 		.stage {
 			position: relative;
-			overflow: auto;
+			overflow: hidden;
 			padding: 68px 28px 28px;
 			overscroll-behavior: contain;
 			cursor: grab;
+			touch-action: none;
 			background-color: var(--canvas);
 			background-image: radial-gradient(circle, rgba(99, 110, 138, .16) 1px, transparent 1.2px);
 			background-size: 22px 22px;
@@ -171,6 +172,7 @@
 			width: var(--plane-width);
 			height: var(--plane-height);
 			transform-origin: top left;
+			will-change: transform;
 			transition: transform .16s ease;
 		}
 
@@ -500,7 +502,7 @@
 		/*
 			CONTENT ONLY.
 			Replace the map object below for each new diagram. Leave the shell,
-			rendering code, styling, scrolling, zooming, and canvas panning alone.
+			rendering code, styling, zooming, and transform-based canvas panning alone.
 
 			Coordinate model:
 			- plane.width / plane.height set the drawing surface.
@@ -628,6 +630,8 @@
 		let selectedEdge = null;
 		let activeDetail = null;
 		let zoom = 1;
+		let panX = 0;
+		let panY = 0;
 		let spacePan = false;
 		let dragPan = null;
 
@@ -877,13 +881,24 @@
 			});
 		}
 
+		function applyView({ animate = true } = {}) {
+			plane.style.transition = animate ? "transform .16s ease" : "none";
+			plane.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`;
+			if (!animate) {
+				requestAnimationFrame(() => {
+					plane.style.transition = "transform .16s ease";
+				});
+			}
+		}
+
 		function resetView() {
 			closeDetail({ clearFocus: true });
 			clearSelection();
 			zoom = 1;
+			panX = 0;
+			panY = 0;
 			search.value = "";
-			stage.scrollTo({ left: 0, top: 0, behavior: "smooth" });
-			plane.style.transform = "scale(1)";
+			applyView();
 			renderEdges();
 			applyState();
 		}
@@ -904,15 +919,18 @@
 
 		document.querySelector("#zoomIn").addEventListener("click", () => {
 			zoom = Math.min(1.25, zoom + .1);
-			plane.style.transform = `scale(${zoom})`;
+			applyView();
 		});
 		document.querySelector("#zoomOut").addEventListener("click", () => {
 			zoom = Math.max(.65, zoom - .1);
-			plane.style.transform = `scale(${zoom})`;
+			applyView();
 		});
 		document.querySelector("#fit").addEventListener("click", () => {
-			zoom = Math.max(.62, Math.min(1, (stage.clientWidth - 24) / map.plane.width));
-			plane.style.transform = `scale(${zoom})`;
+			const pad = 56;
+			zoom = Math.max(.35, Math.min(1.15, (stage.clientWidth - pad) / map.plane.width, (stage.clientHeight - pad) / map.plane.height));
+			panX = Math.round((stage.clientWidth - map.plane.width * zoom) / 2) - 28;
+			panY = Math.round((stage.clientHeight - map.plane.height * zoom) / 2) - 68;
+			applyView();
 		});
 		document.querySelector("#reset").addEventListener("click", resetView);
 
@@ -963,8 +981,8 @@
 				pointerId: event.pointerId,
 				x: event.clientX,
 				y: event.clientY,
-				scrollLeft: stage.scrollLeft,
-				scrollTop: stage.scrollTop,
+				panX,
+				panY,
 			};
 			stage.classList.add("dragging");
 		});
@@ -972,9 +990,18 @@
 		stage.addEventListener("pointermove", event => {
 			if (!dragPan || dragPan.pointerId !== event.pointerId) return;
 			event.preventDefault();
-			stage.scrollLeft = dragPan.scrollLeft - (event.clientX - dragPan.x);
-			stage.scrollTop = dragPan.scrollTop - (event.clientY - dragPan.y);
+			panX = dragPan.panX + (event.clientX - dragPan.x);
+			panY = dragPan.panY + (event.clientY - dragPan.y);
+			applyView({ animate: false });
 		});
+
+		stage.addEventListener("wheel", event => {
+			if (!detailOverlay.hidden) return;
+			event.preventDefault();
+			panX -= event.deltaX;
+			panY -= event.deltaY;
+			applyView({ animate: false });
+		}, { passive: false });
 
 		function endPan(event) {
 			if (!dragPan || dragPan.pointerId !== event.pointerId) return;
@@ -991,6 +1018,7 @@
 		renderLanes();
 		renderNodes();
 		renderEdges();
+		applyView({ animate: false });
 		applyState();
 	</script>
 </body>
