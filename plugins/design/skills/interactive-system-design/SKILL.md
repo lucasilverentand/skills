@@ -35,8 +35,8 @@ Use three layers:
 
 The template already includes:
 - Search parts and edge labels.
-- Focus mode on click: highlight connected edges and dim unrelated parts.
-- Edge selection: clicking a connector or its label should focus both endpoints and expose the relationship detail.
+- Card details: clicking a compact card opens the centered hero detail view without changing map focus or dimming neighboring cards.
+- Relationship focus mode: clicking a connector highlights the connected endpoints and dims unrelated parts.
 - Reset, fit-to-view, zoom in/out, cursor-centered wheel zoom, free canvas dragging, and Space-hold map-only dragging.
 
 ## Orthogonal connectors

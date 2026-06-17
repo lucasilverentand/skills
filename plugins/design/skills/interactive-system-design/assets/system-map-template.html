@@ -1116,9 +1116,7 @@
 			document.querySelectorAll(".node").forEach(card => {
 				card.querySelector(".node-button").addEventListener("click", () => {
 					const id = card.dataset.node;
-					focus = id;
-					selectedEdge = null;
-					renderEdges();
+					clearSelection();
 					applyState();
 					openDetail(id, card);
 				});
