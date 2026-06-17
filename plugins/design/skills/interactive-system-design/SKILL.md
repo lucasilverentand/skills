@@ -10,7 +10,8 @@ Create an explorable system drawing as one self-contained HTML file. The artifac
 - Write one `.html` file. Default to `.context/architecture/interactive/<slug>.html` unless the user names a path.
 - Keep it self-contained: inline CSS, inline SVG, inline JavaScript, no CDN dependencies, no external fonts, no build step.
 - Use real HTML and SVG for the main drawing. Do not make the core diagram a raster image, canvas-only surface, or Mermaid embed.
-- Include enough structure for later edits: a `nodes` array, an `edges` array, stable ids, and clear sections for layout, rendering, interactions, and content.
+- Start from `assets/system-map-template.html` unless the user asks for a different interaction model. Copy it to the output path, then edit only the `map` object in the `CONTENT ONLY` block for the first pass.
+- Keep structure for later edits: the `map.nodes` cards, `map.edges` connections, stable ids, lane positions, and plane dimensions must be the only normal content-editing surface.
 - If a source design doc or architecture artifact exists, preserve its terminology. If it does not, create a first draft from the conversation and mark uncertain assumptions in the foldout cards.
 
 ## Workflow
@@ -20,7 +21,7 @@ Create an explorable system drawing as one self-contained HTML file. The artifac
    - Top-to-bottom for pipeline, lifecycle, or command flow.
    - Swimlanes for ownership, trust boundaries, platforms, or runtime tiers.
    - Radial or clustered layouts only when the relationships are genuinely hub-like.
-3. Create the HTML artifact. Model the system in JavaScript first, then render from that model so nodes, edges, cards, filters, and inspector state stay consistent.
+3. Create the HTML artifact by copying `assets/system-map-template.html`. Replace the placeholder `map` object with the system content: title, search placeholder, plane size, lanes, cards, and connections. Avoid editing shell CSS, rendering, zoom, scrolling, or Space-drag panning unless the user specifically asks to change the shell.
 4. Use Bun to preview the artifact from its directory. Prefer a temporary `Bun.serve` command or an existing project Bun script; do not add dependencies or commit server files just to view one HTML file.
 5. Use the Browser plugin when available. Open the Bun-served local URL in the in-app browser, interact with it, check console errors, test a small viewport, and adjust the file until it is readable and usable.
 6. Share the file path, local preview URL if the server is still running, and the main design questions the artifact now exposes. For co-creation, ask for the next decision in concrete terms, such as which component to expand, which flow to trace, or which trade-off to compare.
@@ -28,16 +29,15 @@ Create an explorable system drawing as one self-contained HTML file. The artifac
 ## Drawing structure
 Use three layers:
 
-1. **Canvas shell**: toolbar, search, view toggles, zoom controls, and an optional minimap.
-2. **Diagram plane**: absolute-positioned node cards with an SVG connector layer behind or above them.
-3. **Detail surface**: foldout cards, side inspector, or inline accordions for responsibilities, contracts, data owned, failure modes, and open questions.
+1. **Canvas shell**: fixed menu/search, bottom-right zoom controls, scrollable map, and Space-hold dragging. This comes from the template and should usually stay unchanged.
+2. **Diagram plane**: absolute-positioned node cards with an SVG connector layer behind them.
+3. **Detail surface**: foldout card content for responsibilities, contracts, data owned, failure modes, and open questions.
 
-Good default controls:
+The template already includes:
 - Search parts and edge labels.
-- Toggle by layer, ownership lane, runtime tier, sync vs async, or happy path vs failure path.
 - Focus mode on click: highlight connected edges and dim unrelated parts.
 - Edge selection: clicking a connector or its label should focus both endpoints and expose the relationship detail.
-- Reset, fit-to-view, zoom in/out, and copy/share metadata when useful.
+- Reset, fit-to-view, zoom in/out, scroll-wheel map movement, and Space-hold drag panning.
 
 ## Orthogonal connectors
 Draw every relationship as right-angle SVG paths.

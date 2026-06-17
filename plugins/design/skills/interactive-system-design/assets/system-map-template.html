@@ -1,0 +1,824 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Interactive System Map</title>
+	<style>
+		:root {
+			color-scheme: light;
+			--app: #fbfcff;
+			--canvas: #fbfcff;
+			--canvas-line: #edf0f6;
+			--card: #ffffff;
+			--ink: #111318;
+			--muted: #6b7280;
+			--soft: #9aa3b2;
+			--blue: #5e6ad2;
+			--green: #26a269;
+			--amber: #d99028;
+			--red: #df5b67;
+			--violet: #8b6eea;
+			--border: rgba(15, 23, 42, .12);
+			--edge: #b9c1d0;
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			margin: 0;
+			height: 100vh;
+			overflow: hidden;
+			background: var(--app);
+			color: var(--ink);
+			font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+			letter-spacing: 0;
+		}
+
+		button, input { font: inherit; }
+
+		.app {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr);
+			height: 100vh;
+		}
+
+		.main {
+			display: grid;
+			grid-template-rows: 1fr;
+			min-width: 0;
+			height: 100vh;
+			background: var(--canvas);
+		}
+
+		.topbar {
+			position: fixed;
+			top: 14px;
+			left: 14px;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			width: auto;
+			max-width: calc(100vw - 28px);
+			padding: 4px;
+			border: 1px solid var(--canvas-line);
+			border-radius: 10px;
+			background: rgba(255, 255, 255, .9);
+			backdrop-filter: blur(18px);
+			color: var(--ink);
+			z-index: 10;
+		}
+
+		.topbar::before {
+			content: "Menu";
+			display: inline-flex;
+			align-items: center;
+			height: 30px;
+			padding: 0 9px;
+			color: #3e4654;
+			font-size: 13px;
+			font-weight: 650;
+		}
+
+		.topbar:hover::before,
+		.topbar:focus-within::before {
+			display: none;
+		}
+
+		.search {
+			display: none;
+			width: min(420px, calc(100vw - 190px));
+			flex: 0 1 auto;
+			height: 36px;
+			border: 1px solid var(--canvas-line);
+			border-radius: 8px;
+			background: white;
+			color: var(--ink);
+			outline: none;
+			padding: 0 11px;
+		}
+
+		.topbar:hover .search,
+		.topbar:focus-within .search {
+			display: block;
+		}
+
+		.search:focus {
+			border-color: rgba(94, 106, 210, .45);
+			box-shadow: 0 0 0 3px rgba(94, 106, 210, .13);
+		}
+
+		.tool-group {
+			position: fixed;
+			right: 14px;
+			bottom: 14px;
+			display: flex;
+			gap: 4px;
+			padding: 4px;
+			border: 1px solid var(--canvas-line);
+			border-radius: 999px;
+			background: rgba(240, 242, 246, .94);
+			backdrop-filter: blur(18px);
+			z-index: 11;
+		}
+
+		.tool {
+			min-width: 34px;
+			height: 30px;
+			border: 0;
+			border-radius: 999px;
+			background: transparent;
+			color: #3e4654;
+			padding: 0 9px;
+			cursor: pointer;
+		}
+
+		.tool:hover {
+			background: white;
+		}
+
+		.stage {
+			position: relative;
+			overflow: auto;
+			padding: 68px 28px 28px;
+			overscroll-behavior: contain;
+			background-color: var(--canvas);
+			background-image: radial-gradient(circle, rgba(99, 110, 138, .16) 1px, transparent 1.2px);
+			background-size: 22px 22px;
+			background-position: 2px 2px;
+		}
+
+		.stage.space-pan {
+			cursor: grab;
+		}
+
+		.stage.space-pan.dragging {
+			cursor: grabbing;
+		}
+
+		.stage.space-pan * {
+			cursor: inherit !important;
+		}
+
+		.stage:focus {
+			outline: none;
+		}
+
+		.plane {
+			position: relative;
+			width: var(--plane-width);
+			height: var(--plane-height);
+			transform-origin: top left;
+			transition: transform .16s ease;
+		}
+
+		.lane {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			border-left: 1px solid rgba(148, 163, 184, .22);
+			background: transparent;
+		}
+
+		.lane-title {
+			position: absolute;
+			top: 10px;
+			left: 16px;
+			color: #9aa3b2;
+			font-size: 10px;
+			font-weight: 760;
+			letter-spacing: .08em;
+			text-transform: uppercase;
+		}
+
+		.edge-layer {
+			position: absolute;
+			inset: 0;
+			z-index: 1;
+			overflow: visible;
+		}
+
+		.node-layer {
+			position: relative;
+			z-index: 3;
+		}
+
+		.node {
+			position: absolute;
+			width: var(--card-width);
+			min-height: var(--card-height);
+			border: 1px solid var(--border);
+			border-radius: 7px;
+			background: rgba(255, 255, 255, .98);
+			overflow: hidden;
+			user-select: none;
+			transition: border-color .16s ease, opacity .16s ease, background-color .16s ease;
+		}
+
+		.node.hidden, .edge.hidden, .edge-label.hidden { display: none; }
+		.node.dimmed, .edge.dimmed, .edge-label.dimmed { opacity: .16; }
+
+		.node.focused {
+			border-color: rgba(94, 106, 210, .62);
+			background: #fbfbff;
+		}
+
+		.node-button {
+			width: 100%;
+			border: 0;
+			background: transparent;
+			color: inherit;
+			text-align: left;
+			padding: 13px;
+			cursor: pointer;
+		}
+
+		.meta {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 8px;
+			color: var(--muted);
+			font-size: 9px;
+			font-weight: 780;
+			letter-spacing: .06em;
+			text-transform: uppercase;
+		}
+
+		.node h2 {
+			margin: 9px 0 0;
+			color: var(--ink);
+			font-size: 14px;
+			line-height: 1.15;
+		}
+
+		.summary {
+			margin: 7px 0 0;
+			color: #586174;
+			font-size: 11px;
+			line-height: 1.35;
+			display: -webkit-box;
+			-webkit-line-clamp: 2;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+		}
+
+		.badges {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 5px;
+			margin-top: 10px;
+		}
+
+		.badge {
+			border-radius: 999px;
+			background: #f1f3f8;
+			color: #566072;
+			font-size: 10px;
+			font-weight: 700;
+			padding: 3px 6px;
+		}
+
+		.details {
+			display: grid;
+			grid-template-rows: 0fr;
+			border-top: 1px solid transparent;
+			transition: grid-template-rows .18s ease;
+		}
+
+		.node.open .details {
+			grid-template-rows: 1fr;
+			border-top-color: var(--canvas-line);
+		}
+
+		.details-inner {
+			overflow: hidden;
+			padding: 0 13px;
+		}
+
+		.node.open .details-inner {
+			padding-bottom: 13px;
+		}
+
+		.details h3 {
+			margin: 11px 0 5px;
+			color: #2d3440;
+			font-size: 11px;
+		}
+
+		.details ul {
+			margin: 0;
+			padding-left: 16px;
+			color: #616b7d;
+			font-size: 11px;
+			line-height: 1.42;
+		}
+
+		.edge {
+			fill: none;
+			stroke: var(--edge);
+			stroke-width: 1.8;
+			stroke-linecap: round;
+			stroke-linejoin: round;
+			opacity: .78;
+			pointer-events: none;
+		}
+
+		.edge-hit {
+			fill: none;
+			stroke: transparent;
+			stroke-width: 18;
+			stroke-linecap: round;
+			stroke-linejoin: round;
+			cursor: pointer;
+			pointer-events: stroke;
+		}
+
+		.edge.source,
+		.edge.generate,
+		.edge.validate,
+		.edge.delivery,
+		.edge.read,
+		.edge.write,
+		.edge.event,
+		.edge.control { stroke: var(--edge); }
+		.edge.risk { stroke: #d6a0a7; stroke-dasharray: 3 6; }
+		.edge.selected { stroke: var(--blue); stroke-width: 3; opacity: 1; }
+
+		.edge-label {
+			font-size: 10px;
+			font-weight: 700;
+			fill: #5b6475;
+			paint-order: stroke;
+			stroke: var(--canvas);
+			stroke-width: 5px;
+			stroke-linejoin: round;
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		.edge-label.selected { opacity: 1; fill: #1c2430; }
+
+		@media (max-width: 920px) {
+			body { overflow: hidden; }
+			.app {
+				display: grid;
+				grid-template-columns: 1fr;
+				grid-template-rows: minmax(0, 1fr);
+				height: 100vh;
+			}
+			.main { min-height: 0; }
+			.topbar { top: 10px; left: 10px; max-width: calc(100vw - 20px); }
+			.search { width: min(320px, calc(100vw - 168px)); min-width: 0; }
+			.tool-group { right: 10px; bottom: 10px; }
+			.stage { padding: 60px 20px 20px; }
+		}
+	</style>
+</head>
+<body>
+	<div class="app">
+		<main class="main">
+			<header class="topbar">
+				<input id="search" class="search" type="search" placeholder="Search system">
+			</header>
+			<div class="tool-group" aria-label="View controls">
+				<button class="tool" id="zoomOut" title="Zoom out">-</button>
+				<button class="tool" id="zoomIn" title="Zoom in">+</button>
+				<button class="tool" id="fit" title="Fit view">Fit</button>
+				<button class="tool" id="reset" title="Reset">Reset</button>
+			</div>
+			<section id="stage" class="stage" tabindex="0">
+				<div id="plane" class="plane" aria-label="Interactive system diagram">
+					<div id="lanes"></div>
+					<svg id="edgeLayer" class="edge-layer" aria-hidden="true"></svg>
+					<div id="nodes" class="node-layer"></div>
+				</div>
+			</section>
+		</main>
+	</div>
+	<script>
+		/*
+			CONTENT ONLY.
+			Replace the map object below for each new diagram. Leave the shell,
+			rendering code, styling, scrolling, zooming, and Space-drag panning alone.
+
+			Coordinate model:
+			- plane.width / plane.height set the drawing surface.
+			- lanes are subtle vertical columns.
+			- node x/y values place card top-left corners.
+			- edge busX or busY creates an orthogonal dogleg route.
+		*/
+		const map = {
+			title: "Interactive System Map",
+			subtitle: "Replace this content model with the system under design.",
+			searchPlaceholder: "Search nodes, flows, owners, risks",
+			plane: { width: 1220, height: 720, cardWidth: 220, cardHeight: 132 },
+			lanes: [
+				{ title: "Entry", x: 0, width: 250 },
+				{ title: "Core", x: 294, width: 250 },
+				{ title: "Data", x: 590, width: 290 },
+				{ title: "Delivery", x: 924, width: 296 }
+			],
+			nodes: [
+				{
+					id: "entry",
+					lane: "Entry",
+					x: 22,
+					y: 168,
+					title: "Entry point",
+					type: "Interface",
+					badges: ["request", "user-facing"],
+					summary: "The first boundary where a user, agent, or external system enters.",
+					sections: [
+						{ title: "Responsibilities", items: ["Accept the initial intent.", "Normalize the request shape."] },
+						{ title: "Open Questions", items: ["Which inputs are trusted?", "What context is required?"] }
+					],
+					risk: "Ambiguous entry contracts push complexity into every downstream part."
+				},
+				{
+					id: "orchestrator",
+					lane: "Core",
+					x: 316,
+					y: 244,
+					title: "Coordinator",
+					type: "Service",
+					badges: ["routing", "policy"],
+					summary: "Chooses the workflow and coordinates the major system steps.",
+					sections: [
+						{ title: "Responsibilities", items: ["Select the next action.", "Track state across the flow."] },
+						{ title: "Inputs / Outputs", items: ["Input: normalized intent.", "Output: routed command or event."] }
+					],
+					risk: "A coordinator with too many special cases becomes the hidden architecture."
+				},
+				{
+					id: "state",
+					lane: "Data",
+					x: 632,
+					y: 244,
+					title: "State store",
+					type: "Data",
+					badges: ["source of truth", "audit"],
+					summary: "Persists the durable facts and history the workflow depends on.",
+					sections: [
+						{ title: "Responsibilities", items: ["Store canonical records.", "Expose queryable workflow state."] },
+						{ title: "Failure Modes", items: ["Partial writes.", "Stale reads.", "Schema drift."] }
+					],
+					risk: "Unclear ownership makes downstream behavior hard to reason about."
+				},
+				{
+					id: "delivery",
+					lane: "Delivery",
+					x: 970,
+					y: 244,
+					title: "Delivery surface",
+					type: "Output",
+					badges: ["result", "handoff"],
+					summary: "Presents the outcome or hands it to the next system boundary.",
+					sections: [
+						{ title: "Responsibilities", items: ["Render the final state.", "Expose actionable next steps."] },
+						{ title: "Open Questions", items: ["Who confirms success?", "What gets logged?"] }
+					],
+					risk: "Success can look complete while hidden handoff work is still pending."
+				}
+			],
+			edges: [
+				{
+					from: "entry",
+					to: "orchestrator",
+					kind: "control",
+					label: "normalize intent",
+					fromSide: "right",
+					toSide: "left",
+					busX: 280,
+					detail: "The entry point sends a normalized request into the coordinator."
+				},
+				{
+					from: "orchestrator",
+					to: "state",
+					kind: "write",
+					label: "persist state",
+					fromSide: "right",
+					toSide: "left",
+					busX: 588,
+					detail: "The coordinator writes durable workflow state before delivery."
+				},
+				{
+					from: "state",
+					to: "delivery",
+					kind: "read",
+					label: "read result",
+					fromSide: "right",
+					toSide: "left",
+					busX: 914,
+					detail: "The delivery surface reads the finalized state and presents it."
+				}
+			]
+		};
+
+		const nodeLayer = document.querySelector("#nodes");
+		const edgeLayer = document.querySelector("#edgeLayer");
+		const laneLayer = document.querySelector("#lanes");
+		const search = document.querySelector("#search");
+		const plane = document.querySelector("#plane");
+		const stage = document.querySelector("#stage");
+		let focus = null;
+		let selectedEdge = null;
+		let zoom = 1;
+		let spacePan = false;
+		let dragPan = null;
+
+		document.title = map.title;
+		search.placeholder = map.searchPlaceholder || "Search system";
+		plane.style.setProperty("--plane-width", `${map.plane.width}px`);
+		plane.style.setProperty("--plane-height", `${map.plane.height}px`);
+		plane.style.setProperty("--card-width", `${map.plane.cardWidth}px`);
+		plane.style.setProperty("--card-height", `${map.plane.cardHeight}px`);
+		edgeLayer.setAttribute("viewBox", `0 0 ${map.plane.width} ${map.plane.height}`);
+
+		function escapeHtml(value) {
+			return String(value ?? "").replace(/[&<>"']/g, char => ({
+				"&": "&amp;",
+				"<": "&lt;",
+				">": "&gt;",
+				'"': "&quot;",
+				"'": "&#39;"
+			}[char]));
+		}
+
+		function textFor(node) {
+			const sectionText = (node.sections || []).flatMap(section => [section.title, ...(section.items || [])]);
+			return [node.title, node.type, node.lane, node.summary, node.risk, ...(node.badges || []), ...sectionText].join(" ").toLowerCase();
+		}
+
+		function renderLanes() {
+			laneLayer.innerHTML = (map.lanes || []).map(lane => `
+				<div class="lane" style="left:${lane.x}px;width:${lane.width}px">
+					<span class="lane-title">${escapeHtml(lane.title)}</span>
+				</div>
+			`).join("");
+		}
+
+		function renderNodes() {
+			nodeLayer.innerHTML = map.nodes.map(node => `
+				<article class="node" data-node="${escapeHtml(node.id)}" style="left:${node.x}px;top:${node.y}px">
+					<button class="node-button" aria-expanded="false">
+						<div class="meta"><span>${escapeHtml(node.type)}</span><span>${escapeHtml(node.lane)}</span></div>
+						<h2>${escapeHtml(node.title)}</h2>
+						<p class="summary">${escapeHtml(node.summary)}</p>
+						<div class="badges">${(node.badges || []).map(badge => `<span class="badge">${escapeHtml(badge)}</span>`).join("")}</div>
+					</button>
+					<div class="details">
+						<div class="details-inner">
+							${(node.sections || []).map(section => `
+								<h3>${escapeHtml(section.title)}</h3>
+								<ul>${(section.items || []).map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+							`).join("")}
+							${node.risk ? `<h3>Risk</h3><ul><li>${escapeHtml(node.risk)}</li></ul>` : ""}
+						</div>
+					</div>
+				</article>
+			`).join("");
+
+			document.querySelectorAll(".node").forEach(card => {
+				card.querySelector(".node-button").addEventListener("click", () => {
+					const id = card.dataset.node;
+					focus = focus === id ? null : id;
+					selectedEdge = null;
+					card.classList.toggle("open");
+					card.querySelector(".node-button").setAttribute("aria-expanded", String(card.classList.contains("open")));
+					renderEdges();
+					applyState();
+				});
+			});
+		}
+
+		function anchor(node, side) {
+			const width = map.plane.cardWidth;
+			const height = map.plane.cardHeight;
+			if (side === "left") return {x: node.x, y: node.y + height / 2};
+			if (side === "right") return {x: node.x + width, y: node.y + height / 2};
+			if (side === "top") return {x: node.x + width / 2, y: node.y};
+			return {x: node.x + width / 2, y: node.y + height};
+		}
+
+		function route(start, end, edge) {
+			if (Number.isFinite(edge.busX)) {
+				return {
+					d: `M ${start.x} ${start.y} H ${edge.busX} V ${end.y} H ${end.x}`,
+					labelX: edge.busX,
+					labelY: Math.round((start.y + end.y) / 2) - 7,
+				};
+			}
+			if (Number.isFinite(edge.busY)) {
+				if (start.x === end.x) {
+					return {
+						d: `M ${start.x} ${start.y} V ${end.y}`,
+						labelX: start.x,
+						labelY: Math.round((start.y + end.y) / 2) - 7,
+					};
+				}
+				return {
+					d: `M ${start.x} ${start.y} V ${edge.busY} H ${end.x} V ${end.y}`,
+					labelX: Math.round((start.x + end.x) / 2),
+					labelY: edge.busY - 7,
+				};
+			}
+			if (edge.fromSide === "left" || edge.fromSide === "right") {
+				const midX = Math.round((start.x + end.x) / 2);
+				return {
+					d: `M ${start.x} ${start.y} H ${midX} V ${end.y} H ${end.x}`,
+					labelX: midX,
+					labelY: Math.round((start.y + end.y) / 2) - 7,
+				};
+			}
+			const midY = Math.round((start.y + end.y) / 2);
+			return {
+				d: `M ${start.x} ${start.y} V ${midY} H ${end.x} V ${end.y}`,
+				labelX: Math.round((start.x + end.x) / 2),
+				labelY: midY - 7,
+			};
+		}
+
+		function edgeKey(edge) {
+			return edge.id || `${edge.from}-${edge.to}-${edge.label}`;
+		}
+
+		function renderEdges() {
+			edgeLayer.innerHTML = `
+				<defs>
+					<marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+						<path d="M0,0 L0,6 L8,3 z" fill="#b9c1d0"></path>
+					</marker>
+				</defs>
+			`;
+			for (const edge of map.edges) {
+				const from = map.nodes.find(node => node.id === edge.from);
+				const to = map.nodes.find(node => node.id === edge.to);
+				if (!from || !to) continue;
+				const start = anchor(from, edge.fromSide || "right");
+				const end = anchor(to, edge.toSide || "left");
+				const path = route(start, end, edge);
+				const key = edgeKey(edge);
+				edgeLayer.insertAdjacentHTML("beforeend", `
+					<path class="edge-hit" data-edge="${escapeHtml(key)}" data-kind="${escapeHtml(edge.kind)}" data-from="${escapeHtml(edge.from)}" data-to="${escapeHtml(edge.to)}" d="${path.d}"></path>
+					<path class="edge ${escapeHtml(edge.kind)}" data-edge-line="${escapeHtml(key)}" d="${path.d}" marker-end="url(#arrow)"></path>
+					<text class="edge-label" data-edge-label="${escapeHtml(key)}" x="${path.labelX}" y="${path.labelY}">${escapeHtml(edge.label)}</text>
+				`);
+			}
+			document.querySelectorAll(".edge-hit").forEach(path => {
+				path.addEventListener("click", event => {
+					event.stopPropagation();
+					selectEdge(path.dataset.edge);
+				});
+			});
+		}
+
+		function selectEdge(key) {
+			const edge = map.edges.find(item => edgeKey(item) === key);
+			selectedEdge = selectedEdge === key ? null : key;
+			focus = edge ? edge.from : null;
+			applyState();
+		}
+
+		function clearSelection() {
+			selectedEdge = null;
+			focus = null;
+		}
+
+		function applyState() {
+			const query = search.value.trim().toLowerCase();
+			const visibleNodes = new Set(map.nodes.filter(node => !query || textFor(node).includes(query)).map(node => node.id));
+			const selected = map.edges.find(edge => edgeKey(edge) === selectedEdge);
+			const connected = id => !focus || id === focus || map.edges.some(edge => (edge.from === focus && edge.to === id) || (edge.to === focus && edge.from === id));
+
+			document.querySelectorAll(".node").forEach(card => {
+				const id = card.dataset.node;
+				const selectedNode = selected && (selected.from === id || selected.to === id);
+				card.classList.toggle("hidden", !visibleNodes.has(id));
+				card.classList.toggle("focused", id === focus || selectedNode);
+				card.classList.toggle("dimmed", !!focus && !connected(id) && !selectedNode);
+			});
+
+			document.querySelectorAll(".edge-hit").forEach(hit => {
+				const key = hit.dataset.edge;
+				const visible = visibleNodes.has(hit.dataset.from) && visibleNodes.has(hit.dataset.to);
+				const focusMatch = !focus || hit.dataset.from === focus || hit.dataset.to === focus || key === selectedEdge;
+				const line = document.querySelector(`[data-edge-line="${CSS.escape(key)}"]`);
+				const label = document.querySelector(`[data-edge-label="${CSS.escape(key)}"]`);
+				hit.classList.toggle("hidden", !visible);
+				line.classList.toggle("hidden", !visible);
+				label.classList.toggle("hidden", !visible);
+				line.classList.toggle("dimmed", !!focus && !focusMatch);
+				label.classList.toggle("dimmed", !!focus && !focusMatch);
+				line.classList.toggle("selected", key === selectedEdge);
+				label.classList.toggle("selected", key === selectedEdge);
+			});
+		}
+
+		function resetView() {
+			clearSelection();
+			zoom = 1;
+			search.value = "";
+			stage.scrollTo({ left: 0, top: 0, behavior: "smooth" });
+			plane.style.transform = "scale(1)";
+			document.querySelectorAll(".node").forEach(card => {
+				card.classList.remove("open");
+				card.querySelector(".node-button").setAttribute("aria-expanded", "false");
+			});
+			renderEdges();
+			applyState();
+		}
+
+		search.addEventListener("input", () => {
+			clearSelection();
+			applyState();
+		});
+
+		document.querySelector("#zoomIn").addEventListener("click", () => {
+			zoom = Math.min(1.25, zoom + .1);
+			plane.style.transform = `scale(${zoom})`;
+		});
+		document.querySelector("#zoomOut").addEventListener("click", () => {
+			zoom = Math.max(.65, zoom - .1);
+			plane.style.transform = `scale(${zoom})`;
+		});
+		document.querySelector("#fit").addEventListener("click", () => {
+			zoom = Math.max(.62, Math.min(1, (stage.clientWidth - 24) / map.plane.width));
+			plane.style.transform = `scale(${zoom})`;
+		});
+		document.querySelector("#reset").addEventListener("click", resetView);
+
+		function isTypingTarget(target) {
+			return target && ["INPUT", "TEXTAREA", "SELECT", "BUTTON"].includes(target.tagName);
+		}
+
+		function setSpacePan(active) {
+			spacePan = active;
+			stage.classList.toggle("space-pan", active);
+			if (!active) {
+				dragPan = null;
+				stage.classList.remove("dragging");
+			}
+		}
+
+		window.addEventListener("keydown", event => {
+			if (event.code !== "Space" || event.repeat || isTypingTarget(event.target)) return;
+			event.preventDefault();
+			setSpacePan(true);
+		});
+
+		window.addEventListener("keyup", event => {
+			if (event.code !== "Space") return;
+			event.preventDefault();
+			setSpacePan(false);
+		});
+
+		window.addEventListener("blur", () => setSpacePan(false));
+
+		stage.addEventListener("pointerdown", event => {
+			if (!spacePan || event.button !== 0) return;
+			event.preventDefault();
+			stage.focus({ preventScroll: true });
+			if (stage.setPointerCapture) {
+				try {
+					stage.setPointerCapture(event.pointerId);
+				} catch {
+					/* Pointer capture can fail for synthetic or interrupted events. */
+				}
+			}
+			dragPan = {
+				pointerId: event.pointerId,
+				x: event.clientX,
+				y: event.clientY,
+				scrollLeft: stage.scrollLeft,
+				scrollTop: stage.scrollTop,
+			};
+			stage.classList.add("dragging");
+		});
+
+		stage.addEventListener("pointermove", event => {
+			if (!dragPan || dragPan.pointerId !== event.pointerId) return;
+			event.preventDefault();
+			stage.scrollLeft = dragPan.scrollLeft - (event.clientX - dragPan.x);
+			stage.scrollTop = dragPan.scrollTop - (event.clientY - dragPan.y);
+		});
+
+		function endPan(event) {
+			if (!dragPan || dragPan.pointerId !== event.pointerId) return;
+			if (stage.releasePointerCapture && stage.hasPointerCapture?.(event.pointerId)) {
+				stage.releasePointerCapture(event.pointerId);
+			}
+			dragPan = null;
+			stage.classList.remove("dragging");
+		}
+
+		stage.addEventListener("pointerup", endPan);
+		stage.addEventListener("pointercancel", endPan);
+
+		renderLanes();
+		renderNodes();
+		renderEdges();
+		applyState();
+	</script>
+</body>
+</html>
