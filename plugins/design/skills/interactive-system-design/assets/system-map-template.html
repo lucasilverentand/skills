@@ -511,108 +511,539 @@
 			- edge busX or busY creates an orthogonal dogleg route.
 		*/
 		const map = {
-			title: "Interactive System Map",
-			subtitle: "Replace this content model with the system under design.",
-			searchPlaceholder: "Search nodes, flows, owners, risks",
-			plane: { width: 1220, height: 720, cardWidth: 220, cardHeight: 132 },
+			title: "Agentic Design System Map",
+			subtitle: "A richer starter diagram showing orchestration, evidence, quality gates, and delivery loops.",
+			searchPlaceholder: "Search nodes, flows, evidence, owners, risks",
+			plane: { width: 1840, height: 1040, cardWidth: 242, cardHeight: 138 },
 			lanes: [
-				{ title: "Entry", x: 0, width: 250 },
-				{ title: "Core", x: 294, width: 250 },
-				{ title: "Data", x: 590, width: 290 },
-				{ title: "Delivery", x: 924, width: 296 }
+				{ title: "Intake", x: 0, width: 286 },
+				{ title: "Reasoning", x: 326, width: 326 },
+				{ title: "Tools + Data", x: 710, width: 324 },
+				{ title: "Quality", x: 1090, width: 324 },
+				{ title: "Delivery", x: 1470, width: 324 }
 			],
 			nodes: [
 				{
-					id: "entry",
-					lane: "Entry",
-					x: 22,
-					y: 168,
-					title: "Entry point",
+					id: "requester",
+					lane: "Intake",
+					x: 34,
+					y: 134,
+					title: "Request surface",
 					type: "Interface",
-					badges: ["request", "user-facing"],
-					summary: "The first boundary where a user, agent, or external system enters.",
+					badges: ["prompt", "user-facing"],
+					summary: "Captures the user's goal, visible constraints, and current browser or workspace state.",
 					sections: [
-						{ title: "Responsibilities", items: ["Accept the initial intent.", "Normalize the request shape."] },
-						{ title: "Open Questions", items: ["Which inputs are trusted?", "What context is required?"] }
+						{ title: "Responsibilities", items: ["Accept natural language goals.", "Preserve exact wording and selected browser evidence.", "Expose the first meaningful action quickly."] },
+						{ title: "Contracts", items: ["Input: user request and visible surface.", "Output: normalized goal envelope."] }
 					],
-					risk: "Ambiguous entry contracts push complexity into every downstream part."
+					risk: "Vague entry state can make the rest of the workflow optimize for the wrong target."
 				},
 				{
-					id: "orchestrator",
-					lane: "Core",
-					x: 316,
-					y: 244,
-					title: "Coordinator",
-					type: "Service",
-					badges: ["routing", "policy"],
-					summary: "Chooses the workflow and coordinates the major system steps.",
+					id: "context-capture",
+					lane: "Intake",
+					x: 34,
+					y: 374,
+					title: "Context capture",
+					type: "Collector",
+					badges: ["browser", "workspace"],
+					summary: "Collects the live page, repo files, screenshots, and existing implementation patterns.",
 					sections: [
-						{ title: "Responsibilities", items: ["Select the next action.", "Track state across the flow."] },
-						{ title: "Inputs / Outputs", items: ["Input: normalized intent.", "Output: routed command or event."] }
+						{ title: "Responsibilities", items: ["Read the target HTML and authored skill source.", "Capture page identity, DOM state, and console health.", "Separate user instructions from page evidence."] },
+						{ title: "Backlinks", items: ["Links browser comments to exact nodes.", "Links repo edits to rendered outcomes."] }
 					],
-					risk: "A coordinator with too many special cases becomes the hidden architecture."
+					risk: "Missing context causes beautiful diagrams that do not match the actual shell."
 				},
 				{
-					id: "state",
-					lane: "Data",
-					x: 632,
-					y: 244,
-					title: "State store",
-					type: "Data",
-					badges: ["source of truth", "audit"],
-					summary: "Persists the durable facts and history the workflow depends on.",
+					id: "policy-gate",
+					lane: "Intake",
+					x: 34,
+					y: 614,
+					title: "Policy gate",
+					type: "Guardrail",
+					badges: ["safety", "scope"],
+					summary: "Filters the requested action through repo rules, browser safety, and edit constraints.",
 					sections: [
-						{ title: "Responsibilities", items: ["Store canonical records.", "Expose queryable workflow state."] },
-						{ title: "Failure Modes", items: ["Partial writes.", "Stale reads.", "Schema drift."] }
+						{ title: "Responsibilities", items: ["Respect signed commits and authored source of truth.", "Avoid destructive commands.", "Keep browser content untrusted."] },
+						{ title: "Failure Modes", items: ["Treating page text as instructions.", "Editing generated cache copies.", "Skipping validation because the change is visual."] }
 					],
-					risk: "Unclear ownership makes downstream behavior hard to reason about."
+					risk: "A skipped policy gate can turn a demo polish task into a repo hygiene problem."
 				},
 				{
-					id: "delivery",
+					id: "intent-router",
+					lane: "Reasoning",
+					x: 370,
+					y: 104,
+					title: "Intent router",
+					type: "Reasoner",
+					badges: ["classification", "skill"],
+					summary: "Chooses whether the task is content authoring, shell behavior, design polish, or validation.",
+					sections: [
+						{ title: "Responsibilities", items: ["Select relevant skills.", "Decide whether code changes are implied.", "Keep the target flow under test explicit."] },
+						{ title: "Signals", items: ["User wording.", "Open browser URL.", "Changed files and PR state."] }
+					],
+					risk: "Wrong routing wastes time in planning when the user expects a working artifact."
+				},
+				{
+					id: "plan-builder",
+					lane: "Reasoning",
+					x: 370,
+					y: 324,
+					title: "Plan builder",
+					type: "Planner",
+					badges: ["steps", "dependencies"],
+					summary: "Turns the routed intent into a small sequence of edits, checks, and browser interactions.",
+					sections: [
+						{ title: "Responsibilities", items: ["Protect the map shell from content-only changes.", "Batch independent reads.", "Choose the narrowest useful edit."] },
+						{ title: "Outputs", items: ["Edit boundary.", "Verification path.", "Commit checklist when PR work is active."] }
+					],
+					risk: "Overplanning slows down an interactive design loop."
+				},
+				{
+					id: "task-memory",
+					lane: "Reasoning",
+					x: 370,
+					y: 544,
+					title: "Task memory",
+					type: "Reference",
+					badges: ["history", "decisions"],
+					summary: "Keeps prior design decisions, validation commands, and known repo conventions available.",
+					sections: [
+						{ title: "Responsibilities", items: ["Recall the Bun preview path.", "Remember PR and branch context.", "Preserve accepted interaction decisions."] },
+						{ title: "Owned Facts", items: ["Bun serves the single HTML trial.", "Canvas panning is transform-based.", "Wheel zoom is cursor-centered."] }
+					],
+					risk: "Stale memory must be verified when the live page or branch may have moved."
+				},
+				{
+					id: "rollback-ledger",
+					lane: "Reasoning",
+					x: 370,
+					y: 764,
+					title: "Change ledger",
+					type: "Trace",
+					badges: ["diff", "ownership"],
+					summary: "Records what changed, why it changed, and what should not be reverted.",
+					sections: [
+						{ title: "Responsibilities", items: ["Track touched files.", "Separate user changes from agent edits.", "Support clean commit messages."] },
+						{ title: "Failure Modes", items: ["Losing context across restarts.", "Accidentally replacing unrelated work."] }
+					],
+					risk: "Without a ledger, iteration creates mystery diffs."
+				},
+				{
+					id: "browser-agent",
+					lane: "Tools + Data",
+					x: 750,
+					y: 104,
+					title: "Browser agent",
+					type: "Tool",
+					badges: ["in-app", "DOM"],
+					summary: "Loads the local preview, inspects rendered state, captures screenshots, and exercises interactions.",
+					sections: [
+						{ title: "Responsibilities", items: ["Verify page identity and nonblank content.", "Click cards and edges.", "Read console errors after each UI change."] },
+						{ title: "Data Produced", items: ["DOM snapshots.", "Screenshots.", "Interaction state checks."] }
+					],
+					risk: "Static inspection can miss broken layout, overlap, and interaction regressions."
+				},
+				{
+					id: "file-workspace",
+					lane: "Tools + Data",
+					x: 750,
+					y: 324,
+					title: "Workspace files",
+					type: "Source",
+					badges: ["HTML", "skill"],
+					summary: "Contains the authored skill instructions and the reusable single-file HTML template.",
+					sections: [
+						{ title: "Responsibilities", items: ["Keep the map shell stable.", "Store only reusable template behavior.", "Make content replacement obvious."] },
+						{ title: "Key Files", items: ["SKILL.md.", "assets/system-map-template.html.", "trial index.html copy for preview."] }
+					],
+					risk: "Mixing demo content with shell mechanics makes the template harder to reuse."
+				},
+				{
+					id: "execution-sandbox",
+					lane: "Tools + Data",
+					x: 750,
+					y: 544,
+					title: "Execution sandbox",
+					type: "Runtime",
+					badges: ["Bun", "checks"],
+					summary: "Runs the local server, validation commands, and focused repo checks.",
+					sections: [
+						{ title: "Responsibilities", items: ["Serve the single HTML preview.", "Run repo validation.", "Keep long-running processes visible."] },
+						{ title: "Outputs", items: ["HTTP status.", "Check logs.", "Listening process evidence."] }
+					],
+					risk: "If the server dies, the browser can look broken even when the file is fine."
+				},
+				{
+					id: "artifact-store",
+					lane: "Tools + Data",
+					x: 750,
+					y: 764,
+					title: "Artifact store",
+					type: "Evidence",
+					badges: ["screenshots", "diffs"],
+					summary: "Keeps rendered proof, validation output, and commit-ready source diffs together.",
+					sections: [
+						{ title: "Responsibilities", items: ["Tie screenshot evidence to changed files.", "Keep temporary assets out of the repo.", "Support concise final reporting."] },
+						{ title: "Backlinks", items: ["Screenshot to browser state.", "Diff to source file.", "Commit to PR validation."] }
+					],
+					risk: "Evidence without backlinks is hard to trust during review."
+				},
+				{
+					id: "design-review",
+					lane: "Quality",
+					x: 1130,
+					y: 144,
+					title: "Design review",
+					type: "Evaluator",
+					badges: ["layout", "modern"],
+					summary: "Checks whether the diagram reads like a modern product surface and not a messy debug canvas.",
+					sections: [
+						{ title: "Responsibilities", items: ["Look for overlap and cramped labels.", "Keep shadows restrained.", "Keep controls quiet and discoverable."] },
+						{ title: "Acceptance", items: ["Clear lanes.", "Scannable cards.", "Orthogonal edges that explain structure."] }
+					],
+					risk: "More nodes can make the map feel complex without feeling designed."
+				},
+				{
+					id: "validation-runner",
+					lane: "Quality",
+					x: 1130,
+					y: 384,
+					title: "Validation runner",
+					type: "Verifier",
+					badges: ["CI", "browser"],
+					summary: "Runs the project checks and confirms the rendered target flow still works.",
+					sections: [
+						{ title: "Responsibilities", items: ["Run bun run ci.", "Reload the preview.", "Exercise zoom, pan, card overlay, and search."] },
+						{ title: "Outputs", items: ["Pass/fail check state.", "Console health.", "Interaction proof."] }
+					],
+					risk: "A passing diff can still ship a broken browser interaction."
+				},
+				{
+					id: "risk-register",
+					lane: "Quality",
+					x: 1130,
+					y: 624,
+					title: "Risk register",
+					type: "Control",
+					badges: ["open issues", "tradeoffs"],
+					summary: "Collects unresolved risks, known compromises, and follow-up work without bloating the current change.",
+					sections: [
+						{ title: "Responsibilities", items: ["Flag scope creep.", "Record visual debt.", "Separate follow-up work from the active request."] },
+						{ title: "Failure Modes", items: ["Hiding unresolved risk in a success summary.", "Expanding the PR beyond the user-visible ask."] }
+					],
+					risk: "Untracked risks come back as confusing browser comments later."
+				},
+				{
+					id: "trace-backlinks",
+					lane: "Quality",
+					x: 1130,
+					y: 824,
+					title: "Backlink graph",
+					type: "Trace",
+					badges: ["nodes", "edges"],
+					summary: "Shows how selected cards, edges, source edits, and review evidence refer back to each other.",
+					sections: [
+						{ title: "Responsibilities", items: ["Represent reverse relationships explicitly.", "Keep labels readable on long routes.", "Make each card explain its connected evidence."] },
+						{ title: "User Value", items: ["Click a card to see related system parts.", "Search evidence terms and keep context visible."] }
+					],
+					risk: "Backlinks become noise if every relationship is treated as equally important."
+				},
+				{
+					id: "live-preview",
 					lane: "Delivery",
-					x: 970,
-					y: 244,
-					title: "Delivery surface",
-					type: "Output",
-					badges: ["result", "handoff"],
-					summary: "Presents the outcome or hands it to the next system boundary.",
+					x: 1510,
+					y: 144,
+					title: "Live preview",
+					type: "Surface",
+					badges: ["localhost", "interactive"],
+					summary: "Presents the map as the user sees it, with zoom, pan, search, edge focus, and hero details.",
 					sections: [
-						{ title: "Responsibilities", items: ["Render the final state.", "Expose actionable next steps."] },
-						{ title: "Open Questions", items: ["Who confirms success?", "What gets logged?"] }
+						{ title: "Responsibilities", items: ["Keep the canvas full-screen.", "Make controls feel native to the map.", "Expose complexity without surrounding chrome."] },
+						{ title: "Quality Bar", items: ["No browser scrollbars for panning.", "Dots move with the canvas.", "Wheel zoom works at the cursor."] }
 					],
-					risk: "Success can look complete while hidden handoff work is still pending."
+					risk: "The visible preview is the source of truth for whether the design feels usable."
+				},
+				{
+					id: "pr-handoff",
+					lane: "Delivery",
+					x: 1510,
+					y: 384,
+					title: "PR handoff",
+					type: "Delivery",
+					badges: ["signed commit", "CI"],
+					summary: "Packages the source change with a signed commit, validation output, and PR check state.",
+					sections: [
+						{ title: "Responsibilities", items: ["Stage only touched source files.", "Use a conventional signed commit.", "Watch GitHub validate."] },
+						{ title: "Outputs", items: ["Commit hash.", "Pushed branch.", "Passing PR check."] }
+					],
+					risk: "A good local demo still needs a clean reviewable PR."
+				},
+				{
+					id: "skill-template",
+					lane: "Delivery",
+					x: 1510,
+					y: 624,
+					title: "Reusable template",
+					type: "Artifact",
+					badges: ["single HTML", "content-only"],
+					summary: "The final reusable shell where future diagrams should edit only cards, lanes, and connections.",
+					sections: [
+						{ title: "Responsibilities", items: ["Keep rendering code stable.", "Make the content block self-explanatory.", "Support elaborate diagrams without new dependencies."] },
+						{ title: "Inputs", items: ["Lanes.", "Cards.", "Orthogonal connectors.", "Detail sections."] }
+					],
+					risk: "If the example is too small, users will not learn how to build serious maps."
+				},
+				{
+					id: "learning-loop",
+					lane: "Delivery",
+					x: 1510,
+					y: 824,
+					title: "Learning loop",
+					type: "Feedback",
+					badges: ["comments", "iteration"],
+					summary: "Feeds browser comments, validation failures, and successful patterns back into the next design pass.",
+					sections: [
+						{ title: "Responsibilities", items: ["Turn user comments into precise edits.", "Carry accepted behavior forward.", "Keep the template useful for the next system."] },
+						{ title: "Backlinks", items: ["Comments link to nodes.", "Validation links to source.", "Final state links to the skill."] }
+					],
+					risk: "Iteration gets brittle when feedback is not tied to the artifact it changed."
 				}
 			],
 			edges: [
 				{
-					from: "entry",
-					to: "orchestrator",
+					from: "requester",
+					to: "intent-router",
 					kind: "control",
-					label: "normalize intent",
+					label: "route goal",
 					fromSide: "right",
 					toSide: "left",
-					busX: 280,
-					detail: "The entry point sends a normalized request into the coordinator."
+					busX: 326,
+					detail: "The request surface sends the normalized goal into routing."
 				},
 				{
-					from: "orchestrator",
-					to: "state",
-					kind: "write",
-					label: "persist state",
+					from: "context-capture",
+					to: "plan-builder",
+					kind: "source",
+					label: "provide evidence",
 					fromSide: "right",
 					toSide: "left",
-					busX: 588,
-					detail: "The coordinator writes durable workflow state before delivery."
+					busX: 326,
+					detail: "Captured browser and workspace context shapes the work plan."
 				},
 				{
-					from: "state",
-					to: "delivery",
+					from: "policy-gate",
+					to: "plan-builder",
+					kind: "validate",
+					label: "constrain scope",
+					fromSide: "right",
+					toSide: "left",
+					busX: 326,
+					detail: "Repo and browser safety rules constrain how the plan can execute."
+				},
+				{
+					from: "intent-router",
+					to: "plan-builder",
+					kind: "control",
+					label: "selected path",
+					fromSide: "bottom",
+					toSide: "top",
+					detail: "Routing decisions become a concrete implementation path."
+				},
+				{
+					from: "plan-builder",
+					to: "task-memory",
 					kind: "read",
-					label: "read result",
+					label: "load precedent",
+					fromSide: "bottom",
+					toSide: "top",
+					detail: "The plan reads previous decisions and validation expectations."
+				},
+				{
+					from: "task-memory",
+					to: "rollback-ledger",
+					kind: "write",
+					label: "record decisions",
+					fromSide: "bottom",
+					toSide: "top",
+					detail: "Accepted behavior is recorded so later edits do not regress it."
+				},
+				{
+					from: "intent-router",
+					to: "browser-agent",
+					kind: "control",
+					label: "inspect page",
 					fromSide: "right",
 					toSide: "left",
-					busX: 914,
-					detail: "The delivery surface reads the finalized state and presents it."
+					busX: 710,
+					detail: "The browser agent checks the current rendered state."
+				},
+				{
+					from: "plan-builder",
+					to: "file-workspace",
+					kind: "write",
+					label: "edit source",
+					fromSide: "right",
+					toSide: "left",
+					busX: 710,
+					detail: "The plan becomes a focused source edit."
+				},
+				{
+					from: "task-memory",
+					to: "execution-sandbox",
+					kind: "read",
+					label: "choose commands",
+					fromSide: "right",
+					toSide: "left",
+					busX: 710,
+					detail: "Remembered validation commands drive the runtime checks."
+				},
+				{
+					from: "rollback-ledger",
+					to: "artifact-store",
+					kind: "write",
+					label: "attach diff",
+					fromSide: "right",
+					toSide: "left",
+					busX: 710,
+					detail: "The change ledger stores enough evidence to explain the diff."
+				},
+				{
+					from: "browser-agent",
+					to: "design-review",
+					kind: "validate",
+					label: "visual proof",
+					fromSide: "right",
+					toSide: "left",
+					busX: 1090,
+					detail: "Screenshots and DOM state support visual design review."
+				},
+				{
+					from: "file-workspace",
+					to: "validation-runner",
+					kind: "validate",
+					label: "source checks",
+					fromSide: "right",
+					toSide: "left",
+					busX: 1090,
+					detail: "Changed source is validated by project checks."
+				},
+				{
+					from: "execution-sandbox",
+					to: "validation-runner",
+					kind: "event",
+					label: "run ci",
+					fromSide: "right",
+					toSide: "left",
+					busX: 1090,
+					detail: "The runtime executes the validation command sequence."
+				},
+				{
+					from: "artifact-store",
+					to: "trace-backlinks",
+					kind: "source",
+					label: "evidence links",
+					fromSide: "right",
+					toSide: "left",
+					busX: 1090,
+					detail: "Evidence artifacts connect back to nodes, edges, and source files."
+				},
+				{
+					from: "design-review",
+					to: "live-preview",
+					kind: "delivery",
+					label: "ship visible state",
+					fromSide: "right",
+					toSide: "left",
+					busX: 1470,
+					detail: "Approved visual structure is visible in the live preview."
+				},
+				{
+					from: "validation-runner",
+					to: "pr-handoff",
+					kind: "delivery",
+					label: "check result",
+					fromSide: "right",
+					toSide: "left",
+					busX: 1470,
+					detail: "Validation output becomes PR evidence."
+				},
+				{
+					from: "risk-register",
+					to: "pr-handoff",
+					kind: "risk",
+					label: "remaining risk",
+					fromSide: "right",
+					toSide: "left",
+					busX: 1470,
+					detail: "Open risks are reported with the delivery state."
+				},
+				{
+					from: "trace-backlinks",
+					to: "skill-template",
+					kind: "generate",
+					label: "template model",
+					fromSide: "right",
+					toSide: "left",
+					busX: 1470,
+					detail: "The trace model becomes reusable template guidance."
+				},
+				{
+					from: "live-preview",
+					to: "context-capture",
+					kind: "event",
+					label: "browser comments",
+					fromSide: "top",
+					toSide: "top",
+					busY: 72,
+					detail: "Feedback from the rendered surface loops back into context capture."
+				},
+				{
+					from: "risk-register",
+					to: "policy-gate",
+					kind: "risk",
+					label: "tighten guardrails",
+					fromSide: "left",
+					toSide: "right",
+					busY: 712,
+					detail: "Discovered risks feed back into policy and scope constraints."
+				},
+				{
+					from: "trace-backlinks",
+					to: "artifact-store",
+					kind: "read",
+					label: "resolve backlink",
+					fromSide: "left",
+					toSide: "right",
+					busY: 922,
+					detail: "Backlink selection resolves to the stored evidence that explains it."
+				},
+				{
+					from: "pr-handoff",
+					to: "learning-loop",
+					kind: "event",
+					label: "review signal",
+					fromSide: "bottom",
+					toSide: "top",
+					detail: "PR review and CI feedback are routed into the next iteration."
+				},
+				{
+					from: "skill-template",
+					to: "learning-loop",
+					kind: "event",
+					label: "reuse feedback",
+					fromSide: "bottom",
+					toSide: "top",
+					detail: "Future usage of the template improves the next version of the skill."
+				},
+				{
+					from: "learning-loop",
+					to: "task-memory",
+					kind: "write",
+					label: "remember pattern",
+					fromSide: "bottom",
+					toSide: "bottom",
+					busY: 1000,
+					detail: "Successful interaction patterns are written back into task memory."
 				}
 			]
 		};
