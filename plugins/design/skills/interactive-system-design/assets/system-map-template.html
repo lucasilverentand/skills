@@ -884,11 +884,8 @@
 		function applyView({ animate = true } = {}) {
 			plane.style.transition = animate ? "transform .16s ease" : "none";
 			plane.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`;
-			if (!animate) {
-				requestAnimationFrame(() => {
-					plane.style.transition = "transform .16s ease";
-				});
-			}
+			stage.style.backgroundSize = `${22 * zoom}px ${22 * zoom}px`;
+			stage.style.backgroundPosition = `${2 + panX}px ${2 + panY}px`;
 		}
 
 		function resetView() {
