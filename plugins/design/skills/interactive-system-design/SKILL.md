@@ -1,10 +1,10 @@
 ---
 name: interactive-system-design
-description: Creates browser-tested, single-file interactive HTML system design drawings with orthogonal connected arrows, labeled parts, foldout detail cards, pan/zoom, filtering, and polished visual hierarchy. Use when the user asks to co-create an interactive system design, elaborate architecture drawing, explorable service map, ortho-connected diagram, foldout-card diagram, or a beautiful single-HTML system visualization.
+description: Creates browser-tested, single-file interactive HTML system design drawings with orthogonal connected arrows, labeled parts, centered hero detail cards, pan/zoom, filtering, and polished visual hierarchy. Use when the user asks to co-create an interactive system design, elaborate architecture drawing, explorable service map, ortho-connected diagram, foldout-card or hero-card diagram, or a beautiful single-HTML system visualization.
 ---
 
 # Interactive System Design
-Create an explorable system drawing as one self-contained HTML file. The artifact should feel like a working design surface: orthogonal arrows connect concrete parts, cards fold open to explain responsibilities and trade-offs, and the in-app browser is used to inspect and iterate on the result.
+Create an explorable system drawing as one self-contained HTML file. The artifact should feel like a working design surface: orthogonal arrows connect concrete parts, cards open into centered hero detail views that explain responsibilities and trade-offs, and the in-app browser is used to inspect and iterate on the result.
 
 ## Output contract
 - Write one `.html` file. Default to `.context/architecture/interactive/<slug>.html` unless the user names a path.
@@ -12,7 +12,7 @@ Create an explorable system drawing as one self-contained HTML file. The artifac
 - Use real HTML and SVG for the main drawing. Do not make the core diagram a raster image, canvas-only surface, or Mermaid embed.
 - Start from `assets/system-map-template.html` unless the user asks for a different interaction model. Copy it to the output path, then edit only the `map` object in the `CONTENT ONLY` block for the first pass.
 - Keep structure for later edits: the `map.nodes` cards, `map.edges` connections, stable ids, lane positions, and plane dimensions must be the only normal content-editing surface.
-- If a source design doc or architecture artifact exists, preserve its terminology. If it does not, create a first draft from the conversation and mark uncertain assumptions in the foldout cards.
+- If a source design doc or architecture artifact exists, preserve its terminology. If it does not, create a first draft from the conversation and mark uncertain assumptions in the hero detail cards.
 
 ## Workflow
 1. Gather the minimum useful context. Ask only for information that would materially change the drawing: the system boundary, 5-15 primary parts, the key flows, and the audience. If the user asked for co-creation but left gaps, produce a first pass and make the gaps visible in the artifact.
@@ -31,7 +31,7 @@ Use three layers:
 
 1. **Canvas shell**: fixed menu/search, bottom-right zoom controls, scrollable map, and Space-hold dragging. This comes from the template and should usually stay unchanged.
 2. **Diagram plane**: absolute-positioned node cards with an SVG connector layer behind them.
-3. **Detail surface**: foldout card content for responsibilities, contracts, data owned, failure modes, and open questions.
+3. **Detail surface**: centered hero overlay content for responsibilities, contracts, data owned, failure modes, and open questions.
 
 The template already includes:
 - Search parts and edge labels.
@@ -48,15 +48,15 @@ Draw every relationship as right-angle SVG paths.
 - Route edges around lanes and dense clusters. If crossings become confusing, change the layout or split the view instead of accepting line clutter.
 - Keep labels close to the segment they describe. A user should be able to answer what crosses a boundary without opening the card.
 
-## Foldout cards
-Every important part should have a compact visible card and a richer expanded state.
+## Hero detail cards
+Every important part should have a compact visible card and a richer centered detail state.
 
 Compact card:
 - Name, type, owner or boundary, and one responsibility.
 - Health or status indicators only when the data is meaningful.
 - Small badges for runtime, storage, protocol, or sensitivity.
 
-Expanded card:
+Hero detail card:
 - Responsibilities.
 - Inputs and outputs.
 - Data owned.
@@ -64,7 +64,7 @@ Expanded card:
 - Failure modes and degradation behavior.
 - Open questions or disputed assumptions.
 
-Use details/summary, accessible buttons, or a side inspector. Animate height and opacity gently, but keep content measurable and selectable. Expanded content must not push the whole diagram into chaos; prefer an inspector or overlay when many cards can open.
+Use the template's accessible button-to-dialog interaction: clicking a compact card opens a blurred backdrop and animates the card into a centered detail panel. Keep content measurable and selectable. Do not expand cards in place unless the user explicitly asks for that interaction.
 
 ## Visual quality
 - Use a restrained but varied palette. Avoid making the whole drawing one hue.
@@ -78,7 +78,7 @@ Use details/summary, accessible buttons, or a side inspector. Animate height and
 Before finishing:
 - Serve the artifact with Bun. From the artifact directory, a dependency-free preview can use `bun -e 'const root=process.cwd(); const mime={".html":"text/html; charset=utf-8",".css":"text/css",".js":"text/javascript",".svg":"image/svg+xml"}; Bun.serve({port:4173, async fetch(req){const url=new URL(req.url); const pathname=url.pathname==="/" ? "/index.html" : decodeURIComponent(url.pathname); const file=Bun.file(root+pathname); if(!(await file.exists())) return new Response("Not found",{status:404}); const ext=pathname.match(/\.[^.]+$/)?.[0] ?? ""; return new Response(file,{headers:{"Content-Type":mime[ext] ?? "application/octet-stream"}})}}); console.log("http://localhost:4173"); await new Promise(()=>{});'`.
 - Open the Bun-served local URL with the in-app Browser.
-- Click at least three nodes, two edges, search once, toggle at least one view, and open/close foldout content.
+- Click at least three nodes, two edges, search once, and open/close the hero detail overlay.
 - Resize or test a narrow viewport. Check that labels do not overlap controls, cards remain readable, and connectors still meet their nodes.
 - Check the browser console. Fix JavaScript errors and missing asset warnings.
 - Inspect the HTML for accidental external dependencies with a quick search for `http://`, `https://`, `cdn`, `import`, and `@import`.

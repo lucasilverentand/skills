@@ -279,41 +279,6 @@
 			padding: 3px 6px;
 		}
 
-		.details {
-			display: grid;
-			grid-template-rows: 0fr;
-			border-top: 1px solid transparent;
-			transition: grid-template-rows .18s ease;
-		}
-
-		.node.open .details {
-			grid-template-rows: 1fr;
-			border-top-color: var(--canvas-line);
-		}
-
-		.details-inner {
-			overflow: hidden;
-			padding: 0 13px;
-		}
-
-		.node.open .details-inner {
-			padding-bottom: 13px;
-		}
-
-		.details h3 {
-			margin: 11px 0 5px;
-			color: #2d3440;
-			font-size: 11px;
-		}
-
-		.details ul {
-			margin: 0;
-			padding-left: 16px;
-			color: #616b7d;
-			font-size: 11px;
-			line-height: 1.42;
-		}
-
 		.edge {
 			fill: none;
 			stroke: var(--edge);
@@ -359,6 +324,132 @@
 
 		.edge-label.selected { opacity: 1; fill: #1c2430; }
 
+		.detail-overlay {
+			position: fixed;
+			inset: 0;
+			display: grid;
+			place-items: center;
+			padding: 36px 18px;
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity .18s ease;
+			z-index: 40;
+		}
+
+		.detail-overlay[hidden] {
+			display: none;
+		}
+
+		.detail-overlay.open {
+			opacity: 1;
+			pointer-events: auto;
+		}
+
+		.detail-backdrop {
+			position: absolute;
+			inset: 0;
+			border: 0;
+			background: rgba(247, 249, 253, .68);
+			backdrop-filter: blur(16px) saturate(1.1);
+			cursor: zoom-out;
+		}
+
+		.detail-card {
+			position: relative;
+			width: min(560px, calc(100vw - 36px));
+			max-height: min(720px, calc(100vh - 72px));
+			overflow: auto;
+			border: 1px solid rgba(15, 23, 42, .14);
+			border-radius: 10px;
+			background: rgba(255, 255, 255, .96);
+			color: var(--ink);
+			animation: hero-in .26s cubic-bezier(.2, .8, .2, 1);
+		}
+
+		.detail-card.closing {
+			animation: hero-out .18s ease forwards;
+		}
+
+		@keyframes hero-in {
+			from {
+				opacity: .24;
+				transform: translate(var(--hero-x, 0), var(--hero-y, 12px)) scale(var(--hero-scale, .86));
+			}
+			to {
+				opacity: 1;
+				transform: translate(0, 0) scale(1);
+			}
+		}
+
+		@keyframes hero-out {
+			to {
+				opacity: 0;
+				transform: translate(var(--hero-x, 0), var(--hero-y, 12px)) scale(var(--hero-scale, .86));
+			}
+		}
+
+		.detail-close {
+			position: absolute;
+			top: 12px;
+			right: 12px;
+			width: 30px;
+			height: 30px;
+			border: 1px solid var(--canvas-line);
+			border-radius: 999px;
+			background: #f7f8fb;
+			color: #4a5261;
+			cursor: pointer;
+		}
+
+		.detail-close:hover {
+			background: white;
+		}
+
+		.detail-hero {
+			padding: 22px 22px 18px;
+			border-bottom: 1px solid var(--canvas-line);
+		}
+
+		.detail-hero h2 {
+			margin: 10px 40px 0 0;
+			font-size: 24px;
+			line-height: 1.08;
+		}
+
+		.detail-summary {
+			margin: 10px 0 0;
+			color: #4f5a6b;
+			font-size: 14px;
+			line-height: 1.45;
+		}
+
+		.detail-body {
+			display: grid;
+			gap: 16px;
+			padding: 18px 22px 22px;
+		}
+
+		.detail-section {
+			display: grid;
+			gap: 7px;
+		}
+
+		.detail-section h3 {
+			margin: 0;
+			color: #2d3440;
+			font-size: 12px;
+			letter-spacing: .04em;
+			text-transform: uppercase;
+		}
+
+		.detail-section ul {
+			margin: 0;
+			padding-left: 18px;
+			color: #616b7d;
+			font-size: 13px;
+			line-height: 1.48;
+		}
+
 		@media (max-width: 920px) {
 			body { overflow: hidden; }
 			.app {
@@ -372,6 +463,9 @@
 			.search { width: min(320px, calc(100vw - 168px)); min-width: 0; }
 			.tool-group { right: 10px; bottom: 10px; }
 			.stage { padding: 60px 20px 20px; }
+			.detail-overlay { padding: 18px 12px; }
+			.detail-card { width: calc(100vw - 24px); max-height: calc(100vh - 36px); }
+			.detail-hero h2 { font-size: 21px; }
 		}
 	</style>
 </head>
@@ -395,6 +489,10 @@
 				</div>
 			</section>
 		</main>
+	</div>
+	<div id="detailOverlay" class="detail-overlay" hidden>
+		<button id="detailBackdrop" class="detail-backdrop" type="button" aria-label="Close details"></button>
+		<article id="detailCard" class="detail-card" role="dialog" aria-modal="true" aria-labelledby="detailTitle" tabindex="-1"></article>
 	</div>
 	<script>
 		/*
@@ -521,8 +619,12 @@
 		const search = document.querySelector("#search");
 		const plane = document.querySelector("#plane");
 		const stage = document.querySelector("#stage");
+		const detailOverlay = document.querySelector("#detailOverlay");
+		const detailBackdrop = document.querySelector("#detailBackdrop");
+		const detailCard = document.querySelector("#detailCard");
 		let focus = null;
 		let selectedEdge = null;
+		let activeDetail = null;
 		let zoom = 1;
 		let spacePan = false;
 		let dragPan = null;
@@ -561,35 +663,92 @@
 		function renderNodes() {
 			nodeLayer.innerHTML = map.nodes.map(node => `
 				<article class="node" data-node="${escapeHtml(node.id)}" style="left:${node.x}px;top:${node.y}px">
-					<button class="node-button" aria-expanded="false">
+					<button class="node-button" aria-haspopup="dialog">
 						<div class="meta"><span>${escapeHtml(node.type)}</span><span>${escapeHtml(node.lane)}</span></div>
 						<h2>${escapeHtml(node.title)}</h2>
 						<p class="summary">${escapeHtml(node.summary)}</p>
 						<div class="badges">${(node.badges || []).map(badge => `<span class="badge">${escapeHtml(badge)}</span>`).join("")}</div>
 					</button>
-					<div class="details">
-						<div class="details-inner">
-							${(node.sections || []).map(section => `
-								<h3>${escapeHtml(section.title)}</h3>
-								<ul>${(section.items || []).map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
-							`).join("")}
-							${node.risk ? `<h3>Risk</h3><ul><li>${escapeHtml(node.risk)}</li></ul>` : ""}
-						</div>
-					</div>
 				</article>
 			`).join("");
 
 			document.querySelectorAll(".node").forEach(card => {
 				card.querySelector(".node-button").addEventListener("click", () => {
 					const id = card.dataset.node;
-					focus = focus === id ? null : id;
+					focus = id;
 					selectedEdge = null;
-					card.classList.toggle("open");
-					card.querySelector(".node-button").setAttribute("aria-expanded", String(card.classList.contains("open")));
 					renderEdges();
 					applyState();
+					openDetail(id, card);
 				});
 			});
+		}
+
+		function renderDetail(node) {
+			return `
+				<button class="detail-close" type="button" aria-label="Close details">&times;</button>
+				<div class="detail-hero">
+					<div class="meta"><span>${escapeHtml(node.type)}</span><span>${escapeHtml(node.lane)}</span></div>
+					<h2 id="detailTitle">${escapeHtml(node.title)}</h2>
+					<p class="detail-summary">${escapeHtml(node.summary)}</p>
+					<div class="badges">${(node.badges || []).map(badge => `<span class="badge">${escapeHtml(badge)}</span>`).join("")}</div>
+				</div>
+				<div class="detail-body">
+					${(node.sections || []).map(section => `
+						<section class="detail-section">
+							<h3>${escapeHtml(section.title)}</h3>
+							<ul>${(section.items || []).map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+						</section>
+					`).join("")}
+					${node.risk ? `
+						<section class="detail-section">
+							<h3>Risk</h3>
+							<ul><li>${escapeHtml(node.risk)}</li></ul>
+						</section>
+					` : ""}
+				</div>
+			`;
+		}
+
+		function setHeroOrigin(sourceCard) {
+			const rect = sourceCard.getBoundingClientRect();
+			const targetWidth = Math.min(560, window.innerWidth - 36);
+			const targetX = window.innerWidth / 2;
+			const targetY = window.innerHeight / 2;
+			const sourceX = rect.left + rect.width / 2;
+			const sourceY = rect.top + rect.height / 2;
+			detailCard.style.setProperty("--hero-x", `${Math.round(sourceX - targetX)}px`);
+			detailCard.style.setProperty("--hero-y", `${Math.round(sourceY - targetY)}px`);
+			detailCard.style.setProperty("--hero-scale", String(Math.max(.42, Math.min(.92, rect.width / targetWidth))));
+		}
+
+		function openDetail(id, sourceCard) {
+			const node = map.nodes.find(item => item.id === id);
+			if (!node) return;
+			activeDetail = id;
+			setHeroOrigin(sourceCard);
+			detailCard.classList.remove("closing");
+			detailCard.innerHTML = renderDetail(node);
+			detailOverlay.hidden = false;
+			requestAnimationFrame(() => detailOverlay.classList.add("open"));
+			detailCard.querySelector(".detail-close").addEventListener("click", () => closeDetail());
+			detailCard.focus?.({ preventScroll: true });
+		}
+
+		function closeDetail({ clearFocus = false } = {}) {
+			if (detailOverlay.hidden) return;
+			detailCard.classList.add("closing");
+			detailOverlay.classList.remove("open");
+			window.setTimeout(() => {
+				detailOverlay.hidden = true;
+				detailCard.classList.remove("closing");
+				detailCard.innerHTML = "";
+			}, 180);
+			activeDetail = null;
+			if (clearFocus) {
+				clearSelection();
+				applyState();
+			}
 		}
 
 		function anchor(node, side) {
@@ -674,6 +833,7 @@
 		}
 
 		function selectEdge(key) {
+			closeDetail();
 			const edge = map.edges.find(item => edgeKey(item) === key);
 			selectedEdge = selectedEdge === key ? null : key;
 			focus = edge ? edge.from : null;
@@ -716,22 +876,28 @@
 		}
 
 		function resetView() {
+			closeDetail({ clearFocus: true });
 			clearSelection();
 			zoom = 1;
 			search.value = "";
 			stage.scrollTo({ left: 0, top: 0, behavior: "smooth" });
 			plane.style.transform = "scale(1)";
-			document.querySelectorAll(".node").forEach(card => {
-				card.classList.remove("open");
-				card.querySelector(".node-button").setAttribute("aria-expanded", "false");
-			});
 			renderEdges();
 			applyState();
 		}
 
 		search.addEventListener("input", () => {
+			closeDetail();
 			clearSelection();
 			applyState();
+		});
+
+		detailBackdrop.addEventListener("click", () => closeDetail());
+		window.addEventListener("keydown", event => {
+			if (event.key === "Escape" && !detailOverlay.hidden) {
+				event.preventDefault();
+				closeDetail();
+			}
 		});
 
 		document.querySelector("#zoomIn").addEventListener("click", () => {
