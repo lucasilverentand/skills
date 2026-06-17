@@ -1069,7 +1069,7 @@
 		const MAX_ZOOM = 1.6;
 		const GRID_SIZE = 22;
 		const GRID_OFFSET = 2;
-		const CONNECTOR_GAP = 18;
+		const CONNECTOR_GAP = 22;
 		const CORNER_RADIUS = 10;
 
 		document.title = map.title;
@@ -1230,6 +1230,203 @@
 			return commands.join(" ");
 		}
 
+		function cardObstacle(node) {
+			const width = map.plane.cardWidth;
+			const height = map.plane.cardHeight;
+			return {
+				left: node.x - CONNECTOR_GAP,
+				right: node.x + width + CONNECTOR_GAP,
+				top: node.y - CONNECTOR_GAP,
+				bottom: node.y + height + CONNECTOR_GAP,
+			};
+		}
+
+		function routeObstacles(edge) {
+			return map.nodes
+				.filter(node => node.id !== edge.from && node.id !== edge.to)
+				.map(cardObstacle);
+		}
+
+		function rangesOverlap(firstStart, firstEnd, secondStart, secondEnd) {
+			const firstMin = Math.min(firstStart, firstEnd);
+			const firstMax = Math.max(firstStart, firstEnd);
+			const secondMin = Math.min(secondStart, secondEnd);
+			const secondMax = Math.max(secondStart, secondEnd);
+			return Math.max(firstMin, secondMin) <= Math.min(firstMax, secondMax);
+		}
+
+		function segmentIntersectsRect(start, end, rect) {
+			if (start.x === end.x) {
+				return start.x >= rect.left
+					&& start.x <= rect.right
+					&& rangesOverlap(start.y, end.y, rect.top, rect.bottom);
+			}
+			if (start.y === end.y) {
+				return start.y >= rect.top
+					&& start.y <= rect.bottom
+					&& rangesOverlap(start.x, end.x, rect.left, rect.right);
+			}
+			return false;
+		}
+
+		function pathClear(points, obstacles) {
+			for (let index = 0; index < points.length - 1; index++) {
+				if (obstacles.some(rect => segmentIntersectsRect(points[index], points[index + 1], rect))) {
+					return false;
+				}
+			}
+			return true;
+		}
+
+		function pointBlocked(point, obstacles) {
+			return obstacles.some(rect => point.x >= rect.left
+				&& point.x <= rect.right
+				&& point.y >= rect.top
+				&& point.y <= rect.bottom);
+		}
+
+		function keyFor(point) {
+			return `${point.x},${point.y}`;
+		}
+
+		function pointFor(key) {
+			const [x, y] = key.split(",").map(Number);
+			return {x, y};
+		}
+
+		function pushHeap(heap, item) {
+			heap.push(item);
+			let index = heap.length - 1;
+			while (index > 0) {
+				const parent = Math.floor((index - 1) / 2);
+				if (heap[parent].cost <= item.cost) break;
+				heap[index] = heap[parent];
+				index = parent;
+			}
+			heap[index] = item;
+		}
+
+		function popHeap(heap) {
+			const result = heap[0];
+			const item = heap.pop();
+			if (!heap.length || !item) return result;
+			let index = 0;
+			while (true) {
+				let child = index * 2 + 1;
+				if (child >= heap.length) break;
+				if (child + 1 < heap.length && heap[child + 1].cost < heap[child].cost) child++;
+				if (heap[child].cost >= item.cost) break;
+				heap[index] = heap[child];
+				index = child;
+			}
+			heap[index] = item;
+			return result;
+		}
+
+		function addCoordinate(values, value, max) {
+			if (Number.isFinite(value) && value >= 0 && value <= max) values.add(value);
+		}
+
+		function routeGrid(start, end, edge) {
+			const xValues = new Set();
+			const yValues = new Set();
+			for (let x = 0; x <= map.plane.width; x += GRID_SIZE) xValues.add(x);
+			for (let y = 0; y <= map.plane.height; y += GRID_SIZE) yValues.add(y);
+			addCoordinate(xValues, start.x, map.plane.width);
+			addCoordinate(xValues, end.x, map.plane.width);
+			addCoordinate(xValues, edge.busX, map.plane.width);
+			addCoordinate(yValues, start.y, map.plane.height);
+			addCoordinate(yValues, end.y, map.plane.height);
+			addCoordinate(yValues, edge.busY, map.plane.height);
+
+			const xs = [...xValues].sort((first, second) => first - second);
+			const ys = [...yValues].sort((first, second) => first - second);
+			const xIndex = new Map(xs.map((x, index) => [x, index]));
+			const yIndex = new Map(ys.map((y, index) => [y, index]));
+			const obstacles = routeObstacles(edge);
+			const startKey = keyFor(start);
+			const endKey = keyFor(end);
+			const heap = [];
+			const distance = new Map([[startKey, 0]]);
+			const previous = new Map();
+			const direction = new Map();
+			pushHeap(heap, {key: startKey, cost: 0});
+
+			while (heap.length) {
+				const current = popHeap(heap);
+				if (!current || current.cost !== distance.get(current.key)) continue;
+				if (current.key === endKey) break;
+				const point = pointFor(current.key);
+				const xi = xIndex.get(point.x);
+				const yi = yIndex.get(point.y);
+				const neighbors = [];
+				if (xi > 0) neighbors.push({x: xs[xi - 1], y: point.y});
+				if (xi < xs.length - 1) neighbors.push({x: xs[xi + 1], y: point.y});
+				if (yi > 0) neighbors.push({x: point.x, y: ys[yi - 1]});
+				if (yi < ys.length - 1) neighbors.push({x: point.x, y: ys[yi + 1]});
+
+				for (const next of neighbors) {
+					const nextKey = keyFor(next);
+					if (nextKey !== endKey && pointBlocked(next, obstacles)) continue;
+					if (!pathClear([point, next], obstacles)) continue;
+					const nextDirection = next.x === point.x ? "vertical" : "horizontal";
+					const turnCost = direction.get(current.key) && direction.get(current.key) !== nextDirection ? GRID_SIZE : 0;
+					const stepCost = Math.abs(next.x - point.x) + Math.abs(next.y - point.y) + turnCost;
+					const nextCost = current.cost + stepCost;
+					if (nextCost >= (distance.get(nextKey) ?? Infinity)) continue;
+					distance.set(nextKey, nextCost);
+					previous.set(nextKey, current.key);
+					direction.set(nextKey, nextDirection);
+					pushHeap(heap, {key: nextKey, cost: nextCost});
+				}
+			}
+
+			if (!previous.has(endKey)) return [start, end];
+			const points = [];
+			let cursor = endKey;
+			while (cursor) {
+				points.push(pointFor(cursor));
+				if (cursor === startKey) break;
+				cursor = previous.get(cursor);
+			}
+			points.reverse();
+			return simplifyRoute(points);
+		}
+
+		function simplifyRoute(points) {
+			if (points.length <= 2) return points;
+			const simplified = [points[0]];
+			for (let index = 1; index < points.length - 1; index++) {
+				const previous = simplified[simplified.length - 1];
+				const point = points[index];
+				const next = points[index + 1];
+				if ((previous.x === point.x && point.x === next.x) || (previous.y === point.y && point.y === next.y)) continue;
+				simplified.push(point);
+			}
+			simplified.push(points[points.length - 1]);
+			return simplified;
+		}
+
+		function routeLabel(points) {
+			let segment = {start: points[0], end: points[1] || points[0], length: 0};
+			for (let index = 0; index < points.length - 1; index++) {
+				const start = points[index];
+				const end = points[index + 1];
+				const length = Math.abs(end.x - start.x) + Math.abs(end.y - start.y);
+				if (length > segment.length) segment = {start, end, length};
+			}
+			if (segment.start.y === segment.end.y) {
+				return {
+					labelX: Math.round((segment.start.x + segment.end.x) / 2),
+					labelY: segment.start.y - 7,
+				};
+			}
+			return {
+				labelX: segment.start.x,
+				labelY: Math.round((segment.start.y + segment.end.y) / 2) - 7,
+			};
+		}
+
 		function routed(points, labelX, labelY) {
 			return {
 				d: roundedPath(points),
@@ -1239,41 +1436,9 @@
 		}
 
 		function route(start, end, edge) {
-			if (Number.isFinite(edge.busX)) {
-				return routed(
-					[start, {x: edge.busX, y: start.y}, {x: edge.busX, y: end.y}, end],
-					edge.busX,
-					Math.round((start.y + end.y) / 2) - 7
-				);
-			}
-			if (Number.isFinite(edge.busY)) {
-				if (start.x === end.x) {
-					return routed(
-						[start, end],
-						start.x,
-						Math.round((start.y + end.y) / 2) - 7
-					);
-				}
-				return routed(
-					[start, {x: start.x, y: edge.busY}, {x: end.x, y: edge.busY}, end],
-					Math.round((start.x + end.x) / 2),
-					edge.busY - 7
-				);
-			}
-			if (edge.fromSide === "left" || edge.fromSide === "right") {
-				const midX = Math.round((start.x + end.x) / 2);
-				return routed(
-					[start, {x: midX, y: start.y}, {x: midX, y: end.y}, end],
-					midX,
-					Math.round((start.y + end.y) / 2) - 7
-				);
-			}
-			const midY = Math.round((start.y + end.y) / 2);
-			return routed(
-				[start, {x: start.x, y: midY}, {x: end.x, y: midY}, end],
-				Math.round((start.x + end.x) / 2),
-				midY - 7
-			);
+			const points = routeGrid(start, end, edge);
+			const label = routeLabel(points);
+			return routed(points, label.labelX, label.labelY);
 		}
 
 		function edgeKey(edge) {
