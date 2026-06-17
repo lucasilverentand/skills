@@ -29,7 +29,7 @@ Create an explorable system drawing as one self-contained HTML file. The artifac
 ## Drawing structure
 Use three layers:
 
-1. **Canvas shell**: fixed menu/search, bottom-right zoom controls, clipped viewport, transform-based wheel/trackpad panning, free canvas dragging, and Space-hold map-only dragging that disables card and edge interactions. This comes from the template and should usually stay unchanged.
+1. **Canvas shell**: fixed menu/search, bottom-right zoom controls, clipped viewport, cursor-centered wheel zoom, free canvas dragging, and Space-hold map-only dragging that disables card and edge interactions. This comes from the template and should usually stay unchanged.
 2. **Diagram plane**: absolute-positioned node cards with an SVG connector layer behind them.
 3. **Detail surface**: centered hero overlay content for responsibilities, contracts, data owned, failure modes, and open questions.
 
@@ -37,7 +37,7 @@ The template already includes:
 - Search parts and edge labels.
 - Focus mode on click: highlight connected edges and dim unrelated parts.
 - Edge selection: clicking a connector or its label should focus both endpoints and expose the relationship detail.
-- Reset, fit-to-view, zoom in/out, wheel/trackpad map panning, free canvas dragging, and Space-hold map-only dragging.
+- Reset, fit-to-view, zoom in/out, cursor-centered wheel zoom, free canvas dragging, and Space-hold map-only dragging.
 
 ## Orthogonal connectors
 Draw every relationship as right-angle SVG paths.
