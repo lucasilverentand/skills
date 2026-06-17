@@ -1294,7 +1294,7 @@
 
 			document.querySelectorAll(".node").forEach(card => {
 				const id = card.dataset.node;
-				const selectedNode = selected && (selected.from === id || selected.to === id);
+				const selectedNode = !!selected && (selected.from === id || selected.to === id);
 				card.classList.toggle("hidden", !visibleNodes.has(id));
 				card.classList.toggle("focused", id === focus || selectedNode);
 				card.classList.toggle("dimmed", !!focus && !connected(id) && !selectedNode);
