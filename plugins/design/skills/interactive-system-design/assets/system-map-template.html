@@ -507,27 +507,27 @@
 			Coordinate model:
 			- plane.width / plane.height set the drawing surface.
 			- lanes are subtle vertical columns.
-			- node x/y values place card top-left corners.
+			- node x/y values place card top-left corners; keep them on the 22px grid.
 			- edge busX or busY creates an orthogonal dogleg route.
 		*/
 		const map = {
 			title: "Agentic Design System Map",
 			subtitle: "A richer starter diagram showing orchestration, evidence, quality gates, and delivery loops.",
 			searchPlaceholder: "Search nodes, flows, evidence, owners, risks",
-			plane: { width: 1840, height: 1040, cardWidth: 242, cardHeight: 138 },
+			plane: { width: 1848, height: 1056, cardWidth: 242, cardHeight: 154 },
 			lanes: [
-				{ title: "Intake", x: 0, width: 286 },
-				{ title: "Reasoning", x: 326, width: 326 },
-				{ title: "Tools + Data", x: 710, width: 324 },
-				{ title: "Quality", x: 1090, width: 324 },
-				{ title: "Delivery", x: 1470, width: 324 }
+				{ title: "Intake", x: 0, width: 308 },
+				{ title: "Reasoning", x: 330, width: 330 },
+				{ title: "Tools + Data", x: 704, width: 330 },
+				{ title: "Quality", x: 1078, width: 330 },
+				{ title: "Delivery", x: 1452, width: 352 }
 			],
 			nodes: [
 				{
 					id: "requester",
 					lane: "Intake",
-					x: 34,
-					y: 134,
+					x: 44,
+					y: 132,
 					title: "Request surface",
 					type: "Interface",
 					badges: ["prompt", "user-facing"],
@@ -541,7 +541,7 @@
 				{
 					id: "context-capture",
 					lane: "Intake",
-					x: 34,
+					x: 44,
 					y: 374,
 					title: "Context capture",
 					type: "Collector",
@@ -556,8 +556,8 @@
 				{
 					id: "policy-gate",
 					lane: "Intake",
-					x: 34,
-					y: 614,
+					x: 44,
+					y: 616,
 					title: "Policy gate",
 					type: "Guardrail",
 					badges: ["safety", "scope"],
@@ -571,8 +571,8 @@
 				{
 					id: "intent-router",
 					lane: "Reasoning",
-					x: 370,
-					y: 104,
+					x: 374,
+					y: 110,
 					title: "Intent router",
 					type: "Reasoner",
 					badges: ["classification", "skill"],
@@ -586,8 +586,8 @@
 				{
 					id: "plan-builder",
 					lane: "Reasoning",
-					x: 370,
-					y: 324,
+					x: 374,
+					y: 330,
 					title: "Plan builder",
 					type: "Planner",
 					badges: ["steps", "dependencies"],
@@ -601,8 +601,8 @@
 				{
 					id: "task-memory",
 					lane: "Reasoning",
-					x: 370,
-					y: 544,
+					x: 374,
+					y: 550,
 					title: "Task memory",
 					type: "Reference",
 					badges: ["history", "decisions"],
@@ -616,8 +616,8 @@
 				{
 					id: "rollback-ledger",
 					lane: "Reasoning",
-					x: 370,
-					y: 764,
+					x: 374,
+					y: 770,
 					title: "Change ledger",
 					type: "Trace",
 					badges: ["diff", "ownership"],
@@ -631,8 +631,8 @@
 				{
 					id: "browser-agent",
 					lane: "Tools + Data",
-					x: 750,
-					y: 104,
+					x: 748,
+					y: 110,
 					title: "Browser agent",
 					type: "Tool",
 					badges: ["in-app", "DOM"],
@@ -646,8 +646,8 @@
 				{
 					id: "file-workspace",
 					lane: "Tools + Data",
-					x: 750,
-					y: 324,
+					x: 748,
+					y: 330,
 					title: "Workspace files",
 					type: "Source",
 					badges: ["HTML", "skill"],
@@ -661,8 +661,8 @@
 				{
 					id: "execution-sandbox",
 					lane: "Tools + Data",
-					x: 750,
-					y: 544,
+					x: 748,
+					y: 550,
 					title: "Execution sandbox",
 					type: "Runtime",
 					badges: ["Bun", "checks"],
@@ -676,8 +676,8 @@
 				{
 					id: "artifact-store",
 					lane: "Tools + Data",
-					x: 750,
-					y: 764,
+					x: 748,
+					y: 770,
 					title: "Artifact store",
 					type: "Evidence",
 					badges: ["screenshots", "diffs"],
@@ -691,8 +691,8 @@
 				{
 					id: "design-review",
 					lane: "Quality",
-					x: 1130,
-					y: 144,
+					x: 1122,
+					y: 154,
 					title: "Design review",
 					type: "Evaluator",
 					badges: ["layout", "modern"],
@@ -706,8 +706,8 @@
 				{
 					id: "validation-runner",
 					lane: "Quality",
-					x: 1130,
-					y: 384,
+					x: 1122,
+					y: 396,
 					title: "Validation runner",
 					type: "Verifier",
 					badges: ["CI", "browser"],
@@ -721,8 +721,8 @@
 				{
 					id: "risk-register",
 					lane: "Quality",
-					x: 1130,
-					y: 624,
+					x: 1122,
+					y: 616,
 					title: "Risk register",
 					type: "Control",
 					badges: ["open issues", "tradeoffs"],
@@ -736,8 +736,8 @@
 				{
 					id: "trace-backlinks",
 					lane: "Quality",
-					x: 1130,
-					y: 824,
+					x: 1122,
+					y: 836,
 					title: "Backlink graph",
 					type: "Trace",
 					badges: ["nodes", "edges"],
@@ -751,8 +751,8 @@
 				{
 					id: "live-preview",
 					lane: "Delivery",
-					x: 1510,
-					y: 144,
+					x: 1496,
+					y: 154,
 					title: "Live preview",
 					type: "Surface",
 					badges: ["localhost", "interactive"],
@@ -766,8 +766,8 @@
 				{
 					id: "pr-handoff",
 					lane: "Delivery",
-					x: 1510,
-					y: 384,
+					x: 1496,
+					y: 396,
 					title: "PR handoff",
 					type: "Delivery",
 					badges: ["signed commit", "CI"],
@@ -781,8 +781,8 @@
 				{
 					id: "skill-template",
 					lane: "Delivery",
-					x: 1510,
-					y: 624,
+					x: 1496,
+					y: 616,
 					title: "Reusable template",
 					type: "Artifact",
 					badges: ["single HTML", "content-only"],
@@ -796,8 +796,8 @@
 				{
 					id: "learning-loop",
 					lane: "Delivery",
-					x: 1510,
-					y: 824,
+					x: 1496,
+					y: 836,
 					title: "Learning loop",
 					type: "Feedback",
 					badges: ["comments", "iteration"],
@@ -817,7 +817,7 @@
 					label: "route goal",
 					fromSide: "right",
 					toSide: "left",
-					busX: 326,
+					busX: 330,
 					detail: "The request surface sends the normalized goal into routing."
 				},
 				{
@@ -827,7 +827,7 @@
 					label: "provide evidence",
 					fromSide: "right",
 					toSide: "left",
-					busX: 326,
+					busX: 330,
 					detail: "Captured browser and workspace context shapes the work plan."
 				},
 				{
@@ -837,7 +837,7 @@
 					label: "constrain scope",
 					fromSide: "right",
 					toSide: "left",
-					busX: 326,
+					busX: 330,
 					detail: "Repo and browser safety rules constrain how the plan can execute."
 				},
 				{
@@ -874,7 +874,7 @@
 					label: "inspect page",
 					fromSide: "right",
 					toSide: "left",
-					busX: 710,
+					busX: 704,
 					detail: "The browser agent checks the current rendered state."
 				},
 				{
@@ -884,7 +884,7 @@
 					label: "edit source",
 					fromSide: "right",
 					toSide: "left",
-					busX: 710,
+					busX: 704,
 					detail: "The plan becomes a focused source edit."
 				},
 				{
@@ -894,7 +894,7 @@
 					label: "choose commands",
 					fromSide: "right",
 					toSide: "left",
-					busX: 710,
+					busX: 704,
 					detail: "Remembered validation commands drive the runtime checks."
 				},
 				{
@@ -904,7 +904,7 @@
 					label: "attach diff",
 					fromSide: "right",
 					toSide: "left",
-					busX: 710,
+					busX: 704,
 					detail: "The change ledger stores enough evidence to explain the diff."
 				},
 				{
@@ -914,7 +914,7 @@
 					label: "visual proof",
 					fromSide: "right",
 					toSide: "left",
-					busX: 1090,
+					busX: 1078,
 					detail: "Screenshots and DOM state support visual design review."
 				},
 				{
@@ -924,7 +924,7 @@
 					label: "source checks",
 					fromSide: "right",
 					toSide: "left",
-					busX: 1090,
+					busX: 1078,
 					detail: "Changed source is validated by project checks."
 				},
 				{
@@ -934,7 +934,7 @@
 					label: "run ci",
 					fromSide: "right",
 					toSide: "left",
-					busX: 1090,
+					busX: 1078,
 					detail: "The runtime executes the validation command sequence."
 				},
 				{
@@ -944,7 +944,7 @@
 					label: "evidence links",
 					fromSide: "right",
 					toSide: "left",
-					busX: 1090,
+					busX: 1078,
 					detail: "Evidence artifacts connect back to nodes, edges, and source files."
 				},
 				{
@@ -954,7 +954,7 @@
 					label: "ship visible state",
 					fromSide: "right",
 					toSide: "left",
-					busX: 1470,
+					busX: 1452,
 					detail: "Approved visual structure is visible in the live preview."
 				},
 				{
@@ -964,7 +964,7 @@
 					label: "check result",
 					fromSide: "right",
 					toSide: "left",
-					busX: 1470,
+					busX: 1452,
 					detail: "Validation output becomes PR evidence."
 				},
 				{
@@ -974,7 +974,7 @@
 					label: "remaining risk",
 					fromSide: "right",
 					toSide: "left",
-					busX: 1470,
+					busX: 1452,
 					detail: "Open risks are reported with the delivery state."
 				},
 				{
@@ -984,7 +984,7 @@
 					label: "template model",
 					fromSide: "right",
 					toSide: "left",
-					busX: 1470,
+					busX: 1452,
 					detail: "The trace model becomes reusable template guidance."
 				},
 				{
@@ -994,7 +994,7 @@
 					label: "browser comments",
 					fromSide: "top",
 					toSide: "top",
-					busY: 72,
+					busY: 66,
 					detail: "Feedback from the rendered surface loops back into context capture."
 				},
 				{
@@ -1004,7 +1004,7 @@
 					label: "tighten guardrails",
 					fromSide: "left",
 					toSide: "right",
-					busY: 712,
+					busY: 704,
 					detail: "Discovered risks feed back into policy and scope constraints."
 				},
 				{
@@ -1014,7 +1014,7 @@
 					label: "resolve backlink",
 					fromSide: "left",
 					toSide: "right",
-					busY: 922,
+					busY: 924,
 					detail: "Backlink selection resolves to the stored evidence that explains it."
 				},
 				{
@@ -1042,7 +1042,7 @@
 					label: "remember pattern",
 					fromSide: "bottom",
 					toSide: "bottom",
-					busY: 1000,
+					busY: 1034,
 					detail: "Successful interaction patterns are written back into task memory."
 				}
 			]
@@ -1069,6 +1069,8 @@
 		const MAX_ZOOM = 1.6;
 		const GRID_SIZE = 22;
 		const GRID_OFFSET = 2;
+		const CONNECTOR_GAP = 18;
+		const CORNER_RADIUS = 10;
 
 		document.title = map.title;
 		search.placeholder = map.searchPlaceholder || "Search system";
@@ -1193,48 +1195,85 @@
 		function anchor(node, side) {
 			const width = map.plane.cardWidth;
 			const height = map.plane.cardHeight;
-			if (side === "left") return {x: node.x, y: node.y + height / 2};
-			if (side === "right") return {x: node.x + width, y: node.y + height / 2};
-			if (side === "top") return {x: node.x + width / 2, y: node.y};
-			return {x: node.x + width / 2, y: node.y + height};
+			if (side === "left") return {x: node.x - CONNECTOR_GAP, y: node.y + height / 2};
+			if (side === "right") return {x: node.x + width + CONNECTOR_GAP, y: node.y + height / 2};
+			if (side === "top") return {x: node.x + width / 2, y: node.y - CONNECTOR_GAP};
+			return {x: node.x + width / 2, y: node.y + height + CONNECTOR_GAP};
+		}
+
+		function roundedPath(points) {
+			if (points.length < 2) return "";
+			const commands = [`M ${points[0].x} ${points[0].y}`];
+			for (let index = 1; index < points.length - 1; index++) {
+				const previous = points[index - 1];
+				const point = points[index];
+				const next = points[index + 1];
+				const into = {x: point.x - previous.x, y: point.y - previous.y};
+				const out = {x: next.x - point.x, y: next.y - point.y};
+				const intoLength = Math.abs(into.x) + Math.abs(into.y);
+				const outLength = Math.abs(out.x) + Math.abs(out.y);
+				if (!intoLength || !outLength) continue;
+				const radius = Math.min(CORNER_RADIUS, intoLength / 2, outLength / 2);
+				const before = {
+					x: point.x - Math.sign(into.x) * radius,
+					y: point.y - Math.sign(into.y) * radius,
+				};
+				const after = {
+					x: point.x + Math.sign(out.x) * radius,
+					y: point.y + Math.sign(out.y) * radius,
+				};
+				commands.push(`L ${before.x} ${before.y}`);
+				commands.push(`Q ${point.x} ${point.y} ${after.x} ${after.y}`);
+			}
+			const last = points[points.length - 1];
+			commands.push(`L ${last.x} ${last.y}`);
+			return commands.join(" ");
+		}
+
+		function routed(points, labelX, labelY) {
+			return {
+				d: roundedPath(points),
+				labelX,
+				labelY,
+			};
 		}
 
 		function route(start, end, edge) {
 			if (Number.isFinite(edge.busX)) {
-				return {
-					d: `M ${start.x} ${start.y} H ${edge.busX} V ${end.y} H ${end.x}`,
-					labelX: edge.busX,
-					labelY: Math.round((start.y + end.y) / 2) - 7,
-				};
+				return routed(
+					[start, {x: edge.busX, y: start.y}, {x: edge.busX, y: end.y}, end],
+					edge.busX,
+					Math.round((start.y + end.y) / 2) - 7
+				);
 			}
 			if (Number.isFinite(edge.busY)) {
 				if (start.x === end.x) {
-					return {
-						d: `M ${start.x} ${start.y} V ${end.y}`,
-						labelX: start.x,
-						labelY: Math.round((start.y + end.y) / 2) - 7,
-					};
+					return routed(
+						[start, end],
+						start.x,
+						Math.round((start.y + end.y) / 2) - 7
+					);
 				}
-				return {
-					d: `M ${start.x} ${start.y} V ${edge.busY} H ${end.x} V ${end.y}`,
-					labelX: Math.round((start.x + end.x) / 2),
-					labelY: edge.busY - 7,
-				};
+				return routed(
+					[start, {x: start.x, y: edge.busY}, {x: end.x, y: edge.busY}, end],
+					Math.round((start.x + end.x) / 2),
+					edge.busY - 7
+				);
 			}
 			if (edge.fromSide === "left" || edge.fromSide === "right") {
 				const midX = Math.round((start.x + end.x) / 2);
-				return {
-					d: `M ${start.x} ${start.y} H ${midX} V ${end.y} H ${end.x}`,
-					labelX: midX,
-					labelY: Math.round((start.y + end.y) / 2) - 7,
-				};
+				return routed(
+					[start, {x: midX, y: start.y}, {x: midX, y: end.y}, end],
+					midX,
+					Math.round((start.y + end.y) / 2) - 7
+				);
 			}
 			const midY = Math.round((start.y + end.y) / 2);
-			return {
-				d: `M ${start.x} ${start.y} V ${midY} H ${end.x} V ${end.y}`,
-				labelX: Math.round((start.x + end.x) / 2),
-				labelY: midY - 7,
-			};
+			return routed(
+				[start, {x: start.x, y: midY}, {x: end.x, y: midY}, end],
+				Math.round((start.x + end.x) / 2),
+				midY - 7
+			);
 		}
 
 		function edgeKey(edge) {

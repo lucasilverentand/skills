@@ -22,6 +22,7 @@ Create an explorable system drawing as one self-contained HTML file. The artifac
    - Swimlanes for ownership, trust boundaries, platforms, or runtime tiers.
    - Radial or clustered layouts only when the relationships are genuinely hub-like.
 3. Create the HTML artifact by copying `assets/system-map-template.html`. Replace the placeholder `map` object with the system content: title, search placeholder, plane size, lanes, cards, and connections. Avoid editing shell CSS, rendering, zoom, or transform-based canvas panning unless the user specifically asks to change the shell.
+   - Keep card `x` and `y` coordinates on the template's 22px grid so cards, lanes, and orthogonal routes line up cleanly.
 4. Use Bun to preview the artifact from its directory. Prefer a temporary `Bun.serve` command or an existing project Bun script; do not add dependencies or commit server files just to view one HTML file.
 5. Use the Browser plugin when available. Open the Bun-served local URL in the in-app browser, interact with it, check console errors, test a small viewport, and adjust the file until it is readable and usable.
 6. Share the file path, local preview URL if the server is still running, and the main design questions the artifact now exposes. For co-creation, ask for the next decision in concrete terms, such as which component to expand, which flow to trace, or which trade-off to compare.
