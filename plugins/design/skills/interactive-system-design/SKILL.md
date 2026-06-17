@@ -21,7 +21,7 @@ Create an explorable system drawing as one self-contained HTML file. The artifac
    - Top-to-bottom for pipeline, lifecycle, or command flow.
    - Swimlanes for ownership, trust boundaries, platforms, or runtime tiers.
    - Radial or clustered layouts only when the relationships are genuinely hub-like.
-3. Create the HTML artifact by copying `assets/system-map-template.html`. Replace the placeholder `map` object with the system content: title, search placeholder, plane size, lanes, cards, and connections. Avoid editing shell CSS, rendering, zoom, scrolling, or Space-drag panning unless the user specifically asks to change the shell.
+3. Create the HTML artifact by copying `assets/system-map-template.html`. Replace the placeholder `map` object with the system content: title, search placeholder, plane size, lanes, cards, and connections. Avoid editing shell CSS, rendering, zoom, scrolling, or canvas panning unless the user specifically asks to change the shell.
 4. Use Bun to preview the artifact from its directory. Prefer a temporary `Bun.serve` command or an existing project Bun script; do not add dependencies or commit server files just to view one HTML file.
 5. Use the Browser plugin when available. Open the Bun-served local URL in the in-app browser, interact with it, check console errors, test a small viewport, and adjust the file until it is readable and usable.
 6. Share the file path, local preview URL if the server is still running, and the main design questions the artifact now exposes. For co-creation, ask for the next decision in concrete terms, such as which component to expand, which flow to trace, or which trade-off to compare.
@@ -29,7 +29,7 @@ Create an explorable system drawing as one self-contained HTML file. The artifac
 ## Drawing structure
 Use three layers:
 
-1. **Canvas shell**: fixed menu/search, bottom-right zoom controls, scrollable map, and Space-hold dragging. This comes from the template and should usually stay unchanged.
+1. **Canvas shell**: fixed menu/search, bottom-right zoom controls, scrollable map, free canvas dragging, and Space-hold map-only dragging that disables card and edge interactions. This comes from the template and should usually stay unchanged.
 2. **Diagram plane**: absolute-positioned node cards with an SVG connector layer behind them.
 3. **Detail surface**: centered hero overlay content for responsibilities, contracts, data owned, failure modes, and open questions.
 
@@ -37,7 +37,7 @@ The template already includes:
 - Search parts and edge labels.
 - Focus mode on click: highlight connected edges and dim unrelated parts.
 - Edge selection: clicking a connector or its label should focus both endpoints and expose the relationship detail.
-- Reset, fit-to-view, zoom in/out, scroll-wheel map movement, and Space-hold drag panning.
+- Reset, fit-to-view, zoom in/out, scroll-wheel map movement, free canvas dragging, and Space-hold map-only dragging.
 
 ## Orthogonal connectors
 Draw every relationship as right-angle SVG paths.

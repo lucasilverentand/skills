@@ -142,22 +142,24 @@
 			overflow: auto;
 			padding: 68px 28px 28px;
 			overscroll-behavior: contain;
+			cursor: grab;
 			background-color: var(--canvas);
 			background-image: radial-gradient(circle, rgba(99, 110, 138, .16) 1px, transparent 1.2px);
 			background-size: 22px 22px;
 			background-position: 2px 2px;
 		}
 
-		.stage.space-pan {
-			cursor: grab;
-		}
-
-		.stage.space-pan.dragging {
+		.stage.dragging {
 			cursor: grabbing;
 		}
 
 		.stage.space-pan * {
 			cursor: inherit !important;
+		}
+
+		.stage.space-pan .node-layer,
+		.stage.space-pan .edge-hit {
+			pointer-events: none;
 		}
 
 		.stage:focus {
@@ -498,7 +500,7 @@
 		/*
 			CONTENT ONLY.
 			Replace the map object below for each new diagram. Leave the shell,
-			rendering code, styling, scrolling, zooming, and Space-drag panning alone.
+			rendering code, styling, scrolling, zooming, and canvas panning alone.
 
 			Coordinate model:
 			- plane.width / plane.height set the drawing surface.
@@ -915,7 +917,11 @@
 		document.querySelector("#reset").addEventListener("click", resetView);
 
 		function isTypingTarget(target) {
-			return target && ["INPUT", "TEXTAREA", "SELECT", "BUTTON"].includes(target.tagName);
+			return target && (["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName) || target.isContentEditable);
+		}
+
+		function isInteractiveMapTarget(target) {
+			return !!target.closest?.(".node-button, .edge-hit");
 		}
 
 		function setSpacePan(active) {
@@ -942,7 +948,8 @@
 		window.addEventListener("blur", () => setSpacePan(false));
 
 		stage.addEventListener("pointerdown", event => {
-			if (!spacePan || event.button !== 0) return;
+			if (event.button !== 0) return;
+			if (!spacePan && isInteractiveMapTarget(event.target)) return;
 			event.preventDefault();
 			stage.focus({ preventScroll: true });
 			if (stage.setPointerCapture) {
