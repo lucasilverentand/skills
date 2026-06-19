@@ -1,5 +1,5 @@
 ---
-description: Rebases the current branch onto main (or a specified branch), resolving any conflicts along the way
+description: Rebases the current branch onto main or a specified branch, resolving conflicts along the way
 allowed-tools: Read Bash Glob Grep Edit AskUserQuestion
 ---
 
@@ -12,6 +12,4 @@ Rebase the current branch onto the target branch, resolving any conflicts that a
 - Upstream: !`git rev-parse --abbrev-ref @{upstream} 2>/dev/null || echo "none"`
 - Commits ahead of main: !`git rev-list --count origin/main..HEAD 2>/dev/null || echo "unknown"`
 
-If a rebase is already in progress, skip straight to conflict resolution in the `resolving-conflicts` skill.
-
-Otherwise, determine the target branch from the user's arguments (default: `main` or `master`), then follow the "Start rebase" flow in the `resolving-conflicts` skill.
+Use the `repo-management` skill. If a rebase is already in progress, read `references/conflicts.md` and continue conflict resolution. Otherwise, determine the target branch from the user's arguments, default to `main` or `master`, then follow the rebase flow in that reference.

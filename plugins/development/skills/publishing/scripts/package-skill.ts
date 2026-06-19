@@ -128,8 +128,8 @@ Usage:
   bun run scripts/package-skill.ts <path/to/skill-folder> [output-directory]
 
 Example:
-  bun run scripts/package-skill.ts plugins/development/skills/creating-commits
-  bun run scripts/package-skill.ts plugins/development/skills/creating-commits ./dist
+  bun run scripts/package-skill.ts plugins/delivery/skills/repo-management
+  bun run scripts/package-skill.ts plugins/delivery/skills/repo-management ./dist
 `.trim();
 
   if (args.includes("--help") || args.length === 0) {

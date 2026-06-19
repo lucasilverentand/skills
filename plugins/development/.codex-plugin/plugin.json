@@ -1,7 +1,7 @@
 {
 	"name": "development",
 	"version": "2.0.0",
-	"description": "Implementation and code craft workflows for commits, skill authoring, reusable tooling, and publishing agent skills as maintained software artifacts.",
+	"description": "Implementation and code craft workflows for skill authoring, reusable tooling, and publishing agent skills as maintained software artifacts.",
 	"author": {
 		"name": "Luca Silverentand",
 		"email": "dev@lucasilverentand.com"
@@ -13,7 +13,6 @@
 		"development",
 		"implementation",
 		"code",
-		"commits",
 		"skills",
 		"authoring",
 		"tooling",
@@ -23,7 +22,7 @@
 	"interface": {
 		"displayName": "Development",
 		"shortDescription": "Build and package work",
-		"longDescription": "Implementation and code craft workflows for commits, skill authoring, reusable tooling, and publishing agent skills as maintained software artifacts.",
+		"longDescription": "Implementation and code craft workflows for skill authoring, reusable tooling, and publishing agent skills as maintained software artifacts.",
 		"developerName": "Luca Silverentand",
 		"category": "Development",
 		"capabilities": [

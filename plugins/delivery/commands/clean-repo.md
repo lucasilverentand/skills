@@ -14,4 +14,4 @@ Clean up this repo and leave it in a pristine state.
 - Last 5 commits: !`git log --oneline -5`
 - Remote status: !`git remote -v 2>/dev/null | head -2`
 
-Follow the full workflow in the `cleaning-repos` skill. Use the current state above to skip straight to the right step in the decision tree — don't re-run commands that are already answered by this context.
+Follow the cleanup workflow in the `repo-management` skill. Read `references/cleanup.md` from that skill and use the current state above to skip straight to the right step in the decision tree. Do not re-run commands that are already answered by this context.

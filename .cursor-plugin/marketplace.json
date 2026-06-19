@@ -19,7 +19,7 @@
 		{
 			"name": "delivery",
 			"source": "delivery",
-			"description": "Operations, reliability, and delivery workflows for opening pull requests, cleaning repositories, preparing releases, and getting work safely shipped."
+			"description": "Repository management and delivery workflows for commits, pull requests, rebases, conflict resolution, CI repair, PR readiness, stale state cleanup, releases, and getting work safely shipped."
 		},
 		{
 			"name": "design",
@@ -29,7 +29,7 @@
 		{
 			"name": "development",
 			"source": "development",
-			"description": "Implementation and code craft workflows for commits, skill authoring, reusable tooling, and publishing agent skills as maintained software artifacts."
+			"description": "Implementation and code craft workflows for skill authoring, reusable tooling, and publishing agent skills as maintained software artifacts."
 		},
 		{
 			"name": "intent",
@@ -39,12 +39,7 @@
 		{
 			"name": "maintenance",
 			"source": "maintenance",
-			"description": "Evolution and maintenance workflows for resolving conflicts, mining agent sessions for durable improvements, and encoding long-term user taste into reusable skills."
-		},
-		{
-			"name": "verification",
-			"source": "verification",
-			"description": "Quality and verification workflows for CI monitoring, pull request repair, merge readiness, and evidence-driven validation."
+			"description": "Evolution and maintenance workflows for mining agent sessions for durable improvements and encoding long-term user taste into reusable skills."
 		}
 	]
 }

@@ -14,4 +14,4 @@ The user invoked this command with: $ARGUMENTS
 - Merge state: !`gh pr view --json mergeStateStatus,reviewDecision,isDraft --jq '"merge=\(.mergeStateStatus // "unknown") review=\(.reviewDecision // "unknown") draft=\(.isDraft)"' 2>/dev/null || echo "unknown"`
 - Failed checks: !`gh pr checks --json name,state --jq '[.[] | select(.state == "FAILURE")] | length' 2>/dev/null || echo "unknown"`
 
-Follow the full workflow in the `fix-pr` skill. If `$ARGUMENTS` contains a PR number, use that PR. Otherwise, use the current branch PR from the state above when one exists. Use the current state above to avoid repeating checks that are already answered.
+Use the `repo-management` skill. If `$ARGUMENTS` contains a PR number, use that PR. Otherwise, use the current branch PR from the state above when one exists. Read `references/ci-and-pr-repair.md` and use the current state above to avoid repeating checks that are already answered.

@@ -28,12 +28,12 @@
 		{
 			"name": "delivery",
 			"displayName": "Delivery",
-			"description": "Operations, reliability, and delivery workflows for opening pull requests, cleaning repositories, preparing releases, and getting work safely shipped.",
-			"shortDescription": "Ship and clean up work",
+			"description": "Repository management and delivery workflows for commits, pull requests, rebases, conflict resolution, CI repair, PR readiness, stale state cleanup, releases, and getting work safely shipped.",
+			"shortDescription": "Manage and ship repo work",
 			"category": "DevOps",
-			"keywords": ["delivery", "pull-request", "release", "cleanup", "operations", "reliability"],
-			"skills": ["cleaning-repos", "creating-prs"],
-			"commands": ["clean-repo", "create-draft-pr", "create-pr"],
+			"keywords": ["delivery", "repository", "git", "github", "commit", "pull-request", "ci", "cleanup", "release"],
+			"skills": ["repo-management"],
+			"commands": ["ci", "clean-repo", "create-commit", "create-draft-pr", "create-pr", "fix-pr", "rebase"],
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -69,12 +69,11 @@
 		{
 			"name": "development",
 			"displayName": "Development",
-			"description": "Implementation and code craft workflows for commits, skill authoring, reusable tooling, and publishing agent skills as maintained software artifacts.",
+			"description": "Implementation and code craft workflows for skill authoring, reusable tooling, and publishing agent skills as maintained software artifacts.",
 			"shortDescription": "Build and package work",
 			"category": "Development",
-			"keywords": ["development", "implementation", "code", "commits", "skills", "authoring", "tooling", "publishing"],
-			"skills": ["authoring", "creating-commits", "publishing", "tooling"],
-			"commands": ["create-commit"],
+			"keywords": ["development", "implementation", "code", "skills", "authoring", "tooling", "publishing"],
+			"skills": ["authoring", "publishing", "tooling"],
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -110,26 +109,11 @@
 		{
 			"name": "maintenance",
 			"displayName": "Maintenance",
-			"description": "Evolution and maintenance workflows for resolving conflicts, mining agent sessions for durable improvements, and encoding long-term user taste into reusable skills.",
+			"description": "Evolution and maintenance workflows for mining agent sessions for durable improvements and encoding long-term user taste into reusable skills.",
 			"shortDescription": "Evolve the skill library",
 			"category": "Maintenance",
-			"keywords": ["maintenance", "evolution", "conflicts", "retrospective", "taste", "refactoring"],
-			"skills": ["resolving-conflicts", "retrospecting", "taste-encoding"],
-			"commands": ["rebase"],
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			}
-		},
-		{
-			"name": "verification",
-			"displayName": "Verification",
-			"description": "Quality and verification workflows for CI monitoring, pull request repair, merge readiness, and evidence-driven validation.",
-			"shortDescription": "Validate and repair work",
-			"category": "Testing",
-			"keywords": ["verification", "quality", "ci", "checks", "pull-request", "validation", "review"],
-			"skills": ["fix-pr", "monitoring-ci"],
-			"commands": ["ci", "fix-pr"],
+			"keywords": ["maintenance", "evolution", "retrospective", "taste", "refactoring"],
+			"skills": ["retrospecting", "taste-encoding"],
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"

@@ -126,10 +126,10 @@ Generated at `plugins/<name>/.claude-plugin/plugin.json`:
 
 ```json
 {
-  "name": "git",
-  "description": "Git workflow toolkit",
+  "name": "delivery",
+  "description": "Repository management and delivery workflows",
   "version": "1.1.0",
-  "skills": ["./skills/creating-commits"],
+  "skills": ["./skills/repo-management"],
   "commands": ["./commands/create-commit.md"]
 }
 ```
@@ -154,9 +154,9 @@ Generated at `.cursor-plugin/marketplace.json` (aligned with [cursor-team-market
   },
   "plugins": [
     {
-      "name": "git",
-      "source": "git",
-      "description": "Git workflow toolkit"
+      "name": "delivery",
+      "source": "delivery",
+      "description": "Repository management and delivery workflows"
     }
   ]
 }
@@ -169,13 +169,13 @@ Generated at `plugins/<name>/.cursor-plugin/plugin.json`:
 
 ```json
 {
-  "name": "git",
-  "displayName": "Git",
+  "name": "delivery",
+  "displayName": "Delivery",
   "version": "1.1.0",
-  "description": "Git workflow toolkit",
+  "description": "Repository management and delivery workflows",
   "author": { "name": "Luca Silverentand", "email": "dev@lucasilverentand.com" },
   "license": "MIT",
-  "keywords": ["git", "commits"]
+  "keywords": ["delivery", "repository"]
 }
 ```
 
@@ -185,8 +185,8 @@ Cursor discovers `skills/`, `commands/`, `rules/`, and `agents/` by folder; mani
 Direct skill consumers can install from the plugin-owned skill tree:
 
 ```bash
-bun run install:codex-skills -- creating-commits creating-prs
-bun run install:claude-skills -- creating-commits creating-prs
+bun run install:codex-skills -- repo-management
+bun run install:claude-skills -- repo-management
 ```
 
 Without skill names, the installer targets every plugin-owned skill. Add `--symlink` for local development and `--force` to replace an existing installed skill.

@@ -33,7 +33,7 @@
 			"category": "DevOps",
 			"interface": {
 				"displayName": "Delivery",
-				"shortDescription": "Ship and clean up work"
+				"shortDescription": "Manage and ship repo work"
 			}
 		},
 		{
@@ -98,22 +98,6 @@
 			"interface": {
 				"displayName": "Maintenance",
 				"shortDescription": "Evolve the skill library"
-			}
-		},
-		{
-			"name": "verification",
-			"source": {
-				"source": "local",
-				"path": "./plugins/verification"
-			},
-			"policy": {
-				"installation": "AVAILABLE",
-				"authentication": "ON_INSTALL"
-			},
-			"category": "Testing",
-			"interface": {
-				"displayName": "Verification",
-				"shortDescription": "Validate and repair work"
 			}
 		}
 	]

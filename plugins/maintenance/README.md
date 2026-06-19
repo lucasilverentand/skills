@@ -1,12 +1,9 @@
 # Maintenance
-Evolution and maintenance workflows for resolving conflicts, mining agent sessions for durable improvements, and encoding long-term user taste into reusable skills.
+Evolution and maintenance workflows for mining agent sessions for durable improvements and encoding long-term user taste into reusable skills.
 
 ## Skills
-- `maintenance:resolving-conflicts`
 - `maintenance:retrospecting`
 - `maintenance:taste-encoding`
-
-Codex and Claude Code also expose command shims for this plugin: `/maintenance:rebase`. Prefer the portable skills above for automatic loading.
 
 ## Install
 Codex:

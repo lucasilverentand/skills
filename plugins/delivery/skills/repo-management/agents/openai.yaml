@@ -1,0 +1,4 @@
+interface:
+  display_name: "Repo Management"
+  short_description: "Manage commits, PRs, CI, conflicts, and cleanup"
+  default_prompt: "Use repo-management to handle repository work end to end: commits, pull requests, CI repair, conflict resolution, PR readiness, and cleanup."
