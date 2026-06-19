@@ -5,6 +5,7 @@ Design and architecture skills for product UI, Apple platforms, system architect
 - `design:api-design`
 - `design:architecture`
 - `design:c4-diagrams`
+- `design:dashboard-design`
 - `design:data-modeling`
 - `design:design-options`
 - `design:design-review`
