@@ -61,11 +61,11 @@ Cursor reads `.cursor-plugin/marketplace.json` (team-marketplace layout with `me
 Direct local skill installs are available for personal skills directories:
 
 ```bash
-bun run install:codex-skills -- creating-commits creating-prs
-bun run install:claude-skills -- creating-commits creating-prs
+bun run install:codex-skills -- repo-management
+bun run install:claude-skills -- repo-management
 ```
 
-Omit skill names to install every skill. Add `--symlink` for local development and `--force` to replace existing installed skills. Skill names can be plain (`creating-commits`) or plugin-qualified (`git:creating-commits`).
+Omit skill names to install every skill. Add `--symlink` for local development and `--force` to replace existing installed skills. Skill names can be plain (`repo-management`) or plugin-qualified (`delivery:repo-management`).
 
 ## Cursor Cloud specific instructions
 - **Runtime**: Bun is the sole runtime dependency. There are no `node_modules`, no lockfile, and no npm/yarn/pnpm usage. The update script ensures Bun is installed and on `PATH`.

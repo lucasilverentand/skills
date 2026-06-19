@@ -33,8 +33,8 @@ Cursor (IDE):
 Direct local skill install:
 
 ```bash
-bun run install:codex-skills -- creating-commits creating-prs
-bun run install:claude-skills -- creating-commits creating-prs
+bun run install:codex-skills -- repo-management
+bun run install:claude-skills -- repo-management
 ```
 
 ## Development

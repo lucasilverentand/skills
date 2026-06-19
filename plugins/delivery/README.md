@@ -1,11 +1,10 @@
 # Delivery
-Operations, reliability, and delivery workflows for opening pull requests, cleaning repositories, preparing releases, and getting work safely shipped.
+Repository management and delivery workflows for commits, pull requests, rebases, conflict resolution, CI repair, PR readiness, stale state cleanup, releases, and getting work safely shipped.
 
 ## Skills
-- `delivery:cleaning-repos`
-- `delivery:creating-prs`
+- `delivery:repo-management`
 
-Codex and Claude Code also expose command shims for this plugin: `/delivery:clean-repo`, `/delivery:create-draft-pr`, `/delivery:create-pr`. Prefer the portable skills above for automatic loading.
+Codex and Claude Code also expose command shims for this plugin: `/delivery:ci`, `/delivery:clean-repo`, `/delivery:create-commit`, `/delivery:create-draft-pr`, `/delivery:create-pr`, `/delivery:fix-pr`, `/delivery:rebase`. Prefer the portable skills above for automatic loading.
 
 ## Install
 Codex:

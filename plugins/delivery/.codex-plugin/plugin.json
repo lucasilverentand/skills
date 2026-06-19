@@ -1,7 +1,7 @@
 {
 	"name": "delivery",
 	"version": "2.0.0",
-	"description": "Operations, reliability, and delivery workflows for opening pull requests, cleaning repositories, preparing releases, and getting work safely shipped.",
+	"description": "Repository management and delivery workflows for commits, pull requests, rebases, conflict resolution, CI repair, PR readiness, stale state cleanup, releases, and getting work safely shipped.",
 	"author": {
 		"name": "Luca Silverentand",
 		"email": "dev@lucasilverentand.com"
@@ -11,17 +11,20 @@
 	"license": "MIT",
 	"keywords": [
 		"delivery",
+		"repository",
+		"git",
+		"github",
+		"commit",
 		"pull-request",
-		"release",
+		"ci",
 		"cleanup",
-		"operations",
-		"reliability"
+		"release"
 	],
 	"skills": "./skills/",
 	"interface": {
 		"displayName": "Delivery",
-		"shortDescription": "Ship and clean up work",
-		"longDescription": "Operations, reliability, and delivery workflows for opening pull requests, cleaning repositories, preparing releases, and getting work safely shipped.",
+		"shortDescription": "Manage and ship repo work",
+		"longDescription": "Repository management and delivery workflows for commits, pull requests, rebases, conflict resolution, CI repair, PR readiness, stale state cleanup, releases, and getting work safely shipped.",
 		"developerName": "Luca Silverentand",
 		"category": "DevOps",
 		"capabilities": [
