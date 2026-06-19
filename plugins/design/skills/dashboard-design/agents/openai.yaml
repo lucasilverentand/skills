@@ -1,4 +1,4 @@
 interface:
   display_name: "Dashboard Design"
-  short_description: "Design decision-first dashboards"
-  default_prompt: "Use $dashboard-design to design a decision-first dashboard for this product."
+  short_description: "Advise on and build dashboards"
+  default_prompt: "Use $dashboard-design to advise on or build a decision-first dashboard for this product."
