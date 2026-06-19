@@ -13,7 +13,7 @@ Use this skill to design dashboards as decision-and-action surfaces, not decorat
 
 ## Core Workflow
 1. Choose advisory conversation mode, autonomous build/review mode, or mixed mode from the user's request.
-2. Read `references/foundations-and-taxonomy.md` and `references/dashboard-brief.md` before proposing structure or UI. Produce, ask for, or infer the dashboard brief: user, decision, action, time horizon, scope, entities, data freshness, permissions, and failure cost.
+2. Read `references/dashboard-defaults.md`, `references/foundations-and-taxonomy.md`, and `references/dashboard-brief.md` before proposing structure or UI. Produce, ask for, or infer the dashboard brief: user, decision, action, time horizon, scope, entities, data freshness, permissions, and failure cost.
 3. Classify the surface before choosing a layout:
    - **Dashboard** for at-a-glance status and branching.
    - **Workbench or queue** for repeated operational processing.
@@ -29,6 +29,7 @@ Use this skill to design dashboards as decision-and-action surfaces, not decorat
 ## Routing
 |Need|Read|
 |---|---|
+|Strong default preferences for dashboard product shape, visual tone, data trust, and build/advice behavior|`references/dashboard-defaults.md`|
 |Core decision model, taxonomy, product-surface choice|`references/foundations-and-taxonomy.md`|
 |Required dashboard brief and clarifying questions|`references/dashboard-brief.md`|
 |Navigation, page hierarchy, headers, tabs, responsive layout patterns|`references/information-architecture-and-layouts.md`|
@@ -60,6 +61,13 @@ Use this skill to design dashboards as decision-and-action surfaces, not decorat
 - Choose form containers deliberately. Avoid large settings forms in modals; use pages, drawers, wizards, or review screens when complexity or risk requires it.
 - Mark unknown, stale, partial, and delayed data honestly. Never let missing telemetry look healthy.
 - Pair risky actions with eligibility, consequences, audit trail, permission handling, and post-action verification.
+
+## Default Preferences
+- Treat `references/dashboard-defaults.md` as strong default guidance whenever product context does not clearly point elsewhere.
+- Default to decision/action-first, dense operational surfaces with restrained system UI, visible scope/freshness, capable tables, and preserved drill-down context.
+- Use cards sparingly, charts only when they change the decision, and saved views for repeated operational filter/sort/column setups.
+- Keep risky actions explicit and auditable, copy concrete and terse, and empty states specific to the reason nothing is shown.
+- Let product-specific design systems override visual tone, but not decision/action clarity, data trust, or safety without a clear reason.
 
 ## Expected Outputs
 For advisory conversations, include the dashboard brief, recommended archetype, key trade-offs, questions that still matter, and the next decision the person should make.
