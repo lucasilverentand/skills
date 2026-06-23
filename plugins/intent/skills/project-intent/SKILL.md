@@ -4,7 +4,7 @@ description: Facilitates structured project-intent interviews and A/B/C option n
 ---
 
 # Project Intent
-Use this skill before `project-docs`, `create-planner-project`, or `linear-issues` when the project direction is still fuzzy. It turns scattered ideas into a concise intent packet that future agents can ingest.
+Use this skill before `project-docs`, `create-planner-project`, or `issue-authoring` when the project direction is still fuzzy. It turns scattered ideas into a concise intent packet that future agents can ingest.
 
 ## Core posture
 - Interview first. Do not jump to implementation, Linear project creation, or issue creation while purpose, audience, scope, and current lane are unclear.
@@ -47,5 +47,5 @@ The final packet should include:
 ## Handoffs
 - Use `project-docs` to turn an approved intent packet into a project brief, customer profile, research brief, decision record, or testing strategy.
 - Use `create-planner-project` only after the intent is committed enough to justify a real Linear planning project.
-- Use `linear-issues` only after the work can be phrased as executable issues.
+- Use `issue-authoring` only after the work can be phrased as executable issues.
 - Use repository docs skills when a repo exists and the intent packet needs to become public README flow or private repo hub documentation.

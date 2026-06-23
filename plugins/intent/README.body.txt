@@ -3,11 +3,11 @@ The project source of truth for this plugin is [documents/project-brief.md](docu
 
 The detailed operational structure lives in [skills/create-planner-project/references/planner-project-structure.md](skills/create-planner-project/references/planner-project-structure.md).
 
-The shared Linear issue workflow lives in [skills/linear-issues/SKILL.md](skills/linear-issues/SKILL.md). It owns issue creation, issue refinement, field and relationship rules, complexity scoring, and tidy-up issue hygiene.
+The shared issue workflow lives in [skills/issue-authoring/SKILL.md](skills/issue-authoring/SKILL.md). It owns platform-neutral issue writing, implementer-ready body shape, routing metadata, dependency semantics, and complexity scoring. Destination references are metadata adapters only.
 
 The project intent workflow lives in [skills/project-intent/SKILL.md](skills/project-intent/SKILL.md). Use it before docs, projects, or issues when an idea needs structured interviews, A/B/C narrowing, portfolio triage, or an LLM alignment packet.
 
-The compatibility entrypoints [skills/estimate-issue-complexity/SKILL.md](skills/estimate-issue-complexity/SKILL.md) and [skills/tidy-linear-project/SKILL.md](skills/tidy-linear-project/SKILL.md) route old triggers to `linear-issues`.
+The compatibility entrypoints [skills/linear-issues/SKILL.md](skills/linear-issues/SKILL.md), [skills/estimate-issue-complexity/SKILL.md](skills/estimate-issue-complexity/SKILL.md), and [skills/tidy-linear-project/SKILL.md](skills/tidy-linear-project/SKILL.md) route old triggers to `issue-authoring`.
 
 ## Template library
 Starter templates for the documents kept around a product.
