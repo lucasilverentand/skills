@@ -1,5 +1,5 @@
 # Design
-Design and architecture skills for product UI, Apple platforms, system architecture, data modeling, API design, technical design docs, ADRs, C4 diagrams, and design reviews.
+Design and architecture skills for product UI, websites, Apple platforms, system architecture, data modeling, API design, technical design docs, ADRs, C4 diagrams, and design reviews.
 
 ## Skills
 - `design:api-design`
@@ -14,6 +14,7 @@ Design and architecture skills for product UI, Apple platforms, system architect
 - `design:foundations`
 - `design:platforms`
 - `design:services`
+- `design:web-design`
 - `design:write-adr`
 - `design:write-design-doc`
 
