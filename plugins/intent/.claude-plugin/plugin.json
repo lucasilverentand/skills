@@ -6,7 +6,7 @@
 		"./skills/create-doc-template",
 		"./skills/create-planner-project",
 		"./skills/estimate-issue-complexity",
-		"./skills/linear-issues",
+		"./skills/issue-authoring",
 		"./skills/pickup-work",
 		"./skills/project-context",
 		"./skills/project-docs",
