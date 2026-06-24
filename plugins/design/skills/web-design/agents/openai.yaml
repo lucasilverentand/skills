@@ -1,0 +1,4 @@
+interface:
+  display_name: "Web Design"
+  short_description: "Design modern marketing websites"
+  default_prompt: "Use $web-design to plan, review, or build a modern marketing website."

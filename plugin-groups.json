@@ -42,10 +42,10 @@
 		{
 			"name": "design",
 			"displayName": "Design",
-			"description": "Design and architecture skills for product UI, Apple platforms, system architecture, data modeling, API design, technical design docs, ADRs, C4 diagrams, and design reviews.",
-			"shortDescription": "Product and system design",
+			"description": "Design and architecture skills for product UI, websites, Apple platforms, system architecture, data modeling, API design, technical design docs, ADRs, C4 diagrams, and design reviews.",
+			"shortDescription": "Product, web, and system design",
 			"category": "Design",
-			"keywords": ["design", "architecture", "api", "database", "apple", "hig", "ui", "ux", "adr", "c4"],
+			"keywords": ["design", "architecture", "api", "database", "apple", "hig", "ui", "ux", "web", "website", "adr", "c4"],
 			"skills": [
 				"api-design",
 				"architecture",
@@ -59,6 +59,7 @@
 				"foundations",
 				"platforms",
 				"services",
+				"web-design",
 				"write-adr",
 				"write-design-doc"
 			],
