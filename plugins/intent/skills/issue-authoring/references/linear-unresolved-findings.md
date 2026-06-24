@@ -1,4 +1,4 @@
-# Unresolved cleanup findings
+# Linear unresolved cleanup findings
 Use this format when a tidy run cannot safely finish an item. The goal is to hand humans a short, actionable queue without opening duplicate tracking noise.
 
 ## When to use
@@ -6,7 +6,7 @@ Use this format when a tidy run cannot safely finish an item. The goal is to han
 - Blocker removal might change sequencing expectations.
 - Document drift needs author input, not agent rewrite.
 - State moves lack evidence.
-- Findings are `out-of-scope` but still worth recording for the project owner.
+- Findings are out of scope but still worth recording for the project owner.
 
 ## Report format
 Add a `## Unresolved cleanup` section to the tidy report. For each item use:
@@ -26,11 +26,11 @@ Add a `## Unresolved cleanup` section to the tidy report. For each item use:
 |Severity|Use when|
 |---|---|
 |high|Wrong blockers hide ready work, duplicate execution is likely, or doc drift misstates current scope|
-|medium|Missing AC, labels, or links slow execution but work can continue|
+|medium|Missing AC, labels, complexity, or links slow execution but work can continue|
 |low|Cosmetic consistency, optional links, or stale Suggestion issues|
 
 ## Escalation paths
-1. **Comment on the primary issue** — default for single-issue decisions. Tag the assignee or project lead.
+1. **Comment on the primary issue** — default for single-issue decisions. Tag the project lead or planner.
 2. **Project status update** — use when three or more high-severity items affect milestone risk or the next gate.
 3. **New tracking issue** — only when the user asked to file follow-ups, or the same unresolved item survived two tidy runs. Title pattern: `Tidy: <short topic>`. Label with `Planning` or the project's hygiene label if one exists. Link back to the tidy report comment or date.
 

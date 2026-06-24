@@ -6,8 +6,9 @@ last_updated: 2026-05-28
 related:
   - ../skills/create-planner-project/SKILL.md
   - ../skills/create-planner-project/references/planner-project-structure.md
-  - ../skills/linear-issues/SKILL.md
-  - ../skills/linear-issues/references/issue-rules.md
+  - ../skills/issue-authoring/SKILL.md
+  - ../skills/issue-authoring/references/issue-rules.md
+  - ../skills/issue-authoring/references/linear.md
 ---
 
 # Linear planner project brief
@@ -41,7 +42,7 @@ A user asks for a planner project for a real product. The agent confirms the pro
 
 Planner issues ask for actual product documents where planning needs them: brief, platform decision, stack decision, risk register, open questions log, launch checklist, and similar records. They may point to `project-docs` templates, but completed documents belong to the product's Linear project or repo, not to the planner plugin.
 
-Codex and Claude must consume the same authored skill source under `plugins/intent/skills/`; generated manifests and READMEs are packaging outputs. The `linear-issues` skill owns shared issue authoring, field semantics, relationship rules, complexity scoring, and issue hygiene. Update this brief when a change alters purpose, Linear behavior, scope boundaries, or maintenance rules.
+Codex and Claude must consume the same authored skill source under `plugins/intent/skills/`; generated manifests and READMEs are packaging outputs. The `issue-authoring` skill owns platform-neutral issue authoring, routing metadata, relationship rules, complexity scoring, and thin destination adapters. Update this brief when a change alters purpose, issue behavior, scope boundaries, or maintenance rules.
 
 ## 6. Scope
 
@@ -52,8 +53,8 @@ Codex and Claude must consume the same authored skill source under `plugins/inte
    Web, native, backend, automation, AI, data, integration-heavy, and mixed products.
 3. **Linear record creation rules**
    How to create or select initiatives, projects, milestones, issues, labels, relationships, documents, comments, and status updates.
-4. **Linear issue authoring and hygiene**
-   Reusable issue creation, refinement, relationship, complexity, and tidy-up rules shared by planner setup and existing-project maintenance.
+4. **Issue authoring and metadata**
+   Reusable issue body, routing metadata, relationship, complexity, and platform-adapter rules shared by planner setup and issue refinement.
 5. **Planning document boundaries**
    Which issues require actual product docs, which templates guide them, when Linear docs stay canonical, and when repo docs link back.
 6. **Project tidy-up workflow**
@@ -81,7 +82,7 @@ Codex and Claude must consume the same authored skill source under `plugins/inte
 |Profile-aware output|Descriptions and acceptance criteria reflect the selected project type.|
 |Linear field discipline|No cycle by default; committed work starts in Todo; speculative work can start in Suggestion.|
 |Issue relationship discipline|Blockers, parent issues, related issues, labels, priorities, milestones, and status updates follow the shared issue-creation rules.|
-|Issue workflow reuse|Planner setup, issue refinement, complexity scoring, and tidy-up share the `linear-issues` rules instead of copying issue semantics across skills.|
+|Issue workflow reuse|Planner setup, issue refinement, metadata mapping, and complexity scoring share the `issue-authoring` rules instead of copying issue semantics across skills.|
 |Document ownership|Linear planning docs stay canonical until a repo exists; repo docs link back instead of duplicating the plan.|
 |Codex and Claude parity|Both surfaces use the same skill source, project document, and generated package metadata.|
 |Maintenance traceability|Behavior changes update this brief and the planner structure in the same PR.|

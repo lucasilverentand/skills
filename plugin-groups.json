@@ -92,7 +92,7 @@
 				"create-doc-template",
 				"create-planner-project",
 				"estimate-issue-complexity",
-				"linear-issues",
+				"issue-authoring",
 				"pickup-work",
 				"project-context",
 				"project-docs",

@@ -4,10 +4,9 @@ description: Keeps an existing Linear project tidy after planning and during exe
 ---
 
 # Tidy Linear Project
-Compatibility entrypoint. Use `linear-issues` for the actual workflow:
+Compatibility entrypoint. Use `issue-authoring` for the actual workflow:
 
-1. Read `../linear-issues/SKILL.md`.
-2. Follow its "Tidy issue hygiene" branch.
-3. Read `../linear-issues/references/tidy-checks.md` and `../linear-issues/references/unresolved-findings.md`.
-4. Use `../linear-issues/references/issue-rules.md` for blocker, related, label, priority, and milestone semantics.
-5. Produce the tidy report described by the `linear-issues` skill.
+1. Read `../issue-authoring/SKILL.md`.
+2. Read `../issue-authoring/references/linear-tidy-checks.md` and `../issue-authoring/references/linear-unresolved-findings.md`.
+3. Use `../issue-authoring/references/issue-rules.md` and `../issue-authoring/references/linear.md` for current issue body, metadata, blocker, related, label, priority, milestone, and complexity semantics.
+4. Produce the tidy report described by the tidy references.
