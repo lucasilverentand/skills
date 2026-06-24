@@ -13,40 +13,13 @@
 	},
 	"plugins": [
 		{
-			"name": "collaboration",
-			"displayName": "Collaboration",
-			"description": "Collaboration and communication skills for shared understanding: repository docs, decision trees, onboarding context, and human-readable coordination artifacts.",
-			"shortDescription": "Shared context and coordination",
-			"category": "Documentation",
-			"keywords": ["collaboration", "communication", "documentation", "readme", "decision-tree", "onboarding"],
-			"skills": ["closed-source-docs", "decision-trees", "open-source-docs"],
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			}
-		},
-		{
-			"name": "delivery",
-			"displayName": "Delivery",
-			"description": "Repository management and delivery workflows for commits, pull requests, rebases, conflict resolution, CI repair, PR readiness, stale state cleanup, releases, and getting work safely shipped.",
-			"shortDescription": "Manage and ship repo work",
-			"category": "DevOps",
-			"keywords": ["delivery", "repository", "git", "github", "commit", "pull-request", "ci", "cleanup", "release"],
-			"skills": ["repo-management"],
-			"commands": ["ci", "clean-repo", "create-commit", "create-draft-pr", "create-pr", "fix-pr", "rebase"],
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			}
-		},
-		{
-			"name": "codebase-management",
-			"displayName": "Codebase Management",
-			"description": "Codebase management skills for repository structure, project-type organization, monorepo boundaries, code ownership, cleanup of LLM-generated layouts, and incremental codebase reorganization.",
-			"shortDescription": "Structure and clean up codebases",
+			"name": "codebase",
+			"displayName": "Codebase",
+			"description": "Codebase design and structure skills for API interfaces, repository organization, runtime boundaries, ownership, and cleanup of LLM-generated layouts.",
+			"shortDescription": "Shape codebases and APIs",
 			"category": "Development",
-			"keywords": ["codebase", "repository", "structure", "monorepo", "workspace", "scaffold", "refactor", "cleanup", "llm"],
-			"skills": ["codebase-structure"],
+			"keywords": ["codebase", "repository", "structure", "api", "interface", "monorepo", "workspace", "cleanup"],
+			"skills": ["api-design", "codebase-structure"],
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -55,24 +28,59 @@
 		{
 			"name": "design",
 			"displayName": "Design",
-			"description": "Design and architecture skills for product UI, websites, Apple platforms, system architecture, data modeling, API design, technical design docs, ADRs, C4 diagrams, and design reviews.",
-			"shortDescription": "Product, web, and system design",
+			"description": "Visual and product design skills for websites, dashboards, design systems, and interactive UI direction.",
+			"shortDescription": "Visual and product UI design",
 			"category": "Design",
-			"keywords": ["design", "architecture", "api", "database", "apple", "hig", "ui", "ux", "web", "website", "adr", "c4"],
+			"keywords": ["design", "ui", "ux", "visual", "dashboard", "website", "design-system", "prototype"],
+			"skills": ["dashboard-design", "design-options", "design-system", "web-design"],
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			}
+		},
+		{
+			"name": "workflow",
+			"displayName": "Workflow",
+			"description": "Execution and reasoning workflows for system design, issue-to-PR delivery, root-cause analysis, repository management, decision trees, skill authoring, publishing, and retrospective improvement.",
+			"shortDescription": "Run durable agent workflows",
+			"category": "Productivity",
+			"keywords": ["workflow", "architecture", "data", "pr", "github", "ci", "root-cause", "skill", "retrospective"],
 			"skills": [
-				"api-design",
 				"architecture",
+				"authoring",
 				"c4-diagrams",
-				"dashboard-design",
 				"data-modeling",
-				"design-options",
+				"decision-trees",
 				"design-review",
-				"design-system",
 				"design-workflow",
-				"foundations",
-				"platforms",
-				"services",
-				"web-design",
+				"issue-to-pr",
+				"publishing",
+				"repo-management",
+				"retrospecting",
+				"root-cause-analysis",
+				"taste-encoding",
+				"tooling"
+			],
+			"commands": ["ci", "clean-repo", "create-commit", "create-draft-pr", "create-pr", "fix-pr", "rebase"],
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			}
+		},
+		{
+			"name": "documentation",
+			"displayName": "Documentation",
+			"description": "Documentation skills for repository docs, project context, document templates, design documents, and architecture decision records.",
+			"shortDescription": "Create and maintain docs",
+			"category": "Documentation",
+			"keywords": ["documentation", "readme", "docs", "context", "templates", "adr", "design-doc"],
+			"readmeBody": "README.body.txt",
+			"skills": [
+				"closed-source-docs",
+				"create-doc-template",
+				"open-source-docs",
+				"project-context",
+				"project-docs",
 				"write-adr",
 				"write-design-doc"
 			],
@@ -82,34 +90,18 @@
 			}
 		},
 		{
-			"name": "development",
-			"displayName": "Development",
-			"description": "Implementation and code craft workflows for skill authoring, reusable tooling, and publishing agent skills as maintained software artifacts.",
-			"shortDescription": "Build and package work",
-			"category": "Development",
-			"keywords": ["development", "implementation", "code", "skills", "authoring", "tooling", "publishing"],
-			"skills": ["authoring", "publishing", "tooling"],
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			}
-		},
-		{
-			"name": "intent",
-			"displayName": "Intent",
-			"description": "Intent and problem-understanding workflows for requirements, task shaping, Linear planning, project documents, issue hygiene, and turning vague goals into traceable work.",
-			"shortDescription": "Clarify and plan work",
+			"name": "planning",
+			"displayName": "Planning",
+			"description": "Planning skills for requirements, task specs, project intent interviews, Linear project setup, issue authoring, complexity estimation, work pickup, and project tidy-up.",
+			"shortDescription": "Plan projects and issues",
 			"category": "Productivity",
-			"keywords": ["intent", "requirements", "planning", "linear", "issues", "project-docs", "task-spec", "context"],
+			"keywords": ["planning", "requirements", "linear", "issues", "tasks", "project", "scope", "metadata"],
 			"readmeBody": "README.body.txt",
 			"skills": [
-				"create-doc-template",
 				"create-planner-project",
 				"estimate-issue-complexity",
 				"issue-authoring",
 				"pickup-work",
-				"project-context",
-				"project-docs",
 				"project-intent",
 				"requirements",
 				"task-spec",
@@ -122,13 +114,26 @@
 			}
 		},
 		{
-			"name": "maintenance",
-			"displayName": "Maintenance",
-			"description": "Evolution and maintenance workflows for mining agent sessions for durable improvements and encoding long-term user taste into reusable skills.",
-			"shortDescription": "Evolve the skill library",
-			"category": "Maintenance",
-			"keywords": ["maintenance", "evolution", "retrospective", "taste", "refactoring"],
-			"skills": ["retrospecting", "taste-encoding"],
+			"name": "deploy",
+			"displayName": "Deploy",
+			"description": "Deployment skills for environment topology, infrastructure readiness, CI/CD automation, release pipelines, rollback, and post-deploy verification.",
+			"shortDescription": "Plan and automate deploys",
+			"category": "DevOps",
+			"keywords": ["deploy", "deployment", "environment", "ci", "cd", "release", "rollback", "infra", "automation"],
+			"skills": ["deployment-automation", "deployment-environments"],
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			}
+		},
+		{
+			"name": "apple",
+			"displayName": "Apple",
+			"description": "Apple platform guidance for Human Interface Guidelines, platform conventions, and Apple framework or service integrations.",
+			"shortDescription": "Apple platform guidance",
+			"category": "Design",
+			"keywords": ["apple", "ios", "macos", "watchos", "tvos", "visionos", "hig", "swiftui", "services"],
+			"skills": ["foundations", "platforms", "services"],
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"

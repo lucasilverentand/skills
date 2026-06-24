@@ -1,0 +1,30 @@
+{
+	"name": "documentation",
+	"description": "Documentation skills for repository docs, project context, document templates, design documents, and architecture decision records.",
+	"version": "2.0.0",
+	"skills": [
+		"./skills/closed-source-docs",
+		"./skills/create-doc-template",
+		"./skills/open-source-docs",
+		"./skills/project-context",
+		"./skills/project-docs",
+		"./skills/write-adr",
+		"./skills/write-design-doc"
+	],
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"documentation",
+		"readme",
+		"docs",
+		"context",
+		"templates",
+		"adr",
+		"design-doc"
+	]
+}

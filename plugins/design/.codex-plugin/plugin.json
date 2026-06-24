@@ -1,7 +1,7 @@
 {
 	"name": "design",
 	"version": "2.0.0",
-	"description": "Design and architecture skills for product UI, websites, Apple platforms, system architecture, data modeling, API design, technical design docs, ADRs, C4 diagrams, and design reviews.",
+	"description": "Visual and product design skills for websites, dashboards, design systems, and interactive UI direction.",
 	"author": {
 		"name": "Luca Silverentand",
 		"email": "dev@lucasilverentand.com"
@@ -11,23 +11,19 @@
 	"license": "MIT",
 	"keywords": [
 		"design",
-		"architecture",
-		"api",
-		"database",
-		"apple",
-		"hig",
 		"ui",
 		"ux",
-		"web",
+		"visual",
+		"dashboard",
 		"website",
-		"adr",
-		"c4"
+		"design-system",
+		"prototype"
 	],
 	"skills": "./skills/",
 	"interface": {
 		"displayName": "Design",
-		"shortDescription": "Product, web, and system design",
-		"longDescription": "Design and architecture skills for product UI, websites, Apple platforms, system architecture, data modeling, API design, technical design docs, ADRs, C4 diagrams, and design reviews.",
+		"shortDescription": "Visual and product UI design",
+		"longDescription": "Visual and product design skills for websites, dashboards, design systems, and interactive UI direction.",
 		"developerName": "Luca Silverentand",
 		"category": "Design",
 		"capabilities": [

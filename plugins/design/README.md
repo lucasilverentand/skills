@@ -1,22 +1,11 @@
 # Design
-Design and architecture skills for product UI, websites, Apple platforms, system architecture, data modeling, API design, technical design docs, ADRs, C4 diagrams, and design reviews.
+Visual and product design skills for websites, dashboards, design systems, and interactive UI direction.
 
 ## Skills
-- `design:api-design`
-- `design:architecture`
-- `design:c4-diagrams`
 - `design:dashboard-design`
-- `design:data-modeling`
 - `design:design-options`
-- `design:design-review`
 - `design:design-system`
-- `design:design-workflow`
-- `design:foundations`
-- `design:platforms`
-- `design:services`
 - `design:web-design`
-- `design:write-adr`
-- `design:write-design-doc`
 
 ## Install
 Codex:

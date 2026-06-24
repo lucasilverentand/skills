@@ -14,7 +14,7 @@ Claude Code:
 
 ```text
 /plugin marketplace add lucasilverentand/skills
-/plugin install development@skills-of-luca
+/plugin install workflow@skills-of-luca
 ```
 
 Cursor (team marketplace):
@@ -27,7 +27,7 @@ Cursor (IDE):
 
 ```text
 /plugin marketplace add lucasilverentand/skills
-/plugin install development@skills-of-luca
+/plugin install workflow@skills-of-luca
 ```
 
 Direct local skill install:

@@ -1,0 +1,39 @@
+{
+	"name": "deploy",
+	"version": "2.0.0",
+	"description": "Deployment skills for environment topology, infrastructure readiness, CI/CD automation, release pipelines, rollback, and post-deploy verification.",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"deploy",
+		"deployment",
+		"environment",
+		"ci",
+		"cd",
+		"release",
+		"rollback",
+		"infra",
+		"automation"
+	],
+	"skills": "./skills/",
+	"interface": {
+		"displayName": "Deploy",
+		"shortDescription": "Plan and automate deploys",
+		"longDescription": "Deployment skills for environment topology, infrastructure readiness, CI/CD automation, release pipelines, rollback, and post-deploy verification.",
+		"developerName": "Luca Silverentand",
+		"category": "DevOps",
+		"capabilities": [
+			"Read",
+			"Write"
+		],
+		"websiteURL": "https://github.com/lucasilverentand/skills",
+		"defaultPrompt": [
+			"Use Deploy when the task matches one of its bundled skills."
+		]
+	}
+}

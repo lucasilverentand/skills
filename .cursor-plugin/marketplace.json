@@ -12,39 +12,39 @@
 	},
 	"plugins": [
 		{
-			"name": "codebase-management",
-			"source": "codebase-management",
-			"description": "Codebase management skills for repository structure, project-type organization, monorepo boundaries, code ownership, cleanup of LLM-generated layouts, and incremental codebase reorganization."
+			"name": "apple",
+			"source": "apple",
+			"description": "Apple platform guidance for Human Interface Guidelines, platform conventions, and Apple framework or service integrations."
 		},
 		{
-			"name": "collaboration",
-			"source": "collaboration",
-			"description": "Collaboration and communication skills for shared understanding: repository docs, decision trees, onboarding context, and human-readable coordination artifacts."
+			"name": "codebase",
+			"source": "codebase",
+			"description": "Codebase design and structure skills for API interfaces, repository organization, runtime boundaries, ownership, and cleanup of LLM-generated layouts."
 		},
 		{
-			"name": "delivery",
-			"source": "delivery",
-			"description": "Repository management and delivery workflows for commits, pull requests, rebases, conflict resolution, CI repair, PR readiness, stale state cleanup, releases, and getting work safely shipped."
+			"name": "deploy",
+			"source": "deploy",
+			"description": "Deployment skills for environment topology, infrastructure readiness, CI/CD automation, release pipelines, rollback, and post-deploy verification."
 		},
 		{
 			"name": "design",
 			"source": "design",
-			"description": "Design and architecture skills for product UI, websites, Apple platforms, system architecture, data modeling, API design, technical design docs, ADRs, C4 diagrams, and design reviews."
+			"description": "Visual and product design skills for websites, dashboards, design systems, and interactive UI direction."
 		},
 		{
-			"name": "development",
-			"source": "development",
-			"description": "Implementation and code craft workflows for skill authoring, reusable tooling, and publishing agent skills as maintained software artifacts."
+			"name": "documentation",
+			"source": "documentation",
+			"description": "Documentation skills for repository docs, project context, document templates, design documents, and architecture decision records."
 		},
 		{
-			"name": "intent",
-			"source": "intent",
-			"description": "Intent and problem-understanding workflows for requirements, task shaping, Linear planning, project documents, issue hygiene, and turning vague goals into traceable work."
+			"name": "planning",
+			"source": "planning",
+			"description": "Planning skills for requirements, task specs, project intent interviews, Linear project setup, issue authoring, complexity estimation, work pickup, and project tidy-up."
 		},
 		{
-			"name": "maintenance",
-			"source": "maintenance",
-			"description": "Evolution and maintenance workflows for mining agent sessions for durable improvements and encoding long-term user taste into reusable skills."
+			"name": "workflow",
+			"source": "workflow",
+			"description": "Execution and reasoning workflows for system design, issue-to-PR delivery, root-cause analysis, repository management, decision trees, skill authoring, publishing, and retrospective improvement."
 		}
 	]
 }

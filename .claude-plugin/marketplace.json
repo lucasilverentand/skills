@@ -15,9 +15,31 @@
 	},
 	"plugins": [
 		{
-			"name": "codebase-management",
-			"source": "./plugins/codebase-management",
-			"description": "Codebase management skills for repository structure, project-type organization, monorepo boundaries, code ownership, cleanup of LLM-generated layouts, and incremental codebase reorganization.",
+			"name": "apple",
+			"source": "./plugins/apple",
+			"description": "Apple platform guidance for Human Interface Guidelines, platform conventions, and Apple framework or service integrations.",
+			"version": "2.0.0",
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			},
+			"category": "Design",
+			"keywords": [
+				"apple",
+				"ios",
+				"macos",
+				"watchos",
+				"tvos",
+				"visionos",
+				"hig",
+				"swiftui",
+				"services"
+			]
+		},
+		{
+			"name": "codebase",
+			"source": "./plugins/codebase",
+			"description": "Codebase design and structure skills for API interfaces, repository organization, runtime boundaries, ownership, and cleanup of LLM-generated layouts.",
 			"version": "2.0.0",
 			"author": {
 				"name": "Luca Silverentand",
@@ -28,37 +50,17 @@
 				"codebase",
 				"repository",
 				"structure",
+				"api",
+				"interface",
 				"monorepo",
 				"workspace",
-				"scaffold",
-				"refactor",
-				"cleanup",
-				"llm"
+				"cleanup"
 			]
 		},
 		{
-			"name": "collaboration",
-			"source": "./plugins/collaboration",
-			"description": "Collaboration and communication skills for shared understanding: repository docs, decision trees, onboarding context, and human-readable coordination artifacts.",
-			"version": "2.0.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			},
-			"category": "Documentation",
-			"keywords": [
-				"collaboration",
-				"communication",
-				"documentation",
-				"readme",
-				"decision-tree",
-				"onboarding"
-			]
-		},
-		{
-			"name": "delivery",
-			"source": "./plugins/delivery",
-			"description": "Repository management and delivery workflows for commits, pull requests, rebases, conflict resolution, CI repair, PR readiness, stale state cleanup, releases, and getting work safely shipped.",
+			"name": "deploy",
+			"source": "./plugins/deploy",
+			"description": "Deployment skills for environment topology, infrastructure readiness, CI/CD automation, release pipelines, rollback, and post-deploy verification.",
 			"version": "2.0.0",
 			"author": {
 				"name": "Luca Silverentand",
@@ -66,21 +68,21 @@
 			},
 			"category": "DevOps",
 			"keywords": [
-				"delivery",
-				"repository",
-				"git",
-				"github",
-				"commit",
-				"pull-request",
+				"deploy",
+				"deployment",
+				"environment",
 				"ci",
-				"cleanup",
-				"release"
+				"cd",
+				"release",
+				"rollback",
+				"infra",
+				"automation"
 			]
 		},
 		{
 			"name": "design",
 			"source": "./plugins/design",
-			"description": "Design and architecture skills for product UI, websites, Apple platforms, system architecture, data modeling, API design, technical design docs, ADRs, C4 diagrams, and design reviews.",
+			"description": "Visual and product design skills for websites, dashboards, design systems, and interactive UI direction.",
 			"version": "2.0.0",
 			"author": {
 				"name": "Luca Silverentand",
@@ -89,43 +91,39 @@
 			"category": "Design",
 			"keywords": [
 				"design",
-				"architecture",
-				"api",
-				"database",
-				"apple",
-				"hig",
 				"ui",
 				"ux",
-				"web",
+				"visual",
+				"dashboard",
 				"website",
-				"adr",
-				"c4"
+				"design-system",
+				"prototype"
 			]
 		},
 		{
-			"name": "development",
-			"source": "./plugins/development",
-			"description": "Implementation and code craft workflows for skill authoring, reusable tooling, and publishing agent skills as maintained software artifacts.",
+			"name": "documentation",
+			"source": "./plugins/documentation",
+			"description": "Documentation skills for repository docs, project context, document templates, design documents, and architecture decision records.",
 			"version": "2.0.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
 			},
-			"category": "Development",
+			"category": "Documentation",
 			"keywords": [
-				"development",
-				"implementation",
-				"code",
-				"skills",
-				"authoring",
-				"tooling",
-				"publishing"
+				"documentation",
+				"readme",
+				"docs",
+				"context",
+				"templates",
+				"adr",
+				"design-doc"
 			]
 		},
 		{
-			"name": "intent",
-			"source": "./plugins/intent",
-			"description": "Intent and problem-understanding workflows for requirements, task shaping, Linear planning, project documents, issue hygiene, and turning vague goals into traceable work.",
+			"name": "planning",
+			"source": "./plugins/planning",
+			"description": "Planning skills for requirements, task specs, project intent interviews, Linear project setup, issue authoring, complexity estimation, work pickup, and project tidy-up.",
 			"version": "2.0.0",
 			"author": {
 				"name": "Luca Silverentand",
@@ -133,32 +131,36 @@
 			},
 			"category": "Productivity",
 			"keywords": [
-				"intent",
-				"requirements",
 				"planning",
+				"requirements",
 				"linear",
 				"issues",
-				"project-docs",
-				"task-spec",
-				"context"
+				"tasks",
+				"project",
+				"scope",
+				"metadata"
 			]
 		},
 		{
-			"name": "maintenance",
-			"source": "./plugins/maintenance",
-			"description": "Evolution and maintenance workflows for mining agent sessions for durable improvements and encoding long-term user taste into reusable skills.",
+			"name": "workflow",
+			"source": "./plugins/workflow",
+			"description": "Execution and reasoning workflows for system design, issue-to-PR delivery, root-cause analysis, repository management, decision trees, skill authoring, publishing, and retrospective improvement.",
 			"version": "2.0.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
 			},
-			"category": "Maintenance",
+			"category": "Productivity",
 			"keywords": [
-				"maintenance",
-				"evolution",
-				"retrospective",
-				"taste",
-				"refactoring"
+				"workflow",
+				"architecture",
+				"data",
+				"pr",
+				"github",
+				"ci",
+				"root-cause",
+				"skill",
+				"retrospective"
 			]
 		}
 	]

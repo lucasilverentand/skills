@@ -1,0 +1,22 @@
+{
+	"name": "apple",
+	"displayName": "Apple",
+	"version": "2.0.0",
+	"description": "Apple platform guidance for Human Interface Guidelines, platform conventions, and Apple framework or service integrations.",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"license": "MIT",
+	"keywords": [
+		"apple",
+		"ios",
+		"macos",
+		"watchos",
+		"tvos",
+		"visionos",
+		"hig",
+		"swiftui",
+		"services"
+	]
+}

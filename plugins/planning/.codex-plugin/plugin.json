@@ -1,0 +1,38 @@
+{
+	"name": "planning",
+	"version": "2.0.0",
+	"description": "Planning skills for requirements, task specs, project intent interviews, Linear project setup, issue authoring, complexity estimation, work pickup, and project tidy-up.",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"planning",
+		"requirements",
+		"linear",
+		"issues",
+		"tasks",
+		"project",
+		"scope",
+		"metadata"
+	],
+	"skills": "./skills/",
+	"interface": {
+		"displayName": "Planning",
+		"shortDescription": "Plan projects and issues",
+		"longDescription": "Planning skills for requirements, task specs, project intent interviews, Linear project setup, issue authoring, complexity estimation, work pickup, and project tidy-up.",
+		"developerName": "Luca Silverentand",
+		"category": "Productivity",
+		"capabilities": [
+			"Read",
+			"Write"
+		],
+		"websiteURL": "https://github.com/lucasilverentand/skills",
+		"defaultPrompt": [
+			"Use Planning when the task matches one of its bundled skills."
+		]
+	}
+}

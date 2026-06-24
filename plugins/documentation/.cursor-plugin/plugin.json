@@ -1,0 +1,20 @@
+{
+	"name": "documentation",
+	"displayName": "Documentation",
+	"version": "2.0.0",
+	"description": "Documentation skills for repository docs, project context, document templates, design documents, and architecture decision records.",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"license": "MIT",
+	"keywords": [
+		"documentation",
+		"readme",
+		"docs",
+		"context",
+		"templates",
+		"adr",
+		"design-doc"
+	]
+}

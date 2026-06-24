@@ -1,0 +1,21 @@
+{
+	"name": "codebase",
+	"displayName": "Codebase",
+	"version": "2.0.0",
+	"description": "Codebase design and structure skills for API interfaces, repository organization, runtime boundaries, ownership, and cleanup of LLM-generated layouts.",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"license": "MIT",
+	"keywords": [
+		"codebase",
+		"repository",
+		"structure",
+		"api",
+		"interface",
+		"monorepo",
+		"workspace",
+		"cleanup"
+	]
+}

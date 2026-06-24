@@ -65,7 +65,7 @@ bun run install:codex-skills -- repo-management
 bun run install:claude-skills -- repo-management
 ```
 
-Omit skill names to install every skill. Add `--symlink` for local development and `--force` to replace existing installed skills. Skill names can be plain (`repo-management`) or plugin-qualified (`delivery:repo-management`).
+Omit skill names to install every skill. Add `--symlink` for local development and `--force` to replace existing installed skills. Skill names can be plain (`repo-management`) or plugin-qualified (`workflow:repo-management`).
 
 ## Cursor Cloud specific instructions
 - **Runtime**: Bun is the sole runtime dependency. There are no `node_modules`, no lockfile, and no npm/yarn/pnpm usage. The update script ensures Bun is installed and on `PATH`.

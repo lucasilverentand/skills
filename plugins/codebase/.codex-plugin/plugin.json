@@ -1,0 +1,38 @@
+{
+	"name": "codebase",
+	"version": "2.0.0",
+	"description": "Codebase design and structure skills for API interfaces, repository organization, runtime boundaries, ownership, and cleanup of LLM-generated layouts.",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"codebase",
+		"repository",
+		"structure",
+		"api",
+		"interface",
+		"monorepo",
+		"workspace",
+		"cleanup"
+	],
+	"skills": "./skills/",
+	"interface": {
+		"displayName": "Codebase",
+		"shortDescription": "Shape codebases and APIs",
+		"longDescription": "Codebase design and structure skills for API interfaces, repository organization, runtime boundaries, ownership, and cleanup of LLM-generated layouts.",
+		"developerName": "Luca Silverentand",
+		"category": "Development",
+		"capabilities": [
+			"Read",
+			"Write"
+		],
+		"websiteURL": "https://github.com/lucasilverentand/skills",
+		"defaultPrompt": [
+			"Use Codebase when the task matches one of its bundled skills."
+		]
+	}
+}

@@ -1,0 +1,37 @@
+{
+	"name": "documentation",
+	"version": "2.0.0",
+	"description": "Documentation skills for repository docs, project context, document templates, design documents, and architecture decision records.",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"documentation",
+		"readme",
+		"docs",
+		"context",
+		"templates",
+		"adr",
+		"design-doc"
+	],
+	"skills": "./skills/",
+	"interface": {
+		"displayName": "Documentation",
+		"shortDescription": "Create and maintain docs",
+		"longDescription": "Documentation skills for repository docs, project context, document templates, design documents, and architecture decision records.",
+		"developerName": "Luca Silverentand",
+		"category": "Documentation",
+		"capabilities": [
+			"Read",
+			"Write"
+		],
+		"websiteURL": "https://github.com/lucasilverentand/skills",
+		"defaultPrompt": [
+			"Use Documentation when the task matches one of its bundled skills."
+		]
+	}
+}
