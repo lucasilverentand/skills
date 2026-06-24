@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codebase Structure"
+  short_description: "Structure codebases by project type"
+  default_prompt: "Use $codebase-structure to choose a clean codebase structure for this project."

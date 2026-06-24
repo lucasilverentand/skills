@@ -9,6 +9,7 @@
 		"install:codex-skills": "bun scripts/install-skills.ts --target codex",
 		"marketplace": "bun scripts/marketplace.ts",
 		"marketplace:write": "bun scripts/marketplace.ts --write",
+		"tree": "bun scripts/skill-tree.ts",
 		"validate:cursor": "bun scripts/validate-cursor-marketplace.ts"
 	}
 }

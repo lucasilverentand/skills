@@ -12,6 +12,11 @@
 	},
 	"plugins": [
 		{
+			"name": "codebase-management",
+			"source": "codebase-management",
+			"description": "Codebase management skills for repository structure, project-type organization, monorepo boundaries, code ownership, cleanup of LLM-generated layouts, and incremental codebase reorganization."
+		},
+		{
 			"name": "collaboration",
 			"source": "collaboration",
 			"description": "Collaboration and communication skills for shared understanding: repository docs, decision trees, onboarding context, and human-readable coordination artifacts."

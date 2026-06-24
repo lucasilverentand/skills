@@ -15,6 +15,28 @@
 	},
 	"plugins": [
 		{
+			"name": "codebase-management",
+			"source": "./plugins/codebase-management",
+			"description": "Codebase management skills for repository structure, project-type organization, monorepo boundaries, code ownership, cleanup of LLM-generated layouts, and incremental codebase reorganization.",
+			"version": "2.0.0",
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			},
+			"category": "Development",
+			"keywords": [
+				"codebase",
+				"repository",
+				"structure",
+				"monorepo",
+				"workspace",
+				"scaffold",
+				"refactor",
+				"cleanup",
+				"llm"
+			]
+		},
+		{
 			"name": "collaboration",
 			"source": "./plugins/collaboration",
 			"description": "Collaboration and communication skills for shared understanding: repository docs, decision trees, onboarding context, and human-readable coordination artifacts.",
