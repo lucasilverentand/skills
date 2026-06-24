@@ -47,4 +47,6 @@ bun run ci
 
 `bun run ci` is the same validation GitHub Actions runs on pull requests (marketplace sync, Cursor marketplace layout, skill checks, markdown format, JSON manifests). Use `bun run check` locally for a non-strict dry-run with warnings only.
 
+Use `bun run tree` to print a concise AI-readable tree of plugins, skills, and reference counts. Add `--descriptions`, `--references`, `--metadata`, `--paths`, `--support`, or `--format json` when you need a fuller inventory.
+
 Agent and contributor guidance lives in `AGENTS.md`.

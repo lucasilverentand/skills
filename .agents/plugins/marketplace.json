@@ -5,6 +5,22 @@
 	},
 	"plugins": [
 		{
+			"name": "codebase-management",
+			"source": {
+				"source": "local",
+				"path": "./plugins/codebase-management"
+			},
+			"policy": {
+				"installation": "AVAILABLE",
+				"authentication": "ON_INSTALL"
+			},
+			"category": "Development",
+			"interface": {
+				"displayName": "Codebase Management",
+				"shortDescription": "Structure and clean up codebases"
+			}
+		},
+		{
 			"name": "collaboration",
 			"source": {
 				"source": "local",

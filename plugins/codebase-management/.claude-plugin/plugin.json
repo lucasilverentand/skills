@@ -1,0 +1,26 @@
+{
+	"name": "codebase-management",
+	"description": "Codebase management skills for repository structure, project-type organization, monorepo boundaries, code ownership, cleanup of LLM-generated layouts, and incremental codebase reorganization.",
+	"version": "2.0.0",
+	"skills": [
+		"./skills/codebase-structure"
+	],
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"codebase",
+		"repository",
+		"structure",
+		"monorepo",
+		"workspace",
+		"scaffold",
+		"refactor",
+		"cleanup",
+		"llm"
+	]
+}

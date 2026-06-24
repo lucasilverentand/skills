@@ -40,6 +40,19 @@
 			}
 		},
 		{
+			"name": "codebase-management",
+			"displayName": "Codebase Management",
+			"description": "Codebase management skills for repository structure, project-type organization, monorepo boundaries, code ownership, cleanup of LLM-generated layouts, and incremental codebase reorganization.",
+			"shortDescription": "Structure and clean up codebases",
+			"category": "Development",
+			"keywords": ["codebase", "repository", "structure", "monorepo", "workspace", "scaffold", "refactor", "cleanup", "llm"],
+			"skills": ["codebase-structure"],
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			}
+		},
+		{
 			"name": "design",
 			"displayName": "Design",
 			"description": "Design and architecture skills for product UI, websites, Apple platforms, system architecture, data modeling, API design, technical design docs, ADRs, C4 diagrams, and design reviews.",
