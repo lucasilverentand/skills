@@ -3,7 +3,6 @@ Visual and product design skills for websites, dashboards, design systems, and i
 
 ## Skills
 - `design:dashboard-design`
-- `design:design-options`
 - `design:design-system`
 - `design:web-design`
 
