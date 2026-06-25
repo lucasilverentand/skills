@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design System"
+  short_description: "Create digital design systems"
+  default_prompt: "Use $design-system to create a durable design system from this product brief."
