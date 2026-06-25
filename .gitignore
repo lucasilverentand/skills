@@ -5,7 +5,7 @@ node_modules/
 # extractor scratch tooling + caches
 build/
 .cache/
-tools/
+/tools/
 local/
 
 # mise

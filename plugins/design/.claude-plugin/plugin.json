@@ -4,7 +4,6 @@
 	"version": "2.0.0",
 	"skills": [
 		"./skills/dashboard-design",
-		"./skills/design-options",
 		"./skills/design-system",
 		"./skills/web-design"
 	],
