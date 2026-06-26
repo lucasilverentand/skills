@@ -6,9 +6,9 @@
 		"url": "https://github.com/lucasilverentand"
 	},
 	"description": "Reusable agent skills by Luca Silverentand.",
-	"version": "2.0.0",
+	"version": "3.0.0",
 	"metadata": {
-		"version": "2.0.0",
+		"version": "3.0.0",
 		"homepage": "https://github.com/lucasilverentand/skills",
 		"repository": "https://github.com/lucasilverentand/skills",
 		"license": "MIT"
@@ -18,7 +18,7 @@
 			"name": "apple",
 			"source": "./plugins/apple",
 			"description": "Apple platform guidance for Human Interface Guidelines, platform conventions, and Apple framework or service integrations.",
-			"version": "2.0.0",
+			"version": "3.0.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -40,7 +40,7 @@
 			"name": "codebase",
 			"source": "./plugins/codebase",
 			"description": "Codebase design and structure skills for API interfaces, repository organization, runtime boundaries, ownership, and cleanup of LLM-generated layouts.",
-			"version": "2.0.0",
+			"version": "3.0.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -58,32 +58,10 @@
 			]
 		},
 		{
-			"name": "deploy",
-			"source": "./plugins/deploy",
-			"description": "Deployment skills for environment topology, infrastructure readiness, CI/CD automation, release pipelines, rollback, and post-deploy verification.",
-			"version": "2.0.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			},
-			"category": "DevOps",
-			"keywords": [
-				"deploy",
-				"deployment",
-				"environment",
-				"ci",
-				"cd",
-				"release",
-				"rollback",
-				"infra",
-				"automation"
-			]
-		},
-		{
 			"name": "design",
 			"source": "./plugins/design",
 			"description": "Visual and product design skills for websites, dashboards, design systems, and interactive UI direction.",
-			"version": "2.0.0",
+			"version": "3.0.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -104,7 +82,7 @@
 			"name": "documentation",
 			"source": "./plugins/documentation",
 			"description": "Documentation skills for repository docs, project context, document templates, design documents, and architecture decision records.",
-			"version": "2.0.0",
+			"version": "3.0.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -124,7 +102,7 @@
 			"name": "planning",
 			"source": "./plugins/planning",
 			"description": "Planning skills for requirements, task specs, project intent interviews, Linear project setup, issue authoring, complexity estimation, work pickup, and project tidy-up.",
-			"version": "2.0.0",
+			"version": "3.0.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -144,8 +122,8 @@
 		{
 			"name": "workflow",
 			"source": "./plugins/workflow",
-			"description": "Execution and reasoning workflows for system design, issue-to-PR delivery, root-cause analysis, repository management, decision trees, skill authoring, publishing, and retrospective improvement.",
-			"version": "2.0.0",
+			"description": "Execution and reasoning workflows for system design, repository management, decision trees, skill authoring, publishing, and retrospective improvement.",
+			"version": "3.0.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -158,7 +136,6 @@
 				"pr",
 				"github",
 				"ci",
-				"root-cause",
 				"skill",
 				"retrospective"
 			]
