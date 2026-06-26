@@ -1,5 +1,5 @@
 # Workflow
-Execution and reasoning workflows for system design, issue-to-PR delivery, root-cause analysis, repository management, decision trees, skill authoring, publishing, and retrospective improvement.
+Execution and reasoning workflows for system design, repository management, decision trees, skill authoring, publishing, and retrospective improvement.
 
 ## Skills
 - `workflow:architecture`
@@ -9,11 +9,9 @@ Execution and reasoning workflows for system design, issue-to-PR delivery, root-
 - `workflow:decision-trees`
 - `workflow:design-review`
 - `workflow:design-workflow`
-- `workflow:issue-to-pr`
 - `workflow:publishing`
 - `workflow:repo-management`
 - `workflow:retrospecting`
-- `workflow:root-cause-analysis`
 - `workflow:taste-encoding`
 - `workflow:tooling`
 

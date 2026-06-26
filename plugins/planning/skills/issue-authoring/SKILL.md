@@ -1,18 +1,27 @@
 ---
 name: issue-authoring
-description: Writes, refines, and scores compact implementation-ready issues with proper routing and complexity metadata. Use when the user asks to create an issue, write ticket-ready issue text, refine an issue, add acceptance criteria, add proper metadata, estimate points, split oversized work, or make issue scope clear enough for an implementer.
+description: Writes, refines, splits, and scores the issue artifact itself: compact implementer-ready body, acceptance criteria, scope boundary, routing metadata, and complexity. Use when the user asks to create an issue, write ticket-ready issue text, refine issue scope, add acceptance criteria, add issue metadata, estimate issue points, split oversized work, or make one issue clear enough for an implementer. Do not use for picking work, tidying Linear projects, implementation, pull requests, or project planning.
 ---
 
 # Issue Authoring
-Use this skill to author the issue artifact itself: clear body, proper routing metadata, complexity score, and scope boundaries. Keep the core guidance platform-neutral. Destination-specific references are adapters for field mapping only.
+Use this skill to author the issue artifact itself: clear body, acceptance criteria, routing metadata, complexity score, and scope boundaries. Keep the core guidance platform-neutral. Destination-specific references are adapters for field mapping only.
+
+## Boundary
+This skill owns the written issue and its metadata. It does not own backlog hygiene, project cleanup, issue selection, implementation, PR execution, or full planning-project setup.
+
+Use companion planning skills instead:
+
+- `tidy-linear-project` for duplicates, stale blockers, state hygiene, document drift, and project cleanup.
+- `pickup-work` for selecting and starting the next actionable Linear issue.
+- `create-planner-project` for creating Linear initiatives, projects, milestones, and batches of planning issues.
+- `task-spec` or `requirements` when the source intent is too fuzzy to author one useful issue yet.
 
 ## Decision tree
 - What does the user need?
   - **Write or refine an issue** -> follow "Author issues" and read `references/issue-rules.md`.
   - **Add proper metadata to an issue** -> follow "Author issues", read `references/issue-rules.md`, then read the destination adapter only if writing to a specific platform.
-  - **Estimate, score, point, size, or audit issue complexity** -> follow "Score complexity" and read `references/complexity-scale.md`.
+  - **Estimate, score, point, size, or audit one issue's complexity** -> follow "Score complexity" and read `references/complexity-scale.md`.
   - **Issue is too broad to score or implement cleanly** -> follow "Split oversized issues" and read `references/issue-rules.md` plus `references/complexity-scale.md`.
-  - **Create a full planner project** -> use `create-planner-project`; it calls this skill's issue body and metadata rules while creating planner issues.
 
 ## Author issues
 1. Read `references/issue-rules.md`.
@@ -50,5 +59,3 @@ Use this skill to author the issue artifact itself: clear body, proper routing m
 |`references/complexity-scale.md`|Assigning issue points and decomposing oversized issues|
 |`references/linear.md`|Mapping generic issue metadata to Linear fields only|
 |`references/github.md`|Mapping generic issue metadata to GitHub issue fields only|
-|`references/linear-tidy-checks.md`|Auditing existing Linear projects against the issue metadata and hygiene rules|
-|`references/linear-unresolved-findings.md`|Reporting Linear tidy findings that need human judgment|

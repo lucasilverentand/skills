@@ -1,7 +1,7 @@
 {
 	"name": "workflow",
-	"description": "Execution and reasoning workflows for system design, issue-to-PR delivery, root-cause analysis, repository management, decision trees, skill authoring, publishing, and retrospective improvement.",
-	"version": "2.0.0",
+	"description": "Execution and reasoning workflows for system design, repository management, decision trees, skill authoring, publishing, and retrospective improvement.",
+	"version": "3.0.0",
 	"skills": [
 		"./skills/architecture",
 		"./skills/authoring",
@@ -10,11 +10,9 @@
 		"./skills/decision-trees",
 		"./skills/design-review",
 		"./skills/design-workflow",
-		"./skills/issue-to-pr",
 		"./skills/publishing",
 		"./skills/repo-management",
 		"./skills/retrospecting",
-		"./skills/root-cause-analysis",
 		"./skills/taste-encoding",
 		"./skills/tooling"
 	],
@@ -32,7 +30,6 @@
 		"pr",
 		"github",
 		"ci",
-		"root-cause",
 		"skill",
 		"retrospective"
 	],

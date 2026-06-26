@@ -1,6 +1,6 @@
 {
 	"name": "planning",
-	"version": "2.0.0",
+	"version": "3.0.0",
 	"description": "Planning skills for requirements, task specs, project intent interviews, Linear project setup, issue authoring, complexity estimation, work pickup, and project tidy-up.",
 	"author": {
 		"name": "Luca Silverentand",

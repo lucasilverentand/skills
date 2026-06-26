@@ -6,7 +6,7 @@
 		"url": "https://github.com/lucasilverentand"
 	},
 	"metadata": {
-		"version": "2.0.0",
+		"version": "3.0.0",
 		"homepage": "https://github.com/lucasilverentand/skills",
 		"repository": "https://github.com/lucasilverentand/skills",
 		"license": "MIT"
@@ -41,10 +41,10 @@
 		{
 			"name": "workflow",
 			"displayName": "Workflow",
-			"description": "Execution and reasoning workflows for system design, issue-to-PR delivery, root-cause analysis, repository management, decision trees, skill authoring, publishing, and retrospective improvement.",
+			"description": "Execution and reasoning workflows for system design, repository management, decision trees, skill authoring, publishing, and retrospective improvement.",
 			"shortDescription": "Run durable agent workflows",
 			"category": "Productivity",
-			"keywords": ["workflow", "architecture", "data", "pr", "github", "ci", "root-cause", "skill", "retrospective"],
+			"keywords": ["workflow", "architecture", "data", "pr", "github", "ci", "skill", "retrospective"],
 			"skills": [
 				"architecture",
 				"authoring",
@@ -53,11 +53,9 @@
 				"decision-trees",
 				"design-review",
 				"design-workflow",
-				"issue-to-pr",
 				"publishing",
 				"repo-management",
 				"retrospecting",
-				"root-cause-analysis",
 				"taste-encoding",
 				"tooling"
 			],
@@ -108,19 +106,6 @@
 				"tidy-linear-project"
 			],
 			"commands": ["pickup-work", "tidy-linear-project"],
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			}
-		},
-		{
-			"name": "deploy",
-			"displayName": "Deploy",
-			"description": "Deployment skills for environment topology, infrastructure readiness, CI/CD automation, release pipelines, rollback, and post-deploy verification.",
-			"shortDescription": "Plan and automate deploys",
-			"category": "DevOps",
-			"keywords": ["deploy", "deployment", "environment", "ci", "cd", "release", "rollback", "infra", "automation"],
-			"skills": ["deployment-automation", "deployment-environments"],
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"

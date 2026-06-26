@@ -1,7 +1,7 @@
 {
 	"name": "workflow",
-	"version": "2.0.0",
-	"description": "Execution and reasoning workflows for system design, issue-to-PR delivery, root-cause analysis, repository management, decision trees, skill authoring, publishing, and retrospective improvement.",
+	"version": "3.0.0",
+	"description": "Execution and reasoning workflows for system design, repository management, decision trees, skill authoring, publishing, and retrospective improvement.",
 	"author": {
 		"name": "Luca Silverentand",
 		"email": "dev@lucasilverentand.com"
@@ -16,7 +16,6 @@
 		"pr",
 		"github",
 		"ci",
-		"root-cause",
 		"skill",
 		"retrospective"
 	],
@@ -24,7 +23,7 @@
 	"interface": {
 		"displayName": "Workflow",
 		"shortDescription": "Run durable agent workflows",
-		"longDescription": "Execution and reasoning workflows for system design, issue-to-PR delivery, root-cause analysis, repository management, decision trees, skill authoring, publishing, and retrospective improvement.",
+		"longDescription": "Execution and reasoning workflows for system design, repository management, decision trees, skill authoring, publishing, and retrospective improvement.",
 		"developerName": "Luca Silverentand",
 		"category": "Productivity",
 		"capabilities": [

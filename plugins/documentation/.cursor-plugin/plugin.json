@@ -1,7 +1,7 @@
 {
 	"name": "documentation",
 	"displayName": "Documentation",
-	"version": "2.0.0",
+	"version": "3.0.0",
 	"description": "Documentation skills for repository docs, project context, document templates, design documents, and architecture decision records.",
 	"author": {
 		"name": "Luca Silverentand",

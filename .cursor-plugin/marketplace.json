@@ -7,7 +7,7 @@
 	},
 	"metadata": {
 		"description": "Reusable agent skills by Luca Silverentand.",
-		"version": "2.0.0",
+		"version": "3.0.0",
 		"pluginRoot": "plugins"
 	},
 	"plugins": [
@@ -20,11 +20,6 @@
 			"name": "codebase",
 			"source": "codebase",
 			"description": "Codebase design and structure skills for API interfaces, repository organization, runtime boundaries, ownership, and cleanup of LLM-generated layouts."
-		},
-		{
-			"name": "deploy",
-			"source": "deploy",
-			"description": "Deployment skills for environment topology, infrastructure readiness, CI/CD automation, release pipelines, rollback, and post-deploy verification."
 		},
 		{
 			"name": "design",
@@ -44,7 +39,7 @@
 		{
 			"name": "workflow",
 			"source": "workflow",
-			"description": "Execution and reasoning workflows for system design, issue-to-PR delivery, root-cause analysis, repository management, decision trees, skill authoring, publishing, and retrospective improvement."
+			"description": "Execution and reasoning workflows for system design, repository management, decision trees, skill authoring, publishing, and retrospective improvement."
 		}
 	]
 }

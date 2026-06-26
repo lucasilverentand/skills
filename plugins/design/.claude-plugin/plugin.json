@@ -1,7 +1,7 @@
 {
 	"name": "design",
 	"description": "Visual and product design skills for websites, dashboards, design systems, and interactive UI direction.",
-	"version": "2.0.0",
+	"version": "3.0.0",
 	"skills": [
 		"./skills/dashboard-design",
 		"./skills/design-system",
