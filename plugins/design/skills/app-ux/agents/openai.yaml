@@ -1,0 +1,4 @@
+interface:
+  display_name: "App UX"
+  short_description: "Design app UX architecture"
+  default_prompt: "Use $app-ux to design an app navigation, route, window, and state architecture."

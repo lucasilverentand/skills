@@ -28,11 +28,11 @@
 		{
 			"name": "design",
 			"displayName": "Design",
-			"description": "Visual and product design skills for websites, dashboards, design systems, and interactive UI direction.",
+			"description": "Visual and product design skills for apps, websites, dashboards, design systems, and interactive UI direction.",
 			"shortDescription": "Visual and product UI design",
 			"category": "Design",
-			"keywords": ["design", "ui", "ux", "visual", "dashboard", "website", "design-system", "prototype"],
-			"skills": ["dashboard-design", "design-system", "web-design"],
+			"keywords": ["design", "ui", "ux", "visual", "app", "desktop", "mobile", "dashboard", "website", "navigation", "design-system", "prototype"],
+			"skills": ["app-ux", "dashboard-design", "design-system", "web-design"],
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
