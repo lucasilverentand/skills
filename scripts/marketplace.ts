@@ -51,6 +51,7 @@ interface PluginGroup {
 	keywords?: string[];
 	skills: string[];
 	commands?: string[];
+	mcpServers?: string;
 	readmeBody?: string;
 	author: {
 		name: string;
@@ -231,6 +232,13 @@ async function validateGroups(groups: PluginGroups): Promise<void> {
 				errors.push(`plugin "${group.name}" references missing command "${command}"`);
 			}
 		}
+
+		if (group.mcpServers) {
+			const mcpServersPath = resolve(pluginRoot(group), group.mcpServers);
+			if (!existsSync(mcpServersPath)) {
+				errors.push(`plugin "${group.name}" references missing MCP servers file "${group.mcpServers}"`);
+			}
+		}
 	}
 
 	if (existsSync(PLUGINS_DIR)) {
@@ -262,12 +270,15 @@ function claudePluginManifest(group: PluginGroup, version: string, metadata: Plu
 	if (group.commands?.length) {
 		manifest.commands = group.commands.map((command) => `./commands/${command}.md`).sort();
 	}
+	if (group.mcpServers) {
+		manifest.mcpServers = group.mcpServers;
+	}
 
 	return manifest;
 }
 
 function codexPluginManifest(group: PluginGroup, version: string, metadata: PluginGroups["metadata"]) {
-	return {
+	const manifest: Record<string, unknown> = {
 		name: group.name,
 		version,
 		description: group.description,
@@ -290,10 +301,14 @@ function codexPluginManifest(group: PluginGroup, version: string, metadata: Plug
 			],
 		},
 	};
+	if (group.mcpServers) {
+		manifest.mcpServers = group.mcpServers;
+	}
+	return manifest;
 }
 
 function cursorPluginManifest(group: PluginGroup, version: string, metadata: PluginGroups["metadata"]) {
-	return {
+	const manifest: Record<string, unknown> = {
 		name: group.name,
 		displayName: group.displayName,
 		version,
@@ -302,6 +317,10 @@ function cursorPluginManifest(group: PluginGroup, version: string, metadata: Plu
 		license: metadata.license,
 		keywords: group.keywords ?? [],
 	};
+	if (group.mcpServers) {
+		manifest.mcpServers = group.mcpServers;
+	}
+	return manifest;
 }
 
 function cursorMarketplaceOwner(owner: Owner): { name: string; email?: string } {
@@ -378,9 +397,13 @@ function marketplaceSource(metadata: PluginGroups["metadata"]): string {
 }
 
 function pluginReadme(group: PluginGroup, marketplaceName: string, source: string, readmeBody = ""): string {
-	const commandNote = group.commands?.length
-		? `\nCodex and Claude Code also expose command shims for this plugin: ${group.commands.map((c) => `\`/${group.name}:${c}\``).join(", ")}. Prefer the portable skills above for automatic loading.\n`
-		: "";
+	const notes = [
+		group.commands?.length
+			? `Codex and Claude Code also expose command shims for this plugin: ${group.commands.map((c) => `\`/${group.name}:${c}\``).join(", ")}. Prefer the portable skills above for automatic loading.`
+			: "",
+		group.mcpServers ? `This plugin also exposes MCP tools from \`${group.mcpServers}\`.` : "",
+	].filter(Boolean);
+	const notesSection = notes.length ? `\n\n${notes.join("\n\n")}` : "";
 	const body = readmeBody.trim();
 	const bodySection = body ? `\n${body}\n` : "";
 
@@ -388,8 +411,8 @@ function pluginReadme(group: PluginGroup, marketplaceName: string, source: strin
 ${group.description}
 
 ## Skills
-${group.skills.map((skill) => `- \`${group.name}:${skill}\``).join("\n")}
-${commandNote}
+${group.skills.map((skill) => `- \`${group.name}:${skill}\``).join("\n")}${notesSection}
+
 ## Install
 Codex:
 
