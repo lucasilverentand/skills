@@ -1,7 +1,7 @@
 {
 	"name": "apple",
 	"displayName": "Apple",
-	"version": "3.0.0",
+	"version": "3.1.0",
 	"description": "Apple platform guidance for Human Interface Guidelines, platform conventions, and Apple framework or service integrations.",
 	"author": {
 		"name": "Luca Silverentand",
