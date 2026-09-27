@@ -1,7 +1,7 @@
 {
 	"name": "codebase",
 	"displayName": "Codebase",
-	"version": "3.0.0",
+	"version": "3.1.0",
 	"description": "Codebase design and structure skills for API interfaces, repository organization, runtime boundaries, ownership, and cleanup of LLM-generated layouts.",
 	"author": {
 		"name": "Luca Silverentand",

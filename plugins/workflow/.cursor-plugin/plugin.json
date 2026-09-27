@@ -1,7 +1,7 @@
 {
 	"name": "workflow",
 	"displayName": "Workflow",
-	"version": "3.0.0",
+	"version": "3.1.0",
 	"description": "Execution and reasoning workflows for system design, repository management, decision trees, skill authoring, publishing, and retrospective improvement.",
 	"author": {
 		"name": "Luca Silverentand",

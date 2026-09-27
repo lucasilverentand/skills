@@ -6,7 +6,7 @@
 		"url": "https://github.com/lucasilverentand"
 	},
 	"metadata": {
-		"version": "3.0.0",
+		"version": "3.1.0",
 		"homepage": "https://github.com/lucasilverentand/skills",
 		"repository": "https://github.com/lucasilverentand/skills",
 		"license": "MIT"
@@ -20,6 +20,20 @@
 			"category": "Development",
 			"keywords": ["codebase", "repository", "structure", "api", "interface", "monorepo", "workspace", "cleanup"],
 			"skills": ["api-design", "codebase-structure"],
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com"
+			}
+		},
+		{
+			"name": "developer-ports",
+			"displayName": "Developer Ports",
+			"description": "Local development port registry tools for scanning projects, finding collisions, checking live listeners, suggesting free ports, and reserving user-scoped project ports.",
+			"shortDescription": "Manage local dev ports",
+			"category": "Developer Tools",
+			"keywords": ["ports", "localhost", "dev-server", "registry", "vite", "astro", "expo", "wrangler", "docker", "kubernetes"],
+			"skills": ["port-registry"],
+			"mcpServers": "./.mcp.json",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"

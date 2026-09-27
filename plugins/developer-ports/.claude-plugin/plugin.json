@@ -1,0 +1,28 @@
+{
+	"name": "developer-ports",
+	"description": "Local development port registry tools for scanning projects, finding collisions, checking live listeners, suggesting free ports, and reserving user-scoped project ports.",
+	"version": "3.1.0",
+	"skills": [
+		"./skills/port-registry"
+	],
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"ports",
+		"localhost",
+		"dev-server",
+		"registry",
+		"vite",
+		"astro",
+		"expo",
+		"wrangler",
+		"docker",
+		"kubernetes"
+	],
+	"mcpServers": "./.mcp.json"
+}

@@ -53,6 +53,22 @@
 			}
 		},
 		{
+			"name": "developer-ports",
+			"source": {
+				"source": "local",
+				"path": "./plugins/developer-ports"
+			},
+			"policy": {
+				"installation": "AVAILABLE",
+				"authentication": "ON_INSTALL"
+			},
+			"category": "Developer Tools",
+			"interface": {
+				"displayName": "Developer Ports",
+				"shortDescription": "Manage local dev ports"
+			}
+		},
+		{
 			"name": "documentation",
 			"source": {
 				"source": "local",

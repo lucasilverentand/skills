@@ -7,7 +7,7 @@
 	},
 	"metadata": {
 		"description": "Reusable agent skills by Luca Silverentand.",
-		"version": "3.0.0",
+		"version": "3.1.0",
 		"pluginRoot": "plugins"
 	},
 	"plugins": [
@@ -25,6 +25,11 @@
 			"name": "design",
 			"source": "design",
 			"description": "Visual and product design skills for apps, websites, dashboards, design systems, and interactive UI direction."
+		},
+		{
+			"name": "developer-ports",
+			"source": "developer-ports",
+			"description": "Local development port registry tools for scanning projects, finding collisions, checking live listeners, suggesting free ports, and reserving user-scoped project ports."
 		},
 		{
 			"name": "documentation",
