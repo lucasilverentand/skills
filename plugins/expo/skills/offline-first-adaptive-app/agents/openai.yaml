@@ -1,0 +1,4 @@
+interface:
+  display_name: "Offline-First Expo App"
+  short_description: "Build adaptive offline Expo apps"
+  default_prompt: "Use $offline-first-adaptive-app to design an offline-first adaptive Expo app architecture."

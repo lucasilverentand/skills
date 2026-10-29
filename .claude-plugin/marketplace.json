@@ -6,9 +6,9 @@
 		"url": "https://github.com/lucasilverentand"
 	},
 	"description": "Reusable agent skills by Luca Silverentand.",
-	"version": "3.1.0",
+	"version": "3.2.0",
 	"metadata": {
-		"version": "3.1.0",
+		"version": "3.2.0",
 		"homepage": "https://github.com/lucasilverentand/skills",
 		"repository": "https://github.com/lucasilverentand/skills",
 		"license": "MIT"
@@ -18,7 +18,7 @@
 			"name": "apple",
 			"source": "./plugins/apple",
 			"description": "Apple platform guidance for Human Interface Guidelines, platform conventions, and Apple framework or service integrations.",
-			"version": "3.1.0",
+			"version": "3.2.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -40,7 +40,7 @@
 			"name": "codebase",
 			"source": "./plugins/codebase",
 			"description": "Codebase design and structure skills for API interfaces, repository organization, runtime boundaries, ownership, and cleanup of LLM-generated layouts.",
-			"version": "3.1.0",
+			"version": "3.2.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -61,7 +61,7 @@
 			"name": "design",
 			"source": "./plugins/design",
 			"description": "Visual and product design skills for apps, websites, dashboards, design systems, and interactive UI direction.",
-			"version": "3.1.0",
+			"version": "3.2.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -86,7 +86,7 @@
 			"name": "developer-ports",
 			"source": "./plugins/developer-ports",
 			"description": "Local development port registry tools for scanning projects, finding collisions, checking live listeners, suggesting free ports, and reserving user-scoped project ports.",
-			"version": "3.1.0",
+			"version": "3.2.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -109,7 +109,7 @@
 			"name": "documentation",
 			"source": "./plugins/documentation",
 			"description": "Documentation skills for repository docs, project context, document templates, design documents, and architecture decision records.",
-			"version": "3.1.0",
+			"version": "3.2.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -126,10 +126,29 @@
 			]
 		},
 		{
+			"name": "expo",
+			"source": "./plugins/expo",
+			"description": "Offline-first adaptive Expo app architecture, durable local writes, explicit synchronization, reusable components, and cross-platform layouts.",
+			"version": "3.2.0",
+			"author": {
+				"name": "Luca Silverentand",
+				"email": "dev@lucasilverentand.com",
+				"url": "https://github.com/lucasilverentand"
+			},
+			"category": "Development",
+			"keywords": [
+				"expo",
+				"react-native",
+				"offline-first",
+				"sync",
+				"adaptive"
+			]
+		},
+		{
 			"name": "planning",
 			"source": "./plugins/planning",
 			"description": "Planning skills for requirements, task specs, project intent interviews, Linear project setup, issue authoring, complexity estimation, work pickup, and project tidy-up.",
-			"version": "3.1.0",
+			"version": "3.2.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
@@ -150,7 +169,7 @@
 			"name": "workflow",
 			"source": "./plugins/workflow",
 			"description": "Execution and reasoning workflows for system design, repository management, decision trees, skill authoring, publishing, and retrospective improvement.",
-			"version": "3.1.0",
+			"version": "3.2.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com"
