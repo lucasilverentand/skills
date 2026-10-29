@@ -1,7 +1,7 @@
 {
 	"name": "developer-ports",
 	"displayName": "Developer Ports",
-	"version": "3.1.0",
+	"version": "3.2.0",
 	"description": "Local development port registry tools for scanning projects, finding collisions, checking live listeners, suggesting free ports, and reserving user-scoped project ports.",
 	"author": {
 		"name": "Luca Silverentand",

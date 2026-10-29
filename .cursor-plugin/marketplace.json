@@ -7,7 +7,7 @@
 	},
 	"metadata": {
 		"description": "Reusable agent skills by Luca Silverentand.",
-		"version": "3.1.0",
+		"version": "3.2.0",
 		"pluginRoot": "plugins"
 	},
 	"plugins": [
@@ -35,6 +35,11 @@
 			"name": "documentation",
 			"source": "documentation",
 			"description": "Documentation skills for repository docs, project context, document templates, design documents, and architecture decision records."
+		},
+		{
+			"name": "expo",
+			"source": "expo",
+			"description": "Offline-first adaptive Expo app architecture, durable local writes, explicit synchronization, reusable components, and cross-platform layouts."
 		},
 		{
 			"name": "planning",

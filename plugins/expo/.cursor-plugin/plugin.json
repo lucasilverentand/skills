@@ -1,0 +1,19 @@
+{
+	"name": "expo",
+	"displayName": "Expo",
+	"version": "3.2.0",
+	"description": "Offline-first adaptive Expo app architecture, durable local writes, explicit synchronization, reusable components, and cross-platform layouts.",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com",
+		"url": "https://github.com/lucasilverentand"
+	},
+	"license": "MIT",
+	"keywords": [
+		"expo",
+		"react-native",
+		"offline-first",
+		"sync",
+		"adaptive"
+	]
+}
