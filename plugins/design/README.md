@@ -1,10 +1,11 @@
 # Design
-Visual and product design skills for apps, websites, dashboards, design systems, and interactive UI direction.
+Visual and product design skills for apps, websites, dashboards, design systems, interactive UI direction, and explorable system diagrams.
 
 ## Skills
 - `design:app-ux`
 - `design:dashboard-design`
 - `design:design-system`
+- `design:interactive-system-design`
 - `design:web-design`
 
 ## Install
