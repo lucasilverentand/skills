@@ -39,6 +39,10 @@ Work through these in order:
 
 Do not merge unless the user explicitly asks.
 
+Continue preparing draft PRs, but mark them ready only after validation passes and the user's request authorizes that transition. Otherwise leave the draft in place and report it as a remaining blocker.
+
+`UNKNOWN` mergeability is not confirmation that a PR is ready. Refresh the state once; if it remains unknown, report that uncertainty. For `BLOCKED`, inspect checks, reviews, conversations, and repository rules before naming a cause.
+
 ## Watch CI
 Prefer `gh pr checks` for PRs:
 
@@ -116,3 +120,8 @@ query($owner:String!, $repo:String!, $number:Int!) {
 ```
 
 Resolve conversations only when the underlying issue has actually been addressed.
+
+## Readiness Handoff
+Before reporting merge readiness, confirm the evidence applies to the current pushed head. An unavailable check, review, or conversation result is unresolved, not approval.
+
+Report the PR URL and head SHA, local validation and CI results, draft state, and each remaining blocker with the person or action needed to clear it. Keep preparing what can be fixed within scope; leave external approval and product decisions explicit.
