@@ -1,11 +1,12 @@
 {
 	"name": "design",
-	"description": "Visual and product design skills for apps, websites, dashboards, design systems, and interactive UI direction.",
+	"description": "Visual and product design skills for apps, websites, dashboards, design systems, interactive UI direction, and explorable system diagrams.",
 	"version": "3.2.0",
 	"skills": [
 		"./skills/app-ux",
 		"./skills/dashboard-design",
 		"./skills/design-system",
+		"./skills/interactive-system-design",
 		"./skills/web-design"
 	],
 	"author": {
@@ -27,6 +28,8 @@
 		"website",
 		"navigation",
 		"design-system",
-		"prototype"
+		"prototype",
+		"system-design",
+		"diagram"
 	]
 }

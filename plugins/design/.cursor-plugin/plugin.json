@@ -2,7 +2,7 @@
 	"name": "design",
 	"displayName": "Design",
 	"version": "3.2.0",
-	"description": "Visual and product design skills for apps, websites, dashboards, design systems, and interactive UI direction.",
+	"description": "Visual and product design skills for apps, websites, dashboards, design systems, interactive UI direction, and explorable system diagrams.",
 	"author": {
 		"name": "Luca Silverentand",
 		"email": "dev@lucasilverentand.com"
@@ -20,6 +20,8 @@
 		"website",
 		"navigation",
 		"design-system",
-		"prototype"
+		"prototype",
+		"system-design",
+		"diagram"
 	]
 }
