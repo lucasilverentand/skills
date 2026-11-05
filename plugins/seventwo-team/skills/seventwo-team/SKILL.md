@@ -11,7 +11,7 @@ Activate once per ongoing task, when the user selects this workflow or has made 
 ## 1. Adapt before acting
 1. Load the saved profile and matching project overrides with [preferences.md](references/preferences.md). Reuse known tools, destinations and provider preferences instead of rediscovering them.
 2. For first use or materially changed context, follow [context-setup.md](references/context-setup.md) and discover only the fields this task needs. No tracker, repository-local docs, one provider or no external tools are valid setups. Never provision services or assume a subscription.
-3. If a consequential gap remains, ask one bundled question with options and a recommendation. Keep independent, reversible work moving while waiting. Ask where to save preferences only once a reusable choice exists, bundled with that question; conversation-only is a valid answer.
+3. If a consequential gap remains, ask one bundled question with options and a recommendation. Keep independent, reversible work moving while waiting. Raise preference storage only once a reusable choice exists ([preferences.md](references/preferences.md)).
 
 ## 2. Define the result
 State the outcome, testable acceptance, constraints and authorized endpoint; one sentence is enough for a tiny change. Without a stated endpoint, complete and verify the work where it lives. Editing never by itself authorizes a push, merge, publication, deployment or spending.
@@ -19,12 +19,12 @@ State the outcome, testable acceptance, constraints and authorized endpoint; one
 Read the relevant project guidance and current evidence. Surface unsettled taste, product-owner or business decisions before dependent work. Choose the smallest complete solution; keep required safeguards and skip speculative improvements.
 
 ## 3. Size the team
-Pick the smallest tier whose conditions are met. Unsure about size: start smaller and move up on evidence. Unsure about impact: not tiny. A change touching authorization or permissions, secrets, sensitive data or its persistence, or a public contract (API, schema, CLI, published format) is at least standard and gets independent review whatever its size.
+Pick the smallest tier whose conditions are met. Unsure about size: start smaller and move up on evidence. Unsure about impact: not tiny. A change touching authorization or permissions, secrets, sensitive data or its persistence, or a contract with outside consumers (public API, persisted data schema, published file or CLI format) is never tiny and always gets independent review (§5). If it is a single obvious edit, the advisor may be skipped; the review may not. Internal interfaces without outside consumers follow the ordinary tiers.
 
 |Tier|Typical task|Team|
 |---|---|---|
-|**Tiny**|One obvious change with known, contained impact and a cheap check (typo, copy fix, internal-only setting)|Lead executes directly. No advisors; the lead states in one line why the change is tiny and complete.|
-|**Standard**|Multi-step but settled and reversible work (planned feature slice, focused refactor, docs pass)|One combined efficiency/scope advisor that also challenges the chosen tier, running while the lead prepares independent work. Use distinct advisors when scope or split is contested. Add the context advocate when user, maintainer or stakeholder impact is uncertain or material. Add specialists for actual deliverables.|
+|**Tiny**|One obvious change with known, contained impact (nothing beyond the named change is affected) and a cheap check (typo, copy fix, internal-only setting)|Lead executes directly. No advisors; the lead states in one line why the change is tiny and complete.|
+|**Standard**|Multi-step but settled and reversible work (planned feature slice, focused refactor, docs pass)|One combined efficiency/scope advisor that also challenges the chosen tier, running while the lead prepares independent work. Use distinct advisors when scope or split is contested or a material product or scope choice is open. Add the context advocate when user, maintainer or stakeholder impact is uncertain or material. Add specialists for actual deliverables.|
 |**Consequential**|Several workstreams, architecture or contracts, security/privacy/data risk, hard-to-reverse changes, unclear product direction|Full baseline trio as distinct agents, plus specialists and independent review.|
 
 Baseline roles, used per tier above:

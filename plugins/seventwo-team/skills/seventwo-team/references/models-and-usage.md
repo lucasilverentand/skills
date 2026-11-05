@@ -17,7 +17,7 @@ Capability fit and completed-task results matter more than labels or per-token p
 
 Assign providers according to this user’s accepted preferences and observed task fit. A user may prefer different providers for architecture, execution or review, or use only one. Do not inherit the original author’s allocation or account assumptions.
 
-Provider examples, checked 2026-11-04: [OpenAI guidance](https://learn.chatgpt.com/docs/models) distinguishes focused, coding/reasoning and writing/visual workloads; [Claude effort guidance](https://platform.claude.com/docs/en/build-with-claude/effort) explains effort tradeoffs by model. Treat named model generations as examples to resolve against live access, not a permanent required catalog. Do not research every provider on every task.
+Provider examples, checked 2026-11-04: [OpenAI guidance](https://learn.chatgpt.com/docs/models) distinguishes focused, coding/reasoning and writing/visual workloads; [Claude effort guidance](https://platform.claude.com/docs/en/build-with-claude/effort) explains effort tradeoffs by model. Re-check these links when the date is more than about six months old. Resolve concrete model IDs against live access, not this file. Do not research every provider on every task.
 
 ## Choose effort deliberately
 - **Low:** narrow task, clear evidence, cheap objective check. Poor for open-ended investigation.

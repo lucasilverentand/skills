@@ -4,8 +4,8 @@ These are portable role prompts the lead selects. They are not running agents or
 ## Baseline roles by tier
 Use the tier table in SKILL.md §3.
 
-- **Tiny:** no baseline agents. The lead checks in one line that the change is the smallest complete fix and that nothing else is in scope.
-- **Standard:** one advisor receives the [efficiency planner](presets/efficiency-planner.md) and [scope guard](presets/scope-guard.md) presets together and returns one combined assessment: tier challenge, split, models, checks, keep/cut/defer. The lead keeps preparing independent work meanwhile. Split into distinct advisors when scope or the split is contested, and add the context advocate when stakeholder impact is uncertain or material.
+- **Tiny:** no baseline agents.
+- **Standard:** one advisor receives the [efficiency planner](presets/efficiency-planner.md) and [scope guard](presets/scope-guard.md) presets together and returns one combined assessment: tier challenge, split, models, checks, keep/cut/defer. SKILL.md §3 says when to split it or add the context advocate.
 - **Consequential:** the efficiency planner, scope guard and context advocate ([business/product](presets/business-advocate.md) or [OSS](presets/oss-advocate.md)) run as distinct agents so the scope check stays independent of the plan.
 
 Choose the context advocate from stated project goals, not assumed company ownership. A genuinely mixed decision can use both advocates. Reuse the task's existing advisors and their advice; follow-ups do not start another team.
@@ -14,7 +14,7 @@ Choose the context advocate from stated project goals, not assumed company owner
 |Preset|Select when|Economical combination|
 |---|---|---|
 |[Developer / architect](presets/developer-architect.md)|There is code to implement or an unresolved architecture/interface decision|One owner can design and implement its bounded slice; the lead may do work directly|
-|[Independent reviewer](presets/independent-reviewer.md)|Meaningful implementation, uncertain design, material risk, or a required second-provider assessment|Review the integrated artifact; do not duplicate an already-relevant review|
+|[Independent reviewer](presets/independent-reviewer.md)|Required by SKILL.md §5 (consequential, sensitive, or behavior not covered by passing checks), uncertain design, or a required second-provider assessment|Review the integrated artifact; do not duplicate an already-relevant review|
 |[Git / PR specialist](presets/git-specialist.md)|Any commit or PR the team will author or edit; commit/PR convention problems|One focused pass over the real diff and exact messages; reuse advice until scope or metadata changes|
 |[UX expert](presets/ux-expert.md)|Flows, navigation, user friction, states, or research interpretation change|Combine with UI/content on small surfaces|
 |[UI designer](presets/ui-designer.md)|Visual composition, components, responsive layouts or design consistency change|Combine with UX for focused UI work|
@@ -51,7 +51,7 @@ Fill the task-specific fields from SKILL.md's brief template. Do not ask a child
 
 ## Examples
 - **Typo fix (tiny):** lead edits, checks the rendered result, confirms no documentation change. No agents.
-- **Planned code change (standard):** one combined planner/scope advisor on an economical model; the lead or one coding worker implements; a separately briefed reviewer checks the integrated diff when the change is meaningful.
+- **Planned code change (standard):** one combined planner/scope advisor on an economical model; the lead or one coding worker implements; a separately briefed reviewer checks the integrated diff when SKILL.md §5 requires it.
 - **UI improvement (standard):** combined advisor plus one UX/UI specialist following the accepted design direction; add accessibility or content responsibilities to that brief rather than more agents.
 - **Consequential architecture:** full trio, a strong developer/architect, and an independent second-provider assessment of the same decision for quorum.
 - **Large knowledge reconciliation (consequential when records conflict):** full trio plus a bounded knowledge steward; the lead saves and verifies the record changes.

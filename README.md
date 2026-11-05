@@ -30,6 +30,8 @@ bun run install:claude-skills -- seventwo-team
 
 The direct installer copies into `~/.agents/skills` for Codex or `~/.claude/skills` for Claude Code. It skips existing skills unless `--force` is supplied. Use `--symlink` for local development. Copies need reinstalling after an update; symlinks follow the checkout. Installation does not remove older local skills or sync private preferences between machines.
 
+After installing, start a new session and ask your agent to use SevenTwo Team; it should name the skill and size a team for the task. If it does not recognize the skill, reload the host or check that the plugin is enabled.
+
 Cursor users can import `https://github.com/lucasilverentand/skills` in Dashboard → Settings → Plugins → Import, then select SevenTwo Team. Coordination depends on the agent tools available in that host.
 
 ## Use
