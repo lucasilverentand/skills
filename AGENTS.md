@@ -34,6 +34,8 @@ bun run marketplace
 bun run marketplace:write
 ```
 
+Behavioural evals for the skill live in `plugins/seventwo-team/evals/` (one directory per case: `prompt.md`, optional `case.yaml` + `scaffold.sh`, and `graders/`). Run them with `bun run eval` (add `--case <name>` or `--runs <n>`). Each run is a real Claude Code session billed to your account, capped by `--max-cost-usd 10`; a full pass at the default 3 runs per case costs roughly $2–3. Evals are not part of `bun run ci`. Run them before merging changes to the skill's tiering, delegation or review rules.
+
 `bun run ci` runs `marketplace` (dry-run, fails if generated files are stale), `validate:cursor`, `check --strict` (fails on skill errors and uncommitted markdown compaction), and JSON smoke-parse of manifests. `bun run check` validates token and structure expectations for Markdown skills and docs; warnings are informational. `bun run check:fix` applies safe Markdown compaction only; use it deliberately and review the diff.
 
 ## Continuous integration
