@@ -18,6 +18,7 @@ The `plugins/` tree is committed because it is both the installable package tree
 ## Development Workflow
 - Edit authored skill content under `plugins/<plugin>/skills/<skill-name>/`.
 - Update `plugin-groups.json` when plugin membership, plugin metadata, commands, or skill ownership changes.
+- `metadata.version` versions the marketplace catalog; an optional plugin `version` versions that plugin independently and falls back to the catalog version when omitted.
 - Run `bun run marketplace:write` after changing plugin membership, skill metadata, plugin README source, command lists, or anything that affects generated manifests or marketplaces.
 - Run `bun run marketplace` after generation; it should report everything up to date.
 - Run `bun run check` before finishing docs or skill changes.
@@ -61,11 +62,11 @@ Cursor reads `.cursor-plugin/marketplace.json` (team-marketplace layout with `me
 Direct local skill installs are available for personal skills directories:
 
 ```bash
-bun run install:codex-skills -- repo-management
-bun run install:claude-skills -- repo-management
+bun run install:codex-skills -- seventwo-team
+bun run install:claude-skills -- seventwo-team
 ```
 
-Omit skill names to install every skill. Add `--symlink` for local development and `--force` to replace existing installed skills. Skill names can be plain (`repo-management`) or plugin-qualified (`workflow:repo-management`).
+Omit skill names to install every skill. Add `--symlink` for local development and `--force` to replace existing installed skills. Skill names can be plain (`seventwo-team`) or plugin-qualified (`seventwo-team:seventwo-team`).
 
 ## Cursor Cloud specific instructions
 - **Runtime**: Bun is the sole runtime dependency. There are no `node_modules`, no lockfile, and no npm/yarn/pnpm usage. The update script ensures Bun is installed and on `PATH`.

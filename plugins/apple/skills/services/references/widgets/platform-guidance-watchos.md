@@ -1,3 +1,0 @@
-# Platform guidance — watchOS
-- **Provide a visually meaningful background color.** By default, widgets within the Smart Stack utilize a black backdrop. You may consider implementing a custom background hue that conveys additional meaning. For example, the Stocks application uses red to indicate falling values and green when a stock's value increases.
-- **Assist the system in displaying or prioritizing your watchOS widget within the Smart Stack.** Providing relevancy data helps the operating system show your widget when it is most needed. This relevance can be determined by location or specific ongoing activities, such as a workout session. Refer to [RelevanceKit](apple:RelevanceKit) for developer guidance.

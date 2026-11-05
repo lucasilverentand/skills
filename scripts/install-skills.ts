@@ -4,8 +4,8 @@
  *
  * Examples:
  *   bun scripts/install-skills.ts --target codex
- *   bun scripts/install-skills.ts --target claude creating-commits creating-prs
- *   bun scripts/install-skills.ts --target codex --symlink --force git:creating-commits
+ *   bun scripts/install-skills.ts --target claude seventwo-team
+ *   bun scripts/install-skills.ts --target codex --symlink --force seventwo-team:seventwo-team
  */
 
 import { existsSync, lstatSync } from "node:fs";
@@ -40,7 +40,7 @@ function usage(): never {
 			"  bun scripts/install-skills.ts --target codex [--force] [--symlink] [skill...]",
 			"  bun scripts/install-skills.ts --target claude [--force] [--symlink] [skill...]",
 			"",
-			"Skill names can be plain names such as creating-commits, or plugin-qualified names such as git:creating-commits.",
+			"Skill names can be plain names such as seventwo-team, or plugin-qualified names such as seventwo-team:seventwo-team.",
 		].join("\n"),
 	);
 	process.exit(1);

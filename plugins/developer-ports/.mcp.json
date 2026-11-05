@@ -1,8 +1,0 @@
-{
-	"mcpServers": {
-		"developer-ports": {
-			"command": "node",
-			"args": ["./mcp/developer-ports-server.mjs"]
-		}
-	}
-}

@@ -6,186 +6,33 @@
 		"url": "https://github.com/lucasilverentand"
 	},
 	"description": "Reusable agent skills by Luca Silverentand.",
-	"version": "3.2.0",
+	"version": "4.0.0",
 	"metadata": {
-		"version": "3.2.0",
+		"version": "4.0.0",
 		"homepage": "https://github.com/lucasilverentand/skills",
 		"repository": "https://github.com/lucasilverentand/skills",
 		"license": "MIT"
 	},
 	"plugins": [
 		{
-			"name": "apple",
-			"source": "./plugins/apple",
-			"description": "Apple platform guidance for Human Interface Guidelines, platform conventions, and Apple framework or service integrations.",
-			"version": "3.2.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			},
-			"category": "Design",
-			"keywords": [
-				"apple",
-				"ios",
-				"macos",
-				"watchos",
-				"tvos",
-				"visionos",
-				"hig",
-				"swiftui",
-				"services"
-			]
-		},
-		{
-			"name": "codebase",
-			"source": "./plugins/codebase",
-			"description": "Codebase design and structure skills for API interfaces, repository organization, runtime boundaries, ownership, and cleanup of LLM-generated layouts.",
-			"version": "3.2.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			},
-			"category": "Development",
-			"keywords": [
-				"codebase",
-				"repository",
-				"structure",
-				"api",
-				"interface",
-				"monorepo",
-				"workspace",
-				"cleanup"
-			]
-		},
-		{
-			"name": "design",
-			"source": "./plugins/design",
-			"description": "Visual and product design skills for apps, websites, dashboards, design systems, interactive UI direction, and explorable system diagrams.",
-			"version": "3.2.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			},
-			"category": "Design",
-			"keywords": [
-				"design",
-				"ui",
-				"ux",
-				"visual",
-				"app",
-				"desktop",
-				"mobile",
-				"dashboard",
-				"website",
-				"navigation",
-				"design-system",
-				"prototype",
-				"system-design",
-				"diagram"
-			]
-		},
-		{
-			"name": "developer-ports",
-			"source": "./plugins/developer-ports",
-			"description": "Local development port registry tools for scanning projects, finding collisions, checking live listeners, suggesting free ports, and reserving user-scoped project ports.",
-			"version": "3.2.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			},
-			"category": "Developer Tools",
-			"keywords": [
-				"ports",
-				"localhost",
-				"dev-server",
-				"registry",
-				"vite",
-				"astro",
-				"expo",
-				"wrangler",
-				"docker",
-				"kubernetes"
-			]
-		},
-		{
-			"name": "documentation",
-			"source": "./plugins/documentation",
-			"description": "Documentation skills for repository docs, project context, document templates, design documents, and architecture decision records.",
-			"version": "3.2.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			},
-			"category": "Documentation",
-			"keywords": [
-				"documentation",
-				"readme",
-				"docs",
-				"context",
-				"templates",
-				"adr",
-				"design-doc"
-			]
-		},
-		{
-			"name": "expo",
-			"source": "./plugins/expo",
-			"description": "Offline-first adaptive Expo app architecture, durable local writes, explicit synchronization, reusable components, and cross-platform layouts.",
-			"version": "3.2.0",
+			"name": "seventwo-team",
+			"source": "./plugins/seventwo-team",
+			"description": "Task-selected specialist teams with economical model routing, independent review and evidence-based delivery. Adapts to each user’s tools, project conventions and saved preferences.",
+			"version": "0.2.1",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com",
 				"url": "https://github.com/lucasilverentand"
 			},
-			"category": "Development",
-			"keywords": [
-				"expo",
-				"react-native",
-				"offline-first",
-				"sync",
-				"adaptive"
-			]
-		},
-		{
-			"name": "planning",
-			"source": "./plugins/planning",
-			"description": "Planning skills for requirements, task specs, project intent interviews, Linear project setup, issue authoring, complexity estimation, work pickup, and project tidy-up.",
-			"version": "3.2.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			},
 			"category": "Productivity",
 			"keywords": [
-				"planning",
-				"requirements",
-				"linear",
-				"issues",
-				"tasks",
-				"project",
-				"scope",
-				"metadata"
-			]
-		},
-		{
-			"name": "workflow",
-			"source": "./plugins/workflow",
-			"description": "Execution and reasoning workflows for system design, repository management, decision trees, skill authoring, publishing, and retrospective improvement.",
-			"version": "3.2.0",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			},
-			"category": "Productivity",
-			"keywords": [
-				"workflow",
-				"architecture",
-				"data",
-				"pr",
-				"github",
-				"ci",
-				"skill",
-				"retrospective"
+				"agents",
+				"team",
+				"orchestration",
+				"efficiency",
+				"review",
+				"product",
+				"open-source"
 			]
 		}
 	]

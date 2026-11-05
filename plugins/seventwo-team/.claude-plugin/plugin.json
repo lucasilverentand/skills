@@ -1,0 +1,25 @@
+{
+	"name": "seventwo-team",
+	"description": "Task-selected specialist teams with economical model routing, independent review and evidence-based delivery. Adapts to each user’s tools, project conventions and saved preferences.",
+	"version": "0.2.1",
+	"skills": [
+		"./skills/seventwo-team"
+	],
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com",
+		"url": "https://github.com/lucasilverentand"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"agents",
+		"team",
+		"orchestration",
+		"efficiency",
+		"review",
+		"product",
+		"open-source"
+	]
+}

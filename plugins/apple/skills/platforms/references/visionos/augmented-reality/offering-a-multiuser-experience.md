@@ -1,5 +1,0 @@
-# Offering a multiuser experience
-When multiple people share your app’s AR experience, each participant maps the environment independently, and ARKit automatically merges these maps. For developer guidance on this process, refer to [isCollaborationEnabled](apple:ARKit/ARWorldTrackingConfiguration/isCollaborationEnabled).
-
-- **Consider allowing people occlusion.** If your application supports placing virtual objects behind individuals visible in the device’s camera feed, allow these people to occlude the content to enhance the illusion of reality. For developer guidance, see [Occluding virtual content with people](apple:ARKit/occluding-virtual-content-with-people).
-- **When possible, let new participants enter a multiuser AR experience.** Unless your app requires all users to join before the session begins, consider using implicit map merging to enable new participants to quickly join an ongoing AR experience. For developer guidance, see [isCollaborationEnabled](apple:ARKit/ARWorldTrackingConfiguration/isCollaborationEnabled).

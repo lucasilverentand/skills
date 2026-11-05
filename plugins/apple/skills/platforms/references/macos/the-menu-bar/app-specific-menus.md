@@ -1,6 +1,0 @@
-# App-specific menus
-Your application's custom menus are located in the menu bar, situated between the View and Window menus. For instance, Safari's menu bar contains application-specific menus such as History and Bookmarks.
-
-- **Include dedicated menus for commands unique to your application.** Users instinctively check the menu bar when searching for app-specific functions, particularly upon their initial use of the application. Even if a command is available elsewhere within your app, it must be present in the menu bar. Placing commands here enhances discoverability, allows for keyboard shortcut assignment, and improves accessibility for users utilizing Full Keyboard Access. Omitting commands from the menu bar—even those that are advanced or rarely used—risks hindering everyone's ability to locate them.
-- **To the greatest extent possible, mirror your application’s internal hierarchy within these app-specific menus.** For example, Mail arranges its Mailbox, Message, and Format menus in a sequence that reflects the underlying relationships: mailboxes hold messages, and messages include formatting options.
-- **Organize app-specific menus starting with the most specialized or frequently used commands.** Users generally anticipate that items listed at the beginning of a sequence are more specific than those found toward the end.
