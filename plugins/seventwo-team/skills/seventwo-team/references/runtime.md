@@ -18,7 +18,15 @@ Do not select ultra or ultracode for delegated specialists; they can introduce a
 
 Use only exposed authorized usage information. Subscription allowance, API charges, context capacity, and rate limits are different constraints; do not infer one from another or change billing/authentication to bypass a limit. Missing telemetry does not prove exhaustion. Follow host retry guidance and preserve completed work on quota errors.
 
-## Native Claude or Codex hosts
-Inspect exposed agent tools and their supported model settings. Use only available model IDs and effort controls. Keep the current thread as mediator, and send scoped follow-ups only where supported. Native agents may be limited to their own provider; cross-provider work requires a connector that explicitly supports it. Do not invoke a CLI, API key, or another account to work around an unavailable provider without authorization.
+## Claude Code
+- Delegate with the `Agent` tool. Put the full brief in `prompt`; the child sees no parent history unless it is a fork.
+- Pick the model with the `model` parameter from the values its schema lists (for example `haiku` for narrow advice, `sonnet` for settled implementation, `opus` for hard reasoning). Set `effort` only when the user or project instructions ask for a specific level; otherwise the agent's default applies.
+- `subagent_type` selects an agent definition: a general-purpose type for workers, a read-only search type for discovery. Presets stay in the prompt; they are not registered types.
+- Run advisors you need before planning in the foreground (`run_in_background: false`) and send independent ones in one message so they run concurrently. Background workers notify on completion; do not poll or sleep.
+- Use `isolation: "worktree"` when a worker needs its own checkout. Otherwise give parallel workers disjoint files in the shared checkout.
+- Continue a finished agent with its messaging tool rather than relaunching, and stop unneeded background agents with the host's stop tool.
 
-Resolve deferred tools according to the host's loading rules before concluding they are unavailable. If delegation itself is unavailable, explain that the team cannot run here. The lead continues the task directly within the user's authorized scope, but must not present simulated roles as real agents or claim the planner/reviewer ran.
+## Codex and other native hosts
+Inspect the exposed agent tools (for example Codex's spawn-and-wait tools) and their model and effort settings; use only listed model IDs and values. Keep the current thread as mediator and send scoped follow-ups only where supported. Native agents may be limited to their own provider; cross-provider work requires a connector that explicitly supports it. Do not use a CLI, API key or another account to work around an unavailable provider without authorization.
+
+Resolve deferred tools by the host's loading rules before concluding they are unavailable. If delegation is unavailable, apply SKILL.md §4: say so and continue directly.

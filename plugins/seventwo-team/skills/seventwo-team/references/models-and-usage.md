@@ -36,4 +36,4 @@ Prepare compact relevant evidence for expensive reasoning, batch related questio
 Before escalating, identify whether the bottleneck is evidence, plan clarity, domain knowledge or reasoning. Fix the real bottleneck. Compare total quality, retries, handoffs and actual usage on comparable work; do not promise savings from model names alone.
 
 ## Independent perspectives
-Apply the configured review/quorum policy in SKILL.md. Reuse a relevant author's assessment plus an independent second-provider review of the same result when appropriate. Two same-provider agents or an unrelated advocate reply are not cross-provider quorum. Agreement does not replace tests or the user's judgment. If required diversity is unavailable, disclose it and ask about an acceptable alternative rather than silently claiming equivalent review.
+Review and quorum policy lives in SKILL.md §5. For model choice: the reviewer should be independently briefed and, where provider diversity is called for, on a different provider from the author; pick its effort from the table above.

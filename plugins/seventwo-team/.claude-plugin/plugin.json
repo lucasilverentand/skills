@@ -1,7 +1,7 @@
 {
 	"name": "seventwo-team",
 	"description": "Task-selected specialist teams with economical model routing, independent review and evidence-based delivery. Adapts to each user’s tools, project conventions and saved preferences.",
-	"version": "0.2.1",
+	"version": "0.3.0",
 	"skills": [
 		"./skills/seventwo-team"
 	],
