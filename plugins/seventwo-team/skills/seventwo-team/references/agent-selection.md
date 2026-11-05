@@ -5,7 +5,7 @@ These are portable role prompts the lead selects. They are not running agents or
 Use the tier table in SKILL.md §3.
 
 - **Tiny:** no baseline agents. The lead checks in one line that the change is the smallest complete fix and that nothing else is in scope.
-- **Standard:** one advisor receives the [efficiency planner](presets/efficiency-planner.md) and [scope guard](presets/scope-guard.md) presets together and returns one combined assessment (split, models, checks, keep/cut/defer). Add the context advocate only when a stakeholder tradeoff is live.
+- **Standard:** one advisor receives the [efficiency planner](presets/efficiency-planner.md) and [scope guard](presets/scope-guard.md) presets together and returns one combined assessment: tier challenge, split, models, checks, keep/cut/defer. The lead keeps preparing independent work meanwhile. Split into distinct advisors when scope or the split is contested, and add the context advocate when stakeholder impact is uncertain or material.
 - **Consequential:** the efficiency planner, scope guard and context advocate ([business/product](presets/business-advocate.md) or [OSS](presets/oss-advocate.md)) run as distinct agents so the scope check stays independent of the plan.
 
 Choose the context advocate from stated project goals, not assumed company ownership. A genuinely mixed decision can use both advocates. Reuse the task's existing advisors and their advice; follow-ups do not start another team.
@@ -65,8 +65,8 @@ tests cover both modes. Read-only; no edits, no agents.
 Evidence: src/cli/status.ts, tests/status.test.ts, CONTRIBUTING.md (tests required).
 Dependencies: none; the lead integrates.
 Models available: claude-sonnet-5-5, claude-haiku-5-5 (native); no user budget.
-Return: split with model/effort and one-line reasons; keep/cut/defer;
-one material uncertainty. Return user decisions to the lead.
+Return: is "standard" right (no auth, data or contract impact)?; split with
+model/effort and one-line reasons; keep/cut/defer; one material uncertainty.
 [shared contract]
 [efficiency-planner.md body]
 [scope-guard.md body]

@@ -20,7 +20,7 @@ Use only exposed authorized usage information. Subscription allowance, API charg
 
 ## Claude Code
 - Delegate with the `Agent` tool. Put the full brief in `prompt`; the child sees no parent history unless it is a fork.
-- Pick the model with the `model` parameter from the values its schema lists (for example `haiku` for narrow advice, `sonnet` for settled implementation, `opus` for hard reasoning). Set `effort` only when the user or project instructions ask for a specific level; otherwise the agent's default applies.
+- Pick the model with the `model` parameter from the values its schema lists, matching [models-and-usage.md](models-and-usage.md). Set `effort` only when the user or project instructions ask for a specific level; otherwise the agent's default applies.
 - `subagent_type` selects an agent definition: a general-purpose type for workers, a read-only search type for discovery. Presets stay in the prompt; they are not registered types.
 - Run advisors you need before planning in the foreground (`run_in_background: false`) and send independent ones in one message so they run concurrently. Background workers notify on completion; do not poll or sleep.
 - Use `isolation: "worktree"` when a worker needs its own checkout. Otherwise give parallel workers disjoint files in the shared checkout.
