@@ -44,6 +44,7 @@ interface Owner {
 
 interface PluginGroup {
 	name: string;
+	version?: string;
 	displayName: string;
 	description: string;
 	shortDescription: string;
@@ -340,7 +341,7 @@ function claudeMarketplace(groups: PluginGroups) {
 			name: group.name,
 			source: `./plugins/${group.name}`,
 			description: group.description,
-			version: groups.metadata.version,
+			version: group.version ?? groups.metadata.version,
 			author: group.author,
 			category: group.category,
 			keywords: group.keywords ?? [],
@@ -418,6 +419,7 @@ Codex:
 
 \`\`\`bash
 codex plugin marketplace add ${source}
+codex plugin add ${group.name}@${marketplaceName}
 \`\`\`
 
 Claude Code:
@@ -529,15 +531,15 @@ async function main() {
 		const root = pluginRoot(group);
 		await writeIfChanged(
 			resolve(root, ".claude-plugin/plugin.json"),
-			json(claudePluginManifest(group, groups.metadata.version, groups.metadata)),
+			json(claudePluginManifest(group, group.version ?? groups.metadata.version, groups.metadata)),
 		);
 		await writeIfChanged(
 			resolve(root, ".codex-plugin/plugin.json"),
-			json(codexPluginManifest(group, groups.metadata.version, groups.metadata)),
+			json(codexPluginManifest(group, group.version ?? groups.metadata.version, groups.metadata)),
 		);
 		await writeIfChanged(
 			resolve(root, ".cursor-plugin/plugin.json"),
-			json(cursorPluginManifest(group, groups.metadata.version, groups.metadata)),
+			json(cursorPluginManifest(group, group.version ?? groups.metadata.version, groups.metadata)),
 		);
 		await writeIfChanged(
 			resolve(root, "README.md"),

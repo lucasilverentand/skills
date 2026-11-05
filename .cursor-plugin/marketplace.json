@@ -7,49 +7,14 @@
 	},
 	"metadata": {
 		"description": "Reusable agent skills by Luca Silverentand.",
-		"version": "3.2.0",
+		"version": "4.0.0",
 		"pluginRoot": "plugins"
 	},
 	"plugins": [
 		{
-			"name": "apple",
-			"source": "apple",
-			"description": "Apple platform guidance for Human Interface Guidelines, platform conventions, and Apple framework or service integrations."
-		},
-		{
-			"name": "codebase",
-			"source": "codebase",
-			"description": "Codebase design and structure skills for API interfaces, repository organization, runtime boundaries, ownership, and cleanup of LLM-generated layouts."
-		},
-		{
-			"name": "design",
-			"source": "design",
-			"description": "Visual and product design skills for apps, websites, dashboards, design systems, interactive UI direction, and explorable system diagrams."
-		},
-		{
-			"name": "developer-ports",
-			"source": "developer-ports",
-			"description": "Local development port registry tools for scanning projects, finding collisions, checking live listeners, suggesting free ports, and reserving user-scoped project ports."
-		},
-		{
-			"name": "documentation",
-			"source": "documentation",
-			"description": "Documentation skills for repository docs, project context, document templates, design documents, and architecture decision records."
-		},
-		{
-			"name": "expo",
-			"source": "expo",
-			"description": "Offline-first adaptive Expo app architecture, durable local writes, explicit synchronization, reusable components, and cross-platform layouts."
-		},
-		{
-			"name": "planning",
-			"source": "planning",
-			"description": "Planning skills for requirements, task specs, project intent interviews, Linear project setup, issue authoring, complexity estimation, work pickup, and project tidy-up."
-		},
-		{
-			"name": "workflow",
-			"source": "workflow",
-			"description": "Execution and reasoning workflows for system design, repository management, decision trees, skill authoring, publishing, and retrospective improvement."
+			"name": "seventwo-team",
+			"source": "seventwo-team",
+			"description": "Task-selected specialist teams with economical model routing, independent review and evidence-based delivery. Adapts to each user’s tools, project conventions and saved preferences."
 		}
 	]
 }

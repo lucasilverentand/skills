@@ -6,250 +6,30 @@
 		"url": "https://github.com/lucasilverentand"
 	},
 	"metadata": {
-		"version": "3.2.0",
+		"version": "4.0.0",
 		"homepage": "https://github.com/lucasilverentand/skills",
 		"repository": "https://github.com/lucasilverentand/skills",
 		"license": "MIT"
 	},
 	"plugins": [
 		{
-			"name": "codebase",
-			"displayName": "Codebase",
-			"description": "Codebase design and structure skills for API interfaces, repository organization, runtime boundaries, ownership, and cleanup of LLM-generated layouts.",
-			"shortDescription": "Shape codebases and APIs",
-			"category": "Development",
-			"keywords": [
-				"codebase",
-				"repository",
-				"structure",
-				"api",
-				"interface",
-				"monorepo",
-				"workspace",
-				"cleanup"
-			],
-			"skills": [
-				"api-design",
-				"codebase-structure"
-			],
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			}
-		},
-		{
-			"name": "developer-ports",
-			"displayName": "Developer Ports",
-			"description": "Local development port registry tools for scanning projects, finding collisions, checking live listeners, suggesting free ports, and reserving user-scoped project ports.",
-			"shortDescription": "Manage local dev ports",
-			"category": "Developer Tools",
-			"keywords": [
-				"ports",
-				"localhost",
-				"dev-server",
-				"registry",
-				"vite",
-				"astro",
-				"expo",
-				"wrangler",
-				"docker",
-				"kubernetes"
-			],
-			"skills": [
-				"port-registry"
-			],
-			"mcpServers": "./.mcp.json",
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			}
-		},
-		{
-			"name": "design",
-			"displayName": "Design",
-			"description": "Visual and product design skills for apps, websites, dashboards, design systems, interactive UI direction, and explorable system diagrams.",
-			"shortDescription": "Visual and product UI design",
-			"category": "Design",
-			"keywords": [
-				"design",
-				"ui",
-				"ux",
-				"visual",
-				"app",
-				"desktop",
-				"mobile",
-				"dashboard",
-				"website",
-				"navigation",
-				"design-system",
-				"prototype",
-				"system-design",
-				"diagram"
-			],
-			"skills": [
-				"app-ux",
-				"dashboard-design",
-				"design-system",
-				"interactive-system-design",
-				"web-design"
-			],
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			}
-		},
-		{
-			"name": "workflow",
-			"displayName": "Workflow",
-			"description": "Execution and reasoning workflows for system design, repository management, decision trees, skill authoring, publishing, and retrospective improvement.",
-			"shortDescription": "Run durable agent workflows",
+			"name": "seventwo-team",
+			"version": "0.2.1",
+			"displayName": "SevenTwo Team",
+			"description": "Task-selected specialist teams with economical model routing, independent review and evidence-based delivery. Adapts to each user’s tools, project conventions and saved preferences.",
+			"shortDescription": "Task-selected agent teams",
 			"category": "Productivity",
 			"keywords": [
-				"workflow",
-				"architecture",
-				"data",
-				"pr",
-				"github",
-				"ci",
-				"skill",
-				"retrospective"
+				"agents",
+				"team",
+				"orchestration",
+				"efficiency",
+				"review",
+				"product",
+				"open-source"
 			],
 			"skills": [
-				"architecture",
-				"authoring",
-				"c4-diagrams",
-				"data-modeling",
-				"decision-trees",
-				"design-review",
-				"design-workflow",
-				"publishing",
-				"repo-management",
-				"retrospecting",
-				"taste-encoding",
-				"tooling"
-			],
-			"commands": [
-				"ci",
-				"clean-repo",
-				"create-commit",
-				"create-draft-pr",
-				"create-pr",
-				"fix-pr",
-				"rebase"
-			],
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			}
-		},
-		{
-			"name": "documentation",
-			"displayName": "Documentation",
-			"description": "Documentation skills for repository docs, project context, document templates, design documents, and architecture decision records.",
-			"shortDescription": "Create and maintain docs",
-			"category": "Documentation",
-			"keywords": [
-				"documentation",
-				"readme",
-				"docs",
-				"context",
-				"templates",
-				"adr",
-				"design-doc"
-			],
-			"readmeBody": "README.body.txt",
-			"skills": [
-				"closed-source-docs",
-				"create-doc-template",
-				"open-source-docs",
-				"project-context",
-				"project-docs",
-				"write-adr",
-				"write-design-doc"
-			],
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			}
-		},
-		{
-			"name": "planning",
-			"displayName": "Planning",
-			"description": "Planning skills for requirements, task specs, project intent interviews, Linear project setup, issue authoring, complexity estimation, work pickup, and project tidy-up.",
-			"shortDescription": "Plan projects and issues",
-			"category": "Productivity",
-			"keywords": [
-				"planning",
-				"requirements",
-				"linear",
-				"issues",
-				"tasks",
-				"project",
-				"scope",
-				"metadata"
-			],
-			"readmeBody": "README.body.txt",
-			"skills": [
-				"create-planner-project",
-				"estimate-issue-complexity",
-				"issue-authoring",
-				"pickup-work",
-				"project-intent",
-				"requirements",
-				"task-spec",
-				"tidy-linear-project"
-			],
-			"commands": [
-				"pickup-work",
-				"tidy-linear-project"
-			],
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			}
-		},
-		{
-			"name": "apple",
-			"displayName": "Apple",
-			"description": "Apple platform guidance for Human Interface Guidelines, platform conventions, and Apple framework or service integrations.",
-			"shortDescription": "Apple platform guidance",
-			"category": "Design",
-			"keywords": [
-				"apple",
-				"ios",
-				"macos",
-				"watchos",
-				"tvos",
-				"visionos",
-				"hig",
-				"swiftui",
-				"services"
-			],
-			"skills": [
-				"foundations",
-				"platforms",
-				"services"
-			],
-			"author": {
-				"name": "Luca Silverentand",
-				"email": "dev@lucasilverentand.com"
-			}
-		},
-		{
-			"name": "expo",
-			"displayName": "Expo",
-			"description": "Offline-first adaptive Expo app architecture, durable local writes, explicit synchronization, reusable components, and cross-platform layouts.",
-			"shortDescription": "Build offline-first Expo apps",
-			"category": "Development",
-			"keywords": [
-				"expo",
-				"react-native",
-				"offline-first",
-				"sync",
-				"adaptive"
-			],
-			"skills": [
-				"offline-first-adaptive-app"
+				"seventwo-team"
 			],
 			"author": {
 				"name": "Luca Silverentand",

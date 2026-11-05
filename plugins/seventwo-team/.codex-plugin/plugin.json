@@ -1,0 +1,38 @@
+{
+	"name": "seventwo-team",
+	"version": "0.2.1",
+	"description": "Task-selected specialist teams with economical model routing, independent review and evidence-based delivery. Adapts to each user’s tools, project conventions and saved preferences.",
+	"author": {
+		"name": "Luca Silverentand",
+		"email": "dev@lucasilverentand.com",
+		"url": "https://github.com/lucasilverentand"
+	},
+	"homepage": "https://github.com/lucasilverentand/skills",
+	"repository": "https://github.com/lucasilverentand/skills",
+	"license": "MIT",
+	"keywords": [
+		"agents",
+		"team",
+		"orchestration",
+		"efficiency",
+		"review",
+		"product",
+		"open-source"
+	],
+	"skills": "./skills/",
+	"interface": {
+		"displayName": "SevenTwo Team",
+		"shortDescription": "Task-selected agent teams",
+		"longDescription": "Task-selected specialist teams with economical model routing, independent review and evidence-based delivery. Adapts to each user’s tools, project conventions and saved preferences.",
+		"developerName": "Luca Silverentand",
+		"category": "Productivity",
+		"capabilities": [
+			"Read",
+			"Write"
+		],
+		"websiteURL": "https://github.com/lucasilverentand/skills",
+		"defaultPrompt": [
+			"Use SevenTwo Team when the task matches one of its bundled skills."
+		]
+	}
+}

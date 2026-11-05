@@ -1,2 +1,0 @@
-# Platform guidance — visionOS
-When running on visionOS, developers can leverage ARKit within their visionOS application to detect surrounding surfaces, utilize a user's hand and finger positions for **Designing custom gestures in visionOS**, and enable interactions that integrate nearby physical objects into **Immersive experiences**. For detailed developer guidance, refer to [ARKit](apple:ARKit).

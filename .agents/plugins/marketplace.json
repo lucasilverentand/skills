@@ -5,106 +5,10 @@
 	},
 	"plugins": [
 		{
-			"name": "apple",
+			"name": "seventwo-team",
 			"source": {
 				"source": "local",
-				"path": "./plugins/apple"
-			},
-			"policy": {
-				"installation": "AVAILABLE",
-				"authentication": "ON_INSTALL"
-			},
-			"category": "Design",
-			"interface": {
-				"displayName": "Apple",
-				"shortDescription": "Apple platform guidance"
-			}
-		},
-		{
-			"name": "codebase",
-			"source": {
-				"source": "local",
-				"path": "./plugins/codebase"
-			},
-			"policy": {
-				"installation": "AVAILABLE",
-				"authentication": "ON_INSTALL"
-			},
-			"category": "Development",
-			"interface": {
-				"displayName": "Codebase",
-				"shortDescription": "Shape codebases and APIs"
-			}
-		},
-		{
-			"name": "design",
-			"source": {
-				"source": "local",
-				"path": "./plugins/design"
-			},
-			"policy": {
-				"installation": "AVAILABLE",
-				"authentication": "ON_INSTALL"
-			},
-			"category": "Design",
-			"interface": {
-				"displayName": "Design",
-				"shortDescription": "Visual and product UI design"
-			}
-		},
-		{
-			"name": "developer-ports",
-			"source": {
-				"source": "local",
-				"path": "./plugins/developer-ports"
-			},
-			"policy": {
-				"installation": "AVAILABLE",
-				"authentication": "ON_INSTALL"
-			},
-			"category": "Developer Tools",
-			"interface": {
-				"displayName": "Developer Ports",
-				"shortDescription": "Manage local dev ports"
-			}
-		},
-		{
-			"name": "documentation",
-			"source": {
-				"source": "local",
-				"path": "./plugins/documentation"
-			},
-			"policy": {
-				"installation": "AVAILABLE",
-				"authentication": "ON_INSTALL"
-			},
-			"category": "Documentation",
-			"interface": {
-				"displayName": "Documentation",
-				"shortDescription": "Create and maintain docs"
-			}
-		},
-		{
-			"name": "expo",
-			"source": {
-				"source": "local",
-				"path": "./plugins/expo"
-			},
-			"policy": {
-				"installation": "AVAILABLE",
-				"authentication": "ON_INSTALL"
-			},
-			"category": "Development",
-			"interface": {
-				"displayName": "Expo",
-				"shortDescription": "Build offline-first Expo apps"
-			}
-		},
-		{
-			"name": "planning",
-			"source": {
-				"source": "local",
-				"path": "./plugins/planning"
+				"path": "./plugins/seventwo-team"
 			},
 			"policy": {
 				"installation": "AVAILABLE",
@@ -112,24 +16,8 @@
 			},
 			"category": "Productivity",
 			"interface": {
-				"displayName": "Planning",
-				"shortDescription": "Plan projects and issues"
-			}
-		},
-		{
-			"name": "workflow",
-			"source": {
-				"source": "local",
-				"path": "./plugins/workflow"
-			},
-			"policy": {
-				"installation": "AVAILABLE",
-				"authentication": "ON_INSTALL"
-			},
-			"category": "Productivity",
-			"interface": {
-				"displayName": "Workflow",
-				"shortDescription": "Run durable agent workflows"
+				"displayName": "SevenTwo Team",
+				"shortDescription": "Task-selected agent teams"
 			}
 		}
 	]

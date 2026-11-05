@@ -1,7 +1,0 @@
-# Displaying text in widgets
-- **Prefer using the system font, text styles, and SF Symbols.** Utilizing the native system font assists your widget in appearing cohesive across all platforms while simultaneously enabling you to render high-quality text displays using different weights, styles, and sizes. Employ SF Symbols to ensure symbols scale and align correctly with text that uses the system font. If you must incorporate a custom typeface, do so sparingly and ensure it remains highly legible at a quick glance. It is often effective to use a custom font for larger text elements in the widget and SF Pro for smaller details. Refer to **Typography** and **SF Symbols** for detailed guidance.
-- **Avoid very small font sizes.** Generally, display text using fonts that are 11 points or larger. Text rendered in a font smaller than 11 points may prove difficult for many users to read.
-- **Avoid rasterizing text.** Always utilize native text elements and styles; this guarantees proper scaling of your content and enables VoiceOver to accurately announce it.
-
-> **Note**
-> In iOS, iPadOS, and visionOS, widgets support Dynamic Type sizes ranging from Large to AX5 when you select a system font using `[Font](apple:SwiftUI/Font)` or choose a custom font via `[custom(_:size:)](apple:SwiftUI/Font/custom(_:size:))`. For further details regarding Dynamic Type sizes, consult **Supporting Dynamic Type**.

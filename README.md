@@ -1,52 +1,58 @@
-# Skills of Luca
-Reusable Agent Skills for Codex, Claude Code, Cursor, and other agents that understand the open `SKILL.md` format.
+# SevenTwo Team
+A shared skill for Claude Code, Codex and compatible agents. The current thread leads a small team that protects efficiency, scope and the project's interests, then selects specialists for the task. The package includes 16 role presets, model and effort selection guidance, independent review, and current-system documentation practices.
 
-Each plugin is the source of truth for its own skills under `plugins/<plugin>/skills/<skill>/`. The repo publishes Codex, Claude Code, and Cursor marketplaces from those plugin packages.
+The skill adapts to the user's repository, planner, knowledge store and available providers. On first use it discovers established conventions and asks only about consequential gaps. Explicit reusable preferences are saved in an agreed private location outside this repository. Provider access and integrations must already be available in the host; installing this skill does not provision them.
 
 ## Install
-Codex:
-
-```bash
-codex plugin marketplace add lucasilverentand/skills
-```
-
 Claude Code:
 
 ```text
 /plugin marketplace add lucasilverentand/skills
-/plugin install workflow@skills-of-luca
+/plugin install seventwo-team@skills-of-luca
 ```
 
-Cursor (team marketplace):
-
-1. Dashboard → Settings → Plugins → Import
-2. Paste `https://github.com/lucasilverentand/skills`
-3. Install plugins as Required or Optional
-
-Cursor (IDE):
-
-```text
-/plugin marketplace add lucasilverentand/skills
-/plugin install workflow@skills-of-luca
-```
-
-Direct local skill install:
+Codex:
 
 ```bash
-bun run install:codex-skills -- repo-management
-bun run install:claude-skills -- repo-management
+codex plugin marketplace add lucasilverentand/skills
+codex plugin add seventwo-team@skills-of-luca
 ```
 
+The Codex marketplace is published at [.agents/plugins/marketplace.json](.agents/plugins/marketplace.json). Direct installation from a local clone is also supported:
+
+```bash
+git clone https://github.com/lucasilverentand/skills.git
+cd skills
+bun run install:codex-skills -- seventwo-team
+# Or for Claude Code:
+bun run install:claude-skills -- seventwo-team
+```
+
+The direct installer copies into `~/.agents/skills` for Codex or `~/.claude/skills` for Claude Code. It skips existing skills unless `--force` is supplied. Use `--symlink` for local development. Copies need reinstalling after an update; symlinks follow the checkout. Installation does not remove older local skills or sync private preferences between machines.
+
+Cursor users can import `https://github.com/lucasilverentand/skills` in Dashboard → Settings → Plugins → Import, then select SevenTwo Team. Coordination depends on the agent tools available in that host.
+
+## Use
+Ask your agent to “Use SevenTwo Team to complete this task.” To make it the default for product and open-source work, add the [portable routing instructions](docs/default-routing.md) to your host's user or project guidance, such as `AGENTS.md` or `CLAUDE.md`.
+
+The skill always selects separate efficiency, scope and context advocates. Optional specialists cover development and architecture, independent review, Git and PRs, UX, UI, writing, accessibility, security and privacy, performance and reliability, verification, product analysis, and knowledge maintenance. The presets are role instructions selected by the lead, not separately registered agents.
+
+Read [the skill](plugins/seventwo-team/skills/seventwo-team/SKILL.md) for the workflow and [preferences](plugins/seventwo-team/skills/seventwo-team/references/preferences.md) for private persistence and project scoping. New users can choose repository-local docs, no tracker or one provider; Notion, Linear and a particular model subscription are not required.
+
+## Catalog migration
+Catalog 4.0.0 replaces all earlier plugins with `seventwo-team` (skill release 0.2.1). Old plugin names and paths are retired. Install the replacement explicitly; marketplace updates do not automatically uninstall previous plugins or migrate local configuration. Earlier contents remain available in Git history.
+
 ## Development
-Edit `plugins/<plugin>/skills/`, update `plugin-groups.json` when plugin membership changes, then run:
+Authored source lives in `plugins/seventwo-team/skills/seventwo-team/`. Update metadata in `plugin-groups.json`, then regenerate and validate:
 
 ```bash
 bun run marketplace:write
 bun run ci
 ```
 
-`bun run ci` is the same validation GitHub Actions runs on pull requests (marketplace sync, Cursor marketplace layout, skill checks, markdown format, JSON manifests). Use `bun run check` locally for a non-strict dry-run with warnings only.
+The catalog version and plugin version are independent. `metadata.version` versions the catalog; the plugin's `version` versions the distributed skill. Commit generated manifests, marketplaces and plugin README with their source changes. The existing CI validates marketplace synchronization, Cursor layout, skill structure, Markdown formatting and JSON.
 
-Use `bun run tree` to print a concise AI-readable tree of plugins, skills, and reference counts. Add `--descriptions`, `--references`, `--metadata`, `--paths`, `--support`, or `--format json` when you need a fuller inventory.
+Run `bun run tree` for the skill inventory. Contributor and agent guidance lives in [AGENTS.md](AGENTS.md). Keep personal profiles and private workspace knowledge outside the shared package.
 
-Agent and contributor guidance lives in `AGENTS.md`.
+## License
+[MIT](LICENSE).
