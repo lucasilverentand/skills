@@ -1,16 +1,19 @@
 # Select and brief preset agents
-These are portable role prompts selected by the lead through the plugin skill. They are not running agents, guaranteed native agent types, or a new orchestration service. The host's existing agent tools execute the assignments. Keep this table available to the lead; do not load all preset bodies into every agent.
+These are portable role prompts the lead selects. They are not running agents or native agent types; the host's agent tools execute the assignments. Keep this index available to the lead, and load only the preset bodies an assignment needs.
 
-## Baseline selection
-For each ongoing task, select [efficiency planner](presets/efficiency-planner.md), [scope guard](presets/scope-guard.md), and the context advocate matching the project: [business/product advocate](presets/business-advocate.md) for commercial/internal products, or [OSS advocate](presets/oss-advocate.md) for community/open-source work. For personal/noncommercial or unclear projects, use the user/maintainer perspective without assumed commercial goals; ask only when it matters. Choose from stated project goals rather than assuming company ownership. A genuinely mixed decision can need both perspectives, but do not duplicate seats without a concrete reason. Reuse the task's existing baseline agents and advice; follow-ups do not start another team.
+## Baseline roles by tier
+Use the tier table in SKILL.md §3; tiny tasks use no baseline agents.
 
-Keep these baseline agents distinct. A tiny task warrants only tiny assessments, not invented research, specialists, or debate. Queue within host concurrency limits.
+- **Standard:** one advisor receives the [efficiency planner](presets/efficiency-planner.md) and [scope guard](presets/scope-guard.md) presets together and returns one combined assessment: tier challenge, split, models, checks, keep/cut/defer. SKILL.md §3 says when to split it or add the context advocate.
+- **Consequential:** the efficiency planner, scope guard and context advocate ([business/product](presets/business-advocate.md) or [OSS](presets/oss-advocate.md)) run as distinct agents so the scope check stays independent of the plan.
+
+Choose the context advocate from stated project goals, not assumed company ownership. A genuinely mixed decision can use both advocates. Reuse the task's existing advisors and their advice; follow-ups do not start another team.
 
 ## Add specialists for actual deliverables
 |Preset|Select when|Economical combination|
 |---|---|---|
 |[Developer / architect](presets/developer-architect.md)|There is code to implement or an unresolved architecture/interface decision|One owner can design and implement its bounded slice; the lead may do work directly|
-|[Independent reviewer](presets/independent-reviewer.md)|Meaningful implementation, uncertain design, material risk, or a required second-provider assessment|Review the integrated artifact; do not duplicate an already-relevant review|
+|[Independent reviewer](presets/independent-reviewer.md)|Required by SKILL.md §5 (consequential, sensitive, or behavior not covered by passing checks), including a required second-provider assessment|Review the integrated artifact; do not duplicate an already-relevant review|
 |[Git / PR specialist](presets/git-specialist.md)|Any commit or PR the team will author or edit; commit/PR convention problems|One focused pass over the real diff and exact messages; reuse advice until scope or metadata changes|
 |[UX expert](presets/ux-expert.md)|Flows, navigation, user friction, states, or research interpretation change|Combine with UI/content on small surfaces|
 |[UI designer](presets/ui-designer.md)|Visual composition, components, responsive layouts or design consistency change|Combine with UX for focused UI work|
@@ -22,33 +25,48 @@ Keep these baseline agents distinct. A tiny task warrants only tiny assessments,
 |[Product analyst](presets/product-analyst.md)|Real options, product ambiguity or metric definitions need analysis|Avoid duplicating the context advocate's assessment|
 |[Knowledge steward](presets/knowledge-steward.md)|Significant evidence needs reconciliation across existing records|Lead handles small documentation/tracker updates directly|
 
-Select by the task's actual deliverables, uncertainty and risk, not keyword matching. State why an added agent helps. Do not spawn all specialties because the work is called a product. For combined optional roles, one agent receives the relevant excerpts and one coherent deliverable. For quorum, respect the independent assessments and provider diversity rules in SKILL.md.
+Select by actual deliverables, uncertainty and risk, not keywords, and state why each added agent helps. When combining optional roles, give one agent the relevant excerpts and one coherent deliverable. Quorum rules live in SKILL.md §5.
 
 ## Construct the assignment
-The lead loads only the selected preset, applies the central [model/effort guide](models-and-usage.md), and uses [runtime.md](runtime.md) to choose the actual tool. Copy the relevant role instructions into the brief or provide an accessible exact path; do not assume a remote child can read the parent's filesystem. Include only the necessary task context and canonical knowledge excerpts.
+Load only the selected preset, apply [models-and-usage.md](models-and-usage.md), and pick the tool with [runtime.md](runtime.md). Copy the role instructions into the brief, or give an exact path the child can actually read; a remote or cross-provider child may not share the parent's filesystem. Include only necessary task context and knowledge excerpts. The planner's brief also includes the discovered model IDs, effort values and host limits, so it never guesses them.
 
-The efficiency planner's brief includes the relevant model-routing excerpt and discovered model IDs, effort choices and host constraints. It must not guess available providers or settings from role names.
-
-Every assignment includes this shared contract alongside its selected role:
+Every assignment carries this shared contract next to its role:
 
 ```text
 Complete only the assigned deliverable and permitted actions.
 Use the supplied acceptance criteria, ownership, constraints and evidence.
 Do not spawn agents or activate the full team.
-Do not make external writes unless the lead explicitly assigned them
+Make no external writes unless the lead explicitly assigned them
 within the user's authorization.
-Return material taste, product-owner or scope decisions to the lead with options and
-a recommendation. Pause dependent work; continue independent work.
+Return material taste, product-owner or scope decisions to the lead with
+options and a recommendation. Pause dependent work; continue independent work.
 Distinguish observed facts, accepted decisions, inferences and unknowns.
 Report result locations and checks honestly. No private reasoning transcript.
-Return durable system-knowledge findings to the lead; do not create run reports.
+Return durable system-knowledge findings to the lead; create no run
+reports unless the lead assigns one at the user's request.
 ```
 
-Supply the task-specific fields from SKILL.md's compact brief. Do not ask each child to read the entire coordination skill or all role prompts. A role preset grants no tools, model access, or extra permissions. Keep model/provider policy centralized rather than hard-coding it into the presets.
+Fill the task-specific fields from SKILL.md's brief template. Do not ask a child to read the whole coordination skill or every preset. A preset grants no tools, model access or permissions, and model/provider policy stays centralized rather than in presets.
 
 ## Examples
-- **OSS typo fix:** baseline trio plus lead execution, no specialist roster; check the edit and confirm no system-knowledge change.
-- **Planned code change:** baseline trio plus an appropriate coding model for implementation if delegation is useful; test the integrated result. Add a separate reviewer when the substance warrants it.
-- **Consequential architecture:** baseline trio plus a focused strong developer/architect and an independent second-provider assessment of that same decision for quorum.
-- **UI improvement:** baseline trio plus combined UX/UI work, following the project’s accepted design direction and accessibility needs; add content/accessibility responsibilities or agents only where useful.
-- **Large knowledge reconciliation:** baseline trio plus a bounded knowledge steward; the lead saves and verifies changes to the existing records.
+- **Typo fix (tiny):** lead edits, checks the rendered result, confirms no documentation change. No agents.
+- **Planned code change (standard):** one combined planner/scope advisor on an economical model; the lead or one coding worker implements; a separately briefed reviewer checks the integrated diff when SKILL.md §5 requires it.
+- **UI improvement (standard):** combined advisor plus one UX/UI specialist following the accepted design direction; add accessibility or content responsibilities to that brief rather than more agents.
+- **Consequential architecture:** full trio, a strong developer/architect, and an independent second-provider assessment of the same decision for quorum.
+- **Large knowledge reconciliation (consequential when records conflict):** full trio plus a bounded knowledge steward; the lead saves and verifies the record changes.
+
+### Worked brief: combined advisor for a standard task
+```text
+Role: combined efficiency planner + scope guard (presets attached below).
+Deliverable: execution split and keep/cut/defer list, at most 200 words.
+Acceptance: the PR adds a `--json` flag to `cli status`; existing output unchanged;
+tests cover both modes. Read-only; no edits, no agents.
+Evidence: src/cli/status.ts, tests/status.test.ts, CONTRIBUTING.md (tests required).
+Dependencies: none; the lead integrates.
+Models available: <IDs from the live catalog>; no user budget.
+Return: is "standard" right (no auth, data or contract impact)?; split with
+model/effort and one-line reasons; keep/cut/defer; one material uncertainty.
+[shared contract]
+[efficiency-planner.md body]
+[scope-guard.md body]
+```

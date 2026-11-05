@@ -16,7 +16,7 @@ Matches the [cursor-team-marketplace-template](https://github.com/fieldsphere/cu
 /plugin install seventwo-team@skills-of-luca
 ```
 
-Cursor reads `.cursor-plugin/marketplace.json`, then loads plugin manifests from `plugins/<name>/.cursor-plugin/plugin.json`. Skills and commands are discovered from each plugin's `skills/` and `commands/` directories; prefer skills for portable workflows.
+Cursor reads `.cursor-plugin/marketplace.json`, then loads plugin manifests from `plugins/<name>/.cursor-plugin/plugin.json`. Skills (and optional commands, currently unused) are discovered from each plugin's `skills/` and `commands/` directories; prefer skills for portable workflows.
 
 Validate before publishing:
 
