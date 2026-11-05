@@ -4,6 +4,8 @@ Read this before the first delegation. Host instructions and discovered tool sch
 For model and effort selection, use [models-and-usage.md](models-and-usage.md). The catalog determines callable settings; API documentation must not be used to invent host options or billing entitlements.
 
 ## T3 Code
+Last verified 2026-11-05; if the live schema differs, it wins.
+
 - Discover the locally applicable `orchestrator_capabilities` tool before the first `delegate_task`. Its catalog supplies provider IDs, model IDs, and supported effort values. Put effort and other model settings in `target.options` using that schema.
 - Use the native agent tool for a supported model of the current provider when no settings beyond the inherited ones are needed and host rules allow it. Use `delegate_task` for another provider, explicit effort or other settings beyond inherited ones, background work, or host-managed worktree isolation. Do not launch top-level threads as subagents.
 - A delegated task receives no parent history: include a self-contained brief and relevant artifact locations. Keep task IDs and returned links. Never put secrets in briefs.

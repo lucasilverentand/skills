@@ -2,9 +2,8 @@
 These are portable role prompts the lead selects. They are not running agents or native agent types; the host's agent tools execute the assignments. Keep this index available to the lead, and load only the preset bodies an assignment needs.
 
 ## Baseline roles by tier
-Use the tier table in SKILL.md §3.
+Use the tier table in SKILL.md §3; tiny tasks use no baseline agents.
 
-- **Tiny:** no baseline agents.
 - **Standard:** one advisor receives the [efficiency planner](presets/efficiency-planner.md) and [scope guard](presets/scope-guard.md) presets together and returns one combined assessment: tier challenge, split, models, checks, keep/cut/defer. SKILL.md §3 says when to split it or add the context advocate.
 - **Consequential:** the efficiency planner, scope guard and context advocate ([business/product](presets/business-advocate.md) or [OSS](presets/oss-advocate.md)) run as distinct agents so the scope check stays independent of the plan.
 
@@ -14,7 +13,7 @@ Choose the context advocate from stated project goals, not assumed company owner
 |Preset|Select when|Economical combination|
 |---|---|---|
 |[Developer / architect](presets/developer-architect.md)|There is code to implement or an unresolved architecture/interface decision|One owner can design and implement its bounded slice; the lead may do work directly|
-|[Independent reviewer](presets/independent-reviewer.md)|Required by SKILL.md §5 (consequential, sensitive, or behavior not covered by passing checks), uncertain design, or a required second-provider assessment|Review the integrated artifact; do not duplicate an already-relevant review|
+|[Independent reviewer](presets/independent-reviewer.md)|Required by SKILL.md §5 (consequential, sensitive, or behavior not covered by passing checks), including a required second-provider assessment|Review the integrated artifact; do not duplicate an already-relevant review|
 |[Git / PR specialist](presets/git-specialist.md)|Any commit or PR the team will author or edit; commit/PR convention problems|One focused pass over the real diff and exact messages; reuse advice until scope or metadata changes|
 |[UX expert](presets/ux-expert.md)|Flows, navigation, user friction, states, or research interpretation change|Combine with UI/content on small surfaces|
 |[UI designer](presets/ui-designer.md)|Visual composition, components, responsive layouts or design consistency change|Combine with UX for focused UI work|
@@ -64,7 +63,7 @@ Acceptance: the PR adds a `--json` flag to `cli status`; existing output unchang
 tests cover both modes. Read-only; no edits, no agents.
 Evidence: src/cli/status.ts, tests/status.test.ts, CONTRIBUTING.md (tests required).
 Dependencies: none; the lead integrates.
-Models available: claude-sonnet-5-5, claude-haiku-5-5 (native); no user budget.
+Models available: <IDs from the live catalog>; no user budget.
 Return: is "standard" right (no auth, data or contract impact)?; split with
 model/effort and one-line reasons; keep/cut/defer; one material uncertainty.
 [shared contract]
