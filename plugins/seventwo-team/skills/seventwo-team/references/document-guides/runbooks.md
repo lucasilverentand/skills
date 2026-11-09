@@ -19,7 +19,7 @@ Use for: on-call playbooks, deployment and rollback procedures, escalation paths
 ## Rules
 - Write imperative steps, not narrative. Put each warning before the step it applies to.
 - Before any destructive or irreversible step, name the blast radius and add a check to confirm it.
-- Commands must run as pasted. Don't include shell prompts, and state the environment explicitly.
+- Commands run as pasted once the marked placeholders are replaced; say where each value comes from. Don't include shell prompts, and state the environment explicitly.
 - Reference the secret store or access process; never paste secrets, tokens or personal contact details.
 - Record owner and last-verified date in the destination's native fields when it has them. Do not impose a footer the destination lacks.
 - Deployment procedures add pre-checks, a post-deploy verification and an explicit rollback trigger.
