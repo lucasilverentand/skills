@@ -1,5 +1,5 @@
 # SevenTwo Team
-A shared skill for Claude Code, Codex and compatible agents. The current thread leads a small team that protects efficiency, scope and the project's interests, then selects specialists for the task. The package includes 16 role presets, model and effort selection guidance, independent review, and current-system documentation practices.
+A shared skill for Claude Code, Codex and compatible agents. The current thread leads a small team that protects efficiency, scope and the project's interests, then selects specialists for the task. The package includes 16 role presets, six document guides (user guides, runbooks, tutorials, API reference, microcopy and editing), model and effort selection guidance, independent review, and current-system documentation practices.
 
 The skill adapts to the user's repository, planner, knowledge store and available providers. On first use it discovers established conventions and asks only about consequential gaps. Explicit reusable preferences are saved in an agreed private location outside this repository. Provider access and integrations must already be available in the host; installing this skill does not provision them.
 
