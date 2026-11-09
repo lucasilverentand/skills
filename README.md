@@ -30,14 +30,16 @@ bun run install:claude-skills -- seventwo-team
 
 The direct installer copies into `~/.agents/skills` for Codex or `~/.claude/skills` for Claude Code. It skips existing skills unless `--force` is supplied. Use `--symlink` for local development. Copies need reinstalling after an update; symlinks follow the checkout. Installation does not remove older local skills or sync private preferences between machines.
 
+After installing, start a new session and ask your agent to use SevenTwo Team; it should name the skill and size a team for the task. If it does not recognize the skill, reload the host or check that the plugin is enabled.
+
 Cursor users can import `https://github.com/lucasilverentand/skills` in Dashboard → Settings → Plugins → Import, then select SevenTwo Team. Coordination depends on the agent tools available in that host.
 
 ## Use
 Ask your agent to “Use SevenTwo Team to complete this task.” To make it the default for product and open-source work, add the [portable routing instructions](docs/default-routing.md) to your host's user or project guidance, such as `AGENTS.md` or `CLAUDE.md`.
 
-The skill always selects separate efficiency, scope and context advocates. Optional specialists cover development and architecture, independent review, Git and PRs, UX, UI, writing, accessibility, security and privacy, performance and reliability, verification, product analysis, and knowledge maintenance. The presets are role instructions selected by the lead, not separately registered agents.
+The lead sizes the team to the task: tiny changes run directly with no advisors, standard work gets one combined efficiency and scope advisor, and consequential work gets separate efficiency, scope and context advocates. Optional specialists cover development and architecture, independent review, Git and PRs, UX, UI, writing, accessibility, security and privacy, performance and reliability, verification, product analysis, and knowledge maintenance. The presets are role instructions selected by the lead, not separately registered agents.
 
-Read [the skill](plugins/seventwo-team/skills/seventwo-team/SKILL.md) for the workflow and [preferences](plugins/seventwo-team/skills/seventwo-team/references/preferences.md) for private persistence and project scoping. New users can choose repository-local docs, no tracker or one provider; Notion, Linear and a particular model subscription are not required.
+The skill only activates when you ask for it or make it your default; it does not trigger on ordinary requests. Read [the skill](plugins/seventwo-team/skills/seventwo-team/SKILL.md) for the workflow and [preferences](plugins/seventwo-team/skills/seventwo-team/references/preferences.md) for private persistence and project scoping. New users can choose repository-local docs, no tracker or one provider; Notion, Linear and a particular model subscription are not required.
 
 ## Catalog migration
 Catalog 4.0.0 replaces all earlier plugins with `seventwo-team` (skill release 0.2.1). Old plugin names and paths are retired. Install the replacement explicitly; marketplace updates do not automatically uninstall previous plugins or migrate local configuration. Earlier contents remain available in Git history.

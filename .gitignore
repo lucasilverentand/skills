@@ -2,15 +2,8 @@
 *.log
 node_modules/
 
-# extractor scratch tooling + caches
-build/
-.cache/
-/tools/
-local/
-
 # mise
 .mise.local.toml
 
 # Claude Code
 .claude/*
-!.claude/skills/

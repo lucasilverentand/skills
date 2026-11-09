@@ -9,4 +9,4 @@ Add the marketplace and install a plugin with Claude Code slash commands:
 /plugin install seventwo-team@skills-of-luca
 ```
 
-Claude Code reads `.claude-plugin/marketplace.json`, then loads plugin manifests from `plugins/<name>/.claude-plugin/plugin.json`. Claude-only legacy command shims live under `plugins/<name>/commands/`; prefer skills for portable workflows.
+Claude Code reads `.claude-plugin/marketplace.json`, then loads plugin manifests from `plugins/<name>/.claude-plugin/plugin.json`. Plugins may ship Claude-only command shims under `plugins/<name>/commands/` (none do today); prefer skills for portable workflows.

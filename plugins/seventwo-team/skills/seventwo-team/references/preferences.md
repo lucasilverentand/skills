@@ -2,7 +2,7 @@
 Persistence is part of setup, not a recurring discovery task. Read the saved profile at the start of a new task, reuse it within the task, and refresh only fields affected by new instructions, a changed project, a conflict, or an actual access/availability error.
 
 ## Storage and scope
-Use the user's already-configured preferences home. For a local host without another choice, propose `~/.config/seventwo-team/profile.md` (or the host's established user-configuration location). Obtain approval for that home once, preferably in the same first-use question that resolves the missing choices. After approval, save explicit reusable answers and corrections there without asking permission for every field. Existing host permissions still apply.
+Use the user's already-configured preferences home. For a local host without another choice, propose `~/.config/seventwo-team/profile.md` (or the host's established user-configuration location). Obtain approval for that home once, only when a reusable choice exists to save, preferably in the same question that resolves it. After approval, save explicit reusable answers and corrections there without asking permission for every field. Existing host permissions still apply.
 
 For a host without filesystem access, use an explicitly approved existing memory/settings or documentation record and retain its exact locator in the host's supported persistent settings. Do not assume arbitrary conversation text persists between sessions. If no durable home is available or the user opts out, keep the agreement in the current conversation and disclose that cross-session persistence is unavailable; do not repeatedly offer the same declined storage option.
 

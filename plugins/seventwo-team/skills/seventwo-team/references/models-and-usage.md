@@ -17,7 +17,7 @@ Capability fit and completed-task results matter more than labels or per-token p
 
 Assign providers according to this user’s accepted preferences and observed task fit. A user may prefer different providers for architecture, execution or review, or use only one. Do not inherit the original author’s allocation or account assumptions.
 
-Provider examples, checked 2026-11-04: [OpenAI guidance](https://learn.chatgpt.com/docs/models) distinguishes focused, coding/reasoning and writing/visual workloads; [Claude effort guidance](https://platform.claude.com/docs/en/build-with-claude/effort) explains effort tradeoffs by model. Treat named model generations as examples to resolve against live access, not a permanent required catalog. Do not research every provider on every task.
+Provider examples, checked 2026-11-04: [OpenAI guidance](https://learn.chatgpt.com/docs/models) distinguishes focused, coding/reasoning and writing/visual workloads; [Claude effort guidance](https://platform.claude.com/docs/en/build-with-claude/effort) explains effort tradeoffs by model. Re-check these links when the date is more than about six months old. Resolve concrete model IDs against live access, not this file. Do not research every provider on every task.
 
 ## Choose effort deliberately
 - **Low:** narrow task, clear evidence, cheap objective check. Poor for open-ended investigation.
@@ -36,4 +36,4 @@ Prepare compact relevant evidence for expensive reasoning, batch related questio
 Before escalating, identify whether the bottleneck is evidence, plan clarity, domain knowledge or reasoning. Fix the real bottleneck. Compare total quality, retries, handoffs and actual usage on comparable work; do not promise savings from model names alone.
 
 ## Independent perspectives
-Apply the configured review/quorum policy in SKILL.md. Reuse a relevant author's assessment plus an independent second-provider review of the same result when appropriate. Two same-provider agents or an unrelated advocate reply are not cross-provider quorum. Agreement does not replace tests or the user's judgment. If required diversity is unavailable, disclose it and ask about an acceptable alternative rather than silently claiming equivalent review.
+Review and quorum policy lives in SKILL.md §5. For model choice: the reviewer should be independently briefed and, where provider diversity is called for, on a different provider from the author; pick its effort from the table above.
