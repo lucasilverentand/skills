@@ -16,7 +16,7 @@ Activate once per ongoing task, when the user selects this workflow or has made 
 ## 2. Define the result
 State the outcome, testable acceptance, constraints and authorized endpoint; one sentence is enough for a tiny change. Without a stated endpoint, complete and verify the work where it lives. Editing never by itself authorizes a push, merge, publication, deployment or spending.
 
-Read the relevant project guidance and current evidence. Surface unsettled taste, product-owner or business decisions before dependent work. Choose the smallest complete solution; keep required safeguards and skip speculative improvements.
+Read the relevant project guidance and current evidence. For a document or UI copy, pick the matching guide in [document-guides/](references/document-guides/) by its `Use for:` line, and follow it yourself or attach it to the writer's brief. Surface unsettled taste, product-owner or business decisions before dependent work. Choose the smallest complete solution; keep required safeguards and skip speculative improvements.
 
 ## 3. Size the team
 Pick the smallest tier whose conditions are met. Unsure about size: start smaller and move up on evidence. Unsure about impact: not tiny. A change touching authorization or permissions, secrets, sensitive data or its persistence, or a contract with outside consumers (public API, persisted data schema, published file or CLI format) is never tiny and always gets independent review (§5). If it is a single obvious edit, the advisor may be skipped; the review may not. Internal interfaces without outside consumers follow the ordinary tiers.
