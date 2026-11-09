@@ -298,8 +298,14 @@ function flag(filePath: string, content: string): Flag[] {
 			flags.push(...flagTriggerQuality(rel, descLineNum, fm.description, fm));
 		}
 
-		// Check name matches directory
-		if (fm?.name) {
+		// Check name is present and matches directory
+		if (fm && !fm.name) {
+			flags.push({
+				file: rel,
+				severity: "error",
+				message: "missing name — SKILL.md frontmatter requires one",
+			});
+		} else if (fm?.name) {
 			const dirName = filePath.split("/").at(-2);
 			if (fm.name !== dirName) {
 				flags.push({

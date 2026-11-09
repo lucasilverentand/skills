@@ -18,7 +18,7 @@ Matches the [cursor-team-marketplace-template](https://github.com/fieldsphere/cu
 
 Cursor reads `.cursor-plugin/marketplace.json`, then loads plugin manifests from `plugins/<name>/.cursor-plugin/plugin.json`. Skills (and optional commands, currently unused) are discovered from each plugin's `skills/` and `commands/` directories; prefer skills for portable workflows.
 
-Validate before publishing:
+Validate before publishing (checks rules, agents, and commands frontmatter; `bun run ci` also verifies generated Cursor manifests):
 
 ```bash
 bun run validate:cursor

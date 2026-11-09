@@ -52,9 +52,9 @@ bun run marketplace:write
 bun run ci
 ```
 
-The catalog version and plugin version are independent. `metadata.version` versions the catalog; the plugin's `version` versions the distributed skill. Commit generated manifests, marketplaces and plugin README with their source changes. The existing CI validates marketplace synchronization, Cursor layout, skill structure, Markdown formatting and JSON.
+The catalog version and plugin version are independent. `metadata.version` versions the catalog; the plugin's `version` versions the distributed skill. Commit generated manifests, marketplaces and plugin README with their source changes. The existing CI validates marketplace synchronization, Cursor component frontmatter, skill structure, Markdown formatting and JSON.
 
-Run `bun run tree` for the skill inventory. Contributor and agent guidance lives in [AGENTS.md](AGENTS.md). Keep personal profiles and private workspace knowledge outside the shared package.
+Contributor and agent guidance lives in [AGENTS.md](AGENTS.md). Keep personal profiles and private workspace knowledge outside the shared package.
 
 ## License
 [MIT](LICENSE).
