@@ -59,13 +59,15 @@ Fill the task-specific fields from SKILL.md's brief template. Do not ask a child
 ```text
 Role: combined efficiency planner + scope guard (presets attached below).
 Deliverable: execution split and keep/cut/defer list, at most 200 words.
-Acceptance: the PR adds a `--json` flag to `cli status`; existing output unchanged;
-tests cover both modes. Read-only; no edits, no agents.
+Acceptance: the PR adds a `--json` flag to the internal `cli status` command
+(no outside consumers of its output); existing output unchanged; tests cover
+both modes. Read-only; no edits, no agents.
 Evidence: src/cli/status.ts, tests/status.test.ts, CONTRIBUTING.md (tests required).
 Dependencies: none; the lead integrates.
 Models available: <IDs from the live catalog>; no user budget.
-Return: is "standard" right (no auth, data or contract impact)?; split with
-model/effort and one-line reasons; keep/cut/defer; one material uncertainty.
+Return: is "standard" right (no auth, data or outside-consumer contract)?;
+split with model/effort and one-line reasons; keep/cut/defer; one material
+uncertainty.
 [shared contract]
 [efficiency-planner.md body]
 [scope-guard.md body]
