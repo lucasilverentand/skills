@@ -12,7 +12,7 @@ Use for: reference documentation for HTTP, GraphQL and RPC APIs and webhooks: au
 3. **Operations:** per operation, purpose; method and path or operation name; auth and required scopes; parameters with type, required or optional, default and constraints; request and response schemas with examples; every error with cause and fix; behavior notes such as pagination, idempotency and side effects.
 4. **Errors:** glossary by code with meaning, cause, fix and whether to retry.
 5. **Limits and patterns:** rate limits and headers, pagination, idempotency keys.
-6. **Webhooks:** events, payload schemas, signature verification, retries, ordering and duplicate delivery.
+6. **Webhooks:** events, payload schemas, signature verification, acknowledgement (expected status and deadline), retries, ordering, duplicate delivery and replay protection, as actually implemented.
 7. **Changes:** deprecations with dates and replacements, changelog, migration notes.
 8. **Quickstarts:** a short first call per primary SDK, linking to reference entries.
 
