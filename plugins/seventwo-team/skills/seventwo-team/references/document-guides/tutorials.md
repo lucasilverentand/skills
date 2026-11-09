@@ -2,7 +2,7 @@
 Use for: getting-started guides, integration tutorials, cookbook recipes, how-to guides, migration guides and ordered learning paths for developers or technical users. Readers learn by doing, so each step must work as written and show it worked.
 
 ## Gather first
-- **Form:** choose one first. A tutorial teaches a newcomer one guided happy path. A how-to or recipe solves one task for a reader with context. A migration guide moves a reader from version or system A to B; a learning path orders standalone tutorials. Don't mix forms; link between them. Return an unsettled audience or form to the lead with options and a recommendation.
+- **Form:** choose one first: a tutorial (teaches a newcomer one guided happy path), a how-to or recipe (solves one task for a reader with context), a migration guide or a learning path. Don't mix forms; link between them. Return an unsettled audience or form to the lead with options and a recommendation.
 - **Real facts:** commands, APIs, versions, outputs, breaking changes and the reader's starting state, from code, tests, release notes, existing docs or your own run. Never invent one; return anything unconfirmed to the lead marked unverified.
 
 ## Structure
@@ -12,13 +12,13 @@ Use for: getting-started guides, integration tutorials, cookbook recipes, how-to
 4. **Verify:** one end-to-end check that proves the goal.
 5. **Next steps:** the next tutorial, related how-tos, reference and explanation.
 
-A migration guide lists breaking changes up front, shows before/after code for each, and gives a rollback route with its point of no return.
+A how-to or recipe keeps this outline but skips the teaching: the direct route, with conditions where readers' setups differ. A learning path is an ordered list of tutorials, each with its prerequisites and outcome. A migration guide lists breaking changes up front, shows before/after code for each, and gives a rollback route with its point of no return.
 
 ## Rules
-- Code is complete and runnable, with imports, file paths and pinned versions. No hidden steps.
-- Commands run as pasted: no shell prompts; state the directory and environment.
+- Tutorial code is complete and runnable, with imports, file paths and pinned versions. How-to examples may be focused excerpts that say where they fit. No hidden steps.
+- Commands run as pasted once placeholders are replaced: no shell prompts; state the directory and environment.
 - Use realistic fake data and placeholders such as `<API_KEY>`, naming where the real value lives. Never include real secrets or personal data.
-- Build complexity progressively, one new concept per step.
+- In tutorials, build complexity progressively, one new concept per step.
 - Link to reference or explanation instead of explaining every option inline.
 - Name the targeted product version. When behavior changes, update steps and outputs; label upcoming behavior as proposed.
 - Follow the destination's existing structure; do not impose a template it lacks.
