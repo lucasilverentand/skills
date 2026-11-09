@@ -178,7 +178,13 @@ async function validateGroups(groups: PluginGroups): Promise<void> {
 	if (!groups.name || !/^[a-z0-9][a-z0-9-]*[a-z0-9]$/.test(groups.name)) {
 		errors.push("plugin-groups.json marketplace name must be kebab-case");
 	}
-	if (!groups.owner?.name) errors.push("plugin-groups.json owner.name is required");
+	if (typeof groups.owner?.name !== "string" || !groups.owner.name.trim()) {
+		errors.push("plugin-groups.json owner.name must be a non-empty string");
+	}
+	if (!Array.isArray(groups.plugins) || groups.plugins.length === 0) {
+		errors.push("plugin-groups.json must list at least one plugin");
+		return;
+	}
 	if (!groups.metadata?.version) errors.push("plugin-groups.json metadata.version is required");
 	if (existsSync(OBSOLETE_ROOT_SKILLS_DIR)) {
 		errors.push("root skills/ is not used; move skills into plugins/<plugin>/skills/<skill>");
