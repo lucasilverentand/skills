@@ -18,7 +18,7 @@
 
 import { existsSync } from "node:fs";
 import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
-import { basename, dirname, join, relative, resolve } from "node:path";
+import { basename, dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 
 const ROOT = resolve(import.meta.dir, "..");
 const PLUGINS_DIR = resolve(ROOT, "plugins");
@@ -162,7 +162,9 @@ async function validateSkill(group: PluginGroup, skill: string): Promise<void> {
 		errors.push(`${skillLabel(group, skill)}/SKILL.md has no YAML frontmatter`);
 		return;
 	}
-	if (fm.name && fm.name !== skill) {
+	if (!fm.name) {
+		errors.push(`${skillLabel(group, skill)}/SKILL.md is missing name`);
+	} else if (fm.name !== skill) {
 		errors.push(`${skillLabel(group, skill)}/SKILL.md name "${fm.name}" does not match directory`);
 	}
 	if (!fm.description) {
@@ -236,7 +238,12 @@ async function validateGroups(groups: PluginGroups): Promise<void> {
 
 		if (group.mcpServers) {
 			const mcpServersPath = resolve(pluginRoot(group), group.mcpServers);
-			if (!existsSync(mcpServersPath)) {
+			const fromRoot = relative(pluginRoot(group), mcpServersPath);
+			if (isAbsolute(group.mcpServers) || !fromRoot || fromRoot === ".." || fromRoot.startsWith(`..${sep}`)) {
+				errors.push(
+					`plugin "${group.name}" mcpServers must be a relative path inside plugins/${group.name}: "${group.mcpServers}"`,
+				);
+			} else if (!existsSync(mcpServersPath)) {
 				errors.push(`plugin "${group.name}" references missing MCP servers file "${group.mcpServers}"`);
 			}
 		}
