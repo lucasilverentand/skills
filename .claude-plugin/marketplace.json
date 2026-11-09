@@ -18,7 +18,7 @@
 			"name": "seventwo-team",
 			"source": "./plugins/seventwo-team",
 			"description": "Task-selected specialist teams with economical model routing, independent review and evidence-based delivery. Adapts to each user’s tools, project conventions and saved preferences.",
-			"version": "0.3.0",
+			"version": "0.4.0",
 			"author": {
 				"name": "Luca Silverentand",
 				"email": "dev@lucasilverentand.com",
