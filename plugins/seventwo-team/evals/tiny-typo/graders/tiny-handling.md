@@ -1,4 +1,4 @@
 ---
 type: llm
-criteria: Judging from the final reply, the agent fixed "libary" to "library" in README.md without spawning any advisor or worker agents, treated the task as tiny (directly handled by the lead), did not commit, and did not create any report, summary or completion file.
+criteria: The final reply says the lead fixed the "libary" typo in README.md directly, with no advisors or other agents, because the change is tiny. Saying that nothing was committed is correct; only a claim that it did commit fails. The reply must not point to or offer any report, summary or completion file.
 ---
