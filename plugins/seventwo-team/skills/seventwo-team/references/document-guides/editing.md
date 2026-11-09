@@ -14,7 +14,7 @@ Take depth from the brief; default to a thorough review and say so.
 |---|---|---|
 |Quick pass|1–3, blocking problems only|Highest-impact findings|
 |Thorough review|All|All findings, suggested wording for major ones|
-|Deep edit|All, every checkable claim verified|Visible edits plus findings for the author or lead|
+|Deep edit|All, verifying every claim the available evidence covers|Visible edits plus findings for the author or lead|
 
 Run passes in order; do not polish text a later pass cuts.
 1. **Structure and flow:** order fits how the reader uses it; missing, redundant or misplaced sections; audience fit.
