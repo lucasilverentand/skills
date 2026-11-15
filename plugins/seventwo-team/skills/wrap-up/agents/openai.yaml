@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Wrap-up"
+  short_description: "Preserve work and return a project to clean main"
+  default_prompt: "Use $wrap-up to wrap up this project, preserve unfinished work, and restore a pristine main checkout."

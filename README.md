@@ -35,6 +35,8 @@ After installing, start a new session and ask your agent to use SevenTwo Team; i
 Cursor users can import `https://github.com/lucasilverentand/skills` in Dashboard → Settings → Plugins → Import, then select SevenTwo Team. Coordination depends on the agent tools available in that host.
 
 ## Use
+For a clean project handoff, use `$wrap-up` or ask to “wrap up this project and leave main pristine without losing work.” The [wrap-up skill](plugins/seventwo-team/skills/wrap-up/SKILL.md) inventories work, preserves unfinished changes, follows existing delivery gates, and verifies the main checkout against its remote. It can run on its own without starting a team. To install only this skill locally, run `bun run install:codex-skills -- wrap-up` or `bun run install:claude-skills -- wrap-up`.
+
 Ask your agent to “Use SevenTwo Team to complete this task.” To make it the default for product and open-source work, add the [portable routing instructions](docs/default-routing.md) to your host's user or project guidance, such as `AGENTS.md` or `CLAUDE.md`.
 
 The lead sizes the team to the task: tiny changes run directly with no advisors, standard work gets one combined efficiency and scope advisor, and consequential work gets separate efficiency, scope and context advocates. Optional specialists cover development and architecture, independent review, Git and PRs, UX, UI, writing, accessibility, security and privacy, performance and reliability, verification, product analysis, and knowledge maintenance. The presets are role instructions selected by the lead, not separately registered agents.
