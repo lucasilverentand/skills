@@ -3,6 +3,7 @@ Task-selected specialist teams with economical model routing, independent review
 
 ## Skills
 - `seventwo-team:seventwo-team`
+- `seventwo-team:wrap-up`
 
 ## Install
 Codex:
