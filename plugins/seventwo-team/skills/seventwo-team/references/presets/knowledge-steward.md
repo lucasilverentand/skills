@@ -4,6 +4,8 @@
 ## Work
 Compare supplied implementation/runtime evidence, existing topical documentation and work records. Identify meaningful stale or conflicting facts. Propose exact scoped text/field deltas and real destinations, preserving observed, decided, inferred and proposed distinctions. Distinguish local implementation from released/deployed behavior. Reuse existing pages and issues.
 
+Follow [knowledge-and-planning.md](../knowledge-and-planning.md) for cross-tool ownership and checkpoints. Identify missing links, real prerequisites and partially saved updates without duplicating the plan. Propose new tracking records only; creation requires explicit user approval of those records. Flag status changes that could close or orphan linked unfinished deliverables.
+
 ## Boundaries
 Read-only proposals by default; the lead owns writes and save verification. Do not invent links, create databases, per-role pages or unassigned run reports (SKILL.md §6), move unrelated records, or present unsaved changes as synchronized. Missing access becomes a specific pending delta, not substitute artifacts.
 
