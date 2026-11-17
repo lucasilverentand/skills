@@ -18,6 +18,12 @@ State the outcome, testable acceptance, constraints and authorized endpoint; one
 
 Read the relevant project guidance and current evidence. Beyond tiny edits, for a document or UI copy, pick the matching guide in [document-guides/](references/document-guides/) by its `Use for:` line, and follow it yourself or attach it to the writer's brief. Surface unsettled taste, product-owner or business decisions before dependent work. Choose the smallest complete solution; keep required safeguards and skip speculative improvements.
 
+Before choosing the tier, check whether the task changes trust boundaries, privileges, secrets, sensitive data flows or externally exposed behavior. Carry relevant risks and checks into acceptance; use [security-and-privacy.md](references/security-and-privacy.md) for affected work. This is scoped triage, not a mandatory audit or extra agent for every task.
+
+When work spans tools, establish the authoritative records, permitted actions, dependencies and completion evidence with [knowledge-and-planning.md](references/knowledge-and-planning.md) before writes. Tool access and saved preferences do not grant operational permission.
+
+Before sending content to a tool, repository, record or delegate, check its intended audience and permitted disclosure. Private context stays within its authorized audience; internal tools may expose it to other teams. Apply the audience checks in [security-and-privacy.md](references/security-and-privacy.md#check-the-audience-before-sharing), including for queries, generated artifacts and delivery metadata. Reuse verified audience facts unless the destination, access or content sensitivity changes.
+
 ## 3. Size the team
 Pick the smallest tier whose conditions are met. Unsure about size: start smaller and move up on evidence. Unsure about impact: not tiny. A change touching authorization or permissions, secrets, sensitive data or its persistence, or a contract with outside consumers (public API, persisted data schema, published file or CLI format) is never tiny and always gets independent review (§5). If it is a single obvious edit, the advisor may be skipped; the review may not. Internal interfaces without outside consumers follow the ordinary tiers.
 
@@ -47,15 +53,18 @@ Role/interest and concrete deliverable:
 Acceptance, done when, permitted actions and file/record ownership:
 Relevant evidence, context and accepted decisions:
 Dependencies, interfaces and integration point:
+Starting revision/state, owned write paths/records/resources and handoff:
 Model/effort, output limit, any user budget:
 Return result location/revision, checks, uncertainties, blockers,
 and facts affecting documentation or scope.
 [shared contract from agent-selection.md]
 ```
 
-Advisors follow their preset's output limit; worker reports stay within 400 words unless evidence needs more. Give workers nonoverlapping write ownership, settle shared interfaces before parallel work, and verify which revision each worker has. Default to at most two implementation workers at once. Select the [Git / PR specialist](references/presets/git-specialist.md) when the team authors commits or review requests; use equivalent checks for other VCS.
+Advisors follow their preset's output limit; worker reports stay within 400 words unless evidence needs more. Before concurrent writers start, establish the lead-owned assignment map, exclusive write scopes, dependency handoffs and integration order in [coordination.md](references/coordination.md). This includes the lead's edits and shared tools/resources, not just worker files. Default to at most two implementation workers at once. Select the [Git / PR specialist](references/presets/git-specialist.md) when the team authors commits or review requests; use equivalent checks for other VCS.
 
 Keep assignments, decisions and blockers in the conversation. Plan the current deliverable in detail and later milestones coarsely. Once a viable plan meets acceptance and nothing material blocks it, execute.
+
+Optimize elapsed time to the verified result as well as total effort. For a meaningful split, compare serial execution with the critical path, startup/queue time, shared resource contention and integration/review using [models-and-usage.md](references/models-and-usage.md#choose-concurrency-for-time-to-completion). Use enough independent workers to shorten completion within budget and host limits; more agents do not imply a proportional speedup. Batch independent reads, reuse unchanged evidence and cancel obsolete work. Keep dependent writes sequential under one owner; do not repeat successful checks without new uncertainty or claim unmeasured savings.
 
 ## 5. Review and decide
 This section is the canonical review policy; other files link here.

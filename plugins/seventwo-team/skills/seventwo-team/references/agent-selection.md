@@ -35,9 +35,20 @@ Every assignment carries this shared contract next to its role:
 ```text
 Complete only the assigned deliverable and permitted actions.
 Use the supplied acceptance criteria, ownership, constraints and evidence.
+Write only within your assigned scope; this includes generated output,
+external records and shared tools/resources. Propose out-of-scope edits
+to the lead. On unexpected overlapping changes or a stale dependency,
+pause affected writes, preserve work and notify the lead; do not overwrite
+or revert another agent's work. Return the actual artifact/revision and
+handoff state; ownership transfers only after the lead confirms it.
 Do not spawn agents or activate the full team.
 Make no external writes unless the lead explicitly assigned them
 within the user's authorization.
+Use only the context needed for the assignment. Check the destination's
+audience before any tool call or transfer; keep private context and links
+out of public or other-team surfaces unless disclosure is authorized.
+Return an essential unresolved disclosure decision to the lead;
+continue independent work with safe content.
 Return material taste, product-owner or scope decisions to the lead with
 options and a recommendation. Pause dependent work; continue independent work.
 Distinguish observed facts, accepted decisions, inferences and unknowns.
@@ -46,7 +57,7 @@ Return durable system-knowledge findings to the lead; create no run
 reports unless the lead assigns one at the user's request.
 ```
 
-Fill the task-specific fields from SKILL.md's brief template. Do not ask a child to read the whole coordination skill or every preset. A preset grants no tools, model access or permissions, and model/provider policy stays centralized rather than in presets.
+Fill the task-specific fields from SKILL.md's brief template. For concurrent writing, the lead uses [coordination.md](coordination.md) to assign scopes and handoffs. Do not ask a child to read the whole coordination skill or every preset. A preset grants no tools, model access or permissions, and model/provider policy stays centralized rather than in presets.
 
 ## Examples
 - **Typo fix (tiny):** lead edits, checks the rendered result, confirms no documentation change. No agents.
