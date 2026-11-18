@@ -15,6 +15,7 @@ Choose the context advocate from stated project goals, not assumed company owner
 |[Developer / architect](presets/developer-architect.md)|There is code to implement or an unresolved architecture/interface decision|One owner can design and implement its bounded slice; the lead may do work directly|
 |[Independent reviewer](presets/independent-reviewer.md)|Required by SKILL.md §5 (consequential, sensitive, or behavior not covered by passing checks), including a required second-provider assessment|Review the integrated artifact; do not duplicate an already-relevant review|
 |[Git / PR specialist](presets/git-specialist.md)|Any commit or PR the team will author or edit; commit/PR convention problems|One focused pass over the real diff and exact messages; reuse advice until scope or metadata changes|
+|[App design architect](presets/app-design-architect.md)|Feature grouping, destinations or continuity across screens need a structural decision, including where a new feature belongs in an existing app|Give one specialist the structure and representative journey. Add UX, UI or engineering only for distinct deliverables|
 |[UX expert](presets/ux-expert.md)|Flows, navigation, user friction, states, or research interpretation change|Combine with UI/content on small surfaces|
 |[UI designer](presets/ui-designer.md)|Visual composition, components, responsive layouts or design consistency change|Combine with UX for focused UI work|
 |[Content / UX writer](presets/content-writer.md)|Copy, terminology or a document is a distinct deliverable|Add the role to the UX brief when small. For a document or copy set, read the `Use for:` line of each file in [document-guides/](document-guides/) and attach the matching guide (its text, or an exact path the child can read)|
@@ -63,6 +64,7 @@ Fill the task-specific fields from SKILL.md's brief template. For concurrent wri
 - **Typo fix (tiny):** lead edits, checks the rendered result, confirms no documentation change. No agents.
 - **Planned code change (standard):** one combined planner/scope advisor on an economical model; the lead or one coding worker implements; a separately briefed reviewer checks the integrated diff when SKILL.md §5 requires it.
 - **UI improvement (standard):** combined advisor plus one UX/UI specialist following the accepted design direction; add accessibility or content responsibilities to that brief rather than more agents.
+- **App restructuring:** when a personal queue and a project both expose the same draft, brief the app design architect on where it lives, how each entry works and where Back returns. A single-screen styling change stays with UI.
 - **Consequential architecture:** full trio, a strong developer/architect, and an independent second-provider assessment of the same decision for quorum.
 - **Large knowledge reconciliation (consequential when records conflict):** full trio plus a bounded knowledge steward; the lead saves and verifies the record changes.
 
