@@ -41,7 +41,7 @@ Provider examples, checked 2026-11-04: [OpenAI guidance](https://learn.chatgpt.c
 - **Medium:** ordinary multi-step work, settled implementation or a focused judgment with limited uncertainty.
 - **High:** consequential reasoning, interacting constraints, subtle bugs or substantive independent review. Start here when difficulty is evident instead of buying a predictable failed cheap attempt.
 - **Xhigh or equivalent:** specific unresolved hard problem with evidence explaining what deeper reasoning must resolve.
-- **Max:** exceptional depth with proportionate expected value, or explicitly requested. Not a standing default.
+- **Max:** exceptional depth with proportionate expected value, or explicitly requested. Not a standing default; for any subagent it needs the user's approval under the [ceiling](#subagent-model-ceiling).
 
 Use only supported settings; labels are not equivalent across providers or generations. More effort cannot repair missing evidence or unclear acceptance. Faster service is a latency choice, not a quality upgrade. Orchestration modes are not automatic effort escalations.
 
