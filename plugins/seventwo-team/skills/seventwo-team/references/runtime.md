@@ -14,7 +14,7 @@ Last verified 2026-11-05; if the live schema differs, it wins.
 - Use the host cancellation tool for replaced or unnecessary delegates. Respect tool-specific link and approval requirements.
 
 ## Model settings and limits
-Validate model IDs and supported options against the applicable live tool schema. In T3, model settings belong in `target.options`; Codex exposes `reasoningEffort`, while Claude exposes `effort`. Native schemas can differ. User choices apply to their stated scope (lead, named role, or whole team), not automatically to every child.
+Validate model IDs and supported options against the applicable live tool schema. In T3, model settings belong in `target.options`; Codex exposes `reasoningEffort`, while Claude exposes `effort`. Native schemas can differ. User choices apply to their stated scope (lead, named role, or whole team), not automatically to every child. Check every child's model and paid settings against the [subagent model ceiling](models-and-usage.md#subagent-model-ceiling); never inherit a more expensive parent model or fast mode into a child.
 
 Do not select modes that start their own orchestration (ultra-style modes) for delegated specialists. Special thinking modes can differ between native and host option schemas. Do not infer special-mode semantics from a generic API effort table or treat enum ordering as an escalation ladder. Preserve explicit settings and follow host rules.
 

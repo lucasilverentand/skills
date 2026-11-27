@@ -1,6 +1,9 @@
 # Choosing models and effort
 Choose from the current user's authorized providers and available models, respecting scoped preferences discovered through [context-setup.md](context-setup.md). This guide chooses work and effort; runtime mechanics stay in [runtime.md](runtime.md). No provider is assumed superior, available, cheaper on this account, or endowed with spare quota.
 
+## Subagent model ceiling
+Subagents, delegated tasks, background agents and automated reviews may use, without asking, models up to the Claude Opus tier or the OpenAI Sol tier (for example `claude-opus-5-5`, `claude-sonnet-5-5`, `gpt-6.2-sol`). Anything more expensive needs the user's explicit approval in the current conversation before launch: a higher model family such as Claude Fable, any model whose tier relative to Opus or Sol is unclear, and paid speed or priority settings (fast mode, `priority` or `ultrafast` service tiers). Ask once, naming the model, the setting and why the ceiling is not enough; otherwise stay within it. Approval covers the named assignment only. The ceiling never raises a stricter user rule, such as keeping Fable for the user's own chats.
+
 ## Match capabilities to work
 |Work|Starting capability and effort|When to change|
 |---|---|---|

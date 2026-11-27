@@ -44,7 +44,7 @@ Baseline roles, used per tier above:
 ## 4. Delegate
 Read [runtime.md](references/runtime.md) before the first delegation and follow the host's actual tools, isolation, waiting, cancellation and approvals. Presets are instructions, not registered agents, tools or permissions. If agents cannot run, say so and do the work directly; never present a simulated role as a real assessment. Required review is then still outstanding: do not mark it done or cross a consequential endpoint until it happens or the user accepts an alternative.
 
-Choose models and effort with [models-and-usage.md](references/models-and-usage.md): scarce strong reasoning for the uncertain or difficult part, economical capable models for settled execution and preparation. Respect the user's provider preferences and real access, and keep the current lead rather than starting another coordinator.
+Choose models and effort with [models-and-usage.md](references/models-and-usage.md): scarce strong reasoning for the uncertain or difficult part, economical capable models for settled execution and preparation. Respect the user's provider preferences and real access, and keep the current lead rather than starting another coordinator. Subagents stay at or below Opus/Sol tier unless the user approves a more expensive model or paid speed setting first ([ceiling](references/models-and-usage.md#subagent-model-ceiling)).
 
 Brief every assignment with only the selected preset and scoped evidence:
 
