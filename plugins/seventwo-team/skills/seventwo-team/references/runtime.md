@@ -14,7 +14,7 @@ Last verified 2026-11-05; if the live schema differs, it wins.
 - Use the host cancellation tool for replaced or unnecessary delegates. Respect tool-specific link and approval requirements.
 
 ## Model settings and limits
-Validate model IDs and supported options against the applicable live tool schema. In T3, model settings belong in `target.options`; Codex exposes `reasoningEffort`, while Claude exposes `effort`. Native schemas can differ. User choices apply to their stated scope (lead, named role, or whole team), not automatically to every child.
+Validate model IDs and supported options against the applicable live tool schema. In T3, model settings belong in `target.options`; Codex exposes `reasoningEffort`, while Claude exposes `effort`. Native schemas can differ. User choices apply to their stated scope (lead, named role, or whole team), not automatically to every child. Check every child's model and paid settings against the [subagent model ceiling](models-and-usage.md#subagent-model-ceiling); before launch, resolve the child's effective model, speed setting and effort (including inherited values, aliases and configuration overrides) and set them explicitly when any would exceed the ceiling or is unknown.
 
 Do not select modes that start their own orchestration (ultra-style modes) for delegated specialists. Special thinking modes can differ between native and host option schemas. Do not infer special-mode semantics from a generic API effort table or treat enum ordering as an escalation ladder. Preserve explicit settings and follow host rules.
 
@@ -24,7 +24,7 @@ Use only exposed authorized usage information. Subscription allowance, API charg
 Last verified 2026-11-05; if the live schema differs, it wins.
 
 - Delegate with the `Agent` tool. Put the full brief in `prompt`; the child sees no parent history unless it is a fork.
-- Pick the model with the `model` parameter from the values its schema lists, matching [models-and-usage.md](models-and-usage.md). Set an effort value only when the user or project instructions ask for a specific level; otherwise the agent's default applies.
+- Pick the model with the `model` parameter from the values its schema lists, matching [models-and-usage.md](models-and-usage.md). Set an effort value only when the user or project instructions ask for a specific level, or when the inherited default would exceed the [subagent model ceiling](models-and-usage.md#subagent-model-ceiling) (for example a parent running `max`); a model alias may resolve to the parent's version, so confirm it stays within the ceiling.
 - `subagent_type` selects an agent definition: a general-purpose type for workers, a read-only search type for discovery. Presets stay in the prompt; they are not registered types.
 - Run advisors you need before planning in the foreground (`run_in_background: false`) and send independent ones in one message so they run concurrently. Background workers notify on completion; do not poll or sleep.
 - Use `isolation: "worktree"` when a worker needs its own checkout. Otherwise give parallel workers disjoint files in the shared checkout.

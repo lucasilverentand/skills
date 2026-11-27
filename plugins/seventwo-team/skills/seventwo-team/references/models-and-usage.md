@@ -1,6 +1,23 @@
 # Choosing models and effort
 Choose from the current user's authorized providers and available models, respecting scoped preferences discovered through [context-setup.md](context-setup.md). This guide chooses work and effort; runtime mechanics stay in [runtime.md](runtime.md). No provider is assumed superior, available, cheaper on this account, or endowed with spare quota.
 
+## Subagent model ceiling
+Subagents, delegated tasks, background agents and automated reviews may run without asking at or below the Claude Opus / OpenAI Sol price tier: list price up to Opus 5.5 standard ($4 in / $20 out per million tokens). Anything costlier needs the user's explicit approval in the current conversation before launch. Ask once, naming the model, setting, expected scale and why the ceiling is not enough. Approval covers that assignment only; stricter user rules (such as keeping Fable for the user's own chats) still win.
+
+|Model or setting|List price in/out per 1M tokens|Subagent use|
+|---|---|---|
+|`gpt-6.1-terra`|$1 / $5|Automatic; economical default for routine OpenAI work|
+|`gpt-6.1-sol`, `gpt-6.2-sol`|$2 / $10|Automatic|
+|`claude-sonnet-5-5`|$2 / $10|Automatic|
+|`claude-opus-5-5`|$4 / $20|Automatic; ceiling|
+|`gpt-6.2-astra`, `gpt-6-astra`|$8 / $40 or more|Ask first|
+|Claude Fable (any version)|$8 / $40 or more|Ask first|
+|Opus fast mode|$8 / $40|Ask first|
+|Codex `priority` / fast, `ultrafast` service tier|2× / 6× plan allowance|Ask first|
+|Effort `max`, `ultra`, `ultrathink`|Multiplies tokens on any model|Ask first|
+
+Subscription allowances scale the same way: Codex Plus estimates 17–180 Sol messages per five hours against 6–50 for Astra. A model or option not in this table, or whose price is unknown, counts as above the ceiling until checked. Prices checked 2026-11-27 from [OpenAI's Terra launch](https://openai.com/index/introducing-gpt-6-1-terra/), [Anthropic's Opus page](https://www.anthropic.com/claude/opus) and Codex pricing summaries ([morphllm](https://www.morphllm.com/codex-pricing), [leanopstech](https://leanopstech.com/blog/codex-usage-limits/)); recheck when a new model appears or after about three months. Within the ceiling, still prefer the cheapest model that fits the work below.
+
 ## Match capabilities to work
 |Work|Starting capability and effort|When to change|
 |---|---|---|
@@ -24,7 +41,7 @@ Provider examples, checked 2026-11-04: [OpenAI guidance](https://learn.chatgpt.c
 - **Medium:** ordinary multi-step work, settled implementation or a focused judgment with limited uncertainty.
 - **High:** consequential reasoning, interacting constraints, subtle bugs or substantive independent review. Start here when difficulty is evident instead of buying a predictable failed cheap attempt.
 - **Xhigh or equivalent:** specific unresolved hard problem with evidence explaining what deeper reasoning must resolve.
-- **Max:** exceptional depth with proportionate expected value, or explicitly requested. Not a standing default.
+- **Max:** exceptional depth with proportionate expected value, or explicitly requested. Not a standing default; for any subagent it needs the user's approval under the [ceiling](#subagent-model-ceiling).
 
 Use only supported settings; labels are not equivalent across providers or generations. More effort cannot repair missing evidence or unclear acceptance. Faster service is a latency choice, not a quality upgrade. Orchestration modes are not automatic effort escalations.
 
